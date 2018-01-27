@@ -1,5 +1,5 @@
 {
-  "name": "VvvebJs",
+  "name": "vvvebjs",
   "description": "Drag and drop website builder javascript library",
   "version": "0.0.1",
   "author": "Ziadin Givan",
@@ -11,7 +11,7 @@
     "url": "https://github.com/givanz/VvvebJs.git"
   },
   "dependencies": {
-    "jquery": "^2.0",
+    "jquery": "^3.0"
   },
   "keywords": [
     "vvvebjs",
