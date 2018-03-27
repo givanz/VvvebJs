@@ -231,6 +231,11 @@ Vvveb.Components = {
 							element = element.addClass(value);
 						}
 						else
+						if (property.htmlAttr == "style") 
+						{
+							element = element.css(property.key ,value);
+						}
+						else
 						{
 							element = element.attr(property.htmlAttr, value);
 						}

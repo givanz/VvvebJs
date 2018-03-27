@@ -109,6 +109,28 @@ Vvveb.Components.extend("_base", "html/container", {
                 text: "Fluid"
             }]
         }
+    },
+	{
+        name: "Background",
+        key: "background",
+		htmlAttr: "class",
+        validValues: bgcolorClasses,
+        inputtype: SelectInput,
+        data: {
+            options: bgcolorSelectOptions
+        }
+    },
+	{
+        name: "Background Color",
+        key: "background-color",
+		htmlAttr: "style",
+        inputtype: ColorInput,
+    },
+	{
+        name: "Text Color",
+        key: "color",
+		htmlAttr: "style",
+        inputtype: ColorInput,
     }],
 });
 
