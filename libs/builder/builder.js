@@ -52,6 +52,13 @@ https://github.com/givan/VvvebJs
   };
 })();
 
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
 
 
 if (Vvveb === undefined) var Vvveb = {};
@@ -217,6 +224,7 @@ Vvveb.Components = {
 			return property.input.on('propertyChange', function (event, value, input) {
 					element = Vvveb.Builder.selectedEl;
 					if (property.child) element = element.find(property.child);
+					if (property.parent) element = element.parent(property.parent);
 					
 					if (property.onChange)
 					{
@@ -225,15 +233,14 @@ Vvveb.Components = {
 					{
 						oldValue = element.attr(property.htmlAttr);
 						
-						if (property.htmlAttr == "class") 
+						if (property.htmlAttr == "class" && property.validValues) 
 						{
-							if (property.validValues) element.removeClass(property.validValues.join(" "));
+							element.removeClass(property.validValues.join(" "));
 							element = element.addClass(value);
 						}
-						else
-						if (property.htmlAttr == "style") 
+						else if (property.htmlAttr == "style") 
 						{
-							element = element.css(property.key ,value);
+							element = element.css(property.key, value);
 						}
 						else
 						{
@@ -252,7 +259,7 @@ Vvveb.Components = {
 						element = component.onChange(element, property, value, input);
 					}
 					
-					if (!property.child) Vvveb.Builder.selectNode(element);
+					if (!property.child && !property.parent) Vvveb.Builder.selectNode(element);
 			});				
 		};			
 	
@@ -281,7 +288,13 @@ Vvveb.Components = {
 				property.inputtype.setValue(property.init(element.get(0)));
 			} else if (property.htmlAttr)
 			{
-				value = element.attr(property.htmlAttr);
+				if (property.htmlAttr == "style")
+				{
+					value = element.css(property.key);
+				} else
+				{
+					value = element.attr(property.htmlAttr);
+				}
 
 				//if attribute is class check if one of valid values is included as class to set the select
 				if (value && property.htmlAttr == "class" && property.validValues)
@@ -290,6 +303,7 @@ Vvveb.Components = {
 						return property.validValues.indexOf(el) != -1
 					});
 				} 
+				
 
 				property.inputtype.setValue(value);
 			}
@@ -893,10 +907,72 @@ Vvveb.Builder = {
          + ">\n" 
          + doc.documentElement.innerHTML
          + "\n</html>";
+	},
+	
+	setHtml: function(html) 
+	{
+		//update only body to avoid breaking iframe css/js relative paths
+		start = html.indexOf("<body");
+        end = html.indexOf("</body");		
+
+        if (start >= 0 && end >= 0) {
+            body = html.slice(html.indexOf(">", start) + 1, end);
+        } else {
+            body = html
+        }
+        
+        //self.frameBody.html(body);
+        window.FrameDocument.body.innerHTML = body;
+		
+		//below methods brake document relative css and js paths
+		//return self.iframe.outerHTML = html;
+		//return self.documentFrame.html(html);
+		//return self.documentFrame.attr("srcdoc", html);
 	}
 };
 
+Vvveb.CodeEditor = {
 	
+	isActive: false,
+	oldValue: '',
+	doc:false,
+	
+	init: function(doc) {
+		$("#vvveb-code-editor textarea").val(Vvveb.Builder.getHtml());
+
+		$("#vvveb-code-editor textarea").keyup(function () 
+		{
+			delay(Vvveb.Builder.setHtml(this.value), 1000);
+		});
+
+		//_self = this;
+		Vvveb.Builder.frameBody.on("vvveb.undo.add vvveb.undo.restore", function (e) { Vvveb.CodeEditor.setValue();/*_self.setValue(e);*/});
+
+		this.isActive = true;
+	},
+
+	setValue: function(value) {
+		if (this.isActive)
+		{
+			$("#vvveb-code-editor textarea").val(Vvveb.Builder.getHtml());
+		}
+	},
+
+	destroy: function(element) {
+		this.isActive = false;
+	},
+
+	toggle: function() {
+		if (this.isActive != true)
+		{
+			this.isActive = true;
+			return this.init();
+		}
+		this.isActive = false;
+		this.destroy();
+	}
+}
+
 Vvveb.Gui = {
 	
 	init: function(url, callback) {
@@ -942,6 +1018,11 @@ Vvveb.Gui = {
 	
 	viewport : function () {
 		$("#canvas").attr("class", this.dataset.view);
+	},
+	
+	toggleEditor : function () {
+		$("#vvveb-builder").toggleClass("bottom-panel-expand");
+		Vvveb.CodeEditor.toggle();
 	},
 	
 	preview : function () {

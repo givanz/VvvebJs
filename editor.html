@@ -137,6 +137,19 @@
 				</div>
 				
 				<div id="bottom-panel">
+
+				<div class="btn-group" role="group">
+
+		 			 <button id="mobile-view" data-view="mobile" class="btn btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
+						  <i class="ion-code"></i> Code editor
+					  </button>
+
+					</div>
+					
+					<div id="vvveb-code-editor">
+						<textarea class="form-control"></textarea>
+					<div>
+
 				</div>	
 			</div>
 
@@ -319,7 +332,15 @@
 <script id="vvveb-input-colorinput" type="text/html">
 	
 	<div>
-		<input name="{%=key%}" type="color" value="{%=value%}"  class="form-control"/>
+		<input name="{%=key%}" type="color" value="{%=value%}" pattern="#[a-f0-9]{6}" class="form-control"/>
+	</div>
+	
+</script>
+
+<script id="vvveb-input-numberinput" type="text/html">
+	
+	<div>
+		<input name="{%=key%}" type="number" value="{%=value%}" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-control"/>
 	</div>
 	
 </script>
@@ -386,6 +407,16 @@
 <!-- components-->
 <script src="libs/builder/components-bootstrap4.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
+
+<!-- plugins -->
+
+<!-- code mirror - code editor syntax highlight -->
+<link href="libs/codemirror/lib/codemirror.css" rel="stylesheet"/>
+<link href="libs/codemirror/theme/material.css" rel="stylesheet"/>
+<script src="libs/codemirror/lib/codemirror.js"></script>
+<script src="libs/codemirror/lib/xml.js"></script>
+<script src="libs/codemirror/lib/formatting.js"></script>
+<script src="libs/builder/plugin-codemirror.js"></script>	
 
 
 <script>

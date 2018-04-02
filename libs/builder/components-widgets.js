@@ -45,7 +45,7 @@ Vvveb.Components.add("widgets/googlemaps", {
     //use an image for dragging for performance reasons, iframes elements don't drag well
     afterDrop: function (node)
 	{
-		newnode = $('<div data-component-maps><iframe frameborder="0" src="https://maps.google.com/maps?&z=1&t=q&output=embed" width="100" height="100" style="width:100%;height:100%;pointer-events:none"></iframe></div>')
+		newnode = $('<div data-component-maps style="width:320px;height:240px;position:relative"><iframe frameborder="0" src="https://maps.google.com/maps?&z=1&t=q&output=embed" width="100" height="100" style="width:100%;height:100%;position:absolute;left:0px;pointer-events:none"></iframe></div>')
 		node.replaceWith(newnode);
 		return newnode;
 	},
@@ -77,7 +77,41 @@ Vvveb.Components.add("widgets/googlemaps", {
 			min:1,
 			step:1
        },
-    }]
+    },
+	{
+        name: "Width",
+        key: "width",
+		htmlAttr: "style",
+        parent:"",
+        inputtype: NumberInput,//can also be replaced with RangeInput
+        data: {
+			value: "320",//default
+            min: "50",
+            max: "1024",
+            step: "10"
+        },
+		init: function (node)//use init because number input does not ignore "px"
+		{
+			return parseInt($(node).css("width"));//remove px
+		}
+	},
+	{
+        name: "Height",
+        key: "height",
+		htmlAttr: "style",
+        parent:"",
+        inputtype: NumberInput,
+        data: {
+            value: "240",//default
+            min: "50",
+            max: "1024",
+            step: "10"
+        },
+		init: function (node)
+		{
+			return parseInt($(node).css("height"));//remove px
+		}
+	}]
 });
 
 Vvveb.Components.add("widgets/video", {
@@ -97,7 +131,7 @@ Vvveb.Components.add("widgets/video", {
     //use image for drag and swap with iframe on drop for drag performance
     afterDrop: function (node)
 	{
-		newnode = $('<div data-component-video><iframe frameborder="0" src="https://www.youtube.com/embed/-stFvGmg1A8" style="width:100%;height:100%;pointer-events:none"></iframe></div>')
+		newnode = $('<div data-component-video style="width:320px;height:240px;position:relative"><iframe frameborder="0" src="https://www.youtube.com/embed/-stFvGmg1A8" style="width:100%;height:100%;position:absolute;left:0px;pointer-events:none"></iframe></div>')
 		node.replaceWith(newnode);
 		return newnode;
 	},
@@ -133,27 +167,32 @@ Vvveb.Components.add("widgets/video", {
 	onChange: function (node, property, value)
 	{
 		this[property.key] = value;
-		switch (this.t)
+
+		if (property.key == "t")
 		{
-			case 'y':
-			$("#right-panel [data-key=id]").show();
-			$("#right-panel [data-key=url]").hide();
-			newnode = $('<div data-component-video><iframe src="https://www.youtube.com/embed/' + this.id + '?&amp;autoplay=' + this.autoplay + '&amp;loop=' + this.loop + '" allowfullscreen="true" style="height: 100%; width: 100%;" frameborder="0"></iframe></div>');
-			break;
-			case 'v':
-			$("#right-panel [data-key=id]").show();
-			$("#right-panel [data-key=url]").hide();
-			newnode = $('<div data-component-video><iframe src="https://player.vimeo.com/video/' + this.id + '?&amp;autoplay=' + this.autoplay + '&amp;loop=' + this.loop + '" allowfullscreen="true" style="height: 100%; width: 100%;" frameborder="0"></iframe></div>');
-			break;
-			case 'h':
-			$("#right-panel [data-key=id]").hide();
-			$("#right-panel [data-key=url]").show();
-			newnode = $('<div data-component-video><video src="' + this.url + '" ' + (this.controls?' controls ':'') + (this.loop?' loop ':'') + ' style="height: 100%; width: 100%;"></video></div>');
-			break;
+			switch (this.t)
+			{
+				case 'y':
+				$("#right-panel [data-key=id]").show();
+				$("#right-panel [data-key=url]").hide();
+				newnode = $('<div data-component-video><iframe src="https://www.youtube.com/embed/' + this.id + '?&amp;autoplay=' + this.autoplay + '&amp;loop=' + this.loop + '" allowfullscreen="true" style="height: 100%; width: 100%;" frameborder="0"></iframe></div>');
+				break;
+				case 'v':
+				$("#right-panel [data-key=id]").show();
+				$("#right-panel [data-key=url]").hide();
+				newnode = $('<div data-component-video><iframe src="https://player.vimeo.com/video/' + this.id + '?&amp;autoplay=' + this.autoplay + '&amp;loop=' + this.loop + '" allowfullscreen="true" style="height: 100%; width: 100%;" frameborder="0"></iframe></div>');
+				break;
+				case 'h':
+				$("#right-panel [data-key=id]").hide();
+				$("#right-panel [data-key=url]").show();
+				newnode = $('<div data-component-video><video src="' + this.url + '" ' + (this.controls?' controls ':'') + (this.loop?' loop ':'') + ' style="height: 100%; width: 100%;"></video></div>');
+				break;
+			}
+			
+			node.replaceWith(newnode);
+			return newnode;
 		}
-		
-		node.replaceWith(newnode);
-		return newnode;
+		return node;
 	},	
 	
     properties: [{
@@ -193,5 +232,39 @@ Vvveb.Components.add("widgets/video", {
         name: "Loop",
         key: "loop",
         inputtype: CheckboxInput
+    },
+	{
+        name: "Width",
+        key: "width",
+		htmlAttr: "style",
+        parent:"",
+        inputtype: NumberInput,//can also be replaced with RangeInput
+        data: {
+			value: "320",//default
+            min: "50",
+            max: "1024",
+            step: "10"
+        },
+		init: function (node)//use init because number input does not ignore "px"
+		{
+			return parseInt($(node).css("width"));//remove px
+		}
+	},
+	{
+        name: "Height",
+        key: "height",
+		htmlAttr: "style",
+        parent:"",
+        inputtype: NumberInput,
+        data: {
+            value: "240",//default
+            min: "50",
+            max: "1024",
+            step: "10"
+        },
+		init: function (node)
+		{
+			return parseInt($(node).css("height"));//remove px
+		}
     }]
 });

@@ -1,4 +1,21 @@
 @charset "UTF-8";
+/*
+Copyright 2017 Ziadin Givan
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+https://github.com/givanz/VvvebJs
+*/
 .toggle {
   position: relative;
   width: 65px;
@@ -5932,6 +5949,23 @@ a.text-dark:focus, a.text-dark:hover {
 .invisible {
   visibility: hidden !important; }
 
+/*
+Copyright 2017 Ziadin Givan
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+https://github.com/givanz/VvvebJs
+*/
 /*!
   Ionicons, v2.0.0
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -8981,7 +9015,7 @@ body {
   background-color: #fff; }
 
 #vvveb-builder #bottom-panel {
-  width: 100%;
+  width: auto;
   height: 35px;
   bottom: 0px;
   position: fixed;
@@ -8989,6 +9023,22 @@ body {
   left: 260px;
   right: 260px;
   background-color: #fff; }
+  #vvveb-builder #bottom-panel #vvveb-code-editor {
+    width: 100%;
+    height: 100%; }
+    #vvveb-builder #bottom-panel #vvveb-code-editor textarea {
+      height: 100%;
+      width: 100%;
+      border: none;
+      font-size: 14px;
+      margin-bottom: 10px;
+      background: #fafafa; }
+
+#vvveb-builder.bottom-panel-expand #bottom-panel {
+  height: 50%; }
+
+#vvveb-builder.bottom-panel-expand #canvas {
+  height: 50%; }
 
 #vvveb-builder #canvas {
   margin-right: 260px;
@@ -9237,5 +9287,3 @@ li[data-type] {
   #right-panel .header:first-child {
     margin-top: 0rem;
     border-top: none; }
-
-/*# sourceMappingURL=editor.css.map */
