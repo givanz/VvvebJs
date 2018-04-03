@@ -59,6 +59,7 @@
   }
 
   @include hover-focus {
+    z-index: 1; // Place hover/active items above their siblings for proper border styling
     text-decoration: none;
   }
 
@@ -86,13 +87,8 @@
 .list-group-flush {
   .list-group-item {
     border-right: 0;
-    border-bottom: 0;
     border-left: 0;
-    border-radius: 0;
-
-    &:first-child {
-      border-top: 0;
-    }
+    @include border-radius(0);
   }
 
   &:first-child {

@@ -152,6 +152,7 @@
 
 				</div>	
 			</div>
+		</div>
 
 
 <!-- templates -->
@@ -368,20 +369,19 @@
 
 
 <!-- export html modal-->
-<div id="textarea-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="textarea-modal" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade" id="textarea-modal" tabindex="-1" role="dialog" aria-labelledby="textarea-modal" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-
-	<div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Contents</h5>
+      <div class="modal-header">
+        <h5 class="modal-title" id="textarea-modal">Export html</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-
-			<textarea rows="25" cols="150" class="form-control"></textarea>
-
+        
+        <textarea rows="25" cols="150" class="form-control"></textarea>
+      
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
