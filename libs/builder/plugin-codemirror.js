@@ -26,8 +26,10 @@ Vvveb.CodeEditor = {
 		}
 		
 		
-		_self = this;
-		Vvveb.Builder.frameBody.on("vvveb.undo.add vvveb.undo.restore", function (e) { _self.setValue(e);});
+		//_self = this;
+		Vvveb.Builder.frameBody.on("vvveb.undo.add vvveb.undo.restore", function (e) { Vvveb.CodeEditor.setValue(e);});
+		//load code when a new url is loaded
+		Vvveb.Builder.documentFrame.on("load", function (e) { Vvveb.CodeEditor.setValue();});
 
 		this.isActive = true;
 		this.setValue();

@@ -39,23 +39,24 @@ var Input = {
 		
 		//bind events
 		if (this.events)
-		for (var event in this.events)
+		for (var i in this.events)
 		{
-			fun = this[ this.events[event][0] ];
-			el = this.events[event][1];
+			event = this.events[i][0];
+			fun = this[ this.events[i][1] ];
+			el = this.events[i][2];
 		
-			this.element.on(event, el, {element: this.element}, fun);
+			this.element.on(event, el, {element: this.element, input:this}, fun);
 		}
-		
+
 		return this.element;
 	}
 };
 
 var TextInput = $.extend({}, Input, {
 
-    events: {
-        "keyup": ['onChange', 'input'],
-	 },
+    events: [
+        ["keyup", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
 		$('input', this.element).val(value);
@@ -77,9 +78,9 @@ var CheckboxInput = $.extend({}, Input, {
 		}
 	},
 
-    events: {
-        "change": ['onChange', 'input'],
-	 },
+    events: [
+        ["change", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
 		$('input', this.element).val(value);
@@ -93,10 +94,9 @@ var CheckboxInput = $.extend({}, Input, {
 
 var SelectInput = $.extend({}, Input, {
 	
-
-    events: {
-        "change": ['onChange', 'select' /*'select'*/],
-	 },
+    events: [
+        ["change", "onChange", "select"],
+	 ],
 	
 
 	setValue: function(value) {
@@ -113,9 +113,9 @@ var SelectInput = $.extend({}, Input, {
 
 var LinkInput = $.extend({}, TextInput, {
 
-    events: {
-        "keyup": ['onChange', 'input'],
-	 },
+    events: [
+        ["change", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
 		$('input', this.element).val(value);
@@ -129,9 +129,9 @@ var LinkInput = $.extend({}, TextInput, {
 
 var RangeInput = $.extend({}, Input, {
 
-    events: {
-        "change": ['onChange', 'input'],
-	 },
+    events: [
+        ["change", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
 		$('input', this.element).val(value);
@@ -145,9 +145,9 @@ var RangeInput = $.extend({}, Input, {
 
 var NumberInput = $.extend({}, Input, {
 
-    events: {
-        "change": ['onChange', 'input'],
-	 },
+    events: [
+        ["change", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
 		$('input', this.element).val(value);
@@ -155,6 +155,55 @@ var NumberInput = $.extend({}, Input, {
 	
 	init: function(data) {
 		return this.render("numberinput", data);
+	},
+  }
+);
+
+var CssUnitInput = $.extend({}, Input, {
+
+	number:0,
+	unit:"px",
+		
+	onChange: function(event) {
+		
+		if (event.data && event.data.element)
+		{
+			input = event.data.input;
+			input[this.name] = this.value;// this.name = unit or number	
+			
+			value = "";	
+			if (input.unit == "auto")  
+			{
+				$(event.data.element).addClass("auto"); 
+				value = input.unit;
+			}
+			else 
+			{
+				$(event.data.element).removeClass("auto"); 
+				value = input.number + input.unit;
+			}
+			
+			event.data.element.trigger('propertyChange', [value, this]);
+		}
+	},
+	
+    events: [
+        ["change", "onChange", "select"],
+        ["change", "onChange", "input"],
+	 ],
+
+	setValue: function(value) {
+		this.number = parseInt(value);
+		this.unit = value.replace(this.number, '');
+		
+		if (this.unit == "auto") $(this.element).addClass("auto");
+
+		$('input', this.element).val(this.number);
+		$('select', this.element).val(this.unit);
+	},
+	
+	init: function(data) {
+		return this.render("cssunitinput", data);
 	},
   }
 );
@@ -172,9 +221,9 @@ var ColorInput = $.extend({}, Input, {
 		  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : rgb;
 	},
 
-    events: {
-        "change": ['onChange', 'input'],
-	 },
+    events: [
+        ["change", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
 		$('input', this.element).val(this.rgb2hex(value));
@@ -188,9 +237,9 @@ var ColorInput = $.extend({}, Input, {
 
 var FileUploadInput = $.extend({}, TextInput, {
 
-    events: {
-        "keyup": ['onChange', 'input'],
-	 },
+    events: [
+        ["keyup", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
 		$('input', this.element).val(value);
@@ -202,18 +251,37 @@ var FileUploadInput = $.extend({}, TextInput, {
   }
 );
 
-var RadioInput = $.extend({}, TextInput, {
 
-    events: {
-        "keyup": ['onChange', 'input'],
-	 },
+var RadioInput = $.extend({}, Input, {
+
+	onChange: function(event, node) {
+		
+		if (event.data && event.data.element)
+		{
+			event.data.element.trigger('propertyChange', [this.value, this]);
+		}
+	},
+
+    events: [
+        ["change", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
-		$('input', this.element).val(value);
+		$('input', this.element).removeAttr('checked');
+		if (value)
+		$("input[value=" + value + "]", this.element).prop('checked', true);
 	},
 	
 	init: function(data) {
-		return this.render("textinput", data);
+		return this.render("radioinput", data);
+	},
+  }
+);
+
+var RadioButtonInput = $.extend({}, RadioInput, {
+
+	init: function(data) {
+		return this.render("radiobuttoninput", data);
 	},
   }
 );
@@ -227,9 +295,9 @@ var ToggleInput = $.extend({}, TextInput, {
 		}
 	},
 
-    events: {
-        "change": ['onChange', 'input'],
-	 },
+    events: [
+        ["change", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
 		$('input', this.element).val(value);
@@ -243,9 +311,9 @@ var ToggleInput = $.extend({}, TextInput, {
 
 var ValueTextInput = $.extend({}, TextInput, {
 
-    events: {
-        "keyup": ['onChange', 'input'],
-	 },
+    events: [
+        ["keyup", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
 		$('input', this.element).val(value);
@@ -259,9 +327,9 @@ var ValueTextInput = $.extend({}, TextInput, {
 
 var GridLayoutInput = $.extend({}, TextInput, {
 
-    events: {
-        "keyup": ['onChange', 'input'],
-	 },
+    events: [
+        ["keyup", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
 		$('input', this.element).val(value);
@@ -275,9 +343,9 @@ var GridLayoutInput = $.extend({}, TextInput, {
 
 var ProductsInput = $.extend({}, TextInput, {
 
-    events: {
-        "keyup": ['onChange', 'input'],
-	 },
+    events: [
+        ["keyup", "onChange", "input"],
+	 ],
 
 	setValue: function(value) {
 		$('input', this.element).val(value);
@@ -293,10 +361,10 @@ var ProductsInput = $.extend({}, TextInput, {
 var GridInput = $.extend({}, Input, {
 	
 
-    events: {
-        "change": ['onChange', 'select' /*'select'*/],
-        "click": ['onChange', 'button' /*'select'*/],
-	 },
+    events: [
+        ["change", "onChange", "select" /*'select'*/],
+        ["click", "onChange", "button" /*'select'*/],
+	 ],
 	
 
 	setValue: function(value) {
@@ -313,10 +381,10 @@ var GridInput = $.extend({}, Input, {
 var TextValueInput = $.extend({}, Input, {
 	
 
-    events: {
-        "keyup": ['onChange', 'input'],
-        "click": ['onChange', 'button' /*'select'*/],
-	 },
+    events: [
+        ["keyup", "onChange", "input"],
+	    ["click", "onChange", "button" /*'select'*/],
+	 ],
 	
 
 	setValue: function(value) {
@@ -332,9 +400,9 @@ var TextValueInput = $.extend({}, Input, {
 
 var ButtonInput = $.extend({}, Input, {
 
-    events: {
-        "click": ['onChange', 'button' /*'select'*/],
-	 },
+    events: [
+        ["click", "onChange", "button" /*'select'*/],
+	 ],
 	
 
 	setValue: function(value) {
@@ -343,6 +411,42 @@ var ButtonInput = $.extend({}, Input, {
 	
 	init: function(data) {
 		return this.render("button", data);
+	},
+	
+  }
+);
+
+var SectionInput = $.extend({}, Input, {
+
+    events: [
+        ["click", "onChange", "button" /*'select'*/],
+	 ],
+	
+
+	setValue: function(value) {
+		return false;
+	},
+	
+	init: function(data) {
+		return this.render("sectioninput", data);
+	},
+	
+  }
+);
+
+var ListInput = $.extend({}, Input, {
+	
+    events: [
+        ["change", "onChange", "select"],
+	 ],
+	
+
+	setValue: function(value) {
+		$('select', this.element).val(value);
+	},
+	
+	init: function(data) {
+		return this.render("listinput", data);
 	},
 	
   }

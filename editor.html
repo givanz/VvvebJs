@@ -13,7 +13,6 @@
     
     <link href="css/editor.css" rel="stylesheet">
     <link href="css/line-awesome.css" rel="stylesheet">
-  </head>
 
   <body>
 
@@ -69,6 +68,116 @@
 				
 				<div id="left-panel">
 
+					  <div id="filemanager"> 
+							<div class="header"><a href="#">Pages</a></div>
+
+								<div class="tree">
+									<ol>
+										<!-- li>
+											<label for="folder1"><span>Folder 1</span></label> <input type="checkbox" checked id="folder1" /> 
+											<ol>
+												<li class="file"><a href="document.html.pdf">File 1</a></li>
+												<li>
+													<label for="subfolder1">Subfolder 1</label> <input type="checkbox" id="subfolder1" /> 
+													<ol>
+														<li class="file"><a href="#"><span>Filey 1</span></a></li>
+														<li>
+															<label for="subsubfolder1">Subfolder 1</label> <input type="checkbox" id="subsubfolder1" /> 
+															<ol>
+																<li class="file"><a href="#">File 1</a></li>
+																<li>
+																	<label for="subsubfolder2">Subfolder 1</label> <input type="checkbox" id="subsubfolder2" /> 
+																	<ol>
+																		<li class="file"><a href="#">Subfile 1</a></li>
+																		<li class="file"><a href="#">Subfile 2</a></li>
+																		<li class="file"><a href="#">Subfile 3</a></li>
+																		<li class="file"><a href="#">Subfile 4</a></li>
+																		<li class="file"><a href="#">Subfile 5</a></li>
+																		<li class="file"><a href="#">Subfile 6</a></li>
+																	</ol>
+																</li>
+															</ol>
+														</li>
+														<li class="file"><a href="#">File 3</a></li>
+														<li class="file"><a href="#">File 4</a></li>
+														<li class="file"><a href="#">File 5</a></li>
+														<li class="file"><a href="#">File 6</a></li>
+													</ol>
+												</li>
+											</ol>
+										</li>
+										<li>
+											<label for="folder2"><span>Folder 2</span></label> <input type="checkbox" id="folder2" /> 
+											<ol>
+												<li class="file active"><a href="#"><span>File 1</span></a></li>
+												<li>
+													<label for="subfolder2">Subfolder 1</label> <input type="checkbox" id="subfolder2" /> 
+													<ol>
+														<li class="file"><a href="#">Subfile 1</a></li>
+														<li class="file"><a href="#">Subfile 2</a></li>
+														<li class="file"><a href="#">Subfile 3</a></li>
+														<li class="file"><a href="#">Subfile 4</a></li>
+														<li class="file"><a href="#">Subfile 5</a></li>
+														<li class="file"><a href="#">Subfile 6</a></li>
+													</ol>
+												</li>
+											</ol>
+										</li>
+										<li class="active">
+											<label for="folder3"><span>Folder 3</span></label> <input type="checkbox" id="folder3" /> 
+											<ol>
+												<li class="file"><a href="#"><span>File 1</span></a></li>
+												<li>
+													<label for="subfolder3">Subfolder 1</label> <input type="checkbox" id="subfolder3" /> 
+													<ol>
+														<li class="file"><a href="#">Subfile 1</a></li>
+														<li class="file"><a href="#">Subfile 2</a></li>
+														<li class="file"><a href="#">Subfile 3</a></li>
+														<li class="file"><a href="#">Subfile 4</a></li>
+														<li class="file"><a href="#">Subfile 5</a></li>
+														<li class="file"><a href="#">Subfile 6</a></li>
+													</ol>
+												</li>
+											</ol>
+										</li>
+										<li>
+											<label for="folder4">Folder 4</label> <input type="checkbox" id="folder4" /> 
+											<ol>
+												<li class="file"><a href="#">File 1</a></li>
+												<li>
+													<label for="subfolder4">Subfolder 1</label> <input type="checkbox" id="subfolder4" /> 
+													<ol>
+														<li class="file"><a href="#">Subfile 1</a></li>
+														<li class="file"><a href="#">Subfile 2</a></li>
+														<li class="file"><a href="#">Subfile 3</a></li>
+														<li class="file"><a href="#">Subfile 4</a></li>
+														<li class="file"><a href="#">Subfile 5</a></li>
+														<li class="file"><a href="#">Subfile 6</a></li>
+													</ol>
+												</li>
+											</ol>
+										</li>
+										<li>
+											<label for="folder5">Folder 5</label> <input type="checkbox" id="folder5" /> 
+											<ol>
+												<li class="file"><a href="#">File 1</a></li>
+												<li>
+													<label for="subfolder5">Subfolder 1</label> <input type="checkbox" id="subfolder5" /> 
+													<ol>
+														<li class="file"><a href="#">Subfile 1</a></li>
+														<li class="file"><a href="#">Subfile 2</a></li>
+														<li class="file"><a href="#">Subfile 3</a></li>
+														<li class="file"><a href="#">Subfile 4</a></li>
+														<li class="file"><a href="#">Subfile 5</a></li>
+														<li class="file"><a href="#">Subfile 6</a></li>
+													</ol>
+												</li>
+											</ol>
+										</li  -->
+									</ol>
+								</div>
+					  </div>
+					  	
 					  <div id="components">
 						
 						<div class="header">
@@ -140,7 +249,7 @@
 
 				<div class="btn-group" role="group">
 
-		 			 <button id="mobile-view" data-view="mobile" class="btn btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
+		 			 <button id="code-editor-btn" data-view="mobile" class="btn btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
 						  <i class="ion-code"></i> Code editor
 					  </button>
 
@@ -167,13 +276,44 @@
 
 <script id="vvveb-input-checkboxinput" type="text/html">
 	
-	<div>
+	<div class="custom-control custom-checkbox">
+		  <input name="{%=key%}" class="custom-control-input" type="checkbox" id="{%=key%}_check">
+		  <label class="custom-control-label" for="{%=key%}_check">{% if (typeof text !== 'undefined') { %} {%=text%} {% } %}</label>
+	</div>
+	
+</script>
 
-		<label class="custom-control custom-checkbox">
-		  <input name="{%=key%}" class="custom-control-input" type="checkbox"><span class="custom-control-indicator"></span>
-		  <!-- span class="custom-control-description">Text</span -->
+<script id="vvveb-input-radioinput" type="text/html">
+	
+	<div>
+	
+		{% for ( var i = 0; i < options.length; i++ ) { %}
+
+		<label class="custom-control custom-radio  {% if (typeof inline !== 'undefined' && inline == true) { %}custom-control-inline{% } %}"  title="{%=options[i].title%}">
+		  <input name="{%=key%}" class="custom-control-input" type="radio" value="{%=options[i].value%}" id="{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}"{% } %}>
+		  <label class="custom-control-label" for="{%=key%}{%=i%}">{%=options[i].text%}</label>
 		</label>
 
+		{% } %}
+
+	</div>
+	
+</script>
+
+<script id="vvveb-input-radiobuttoninput" type="text/html">
+	
+	<div class="btn-group btn-group-toggle  {%if (extraclass) { %}{%=extraclass%}{% } %} clearfix" data-toggle="buttons">
+	
+		{% for ( var i = 0; i < options.length; i++ ) { %}
+
+		<label class="btn btn-light  {%if (options[i].checked) { %}active{% } %}" for="{%=key%}{%=i%} " title="{%=options[i].title%}">
+		  <input name="{%=key%}" class="custom-control-input" type="radio" value="{%=options[i].value%}" id="{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}"{% } %}>
+		  {%if (options[i].icon) { %}<i class="{%=options[i].icon%}"></i>{% } %}
+		  {%=options[i].text%}
+		</label>
+
+		{% } %}
+				
 	</div>
 	
 </script>
@@ -208,6 +348,40 @@
 			{% } %}
 		</select>
 	
+	</div>
+	
+</script>
+
+
+<script id="vvveb-input-listinput" type="text/html">
+
+	<div class="row">
+
+		{% for ( var i = 0; i < options.length; i++ ) { %}
+		<div class="col-6">
+			<div class="input-group">
+				<input name="{%=key%}_{%=i%}" type="text" class="form-control" value="{%=options[i].text%}"/>
+				<div class="input-group-append">
+					<button class="input-group-text btn btn-sm btn-danger">
+						<i class="ion-trash-a"></i>
+					</button>
+				</div>
+			  </div>
+			  <br/>
+		</div>
+		{% } %}
+
+
+		{% if (typeof hide_remove === 'undefined') { %}
+		<div class="col-12">
+		
+			<button class="btn btn-sm btn-outline-primary">
+				<i class="ion-trash-a"></i> Add new
+			</button>
+			
+		</div>
+		{% } %}
+			
 	</div>
 	
 </script>
@@ -339,11 +513,13 @@
 </script>
 
 <script id="vvveb-input-numberinput" type="text/html">
-	
 	<div>
-		<input name="{%=key%}" type="number" value="{%=value%}" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-control"/>
+		<input name="{%=key%}" type="number" value="{%=value%}" 
+			  {% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %} 
+			  {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %} 
+			  {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %} 
+		class="form-control"/>
 	</div>
-	
 </script>
 
 <script id="vvveb-input-button" type="text/html">
@@ -354,13 +530,57 @@
 	</div>		
 </script>
 
+<script id="vvveb-input-cssunitinput" type="text/html">
+	<div class="input-group" id="cssunit-{%=key%}">
+		<input name="number" type="number" value="{%=value%}" 
+			  {% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %} 
+			  {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %} 
+			  {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %} 
+		class="form-control"/>
+		 <div class="input-group-append">
+		<select class="form-control custom-select small-arrow" name="unit">
+			<option>em&ensp;</option>
+			<option>px</option>
+			<option>%</option>
+			<option>rem</option>
+			<option>auto</option>
+		</select>
+		</div>
+	</div>
+	
+</script>
+
+
+<script id="vvveb-filemanager-page" type="text/html">
+	<li data-url="{%=url%}" data-page="{%=name%}">
+		<label for="{%=name%}"><span>{%=title%}</span></label> <input type="checkbox" checked id="{%=name%}" />
+		<ol></ol>
+	</li>
+</script>
+
+<script id="vvveb-filemanager-component" type="text/html">
+	<li data-url="{%=url%}" data-component="{%=name%}" class="file">
+		<a href="{%=url%}"><span>{%=title%}</span></a>
+	</li>
+</script>
+
+<script id="vvveb-input-sectioninput" type="text/html">
+
+		<label class="header" data-header="{%=key%}" for="header_{%=key%}"><span>&ensp;{%=header%}</span> <div class="header-arrow"></div></label> 
+		<input class="header_check" type="checkbox" {% if (typeof expanded !== 'undefined' && expanded == false) { %} {% } else { %}checked="true"{% } %} id="header_{%=key%}"> 
+		<div class="section" data-section="{%=key%}"></div>		
+	
+</script>
+
 
 <script id="vvveb-property" type="text/html">
 
-	<div class="form-group row" data-key="{%=key%}">
-		<label class="col-sm-4 control-label" for="input-model">{%=name%}</label>
-		<div class="col-sm-8 input">
-		 </div>
+	<div class="form-group {% if (typeof col !== 'undefined' && col != false) { %} col-sm-{%=col%} d-inline-block {% } else { %}row{% } %}" data-key="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
+		
+		{% if (typeof name !== 'undefined' && name != false) { %}<label class="{% if (typeof inline === 'undefined' ) { %}col-sm-4{% } %} control-label" for="input-model">{%=name%}</label>{% } %}
+		
+		<div class="{% if (typeof inline === 'undefined') { %}col-sm-{% if (typeof name !== 'undefined' && name != false) { %}8{% } else { %}12{% } } %} input"></div>
+		
 	</div>		 
 	
 </script>
@@ -373,7 +593,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="textarea-modal">Export html</h5>
+        <h5 class="modal-title">Export html</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -405,8 +625,8 @@
 <!-- inputs-->
 <script src="libs/builder/inputs.js"></script>	
 <!-- components-->
-<script src="libs/builder/components-bootstrap4.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
+<script src="libs/builder/components-bootstrap4.js"></script>	
 
 <!-- plugins -->
 
@@ -422,11 +642,30 @@
 <script>
 $(document).ready(function() 
 {
-	Vvveb.Builder.init('demo/index.html', function() {
-		//load code after page is loaded here
-		Vvveb.Gui.init();
+	Vvveb.Builder.init('demo/narrow-jumbotron/index.html', function() {
+		//run code after page/iframe is loaded
 	});
+
+	Vvveb.Gui.init();
+	Vvveb.FileManager.init();
+	Vvveb.FileManager.addPages(
+	[
+		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html"},
+		{name:"landio", title:"Landio landing page",  url: "demo/landio/index.html"},
+		{name:"album", title:"Album",  url: "demo/album/index.html"},
+		{name:"blog", title:"Blog",  url: "demo/blog/index.html"},
+		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html"},
+		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html"},
+		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html"},
+		{name:"product", title:"Product",  url: "demo/product/index.html"},
+		{name:"ecommerce", title:"eCommerce homepage",  url: "ecommerce_demo/index.html"},
+		{name:"test", title:"test",  url: "http://vvveb_install.givan.ro/"},
+	]);
 });
 </script>
 </body>
 </html>
+
+
+
+

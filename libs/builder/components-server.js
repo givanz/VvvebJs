@@ -16,11 +16,11 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-Vvveb.ComponentsGroup['Server Components'] = ["components/products", "components/categories", "components/manufacturers", "components/search", "components/user", "components/product_gallery", "components/cart", "components/checkout", "components/filters", "components/product", "components/slider"];
+Vvveb.ComponentsGroup['Server Components'] = ["components/products", "components/product", "components/categories", "components/manufacturers", "components/search", "components/user", "components/product_gallery", "components/cart", "components/checkout", "components/filters", "components/product", "components/slider"];
 
 
 Vvveb.Components.add("components/product", {
-    name: "Products",
+    name: "Product",
     attributes: ["data-component-product"],
 
     image: "icons/map.svg",
@@ -77,7 +77,8 @@ Vvveb.Components.add("components/product", {
 
 Vvveb.Components.add("components/products", {
     name: "Products",
-    classes: ["component_products"],
+    attributes: ["data-component-products"],
+
     image: "icons/products.svg",
     html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
     onPropertiesShow: function ()
@@ -91,40 +92,50 @@ Vvveb.Components.add("components/products", {
 		jQuery("input.product_autocomplete", this.el).autocomplete("/?module=ajax&action=product_autocomplete", {json_key:'products'});		
 	},
     properties: [{
-        name: "Type",
+        name: false,
         key: "type",
-        nolabel:true,
-        inputtype: RadioInput,
+        inputtype: RadioButtonInput,
         data: {
+            inline: true,
+            extraclass:"btn-group-fullwidth",
             options: [{
+                value: "automatic",
+                icon:"la la-cog",
+                text: "Configuration",
+                title: "Configuration",
+                checked:true,
+            }, {
                 value: "autocomplete",
                 text: "Autocomplete",
-                icon:"linecons-user",
-                isChecked:true,
-            }, {
-                value: "automatic",
-                icon:"linecons-cog",
-                text: "Automatic"
+                title: "Autocomplete",
+                icon:"la la-search",
             }],
-            name:"type",
-			onChange : function(event) {
-				current = $(event.currentTarget).val();
-				$('.form-group[class*="group-"]').hide();
-				$('.form-group[class*="group-' + current + '"]').show();
-
-			},            
         },
+		onChange : function(element, value, input) {
+			
+//			console.log(element, value, input);
+//			current = $(event.currentTarget).val();
+			$('.form-group[data-group]').hide();
+			$('.form-group[data-group="'+ input.value + '"]').show();
+
+			return element;
+		},            
     },{
         name: "Products",
         key: "height",
-        nolabel:true,
         group:"autocomplete",
         inputtype: ProductsInput,
     },{
         name: "Number of products",
         group:"automatic",
         key: "limit",
-        inputtype: TextInput,
+        inputtype: NumberInput,
+        data: {
+            value: "8",//default
+            min: "1",
+            max: "1024",
+            step: "1"
+        },        
         getFromNode: function(node) {
             return 10
         },
@@ -132,7 +143,13 @@ Vvveb.Components.add("components/products", {
         name: "Start from page",
         group:"automatic",
         key: "page",
-        inputtype: TextInput,
+        data: {
+            value: "1",//default
+            min: "1",
+            max: "1024",
+            step: "1"
+        },        
+        inputtype: NumberInput,
         getFromNode: function(node) {
             return 0
         },
@@ -173,7 +190,8 @@ Vvveb.Components.add("components/products", {
         key: "category",
         inputtype: TextInput
 	},{
-        nolabel:true,
+        nolabel:false,
+        key:"fields",
         inputtype: TextInput,
         data: {text:"Fields"}
 	},{
@@ -207,7 +225,7 @@ Vvveb.Components.add("components/manufacturers", {
     image: "icons/categories.svg",
     html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
     properties: [{
-        nolabel:true,
+        nolabel:false,
         inputtype: TextInput,
         data: {text:"Fields"}
 	},{

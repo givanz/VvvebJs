@@ -1,0 +1,116 @@
+/* CSS Tree menu styles */
+.tree
+{
+	ol
+	{
+		padding: 0 0 0 2rem;
+		width: 300px;
+		width: $builder-right-panel-width + 15;
+		font-size:12px;
+		color:#555;
+
+		li 
+		{ 
+			position: relative; 
+			margin-left: -15px;
+			list-style: none;
+			color:#555;
+			
+			&:hover
+			{
+				color:#007bff;
+			}
+			
+			&.active
+			{
+				//background-color:$primary;
+				//color:#fff;
+				> label > span, > a > span  
+				{
+					color:#007bff;
+					font-weight:600;
+				}
+			}
+		}
+		
+		li.file
+		{
+			margin-left: -1px !important;
+			
+			a
+			{
+				background: url(../libs/builder/icons/file.svg) 0px 0px no-repeat;
+				background-size:18px 18px;
+				
+				color: #333;
+				padding-left: 21px;
+				text-decoration: none;
+				display: block;
+				/*
+				&[href *= '.pdf']	{ background: url(../img/document.png) 0 0 no-repeat; }
+				&[href *= '.html']	{ background: url(../img/document.png) 0 0 no-repeat; }
+				&[href $= '.css']	{ background: url(../img/document.png) 0 0 no-repeat; }
+				&[href $= '.js']	{ background: url(../img/document.png) 0 0 no-repeat; }
+				*/ 
+
+				&:hover
+				{
+					color:$primary;
+				}
+			}
+		}
+
+		li input
+		{
+			position: absolute;
+			left: 0;
+			margin-left: 0;
+			opacity: 0;
+			z-index: 2;
+			cursor: pointer;
+			height: 1em;
+			width: 1em;
+			top: 0;
+			
+			 + ol
+			{
+				background: url(../img/toggle-small-expand.png) 40px 0 no-repeat;
+				background: url(../libs/builder/icons/plus_round.svg) 40px 0px no-repeat;
+				background: url(../libs/builder/icons/arrow-down.svg) 42px 2px no-repeat;
+				background-size:10px 10px;
+				
+				margin: -1.18em 0 0 -44px; /* 15px */
+				padding:0.8rem 0rem;
+				height: 0em;
+				
+				> li { display: none; margin-left: -14px !important; padding-left: 1px; }
+			}
+		}
+		
+		li label
+		{
+			background: url(../libs/builder/icons/folder.svg) 15px 1px no-repeat;
+			background: url(../libs/builder/icons/file.svg) 12px 0px no-repeat;
+			background-size:18px 18px;
+			cursor: pointer;
+			display: block;
+			padding-left: 37px;
+			margin:0px;
+			font-size:12px;
+		}
+
+		li input:checked + ol
+		{
+			background: url(../img/toggle-small.png) 40px 5px no-repeat;
+			background: url(../libs/builder/icons/minus_round.svg) 40px 5px no-repeat;
+			background: url(../libs/builder/icons/arrow-right.svg) 42px 8px no-repeat;
+			background-size:10px 10px;
+			margin: -1.65em 0 0 -44px; /* 20px */
+			padding: 1.963em 0 0 80px;
+			height: auto;
+
+			> li { display: block; margin: 0 0 0.125em;  /* 2px */}
+			> li:last-child { margin: 0 0 0.063em; /* 1px */ }
+		}
+	}
+}

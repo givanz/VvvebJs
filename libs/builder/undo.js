@@ -149,5 +149,9 @@ Vvveb.Undo = {
 		  this.restore(this.mutations[++this.undoIndex], false);
 		}
 	},
+
+	hasChanges : function() {	
+		return this.mutations.length;
+	},
 };
 
