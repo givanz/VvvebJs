@@ -83,6 +83,7 @@ if (Vvveb === undefined) var Vvveb = {};
 
 Vvveb.defaultComponent = "_base";
 Vvveb.preservePropertySections = true;
+Vvveb.dragIcon = 'icon';//icon = use component icon when dragging | html = use component html to create draggable element
 
 Vvveb.baseUrl =  document.currentScript?document.currentScript.src.replace(/[^\/]*?\.js$/,''):'';
 
@@ -632,54 +633,41 @@ Vvveb.Builder = {
 		moveEvent = {target:null, };
 		
 		this.frameBody.on("mousemove touchmove", function(event) {
-			//delay for half a second if dragging over same element
-			if (event.target == moveEvent.target && ((event.timeStamp - moveEvent.timeStamp) < 500)) return;
-
+			
 			if (event.target)
 			{
-				moveEvent = event;
-				
+				//moveEvent = event;
 				self.highlightEl = target = jQuery(event.target);
 				offset = target.offset();
-				width = target.outerWidth();
 				height = target.outerHeight();
+				halfHeight = Math.max(height / 2, 50);
+				width = target.outerWidth();
+				halfWidth = Math.max(width / 2, 50);
 				
 				if (self.isDragging)
 				{
-					if (self.iconDrag) self.iconDrag.remove();
-					
 					parent = self.highlightEl;
 					parentOffset = self.dragElement.offset();
 
 					try {
-						if (event.originalEvent && (offset.left  > (event.originalEvent.x - 10)))
+						if (event.originalEvent)
 						{
-								if (offset.top  > (event.originalEvent.y - 10))
-								{
-									parent.before(self.dragElement);
-								} else
-								{
-									parent.prepend(self.dragElement);
-									//self.dragElement.prependTo(parent);
-								}
-						} else
-						{
-								if (event.originalEvent && offset.top  > ((event.originalEvent.y - 10)))
-								{
-									parent.before(self.dragElement);
-								} else
-								{
-									parent.append(self.dragElement);
-									//self.dragElement.appendTo(parent);
-								}
+							if ((offset.top  < (event.originalEvent.y - halfHeight)) || (offset.left  < (event.originalEvent.x - halfWidth)))
+							{
+								self.dragElement.appendTo(parent);
+							} else
+							{
+								self.dragElement.prependTo(parent);
+							};
 						}
 						
 					} catch(err) {
 						console.log(err);
+						return false;
 					}
 					
-					self.isDragging == false;
-				} else
+					self.iconDrag.css({'left': event.originalEvent.x + 275/*left panel width*/, 'top':event.originalEvent.y - 30 });					
+				}// else //uncomment else to disable parent highlighting when dragging
 				{
 					
 					jQuery("#highlight-box").css(
@@ -687,13 +675,15 @@ Vvveb.Builder = {
 						 "left": offset.left - self.frameDoc.scrollLeft() , 
 						 "width" : width, 
 						 "height": height,
-						  "display" : event.target.hasAttribute('contenteditable')?"none":"block"
+						  "display" : event.target.hasAttribute('contenteditable')?"none":"block",
+						  "border":self.isDragging?"1px dashed aqua":"",//when dragging highlight parent with green
 						 });
 						 
 					jQuery("#highlight-name").html(self._getElementType(event.target));
+					if (self.isDragging) jQuery("#highlight-name").hide(); else jQuery("#highlight-name").show();//hide tag name when dragging
 				}
-									 
 			}	
+			
 		});
 		
 		
@@ -701,6 +691,7 @@ Vvveb.Builder = {
 			if (self.isDragging)
 			{
 				self.isDragging = false;
+				if (self.iconDrag) self.iconDrag.remove();
 				
 				if (component.dragHtml) //if dragHtml is set for dragging then set real component html
 				{
@@ -709,6 +700,8 @@ Vvveb.Builder = {
 					self.dragElement = newElement;
 				}
 				if (component.afterDrop) self.dragElement = component.afterDrop(self.dragElement);
+				
+				self.dragElement.css("border", "");
 				
 				node = self.dragElement.get(0);
 				self.selectNode(node);
@@ -941,15 +934,19 @@ Vvveb.Builder = {
 				html = component.dragHtml;
 			} else
 			{
-			html = component.html;
+				html = component.html;
 			}
 			
 			self.dragElement = $(html);
+			self.dragElement.css("border", "1px dashed #4285f4");
 			
 			if (component.dragStart) self.dragElement = component.dragStart(self.dragElement);
 
 			self.isDragging = true;
-			self.iconDrag = $this.clone().attr("id", "component-clone").css('position', 'absolute');
+			if (Vvveb.dragIcon == 'html')
+				self.iconDrag = $(html).attr("id", "component-clone").css('position', 'absolute');
+			else
+				self.iconDrag = $('<img src=""/>').attr({"id": "component-clone", 'src': $this.css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1')}).css({'position':'absolute', 'width':'64px', 'height':'64px'});
 			$('body').append(self.iconDrag);
 		});
 		

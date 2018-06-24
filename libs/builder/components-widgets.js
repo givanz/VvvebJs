@@ -16,7 +16,7 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-Vvveb.ComponentsGroup['Widgets'] = ["widgets/googlemaps", "widgets/video", "widgets/chartjs", "widgets/facebookpage", "widgets/paypal", "widgets/instagram", "widgets/twitter", "widgets/facebookcomments"];
+Vvveb.ComponentsGroup['Widgets'] = ["widgets/googlemaps", "widgets/video", "widgets/chartjs", "widgets/facebookpage", "widgets/paypal", "widgets/instagram", "widgets/twitter"/*, "widgets/facebookcomments"*/];
 
 Vvveb.Components.extend("_base", "widgets/googlemaps", {
     name: "Google Maps",
