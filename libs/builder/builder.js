@@ -946,8 +946,13 @@ Vvveb.Builder = {
 			if (Vvveb.dragIcon == 'html')
 				self.iconDrag = $(html).attr("id", "component-clone").css('position', 'absolute');
 			else
-				self.iconDrag = $('<img src=""/>').attr({"id": "component-clone", 'src': $this.css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1')}).css({'position':'absolute', 'width':'64px', 'height':'64px'});
+				self.iconDrag = $('<img src=""/>').attr({"id": "component-clone", 'src': $this.css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1')}).
+				css({'z-index':100, 'position':'absolute', 'width':'64px', 'height':'64px', 'top': event.originalEvent.y, 'left': event.originalEvent.x});
+				
 			$('body').append(self.iconDrag);
+			
+			event.preventDefault();
+			return false;
 		});
 		
 		
@@ -1105,6 +1110,28 @@ Vvveb.Gui = {
 	save : function () {
 		$('#textarea-modal textarea').val(Vvveb.Builder.getHtml());
 		$('#textarea-modal').modal();
+	},
+	
+	download : function () {
+		filename = /[^\/]+$/.exec(Vvveb.Builder.iframe.src)[0];
+		uriContent = "data:application/octet-stream,"  + encodeURIComponent(Vvveb.Builder.getHtml());
+
+		var link = document.createElement('a');
+		if ('download' in link)
+		{
+			link.download = filename;
+			link.href = uriContent;
+			link.target = "_blank";
+			
+			document.body.appendChild(link);
+			result = link.click();
+			document.body.removeChild(link);
+			link.remove();
+			
+		} else
+		{
+			location.href = uriContent;
+		}
 	},
 	
 	viewport : function () {
