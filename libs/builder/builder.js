@@ -79,6 +79,15 @@ function getStyle(el,styleProp)
 	return value;
 }
 
+function isElement(obj){
+   return (typeof obj==="object") &&
+      (obj.nodeType===1) && (typeof obj.style === "object") &&
+      (typeof obj.ownerDocument ==="object")/* && obj.tagName != "BODY"*/;
+}
+
+
+var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
+
 if (Vvveb === undefined) var Vvveb = {};
 
 Vvveb.defaultComponent = "_base";
@@ -200,6 +209,8 @@ Vvveb.Components = {
 			//search for attributes
 			for (var i in node.attributes)
 			{
+				if (node.attributes[i])
+				{
 				attr = node.attributes[i].name;
 				value = node.attributes[i].value;
 
@@ -218,6 +229,7 @@ Vvveb.Components = {
 					} else 
 					return component;
 				}
+			}
 			}
 				
 			for (var i in node.attributes)
@@ -384,6 +396,12 @@ Vvveb.Components = {
 				row.find('.input').append(property.input);
 				section.append(row);
 			}
+			
+			if (property.inputtype.afterInit)
+			{
+				property.inputtype.afterInit(property.input);
+			}
+
 		}
 		
 		if (component.init) component.init(Vvveb.Builder.selectedEl.get(0));
@@ -492,6 +510,7 @@ Vvveb.Builder = {
 
 		componentsList = $("#components-list");
 		componentsList.empty();
+		var item = {};
 		
 		for (group in Vvveb.ComponentsGroup)	
 		{
@@ -595,7 +614,7 @@ Vvveb.Builder = {
 
 	},
 	
-	selectNode:  function(node = false) {
+	selectNode:  function(node) {
 		
 		if (!node)
 		{
@@ -634,7 +653,7 @@ Vvveb.Builder = {
 		
 		this.frameBody.on("mousemove touchmove", function(event) {
 			
-			if (event.target)
+			if (event.target && isElement(event.target))
 			{
 				//moveEvent = event;
 				self.highlightEl = target = jQuery(event.target);
@@ -647,17 +666,23 @@ Vvveb.Builder = {
 				if (self.isDragging)
 				{
 					parent = self.highlightEl;
-					parentOffset = self.dragElement.offset();
+					//parentOffset = self.dragElement.offset();
 
 					try {
 						if (event.originalEvent)
 						{
 							if ((offset.top  < (event.originalEvent.y - halfHeight)) || (offset.left  < (event.originalEvent.x - halfWidth)))
 							{
-								self.dragElement.appendTo(parent);
+								 if (isIE11) 
+								 self.highlightEl.append(self.dragElement); 
+								 else 
+									self.dragElement.appendTo(parent);
 							} else
 							{
-								self.dragElement.prependTo(parent);
+								if (isIE11) 
+								 self.highlightEl.prepend(self.dragElement); 
+								else 
+									self.dragElement.prependTo(parent);
 							};
 						}
 						
@@ -666,7 +691,7 @@ Vvveb.Builder = {
 						return false;
 					}
 					
-					self.iconDrag.css({'left': event.originalEvent.x + 275/*left panel width*/, 'top':event.originalEvent.y - 30 });					
+					if (event.originalEvent) self.iconDrag.css({'left': event.originalEvent.x + 275/*left panel width*/, 'top':event.originalEvent.y - 30 });					
 				}// else //uncomment else to disable parent highlighting when dragging
 				{
 					
@@ -954,7 +979,6 @@ Vvveb.Builder = {
 			event.preventDefault();
 			return false;
 		});
-		
 		
 		$('body').on('mouseup touchend', function(event) {
 			if (self.iconDrag && self.isDragging == true)

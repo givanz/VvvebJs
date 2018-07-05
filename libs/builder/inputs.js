@@ -41,11 +41,11 @@ var Input = {
 		if (this.events)
 		for (var i in this.events)
 		{
-			event = this.events[i][0];
+			ev = this.events[i][0];
 			fun = this[ this.events[i][1] ];
 			el = this.events[i][2];
 		
-			this.element.on(event, el, {element: this.element, input:this}, fun);
+			this.element.on(ev, el, {element: this.element, input:this}, fun);
 		}
 
 		return this.element;
@@ -213,12 +213,15 @@ var ColorInput = $.extend({}, Input, {
 	 //html5 color input only supports setting values as hex colors even if the picker returns only rgb
 	 rgb2hex: function(rgb) {
 		 
+		 if (rgb)
+		 {
 		 rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
 		 
 		 return (rgb && rgb.length === 4) ? "#" +
 		  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
 		  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
 		  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : rgb;
+		 }
 	},
 
     events: [
