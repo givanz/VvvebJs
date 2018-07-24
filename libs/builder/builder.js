@@ -263,8 +263,8 @@ Vvveb.Components = {
 		tagName = node.tagName.toLowerCase();
 		if (tagName in this._nodesLookup) return this._nodesLookup[ tagName ];
 	
+		return false;
 		//return false;
-		return this.get(Vvveb.defaultComponent);
 	},
 	
 	render: function(type) {
@@ -294,7 +294,8 @@ Vvveb.Components = {
 					if (property.onChange)
 					{
 						element = property.onChange(element, value, input, component);
-					} else if (property.htmlAttr)
+					}/* else */
+					if (property.htmlAttr)
 					{
 						oldValue = element.attr(property.htmlAttr);
 						
@@ -544,9 +545,11 @@ Vvveb.Builder = {
 		}
 	 },
 	
-	loadUrl : function(url) {	
+	loadUrl : function(url, callback) {	
 		jQuery("#select-box").hide();
-		self.iframe.src = url;
+		
+		self.initCallback = callback;
+		if (self.iframe.src != url)	self.iframe.src = url;
 	},
 	
 /* iframe */
@@ -575,7 +578,7 @@ Vvveb.Builder = {
 		self.frameHtml = $(window.FrameDocument).find("html");
 		self.frameBody = $(window.FrameDocument).find("body");
 
-		this._initHightlight();
+		this._initHighlight();
     },	
     
     _getElementType: function(el) {
@@ -610,7 +613,14 @@ Vvveb.Builder = {
 	
 	loadNodeComponent:  function(node) {
 		data = Vvveb.Components.matchNode(node);
-		if (data) Vvveb.Components.render(data.type);
+		var component;
+		
+		if (data) 
+			component = data.type;
+		else 
+			component = Vvveb.defaultComponent;
+			
+		Vvveb.Components.render(component);
 
 	},
 	
@@ -646,7 +656,7 @@ Vvveb.Builder = {
 	},
 
 /* iframe highlight */    
-    _initHightlight: function() {
+    _initHighlight: function() {
 		
 		
 		moveEvent = {target:null, };
@@ -1195,15 +1205,41 @@ Vvveb.Gui = {
 Vvveb.FileManager = {
 	tree:false,
 	pages:{},
+	currentPage: false,
 	
 	init: function() {
 		this.tree = $("#filemanager .tree > ol").html("");
 		
-		$(this.tree).on("click", "li[data-page] span", function (e) {
-			
-			Vvveb.FileManager.loadPage($(this).parents("li").data("page"));
+		$(this.tree).on("click", "a", function (e) {
+			e.preventDefault();
 			return false;
+		});
+		
+		$(this.tree).on("click", "li[data-page] label", function (e) {
+			var page = $(this.parentNode).data("page");
+			
+			if (page) Vvveb.FileManager.loadPage(page);
+			return false;			
 		})
+		
+		$(this.tree).on("click", "li[data-component] label ", function (e) {
+			node = $(e.currentTarget.parentNode).data("node");
+			
+			Vvveb.Builder.frameHtml.animate({
+				scrollTop: $(node).offset().top
+			}, 1000);
+
+			Vvveb.Builder.selectNode(node);
+			Vvveb.Builder.loadNodeComponent(node);
+			
+			//e.preventDefault();
+			//return false;
+		}).on("mouseenter", "li[data-component] label", function (e) {
+
+			node = $(e.currentTarget).data("node");
+			$(node).trigger("mousemove");
+			
+		});
 	},
 	
 	addPage: function(name, title, url) {
@@ -1226,11 +1262,115 @@ Vvveb.FileManager = {
 			tmpl("vvveb-filemanager-component", {name:name, url:url, title:title}));
 	},
 	
+	getComponents: function() {
+
+			var tree = [];
+			function getNodeTree (node, parent) {
+				if (node.hasChildNodes()) {
+					for (var j = 0; j < node.childNodes.length; j++) {
+						child = node.childNodes[j];
+						
+						if (child && child["attributes"] != undefined && 
+							(matchChild = Vvveb.Components.matchNode(child))) 
+						{
+							element = {
+								name: matchChild.name,
+								image: matchChild.image,
+								type: matchChild.type,
+								node: child,
+								children: []
+							};
+							element.children = [];
+							parent.push(element);
+							element = getNodeTree(child, element.children);
+						} else
+						{
+							element = getNodeTree(child, parent);	
+						}
+					}
+				}
+
+				return false;
+			}
+		
+		getNodeTree(window.FrameDocument.body, tree);
+		
+		return tree;
+	},
+	
+	loadComponents: function() {
+
+		tree = this.getComponents();
+		html = drawComponentsTree(tree);
+
+		/*
+		function drawComponentsTree(tree)
+		{
+			var html = "";
+			j++;
+			for (i in tree)
+			{
+				var node = tree[i];
+				
+				if (tree[i].children.length > 0) 
+					html += '<li data-component="' + node.name + '" data-node="' + node.node + '">\
+					<label for="id' + j + '" style="background-image:url(libs/builder/' + node.image + ')"><span>' + node.name + '</span></label> <input type="checkbox" id="id' + j + '" />\
+					<ol>' + drawComponentsTree(node.children) + '</ol></li>';		
+				else 
+					html +='<li data-component="' + node.name + '" class="file"  data-node="' + node.node + '">\
+							<a href="#" style="background-image:url(libs/builder/' + node.image + ')"><span>' + node.name + '</span></a></li>';
+			}
+			
+			return html;
+		}
+		
+		 $("[data-page='" + this.currentPage + "'] > ol", this.tree).html(html);
+		*/		
+		
+		function drawComponentsTree(tree)
+		{
+			var html = $("<ol></ol>");
+			j++;
+			for (i in tree)
+			{
+				var node = tree[i];
+				
+				if (tree[i].children.length > 0) 
+				{
+					var li = $('<li data-component="' + node.name + '">\
+					<label for="id' + j + '" style="background-image:url(libs/builder/' + node.image + ')"><span>' + node.name + '</span></label>\
+					<input type="checkbox" id="id' + j + '">\
+					</li>');		
+					li.data("node", node.node);
+					li.append(drawComponentsTree(node.children));
+					html.append(li);
+				}
+				else 
+				{
+					var li =$('<li data-component="' + node.name + '" class="file">\
+							<label for="id' + j + '" style="background-image:url(libs/builder/' + node.image + ')"><span>' + node.name + '</span></label>\
+							<input type="checkbox" id="id' + j + '"></li>');
+					li.data("node", node.node);							
+					html.append(li);
+				}
+			}
+			
+			return html;
+		}
+		
+		$("[data-page='" + this.currentPage + "'] > ol", this.tree).replaceWith(html);
+	},
+	
 	loadPage: function(name) {
 		$("[data-page]", this.tree).removeClass("active");
 		$("[data-page='" + name + "']", this.tree).addClass("active");
 		
-		Vvveb.Builder.loadUrl(this.pages[name]['url']);
+		this.currentPage = name;
+		
+		Vvveb.Builder.loadUrl(this.pages[name]['url'], 
+			function () { 
+				Vvveb.FileManager.loadComponents(); 
+			});
 	},
 
 }

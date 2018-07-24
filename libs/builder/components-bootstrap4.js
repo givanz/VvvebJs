@@ -796,6 +796,7 @@ Vvveb.Components.extend("_base", "html/heading", {
 Vvveb.Components.extend("_base", "html/link", {
     nodes: ["a"],
     name: "Link",
+	image: "icons/link.svg",
     properties: [{
         name: "Url",
         key: "href",

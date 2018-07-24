@@ -34,6 +34,10 @@ var Input = {
 		return tmpl("vvveb-input-" + name, data);
 	},
 
+	setValue: function(value) {
+		$('input', this.element).val(value);
+	},
+	
 	render: function(name, data) {
 		this.element = $(this.renderTemplate(name, data));
 		
@@ -57,10 +61,6 @@ var TextInput = $.extend({}, Input, {
     events: [
         ["keyup", "onChange", "input"],
 	 ],
-
-	setValue: function(value) {
-		$('input', this.element).val(value);
-	},
 	
 	init: function(data) {
 		return this.render("textinput", data);
@@ -81,10 +81,6 @@ var CheckboxInput = $.extend({}, Input, {
     events: [
         ["change", "onChange", "input"],
 	 ],
-
-	setValue: function(value) {
-		$('input', this.element).val(value);
-	},
 	
 	init: function(data) {
 		return this.render("checkboxinput", data);
@@ -116,10 +112,6 @@ var LinkInput = $.extend({}, TextInput, {
     events: [
         ["change", "onChange", "input"],
 	 ],
-
-	setValue: function(value) {
-		$('input', this.element).val(value);
-	},
 	
 	init: function(data) {
 		return this.render("textinput", data);
@@ -132,10 +124,6 @@ var RangeInput = $.extend({}, Input, {
     events: [
         ["change", "onChange", "input"],
 	 ],
-
-	setValue: function(value) {
-		$('input', this.element).val(value);
-	},
 	
 	init: function(data) {
 		return this.render("rangeinput", data);
@@ -148,10 +136,6 @@ var NumberInput = $.extend({}, Input, {
     events: [
         ["change", "onChange", "input"],
 	 ],
-
-	setValue: function(value) {
-		$('input', this.element).val(value);
-	},
 	
 	init: function(data) {
 		return this.render("numberinput", data);
@@ -244,10 +228,6 @@ var FileUploadInput = $.extend({}, TextInput, {
         ["keyup", "onChange", "input"],
 	 ],
 
-	setValue: function(value) {
-		$('input', this.element).val(value);
-	},
-	
 	init: function(data) {
 		return this.render("textinput", data);
 	},
@@ -272,7 +252,7 @@ var RadioInput = $.extend({}, Input, {
 	setValue: function(value) {
 		$('input', this.element).removeAttr('checked');
 		if (value)
-		$("input[value=" + value + "]", this.element).prop('checked', true);
+		$("input[value=" + value + "]", this.element).attr("checked", "true").prop('checked', true);
 	},
 	
 	init: function(data) {
@@ -282,6 +262,15 @@ var RadioInput = $.extend({}, Input, {
 );
 
 var RadioButtonInput = $.extend({}, RadioInput, {
+
+	setValue: function(value) {
+		$('input', this.element).removeAttr('checked');
+		$('btn', this.element).removeClass('active');
+		if (value)
+		{
+			$("input[value=" + value + "]", this.element).attr("checked", "true").prop('checked', true).parent().button("toggle");
+		}
+	},
 
 	init: function(data) {
 		return this.render("radiobuttoninput", data);
@@ -302,10 +291,6 @@ var ToggleInput = $.extend({}, TextInput, {
         ["change", "onChange", "input"],
 	 ],
 
-	setValue: function(value) {
-		$('input', this.element).val(value);
-	},
-		
 	init: function(data) {
 		return this.render("toggle", data);
 	},
@@ -317,10 +302,6 @@ var ValueTextInput = $.extend({}, TextInput, {
     events: [
         ["keyup", "onChange", "input"],
 	 ],
-
-	setValue: function(value) {
-		$('input', this.element).val(value);
-	},
 	
 	init: function(data) {
 		return this.render("textinput", data);
@@ -333,10 +314,6 @@ var GridLayoutInput = $.extend({}, TextInput, {
     events: [
         ["keyup", "onChange", "input"],
 	 ],
-
-	setValue: function(value) {
-		$('input', this.element).val(value);
-	},
 	
 	init: function(data) {
 		return this.render("textinput", data);
@@ -349,10 +326,6 @@ var ProductsInput = $.extend({}, TextInput, {
     events: [
         ["keyup", "onChange", "input"],
 	 ],
-
-	setValue: function(value) {
-		$('input', this.element).val(value);
-	},
 	
 	init: function(data) {
 		return this.render("textinput", data);
@@ -388,11 +361,6 @@ var TextValueInput = $.extend({}, Input, {
         ["keyup", "onChange", "input"],
 	    ["click", "onChange", "button" /*'select'*/],
 	 ],
-	
-
-	setValue: function(value) {
-		$('input', this.element).val(value);
-	},
 	
 	init: function(data) {
 		return this.render("textvalue", data);
@@ -452,5 +420,61 @@ var ListInput = $.extend({}, Input, {
 		return this.render("listinput", data);
 	},
 	
+  }
+);
+
+
+
+var AutocompleteInput = $.extend({}, Input, {
+
+    events: [
+        ["autocomplete.change", "onAutocompleteChange", "input"],
+	 ],
+
+	onAutocompleteChange: function(event, value, text) {
+		
+		if (event.data && event.data.element)
+		{
+			event.data.element.trigger('propertyChange', [value, this]);
+		}
+	},
+
+	init: function(data) {
+		
+		this.element = this.render("textinput", data);
+		
+		$('input', this.element).autocomplete(data.url);//using default parameters
+		
+		return this.element;
+	}
+  }
+);
+
+var AutocompleteList = $.extend({}, Input, {
+
+    events: [
+        ["autocompletelist.change", "onAutocompleteChange", "input"],
+	 ],
+
+	onAutocompleteChange: function(event, value, text) {
+		
+		if (event.data && event.data.element)
+		{
+			event.data.element.trigger('propertyChange', [value, this]);
+		}
+	},
+
+	setValue: function(value) {
+		$('input', this.element).data("autocompleteList").setValue(value);
+	},
+
+	init: function(data) {
+		
+		this.element = this.render("textinput", data);
+		
+		$('input', this.element).autocompleteList(data);//using default parameters
+		
+		return this.element;
+	}
   }
 );
