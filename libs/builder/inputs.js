@@ -230,16 +230,12 @@ var ImageInput = $.extend({}, Input, {
 	 ],
 
 	setValue: function(value) {
-		console.log(value);
-		console.log(value.indexOf("data:image"));
-		
+
 		//don't set blob value to avoid slowing down the page		
 		if (value.indexOf("data:image") == -1)
 		{
 				$('input[type="text"]', this.element).val(value);
-				console.log('asdsad');
 		}
-		return "";
 	},
 
 	onUpload: function(event, node) {
