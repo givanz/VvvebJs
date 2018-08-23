@@ -824,7 +824,7 @@ Vvveb.Components.extend("_base", "html/image", {
         name: "Image",
         key: "src",
         htmlAttr: "src",
-        inputtype: FileUploadInput
+        inputtype: ImageInput
     }, {
         name: "Width",
         key: "width",

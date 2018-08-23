@@ -222,6 +222,47 @@ var ColorInput = $.extend({}, Input, {
   }
 );
 
+var ImageInput = $.extend({}, Input, {
+
+    events: [
+        ["keyup", "onChange", "input[type=text]"],
+        ["change", "onUpload", "input[type=file]"],
+	 ],
+
+	setValue: function(value) {
+		console.log(value);
+		console.log(value.indexOf("data:image"));
+		
+		//don't set blob value to avoid slowing down the page		
+		if (value.indexOf("data:image") == -1)
+		{
+				$('input[type="text"]', this.element).val(value);
+				console.log('asdsad');
+		}
+		return "";
+	},
+
+	onUpload: function(event, node) {
+
+		function imageIsLoaded(e) {
+			event.data.element.trigger('propertyChange', [e.target.result, this]);
+		}
+
+		if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+        
+        return "";
+	},
+
+	init: function(data) {
+		return this.render("imageinput", data);
+	},
+  }
+);
+
 var FileUploadInput = $.extend({}, TextInput, {
 
     events: [
