@@ -485,6 +485,7 @@ Vvveb.WysiwygEditor = {
 Vvveb.Builder = {
 
 	dragMoveMutation : false,
+	isPreview : false,
 	
 	init: function(url, callback) {
 
@@ -560,9 +561,14 @@ Vvveb.Builder = {
 
 	    return this.documentFrame.on("load", function() 
         {
-			
 				window.FrameWindow = self.iframe.contentWindow;
 				window.FrameDocument = self.iframe.contentWindow.document;
+
+				$(window.FrameWindow).on( "beforeunload", function(event) {
+					var dialogText = "You have unsaved changes";
+					event.returnValue = dialogText;
+					return dialogText;
+				});
 			
 				Vvveb.WysiwygEditor.init(window.FrameDocument);
 				if (self.initCallback) self.initCallback();
@@ -758,35 +764,41 @@ Vvveb.Builder = {
 				}
 			}
 		});
-		
 
 		this.frameBody.on("dblclick", function(event) {
-
-			self.texteditEl = target = jQuery(event.target);
-
-			Vvveb.WysiwygEditor.edit(self.texteditEl);
 			
-			self.texteditEl.attr({'contenteditable':true, 'spellcheckker':false});
-			
-			self.texteditEl.on("blur keyup paste input", function(event) {
+			if (Vvveb.Builder.isPreview == false)
+			{
+				self.texteditEl = target = jQuery(event.target);
 
-				jQuery("#select-box").css({
-						"width" : self.texteditEl.outerWidth(), 
-						"height": self.texteditEl.outerHeight()
-					 });
-			});		
-			
-			jQuery("#select-box").addClass("text-edit").find("#select-actions").hide();
-			jQuery("#highlight-box").hide();
+				Vvveb.WysiwygEditor.edit(self.texteditEl);
+				
+				self.texteditEl.attr({'contenteditable':true, 'spellcheckker':false});
+				
+				self.texteditEl.on("blur keyup paste input", function(event) {
+
+					jQuery("#select-box").css({
+							"width" : self.texteditEl.outerWidth(), 
+							"height": self.texteditEl.outerHeight()
+						 });
+				});		
+				
+				jQuery("#select-box").addClass("text-edit").find("#select-actions").hide();
+				jQuery("#highlight-box").hide();
+			}
 		});
 		
 		
 		this.frameBody.on("click", function(event) {
-			if (event.target)
+			
+			if (Vvveb.Builder.isPreview == false)
 			{
-				self.selectNode(event.target);
-				self.loadNodeComponent(event.target);
-
+				if (event.target)
+				{
+					self.selectNode(event.target);
+					self.loadNodeComponent(event.target);
+				}
+				
 				event.preventDefault();
 				return false;
 			}	
@@ -1178,6 +1190,7 @@ Vvveb.Gui = {
 	},
 	
 	preview : function () {
+		(Vvveb.Builder.isPreview == true)?Vvveb.Builder.isPreview = false:Vvveb.Builder.isPreview = true;
 		$("#iframe-layer").toggle();
 		$("#vvveb-builder").toggleClass("preview");
 	},

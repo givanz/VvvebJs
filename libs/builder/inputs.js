@@ -240,17 +240,47 @@ var ImageInput = $.extend({}, Input, {
 
 	onUpload: function(event, node) {
 
-		function imageIsLoaded(e) {
-			event.data.element.trigger('propertyChange', [e.target.result, this]);
-		}
+		var element = this.element;
 
 		if (this.files && this.files[0]) {
             var reader = new FileReader();
             reader.onload = imageIsLoaded;
             reader.readAsDataURL(this.files[0]);
+            //reader.readAsBinaryString(this.files[0]);
+            file = this.files[0];
         }
-        
-        return "";
+
+		function imageIsLoaded(e) {
+				
+				image = e.target.result;
+				
+				event.data.element.trigger('propertyChange', [image, this]);
+				
+				return;//remove this line to enable php upload
+
+				var formData = new FormData();
+				formData.append("file", file);
+    
+				$.ajax({
+					type: "POST",
+					url: '/upload.php',//set your server side upload script url
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function (data) {
+						console.log("File uploaded at: ", data);
+						
+						//if image is succesfully uploaded set image url
+						event.data.element.trigger('propertyChange', [data, this]);
+						
+						//update src input
+						$('input[type="text"]', element).val(data);
+					},
+					error: function (data) {
+						alert(data.responseText);
+					}
+				});		
+		}
 	},
 
 	init: function(data) {
