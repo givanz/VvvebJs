@@ -486,6 +486,7 @@ Vvveb.Builder = {
 
 	dragMoveMutation : false,
 	isPreview : false,
+	runJsOnSetHtml : false,
 	
 	init: function(url, callback) {
 
@@ -1061,8 +1062,11 @@ Vvveb.Builder = {
             body = html
         }
         
-        //self.frameBody.html(body);
-        window.FrameDocument.body.innerHTML = body;
+        if (this.runJsOnSetHtml)
+			self.frameBody.html(body);
+		else
+			window.FrameDocument.body.innerHTML = body;
+        
 		
 		//below methods brake document relative css and js paths
 		//return self.iframe.outerHTML = html;
@@ -1186,7 +1190,12 @@ Vvveb.Gui = {
 	
 	toggleEditor : function () {
 		$("#vvveb-builder").toggleClass("bottom-panel-expand");
+		$("#toggleEditorJsExecute").toggle();
 		Vvveb.CodeEditor.toggle();
+	},
+	
+	toggleEditorJsExecute : function () {
+		Vvveb.Builder.runJsOnSetHtml = this.checked;
 	},
 	
 	preview : function () {
