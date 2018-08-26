@@ -697,6 +697,115 @@ Vvveb.Components.extend("_base", "_base", {
     }]
 });    
 
+//Background image
+Vvveb.Components.extend("_base", "_base", {
+	 properties: [{
+		key: "background_image_header",
+		inputtype: SectionInput,
+		name:false,
+		sort: base_sort++,
+		data: {header:"Background Image", expanded:false},
+	 },{
+        name: "Image",
+        key: "Image",
+        sort: base_sort++,
+		//htmlAttr: "style",
+        inputtype: ImageInput,
+		onChange: function(node, value) {
+			
+			$(node).css('background-image', 'url(' + value + ')');
+			
+			return node;
+		}        
+
+   	}, {
+        name: "Repeat",
+        key: "background-repeat",
+        sort: base_sort++,
+		htmlAttr: "style",
+        inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "Default"
+			}, {	
+				value: "repeat-x",
+				text: "repeat-x"
+			}, {
+				value: "repeat-y",
+				text: "repeat-y"
+			}, {
+				value: "no-repeat",
+				text: "no-repeat"
+			}],
+		}
+   	}, {
+        name: "Size",
+        key: "background-size",
+        sort: base_sort++,
+		htmlAttr: "style",
+        inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "Default"
+			}, {	
+				value: "contain",
+				text: "contain"
+			}, {
+				value: "cover",
+				text: "cover"
+			}],
+		}
+   	}, {
+        name: "Position x",
+        key: "background-position-x",
+        sort: base_sort++,
+		htmlAttr: "style",
+        col:6,
+		inline:true,
+		inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "Default"
+			}, {	
+				value: "center",
+				text: "center"
+			}, {	
+				value: "right",
+				text: "right"
+			}, {
+				value: "left",
+				text: "left"
+			}],
+		}
+   	}, {
+        name: "Position y",
+        key: "background-position-y",
+        sort: base_sort++,
+		htmlAttr: "style",
+        col:6,
+		inline:true,
+		inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "Default"
+			}, {	
+				value: "center",
+				text: "center"
+			}, {	
+				value: "top",
+				text: "top"
+			}, {
+				value: "bottom",
+				text: "bottom"
+			}],
+		}
+    }]
+});    
+
 Vvveb.Components.extend("_base", "html/container", {
     classes: ["container", "container-fluid"],
     image: "icons/container.svg",
