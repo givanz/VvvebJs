@@ -240,8 +240,6 @@ var ImageInput = $.extend({}, Input, {
 
 	onUpload: function(event, node) {
 
-		var element = this.element;
-
 		if (this.files && this.files[0]) {
             var reader = new FileReader();
             reader.onload = imageIsLoaded;
@@ -274,7 +272,7 @@ var ImageInput = $.extend({}, Input, {
 						event.data.element.trigger('propertyChange', [data, this]);
 						
 						//update src input
-						$('input[type="text"]', element).val(data);
+						$('input[type="text"]', event.data.element).val(data);
 					},
 					error: function (data) {
 						alert(data.responseText);
