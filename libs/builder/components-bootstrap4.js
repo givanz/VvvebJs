@@ -594,7 +594,7 @@ Vvveb.Components.extend("_base", "_base", {
         inputtype: CssUnitInput
     }, {
         name: "Left",
-        key: "margin-Left",
+        key: "margin-left",
 		htmlAttr: "style",
         sort: base_sort++,
         col:6,

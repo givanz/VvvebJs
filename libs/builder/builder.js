@@ -306,7 +306,9 @@ Vvveb.Components = {
 						}
 						else if (property.htmlAttr == "style") 
 						{
+							console.log(property.key, value);
 							element = element.css(property.key, value);
+							console.log(element);
 						}
 						else
 						{
@@ -326,6 +328,8 @@ Vvveb.Components = {
 					}
 					
 					if (!property.child && !property.parent) Vvveb.Builder.selectNode(element);
+					
+					return element;
 			});				
 		};			
 	
@@ -1157,9 +1161,34 @@ Vvveb.Gui = {
 		Vvveb.Builder.selectNode();
 	},
 	
+	//show modal with html content
 	save : function () {
 		$('#textarea-modal textarea').val(Vvveb.Builder.getHtml());
 		$('#textarea-modal').modal();
+	},
+	
+	//post html content through ajax to save to filesystem/db
+	saveAjax : function () {
+		
+		var data = {};
+		data["html"] = Vvveb.Builder.getHtml();
+		data["fileName"] = Vvveb.FileManager.getCurrentUrl();
+
+		$.ajax({
+			type: "POST",
+			url: 'save.php',//set your server side save script url
+			data: data,
+			success: function (data) {
+				//console.log("File saved at: ", data);
+				
+				$('#message-modal').modal().find(".modal-body").html("File saved at: " + data);
+
+				//Vvveb.FileManager.reloadCurrentPage(); //optional uncomment to reload after save
+			},
+			error: function (data) {
+				alert(data.responseText);
+			}
+		});			
 	},
 	
 	download : function () {
@@ -1381,6 +1410,16 @@ Vvveb.FileManager = {
 		}
 		
 		$("[data-page='" + this.currentPage + "'] > ol", this.tree).replaceWith(html);
+	},
+	
+	getCurrentUrl: function() {
+		if (this.currentPage)
+		return this.pages[this.currentPage]['url'];
+	},
+	
+	reloadCurrentPage: function() {
+		if (this.currentPage)
+		return this.loadPage(this.currentPage);
 	},
 	
 	loadPage: function(name) {

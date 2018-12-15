@@ -626,6 +626,27 @@
     </div>
   </div>
 </div>
+
+<!-- message modal-->
+<div class="modal fade" id="message-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">VvvebJs</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Page was successfully saved!.</p>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary">Ok</button> -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 	
 <!-- jquery-->
 <script src="js/jquery.min.js"></script>
@@ -667,14 +688,14 @@ $(document).ready(function()
 	Vvveb.FileManager.init();
 	Vvveb.FileManager.addPages(
 	[
-		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html"},
-		{name:"landio", title:"Landio landing page",  url: "demo/landio/index.html"},
-		{name:"album", title:"Album",  url: "demo/album/index.html"},
-		{name:"blog", title:"Blog",  url: "demo/blog/index.html"},
-		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html"},
-		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html"},
-		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html"},
-		{name:"product", title:"Product",  url: "demo/product/index.html"},
+		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
+		{name:"landio", title:"Landio landing page",  url: "demo/landio/index.html", assets: ['demo/landio/landio.css']},
+		{name:"album", title:"Album",  url: "demo/album/index.html", assets: ['demo/album/album.css']},
+		{name:"blog", title:"Blog",  url: "demo/blog/index.html", assets: ['demo/blog/blog.css']},
+		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html", assets: ['demo/carousel/carousel.css']},
+		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
+		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", assets: ['demo/pricing/pricing.css']},
+		{name:"product", title:"Product",  url: "demo/product/index.html", assets: ['demo/product/product.css']},
 		{name:"ecommerce", title:"eCommerce homepage",  url: "ecommerce_demo/index.html"},
 		{name:"test", title:"test",  url: "http://vvveb_install.givan.ro/"},
 	]);

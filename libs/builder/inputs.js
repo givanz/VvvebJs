@@ -153,7 +153,8 @@ var CssUnitInput = $.extend({}, Input, {
 		if (event.data && event.data.element)
 		{
 			input = event.data.input;
-			input[this.name] = this.value;// this.name = unit or number	
+			if (this.value != "") input[this.name] = this.value;// this.name = unit or number	
+			if (input['unit'] == "") input['unit'] = "px";//if unit is not set use default px
 			
 			value = "";	
 			if (input.unit == "auto")  
@@ -254,14 +255,14 @@ var ImageInput = $.extend({}, Input, {
 				
 				event.data.element.trigger('propertyChange', [image, this]);
 				
-				return;//remove this line to enable php upload
+				//return;//remove this line to enable php upload
 
 				var formData = new FormData();
 				formData.append("file", file);
     
 				$.ajax({
 					type: "POST",
-					url: '/upload.php',//set your server side upload script url
+					url: 'upload.php',//set your server side upload script url
 					data: formData,
 					processData: false,
 					contentType: false,

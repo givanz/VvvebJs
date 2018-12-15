@@ -355,7 +355,6 @@ Vvveb.Components.extend("_base", "widgets/facebookpage", {
 			<script>(function(d, s, id) {\
 			  var appId = document.getElementsByClassName("fb-page")[0].dataset.appid;\
 			  var js, fjs = d.getElementsByTagName(s)[0];\
-			  if (d.getElementById(id)) return;\
 			  js = d.createElement(s); js.id = id;\
 			  js.src = \'https://connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v3.0&appId=" + appId + "&autoLogAppEvents=1\';\
 			  fjs.parentNode.insertBefore(js, fjs);\
@@ -391,7 +390,25 @@ Vvveb.Components.extend("_base", "widgets/facebookpage", {
         htmlAttr: "data-appId",
         child:".fb-page",
         inputtype: TextInput
-	}]
+	}],
+   onChange: function(node, input, value, component) {
+	   //console.log(component.html);
+	   //console.log(this.html);
+	   
+	   var newElement = $(this.html);
+	   newElement.find(".fb-page").attr(input.htmlAttr, value);
+	   
+	   console.log(node.parent());
+	   console.log(node.parent().html());
+	   node.parent().html(newElement.html());
+
+	   console.log(newElement);
+
+
+	   console.log(newElement.html());
+
+	   return newElement;
+	}	
 });
     
 Vvveb.Components.extend("_base", "widgets/chartjs", {
