@@ -1422,13 +1422,14 @@ Vvveb.FileManager = {
 		return this.loadPage(this.currentPage);
 	},
 	
-	loadPage: function(name) {
+	loadPage: function(name, disableCache = true) {
 		$("[data-page]", this.tree).removeClass("active");
 		$("[data-page='" + name + "']", this.tree).addClass("active");
 		
 		this.currentPage = name;
+		var url = this.pages[name]['url'];
 		
-		Vvveb.Builder.loadUrl(this.pages[name]['url'], 
+		Vvveb.Builder.loadUrl(url + (disableCache ? (url.indexOf('?') > -1?'&':'?') + Math.random():''), 
 			function () { 
 				Vvveb.FileManager.loadComponents(); 
 			});
