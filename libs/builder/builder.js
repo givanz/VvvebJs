@@ -306,9 +306,7 @@ Vvveb.Components = {
 						}
 						else if (property.htmlAttr == "style") 
 						{
-							console.log(property.key, value);
 							element = element.css(property.key, value);
-							console.log(element);
 						}
 						else
 						{
@@ -508,6 +506,8 @@ Vvveb.Builder = {
 		self._loadIframe(url);
 		
 		self._initDragdrop();
+		
+		self._initBox();
 
 		self.dragElement = null;
 	},
@@ -669,7 +669,6 @@ Vvveb.Builder = {
 /* iframe highlight */    
     _initHighlight: function() {
 		
-		
 		moveEvent = {target:null, };
 		
 		this.frameBody.on("mousemove touchmove", function(event) {
@@ -810,6 +809,10 @@ Vvveb.Builder = {
 			
 		});
 		
+	},
+	
+	_initBox: function() {
+		
 		$("#drag-box").on("mousedown", function(event) {
 			jQuery("#select-box").hide();
 			self.dragElement = self.selectedEl;
@@ -891,6 +894,7 @@ Vvveb.Builder = {
 		});
 		
 		$("#clone-box").on("click", function(event) {
+			
 			clone = self.selectedEl.clone();
 			
 			self.selectedEl.after(clone);
