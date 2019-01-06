@@ -574,6 +574,36 @@ Vvveb.Builder = {
 					event.returnValue = dialogText;
 					return dialogText;
 				});
+				
+				jQuery(window.FrameWindow).on("scroll resize", function(event) {
+				
+						if (self.selectedEl)
+						{
+							offset = self.selectedEl.offset();
+							
+							jQuery("#select-box").css(
+								{"top": offset.top - self.frameDoc.scrollTop() , 
+								 "left": offset.left - self.frameDoc.scrollLeft() , 
+								 "width" : self.selectedEl.outerWidth(), 
+								 "height": self.selectedEl.outerHeight(),
+								 //"display": "block"
+								 });			
+								 
+						}
+						
+						if (self.highlightEl)
+						{
+							offset = self.highlightEl.offset();
+							
+							jQuery("#highlight-box").css(
+								{"top": offset.top - self.frameDoc.scrollTop() , 
+								 "left": offset.left - self.frameDoc.scrollLeft() , 
+								 "width" : self.highlightEl.outerWidth(), 
+								 "height": self.highlightEl.outerHeight(),
+								 //"display": "block"
+								 });			
+						}
+				});
 			
 				Vvveb.WysiwygEditor.init(window.FrameDocument);
 				if (self.initCallback) self.initCallback();
@@ -927,35 +957,7 @@ Vvveb.Builder = {
 			return false;
 		});
 
-		jQuery(window.FrameWindow).on("scroll resize", function(event) {
-				
-				if (self.selectedEl)
-				{
-					offset = self.selectedEl.offset();
-					
-					jQuery("#select-box").css(
-						{"top": offset.top - self.frameDoc.scrollTop() , 
-						 "left": offset.left - self.frameDoc.scrollLeft() , 
-						 "width" : self.selectedEl.outerWidth(), 
-						 "height": self.selectedEl.outerHeight(),
-						 //"display": "block"
-						 });			
-						 
-				}
-				
-				if (self.highlightEl)
-				{
-					offset = self.highlightEl.offset();
-					
-					jQuery("#highlight-box").css(
-						{"top": offset.top - self.frameDoc.scrollTop() , 
-						 "left": offset.left - self.frameDoc.scrollLeft() , 
-						 "width" : self.highlightEl.outerWidth(), 
-						 "height": self.highlightEl.outerHeight(),
-						 //"display": "block"
-						 });			
-				}
-		});
+
 		
 	},	
 
@@ -1032,19 +1034,23 @@ Vvveb.Builder = {
 			
 	},
 
-	
 	getHtml: function() 
 	{
-		doc = window.FrameDocument;
+		var doc = window.FrameDocument;
+		var hasDoctpe = (doc.doctype !== null);
+		var html = "";
 		
-		return "<!DOCTYPE "
+		if (hasDoctpe) html =
+		"<!DOCTYPE "
          + doc.doctype.name
          + (doc.doctype.publicId ? ' PUBLIC "' + doc.doctype.publicId + '"' : '')
          + (!doc.doctype.publicId && doc.doctype.systemId ? ' SYSTEM' : '') 
          + (doc.doctype.systemId ? ' "' + doc.doctype.systemId + '"' : '')
-         + ">\n" 
-         + doc.documentElement.innerHTML
-         + "\n</html>";
+         + ">\n";
+          
+         html +=  doc.documentElement.innerHTML + "\n</html>";
+         
+         return html;
 	},
 	
 	setHtml: function(html) 

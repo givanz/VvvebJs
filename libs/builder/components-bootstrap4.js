@@ -637,7 +637,7 @@ Vvveb.Components.extend("_base", "_base", {
         inputtype: CssUnitInput
     }, {
         name: "Left",
-        key: "padding-Left",
+        key: "padding-left",
 		htmlAttr: "style",
         sort: base_sort++,
         col:6,
