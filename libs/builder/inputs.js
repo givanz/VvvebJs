@@ -59,7 +59,7 @@ var Input = {
 var TextInput = $.extend({}, Input, {
 
     events: [
-        ["keyup", "onChange", "input"],
+        ["blur", "onChange", "input"],
 	 ],
 	
 	init: function(data) {
@@ -226,7 +226,7 @@ var ColorInput = $.extend({}, Input, {
 var ImageInput = $.extend({}, Input, {
 
     events: [
-        ["keyup", "onChange", "input[type=text]"],
+        ["blur", "onChange", "input[type=text]"],
         ["change", "onUpload", "input[type=file]"],
 	 ],
 
@@ -291,7 +291,7 @@ var ImageInput = $.extend({}, Input, {
 var FileUploadInput = $.extend({}, TextInput, {
 
     events: [
-        ["keyup", "onChange", "input"],
+        ["blur", "onChange", "input"],
 	 ],
 
 	init: function(data) {
@@ -366,7 +366,7 @@ var ToggleInput = $.extend({}, TextInput, {
 var ValueTextInput = $.extend({}, TextInput, {
 
     events: [
-        ["keyup", "onChange", "input"],
+        ["blur", "onChange", "input"],
 	 ],
 	
 	init: function(data) {
@@ -378,7 +378,7 @@ var ValueTextInput = $.extend({}, TextInput, {
 var GridLayoutInput = $.extend({}, TextInput, {
 
     events: [
-        ["keyup", "onChange", "input"],
+        ["blur", "onChange", "input"],
 	 ],
 	
 	init: function(data) {
@@ -390,7 +390,7 @@ var GridLayoutInput = $.extend({}, TextInput, {
 var ProductsInput = $.extend({}, TextInput, {
 
     events: [
-        ["keyup", "onChange", "input"],
+        ["blur", "onChange", "input"],
 	 ],
 	
 	init: function(data) {
@@ -424,7 +424,7 @@ var TextValueInput = $.extend({}, Input, {
 	
 
     events: [
-        ["keyup", "onChange", "input"],
+        ["blur", "onChange", "input"],
 	    ["click", "onChange", "button" /*'select'*/],
 	 ],
 	

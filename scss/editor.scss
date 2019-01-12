@@ -28,9 +28,11 @@ $custom-select-padding-y: .4rem;
 
 #logo
 {
-	margin-left: 0px;
-	margin-top: 0px;
+	margin-left: 0.5rem;
+	margin-top: 0rem;
 }
+
+$input-height: default;
 
 @import "line-awesome";
 @import "bootstrap";

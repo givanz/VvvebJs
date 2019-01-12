@@ -269,10 +269,10 @@ Vvveb.Components = {
 	
 	render: function(type) {
 
-		component = this._components[type];
+		var component = this._components[type];
 		
-		rightPanel = jQuery("#right-panel #component-properties");
-		section = rightPanel.find('.section[data-section="default"]');
+		var rightPanel = jQuery("#right-panel #component-properties");
+		var section = rightPanel.find('.section[data-section="default"]');
 		
 		if (!(Vvveb.preservePropertySections && section.length))
 		{
@@ -285,9 +285,13 @@ Vvveb.Components = {
 	
 		if (component.beforeInit) component.beforeInit(Vvveb.Builder.selectedEl.get(0));
 		
-		fn = function(component, property) {
+		var element;
+		
+		var fn = function(component, property) {
 			return property.input.on('propertyChange', function (event, value, input) {
-					element = Vvveb.Builder.selectedEl;
+					
+					var element = Vvveb.Builder.selectedEl;
+					
 					if (property.child) element = element.find(property.child);
 					if (property.parent) element = element.parent(property.parent);
 					
@@ -331,15 +335,15 @@ Vvveb.Components = {
 			});				
 		};			
 	
-		nodeElement = Vvveb.Builder.selectedEl;
+		var nodeElement = Vvveb.Builder.selectedEl;
 
 		for (var i in component.properties)
 		{
-			property = component.properties[i];
+			var property = component.properties[i];
+			var element = nodeElement;
 			
 			if (property.beforeInit) property.beforeInit(element.get(0)) 
 			
-			element = nodeElement;
 			if (property.child) element = element.find(property.child);
 			
 			if (property.data) {
@@ -361,10 +365,10 @@ Vvveb.Components = {
 				if (property.htmlAttr == "style")
 				{
 					//value = element.css(property.key);//jquery css returns computed style
-					value = getStyle(element.get(0), property.key);//getStyle returns declared style
+					var value = getStyle(element.get(0), property.key);//getStyle returns declared style
 				} else
 				{
-					value = element.attr(property.htmlAttr);
+					var value = element.attr(property.htmlAttr);
 				}
 
 				//if attribute is class check if one of valid values is included as class to set the select
@@ -395,7 +399,7 @@ Vvveb.Components = {
 			}
 			else
 			{
-				row = $(tmpl('vvveb-property', property)); 
+				var row = $(tmpl('vvveb-property', property)); 
 				row.find('.input').append(property.input);
 				section.append(row);
 			}

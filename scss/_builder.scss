@@ -18,17 +18,17 @@ https://github.com/givanz/VvvebJs
 
 $builder-header-top-height:35px !default;
 $builder-bottom-panel-height:35px !default;
-$builder-border-color: #eee !default;
+$builder-border-color: #ddd !default;
 
 $builder-left-panel-width:260px !default;
 $builder-right-panel-width:260px !default;
 $builder-canvas-margin:0px !default;
 $builder-filemanager-height:200px !default;
+$builder-background-color: #4285f4 !default;
 
 $canvas-width-substract: $builder-left-panel-width + $builder-right-panel-width + $builder-canvas-margin;
 $canvas-height-substract: $builder-header-top-height + $builder-bottom-panel-height;
 
-@import "ionicons/ionicons";
 @import "csstree";
 
 @mixin component-list-element() {
@@ -49,7 +49,7 @@ $canvas-height-substract: $builder-header-top-height + $builder-bottom-panel-hei
 		border-top-width:1px;
 		*/
 		background-position: 50% 30%;
-		background-size: auto 42px;
+		background-size: auto 38px;
 		z-index: 100;
 		background-color: transparent;
 		cursor:pointer;
@@ -110,7 +110,7 @@ body
 		{
 			> .header 
 			{
-				border-top:1px solid #eee;
+				border-top:1px solid #ddd;
 				position:relative;
 				
 				#clear-backspace
@@ -173,9 +173,11 @@ body
 				line-height: 2rem;
 				text-align: left;
 				padding-left: 1rem;
-				border-bottom: 1px solid #eee;
+				border-top: 1px solid #ddd;
+				border-bottom: 1px solid #ddd;
 				margin-bottom:0rem;
 				padding:0.0rem 0.5rem;
+				padding:0rem 0rem 0.5rem 1.5rem;
 			  
 				a 
 				{
@@ -210,7 +212,6 @@ body
 		background:-webkit-linear-gradient(right, #fff 85%, #fcfcfc 100%);
 		background:linear-gradient(right, #fff 85%, #fcfcfc 100%);
 		box-shadow: 1px -2px 2px #f3f3f3 inset;
-		padding-bottom:1rem;
 		
 				
 		width: $builder-right-panel-width;
@@ -295,6 +296,24 @@ body
 		border-bottom:1px solid #eee;
 		text-align:center;
 		background-color:#fafafa;
+		
+		.btn-group
+		{
+			.btn
+			{
+				padding: 0rem 0.5rem;
+				font-size: 1.25rem;
+			}
+			
+			&.responsive-btns
+			{
+				.btn
+				{
+					font-size: 1.4rem;
+				}
+			}
+		}
+		
 	}
 	
 	#bottom-panel
@@ -303,7 +322,7 @@ body
 		height:$builder-bottom-panel-height;
 		bottom:0px;
 		position:fixed;
-		border-top:1px solid #eee;
+		border-top:1px solid #ddd;
 		left: $builder-left-panel-width +  $builder-canvas-margin;
 		right: $builder-right-panel-width;;
 		background-color:#fff;
@@ -401,7 +420,7 @@ body
 	#highlight-box
 	{
 		position:absolute;
-		border:1px solid #4285f4;
+		border:1px solid $builder-background-color;
 		width:0px;
 		height:0px;
 		top:0px;
@@ -418,8 +437,8 @@ body
 	#select-box
 	{
 		position:absolute;
-		border:1px solid #4285f4;
-		background:rgba(66, 133, 244, 0.1);
+		border:1px solid $builder-background-color;
+		background:rgba( $builder-background-color, 0.1);//rgba(66, 133, 244, 0.1);
 		width:0px;
 		height:0px;
 		top:0px;
@@ -432,8 +451,9 @@ body
 		position:absolute;
 		right:-1px;
 		top:-25px;
-		background:#4285f4;
+		background:$builder-background-color;
 		color:#fff;
+		padding:0.05rem 0.2rem 0.05rem 0.2rem;
 		border-radius:3px 3px 0px 0px;
 	}
 
@@ -452,12 +472,18 @@ body
 		font-size:16px;
 		padding-right:2px;
 		padding:0px 5px;
+		
+		&:hover
+		{
+			text-decoration:none;
+			background:lighten( $builder-background-color, 10% )
+		}
 	}
 
 
 	#highlight-name
 	{
-		background:#4285f4;
+		background:$builder-background-color;
 		font-size:12px;
 		color:#fff;
 		position:relative;
@@ -517,7 +543,7 @@ li[data-type]
 		.form-control
 		{
 			border-color:#fff;
-			border-bottom-color: #eee;
+			border-bottom-color: #ddd;
 			border-radius:0px;
 			background-color:transparent;
 		}
@@ -569,7 +595,7 @@ li[data-type]
 			padding: 0;
 			width: 100%;
 			position:relative;
-			border-top: 1px solid #eee;
+			border-top: 1px solid #ddd;
 
 			label
 			{
@@ -577,7 +603,8 @@ li[data-type]
 				font-weight: 600;
 				line-height: 32px;
 				text-align: left;
-				padding-left:1rem;
+				//padding-left:1rem;
+				padding:0.5rem 0rem 0.5rem 1.5rem;
 			  
 				> a 
 				{
@@ -658,8 +685,9 @@ label.header
 	width: 100%;
 	line-height: 32px;
 	text-align: left;
-	padding-left: 0.3rem;
-	border-top: 1px solid #eee;
+	padding:0.3rem 0 0 0.3rem;
+	padding:0.5rem 0rem 0.5rem 0.5rem;
+	border-top: 1px solid #ddd;
 	color: #007bff;
 	cursor:pointer;
 	position:relative;
@@ -819,7 +847,7 @@ input[type="number"]:focus {
 
 .btn-group .btn.btn-gray.active
 {
-	background-color:#eee;
+	background-color:#ddd;
 }
 
 .btn-group .btn i
