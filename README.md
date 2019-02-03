@@ -4,9 +4,27 @@
 ## Drag and drop website builder javascript library.
 Built with jQuery and Bootstrap 4.
 
-[Live Demo](http://www.vvveb.com/vvvebjs/editor.html) using [Land.io](http://tatygrassini.github.io/landio-html/) and Bootstrap 4 components.
+[Two panel Live Demo](http://www.vvveb.com/vvvebjs/editor.html)
+
+[One panel Live Demo](http://www.vvveb.com/vvvebjs/editor.html#no-right-panel)
+
+Using [Startboostrap landing page](https://startbootstrap.com/template-overviews/landing-page/) for demo page and Bootstrap 4 components.
 
 <img src="http://www.vvveb.com/img/browser.png?v=1">
+
+### Features
+
+* Components and blocks/snippets drag and drop.
+* Undo/Redo operations.
+* One or two panels interface.
+* File manager and component hierarchy navigation.
+* Add new page.
+* Live code editor.
+* Image upload with example php script included.
+* Page download or export html or save page on server with example php script included.
+* Components/Blocks list search.
+* Bootstrap 4 components.
+* Youtube, Google maps, Charts.js etc widgets.
 
 By default the editor comes with Bootstrap 4 and Widgets components and can be extended with any kind of components and inputs.
 
