@@ -3,7 +3,7 @@
 {
 	ol
 	{
-		padding: 0.3rem 0 0 2.5rem;
+		padding: 0.3rem 0 0 2rem;
 		width: 300px;
 		width: $builder-right-panel-width + 15;
 		font-size:12px;
@@ -13,6 +13,7 @@
 		{ 
 			position: relative; 
 			margin-left: -15px;
+			margin-bottom: 0.2rem;
 			list-style: none;
 			color:#555;
 			overflow:hidden;

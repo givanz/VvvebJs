@@ -25,5 +25,9 @@
     "editor",
     "site",
     "builder"
-  ]
+  ],
+  "devDependencies": {
+    "gulp": "github:gulpjs/gulp",
+    "gulp-sass": "^4.0.2"
+  }
 }

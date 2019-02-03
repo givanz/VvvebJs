@@ -16,30 +16,35 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-$builder-header-top-height:35px !default;
+$builder-header-top-height:40px !default;
 $builder-bottom-panel-height:35px !default;
 $builder-border-color: #ddd !default;
 
-$builder-left-panel-width:260px !default;
-$builder-right-panel-width:260px !default;
+$builder-left-panel-width:270px !default;
+$builder-right-panel-width:270px !default;
 $builder-canvas-margin:0px !default;
-$builder-filemanager-height:200px !default;
+$builder-filemanager-height:250px !default;
+$drag-items-tabs-height:100px !default;
 $builder-background-color: #4285f4 !default;
 
 $canvas-width-substract: $builder-left-panel-width + $builder-right-panel-width + $builder-canvas-margin;
+$canvas-no-right-width-substract: $builder-left-panel-width  + $builder-canvas-margin;
 $canvas-height-substract: $builder-header-top-height + $builder-bottom-panel-height;
+
+$font-size-base: .875rem;
+
 
 @import "csstree";
 
 @mixin component-list-element() {
-		width: 108px;
+		width: 116px;
 		text-align: center;
 		font-weight: normal;
 		font-size: 11px;
 		color: #000;
 		background-repeat: no-repeat;
 		padding-top: 62px;
-		padding-bottom: 7px;
+		padding-bottom: 14px;
 
 		border-color:#ddd;
 		border-style:solid;
@@ -49,11 +54,38 @@ $canvas-height-substract: $builder-header-top-height + $builder-bottom-panel-hei
 		border-top-width:1px;
 		*/
 		background-position: 50% 30%;
-		background-size: auto 38px;
+		background-size: auto 42px;
 		z-index: 100;
 		background-color: transparent;
 		cursor:pointer;
-		opacity:0.76;
+		opacity:0.75;
+
+		zoom: 1;
+}
+
+@mixin block-list-element() {
+		width: 100%;
+		height:100px;
+		text-align: center;
+		font-weight: normal;
+		font-size: 11px;
+		color: #000;
+		background-repeat: no-repeat;
+		padding-top: 170px;
+		margin-bottom: 14px;
+
+		border-color:#ddd;
+		border-style:solid;
+		border-width:0px;
+		/*		  
+		border-left-width:1px;
+		border-top-width:1px;
+		*/
+		background-size: 250px 150px;
+		z-index: 100;
+		background-color: transparent;
+		cursor:pointer;
+		opacity:0.75;
 
 		zoom: 1;
 }
@@ -61,6 +93,15 @@ $canvas-height-substract: $builder-header-top-height + $builder-bottom-panel-hei
 body
 {
 	background:#eee;
+}
+
+.modal-content
+{
+	font-size:.875rem;
+}
+
+.modal-footer .btn {
+    font-size: .875rem;
 }
 
 #vvveb-builder
@@ -106,46 +147,97 @@ body
 			width:$builder-right-panel-width + 15;
 		}
 
-		#components
+		.drag-elements
 		{
-			> .header 
-			{
-				border-top:1px solid #ddd;
-				position:relative;
-				
-				#clear-backspace
-				{
-					border:none;
-					background:none;
+			padding-top: 0rem;
+			border-top:1px solid #ddd;
 
-					position: absolute;
-					top: 3px;
-					right: 0px;
+			> .header
+			{
+				background:#fafafa;
+				
+				.search 
+				{	
+					position:relative;
+					.form-control
+					{
+						border-color:#fff;
+						border-bottom-color: #ddd;
+						border-radius:0px;
+					}
 					
-					i {
-						font-size:13px;
+					.form-control:focus
+					{
+						border-color:#80bdff;
+					}
+					
+
+					.form-control::placeholder
+					{
+						/*font-size: $font-size-sm;*/
+						font-size: .75rem;
 					}
 
-					opacity:0.8;
 					
-					&:hover
+					.clear-backspace
+					{
+						border:none;
+						background:none;
+
+						position: absolute;
+						top: 3px;
+						right: 0px;
+						
+						i {
+							font-size:13px;
+						}
+
+						opacity:0.8;
+						
+						&:hover
+						{
+							opacity:1;
+						}
+					}
+					
+					input:focus + #clear-backspace,
+					input:hover + #clear-backspace
 					{
 						opacity:1;
-					}
-				}
-				
-				input:focus + #clear-backspace,
-				input:hover + #clear-backspace
-				{
-					opacity:1;
+					}					
 				}
 			}
+			
+			
+			.nav-item
+			{
+				.nav-link
+				{
+					text-align:center;
+					border-top-color: #fff;
+					padding: 0.5rem 0.7rem;
+					border-radius:0px;
+					min-width:5rem;
+					color:$dark;
+					
+					small
+					{
+						font-size:70%;
+					}
+					
+					&.active, &:hover
+					{
+						color:$primary;
+					}
+				}
+			}
+
 		}
 		
-		#components-list
+		#components-list, .component-properties
 		{
 			height:98%;
-			height:calc(99% - #{$builder-filemanager-height});
+			height:calc(99% - #{$builder-filemanager-height} - #{$drag-items-tabs-height});
 			overflow-y: auto;
 			overflow-x: hidden;
 			width:$builder-right-panel-width + 15;
@@ -173,11 +265,10 @@ body
 				line-height: 2rem;
 				text-align: left;
 				padding-left: 1rem;
-				border-top: 1px solid #ddd;
 				border-bottom: 1px solid #ddd;
 				margin-bottom:0rem;
 				padding:0.0rem 0.5rem;
-				padding:0rem 0rem 0.5rem 1.5rem;
+				padding:0rem 0rem 0.5rem 1rem;
 			  
 				a 
 				{
@@ -215,93 +306,21 @@ body
 		
 				
 		width: $builder-right-panel-width;
-		
-		#component-properties
-		{
-			overflow-y: auto;
-			overflow-x: hidden;			
-			height:98%;
-			
-			.custom-select
-			{
-				height:auto;
-			}
-			.form-control, .custom-select
-			{
-				padding:.275rem 0.25rem;
-			}
-		}
-/*		
-		&:hover
-		{
-			width:$builder-right-panel-width + 15;
-		}
-
-		#component-properties
-		{
-			height:98%;
-			overflow-y: auto;
-			overflow-x: hidden;
-			width:$builder-right-panel-width + 15;
-		
-			//scrollbar on hover
-			&:hover
-			{
-				
-			}
-		}
-*/		
-/*
-		box-shadow: -1px 0px 2px rgba(0,0,0,.3);
-		-moz-box-shadow: -1px 0px 2px rgba(0,0,0,.3);
-		-webkit-box-shadow: -1px 0px 2px rgba(0,0,0,.3);
-*/
-		.form-group
-		{
-			margin-right:0px;			
-			margin-left:0px;			
-			
-			[class^="col-sm-"]
-			{
-				padding-left:10px;
-				padding-right:10px;
-			}
-			
-			label
-			{
-				font-size:11px;
-				margin-bottom:0px;
-				
-				i
-				{
-					font-size:14px;
-				}
-			}
-			
-			.input
-			{
-				width:100%;
-			}
-			
-			.custom-control
-			{
-				min-height:1.1rem;
-			}
-		}
 	}
 	
 	#top-panel
 	{
 		height:$builder-header-top-height;
-		border-bottom:1px solid #eee;
+		border-bottom:1px solid #ccc;
 		text-align:center;
 		background-color:#fafafa;
+		overflow:hidden;
 		
 		.btn-group
 		{
 			.btn
 			{
-				padding: 0rem 0.5rem;
+				padding: 0.25rem 0.5rem;
 				font-size: 1.25rem;
 			}
 			
@@ -309,7 +328,8 @@ body
 			{
 				.btn
 				{
-					font-size: 1.4rem;
+					font-size: 1.6rem;
+					padding:0rem 0.5rem
 				}
 			}
 		}
@@ -358,11 +378,96 @@ body
 		}
 	}
 	
+	.component-properties-sidepane {
+	  z-index: 0;
+	  margin: 0;
+	  -webkit-touch-callout: none;
+	  -webkit-user-select: none;
+	  -khtml-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	  height: auto;
+	  width: 100%;
+	  overflow-y: auto;
+	 
+		> div
+		   {
+			position:absolute;
+			height:100%;
+		   }	
+	}
+	
+	.component-properties
+	{
+		overflow-y: auto;
+		overflow-x: hidden;			
+		height:98%;
+		
+		#right-panel
+		{
+			color:#777;
+		}
+
+		&, select, input
+		{
+			font-size:12px;
+		}
+
+		label
+		{
+			margin-top:4px;
+		}
+		
+		.custom-select
+		{
+			height:auto;
+		}
+		.form-control, .custom-select
+		{
+			padding:.275rem 0.25rem;
+		}
+
+		.form-group
+		{
+			margin-right:0px;			
+			margin-left:0px;			
+			
+			[class^="col-sm-"]
+			{
+				padding-left:10px;
+				padding-right:10px;
+			}
+			
+			label
+			{
+				font-size:11px;
+				margin-bottom:0px;
+				
+				i
+				{
+					font-size:14px;
+				}
+			}
+			
+			.input
+			{
+				width:100%;
+			}
+			
+			.custom-control
+			{
+				min-height:1.1rem;
+			}
+		}
+	}
+
+	
 	// canvas
 	#canvas
 	{
-	    margin-right: 260px;
-		margin-left: 260px;
+	    margin-right: $builder-right-panel-width;
+		margin-left: $builder-left-panel-width;
 		width:100%;
 		height:100%;
 		width: calc( 100vw - #{$canvas-width-substract});
@@ -407,6 +512,19 @@ body
 		}
 	}
 
+	&.no-right-panel 
+	{	
+		#canvas
+		{
+			width: calc( 100vw - #{$canvas-no-right-width-substract});
+			margin-right:0px;
+		}
+		
+		#right-panel
+		{
+			display:none;
+		}
+	}
 
 
 
@@ -496,20 +614,6 @@ body
 	}
 
 
-	#right-panel
-	{
-		color:#777;
-	}
-
-	#right-panel, #right-panel select, #right-panel input
-	{
-		font-size:12px;
-	}
-
-	#right-panel label
-	{
-		margin-top:4px;
-	}
 
 	::-webkit-scrollbar {
 	  width: 0.8em;
@@ -534,28 +638,7 @@ li[data-type]
 	}
 }
 
-
-#components
-{
-	.header
-	{
-	
-		.form-control
-		{
-			border-color:#fff;
-			border-bottom-color: #ddd;
-			border-radius:0px;
-			background-color:transparent;
-		}
-		
-		.form-control:focus
-		{
-			border-color:#80bdff;
-		}
-	}
-}
-
-#components-sidepane {
+.drag-elements-sidepane {
   z-index: 0;
   margin: 0;
   -webkit-touch-callout: none;
@@ -571,8 +654,9 @@ li[data-type]
    > div
    {
 	position:absolute;
-	height:95%;
+	height:98%;
    }	
+	width:100%;
 
 	ul {
 	  z-index: 1;
@@ -638,12 +722,18 @@ li[data-type]
 				  color: #333;
 				  text-decoration: none;
 				  text-shadow: none;
-				  
+				  margin-top:3px;
 				}
 			
 
 			&[data-type] {
 				border:none;
+				list-style: none;
+				
+				a
+				{
+					display:none;
+				}
 
 				&:hover {
 				  cursor:hand;
@@ -653,9 +743,10 @@ li[data-type]
 				  background-color: #fff;
 				  opacity:1;
 				  text-align:center;
-				  /*
-				  box-shadow:0px 0px 1px 1px #007bff inset;
-				  box-shadow:0px 0px 1px 1px rgba(0, 123, 255, 0.3) inset;*/
+
+				  a {
+					color:$blue;
+				  }
 
 				}
 				
@@ -664,12 +755,28 @@ li[data-type]
 					display:block;
 				}
 
-				@include component-list-element(); 
 			}
 		}
 	 }
     }
   }
+}
+
+#blocks .drag-elements-sidepane
+{
+	li[data-type]
+	{
+		@include block-list-element(); 
+	}
+}
+
+
+#components .drag-elements-sidepane
+{
+	li[data-type]
+	{
+		@include component-list-element(); 
+	}
 }
 /*
 #right-panel 
@@ -855,7 +962,14 @@ input[type="number"]:focus {
 	vertical-align:middle;
 }
 
+.form-control::placeholder
+{
+	opacity:0.7;
+}
 
+.btn-link:hover {
+	text-decoration:none;
+}
 
 /* autocomplete */
 input.autocomplete-loading

@@ -332,7 +332,7 @@ var RadioButtonInput = $.extend({}, RadioInput, {
 	setValue: function(value) {
 		$('input', this.element).removeAttr('checked');
 		$('btn', this.element).removeClass('active');
-		if (value)
+		if (value && value != "")
 		{
 			$("input[value=" + value + "]", this.element).attr("checked", "true").prop('checked', true).parent().button("toggle");
 		}

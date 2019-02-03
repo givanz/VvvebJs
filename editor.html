@@ -43,7 +43,7 @@
 						  <i class="la la-eye"></i>
 					  </button>
 
-					  <button class="btn btn-light" title="Export (Ctrl + E)" id="save-btn" data-vvveb-action="save" data-vvveb-shortcut="ctrl+e">
+					  <button class="btn btn-light" title="Export (Ctrl + E)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-shortcut="ctrl+e">
 						  <i class="la la-save"></i>
 					  </button>
 					  
@@ -73,138 +73,99 @@
 				<div id="left-panel">
 
 					  <div id="filemanager"> 
-							<div class="header"><a href="#">Pages</a></div>
+							<div class="header">
+								<a href="#" class="text-secondary">Pages</a>
+
+									<div class="btn-group responsive-btns mr-4 float-right" role="group">
+									  <button class="btn btn-link btn-sm" title="New file" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="">
+										  <i class="la la-file"></i> <small>New page</small>
+									  </button>
+									  
+									  <!--  &ensp;
+									  <button class="btn btn-link text-dark p-0"  title="Delete file" id="delete-file-btn" data-vvveb-action="deletePage" data-vvveb-shortcut="">
+										  <i class="la la-trash"></i> <small>Delete</small>
+									  </button> -->
+									</div>
+
+								</div>
 
 								<div class="tree">
 									<ol>
-										<!-- li>
-											<label for="folder1"><span>Folder 1</span></label> <input type="checkbox" checked id="folder1" /> 
-											<ol>
-												<li class="file"><a href="document.html.pdf">File 1</a></li>
-												<li>
-													<label for="subfolder1">Subfolder 1</label> <input type="checkbox" id="subfolder1" /> 
-													<ol>
-														<li class="file"><a href="#"><span>Filey 1</span></a></li>
-														<li>
-															<label for="subsubfolder1">Subfolder 1</label> <input type="checkbox" id="subsubfolder1" /> 
-															<ol>
-																<li class="file"><a href="#">File 1</a></li>
-																<li>
-																	<label for="subsubfolder2">Subfolder 1</label> <input type="checkbox" id="subsubfolder2" /> 
-																	<ol>
-																		<li class="file"><a href="#">Subfile 1</a></li>
-																		<li class="file"><a href="#">Subfile 2</a></li>
-																		<li class="file"><a href="#">Subfile 3</a></li>
-																		<li class="file"><a href="#">Subfile 4</a></li>
-																		<li class="file"><a href="#">Subfile 5</a></li>
-																		<li class="file"><a href="#">Subfile 6</a></li>
-																	</ol>
-																</li>
-															</ol>
-														</li>
-														<li class="file"><a href="#">File 3</a></li>
-														<li class="file"><a href="#">File 4</a></li>
-														<li class="file"><a href="#">File 5</a></li>
-														<li class="file"><a href="#">File 6</a></li>
-													</ol>
-												</li>
-											</ol>
-										</li>
-										<li>
-											<label for="folder2"><span>Folder 2</span></label> <input type="checkbox" id="folder2" /> 
-											<ol>
-												<li class="file active"><a href="#"><span>File 1</span></a></li>
-												<li>
-													<label for="subfolder2">Subfolder 1</label> <input type="checkbox" id="subfolder2" /> 
-													<ol>
-														<li class="file"><a href="#">Subfile 1</a></li>
-														<li class="file"><a href="#">Subfile 2</a></li>
-														<li class="file"><a href="#">Subfile 3</a></li>
-														<li class="file"><a href="#">Subfile 4</a></li>
-														<li class="file"><a href="#">Subfile 5</a></li>
-														<li class="file"><a href="#">Subfile 6</a></li>
-													</ol>
-												</li>
-											</ol>
-										</li>
-										<li class="active">
-											<label for="folder3"><span>Folder 3</span></label> <input type="checkbox" id="folder3" /> 
-											<ol>
-												<li class="file"><a href="#"><span>File 1</span></a></li>
-												<li>
-													<label for="subfolder3">Subfolder 1</label> <input type="checkbox" id="subfolder3" /> 
-													<ol>
-														<li class="file"><a href="#">Subfile 1</a></li>
-														<li class="file"><a href="#">Subfile 2</a></li>
-														<li class="file"><a href="#">Subfile 3</a></li>
-														<li class="file"><a href="#">Subfile 4</a></li>
-														<li class="file"><a href="#">Subfile 5</a></li>
-														<li class="file"><a href="#">Subfile 6</a></li>
-													</ol>
-												</li>
-											</ol>
-										</li>
-										<li>
-											<label for="folder4">Folder 4</label> <input type="checkbox" id="folder4" /> 
-											<ol>
-												<li class="file"><a href="#">File 1</a></li>
-												<li>
-													<label for="subfolder4">Subfolder 1</label> <input type="checkbox" id="subfolder4" /> 
-													<ol>
-														<li class="file"><a href="#">Subfile 1</a></li>
-														<li class="file"><a href="#">Subfile 2</a></li>
-														<li class="file"><a href="#">Subfile 3</a></li>
-														<li class="file"><a href="#">Subfile 4</a></li>
-														<li class="file"><a href="#">Subfile 5</a></li>
-														<li class="file"><a href="#">Subfile 6</a></li>
-													</ol>
-												</li>
-											</ol>
-										</li>
-										<li>
-											<label for="folder5">Folder 5</label> <input type="checkbox" id="folder5" /> 
-											<ol>
-												<li class="file"><a href="#">File 1</a></li>
-												<li>
-													<label for="subfolder5">Subfolder 1</label> <input type="checkbox" id="subfolder5" /> 
-													<ol>
-														<li class="file"><a href="#">Subfile 1</a></li>
-														<li class="file"><a href="#">Subfile 2</a></li>
-														<li class="file"><a href="#">Subfile 3</a></li>
-														<li class="file"><a href="#">Subfile 4</a></li>
-														<li class="file"><a href="#">Subfile 5</a></li>
-														<li class="file"><a href="#">Subfile 6</a></li>
-													</ol>
-												</li>
-											</ol>
-										</li  -->
 									</ol>
 								</div>
 					  </div>
-					  	
-					  <div id="components">
-						
-						<div class="header">
-						  
-							  <input class="form-control form-control-sm" placeholder="" type="text" id="component-search"  data-vvveb-action="componentSearch" data-vvveb-on="keyup">
-							  <button id="clear-backspace"  data-vvveb-action="clearComponentSearch">
-								  <i class="la la-close"></i>
-							  </button>
-						  
-						</div>
+					  
+					  
+					  <div class="drag-elements">
 
-						<div id="components-sidepane" class="sidepane">
-						  <div>
-							  
-							<ul id="components-list" class="clearfix">
+						<div class="header">							
+							<ul class="nav nav-tabs" id="elements-tabs" role="tablist">
+							  <li class="nav-item component-tab">
+								<a class="nav-link active" id="components-tab" data-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="true"><i class="la la-lg la-cube"></i> <div><small>Components</small></div></a>
+							  </li>
+							  <li class="nav-item blocks-tab">
+								<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
+							  </li>
+							  <li class="nav-item component-properties-tab">
+								<a class="nav-link" id="blocks-tab"  style="display:none" data-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
+							  </li>
 							</ul>
+					
+							<div class="tab-content">
+							  <div class="tab-pane fade show active" id="components" role="tabpanel" aria-labelledby="components-tab">
+								  
+								   <div class="search">
+										  <input class="form-control form-control-sm" placeholder="Search components" type="text" id="component-search"  data-vvveb-action="componentSearch" data-vvveb-on="keyup">
+										  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
+											  <i class="la la-close"></i>
+										  </button>
+									  </div>
 
-						  </div>
-						</div>
+									<div class="drag-elements-sidepane sidepane">
+									  <div>
+										  
+										<ul id="components-list" class="clearfix">
+										</ul>
+
+									  </div>
+									</div>
+							  
+							  </div>
+							  <div class="tab-pane fade" id="blocks" role="tabpanel" aria-labelledby="blocks-tab">
+								  
+								   <div class="search">
+										  <input class="form-control form-control-sm" placeholder="Search blocks" type="text" id="block-search"  data-vvveb-action="blockSearch" data-vvveb-on="keyup">
+										  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
+											  <i class="la la-close"></i>
+										  </button>
+									  </div>
+
+									<div class="drag-elements-sidepane sidepane">
+									  <div>
+										  
+										<ul id="blocks-list" class="clearfix">
+										</ul>
+
+									  </div>
+									</div>
+							  
+							  </div>
+							
+								<div class="tab-pane fade" id="properties" role="tabpanel" aria-labelledby="blocks-tab">
+									<div class="component-properties-sidepane">
+										<div>
+											<div class="component-properties">
+												<div class="mt-4 text-center">Click on an element to edit.</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>							
+					
 					  </div>
+				</div>	
 
-
-				</div>
 
 				<div id="canvas">
 					<div id="iframe-wrapper">
@@ -245,7 +206,7 @@
 				</div>
 
 				<div id="right-panel">
-					<div id="component-properties">
+					<div class="component-properties">
 					</div>
 				</div>
 				
@@ -259,7 +220,7 @@
 					 
 						<div id="toggleEditorJsExecute" class="custom-control custom-checkbox mt-1" style="display:none">
 							<input type="checkbox" class="custom-control-input" id="customCheck" name="example1" data-vvveb-action="toggleEditorJsExecute">
-							<label class="custom-control-label" for="customCheck"><small>Run code on edit</small></label>
+							<label class="custom-control-label" for="customCheck"><small>Run javascript code on edit</small></label>
 						</div>
 					</div>
 					
@@ -602,6 +563,30 @@
 	
 </script>
 
+<script id="vvveb-input-autocompletelist" type="text/html">
+	
+	<div>
+		<input name="{%=key%}" type="text" class="form-control"/>
+		
+		<div class="form-control autocomplete-list" style="min=height: 150px; overflow: auto;">
+                  <div id="featured-product43"><i class="la la-close"></i> MacBook
+                    <input name="product[]" value="43" type="hidden">
+                  </div>
+                                  <div id="featured-product40"><i class="la la-close"></i> iPhone
+                    <input name="product[]" value="40" type="hidden">
+                  </div>
+                                  <div id="featured-product42"><i class="la la-close"></i> Apple Cinema 30"
+                    <input name="product[]" value="42" type="hidden">
+                  </div>
+                                  <div id="featured-product30"><i class="la la-close"></i> Canon EOS 5D
+                    <input name="product[]" value="30" type="hidden">
+                  </div>
+		</div>
+	</div>
+	
+</script>
+
+
 <!--// end templates -->
 
 
@@ -610,9 +595,9 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Export html</h5>
+        <p class="modal-title text-primary"><i class="la la-lg la-save"></i> Export html</p>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true"><small><i class="la la-close"></i></small></span>
         </button>
       </div>
       <div class="modal-body">
@@ -621,7 +606,7 @@
       
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal"><i class="la la-close"></i> Close</button>
       </div>
     </div>
   </div>
@@ -632,9 +617,9 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">VvvebJs</h5>
+        <p class="modal-title text-primary"><i class="la la-lg la-comment"></i> VvvebJs</p>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true"><small><i class="la la-close"></i></small></span>
         </button>
       </div>
       <div class="modal-body">
@@ -642,9 +627,70 @@
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-primary">Ok</button> -->
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal"><i class="la la-close"></i> Close</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- new page modal-->
+<div class="modal fade" id="new-page-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    
+    <form>
+		
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title text-primary"><i class="la la-lg la-file"></i> New page</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><small><i class="la la-close"></i></small></span>
+        </button>
+      </div>
+
+      <div class="modal-body text">
+		<div class="form-group row" data-key="type">      
+			<label class="col-sm-3 control-label" for="input-model">
+				Template 
+				<abbr class="badge badge-pill badge-secondary" title="This template will be used as a start">?</abbr> 
+			</label>      
+			<div class="col-sm-9 input">
+				<div>    
+					<select class="form-control custom-select" name="startTemplateUrl">        
+						<option value="new-page-blank-template.html">Blank Template</option>        
+						<option value="demo/narrow-jumbotron/index.html">Narrow jumbotron</option>       
+						<option value="demo/album/index.html">Album</option>       
+					</select>    
+				</div>
+			</div>     
+		</div>
+
+		<div class="form-group row" data-key="href">     
+			 <label class="col-sm-3 control-label" for="input-model"><p>Page name</p></label>      
+			<div class="col-sm-9 input">
+				<div>   
+					<input name="title" type="text" class="form-control" placeholder="My page" required>  
+				</div>
+			</div>     
+		</div>
+		
+		<div class="form-group row" data-key="href">     
+			 <label class="col-sm-3 control-label" for="input-model"><p>File name</p></label>      
+			<div class="col-sm-9 input">
+				<div>   
+					<input name="fileName" type="text" class="form-control" placeholder="my-page.html" required>  
+				</div>
+			</div>     
+		</div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-lg" type="submit"><i class="la la-check"></i> Create page</button>
+        <button class="btn btn-secondary btn-lg" type="reset" data-dismiss="modal"><i class="la la-close"></i> Cancel</button>
+      </div>
+    </div>
+    
+   </form>		
+
   </div>
 </div>
 	
@@ -662,9 +708,13 @@
 <script src="libs/builder/undo.js"></script>	
 <!-- inputs-->
 <script src="libs/builder/inputs.js"></script>	
+
 <!-- components-->
 <script src="libs/builder/components-bootstrap4.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
+
+<!-- blocks-->
+<script src="libs/builder/blocks-bootstrap4.js"></script>	
 
 <!-- plugins -->
 
@@ -676,10 +726,23 @@
 <script src="libs/codemirror/lib/formatting.js"></script>
 <script src="libs/builder/plugin-codemirror.js"></script>	
 
+<!-- jszip - download page as zip -->
+<!-- script src="libs/jszip/jszip.min.js"></script>
+<script src="libs/builder/plugin-jszip.js"></script -->
 
 <script>
 $(document).ready(function() 
 {
+	//if url has #no-right-panel set one panel demo
+	if (window.location.hash.indexOf("no-right-panel") != -1)
+	{
+		$("#vvveb-builder").addClass("no-right-panel");
+		Vvveb.Components.componentPropertiesElement = "#left-panel .component-properties";
+	} else
+	{
+		$(".component-properties-tab").hide();
+	}
+
 	Vvveb.Builder.init('demo/narrow-jumbotron/index.html', function() {
 		//run code after page/iframe is loaded
 	});
@@ -689,7 +752,7 @@ $(document).ready(function()
 	Vvveb.FileManager.addPages(
 	[
 		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
-		{name:"landio", title:"Landio landing page",  url: "demo/landio/index.html", assets: ['demo/landio/landio.css']},
+		{name:"landing-page", title:"Landing page",  url: "demo/startbootstrap-landing-page/index.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
 		{name:"album", title:"Album",  url: "demo/album/index.html", assets: ['demo/album/album.css']},
 		{name:"blog", title:"Blog",  url: "demo/blog/index.html", assets: ['demo/blog/blog.css']},
 		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html", assets: ['demo/carousel/carousel.css']},

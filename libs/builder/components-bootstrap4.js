@@ -69,7 +69,7 @@ function changeNodeName(node, newNodeName)
 }
 
 Vvveb.ComponentsGroup['Bootstrap 4'] =
-["html/container", "html/gridrow", "html/button", "html/buttongroup", "html/buttontoolbar", "html/heading", "html/image", "html/jumbotron", "html/alert", "html/card", "html/listgroup", "html/hr", "html/taglabel", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination", "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/table", ];
+["html/container", "html/gridrow", "html/button", "html/buttongroup", "html/buttontoolbar", "html/heading", "html/image", "html/jumbotron", "html/alert", "html/card", "html/listgroup", "html/hr", "html/taglabel", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination", "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/table", "html/paragraph"];
 
 
 var base_sort = 100;//start sorting for base component from 100 to allow extended properties to be first
@@ -809,7 +809,7 @@ Vvveb.Components.extend("_base", "_base", {
 Vvveb.Components.extend("_base", "html/container", {
     classes: ["container", "container-fluid"],
     image: "icons/container.svg",
-    html: '<div class="container"><div class="m-5">Container</div></div>',
+    html: '<div class="container" style="min-height:150px;"><div class="m-5">Container</div></div>',
     name: "Container",
     properties: [
      {
@@ -1949,7 +1949,7 @@ Vvveb.Components.add("html/gridcolumn", {
 		},
 		
 		onChange: function(node, value, input) {
-			_class = node.attr("class");
+			var _class = node.attr("class");
 			
 			//remove previous breakpoint column size
 			_class = _class.replace(new RegExp(input.name + '-\\d+?'), '');
@@ -1978,7 +1978,7 @@ Vvveb.Components.add("html/gridrow", {
 			
 			var reg = /col-([^-\$ ]*)?-?(\d+)/g; 
 			var match;
-			data = {};
+			var data = {};
 
 			while ((match = reg.exec(_class)) != null) {
 				data["col" + ((match[1] != undefined)?"_" + match[1]:"")] = match[2];
@@ -1990,13 +1990,14 @@ Vvveb.Components.add("html/gridrow", {
 				key: "column" + i,
 				//index: i - 1,
 				columnNode: this,
+				col:12,
 				inline:true,
 				inputtype: GridInput,
 				data: data,
 				onChange: function(node, value, input) {
 
 					//column = $('[class*="col-"]:eq(' + this.index + ')', node);
-					column = $(this.columnNode);
+					var column = $(this.columnNode);
 					
 					//if remove button is clicked remove column and render row properties
 					if (input.nodeName == 'BUTTON')
@@ -2058,5 +2059,49 @@ Vvveb.Components.add("html/gridrow", {
 			 
 			 return node;
 		}
+	}]
+});
+
+
+Vvveb.Components.extend("_base", "html/paragraph", {
+    nodes: ["p"],
+    name: "Paragraph",
+	image: "icons/paragraph.svg",
+	html: '<p>Lorem ipsum</p>',
+    properties: [{
+        name: "Text align",
+        key: "text-align",
+        htmlAttr: "class",
+        inputtype: SelectInput,
+        validValues: ["", "text-left", "text-center", "text-right"],
+        inputtype: RadioButtonInput,
+        data: {
+			extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+                value: "",
+                icon:"la la-close",
+                //text: "None",
+                title: "None",
+                checked:true,
+            }, {
+                value: "left",
+                //text: "Left",
+                title: "text-left",
+                icon:"la la-align-left",
+                checked:false,
+            }, {
+                value: "text-center",
+                //text: "Center",
+                title: "Center",
+                icon:"la la-align-center",
+                checked:false,
+            }, {
+                value: "text-right",
+                //text: "Right",
+                title: "Right",
+                icon:"la la-align-right",
+                checked:false,
+            }],
+        },
 	}]
 });
