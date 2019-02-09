@@ -9250,7 +9250,7 @@ body {
         font-size: 70%; }
       #vvveb-builder #left-panel .drag-elements .nav-item .nav-link.active, #vvveb-builder #left-panel .drag-elements .nav-item .nav-link:hover {
         color: #007bff; }
-  #vvveb-builder #left-panel #components-list, #vvveb-builder #left-panel .component-properties {
+  #vvveb-builder #left-panel #components-list, #vvveb-builder #left-panel #blocks-list, #vvveb-builder #left-panel .component-properties {
     height: 98%;
     height: calc(99% - 250px - 100px);
     overflow-y: auto;
@@ -9594,18 +9594,20 @@ li[data-type] {
               display: block; }
 
 #blocks .drag-elements-sidepane li[data-type] {
-  width: 100%;
-  height: 100px;
+  width: 240px;
+  height: 180px;
   text-align: center;
   font-weight: normal;
   font-size: 11px;
   color: #000;
   background-repeat: no-repeat;
-  padding-top: 170px;
+  padding-top: 150px;
   margin-bottom: 14px;
   border-color: #ddd;
   border-style: solid;
   border-width: 0px;
+  box-shadow: 0px 0px 2px 1px #aaa;
+  background-position: top center;
   /*		  
 		border-left-width:1px;
 		border-top-width:1px;
@@ -9616,6 +9618,9 @@ li[data-type] {
   cursor: pointer;
   opacity: 0.75;
   zoom: 1; }
+  #blocks .drag-elements-sidepane li[data-type] a {
+    background: #fff;
+    padding: 5px 0px 0px 0px; }
 
 #components .drag-elements-sidepane li[data-type] {
   width: 116px;

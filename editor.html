@@ -106,8 +106,8 @@
 							  <li class="nav-item blocks-tab">
 								<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
 							  </li>
-							  <li class="nav-item component-properties-tab">
-								<a class="nav-link" id="blocks-tab"  style="display:none" data-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
+							  <li class="nav-item component-properties-tab" style="display:none">
+								<a class="nav-link" id="components-tab" data-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
 							  </li>
 							</ul>
 					
@@ -737,6 +737,7 @@ $(document).ready(function()
 	if (window.location.hash.indexOf("no-right-panel") != -1)
 	{
 		$("#vvveb-builder").addClass("no-right-panel");
+		$(".component-properties-tab").show();
 		Vvveb.Components.componentPropertiesElement = "#left-panel .component-properties";
 	} else
 	{

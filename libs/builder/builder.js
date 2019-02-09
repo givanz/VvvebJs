@@ -229,7 +229,9 @@ Vvveb.Components = {
 	matchNode: function(node) {
 		var component = {};
 		
-		if (node.attributes.length)
+		if (!node || !node.tagName) return false;
+		
+		if (node.attributes && node.attributes.length)
 		{
 			//search for attributes
 			for (var i in node.attributes)
@@ -759,17 +761,27 @@ Vvveb.Builder = {
 			self.texteditEl = null;
 		}
 
-		self.selectedEl = target = jQuery(node);
-		offset = target.offset();
+		var target = jQuery(node);
 		
-		
-		jQuery("#select-box").css(
-			{"top": offset.top - self.frameDoc.scrollTop() , 
-			 "left": offset.left - self.frameDoc.scrollLeft() , 
-			 "width" : target.outerWidth(), 
-			 "height": target.outerHeight(),
-			 "display": "block",
-			 });
+		if (target)
+		{
+			self.selectedEl = target;
+
+			try {
+				offset = target.offset();
+					
+				jQuery("#select-box").css(
+					{"top": offset.top - self.frameDoc.scrollTop() , 
+					 "left": offset.left - self.frameDoc.scrollLeft() , 
+					 "width" : target.outerWidth(), 
+					 "height": target.outerHeight(),
+					 "display": "block",
+					 });
+			} catch(err) {
+				console.log(err);
+				return false;
+			}
+		}
 			 
 		jQuery("#highlight-name").html(this._getElementType(node));
 		
@@ -846,7 +858,8 @@ Vvveb.Builder = {
 			{
 				self.isDragging = false;
 				if (self.iconDrag) self.iconDrag.remove();
-
+				$("#component-clone").remove();
+				
 				if (self.component.dragHtml) //if dragHtml is set for dragging then set real component html
 				{
 					newElement = $(self.component.html);
@@ -1358,6 +1371,21 @@ Vvveb.Gui = {
 	
 	clearComponentSearch : function () {
 		$("#component-search").val("").keyup();
+	},
+	
+	blockSearch : function () {
+		searchText = this.value;
+		
+		$("#blocks-list li ol li").each(function () {
+			$this = $(this);
+			
+			$this.hide();
+			if ($this.data("search").indexOf(searchText) > -1) $this.show();
+		});
+	},
+	
+	clearBlockSearch : function () {
+		$("#block-search").val("").keyup();
 	},
 
 //Pages, file/components tree 
