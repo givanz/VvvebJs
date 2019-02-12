@@ -733,38 +733,10 @@
 <script>
 $(document).ready(function() 
 {
-	//if url has #no-right-panel set one panel demo
-	if (window.location.hash.indexOf("no-right-panel") != -1)
-	{
-		$("#vvveb-builder").addClass("no-right-panel");
-		$(".component-properties-tab").show();
-		Vvveb.Components.componentPropertiesElement = "#left-panel .component-properties";
-	} else
-	{
-		$(".component-properties-tab").hide();
-	}
-
-	Vvveb.Builder.init('demo/narrow-jumbotron/index.html', function() {
-		//run code after page/iframe is loaded
+	Vvveb.Builder.init('demo/index.html', function() {
+		//load code after page is loaded here
+		Vvveb.Gui.init();
 	});
-
-	Vvveb.Gui.init();
-	Vvveb.FileManager.init();
-	Vvveb.FileManager.addPages(
-	[
-		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
-		{name:"landing-page", title:"Landing page",  url: "demo/startbootstrap-landing-page/index.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
-		{name:"album", title:"Album",  url: "demo/album/index.html", assets: ['demo/album/album.css']},
-		{name:"blog", title:"Blog",  url: "demo/blog/index.html", assets: ['demo/blog/blog.css']},
-		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html", assets: ['demo/carousel/carousel.css']},
-		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
-		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", assets: ['demo/pricing/pricing.css']},
-		{name:"product", title:"Product",  url: "demo/product/index.html", assets: ['demo/product/product.css']},
-		{name:"ecommerce", title:"eCommerce homepage",  url: "ecommerce_demo/index.html"},
-		{name:"test", title:"test",  url: "http://vvveb_install.givan.ro/"},
-	]);
-	
-	Vvveb.FileManager.loadPage("narrow-jumbotron");
 });
 </script>
 </body>
