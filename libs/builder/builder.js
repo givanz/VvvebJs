@@ -1118,6 +1118,9 @@ Vvveb.Builder = {
 				self.isDragging = false;
 				$("#component-clone").remove();
 				self.iconDrag.remove();
+				if(self.dragElement){
+					self.dragElement.remove();
+				}
 			}
 		});
 		
