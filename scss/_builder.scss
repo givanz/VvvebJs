@@ -240,7 +240,7 @@ body
 		#components-list, #blocks-list, .component-properties, 
 		{
 			height:98%;
-			height:calc(99% - #{$builder-filemanager-height} - #{$drag-items-tabs-height});
+			height:calc(100% - #{$builder-filemanager-height} - #{$drag-items-tabs-height} - #{$builder-header-top-height});
 			overflow-y: auto;
 			overflow-x: hidden;
 			width:$builder-right-panel-width + 15;
@@ -405,7 +405,8 @@ body
 	{
 		overflow-y: auto;
 		overflow-x: hidden;			
-		height:98%;
+		height:95%;
+		height:calc(100% - #{$builder-header-top-height});
 		
 		#right-panel
 		{
