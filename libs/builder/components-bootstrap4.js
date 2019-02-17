@@ -711,6 +711,12 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		//htmlAttr: "style",
         inputtype: ImageInput,
+        
+        init: function(node) {
+			var image = $(node).css("background-image").replace(/^url\(['"]?(.+)['"]?\)/, '$1');
+			return image;
+        },
+
 		onChange: function(node, value) {
 			
 			$(node).css('background-image', 'url(' + value + ')');
