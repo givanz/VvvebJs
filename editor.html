@@ -162,7 +162,7 @@
 								</div>
 							</div>
 						</div>							
-					
+
 					  </div>
 				</div>	
 
@@ -174,6 +174,9 @@
 							<div id="highlight-box">
 								<div id="highlight-name"></div>
 								
+								<div id="section-actions">
+									<a id="add-section-btn" href="" title="Add element"><i class="la la-plus"></i></a>
+								</div>
 							</div>
 
 							<div id="select-box">
@@ -187,17 +190,87 @@
 								</div>
 
 								<div id="select-actions">
-									<a id="drag-box" href="" title="Drag element"><i class="la la-arrows"></i></a>
-									<a id="parent-box" href="" title="Select parent"><i class="la la-level-down la-rotate-180"></i></a>
+									<a id="drag-btn" href="" title="Drag element"><i class="la la-arrows"></i></a>
+									<a id="parent-btn" href="" title="Select parent"><i class="la la-level-down la-rotate-180"></i></a>
 									
-									<a id="up-box" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
-									<a id="down-box" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
-									<a id="clone-box" href="" title="Clone element"><i class="la la-copy"></i></a>
-									<a id="delete-box" href="" title="Remove element"><i class="la la-trash"></i></a>
+									<a id="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
+									<a id="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
+									<a id="clone-btn" href="" title="Clone element"><i class="la la-copy"></i></a>
+									<a id="delete-btn" href="" title="Remove element"><i class="la la-trash"></i></a>
 								</div>
+
 							</div>
 							
-						
+							<!-- add section box -->
+							<div id="add-section-box" class="drag-elements">
+
+									<div class="header">							
+										<ul class="nav nav-tabs" id="elements-tabs" role="tablist">
+										  <li class="nav-item component-tab">
+											<a class="nav-link active" id="components-tab" data-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="true"><i class="la la-lg la-cube"></i> <div><small>Components</small></div></a>
+										  </li>
+										  <li class="nav-item blocks-tab">
+											<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
+										  </li>
+										  <li class="nav-item component-properties-tab" style="display:none">
+											<a class="nav-link" id="components-tab" data-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
+										  </li>
+										</ul>
+								
+										<div class="tab-content">
+										  <div class="tab-pane fade show active" id="components" role="tabpanel" aria-labelledby="components-tab">
+											  
+											   <div class="search">
+													  <input class="form-control form-control-sm" placeholder="Search components" type="text" id="component-search"  data-vvveb-action="componentSearch" data-vvveb-on="keyup">
+													  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
+														  <i class="la la-close"></i>
+													  </button>
+												  </div>
+
+												<div class="drag-elements-sidepane sidepane">
+												  <div>
+													  
+													<ul id="components-list" class="clearfix">
+													</ul>
+
+												  </div>
+												</div>
+										  
+										  </div>
+										  <div class="tab-pane fade" id="blocks" role="tabpanel" aria-labelledby="blocks-tab">
+											  
+											   <div class="search">
+													  <input class="form-control form-control-sm" placeholder="Search blocks" type="text" id="block-search"  data-vvveb-action="blockSearch" data-vvveb-on="keyup">
+													  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
+														  <i class="la la-close"></i>
+													  </button>
+												  </div>
+
+												<div class="drag-elements-sidepane sidepane">
+												  <div>
+													  
+													<ul id="blocks-list" class="clearfix">
+													</ul>
+
+												  </div>
+												</div>
+										  
+										  </div>
+										
+											<div class="tab-pane fade" id="properties" role="tabpanel" aria-labelledby="blocks-tab">
+												<div class="component-properties-sidepane">
+													<div>
+														<div class="component-properties">
+															<div class="mt-4 text-center">Click on an element to edit.</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>		
+
+							</div>
+							<!-- //add section box -->
 						</div>
 						<iframe src="about:none" id="iframe1"></iframe>
 					</div>
@@ -761,6 +834,17 @@ $(document).ready(function()
 		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", assets: ['demo/pricing/pricing.css']},
 		{name:"product", title:"Product",  url: "demo/product/index.html", assets: ['demo/product/product.css']},
 		{name:"ecommerce", title:"eCommerce homepage",  url: "ecommerce_demo/index.html"},
+		//uncomment php code below and rename file to .php extension to load saved html files in the editor
+		/*
+		<?php 
+		   $htmlFiles = glob("*.html");
+		   foreach ($htmlFiles as $file) { 
+			   if (in_array($file, array('new-page-blank-template.html', 'editor.html'))) continue;//skip template files
+			   $pathInfo = pathinfo($file);
+		?>
+		{name:"<?php echo ucfirst($pathInfo['filename']);?>", title:"<?php echo ucfirst($pathInfo['filename']);?>",  url: "<?php echo $pathInfo['basename'];?>"},
+		<?php } ?>
+		*/
 		{name:"test", title:"test",  url: "http://vvveb_install.givan.ro/"},
 	]);
 	
@@ -769,7 +853,3 @@ $(document).ready(function()
 </script>
 </body>
 </html>
-
-
-
-

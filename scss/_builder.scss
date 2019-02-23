@@ -37,14 +37,14 @@ $font-size-base: .875rem;
 @import "csstree";
 
 @mixin component-list-element() {
-		width: 116px;
+		width: 50%;
 		text-align: center;
 		font-weight: normal;
 		font-size: 11px;
 		color: #000;
 		background-repeat: no-repeat;
-		padding-top: 62px;
-		padding-bottom: 14px;
+		padding-top: 55px;
+		padding-bottom: 7px;
 
 		border-color:#ddd;
 		border-style:solid;
@@ -64,7 +64,7 @@ $font-size-base: .875rem;
 }
 
 @mixin block-list-element() {
-		width: 240px;
+		width: 100%;
 		height:180px;
 		text-align: center;
 		font-weight: normal;
@@ -77,7 +77,7 @@ $font-size-base: .875rem;
 		border-color:#ddd;
 		border-style:solid;
 		border-width:0px;
-		box-shadow: 0px 0px 2px 1px #aaa;
+		box-shadow: 0px 0px 2px 1px #ccc;
 		background-position: top center;
 		
 		/*		  
@@ -150,108 +150,7 @@ body
 			width:$builder-right-panel-width + 15;
 		}
 
-		.drag-elements
-		{
-			padding-top: 0rem;
-			border-top:1px solid #ddd;
 
-			> .header
-			{
-				background:#fafafa;
-				
-				.search 
-				{	
-					position:relative;
-					.form-control
-					{
-						border-color:#fff;
-						border-bottom-color: #ddd;
-						border-radius:0px;
-					}
-					
-					.form-control:focus
-					{
-						border-color:#80bdff;
-					}
-					
-
-					.form-control::placeholder
-					{
-						/*font-size: $font-size-sm;*/
-						font-size: .75rem;
-					}
-
-					
-					.clear-backspace
-					{
-						border:none;
-						background:none;
-
-						position: absolute;
-						top: 3px;
-						right: 0px;
-						
-						i {
-							font-size:13px;
-						}
-
-						opacity:0.8;
-						
-						&:hover
-						{
-							opacity:1;
-						}
-					}
-					
-					input:focus + #clear-backspace,
-					input:hover + #clear-backspace
-					{
-						opacity:1;
-					}					
-				}
-			}
-			
-			
-			.nav-item
-			{
-				.nav-link
-				{
-					text-align:center;
-					border-top-color: #fff;
-					padding: 0.5rem 0.7rem;
-					border-radius:0px;
-					min-width:5rem;
-					color:$dark;
-					
-					small
-					{
-						font-size:70%;
-					}
-					
-					&.active, &:hover
-					{
-						color:$primary;
-					}
-				}
-			}
-
-		}
-		
-		#components-list, #blocks-list, .component-properties, 
-		{
-			height:98%;
-			height:calc(100% - #{$builder-filemanager-height} - #{$drag-items-tabs-height} - #{$builder-header-top-height});
-			overflow-y: auto;
-			overflow-x: hidden;
-			width:$builder-right-panel-width + 15;
-
-			//scrollbar on hover
-			&:hover
-			{
-				
-			}
-		}
-		
 		#filemanager
 		{
 			height:$builder-filemanager-height;
@@ -380,6 +279,118 @@ body
 			height:50%;
 		}
 	}
+
+	.drag-elements
+	{
+		padding-top: 0rem;
+		border-top:1px solid #ddd;
+
+		> .header
+		{
+			background:#fafafa;
+			
+			.search 
+			{	
+				position:relative;
+				.form-control
+				{
+					border-color:#fff;
+					border-bottom-color: #ddd;
+					border-radius:0px;
+				}
+				
+				.form-control:focus
+				{
+					border-color:#80bdff;
+				}
+				
+
+				.form-control::placeholder
+				{
+					/*font-size: $font-size-sm;*/
+					font-size: .75rem;
+				}
+
+				
+				.clear-backspace
+				{
+					border:none;
+					background:none;
+
+					position: absolute;
+					top: 3px;
+					right: 0px;
+					
+					i {
+						font-size:13px;
+					}
+
+					opacity:0.8;
+					
+					&:hover
+					{
+						opacity:1;
+					}
+				}
+				
+				input:focus + #clear-backspace,
+				input:hover + #clear-backspace
+				{
+					opacity:1;
+				}					
+			}
+		}
+		
+		
+		.nav-item
+		{
+			.nav-link
+			{
+				text-align:center;
+				border-top-color: #fff;
+				padding: 0.5rem 1rem;
+				border-radius:0px;
+				min-width:5rem;
+				color:$dark;
+				
+				i.la-lg
+				{
+					font-size:1.5rem;
+				}
+				
+				small
+				{
+					font-size:70%;
+				}
+				
+				&.active, &:hover
+				{
+					color:$primary;
+				}
+			}
+		}
+		
+		&#add-section-box .nav-item:first-child .nav-link
+		{
+			border-left:none;
+		}
+	}
+	
+	#components-list, #blocks-list, .component-properties, 
+	{
+		height:98%;
+		height:calc(100% - #{$builder-filemanager-height} - #{$drag-items-tabs-height} - #{$builder-header-top-height});
+		overflow-y: auto;
+		overflow-x: hidden;
+		width:$builder-right-panel-width + 15;
+
+		//scrollbar on hover
+		&:hover
+		{
+			
+		}
+	}
+	
 	
 	.component-properties-sidepane {
 	  z-index: 0;
@@ -547,6 +558,7 @@ body
 		height:0px;
 		top:0px;
 		left:0px;
+		display:none;
 	}
 
 	.text-edit#select-box
@@ -575,7 +587,7 @@ body
 		top:-25px;
 		background:$builder-background-color;
 		color:#fff;
-		padding:0.05rem 0.2rem 0.05rem 0.2rem;
+		padding:0px 0px;
 		border-radius:3px 3px 0px 0px;
 	}
 
@@ -587,21 +599,64 @@ body
 		display:none;
 	}
 
-	#select-actions a, #wysiwyg-editor a
+	#select-actions a, #wysiwyg-editor a, #section-actions a#add-section-btn
 	{
 		pointer-events: auto;
 		color:#fff;
 		font-size:16px;
 		padding-right:2px;
-		padding:0px 5px;
+		padding:2px 5px;
 		
 		&:hover
 		{
 			text-decoration:none;
-			background:lighten( $builder-background-color, 10% )
+			background:darken( $builder-background-color, 10%)
 		}
 	}
 
+	#section-actions
+	{
+	
+		bottom: 0px;
+		position: absolute;
+		border-radius: 3px 3px 0px 0px;
+		bottom: -10px;
+		left: 50%;
+		left: calc(50% - 12px);
+
+
+		a#add-section-btn
+		{
+			position: relative;
+			bottom: 0px;
+			background: #4285f4;
+			color: #fff;
+			font-size: 18x;
+			border-radius: 20px;
+			width: 20px;
+			height: 20px;
+			padding: 4px 5px;
+			cursor:pointer;
+			
+		}
+	}
+	
+	#add-section-box
+	{
+		width: 40%;
+		height: 30%;
+		min-height: 300px;
+		max-height: 400px;
+		position: absolute;
+		background: #fff;
+		top: 100px;
+		left: 100px;
+		box-shadow: 0px 0px 2px 0px #ccc;
+		min-width: 400px;
+		max-width: 800px;
+		pointer-events:auto;
+		display:none;
+	}
 
 	#highlight-name
 	{
@@ -692,7 +747,7 @@ li[data-type]
 				line-height: 32px;
 				text-align: left;
 				//padding-left:1rem;
-				padding:0.5rem 0rem 0.5rem 1.5rem;
+				padding:0.5rem 0rem 0.5rem 1rem;
 			  
 				> a 
 				{
@@ -712,8 +767,7 @@ li[data-type]
 		 ol {
 		 
 			margin:0px;
-			padding:0px;
-			padding-left:20px;
+			padding:0rem 1rem;
 			padding-bottom:1rem;
 			
 			@extend .clearfix;
@@ -726,7 +780,7 @@ li[data-type]
 				  color: #333;
 				  text-decoration: none;
 				  text-shadow: none;
-				  margin-top:3px;
+				  margin-top:5px;
 				}
 			
 
@@ -749,7 +803,7 @@ li[data-type]
 				  text-align:center;
 
 				  a {
-					color:$blue;
+					//color:$blue;
 				  }
 
 				}
@@ -785,6 +839,12 @@ li[data-type]
 	li[data-type]
 	{
 		@include component-list-element(); 
+		
+		&:hover
+		{
+			box-shadow: 0px 0px 1px 0px $builder-background-color;
+			background-color:rgba( $builder-background-color, 0.1);
+		}
 	}
 }
 /*

@@ -668,7 +668,7 @@ Vvveb.Builder = {
 				
 						if (self.selectedEl)
 						{
-							offset = self.selectedEl.offset();
+							var offset = self.selectedEl.offset();
 							
 							jQuery("#select-box").css(
 								{"top": offset.top - self.frameDoc.scrollTop() , 
@@ -682,7 +682,7 @@ Vvveb.Builder = {
 						
 						if (self.highlightEl)
 						{
-							offset = self.highlightEl.offset();
+							var offset = self.highlightEl.offset();
 							
 							jQuery("#highlight-box").css(
 								{"top": offset.top - self.frameDoc.scrollTop() , 
@@ -709,6 +709,10 @@ Vvveb.Builder = {
 		self.frameDoc = $(window.FrameDocument);
 		self.frameHtml = $(window.FrameDocument).find("html");
 		self.frameBody = $(window.FrameDocument).find("body");
+		self.frameHead = $(window.FrameDocument).find("head");
+		
+		//insert editor helpers like non editable areas
+		self.frameHead.append('<link data-vvveb-helpers href="' + Vvveb.baseUrl + '../../css/vvvebjs-editor-helpers.css" rel="stylesheet">');
 
 		self._initHighlight();
     },	
@@ -768,7 +772,7 @@ Vvveb.Builder = {
 			self.selectedEl = target;
 
 			try {
-				offset = target.offset();
+				var offset = target.offset();
 					
 				jQuery("#select-box").css(
 					{"top": offset.top - self.frameDoc.scrollTop() , 
@@ -799,11 +803,11 @@ Vvveb.Builder = {
 			{
 				//moveEvent = event;
 				self.highlightEl = target = jQuery(event.target);
-				offset = target.offset();
-				height = target.outerHeight();
-				halfHeight = Math.max(height / 2, 50);
-				width = target.outerWidth();
-				halfWidth = Math.max(width / 2, 50);
+				var offset = target.offset();
+				var height = target.outerHeight();
+				var halfHeight = Math.max(height / 2, 50);
+				var width = target.outerWidth();
+				var halfWidth = Math.max(width / 2, 50);
 				
 				if (self.isDragging)
 				{
@@ -940,7 +944,7 @@ Vvveb.Builder = {
 	_initBox: function() {
 		var self = this;
 		
-		$("#drag-box").on("mousedown", function(event) {
+		$("#drag-btn").on("mousedown", function(event) {
 			jQuery("#select-box").hide();
 			self.dragElement = self.selectedEl;
 			self.isDragging = true;
@@ -958,7 +962,7 @@ Vvveb.Builder = {
 			return false;
 		});
 		
-		$("#down-box").on("click", function(event) {
+		$("#down-btn").on("click", function(event) {
 			jQuery("#select-box").hide();
 
 			node = self.selectedEl.get(0);
@@ -989,7 +993,7 @@ Vvveb.Builder = {
 			return false;
 		});
 		
-		$("#up-box").on("click", function(event) {
+		$("#up-btn").on("click", function(event) {
 			jQuery("#select-box").hide();
 
 			node = self.selectedEl.get(0);
@@ -1020,7 +1024,7 @@ Vvveb.Builder = {
 			return false;
 		});
 		
-		$("#clone-box").on("click", function(event) {
+		$("#clone-btn").on("click", function(event) {
 			
 			clone = self.selectedEl.clone();
 			
@@ -1038,7 +1042,7 @@ Vvveb.Builder = {
 			return false;
 		});
 		
-		$("#parent-box").on("click", function(event) {
+		$("#parent-btn").on("click", function(event) {
 			
 			node = self.selectedEl.parent().get(0);
 			
@@ -1049,7 +1053,7 @@ Vvveb.Builder = {
 			return false;
 		});
 
-		$("#delete-box").on("click", function(event) {
+		$("#delete-btn").on("click", function(event) {
 			jQuery("#select-box").hide();
 			
 			node = self.selectedEl.get(0);
@@ -1061,6 +1065,21 @@ Vvveb.Builder = {
 
 			self.selectedEl.remove();
 
+			event.preventDefault();
+			return false;
+		});
+		
+		$("#add-section-btn").on("click", function(event) {
+
+			var offset = jQuery(this).offset();			
+			var addSectionBox = jQuery("#add-section-box");
+			
+			addSectionBox.css(
+				{"top": offset.top - self.frameDoc.scrollTop() - $(this).outerHeight(), 
+				 "left": offset.left - (addSectionBox.outerWidth() / 2) - (275) - self.frameDoc.scrollLeft() , 
+				 //"display": "block"
+				 });
+			
 			event.preventDefault();
 			return false;
 		});
@@ -1147,8 +1166,21 @@ Vvveb.Builder = {
 		});
 			
 	},
+	
+	removeHelpers: function (html, keepHelperAttributes = false)
+	{
+		//tags like stylesheets or scripts 
+		html = html.replace(/<.*?data-vvveb-helpers.*?>/gi, "");
+		//attributes
+		if (!keepHelperAttributes)
+		{
+			html = html.replace(/\s*data-vvveb-\w+(=["'].*?["'])?\s*/gi, "");
+		}
+		
+		return html;
+	},
 
-	getHtml: function() 
+	getHtml: function(keepHelperAttributes = true) 
 	{
 		var doc = window.FrameDocument;
 		var hasDoctpe = (doc.doctype !== null);
@@ -1164,7 +1196,7 @@ Vvveb.Builder = {
           
          html +=  doc.documentElement.innerHTML + "\n</html>";
          
-         return html;
+         return this.removeHelpers(html, keepHelperAttributes);
 	},
 	
 	setHtml: function(html) 
@@ -1531,30 +1563,6 @@ Vvveb.FileManager = {
 		tree = this.getComponents();
 		html = drawComponentsTree(tree);
 
-		/*
-		function drawComponentsTree(tree)
-		{
-			var html = "";
-			j++;
-			for (i in tree)
-			{
-				var node = tree[i];
-				
-				if (tree[i].children.length > 0) 
-					html += '<li data-component="' + node.name + '" data-node="' + node.node + '">\
-					<label for="id' + j + '" style="background-image:url(libs/builder/' + node.image + ')"><span>' + node.name + '</span></label> <input type="checkbox" id="id' + j + '" />\
-					<ol>' + drawComponentsTree(node.children) + '</ol></li>';		
-				else 
-					html +='<li data-component="' + node.name + '" class="file"  data-node="' + node.node + '">\
-							<a href="#" style="background-image:url(libs/builder/' + node.image + ')"><span>' + node.name + '</span></a></li>';
-			}
-			
-			return html;
-		}
-		
-		 $("[data-page='" + this.currentPage + "'] > ol", this.tree).html(html);
-		*/		
-		
 		function drawComponentsTree(tree)
 		{
 			var html = $("<ol></ol>");

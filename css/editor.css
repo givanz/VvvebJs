@@ -9209,53 +9209,6 @@ body {
   max-height: 100%; }
   #vvveb-builder #left-panel:hover {
     width: 285px; }
-  #vvveb-builder #left-panel .drag-elements {
-    padding-top: 0rem;
-    border-top: 1px solid #ddd; }
-    #vvveb-builder #left-panel .drag-elements > .header {
-      background: #fafafa; }
-      #vvveb-builder #left-panel .drag-elements > .header .search {
-        position: relative; }
-        #vvveb-builder #left-panel .drag-elements > .header .search .form-control {
-          border-color: #fff;
-          border-bottom-color: #ddd;
-          border-radius: 0px; }
-        #vvveb-builder #left-panel .drag-elements > .header .search .form-control:focus {
-          border-color: #80bdff; }
-        #vvveb-builder #left-panel .drag-elements > .header .search .form-control::placeholder {
-          /*font-size: $font-size-sm;*/
-          font-size: .75rem; }
-        #vvveb-builder #left-panel .drag-elements > .header .search .clear-backspace {
-          border: none;
-          background: none;
-          position: absolute;
-          top: 3px;
-          right: 0px;
-          opacity: 0.8; }
-          #vvveb-builder #left-panel .drag-elements > .header .search .clear-backspace i {
-            font-size: 13px; }
-          #vvveb-builder #left-panel .drag-elements > .header .search .clear-backspace:hover {
-            opacity: 1; }
-        #vvveb-builder #left-panel .drag-elements > .header .search input:focus + #clear-backspace,
-        #vvveb-builder #left-panel .drag-elements > .header .search input:hover + #clear-backspace {
-          opacity: 1; }
-    #vvveb-builder #left-panel .drag-elements .nav-item .nav-link {
-      text-align: center;
-      border-top-color: #fff;
-      padding: 0.5rem 0.7rem;
-      border-radius: 0px;
-      min-width: 5rem;
-      color: #343a40; }
-      #vvveb-builder #left-panel .drag-elements .nav-item .nav-link small {
-        font-size: 70%; }
-      #vvveb-builder #left-panel .drag-elements .nav-item .nav-link.active, #vvveb-builder #left-panel .drag-elements .nav-item .nav-link:hover {
-        color: #007bff; }
-  #vvveb-builder #left-panel #components-list, #vvveb-builder #left-panel #blocks-list, #vvveb-builder #left-panel .component-properties {
-    height: 98%;
-    height: calc(99% - 250px - 100px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    width: 285px; }
   #vvveb-builder #left-panel #filemanager {
     height: 250px;
     width: 285px; }
@@ -9334,6 +9287,59 @@ body {
 #vvveb-builder.bottom-panel-expand #canvas {
   height: 50%; }
 
+#vvveb-builder .drag-elements {
+  padding-top: 0rem;
+  border-top: 1px solid #ddd; }
+  #vvveb-builder .drag-elements > .header {
+    background: #fafafa; }
+    #vvveb-builder .drag-elements > .header .search {
+      position: relative; }
+      #vvveb-builder .drag-elements > .header .search .form-control {
+        border-color: #fff;
+        border-bottom-color: #ddd;
+        border-radius: 0px; }
+      #vvveb-builder .drag-elements > .header .search .form-control:focus {
+        border-color: #80bdff; }
+      #vvveb-builder .drag-elements > .header .search .form-control::placeholder {
+        /*font-size: $font-size-sm;*/
+        font-size: .75rem; }
+      #vvveb-builder .drag-elements > .header .search .clear-backspace {
+        border: none;
+        background: none;
+        position: absolute;
+        top: 3px;
+        right: 0px;
+        opacity: 0.8; }
+        #vvveb-builder .drag-elements > .header .search .clear-backspace i {
+          font-size: 13px; }
+        #vvveb-builder .drag-elements > .header .search .clear-backspace:hover {
+          opacity: 1; }
+      #vvveb-builder .drag-elements > .header .search input:focus + #clear-backspace,
+      #vvveb-builder .drag-elements > .header .search input:hover + #clear-backspace {
+        opacity: 1; }
+  #vvveb-builder .drag-elements .nav-item .nav-link {
+    text-align: center;
+    border-top-color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0px;
+    min-width: 5rem;
+    color: #343a40; }
+    #vvveb-builder .drag-elements .nav-item .nav-link i.la-lg {
+      font-size: 1.5rem; }
+    #vvveb-builder .drag-elements .nav-item .nav-link small {
+      font-size: 70%; }
+    #vvveb-builder .drag-elements .nav-item .nav-link.active, #vvveb-builder .drag-elements .nav-item .nav-link:hover {
+      color: #007bff; }
+  #vvveb-builder .drag-elements#add-section-box .nav-item:first-child .nav-link {
+    border-left: none; }
+
+#vvveb-builder #components-list, #vvveb-builder #blocks-list, #vvveb-builder .component-properties {
+  height: 98%;
+  height: calc(100% - 250px - 100px - 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 285px; }
+
 #vvveb-builder .component-properties-sidepane {
   z-index: 0;
   margin: 0;
@@ -9353,7 +9359,8 @@ body {
 #vvveb-builder .component-properties {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 98%; }
+  height: 95%;
+  height: calc(100% - 40px); }
   #vvveb-builder .component-properties #right-panel {
     color: #777; }
   #vvveb-builder .component-properties, #vvveb-builder .component-properties select, #vvveb-builder .component-properties input {
@@ -9427,7 +9434,8 @@ body {
   width: 0px;
   height: 0px;
   top: 0px;
-  left: 0px; }
+  left: 0px;
+  display: none; }
 
 #vvveb-builder .text-edit#select-box {
   border-style: dashed;
@@ -9450,7 +9458,7 @@ body {
   top: -25px;
   background: #4285f4;
   color: #fff;
-  padding: 0.05rem 0.2rem 0.05rem 0.2rem;
+  padding: 0px 0px;
   border-radius: 3px 3px 0px 0px; }
 
 #vvveb-builder #wysiwyg-editor {
@@ -9459,15 +9467,49 @@ body {
   left: -1px;
   display: none; }
 
-#vvveb-builder #select-actions a, #vvveb-builder #wysiwyg-editor a {
+#vvveb-builder #select-actions a, #vvveb-builder #wysiwyg-editor a, #vvveb-builder #section-actions a#add-section-btn {
   pointer-events: auto;
   color: #fff;
   font-size: 16px;
   padding-right: 2px;
-  padding: 0px 5px; }
-  #vvveb-builder #select-actions a:hover, #vvveb-builder #wysiwyg-editor a:hover {
+  padding: 2px 5px; }
+  #vvveb-builder #select-actions a:hover, #vvveb-builder #wysiwyg-editor a:hover, #vvveb-builder #section-actions a#add-section-btn:hover {
     text-decoration: none;
-    background: #72a4f7; }
+    background: #1266f1; }
+
+#vvveb-builder #section-actions {
+  bottom: 0px;
+  position: absolute;
+  border-radius: 3px 3px 0px 0px;
+  bottom: -10px;
+  left: 50%;
+  left: calc(50% - 12px); }
+  #vvveb-builder #section-actions a#add-section-btn {
+    position: relative;
+    bottom: 0px;
+    background: #4285f4;
+    color: #fff;
+    font-size: 18x;
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    padding: 4px 5px;
+    cursor: pointer; }
+
+#vvveb-builder #add-section-box {
+  width: 40%;
+  height: 30%;
+  min-height: 300px;
+  max-height: 400px;
+  position: absolute;
+  background: #fff;
+  top: 100px;
+  left: 100px;
+  box-shadow: 0px 0px 2px 0px #ccc;
+  min-width: 400px;
+  max-width: 800px;
+  pointer-events: auto;
+  display: none; }
 
 #vvveb-builder #highlight-name {
   background: #4285f4;
@@ -9490,14 +9532,14 @@ body {
 
 /* style for drag element */
 li[data-type] {
-  width: 116px;
+  width: 50%;
   text-align: center;
   font-weight: normal;
   font-size: 11px;
   color: #000;
   background-repeat: no-repeat;
-  padding-top: 62px;
-  padding-bottom: 14px;
+  padding-top: 55px;
+  padding-bottom: 7px;
   border-color: #ddd;
   border-style: solid;
   border-width: 0px;
@@ -9555,7 +9597,7 @@ li[data-type] {
           font-weight: 600;
           line-height: 32px;
           text-align: left;
-          padding: 0.5rem 0rem 0.5rem 1.5rem; }
+          padding: 0.5rem 0rem 0.5rem 1rem; }
           .drag-elements-sidepane ul > li.header label > a {
             padding-left: 1rem;
             color: #007bff; }
@@ -9564,8 +9606,7 @@ li[data-type] {
           border-top: none; }
       .drag-elements-sidepane ul > li ol {
         margin: 0px;
-        padding: 0px;
-        padding-left: 20px;
+        padding: 0rem 1rem;
         padding-bottom: 1rem; }
         .drag-elements-sidepane ul > li ol li {
           list-style: none;
@@ -9574,7 +9615,7 @@ li[data-type] {
             color: #333;
             text-decoration: none;
             text-shadow: none;
-            margin-top: 3px; }
+            margin-top: 5px; }
           .drag-elements-sidepane ul > li ol li[data-type] {
             border: none;
             list-style: none; }
@@ -9588,13 +9629,11 @@ li[data-type] {
               background-color: #fff;
               opacity: 1;
               text-align: center; }
-              .drag-elements-sidepane ul > li ol li[data-type]:hover a {
-                color: #007bff; }
             .drag-elements-sidepane ul > li ol li[data-type] a {
               display: block; }
 
 #blocks .drag-elements-sidepane li[data-type] {
-  width: 240px;
+  width: 100%;
   height: 180px;
   text-align: center;
   font-weight: normal;
@@ -9606,7 +9645,7 @@ li[data-type] {
   border-color: #ddd;
   border-style: solid;
   border-width: 0px;
-  box-shadow: 0px 0px 2px 1px #aaa;
+  box-shadow: 0px 0px 2px 1px #ccc;
   background-position: top center;
   /*		  
 		border-left-width:1px;
@@ -9623,14 +9662,14 @@ li[data-type] {
     padding: 5px 0px 0px 0px; }
 
 #components .drag-elements-sidepane li[data-type] {
-  width: 116px;
+  width: 50%;
   text-align: center;
   font-weight: normal;
   font-size: 11px;
   color: #000;
   background-repeat: no-repeat;
-  padding-top: 62px;
-  padding-bottom: 14px;
+  padding-top: 55px;
+  padding-bottom: 7px;
   border-color: #ddd;
   border-style: solid;
   border-width: 0px;
@@ -9645,6 +9684,9 @@ li[data-type] {
   cursor: pointer;
   opacity: 0.75;
   zoom: 1; }
+  #components .drag-elements-sidepane li[data-type]:hover {
+    box-shadow: 0px 0px 1px 0px #4285f4;
+    background-color: rgba(66, 133, 244, 0.1); }
 
 /*
 #right-panel 

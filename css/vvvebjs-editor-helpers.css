@@ -1,0 +1,19 @@
+[data-vvveb-disabled] {
+  pointer-events: none;
+  position: relative; }
+  [data-vvveb-disabled]::after {
+    content: "Non-editable area";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    padding-top: 5px;
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center;
+    background: rgba(252, 252, 252, 0.85);
+    border: 1px dashed #999;
+    overflow: hidden; }
+
+/*# sourceMappingURL=vvvebjs-editor-helpers.css.map */
