@@ -1437,8 +1437,8 @@ Vvveb.Gui = {
 			
 			//replace nonalphanumeric with dashes and lowercase for name
 			var name = title.replace(/\W+/g, '-').toLowerCase();
-				//allow dot char for extension (eg .html)
-				fileName = fileName.replace(/[^\A-ZA-z0-9\.]+/g, '-').toLowerCase();
+				//allow only alphanumeric, dot char for extension (eg .html) and / to allow typing full path including folders
+				fileName = fileName.replace(/[^A-Za-z0-9\.\/]+/g, '-').toLowerCase();
 			
 			//add your server url/prefix/path if needed
 			var url = "" + fileName;
