@@ -858,8 +858,6 @@ Vvveb.Builder = {
 		});
 		
 		self.frameHtml.on("mouseup touchend", function(event) {
-			self.iconDrag.remove();
-			console.log(self.isDragging);
 			if (self.isDragging)
 			{
 				self.isDragging = false;
