@@ -147,6 +147,11 @@ var CssUnitInput = $.extend({}, Input, {
 
 	number:0,
 	unit:"px",
+
+    events: [
+        ["change", "onChange", "select"],
+        ["change keyup mouseup", "onChange", "input"],
+	 ],
 		
 	onChange: function(event) {
 		
@@ -172,11 +177,6 @@ var CssUnitInput = $.extend({}, Input, {
 		}
 	},
 	
-    events: [
-        ["change", "onChange", "select"],
-        ["change", "onChange", "input"],
-	 ],
-
 	setValue: function(value) {
 		this.number = parseInt(value);
 		this.unit = value.replace(this.number, '');

@@ -797,7 +797,7 @@ Vvveb.Builder = {
 		moveEvent = {target:null, };
 		var self = Vvveb.Builder;
 		
-		self.frameBody.on("mousemove touchmove", function(event) {
+		self.frameHtml.on("mousemove touchmove", function(event) {
 			
 			if (event.target && isElement(event.target))
 			{
@@ -857,7 +857,9 @@ Vvveb.Builder = {
 			
 		});
 		
-		self.frameBody.on("mouseup touchend", function(event) {
+		self.frameHtml.on("mouseup touchend", function(event) {
+			self.iconDrag.remove();
+			console.log(self.isDragging);
 			if (self.isDragging)
 			{
 				self.isDragging = false;
@@ -895,7 +897,7 @@ Vvveb.Builder = {
 			}
 		});
 
-		self.frameBody.on("dblclick", function(event) {
+		self.frameHtml.on("dblclick", function(event) {
 			
 			if (Vvveb.Builder.isPreview == false)
 			{
@@ -919,7 +921,7 @@ Vvveb.Builder = {
 		});
 		
 		
-		self.frameBody.on("click", function(event) {
+		self.frameHtml.on("click", function(event) {
 			
 			if (Vvveb.Builder.isPreview == false)
 			{
