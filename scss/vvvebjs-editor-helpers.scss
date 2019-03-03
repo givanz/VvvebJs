@@ -16,5 +16,8 @@
 		background:rgba(252, 252, 252, 0.85);
 		border:1px dashed #999;
 		overflow:hidden;
+		display: flex;		
+		align-items: center;
+		justify-content: center;
 	}
 }
