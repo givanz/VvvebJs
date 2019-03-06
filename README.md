@@ -8,6 +8,8 @@ Built with jQuery and Bootstrap 4.
 
 [One panel Live Demo](http://www.vvveb.com/vvvebjs/editor.html#no-right-panel)
 
+[![Slack](https://img.shields.io/badge/slack-join-blueviolet.svg)](https://join.slack.com/t/vvvebjs/shared_invite/enQtNTY5MTg4NTIyMzg5LWNiN2JhNWRjNmQ4NzYxMzhiZjA1NjIyYzU0NjAzZGVkZjE1OGY4ZGFmYjU3NjJhNzUxMzc4Yzc4NmMzODQ0YTE) [![Discord](https://img.shields.io/discord/552910925712195606.svg?label=discord&logo=discord)](https://discord.gg/QFgZhp) [![npm](https://img.shields.io/npm/v/vvvebjs.svg)](https://www.npmjs.com/package/vvvebjs)
+
 Using [Startboostrap landing page](https://startbootstrap.com/template-overviews/landing-page/) for demo page and Bootstrap 4 components.
 
 <img src="http://www.vvveb.com/img/browser.png?v=1">
@@ -70,7 +72,33 @@ For documentation check the [wiki](https://github.com/givanz/VvvebJs/wiki)
 
 ## Support
 
-If you like the project you can support it with a [PayPal donation](https://paypal.me/zgivan)
+If you like the project you can support it with a [PayPal donation](https://paypal.me/zgivan) or become a backer/sponsor via [Open Collective](https://opencollective.com/vvvebjs)
+
+
+<a href="https://opencollective.com/vvvebjs/sponsors/0/website"><img src="https://opencollective.com/vvvebjs/sponsors/0/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/sponsors/1/website"><img src="https://opencollective.com/vvvebjs/sponsors/1/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/sponsors/2/website"><img src="https://opencollective.com/vvvebjs/sponsors/2/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/sponsors/3/website"><img src="https://opencollective.com/vvvebjs/sponsors/3/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/sponsors/4/website"><img src="https://opencollective.com/vvvebjs/sponsors/4/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/sponsors/5/website"><img src="https://opencollective.com/vvvebjs/sponsors/5/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/sponsors/6/website"><img src="https://opencollective.com/vvvebjs/sponsors/6/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/sponsors/7/website"><img src="https://opencollective.com/vvvebjs/sponsors/7/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/sponsors/8/website"><img src="https://opencollective.com/vvvebjs/sponsors/8/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/sponsors/9/website"><img src="https://opencollective.com/vvvebjs/sponsors/9/avatar"></a>
+
+<a href="https://opencollective.com/vvvebjs/backers/0/website"><img src="https://opencollective.com/vvvebjs/backers/0/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/1/website"><img src="https://opencollective.com/vvvebjs/backers/1/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/2/website"><img src="https://opencollective.com/vvvebjs/backers/2/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/3/website"><img src="https://opencollective.com/vvvebjs/backers/3/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/4/website"><img src="https://opencollective.com/vvvebjs/backers/4/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/5/website"><img src="https://opencollective.com/vvvebjs/backers/5/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/6/website"><img src="https://opencollective.com/vvvebjs/backers/6/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/7/website"><img src="https://opencollective.com/vvvebjs/backers/7/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/8/website"><img src="https://opencollective.com/vvvebjs/backers/8/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/9/website"><img src="https://opencollective.com/vvvebjs/backers/9/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/10/website"><img src="https://opencollective.com/vvvebjs/backers/10/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/11/website"><img src="https://opencollective.com/vvvebjs/backers/11/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/12/website"><img src="https://opencollective.com/vvvebjs/backers/12/avatar"></a>
 
 
 ## License
