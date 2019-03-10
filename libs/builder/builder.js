@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-https://github.com/givan/VvvebJs
+https://github.com/givanz/VvvebJs
 */
 
 
@@ -536,6 +536,7 @@ Vvveb.Builder = {
 	dragMoveMutation : false,
 	isPreview : false,
 	runJsOnSetHtml : false,
+	designerMode : false,
 	
 	init: function(url, callback) {
 
@@ -794,14 +795,12 @@ Vvveb.Builder = {
 /* iframe highlight */    
     _initHighlight: function() {
 		
-		moveEvent = {target:null, };
 		var self = Vvveb.Builder;
 		
 		self.frameHtml.on("mousemove touchmove", function(event) {
 			
-			if (event.target && isElement(event.target))
+			if (event.target && isElement(event.target) && event.originalEvent)
 			{
-				//moveEvent = event;
 				self.highlightEl = target = jQuery(event.target);
 				var offset = target.offset();
 				var height = target.outerHeight();
@@ -809,15 +808,19 @@ Vvveb.Builder = {
 				var width = target.outerWidth();
 				var halfWidth = Math.max(width / 2, 50);
 				
+				var x = (event.clientX || event.originalEvent.clientX);
+				var y = (event.clientY || event.originalEvent.clientY);
+				
 				if (self.isDragging)
 				{
-					parent = self.highlightEl;
-					//parentOffset = self.dragElement.offset();
+					var parent = self.highlightEl;
+					var parentOffset = {left: 0, top: 0};
+					if (parent.css("position") == "relative") parentOffset = parent.offset();
 
 					try {
 						if (event.originalEvent)
 						{
-							if ((offset.top  < (event.originalEvent.y - halfHeight)) || (offset.left  < (event.originalEvent.x - halfWidth)))
+							if ((offset.top  < (y - halfHeight)) || (offset.left  < (x - halfWidth)))
 							{
 								 if (isIE11) 
 									self.highlightEl.append(self.dragElement); 
@@ -830,6 +833,15 @@ Vvveb.Builder = {
 								else 
 									self.dragElement.prependTo(parent);
 							};
+							
+							if (self.designerMode)
+							{
+								self.dragElement.css({
+									"position": "absolute",
+									'left': x - (parentOffset.left - self.frameDoc.scrollLeft()), 
+									'top': y - (parentOffset.top - self.frameDoc.scrollTop()),
+									});
+							}
 						}
 						
 					} catch(err) {
@@ -837,7 +849,7 @@ Vvveb.Builder = {
 						return false;
 					}
 					
-					if (event.originalEvent) self.iconDrag.css({'left': event.originalEvent.x + 275/*left panel width*/, 'top':event.originalEvent.y - 30 });					
+					if (!self.designerMode && self.iconDrag) self.iconDrag.css({'left': x + 275/*left panel width*/, 'top':y - 30 });					
 				}// else //uncomment else to disable parent highlighting when dragging
 				{
 					
@@ -1120,10 +1132,14 @@ Vvveb.Builder = {
 
 			self.isDragging = true;
 			if (Vvveb.dragIcon == 'html')
+			{
 				self.iconDrag = $(html).attr("id", "dragElement-clone").css('position', 'absolute');
-			else
+			}
+			else if (self.designerMode == false)
+			{
 				self.iconDrag = $('<img src=""/>').attr({"id": "dragElement-clone", 'src': $this.css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1')}).
 				css({'z-index':100, 'position':'absolute', 'width':'64px', 'height':'64px', 'top': event.originalEvent.y, 'left': event.originalEvent.x});
+			}
 				
 			$('body').append(self.iconDrag);
 			
@@ -1146,9 +1162,12 @@ Vvveb.Builder = {
 		$('body').on('mousemove touchmove', function(event) {
 			if (self.iconDrag && self.isDragging == true)
 			{
-				self.iconDrag.css({'left': event.originalEvent.x - 60, 'top':event.originalEvent.y - 30});
-				
-				elementMouseIsOver = document.elementFromPoint(event.clientX - 60, event.clientY - 40);
+				var x = (event.clientX || event.originalEvent.clientX);
+				var y = (event.clientY || event.originalEvent.clientY);
+
+				self.iconDrag.css({'left': x - 60, 'top': y - 30});
+
+				elementMouseIsOver = document.elementFromPoint(x - 60, y - 40);
 				
 				//if drag elements hovers over iframe switch to iframe mouseover handler	
 				if (elementMouseIsOver && elementMouseIsOver.tagName == 'IFRAME')
@@ -1247,7 +1266,13 @@ Vvveb.Builder = {
 				alert(data.responseText);
 			}
 		});					
+	},
+	
+	setDesignerMode: function(designerMode = false)
+	{
+		this.designerMode = designerMode;
 	}
+
 };
 
 Vvveb.CodeEditor = {
@@ -1458,6 +1483,12 @@ Vvveb.Gui = {
 	
 	deletePage : function () {
 		
+	},
+
+	setDesignerMode : function () {
+		//aria-pressed attribute is updated after action is called and we check for false instead of true
+		var designerMode = this.attributes["aria-pressed"].value != "true";
+		Vvveb.Builder.setDesignerMode(designerMode);
 	},
 	
 }

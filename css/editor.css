@@ -9874,4 +9874,10 @@ ul.autocomplete li.selected {
   background-color: Highlight;
   color: #fff; }
 
+.btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active, .show > .btn-light.dropdown-toggle {
+  box-shadow: 0px 0px 1px 0px #4285f4;
+  background-color: rgba(66, 133, 244, 0.1);
+  border-radius: 0px;
+  border-color: transparent; }
+
 /*# sourceMappingURL=editor.css.map */
