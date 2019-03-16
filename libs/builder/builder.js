@@ -814,8 +814,6 @@ Vvveb.Builder = {
 				if (self.isDragging)
 				{
 					var parent = self.highlightEl;
-					var parentOffset = {left: 0, top: 0};
-					if (parent.css("position") == "relative") parentOffset = parent.offset();
 
 					try {
 						if (event.originalEvent)
@@ -836,6 +834,8 @@ Vvveb.Builder = {
 							
 							if (self.designerMode)
 							{
+								var parentOffset = self.dragElement.offsetParent().offset();
+
 								self.dragElement.css({
 									"position": "absolute",
 									'left': x - (parentOffset.left - self.frameDoc.scrollLeft()), 
