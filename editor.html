@@ -584,7 +584,7 @@
 <script id="vvveb-input-colorinput" type="text/html">
 	
 	<div>
-		<input name="{%=key%}" type="color" value="{%=value%}" pattern="#[a-f0-9]{6}" class="form-control"/>
+		<input name="{%=key%}" type="color" {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %}  pattern="#[a-f0-9]{6}" class="form-control"/>
 	</div>
 	
 </script>
@@ -609,7 +609,7 @@
 
 <script id="vvveb-input-cssunitinput" type="text/html">
 	<div class="input-group" id="cssunit-{%=key%}">
-		<input name="number" type="number" value="{%=value%}" 
+		<input name="number" type="number"  {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %} 
 			  {% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %} 
 			  {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %} 
 			  {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %} 
