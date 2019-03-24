@@ -1116,29 +1116,39 @@ Vvveb.Builder = {
 			addSectionBox.hide();
 		});
 		
+		function addSectionComponent(html, after = true) 
+		{
+			var node = $(html);
+			
+			if (after)
+			{
+				addSectionElement.after(node);
+			} else
+			{
+				addSectionElement.append(node);
+			}
+			
+			node = node.get(0);
+			
+			Vvveb.Undo.addMutation({type: 'childList', 
+									target: node.parentNode, 
+									addedNodes: [node], 
+									nextSibling: node.nextSibling});
+		}
+		
 		$(".components-list li ol li", addSectionBox).on("click", function(event) {
 			var html = Vvveb.Components.get(this.dataset.type).html;
 
-			if (jQuery("[name='add-section-insert-mode']:checked").val() == "after")
-			{
-				addSectionElement.after(html);
-			} else
-			{
-				addSectionElement.append(html);
-			}
+			addSectionComponent(html, (jQuery("[name='add-section-insert-mode']:checked").val() == "after"));
+
 			addSectionBox.hide();
 		});
 
 		$(".blocks-list li ol li", addSectionBox).on("click", function(event) {
 			var html = Vvveb.Blocks.get(this.dataset.type).html;
 
-			if (jQuery("[name='add-section-insert-mode']:checked").val() == "after")
-			{
-				addSectionElement.after(html);
-			} else
-			{
-				addSectionElement.append(html);
-			}
+			addSectionComponent(html, (jQuery("[name='add-section-insert-mode']:checked").val() == "after"));
+
 			addSectionBox.hide();
 		});
 		
