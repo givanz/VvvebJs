@@ -564,77 +564,90 @@ Vvveb.Builder = {
 /* controls */    	
 	loadControlGroups : function() {	
 
-		componentsList = $("#components-list");
+		var componentsList = $(".components-list");
 		componentsList.empty();
 		var item = {}, component = {};
 		
-		for (group in Vvveb.ComponentsGroup)	
+		componentsList.each(function ()
 		{
-			componentsList.append('<li class="header" data-section="' + group + '"  data-search=""><label class="header" for="comphead_' + group + '">' + group + '  <div class="header-arrow"></div>\
-								   </label><input class="header_check" type="checkbox" checked="true" id="comphead_' + group + '">  <ol></ol></li>');
-
-			componentsSubList = componentsList.find('li[data-section="' + group + '"]  ol');
+			var list = $(this);
+			var type = this.dataset.type;
 			
-			components = Vvveb.ComponentsGroup[ group ];
-			
-			for (i in components)
+			for (group in Vvveb.ComponentsGroup)	
 			{
-				componentType = components[i];
-				component = Vvveb.Components.get(componentType);
+				list.append('<li class="header clearfix" data-section="' + group + '"  data-search=""><label class="header" for="' + type + '_comphead_' + group + '">' + group + '  <div class="header-arrow"></div>\
+									   </label><input class="header_check" type="checkbox" checked="true" id="' + type + '_comphead_' + group + '">  <ol></ol></li>');
+
+				var componentsSubList = list.find('li[data-section="' + group + '"]  ol');
 				
-				if (component)
+				components = Vvveb.ComponentsGroup[ group ];
+				
+				for (i in components)
 				{
-					item = $('<li data-section="' + group + '" data-drag-type=component data-type="' + componentType + '" data-search="' + component.name.toLowerCase() + '"><a href="#">' + component.name + "</a></li>");
-
-					if (component.image) {
-
-						item.css({
-							backgroundImage: "url(" + 'libs/builder/' + component.image + ")",
-							backgroundRepeat: "no-repeat"
-						})
-					}
+					componentType = components[i];
+					component = Vvveb.Components.get(componentType);
 					
-					componentsSubList.append(item)
+					if (component)
+					{
+						item = $('<li data-section="' + group + '" data-drag-type=component data-type="' + componentType + '" data-search="' + component.name.toLowerCase() + '"><a href="#">' + component.name + "</a></li>");
+
+						if (component.image) {
+
+							item.css({
+								backgroundImage: "url(" + 'libs/builder/' + component.image + ")",
+								backgroundRepeat: "no-repeat"
+							})
+						}
+						
+						componentsSubList.append(item)
+					}
 				}
 			}
-		}
+		});
 	 },
 	 
 	loadBlockGroups : function() {	
 
-		blocksList = $("#blocks-list");
+		var blocksList = $(".blocks-list");
 		blocksList.empty();
 		var item = {};
 
-		for (group in Vvveb.BlocksGroup)	
+		blocksList.each(function ()
 		{
-			blocksList.append('<li class="header" data-section="' + group + '"  data-search=""><label class="header" for="blockhead_' + group + '">' + group + '  <div class="header-arrow"></div>\
-								   </label><input class="header_check" type="checkbox" checked="true" id="blockhead_' + group + '">  <ol></ol></li>');
 
-			blocksSubList = blocksList.find('li[data-section="' + group + '"]  ol');
-			blocks = Vvveb.BlocksGroup[ group ];
+			var list = $(this);
+			var type = this.dataset.type;
 
-			for (i in blocks)
+			for (group in Vvveb.BlocksGroup)	
 			{
-				blockType = blocks[i];
-				block = Vvveb.Blocks.get(blockType);
-				
-				if (block)
+				list.append('<li class="header" data-section="' + group + '"  data-search=""><label class="header" for="' + type + '_blockhead_' + group + '">' + group + '  <div class="header-arrow"></div>\
+									   </label><input class="header_check" type="checkbox" checked="true" id="' + type + '_blockhead_' + group + '">  <ol></ol></li>');
+
+				var blocksSubList = list.find('li[data-section="' + group + '"]  ol');
+				blocks = Vvveb.BlocksGroup[ group ];
+
+				for (i in blocks)
 				{
-					item = $('<li data-section="' + group + '" data-drag-type=block data-type="' + blockType + '" data-search="' + block.name.toLowerCase() + '"><a href="#">' + block.name + "</a></li>");
-
-					if (block.image) {
-
-						item.css({
-							backgroundImage: "url(" + ((block.image.indexOf('//') == -1) ? 'libs/builder/':'') + block.image + ")",
-							backgroundRepeat: "no-repeat"
-						})
-					}
+					blockType = blocks[i];
+					block = Vvveb.Blocks.get(blockType);
 					
-					blocksSubList.append(item)
+					if (block)
+					{
+						item = $('<li data-section="' + group + '" data-drag-type=block data-type="' + blockType + '" data-search="' + block.name.toLowerCase() + '"><a href="#">' + block.name + "</a></li>");
+
+						if (block.image) {
+
+							item.css({
+								backgroundImage: "url(" + ((block.image.indexOf('//') == -1) ? 'libs/builder/':'') + block.image + ")",
+								backgroundRepeat: "no-repeat"
+							})
+						}
+						
+						blocksSubList.append(item)
+					}
 				}
 			}
-		}
+		});
 	 },
 	
 	loadUrl : function(url, callback) {	
@@ -958,11 +971,10 @@ Vvveb.Builder = {
 		
 		$("#drag-btn").on("mousedown", function(event) {
 			jQuery("#select-box").hide();
-			self.dragElement = self.selectedEl;
+			self.dragElement = self.selectedEl.css("position","");
 			self.isDragging = true;
 			
 			node = self.dragElement.get(0);
-			
 
 			self.dragMoveMutation = {type: 'move', 
 								target: node,
@@ -1080,23 +1092,55 @@ Vvveb.Builder = {
 			event.preventDefault();
 			return false;
 		});
+
+		var addSectionBox = jQuery("#add-section-box");
+		var addSectionElement = {};
 		
 		$("#add-section-btn").on("click", function(event) {
+			
+			addSectionElement = self.highlightEl; 
 
 			var offset = jQuery(this).offset();			
-			var addSectionBox = jQuery("#add-section-box");
 			
 			addSectionBox.css(
 				{"top": offset.top - self.frameDoc.scrollTop() - $(this).outerHeight(), 
-				 "left": offset.left - (addSectionBox.outerWidth() / 2) - (275) - self.frameDoc.scrollLeft() , 
-				 //"display": "block"
+				 "left": offset.left - (addSectionBox.outerWidth() / 2) - (275) - self.frameDoc.scrollLeft(), 
+				 "display": "block",
 				 });
 			
 			event.preventDefault();
 			return false;
 		});
+		
+		$("#close-section-btn").on("click", function(event) {
+			addSectionBox.hide();
+		});
+		
+		$(".components-list li ol li", addSectionBox).on("click", function(event) {
+			var html = Vvveb.Components.get(this.dataset.type).html;
 
+			if (jQuery("[name='add-section-insert-mode']:checked").val() == "after")
+			{
+				addSectionElement.after(html);
+			} else
+			{
+				addSectionElement.append(html);
+			}
+			addSectionBox.hide();
+		});
 
+		$(".blocks-list li ol li", addSectionBox).on("click", function(event) {
+			var html = Vvveb.Blocks.get(this.dataset.type).html;
+
+			if (jQuery("[name='add-section-insert-mode']:checked").val() == "after")
+			{
+				addSectionElement.after(html);
+			} else
+			{
+				addSectionElement.append(html);
+			}
+			addSectionBox.hide();
+		});
 		
 	},	
 
@@ -1422,7 +1466,7 @@ Vvveb.Gui = {
 	componentSearch : function () {
 		searchText = this.value;
 		
-		$("#components-list li ol li").each(function () {
+		$("#left-panel .components-list li ol li").each(function () {
 			$this = $(this);
 			
 			$this.hide();
@@ -1431,13 +1475,13 @@ Vvveb.Gui = {
 	},
 	
 	clearComponentSearch : function () {
-		$("#component-search").val("").keyup();
+		$(".component-search").val("").keyup();
 	},
 	
 	blockSearch : function () {
 		searchText = this.value;
 		
-		$("#blocks-list li ol li").each(function () {
+		$("#left-panel .blocks-list li ol li").each(function () {
 			$this = $(this);
 			
 			$this.hide();
@@ -1446,7 +1490,30 @@ Vvveb.Gui = {
 	},
 	
 	clearBlockSearch : function () {
-		$("#block-search").val("").keyup();
+		$(".block-search").val("").keyup();
+	},
+	
+	addBoxComponentSearch : function () {
+		searchText = this.value;
+		
+		$("#add-section-box .components-list li ol li").each(function () {
+			$this = $(this);
+			
+			$this.hide();
+			if ($this.data("search").indexOf(searchText) > -1) $this.show();
+		});
+	},
+	
+	
+	addBoxBlockSearch : function () {
+		searchText = this.value;
+		
+		$("#add-section-box .blocks-list li ol li").each(function () {
+			$this = $(this);
+			
+			$this.hide();
+			if ($this.data("search").indexOf(searchText) > -1) $this.show();
+		});
 	},
 
 //Pages, file/components tree 

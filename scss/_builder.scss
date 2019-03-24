@@ -376,21 +376,77 @@ body
 		}
 	}
 	
-	#components-list, #blocks-list, .component-properties, 
+	.components-list, .blocks-list, .component-properties
 	{
 		height:98%;
 		height:calc(100% - #{$builder-filemanager-height} - #{$drag-items-tabs-height} - #{$builder-header-top-height});
 		overflow-y: auto;
 		overflow-x: hidden;
 		width:$builder-right-panel-width + 15;
-
+		list-style:none;
+		background: #fff;
 		//scrollbar on hover
 		&:hover
 		{
 			
 		}
+		
+	}
+
+	& #add-section-box 
+	{
+		.header > div.section-box-actions 
+		{
+			position:absolute;
+			top:1rem;
+			right:1rem;
+		}
+	
+		.components-list, .blocks-list, .component-properties {
+			width:auto;
+			height:auto;
+			padding: 0px;
+			overflow-y: auto;
+			height: 200px;
+			
+			ol 
+			{
+				padding:0rem 0rem 0rem 1rem;
+				
+				li
+				{
+					width:14%;
+					float:left;
+					
+					a
+					{
+						display:block;
+						color: #333;
+						text-decoration: none;
+						text-shadow: none;
+						margin-top:5px;
+					}
+				}
+			}
+
+		}
+		
+					
+		.blocks-list
+		{
+			ol 
+			{
+				li
+				{
+					@include block-list-element();
+					width:30%;
+					margin-right:1.5rem;
+				}
+			}
+		}
 	}
 	
+
 	
 	.component-properties-sidepane {
 	  z-index: 0;
@@ -643,8 +699,7 @@ body
 	
 	#add-section-box
 	{
-		width: 40%;
-		height: 30%;
+		width: 50%;
 		min-height: 300px;
 		max-height: 400px;
 		position: absolute;
@@ -652,10 +707,12 @@ body
 		top: 100px;
 		left: 100px;
 		box-shadow: 0px 0px 2px 0px #ccc;
+		border: 1px solid #ddd;
 		min-width: 400px;
 		max-width: 800px;
 		pointer-events:auto;
 		display:none;
+		background:#fff;
 	}
 
 	#highlight-name
@@ -834,7 +891,8 @@ li[data-type]
 }
 
 
-#components .drag-elements-sidepane
+#components .drag-elements-sidepane,
+#add-section-box
 {
 	li[data-type]
 	{

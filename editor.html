@@ -122,7 +122,7 @@
 							  <div class="tab-pane fade show active" id="components" role="tabpanel" aria-labelledby="components-tab">
 								  
 								   <div class="search">
-										  <input class="form-control form-control-sm" placeholder="Search components" type="text" id="component-search"  data-vvveb-action="componentSearch" data-vvveb-on="keyup">
+										  <input class="form-control form-control-sm component-search" placeholder="Search components" type="text" data-vvveb-action="componentSearch" data-vvveb-on="keyup">
 										  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
 											  <i class="la la-close"></i>
 										  </button>
@@ -131,7 +131,7 @@
 									<div class="drag-elements-sidepane sidepane">
 									  <div>
 										  
-										<ul id="components-list" class="clearfix">
+										<ul class="components-list clearfix" data-type="leftpanel">
 										</ul>
 
 									  </div>
@@ -141,7 +141,7 @@
 							  <div class="tab-pane fade" id="blocks" role="tabpanel" aria-labelledby="blocks-tab">
 								  
 								   <div class="search">
-										  <input class="form-control form-control-sm" placeholder="Search blocks" type="text" id="block-search"  data-vvveb-action="blockSearch" data-vvveb-on="keyup">
+										  <input class="form-control form-control-sm block-search" placeholder="Search blocks" type="text" data-vvveb-action="blockSearch" data-vvveb-on="keyup">
 										  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
 											  <i class="la la-close"></i>
 										  </button>
@@ -150,7 +150,7 @@
 									<div class="drag-elements-sidepane sidepane">
 									  <div>
 										  
-										<ul id="blocks-list" class="clearfix">
+										<ul class="blocks-list clearfix" data-type="leftpanel">
 										</ul>
 
 									  </div>
@@ -211,51 +211,71 @@
 							<div id="add-section-box" class="drag-elements">
 
 									<div class="header">							
-										<ul class="nav nav-tabs" id="elements-tabs" role="tablist">
+										<ul class="nav nav-tabs" id="box-elements-tabs" role="tablist">
 										  <li class="nav-item component-tab">
-											<a class="nav-link active" id="components-tab" data-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="true"><i class="la la-lg la-cube"></i> <div><small>Components</small></div></a>
+											<a class="nav-link active" id="box-components-tab" data-toggle="tab" href="#box-components" role="tab" aria-controls="components" aria-selected="true"><i class="la la-lg la-cube"></i> <div><small>Components</small></div></a>
 										  </li>
 										  <li class="nav-item blocks-tab">
-											<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
+											<a class="nav-link" id="box-blocks-tab" data-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
 										  </li>
 										  <li class="nav-item component-properties-tab" style="display:none">
-											<a class="nav-link" id="components-tab" data-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
+											<a class="nav-link" id="components-tab" data-toggle="tab" href="#box-properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
 										  </li>
 										</ul>
-								
+										
+										<div class="section-box-actions">
+
+											<div id="close-section-btn" class="btn btn-light btn-sm bg-white btn-sm float-right"><i class="la la-close"></i></div>
+										
+											<div class="small mt-1 mr-3 float-right">
+											
+												<div class="custom-control custom-radio custom-control-inline">
+												  <input type="radio" id="add-section-insert-mode-after" value="after" checked="true" name="add-section-insert-mode" class="custom-control-input">
+												  <label class="custom-control-label" for="add-section-insert-mode-after">After</label>
+												</div>
+												
+												<div class="custom-control custom-radio custom-control-inline">
+												  <input type="radio" id="add-section-insert-mode-inside" value="inside" name="add-section-insert-mode" class="custom-control-input">
+												  <label class="custom-control-label" for="add-section-insert-mode-inside">Inside</label>
+												</div>
+										
+											</div>
+											
+										</div>
+										
 										<div class="tab-content">
-										  <div class="tab-pane fade show active" id="components" role="tabpanel" aria-labelledby="components-tab">
+										  <div class="tab-pane fade show active" id="box-components" role="tabpanel" aria-labelledby="components-tab">
 											  
 											   <div class="search">
-													  <input class="form-control form-control-sm" placeholder="Search components" type="text" id="component-search"  data-vvveb-action="componentSearch" data-vvveb-on="keyup">
+													  <input class="form-control form-control-sm component-search" placeholder="Search components" type="text" data-vvveb-action="addBoxComponentSearch" data-vvveb-on="keyup">
 													  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
 														  <i class="la la-close"></i>
 													  </button>
 												  </div>
 
-												<div class="drag-elements-sidepane sidepane">
+												<div>
 												  <div>
 													  
-													<ul id="components-list" class="clearfix">
+													<ul class="components-list clearfix" data-type="addbox">
 													</ul>
 
 												  </div>
 												</div>
 										  
 										  </div>
-										  <div class="tab-pane fade" id="blocks" role="tabpanel" aria-labelledby="blocks-tab">
+										  <div class="tab-pane fade" id="box-blocks" role="tabpanel" aria-labelledby="blocks-tab">
 											  
 											   <div class="search">
-													  <input class="form-control form-control-sm" placeholder="Search blocks" type="text" id="block-search"  data-vvveb-action="blockSearch" data-vvveb-on="keyup">
+													  <input class="form-control form-control-sm block-search" placeholder="Search blocks" type="text" data-vvveb-action="addBoxBlockSearch" data-vvveb-on="keyup">
 													  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
 														  <i class="la la-close"></i>
 													  </button>
 												  </div>
 
-												<div class="drag-elements-sidepane sidepane">
+												<div>
 												  <div>
 													  
-													<ul id="blocks-list" class="clearfix">
+													<ul class="blocks-list clearfix"  data-type="addbox">
 													</ul>
 
 												  </div>
@@ -263,7 +283,7 @@
 										  
 										  </div>
 										
-											<div class="tab-pane fade" id="properties" role="tabpanel" aria-labelledby="blocks-tab">
+											<div class="tab-pane fade" id="box-properties" role="tabpanel" aria-labelledby="blocks-tab">
 												<div class="component-properties-sidepane">
 													<div>
 														<div class="component-properties">

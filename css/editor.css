@@ -9333,12 +9333,65 @@ body {
   #vvveb-builder .drag-elements#add-section-box .nav-item:first-child .nav-link {
     border-left: none; }
 
-#vvveb-builder #components-list, #vvveb-builder #blocks-list, #vvveb-builder .component-properties {
+#vvveb-builder .components-list, #vvveb-builder .blocks-list, #vvveb-builder .component-properties {
   height: 98%;
   height: calc(100% - 250px - 100px - 40px);
   overflow-y: auto;
   overflow-x: hidden;
-  width: 285px; }
+  width: 285px;
+  list-style: none;
+  background: #fff; }
+
+#vvveb-builder #add-section-box .header > div.section-box-actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem; }
+
+#vvveb-builder #add-section-box .components-list, #vvveb-builder #add-section-box .blocks-list, #vvveb-builder #add-section-box .component-properties {
+  width: auto;
+  height: auto;
+  padding: 0px;
+  overflow-y: auto;
+  height: 200px; }
+  #vvveb-builder #add-section-box .components-list ol, #vvveb-builder #add-section-box .blocks-list ol, #vvveb-builder #add-section-box .component-properties ol {
+    padding: 0rem 0rem 0rem 1rem; }
+    #vvveb-builder #add-section-box .components-list ol li, #vvveb-builder #add-section-box .blocks-list ol li, #vvveb-builder #add-section-box .component-properties ol li {
+      width: 14%;
+      float: left; }
+      #vvveb-builder #add-section-box .components-list ol li a, #vvveb-builder #add-section-box .blocks-list ol li a, #vvveb-builder #add-section-box .component-properties ol li a {
+        display: block;
+        color: #333;
+        text-decoration: none;
+        text-shadow: none;
+        margin-top: 5px; }
+
+#vvveb-builder #add-section-box .blocks-list ol li {
+  width: 100%;
+  height: 180px;
+  text-align: center;
+  font-weight: normal;
+  font-size: 11px;
+  color: #000;
+  background-repeat: no-repeat;
+  padding-top: 150px;
+  margin-bottom: 14px;
+  border-color: #ddd;
+  border-style: solid;
+  border-width: 0px;
+  box-shadow: 0px 0px 2px 1px #ccc;
+  background-position: top center;
+  /*		  
+		border-left-width:1px;
+		border-top-width:1px;
+		*/
+  background-size: 250px 150px;
+  z-index: 100;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.75;
+  zoom: 1;
+  width: 30%;
+  margin-right: 1.5rem; }
 
 #vvveb-builder .component-properties-sidepane {
   z-index: 0;
@@ -9497,8 +9550,7 @@ body {
     cursor: pointer; }
 
 #vvveb-builder #add-section-box {
-  width: 40%;
-  height: 30%;
+  width: 50%;
   min-height: 300px;
   max-height: 400px;
   position: absolute;
@@ -9506,10 +9558,12 @@ body {
   top: 100px;
   left: 100px;
   box-shadow: 0px 0px 2px 0px #ccc;
+  border: 1px solid #ddd;
   min-width: 400px;
   max-width: 800px;
   pointer-events: auto;
-  display: none; }
+  display: none;
+  background: #fff; }
 
 #vvveb-builder #highlight-name {
   background: #4285f4;
@@ -9661,7 +9715,8 @@ li[data-type] {
     background: #fff;
     padding: 5px 0px 0px 0px; }
 
-#components .drag-elements-sidepane li[data-type] {
+#components .drag-elements-sidepane li[data-type],
+#add-section-box li[data-type] {
   width: 50%;
   text-align: center;
   font-weight: normal;
@@ -9684,7 +9739,8 @@ li[data-type] {
   cursor: pointer;
   opacity: 0.75;
   zoom: 1; }
-  #components .drag-elements-sidepane li[data-type]:hover {
+  #components .drag-elements-sidepane li[data-type]:hover,
+  #add-section-box li[data-type]:hover {
     box-shadow: 0px 0px 1px 0px #4285f4;
     background-color: rgba(66, 133, 244, 0.1); }
 
