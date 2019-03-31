@@ -9357,6 +9357,7 @@ body {
     padding: 0rem 0rem 0rem 1rem; }
     #vvveb-builder #add-section-box .components-list ol li, #vvveb-builder #add-section-box .blocks-list ol li, #vvveb-builder #add-section-box .component-properties ol li {
       width: 14%;
+      min-width: 90px;
       float: left; }
       #vvveb-builder #add-section-box .components-list ol li a, #vvveb-builder #add-section-box .blocks-list ol li a, #vvveb-builder #add-section-box .component-properties ol li a {
         display: block;
@@ -9559,7 +9560,7 @@ body {
   left: 100px;
   box-shadow: 0px 0px 2px 0px #ccc;
   border: 1px solid #ddd;
-  min-width: 400px;
+  min-width: 500px;
   max-width: 800px;
   pointer-events: auto;
   display: none;

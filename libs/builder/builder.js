@@ -668,6 +668,7 @@ Vvveb.Builder = {
         {
 				window.FrameWindow = self.iframe.contentWindow;
 				window.FrameDocument = self.iframe.contentWindow.document;
+				var addSectionBox = jQuery("#add-section-box"); 
 
 				$(window.FrameWindow).on( "beforeunload", function(event) {
 					if (Vvveb.Undo.undoIndex <= 0)
@@ -704,8 +705,12 @@ Vvveb.Builder = {
 								 "width" : self.highlightEl.outerWidth(), 
 								 "height": self.highlightEl.outerHeight(),
 								 //"display": "block"
-								 });			
+								 });		
+								 
+							
+							addSectionBox.hide();
 						}
+						
 				});
 			
 				Vvveb.WysiwygEditor.init(window.FrameDocument);
@@ -1100,11 +1105,11 @@ Vvveb.Builder = {
 			
 			addSectionElement = self.highlightEl; 
 
-			var offset = jQuery(this).offset();			
+			var offset = jQuery(addSectionElement).offset();			
 			
 			addSectionBox.css(
-				{"top": offset.top - self.frameDoc.scrollTop() - $(this).outerHeight(), 
-				 "left": offset.left - (addSectionBox.outerWidth() / 2) - (275) - self.frameDoc.scrollLeft(), 
+				{"top": (offset.top - self.frameDoc.scrollTop()) + addSectionElement.outerHeight(), 
+				 "left": (offset.left - self.frameDoc.scrollLeft()) + (addSectionElement.outerWidth() / 2) - (addSectionBox.outerWidth() / 2), 
 				 "display": "block",
 				 });
 			

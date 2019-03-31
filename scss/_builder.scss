@@ -416,6 +416,7 @@ body
 				li
 				{
 					width:14%;
+					min-width:90px;
 					float:left;
 					
 					a
@@ -708,7 +709,7 @@ body
 		left: 100px;
 		box-shadow: 0px 0px 2px 0px #ccc;
 		border: 1px solid #ddd;
-		min-width: 400px;
+		min-width: 500px;
 		max-width: 800px;
 		pointer-events:auto;
 		display:none;
