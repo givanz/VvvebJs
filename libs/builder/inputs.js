@@ -161,7 +161,7 @@ var CssUnitInput = $.extend({}, Input, {
 			if (this.value != "") input[this.name] = this.value;// this.name = unit or number	
 			if (input['unit'] == "") input['unit'] = "px";//if unit is not set use default px
 			
-			value = "";	
+			var value = "";	
 			if (input.unit == "auto")  
 			{
 				$(event.data.element).addClass("auto"); 

@@ -298,16 +298,16 @@ Vvveb.Components = {
 
 		var component = this._components[type];
 		
-		var rightPanel = jQuery(this.componentPropertiesElement);
-		var section = rightPanel.find('.section[data-section="default"]');
+		var componentsPanel = jQuery(this.componentPropertiesElement);
+		var section = componentsPanel.find('.section[data-section="default"]');
 		
 		if (!(Vvveb.preservePropertySections && section.length))
 		{
-			rightPanel.html('').append(tmpl("vvveb-input-sectioninput", {key:"default", header:component.name}));
-			section = rightPanel.find(".section");
+			componentsPanel.html('').append(tmpl("vvveb-input-sectioninput", {key:"default", header:component.name}));
+			section = componentsPanel.find(".section");
 		}
 
-		rightPanel.find('[data-header="default"] span').html(component.name);
+		componentsPanel.find('[data-header="default"] span').html(component.name);
 		section.html("")	
 	
 		if (component.beforeInit) component.beforeInit(Vvveb.Builder.selectedEl.get(0));
@@ -413,15 +413,15 @@ Vvveb.Components = {
 
 			if (property.inputtype == SectionInput)
 			{
-				section = rightPanel.find('.section[data-section="' + property.key + '"]');
+				section = componentsPanel.find('.section[data-section="' + property.key + '"]');
 				
 				if (Vvveb.preservePropertySections && section.length)
 				{
 					section.html("");
 				} else 
 				{
-					rightPanel.append(property.input);
-					section = rightPanel.find('.section[data-section="' + property.key + '"]');
+					componentsPanel.append(property.input);
+					section = componentsPanel.find('.section[data-section="' + property.key + '"]');
 				}
 			}
 			else
@@ -651,6 +651,7 @@ Vvveb.Builder = {
 	 },
 	
 	loadUrl : function(url, callback) {	
+		var self = this;
 		jQuery("#select-box").hide();
 		
 		self.initCallback = callback;
@@ -1439,7 +1440,7 @@ Vvveb.Gui = {
 		var link = document.createElement('a');
 		if ('download' in link)
 		{
-			link.download = filename;
+			link.dataset.download = filename;
 			link.href = uriContent;
 			link.target = "_blank";
 			
@@ -1572,7 +1573,44 @@ Vvveb.Gui = {
 		var designerMode = this.attributes["aria-pressed"].value != "true";
 		Vvveb.Builder.setDesignerMode(designerMode);
 	},
+//layout
+	togglePanel: function (panel, cssVar) {
+		var panel = $(panel);
+		var body = $("body");
+		var prevValue = body.css(cssVar);
+		if (prevValue !== "0px") 
+		{
+			panel.data("layout-toggle", prevValue);
+			body.css(cssVar, "0px");
+			panel.hide();
+		} else
+		{
+			prevValue= panel.data("layout-toggle");
+			body.css(cssVar, prevValue);
+			panel.show();
+			
+		}
+	},
+
+	toggleFileManager: function () {
+		Vvveb.Gui.togglePanel("#filemanager", "--builder-filemanager-height");
+	},
 	
+	toggleLeftColumn: function () {
+		Vvveb.Gui.togglePanel("#left-panel", "--builder-left-panel-width");
+	},
+	
+	toggleRightColumn: function () {
+		Vvveb.Gui.togglePanel("#right-panel", "--builder-right-panel-width");
+		var rightColumnEnabled = this.attributes["aria-pressed"].value == "true";
+
+		$("#vvveb-builder").toggleClass("no-right-panel");
+		$(".component-properties-tab").toggle();
+		
+		Vvveb.Components.componentPropertiesElement = (rightColumnEnabled ? "#right-panel" :"#left-panel") +" .component-properties";
+		if ($("#properties").is(":visible")) $('.component-tab a').show().tab('show'); 
+
+	},
 }
 
 Vvveb.FileManager = {
@@ -1635,7 +1673,7 @@ Vvveb.FileManager = {
 			tmpl("vvveb-filemanager-component", {name:name, url:url, title:title}));
 	},
 	
-	getComponents: function() {
+	getComponents: function(allowedComponents = {}) {
 
 			var tree = [];
 			function getNodeTree (node, parent) {
@@ -1646,6 +1684,10 @@ Vvveb.FileManager = {
 						if (child && child["attributes"] != undefined && 
 							(matchChild = Vvveb.Components.matchNode(child))) 
 						{
+							if (Array.isArray(allowedComponents)
+								&& allowedComponents.indexOf(matchChild.type) == -1)
+							continue;
+						
 							element = {
 								name: matchChild.name,
 								image: matchChild.image,
@@ -1671,9 +1713,9 @@ Vvveb.FileManager = {
 		return tree;
 	},
 	
-	loadComponents: function() {
+	loadComponents: function(allowedComponents = {}) {
 
-		tree = this.getComponents();
+		tree = this.getComponents(allowedComponents);
 		html = drawComponentsTree(tree);
 
 		function drawComponentsTree(tree)
@@ -1720,7 +1762,7 @@ Vvveb.FileManager = {
 		return this.loadPage(this.currentPage);
 	},
 	
-	loadPage: function(name, disableCache = true) {
+	loadPage: function(name, allowedComponents = false, disableCache = true) {
 		$("[data-page]", this.tree).removeClass("active");
 		$("[data-page='" + name + "']", this.tree).addClass("active");
 		
@@ -1729,7 +1771,7 @@ Vvveb.FileManager = {
 		
 		Vvveb.Builder.loadUrl(url + (disableCache ? (url.indexOf('?') > -1?'&':'?') + Math.random():''), 
 			function () { 
-				Vvveb.FileManager.loadComponents(); 
+				Vvveb.FileManager.loadComponents(allowedComponents); 
 			});
 	},
 

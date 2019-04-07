@@ -9094,7 +9094,7 @@ https://github.com/givanz/VvvebJs
 .tree ol {
   padding: 0.3rem 0 0 2rem;
   width: 300px;
-  width: 285px;
+  width: 30vw;
   font-size: 12px;
   color: #555; }
   .tree ol li {
@@ -9173,7 +9173,16 @@ https://github.com/givanz/VvvebJs
       /* 1px */ }
 
 body {
-  background: #eee; }
+  background: #eee;
+  --builder-left-panel-width: 15vw;
+  --builder-right-panel-width: 15vw;
+  --builder-filemanager-height: 200px;
+  --builder-canvas-margin: 0px;
+  --builder-header-top-height: 40px;
+  --builder-bottom-panel-height: 35px;
+  --drag-items-tabs-height: 90px;
+  scrollbar-color: rgba(0, 0, 0, 0.1) #fff;
+  scrollbar-width: thin; }
 
 .modal-content {
   font-size: .875rem; }
@@ -9204,14 +9213,16 @@ body {
   background: -webkit-linear-gradient(left, #fff 85%, #fcfcfc 100%);
   background: linear-gradient(left, #fff 85%, #fcfcfc 100%);
   box-shadow: -1px -2px 2px #f3f3f3 inset;
-  width: 270px;
+  width: 15vw;
+  width: calc(var(--builder-left-panel-width));
   height: 100%;
   max-height: 100%; }
-  #vvveb-builder #left-panel:hover {
-    width: 285px; }
   #vvveb-builder #left-panel #filemanager {
-    height: 250px;
-    width: 285px; }
+    height: 200px;
+    width: 30vw;
+    height: var(--builder-filemanager-height);
+    width: calc( var(--builder-left-panel-width));
+    border-bottom: 1px solid #ddd; }
     #vvveb-builder #left-panel #filemanager .header {
       font-size: 11px;
       font-weight: 600;
@@ -9229,10 +9240,24 @@ body {
       #vvveb-builder #left-panel #filemanager .header a {
         color: #007bff; }
     #vvveb-builder #left-panel #filemanager .tree {
-      height: 220px;
+      height: 160px;
+      height: calc( var(--builder-filemanager-height) - 40px);
       padding: 0.5rem 0rem;
-      overflow-y: auto;
+      overflow-y: hidden;
       overflow-x: hidden; }
+      #vvveb-builder #left-panel #filemanager .tree:hover {
+        overflow-y: auto; }
+      #vvveb-builder #left-panel #filemanager .tree::-webkit-scrollbar {
+        width: 0.5rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        -webkit-box-shadow: none; }
+      #vvveb-builder #left-panel #filemanager .tree::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
+      #vvveb-builder #left-panel #filemanager .tree::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.15);
+        outline: 1px solid slategrey; }
+  #vvveb-builder #left-panel .components-list, #vvveb-builder #left-panel .blocks-list, #vvveb-builder #left-panel .component-properties {
+    width: var(--builder-left-panel-width); }
 
 #vvveb-builder #right-panel {
   float: right;
@@ -9246,7 +9271,10 @@ body {
   background: -webkit-linear-gradient(right, #fff 85%, #fcfcfc 100%);
   background: linear-gradient(right, #fff 85%, #fcfcfc 100%);
   box-shadow: 1px -2px 2px #f3f3f3 inset;
-  width: 270px; }
+  width: 15vw;
+  width: var(--builder-right-panel-width); }
+  #vvveb-builder #right-panel .components-list, #vvveb-builder #right-panel .blocks-list, #vvveb-builder #right-panel .component-properties {
+    width: var(--builder-right-panel-width); }
 
 #vvveb-builder #top-panel {
   height: 40px;
@@ -9267,8 +9295,11 @@ body {
   bottom: 0px;
   position: fixed;
   border-top: 1px solid #ddd;
-  left: 270px;
-  right: 270px;
+  left: 15vw;
+  left: calc($builder-left-panel-width +  $builder-canvas-margin);
+  left: calc( var(--builder-left-panel-width) + var(--builder-canvas-margin));
+  right: 15vw;
+  right: var(--builder-right-panel-width);
   background-color: #fff; }
   #vvveb-builder #bottom-panel #vvveb-code-editor {
     width: 100%;
@@ -9288,8 +9319,7 @@ body {
   height: 50%; }
 
 #vvveb-builder .drag-elements {
-  padding-top: 0rem;
-  border-top: 1px solid #ddd; }
+  padding-top: 0rem; }
   #vvveb-builder .drag-elements > .header {
     background: #fafafa; }
     #vvveb-builder .drag-elements > .header .search {
@@ -9320,12 +9350,12 @@ body {
   #vvveb-builder .drag-elements .nav-item .nav-link {
     text-align: center;
     border-top-color: #fff;
-    padding: 0.5rem 1rem;
     border-radius: 0px;
     min-width: 5rem;
-    color: #343a40; }
+    color: #343a40;
+    line-height: 1.2rem; }
     #vvveb-builder .drag-elements .nav-item .nav-link i.la-lg {
-      font-size: 1.5rem; }
+      font-size: 1.2rem; }
     #vvveb-builder .drag-elements .nav-item .nav-link small {
       font-size: 70%; }
     #vvveb-builder .drag-elements .nav-item .nav-link.active, #vvveb-builder .drag-elements .nav-item .nav-link:hover {
@@ -9335,12 +9365,23 @@ body {
 
 #vvveb-builder .components-list, #vvveb-builder .blocks-list, #vvveb-builder .component-properties {
   height: 98%;
-  height: calc(100% - 250px - 100px - 40px);
-  overflow-y: auto;
+  height: calc(100% - 200px - 90px - 40px);
+  height: calc(100% - var(--builder-filemanager-height) - 90px - 40px);
   overflow-x: hidden;
-  width: 285px;
   list-style: none;
-  background: #fff; }
+  background: #fff;
+  overflow-y: hidden; }
+  #vvveb-builder .components-list:hover, #vvveb-builder .blocks-list:hover, #vvveb-builder .component-properties:hover {
+    overflow-y: auto; }
+  #vvveb-builder .components-list::-webkit-scrollbar, #vvveb-builder .blocks-list::-webkit-scrollbar, #vvveb-builder .component-properties::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    -webkit-box-shadow: none; }
+  #vvveb-builder .components-list::-webkit-scrollbar-track, #vvveb-builder .blocks-list::-webkit-scrollbar-track, #vvveb-builder .component-properties::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
+  #vvveb-builder .components-list::-webkit-scrollbar-thumb, #vvveb-builder .blocks-list::-webkit-scrollbar-thumb, #vvveb-builder .component-properties::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    outline: 1px solid slategrey; }
 
 #vvveb-builder #add-section-box .header > div.section-box-actions {
   position: absolute;
@@ -9351,7 +9392,6 @@ body {
   width: auto;
   height: auto;
   padding: 0px;
-  overflow-y: auto;
   height: 200px; }
   #vvveb-builder #add-section-box .components-list ol, #vvveb-builder #add-section-box .blocks-list ol, #vvveb-builder #add-section-box .component-properties ol {
     padding: 0rem 0rem 0rem 1rem; }
@@ -9409,10 +9449,17 @@ body {
   #vvveb-builder .component-properties-sidepane > div {
     position: absolute;
     height: 100%; }
+  #vvveb-builder .component-properties-sidepane::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    -webkit-box-shadow: none; }
+  #vvveb-builder .component-properties-sidepane::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
+  #vvveb-builder .component-properties-sidepane::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    outline: 1px solid slategrey; }
 
 #vvveb-builder .component-properties {
-  overflow-y: auto;
-  overflow-x: hidden;
   height: 95%;
   height: calc(100% - 40px); }
   #vvveb-builder .component-properties #right-panel {
@@ -9431,10 +9478,12 @@ body {
     #vvveb-builder .component-properties .form-group [class^="col-sm-"] {
       padding-left: 10px;
       padding-right: 10px; }
-    #vvveb-builder .component-properties .form-group label {
+    #vvveb-builder .component-properties .form-group > label {
       font-size: 11px;
-      margin-bottom: 0px; }
-      #vvveb-builder .component-properties .form-group label i {
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #555; }
+      #vvveb-builder .component-properties .form-group > label i {
         font-size: 14px; }
     #vvveb-builder .component-properties .form-group .input {
       width: 100%; }
@@ -9442,13 +9491,18 @@ body {
       min-height: 1.1rem; }
 
 #vvveb-builder #canvas {
-  margin-right: 270px;
-  margin-left: 270px;
+  margin-right: 15vw;
+  margin-left: 15vw;
+  margin-right: var(--builder-right-panel-width);
+  margin-left: var(--builder-left-panel-width);
   width: 100%;
   height: 100%;
-  width: calc( 100vw - 540px);
+  width: calc( 100vw - 600px);
   height: calc( 100vh - 75px);
   top: 40px;
+  width: calc( 100vw - (var(--builder-left-panel-width) + var(--builder-right-panel-width) + var(--builder-canvas-margin)));
+  height: calc( 100vh - (var(--builder-header-top-height) + var(--builder-bottom-panel-height)));
+  top: var(--builder-header-top-height);
   position: fixed;
   transition: width 0.35s, left 0.35s; }
   #vvveb-builder #canvas #iframe-wrapper, #vvveb-builder #canvas iframe {
@@ -9457,10 +9511,12 @@ body {
     border: none; }
   #vvveb-builder #canvas.tablet {
     width: 768px !important;
-    left: calc(50% - 654px); }
+    left: calc(50% - 399vw);
+    left: calc(50% - ((768px / 2) + var(--builder-left-panel-width))); }
   #vvveb-builder #canvas.mobile {
     width: 320px !important;
-    left: calc(50% - 430px); }
+    left: calc(50% - 175vw);
+    left: calc(50% - ((320px / 2) + var(--builder-left-panel-width))); }
 
 #vvveb-builder.preview #canvas {
   width: 100%;
@@ -9470,12 +9526,10 @@ body {
 #vvveb-builder.preview #left-panel, #vvveb-builder.preview #right-panel {
   display: none; }
 
-#vvveb-builder.no-right-panel #canvas {
-  width: calc( 100vw - 270px);
-  margin-right: 0px; }
-
-#vvveb-builder.no-right-panel #right-panel {
-  display: none; }
+#vvveb-builder.no-right-panel {
+  --builder-right-panel-width: 0px; }
+  #vvveb-builder.no-right-panel #right-panel {
+    display: none; }
 
 #vvveb-builder #iframe-layer {
   overflow: hidden;
@@ -9627,6 +9681,15 @@ li[data-type] {
   width: 100%;
   overflow-y: auto;
   width: 100%; }
+  .drag-elements-sidepane::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    -webkit-box-shadow: none; }
+  .drag-elements-sidepane::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
+  .drag-elements-sidepane::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    outline: 1px solid slategrey; }
   .drag-elements-sidepane > div {
     position: absolute;
     height: 98%; }
@@ -9932,9 +9995,11 @@ ul.autocomplete li.selected {
   color: #fff; }
 
 .btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active, .show > .btn-light.dropdown-toggle {
-  box-shadow: 0px 0px 1px 0px #4285f4;
-  background-color: rgba(66, 133, 244, 0.1);
+  box-shadow: 0px 0px 1px 0px rgba(255, 255, 255, 0.1);
+  background-color: rgba(66, 133, 244, 0.07);
   border-radius: 0px;
   border-color: transparent; }
+  .btn-light:not(:disabled):not(.disabled):active:focus, .btn-light:not(:disabled):not(.disabled).active:focus, .show > .btn-light.dropdown-toggle:focus {
+    box-shadow: 0px 0px 1px 0px rgba(66, 133, 244, 0.2); }
 
 /*# sourceMappingURL=editor.css.map */

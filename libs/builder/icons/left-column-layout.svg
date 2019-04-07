@@ -10,7 +10,7 @@
    version="1.1"
    viewBox="0 -64 512 512"
    id="svg6"
-   sodipodi:docname="file.svg"
+   sodipodi:docname="right-column.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <metadata
      id="metadata12">
@@ -20,6 +20,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -38,21 +39,26 @@
      inkscape:window-height="1391"
      id="namedview8"
      showgrid="false"
-     inkscape:zoom="0.4609375"
-     inkscape:cx="260.33898"
-     inkscape:cy="256"
+     inkscape:zoom="0.921875"
+     inkscape:cx="90.115527"
+     inkscape:cy="206.18105"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg6" />
   <g
-     transform="matrix(1.1694915,0,0,-1.1694915,-11.389831,418.16949)"
-     id="g4"
-     style="fill:#808080">
+     transform="matrix(1,0,0,-1,2.1694915,393.76271)"
+     id="g4">
     <path
-       d="m 80,400 h 16 192 6.5 l 5,-4.5 96,-96 4.5,-5 V 288 0 -16 H 384 96 80 V 0 384 Z m 32,-32 V 16 h 256 v 256 h -80 -16 v 16 80 z m 192,-23 v -41 h 41 z"
+       d="m 80,368 h 16 320 16 V 352 32 16 H 416 96 80 v 16 320 z m 32,-32 V 48 h 128 v 288 z m 160,0 V 48 h 128 v 288 z"
        id="path2"
        inkscape:connector-curvature="0"
-       style="fill:#808080" />
+       style="fill:#4d4d4d" />
   </g>
+  <path
+     style="fill:#808080;fill-opacity:0.32941176;stroke:none;stroke-width:0.54237288;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     d="M 114.41383,265.79183 V 122.06301 h 63.45763 63.45763 v 143.72882 143.72881 h -63.45763 -63.45763 z"
+     id="path870"
+     inkscape:connector-curvature="0"
+     transform="translate(0,-64)" />
 </svg>

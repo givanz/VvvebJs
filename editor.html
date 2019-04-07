@@ -23,6 +23,20 @@
 					<img src="img/logo.png" alt="Vvveb" class="float-left" id="logo">
 					
 					
+					<div class="btn-group float-left" role="group">
+					  <button class="btn btn-light" title="Toggle file manager" id="toggle-file-manager-btn" data-vvveb-action="toggleFileManager" data-toggle="button" aria-pressed="false">
+						  <img src="libs/builder/icons/file-manager-layout.svg" width="20px" height="20px">
+					  </button>
+
+					  <button class="btn btn-light" title="Toggle left column" id="toggle-left-column-btn" data-vvveb-action="toggleLeftColumn" data-toggle="button" aria-pressed="false">
+						  <img src="libs/builder/icons/left-column-layout.svg" width="20px" height="20px">
+					  </button>
+					  
+					  <button class="btn btn-light" title="Toggle right column" id="toggle-right-column-btn" data-vvveb-action="toggleRightColumn" data-toggle="button" aria-pressed="false">
+						  <img src="libs/builder/icons/right-column-layout.svg" width="20px" height="20px">
+					  </button>
+					</div>
+										
 					<div class="btn-group mr-3" role="group">
 					  <button class="btn btn-light" title="Undo (Ctrl/Cmd + Z)" id="undo-btn" data-vvveb-action="undo" data-vvveb-shortcut="ctrl+z">
 						  <i class="la la-undo"></i>
@@ -54,7 +68,7 @@
 						  <i class="la la-save"></i>
 					  </button>
 					  
-					  <button class="btn btn-light" title="Download" id="save-btn" data-vvveb-action="download" download="index.html">
+					  <button class="btn btn-light" title="Download" id="download-btn" data-vvveb-action="download" data-download="index.html">
 						  <i class="la la-download"></i>
 					  </button>
 					</div>	
@@ -114,7 +128,7 @@
 								<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
 							  </li>
 							  <li class="nav-item component-properties-tab" style="display:none">
-								<a class="nav-link" id="components-tab" data-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
+								<a class="nav-link" id="properties-tab" data-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
 							  </li>
 							</ul>
 					
@@ -192,7 +206,7 @@
 										<a id="bold-btn" href="" title="Bold"><i><strong>B</strong></i></a>
 										<a id="italic-btn" href="" title="Italic"><i>I</i></a>
 										<a id="underline-btn" href="" title="Underline"><u>u</u></a>
-										<a id="strike-btn" href="" title="Strikeout"><strike>S</strike></a>
+										<a id="strike-btn" href="" title="Strikeout"><del>S</del></a>
 										<a id="link-btn" href="" title="Create link"><strong>a</strong></a>
 								</div>
 
@@ -219,7 +233,7 @@
 											<a class="nav-link" id="box-blocks-tab" data-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
 										  </li>
 										  <li class="nav-item component-properties-tab" style="display:none">
-											<a class="nav-link" id="components-tab" data-toggle="tab" href="#box-properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
+											<a class="nav-link" id="box-properties-tab" data-toggle="tab" href="#box-properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
 										  </li>
 										</ul>
 										
@@ -230,7 +244,7 @@
 											<div class="small mt-1 mr-3 float-right">
 											
 												<div class="custom-control custom-radio custom-control-inline">
-												  <input type="radio" id="add-section-insert-mode-after" value="after" checked="true" name="add-section-insert-mode" class="custom-control-input">
+												  <input type="radio" id="add-section-insert-mode-after" value="after" checked="checked" name="add-section-insert-mode" class="custom-control-input">
 												  <label class="custom-control-label" for="add-section-insert-mode-after">After</label>
 												</div>
 												
@@ -283,7 +297,7 @@
 										  
 										  </div>
 										
-											<div class="tab-pane fade" id="box-properties" role="tabpanel" aria-labelledby="blocks-tab">
+											<!-- div class="tab-pane fade" id="box-properties" role="tabpanel" aria-labelledby="blocks-tab">
 												<div class="component-properties-sidepane">
 													<div>
 														<div class="component-properties">
@@ -291,7 +305,7 @@
 														</div>
 													</div>
 												</div>
-											</div>
+											</div -->
 										</div>
 									</div>		
 
@@ -313,7 +327,7 @@
 
 				<div class="btn-group" role="group">
 
-		 			 <button id="code-editor-btn btn-sm" data-view="mobile" class="btn btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
+		 			 <button id="code-editor-btn" data-view="mobile" class="btn btn-sm btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
 						  <i class="la la-code"></i> Code editor
 					  </button>
 					 
@@ -748,7 +762,7 @@
 
       <div class="modal-body text">
 		<div class="form-group row" data-key="type">      
-			<label class="col-sm-3 control-label" for="input-model">
+			<label class="col-sm-3 control-label">
 				Template 
 				<abbr class="badge badge-pill badge-secondary" title="This template will be used as a start">?</abbr> 
 			</label>      
@@ -764,7 +778,7 @@
 		</div>
 
 		<div class="form-group row" data-key="href">     
-			 <label class="col-sm-3 control-label" for="input-model"><p>Page name</p></label>      
+			 <label class="col-sm-3 control-label">Page name</label>      
 			<div class="col-sm-9 input">
 				<div>   
 					<input name="title" type="text" class="form-control" placeholder="My page" required>  
@@ -773,7 +787,7 @@
 		</div>
 		
 		<div class="form-group row" data-key="href">     
-			 <label class="col-sm-3 control-label" for="input-model"><p>File name</p></label>      
+			 <label class="col-sm-3 control-label">File name</label>      
 			<div class="col-sm-9 input">
 				<div>   
 					<input name="fileName" type="text" class="form-control" placeholder="my-page.html" required>  
@@ -791,6 +805,7 @@
    </form>		
 
   </div>
+</div>
 </div>
 	
 <!-- jquery-->

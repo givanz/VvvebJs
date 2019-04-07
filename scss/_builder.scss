@@ -20,16 +20,20 @@ $builder-header-top-height:40px !default;
 $builder-bottom-panel-height:35px !default;
 $builder-border-color: #ddd !default;
 
-$builder-left-panel-width:270px !default;
-$builder-right-panel-width:270px !default;
+$builder-left-panel-width:300px !default;
+$builder-right-panel-width:300px !default;
 $builder-canvas-margin:0px !default;
-$builder-filemanager-height:250px !default;
-$drag-items-tabs-height:100px !default;
+$builder-filemanager-height:200px !default;
+$drag-items-tabs-height:90px !default;
 $builder-background-color: #4285f4 !default;
 
 $canvas-width-substract: $builder-left-panel-width + $builder-right-panel-width + $builder-canvas-margin;
 $canvas-no-right-width-substract: $builder-left-panel-width  + $builder-canvas-margin;
 $canvas-height-substract: $builder-header-top-height + $builder-bottom-panel-height;
+
+$builder-left-panel-width:15vw;
+$builder-right-panel-width:15vw;
+
 
 $font-size-base: .875rem;
 
@@ -93,9 +97,39 @@ $font-size-base: .875rem;
 		zoom: 1;
 }
 
+@mixin webkit-scrollbar()
+{
+	&::-webkit-scrollbar {
+		width: 0.5rem;
+		background-color: rgba(255,255,255, 0.1);
+		-webkit-box-shadow:none;
+	}
+	 
+	&::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.05);
+	}
+	 
+	&::-webkit-scrollbar-thumb {
+	  background-color: rgba(0,0,0, 0.15);
+	  outline: 1px solid slategrey;
+	}
+}
+
 body
 {
 	background:#eee;
+	--builder-left-panel-width: #{$builder-left-panel-width};
+	--builder-right-panel-width: #{$builder-right-panel-width};
+	--builder-filemanager-height: #{$builder-filemanager-height};
+	--builder-canvas-margin: #{$builder-canvas-margin};
+	
+	--builder-header-top-height:#{$builder-header-top-height};
+	--builder-bottom-panel-height:#{$builder-bottom-panel-height};
+	--drag-items-tabs-height:#{$drag-items-tabs-height};
+	
+	scrollbar-color: rgba(0,0,0, 0.1) #fff;
+	scrollbar-width: thin;
+
 }
 
 .modal-content
@@ -142,19 +176,17 @@ body
 		box-shadow: -1px -2px 2px #f3f3f3 inset;
 
 		width: $builder-left-panel-width;
+		width: calc(var(--builder-left-panel-width));
 		height:100%;
 		max-height:100%;
-
-		&:hover
-		{
-			width:$builder-right-panel-width + 15;
-		}
-
 
 		#filemanager
 		{
 			height:$builder-filemanager-height;
 			width:$builder-right-panel-width + 15;
+			height: var(--builder-filemanager-height);
+			width:calc( var(--builder-left-panel-width));
+			border-bottom: 1px solid #ddd;
 		
 			.header
 			{
@@ -180,11 +212,24 @@ body
 			
 			.tree
 			{
-				height:$builder-filemanager-height - 30px;
+				height:$builder-filemanager-height - $builder-header-top-height;
+				height:calc( var(--builder-filemanager-height) - #{$builder-header-top-height});
 				padding:0.5rem 0rem;
-				overflow-y: auto;
+				overflow-y: hidden;
 				overflow-x: hidden;
+				
+				&:hover
+				{
+					overflow-y: auto;
+				}
+				
+				@include webkit-scrollbar();
 			}
+		}
+		
+		.components-list, .blocks-list, .component-properties
+		{
+			width:var(--builder-left-panel-width);
 		}
 	}
 	
@@ -208,6 +253,12 @@ body
 		
 				
 		width: $builder-right-panel-width;
+		width: var(--builder-right-panel-width);
+		
+		.components-list, .blocks-list, .component-properties
+		{
+			width:var(--builder-right-panel-width);
+		}
 	}
 	
 	#top-panel
@@ -245,8 +296,11 @@ body
 		bottom:0px;
 		position:fixed;
 		border-top:1px solid #ddd;
-		left: $builder-left-panel-width +  $builder-canvas-margin;
-		right: $builder-right-panel-width;;
+		left: $builder-left-panel-width;
+		left: calc($builder-left-panel-width +  $builder-canvas-margin);
+		left: calc( var(--builder-left-panel-width) + var(--builder-canvas-margin));
+		right: $builder-right-panel-width;
+		right: var(--builder-right-panel-width);
 		background-color:#fff;
 		
 		#vvveb-code-editor 
@@ -283,7 +337,6 @@ body
 	.drag-elements
 	{
 		padding-top: 0rem;
-		border-top:1px solid #ddd;
 
 		> .header
 		{
@@ -348,14 +401,14 @@ body
 			{
 				text-align:center;
 				border-top-color: #fff;
-				padding: 0.5rem 1rem;
 				border-radius:0px;
 				min-width:5rem;
 				color:$dark;
+				line-height:1.2rem;
 				
 				i.la-lg
 				{
-					font-size:1.5rem;
+					font-size:1.2rem;
 				}
 				
 				small
@@ -380,16 +433,19 @@ body
 	{
 		height:98%;
 		height:calc(100% - #{$builder-filemanager-height} - #{$drag-items-tabs-height} - #{$builder-header-top-height});
-		overflow-y: auto;
+		height:calc(100% - var(--builder-filemanager-height) - #{$drag-items-tabs-height} - #{$builder-header-top-height});
 		overflow-x: hidden;
-		width:$builder-right-panel-width + 15;
 		list-style:none;
 		background: #fff;
 		//scrollbar on hover
+		overflow-y:hidden;
+		
 		&:hover
 		{
-			
+			overflow-y:auto;
 		}
+		
+		@include webkit-scrollbar();
 		
 	}
 
@@ -406,7 +462,6 @@ body
 			width:auto;
 			height:auto;
 			padding: 0px;
-			overflow-y: auto;
 			height: 200px;
 			
 			ol 
@@ -467,12 +522,12 @@ body
 			position:absolute;
 			height:100%;
 		   }	
+		
+		@include webkit-scrollbar();		   
 	}
 	
 	.component-properties
 	{
-		overflow-y: auto;
-		overflow-x: hidden;			
 		height:95%;
 		height:calc(100% - #{$builder-header-top-height});
 		
@@ -511,10 +566,12 @@ body
 				padding-right:10px;
 			}
 			
-			label
+			> label
 			{
 				font-size:11px;
-				margin-bottom:0px;
+				margin-bottom:5px;
+				font-weight:600;
+				color:#555;
 				
 				i
 				{
@@ -538,13 +595,18 @@ body
 	// canvas
 	#canvas
 	{
-	    margin-right: $builder-right-panel-width;
+	        margin-right: $builder-right-panel-width;
 		margin-left: $builder-left-panel-width;
+	   	margin-right: var(--builder-right-panel-width);
+		margin-left: var(--builder-left-panel-width);
 		width:100%;
 		height:100%;
 		width: calc( 100vw - #{$canvas-width-substract});
 		height: calc( 100vh - #{$canvas-height-substract});
 		top:$builder-header-top-height;
+		width: calc( 100vw - (var(--builder-left-panel-width) + var(--builder-right-panel-width) + var(--builder-canvas-margin)));
+		height: calc( 100vh - (var(--builder-header-top-height) + var(--builder-bottom-panel-height)));
+		top:var(--builder-header-top-height);
 		position:fixed;
 		transition:width 0.35s, left 0.35s;
 		//border-top: 1px solid $builder-border-color;	
@@ -560,12 +622,14 @@ body
 		{
 			width:768px !important;
 			left: calc(50% - #{(768 / 2) + $builder-left-panel-width});
+			left: calc(50% - ((768px / 2) + var(--builder-left-panel-width)));
 		}
 
 		&.mobile
 		{
 			width:320px !important;
 			left: calc(50% - #{(320 / 2) + $builder-left-panel-width});
+			left: calc(50% - ((320px / 2) + var(--builder-left-panel-width)));
 		}
 	}
 	
@@ -586,11 +650,7 @@ body
 
 	&.no-right-panel 
 	{	
-		#canvas
-		{
-			width: calc( 100vw - #{$canvas-no-right-width-substract});
-			margin-right:0px;
-		}
+		--builder-right-panel-width:0px;
 		
 		#right-panel
 		{
@@ -767,6 +827,8 @@ li[data-type]
   height: auto;
   width: 100%;
   overflow-y: auto;
+ 
+  @include webkit-scrollbar();
  
    > div
    {
@@ -1136,8 +1198,14 @@ ul.autocomplete li.selected
 
 
 .btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active, .show > .btn-light.dropdown-toggle {
-	box-shadow: 0px 0px 1px 0px $builder-background-color;
-	background-color:rgba( $builder-background-color, 0.1);
+	box-shadow: 0px 0px 1px 0px rgba( 255,255,255, 0.1);
+	background-color:rgba( $builder-background-color, 0.07);
 	border-radius:0px;
 	border-color: transparent;
+	&:focus {
+		box-shadow: 0px 0px 1px 0px rgba( $builder-background-color, 0.2);
+	}
 }
+
+
+
