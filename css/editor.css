@@ -9183,6 +9183,15 @@ body {
   --drag-items-tabs-height: 90px;
   scrollbar-color: rgba(0, 0, 0, 0.1) #fff;
   scrollbar-width: thin; }
+  body::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    -webkit-box-shadow: none; }
+  body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
+  body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    outline: 1px solid slategrey; }
 
 .modal-content {
   font-size: .875rem; }
@@ -9369,7 +9378,7 @@ body {
   height: calc(100% - var(--builder-filemanager-height) - 90px - 40px);
   overflow-x: hidden;
   list-style: none;
-  background: #fff;
+  background: #fcfcfc;
   overflow-y: hidden; }
   #vvveb-builder .components-list:hover, #vvveb-builder .blocks-list:hover, #vvveb-builder .component-properties:hover {
     overflow-y: auto; }
@@ -9398,7 +9407,8 @@ body {
     #vvveb-builder #add-section-box .components-list ol li, #vvveb-builder #add-section-box .blocks-list ol li, #vvveb-builder #add-section-box .component-properties ol li {
       width: 14%;
       min-width: 90px;
-      float: left; }
+      float: left;
+      margin: 0% 1% 1% 1%; }
       #vvveb-builder #add-section-box .components-list ol li a, #vvveb-builder #add-section-box .blocks-list ol li a, #vvveb-builder #add-section-box .component-properties ol li a {
         display: block;
         color: #333;
@@ -9407,7 +9417,7 @@ body {
         margin-top: 5px; }
 
 #vvveb-builder #add-section-box .blocks-list ol li {
-  width: 100%;
+  width: 90%;
   height: 180px;
   text-align: center;
   font-weight: normal;
@@ -9431,7 +9441,7 @@ body {
   cursor: pointer;
   opacity: 0.75;
   zoom: 1;
-  width: 30%;
+  width: 29%;
   margin-right: 1.5rem; }
 
 #vvveb-builder .component-properties-sidepane {
@@ -9505,7 +9515,7 @@ body {
   top: var(--builder-header-top-height);
   position: fixed;
   transition: width 0.35s, left 0.35s; }
-  #vvveb-builder #canvas #iframe-wrapper, #vvveb-builder #canvas iframe {
+  #vvveb-builder #canvas #iframe-wrapper, #vvveb-builder #canvas iframe, #vvveb-builder #canvas iframe body {
     width: 100%;
     height: 100%;
     border: none; }
@@ -9641,7 +9651,8 @@ body {
 
 /* style for drag element */
 li[data-type] {
-  width: 50%;
+  width: 45%;
+  margin: 0% 1% 3% 3%;
   text-align: center;
   font-weight: normal;
   font-size: 11px;
@@ -9662,6 +9673,9 @@ li[data-type] {
   background-color: transparent;
   cursor: pointer;
   opacity: 0.75;
+  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
   zoom: 1;
   /*border-width:1px;*/
   list-style: none; }
@@ -9708,8 +9722,7 @@ li[data-type] {
         margin: 0;
         padding: 0;
         width: 100%;
-        position: relative;
-        border-top: 1px solid #ddd; }
+        position: relative; }
         .drag-elements-sidepane ul > li.header label {
           font-size: 11px;
           font-weight: 600;
@@ -9724,8 +9737,8 @@ li[data-type] {
           border-top: none; }
       .drag-elements-sidepane ul > li ol {
         margin: 0px;
-        padding: 0rem 1rem;
-        padding-bottom: 1rem; }
+        padding: 0rem;
+        padding-bottom: 0rem; }
         .drag-elements-sidepane ul > li ol li {
           list-style: none;
           float: left; }
@@ -9751,7 +9764,7 @@ li[data-type] {
               display: block; }
 
 #blocks .drag-elements-sidepane li[data-type] {
-  width: 100%;
+  width: 90%;
   height: 180px;
   text-align: center;
   font-weight: normal;
@@ -9781,7 +9794,8 @@ li[data-type] {
 
 #components .drag-elements-sidepane li[data-type],
 #add-section-box li[data-type] {
-  width: 50%;
+  width: 45%;
+  margin: 0% 1% 3% 3%;
   text-align: center;
   font-weight: normal;
   font-size: 11px;
@@ -9802,6 +9816,9 @@ li[data-type] {
   background-color: transparent;
   cursor: pointer;
   opacity: 0.75;
+  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
   zoom: 1; }
   #components .drag-elements-sidepane li[data-type]:hover,
   #add-section-box li[data-type]:hover {
@@ -10001,5 +10018,21 @@ ul.autocomplete li.selected {
   border-color: transparent; }
   .btn-light:not(:disabled):not(.disabled):active:focus, .btn-light:not(:disabled):not(.disabled).active:focus, .show > .btn-light.dropdown-toggle:focus {
     box-shadow: 0px 0px 1px 0px rgba(66, 133, 244, 0.2); }
+
+.nav-tabs .nav-item:first-child .nav-link {
+  border-left: none; }
+
+.nav-tabs .nav-link {
+  text-align: center; }
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  color: #495057;
+  background-color: #fff;
+  border-color: #fff #dee2e6 #fff #dee2e6;
+  border-radius: 0px; }
+
+.nav-fill .nav-link {
+  padding-left: 0rem;
+  padding-right: 0rem; }
 
 /*# sourceMappingURL=editor.css.map */

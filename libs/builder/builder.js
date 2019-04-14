@@ -113,6 +113,8 @@ Vvveb.Components = {
 	
 	componentPropertiesElement: "#right-panel .component-properties",
 
+	componentPropertiesDefaultSection: "content",
+
 	get: function(type) {
 		return this._components[type];
 	},
@@ -299,15 +301,24 @@ Vvveb.Components = {
 		var component = this._components[type];
 		
 		var componentsPanel = jQuery(this.componentPropertiesElement);
-		var section = componentsPanel.find('.section[data-section="default"]');
+		var defaultSection = this.componentPropertiesDefaultSection;
+		var componentsPanelSections = {};
+		jQuery(".tab-pane",componentsPanel).each(function ()
+		{
+			var sectionName = this.id.replace('-tab', '');
+			componentsPanelSections[sectionName] = $(this);
+			
+		});
+		
+		var section = componentsPanelSections[defaultSection].find('.section[data-section="default"]');
 		
 		if (!(Vvveb.preservePropertySections && section.length))
 		{
-			componentsPanel.html('').append(tmpl("vvveb-input-sectioninput", {key:"default", header:component.name}));
-			section = componentsPanel.find(".section");
+			componentsPanelSections[defaultSection].html('').append(tmpl("vvveb-input-sectioninput", {key:"default", header:component.name}));
+			section = componentsPanelSections[defaultSection].find(".section");
 		}
 
-		componentsPanel.find('[data-header="default"] span').html(component.name);
+		componentsPanelSections[defaultSection].find('[data-header="default"] span').html(component.name);
 		section.html("")	
 	
 		if (component.beforeInit) component.beforeInit(Vvveb.Builder.selectedEl.get(0));
@@ -410,18 +421,25 @@ Vvveb.Components = {
 			}
 			
 			fn(component, property);
+			
+			var propertySection = defaultSection;
+			if (property.section)
+			{
+				propertySection = property.section;
+			}
+			
 
 			if (property.inputtype == SectionInput)
 			{
-				section = componentsPanel.find('.section[data-section="' + property.key + '"]');
+				section = componentsPanelSections[propertySection].find('.section[data-section="' + property.key + '"]');
 				
 				if (Vvveb.preservePropertySections && section.length)
 				{
 					section.html("");
 				} else 
 				{
-					componentsPanel.append(property.input);
-					section = componentsPanel.find('.section[data-section="' + property.key + '"]');
+					componentsPanelSections[propertySection].append(property.input);
+					section = componentsPanelSections[propertySection].find('.section[data-section="' + property.key + '"]');
 				}
 			}
 			else
