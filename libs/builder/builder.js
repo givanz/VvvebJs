@@ -912,14 +912,17 @@ Vvveb.Builder = {
 				self.isDragging = false;
 				if (self.iconDrag) self.iconDrag.remove();
 				$("#component-clone").remove();
-				
-				if (self.component.dragHtml) //if dragHtml is set for dragging then set real component html
-				{
-					newElement = $(self.component.html);
-					self.dragElement.replaceWith(newElement);
-					self.dragElement = newElement;
+
+				if (self.dragMoveMutation === false)
+				{				
+					if (self.component.dragHtml) //if dragHtml is set for dragging then set real component html
+					{
+						newElement = $(self.component.html);
+						self.dragElement.replaceWith(newElement);
+						self.dragElement = newElement;
+					}
+					if (self.component.afterDrop) self.dragElement = self.component.afterDrop(self.dragElement);
 				}
-				if (self.component.afterDrop) self.dragElement = self.component.afterDrop(self.dragElement);
 				
 				self.dragElement.css("border", "");
 				
@@ -1125,10 +1128,20 @@ Vvveb.Builder = {
 			addSectionElement = self.highlightEl; 
 
 			var offset = jQuery(addSectionElement).offset();			
+			var top = (offset.top - self.frameDoc.scrollTop()) + addSectionElement.outerHeight();
+			var left = (offset.left - self.frameDoc.scrollLeft()) + (addSectionElement.outerWidth() / 2) - (addSectionBox.outerWidth() / 2);
+			var outerHeight = $(window.FrameWindow).height() + self.frameDoc.scrollTop();
+
+			//check if box is out of viewport and move inside
+			if (left < 0) left = 0;
+			if (top < 0) top = 0;
+			if ((left + addSectionBox.outerWidth()) > self.frameDoc.outerWidth()) left = self.frameDoc.outerWidth() - addSectionBox.outerWidth();
+			if (((top + addSectionBox.outerHeight()) + self.frameDoc.scrollTop()) > outerHeight) top = top - addSectionBox.outerHeight();
+			
 			
 			addSectionBox.css(
-				{"top": (offset.top - self.frameDoc.scrollTop()) + addSectionElement.outerHeight(), 
-				 "left": (offset.left - self.frameDoc.scrollLeft()) + (addSectionElement.outerWidth() / 2) - (addSectionBox.outerWidth() / 2), 
+				{"top": top, 
+				 "left": left, 
 				 "display": "block",
 				 });
 			
@@ -1604,7 +1617,7 @@ Vvveb.Gui = {
 		} else
 		{
 			prevValue= panel.data("layout-toggle");
-			body.css(cssVar, prevValue);
+			body.css(cssVar, '');
 			panel.show();
 			
 		}
@@ -1671,18 +1684,19 @@ Vvveb.FileManager = {
 		});
 	},
 	
-	addPage: function(name, title, url) {
+	addPage: function(name, data) {
 		
-		this.pages[name] = {title:title, url:url};
+		this.pages[name] = data;
+		data['name'] = name;
 		
 		this.tree.append(
-			tmpl("vvveb-filemanager-page", {name:name, title:title, url:url}));
+			tmpl("vvveb-filemanager-page", data));
 	},
 	
 	addPages: function(pages) {
 		for (page in pages)
 		{
-			this.addPage(pages[page]['name'], pages[page]['title'], pages[page]['url']);
+			this.addPage(pages[page]['name'], pages[page]);
 		}
 	},
 	
@@ -1733,8 +1747,8 @@ Vvveb.FileManager = {
 	
 	loadComponents: function(allowedComponents = {}) {
 
-		tree = this.getComponents(allowedComponents);
-		html = drawComponentsTree(tree);
+		var tree = this.getComponents(allowedComponents);
+		var html = drawComponentsTree(tree);
 
 		function drawComponentsTree(tree)
 		{
