@@ -69,7 +69,7 @@ function changeNodeName(node, newNodeName)
 }
 
 Vvveb.ComponentsGroup['Bootstrap 4'] =
-["html/container", "html/gridrow", "html/button", "html/buttongroup", "html/buttontoolbar", "html/heading", "html/image", "html/jumbotron", "html/alert", "html/card", "html/listgroup", "html/hr", "html/taglabel", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination", "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/table", "html/paragraph", "html/link"];
+["html/container", "html/gridrow", "html/button", "html/buttongroup", "html/buttontoolbar", "html/heading", "html/image", "html/jumbotron", "html/alert", "html/card", "html/listgroup", "html/hr", "html/taglabel", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination", "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/table", "html/paragraph", "html/link", "html/video"];
 
 
 var base_sort = 100;//start sorting for base component from 100 to allow extended properties to be first
@@ -2159,4 +2159,54 @@ Vvveb.Components.extend("_base", "html/paragraph", {
             }],
         },
 	}]
+});
+
+Vvveb.Components.extend("_base", "html/video", {
+    nodes: ["video"],
+    name: "Video",
+    html: '<video width="320" height="240" playsinline loop autoplay><source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4"><video>',
+    dragHtml: '<img  width="320" height="240" src="' + Vvveb.baseUrl + 'icons/video.svg">',
+	image: "icons/video.svg",
+    properties: [{
+        name: "Src",
+        child: "source",
+        key: "src",
+        htmlAttr: "src",
+        inputtype: LinkInput
+    },{
+        name: "Width",
+        key: "width",
+        htmlAttr: "width",
+        inputtype: TextInput
+    }, {
+        name: "Height",
+        key: "height",
+        htmlAttr: "height",
+        inputtype: TextInput
+    },{
+        name: "Muted",
+        key: "muted",
+        htmlAttr: "muted",
+        inputtype: CheckboxInput
+    },{
+        name: "Loop",
+        key: "loop",
+        htmlAttr: "loop",
+        inputtype: CheckboxInput
+    },{
+        name: "Autoplay",
+        key: "autoplay",
+        htmlAttr: "autoplay",
+        inputtype: CheckboxInput
+    },{
+        name: "Plays inline",
+        key: "playsinline",
+        htmlAttr: "playsinline",
+        inputtype: CheckboxInput
+    },{
+        name: "Controls",
+        key: "controls",
+        htmlAttr: "controls",
+        inputtype: CheckboxInput
+    }]
 });
