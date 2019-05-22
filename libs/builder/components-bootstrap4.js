@@ -69,7 +69,7 @@ function changeNodeName(node, newNodeName)
 }
 
 Vvveb.ComponentsGroup['Bootstrap 4'] =
-["html/container", "html/gridrow", "html/button", "html/buttongroup", "html/buttontoolbar", "html/heading", "html/image", "html/jumbotron", "html/alert", "html/card", "html/listgroup", "html/hr", "html/taglabel", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination", "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/table", "html/paragraph", "html/link", "html/video"];
+["html/container", "html/gridrow", "html/button", "html/buttongroup", "html/buttontoolbar", "html/heading", "html/image", "html/jumbotron", "html/alert", "html/card", "html/listgroup", "html/hr", "html/taglabel", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination", "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/table", "html/paragraph", "html/link", "html/video", "html/button"];
 
 
 var base_sort = 100;//start sorting for base component from 100 to allow extended properties to be first
@@ -2207,6 +2207,52 @@ Vvveb.Components.extend("_base", "html/video", {
         name: "Controls",
         key: "controls",
         htmlAttr: "controls",
+        inputtype: CheckboxInput
+    }]
+});
+
+
+Vvveb.Components.extend("_base", "html/button", {
+    nodes: ["button"],
+    name: "Html Button",
+    image: "icons/button.svg",
+    html: '<button>Button</button>',
+    properties: [{
+        name: "Text",
+        key: "text",
+        htmlAttr: "innerHTML",
+        inputtype: TextInput
+    }, {
+        name: "Name",
+        key: "name",
+        htmlAttr: "name",
+        inputtype: TextInput
+    }, {
+        name: "Type",
+        key: "type",
+		htmlAttr: "type",
+        inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "button",
+				text: "button"
+			}, {	
+				value: "reset",
+				text: "reset"
+			}, {
+				value: "submit",
+				text: "submit"
+			}],
+		}
+   	},{
+        name: "Autofocus",
+        key: "autofocus",
+        htmlAttr: "autofocus",
+        inputtype: CheckboxInput
+   	},{
+        name: "Disabled",
+        key: "disabled",
+        htmlAttr: "disabled",
         inputtype: CheckboxInput
     }]
 });

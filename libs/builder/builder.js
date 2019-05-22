@@ -350,6 +350,10 @@ Vvveb.Components = {
 						{
 							element = element.css(property.key, value);
 						}
+						else if (property.htmlAttr == "innerHTML") 
+						{
+							element = element.html(value);
+						}
 						else
 						{
 							element = element.attr(property.htmlAttr, value);
@@ -404,6 +408,10 @@ Vvveb.Components = {
 				{
 					//value = element.css(property.key);//jquery css returns computed style
 					var value = getStyle(element.get(0), property.key);//getStyle returns declared style
+				} else
+				if (property.htmlAttr == "innerHTML")
+				{
+					var value = element.html();
 				} else
 				{
 					var value = element.attr(property.htmlAttr);
