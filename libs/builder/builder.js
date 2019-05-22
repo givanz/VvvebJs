@@ -688,6 +688,8 @@ Vvveb.Builder = {
 				window.FrameWindow = self.iframe.contentWindow;
 				window.FrameDocument = self.iframe.contentWindow.document;
 				var addSectionBox = jQuery("#add-section-box"); 
+				var highlightBox = jQuery("#highlight-box").hide(); 
+				
 
 				$(window.FrameWindow).on( "beforeunload", function(event) {
 					if (Vvveb.Undo.undoIndex <= 0)
@@ -718,7 +720,7 @@ Vvveb.Builder = {
 						{
 							var offset = self.highlightEl.offset();
 							
-							jQuery("#highlight-box").css(
+							highlightBox.css(
 								{"top": offset.top - self.frameDoc.scrollTop() , 
 								 "left": offset.left - self.frameDoc.scrollLeft() , 
 								 "width" : self.highlightEl.outerWidth(), 
