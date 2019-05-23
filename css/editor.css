@@ -9602,6 +9602,10 @@ body {
   bottom: -10px;
   left: 50%;
   left: calc(50% - 12px); }
+  
+ #vvveb-builder #section-actions.outside { 
+ bottom:-25px;
+ } 
   #vvveb-builder #section-actions a#add-section-btn {
     position: relative;
     bottom: 0px;

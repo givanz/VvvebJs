@@ -746,7 +746,12 @@ body
 		left: 50%;
 		left: calc(50% - 12px);
 
+		&.outside
+		{
+			bottom:-25px;
+		}
 
+		
 		a#add-section-btn
 		{
 			position: relative;
