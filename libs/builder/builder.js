@@ -908,7 +908,8 @@ Vvveb.Builder = {
 						  "display" : event.target.hasAttribute('contenteditable')?"none":"block",
 						  "border":self.isDragging?"1px dashed aqua":"",//when dragging highlight parent with green
 						 });
-					if (height < 30) 
+
+					if (height < 50) 
 					{
 						jQuery("#section-actions").addClass("outside");	 
 					} else
