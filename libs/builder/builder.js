@@ -280,13 +280,14 @@ Vvveb.Components = {
 	render: function(type) {
 
 		var component = this._components[type];
-		
+
 		var componentsPanel = jQuery(this.componentPropertiesElement);
 		var defaultSection = this.componentPropertiesDefaultSection;
 		var componentsPanelSections = {};
-		jQuery(".tab-pane",componentsPanel).each(function ()
+
+		jQuery(this.componentPropertiesElement + " .tab-pane").each(function ()
 		{
-			var sectionName = this.id.replace('-tab', '');
+			var sectionName = this.dataset.section;
 			componentsPanelSections[sectionName] = $(this);
 			
 		});
@@ -574,16 +575,18 @@ Vvveb.Builder = {
 		var componentsList = $(".components-list");
 		componentsList.empty();
 		var item = {}, component = {};
+		var count = 0;
 		
 		componentsList.each(function ()
 		{
 			var list = $(this);
 			var type = this.dataset.type;
+			count ++;
 			
 			for (group in Vvveb.ComponentsGroup)	
 			{
-				list.append('<li class="header clearfix" data-section="' + group + '"  data-search=""><label class="header" for="' + type + '_comphead_' + group + '">' + group + '  <div class="header-arrow"></div>\
-									   </label><input class="header_check" type="checkbox" checked="true" id="' + type + '_comphead_' + group + '">  <ol></ol></li>');
+				list.append('<li class="header clearfix" data-section="' + group + '"  data-search=""><label class="header" for="' + type + '_comphead_' + group + count + '">' + group + '  <div class="header-arrow"></div>\
+									   </label><input class="header_check" type="checkbox" checked="true" id="' + type + '_comphead_' + group + count + '">  <ol></ol></li>');
 
 				var componentsSubList = list.find('li[data-section="' + group + '"]  ol');
 				
@@ -1698,6 +1701,7 @@ Vvveb.ContentManager = {
 		return element.html();
 	},
 }
+
 
 Vvveb.FileManager = {
 	tree:false,
