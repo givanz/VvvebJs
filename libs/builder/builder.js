@@ -60,25 +60,6 @@ var delay = (function(){
   };
 })();
 
-function getStyle(el,styleProp)
-{
-	value = "";
-	//var el = document.getElementById(el);
-	if (el.style && el.style.length > 0 && el.style[styleProp])//check inline
-		var value = el.style[styleProp];
-	else
-	if (el.currentStyle)	//check defined css
-		var value = el.currentStyle[styleProp];
-	else if (window.getComputedStyle)
-	{
-		var value = document.defaultView.getDefaultComputedStyle ? 
-						document.defaultView.getDefaultComputedStyle(el,null).getPropertyValue(styleProp) : 
-						window.getComputedStyle(el,null).getPropertyValue(styleProp);
-	}
-	
-	return value;
-}
-
 function isElement(obj){
    return (typeof obj==="object") &&
       (obj.nodeType===1) && (typeof obj.style === "object") &&
@@ -348,11 +329,11 @@ Vvveb.Components = {
 						}
 						else if (property.htmlAttr == "style") 
 						{
-							element = element.css(property.key, value);
+							element = Vvveb.StyleManager.setStyle(element, property.key, value);
 						}
 						else if (property.htmlAttr == "innerHTML") 
 						{
-							element = element.html(value);
+							element = Vvveb.ContentManager.setHtml(element, value);
 						}
 						else
 						{
@@ -407,11 +388,11 @@ Vvveb.Components = {
 				if (property.htmlAttr == "style")
 				{
 					//value = element.css(property.key);//jquery css returns computed style
-					var value = getStyle(element.get(0), property.key);//getStyle returns declared style
+					var value = Vvveb.StyleManager.getStyle(element, property.key);//getStyle returns declared style
 				} else
 				if (property.htmlAttr == "innerHTML")
 				{
-					var value = element.html();
+					var value = Vvveb.ContentManager.getHtml(element);
 				} else
 				{
 					var value = element.attr(property.htmlAttr);
@@ -763,6 +744,8 @@ Vvveb.Builder = {
 		self.frameHead.append('<link data-vvveb-helpers href="' + Vvveb.baseUrl + '../../css/vvvebjs-editor-helpers.css" rel="stylesheet">');
 
 		self._initHighlight();
+		
+		$(window).triggerHandler("vvveb.iframe.loaded", self.frameDoc);
     },	
     
     _getElementType: function(el) {
@@ -1313,6 +1296,8 @@ Vvveb.Builder = {
 		var hasDoctpe = (doc.doctype !== null);
 		var html = "";
 		
+		$(window).triggerHandler("vvveb.getHtml.before", doc);
+		
 		if (hasDoctpe) html =
 		"<!DOCTYPE "
          + doc.doctype.name
@@ -1323,7 +1308,12 @@ Vvveb.Builder = {
           
          html +=  doc.documentElement.innerHTML + "\n</html>";
          
-         return this.removeHelpers(html, keepHelperAttributes);
+         html = this.removeHelpers(html, keepHelperAttributes);
+         
+         var filter = $(window).triggerHandler("vvveb.getHtml.after", html);
+         if (filter) return filter;
+         
+         return html;
 	},
 	
 	setHtml: function(html) 
@@ -1661,6 +1651,54 @@ Vvveb.Gui = {
 	},
 }
 
+Vvveb.StyleManager = {
+	setStyle: function(element, styleProp, value) {
+		return element.css(styleProp, value);
+	},
+	
+	
+	_getCssStyle: function(element, styleProp){
+		var value = "";
+		var el = element.get(0);
+		
+		if (el.style && el.style.length > 0 && el.style[styleProp])//check inline
+			var value = el.style[styleProp];
+		else
+		if (el.currentStyle)	//check defined css
+			var value = el.currentStyle[styleProp];
+		else if (window.getComputedStyle)
+		{
+			var value = document.defaultView.getDefaultComputedStyle ? 
+							document.defaultView.getDefaultComputedStyle(el,null).getPropertyValue(styleProp) : 
+							window.getComputedStyle(el,null).getPropertyValue(styleProp);
+		}
+		
+		return value;
+	},
+	
+	getStyle: function(element,styleProp){
+		return this._getCssStyle(element, styleProp);
+	}
+}
+
+Vvveb.ContentManager = {
+	getAttr: function(element, attrName) {
+		return element.attr(attrName);
+	},
+	
+	setAttr: function(element, attrName, value) {
+		return element.attr(attrName, value);
+	},
+	
+	setHtml: function(element, html) {
+		return element.html(html);
+	},
+	
+	getHtml: function(element) {
+		return element.html();
+	},
+}
+
 Vvveb.FileManager = {
 	tree:false,
 	pages:{},
@@ -1766,6 +1804,7 @@ Vvveb.FileManager = {
 
 		var tree = this.getComponents(allowedComponents);
 		var html = drawComponentsTree(tree);
+		var j = 0;
 
 		function drawComponentsTree(tree)
 		{

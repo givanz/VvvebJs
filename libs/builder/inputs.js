@@ -68,6 +68,22 @@ var TextInput = $.extend({}, Input, {
   }
 );
 
+var TextareaInput = $.extend({}, Input, {
+
+    events: [
+        ["keyup", "onChange", "textarea"],
+	 ],
+	
+	setValue: function(value) {
+		$('textarea', this.element).val(value);
+	},
+	
+	init: function(data) {
+		return this.render("textareainput", data);
+	},
+  }
+);
+
 var CheckboxInput = $.extend({}, Input, {
 
 	onChange: function(event, node) {

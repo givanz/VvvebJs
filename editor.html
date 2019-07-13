@@ -176,7 +176,32 @@
 									<div class="component-properties-sidepane">
 										<div>
 											<div class="component-properties">
-												<div class="mt-4 text-center">Click on an element to edit.</div>
+												<ul class="nav nav-tabs nav-fill" id="properties-tabs" role="tablist">
+													  <li class="nav-item content-tab">
+														<a class="nav-link active" data-toggle="tab" href="#content-tab" role="tab" aria-controls="components" aria-selected="true">
+															<i class="la la-lg la-cube"></i> <div><span>Content</span></div></a>
+													  </li>
+													  <li class="nav-item style-tab">
+														<a class="nav-link" data-toggle="tab" href="#style-tab" role="tab" aria-controls="blocks" aria-selected="false">
+															<i class="la la-lg la-image"></i> <div><span>Style</span></div></a>
+													  </li>
+													  <li class="nav-item advanced-tab">
+														<a class="nav-link" data-toggle="tab" href="#advanced-tab" role="tab" aria-controls="blocks" aria-selected="false">
+															<i class="la la-lg la-cog"></i> <div><span>Advanced</span></div></a>
+													  </li>
+													</ul>
+											
+													<div class="tab-content">
+														 <div class="tab-pane fade show active" id="content-tab" role="tabpanel" aria-labelledby="content-tab">
+															<div class="mt-4 text-center">Click on an element to edit.</div>
+														</div>
+														
+														 <div class="tab-pane fade show" id="style-tab" role="tabpanel" aria-labelledby="style-tab">
+														</div>
+														
+														 <div class="tab-pane fade show" id="advanced-tab" role="tabpanel" aria-labelledby="advanced-tab">
+														</div>
+													</div>
 											</div>
 										</div>
 									</div>
@@ -387,6 +412,14 @@
 	
 </script>
 
+<script id="vvveb-input-textareainput" type="text/html">
+	
+	<div>
+		<textarea name="{%=key%}" rows="3" class="form-control"/>
+	</div>
+	
+</script>
+
 <script id="vvveb-input-checkboxinput" type="text/html">
 	
 	<div class="custom-control custom-checkbox">
@@ -419,7 +452,7 @@
 	
 		{% for ( var i = 0; i < options.length; i++ ) { %}
 
-		<label class="btn  btn-outline-primary  {%if (options[i].checked) { %}active{% } %}" for="{%=key%}{%=i%} " title="{%=options[i].title%}">
+		<label class="btn  btn-outline-primary  {%if (options[i].checked) { %}active{% } %}  {%if (options[i].extraclass) { %}{%=options[i].extraclass%}{% } %}" for="{%=key%}{%=i%} " title="{%=options[i].title%}">
 		  <input name="{%=key%}" class="custom-control-input" type="radio" value="{%=options[i].value%}" id="{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}"{% } %}>
 		  {%if (options[i].icon) { %}<i class="{%=options[i].icon%}"></i>{% } %}
 		  {%=options[i].text%}
@@ -875,6 +908,7 @@
 -->
 
 <!-- components-->
+<script src="libs/builder/components-server.js"></script>	
 <script src="libs/builder/components-bootstrap4.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
 
@@ -894,6 +928,10 @@
 <!-- jszip - download page as zip -->
 <!-- script src="libs/jszip/jszip.min.js"></script>
 <script src="libs/builder/plugin-jszip.js"></script -->
+
+
+<!-- autocomplete plugin used by autocomplete input-->
+<script src="libs/autocomplete/jquery.autocomplete.js"></script>	
 
 <script>
 $(document).ready(function() 
@@ -925,7 +963,7 @@ $(document).ready(function()
 		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
 		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", assets: ['demo/pricing/pricing.css']},
 		{name:"product", title:"Product",  url: "demo/product/index.html", assets: ['demo/product/product.css']},
-		{name:"ecommerce", title:"eCommerce homepage",  url: "ecommerce_demo/index.html"},
+		{name:"ecommerce", title:"eCommerce homepage",  url: "demo/essence/index.html",  config: "demo/essence/vvvebjs.json"},
 		//uncomment php code below and rename file to .php extension to load saved html files in the editor
 		/*
 		<?php 

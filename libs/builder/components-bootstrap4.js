@@ -736,8 +736,58 @@ Vvveb.Components.extend("_base", "_base", {
 		inline:true,
 		htmlAttr: "style",
         inputtype: ColorInput,
-    }]
+	}]
 });    
+
+
+
+//Border radius
+Vvveb.Components.extend("_base", "_base", {
+	 properties: [{
+		key: "border_radius_header",
+		inputtype: SectionInput,
+		name:false,
+		sort: base_sort++,
+		section: style_section,
+		data: {header:"Border radius", expanded:false},
+	}, {
+        name: "Top Left",
+        key: "border-top-left-radius",
+		htmlAttr: "style",
+        sort: base_sort++,
+		section: style_section,
+        col:6,
+		inline:true,
+        inputtype: CssUnitInput
+	}, {
+        name: "Top Right",
+        key: "border-top-right-radius",
+		htmlAttr: "style",
+        sort: base_sort++,
+		section: style_section,
+        col:6,
+		inline:true,
+        inputtype: CssUnitInput
+    }, {
+        name: "Bottom Left",
+        key: "border-bottom-left-radius",
+		htmlAttr: "style",
+        sort: base_sort++,
+		section: style_section,
+        col:6,
+		inline:true,
+        inputtype: CssUnitInput
+    }, {
+        name: "Bottom Right",
+        key: "border-bottom-right-radius",
+		htmlAttr: "style",
+        sort: base_sort++,
+		section: style_section,
+        col:6,
+		inline:true,
+        inputtype: CssUnitInput
+    }]
+});
 
 //Background image
 Vvveb.Components.extend("_base", "_base", {
@@ -2021,7 +2071,10 @@ Vvveb.Components.add("html/gridrow", {
     image: "icons/grid_row.svg",
     classes: ["row"],
     html: '<div class="row"><div class="col-sm-4"><h3>col-sm-4</h3></div><div class="col-sm-4 col-5"><h3>col-sm-4</h3></div><div class="col-sm-4"><h3>col-sm-4</h3></div></div>',
-    
+    children :[{
+		name: "html/gridcolumn",
+		classesRegex: ["col-"],
+	}],
 	beforeInit: function (node)
 	{
 		properties = [];
@@ -2254,5 +2307,27 @@ Vvveb.Components.extend("_base", "html/button", {
         key: "disabled",
         htmlAttr: "disabled",
         inputtype: CheckboxInput
+    }]
+});   
+
+Vvveb.Components.extend("_base", "_base", {
+	 properties: [
+	 {
+        name: "Font family",
+        key: "font-family",
+		htmlAttr: "style",
+        sort: base_sort++,
+        col:6,
+		inline:true,
+        inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "extended"
+			}, {
+				value: "Ggoogle ",
+				text: "google"
+			}]
+		}
     }]
 });
