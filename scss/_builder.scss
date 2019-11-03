@@ -23,7 +23,7 @@ $builder-border-color: #ddd !default;
 $builder-left-panel-width:300px !default;
 $builder-right-panel-width:300px !default;
 $builder-canvas-margin:0px !default;
-$builder-filemanager-height:200px !default;
+$builder-filemanager-height:250px !default;
 $drag-items-tabs-height:90px !default;
 $builder-background-color: #4285f4 !default;
 
@@ -228,9 +228,9 @@ body
 
 		#filemanager
 		{
-			height:$builder-filemanager-height;
+			//height:$builder-filemanager-height;
 			width:$builder-right-panel-width + 15;
-			height: var(--builder-filemanager-height);
+			//height: var(--builder-filemanager-height);
 			width:calc( var(--builder-left-panel-width));
 			border-bottom: 1px solid #ddd;
 		
@@ -268,6 +268,8 @@ body
 				{
 					overflow-y: auto;
 				}
+				
+				resize:vertical;
 				
 				@include webkit-scrollbar();
 			}
@@ -314,6 +316,7 @@ body
 		text-align:center;
 		background-color:#fafafa;
 		overflow:hidden;
+		width:100%;
 		
 		.btn-group
 		{

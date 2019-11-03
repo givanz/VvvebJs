@@ -1747,8 +1747,21 @@ Vvveb.FileManager = {
 		
 		this.pages[name] = data;
 		data['name'] = name;
+
+		var folder = this.tree;
+		if (data.folder)
+		{
+			if (!(folder = this.tree.find('li[data-folder="' + data.folder + '"]')).length) 
+			{
+				data.folderTitle = data.folder[0].toUpperCase() + data.folder.slice(1);
+				folder = $(tmpl("vvveb-filemanager-folder", data));
+				this.tree.append(folder);
+			}
+			
+			folder = folder.find("> ol");
+		} 
 		
-		this.tree.append(
+		folder.append(
 			tmpl("vvveb-filemanager-page", data));
 	},
 	
@@ -1872,6 +1885,7 @@ Vvveb.FileManager = {
 		scroll.scrollTop(scroll.prop("scrollHeight"));	
 	},
 }
+
 
 // Toggle fullscreen
 function launchFullScreen(document) {

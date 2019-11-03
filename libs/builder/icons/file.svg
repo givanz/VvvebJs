@@ -7,24 +7,25 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="24"
    version="1.1"
-   viewBox="0 -64 512 512"
-   id="svg6"
+   viewBox="0 0 24 24"
+   width="24"
+   id="svg11"
    sodipodi:docname="file.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <metadata
-     id="metadata12">
+     id="metadata15">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <defs
-     id="defs10" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -36,23 +37,30 @@
      inkscape:pageshadow="2"
      inkscape:window-width="2560"
      inkscape:window-height="1391"
-     id="namedview8"
+     id="namedview13"
      showgrid="false"
-     inkscape:zoom="0.4609375"
-     inkscape:cx="260.33898"
-     inkscape:cy="256"
+     inkscape:zoom="7.375"
+     inkscape:cx="16.271186"
+     inkscape:cy="16"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg6" />
+     inkscape:current-layer="svg11" />
+  <desc
+     id="desc4" />
+  <defs
+     id="defs6" />
   <g
-     transform="matrix(1.1694915,0,0,-1.1694915,-11.389831,418.16949)"
-     id="g4"
-     style="fill:#808080">
-    <path
-       d="m 80,400 h 16 192 6.5 l 5,-4.5 96,-96 4.5,-5 V 288 0 -16 H 384 96 80 V 0 384 Z m 32,-32 V 16 h 256 v 256 h -80 -16 v 16 80 z m 192,-23 v -41 h 41 z"
-       id="path2"
-       inkscape:connector-curvature="0"
-       style="fill:#808080" />
+     id="Page-1"
+     transform="matrix(0.88,0,0,0.88,-2.3589831,-2.4945763)"
+     style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1">
+    <g
+       id="icon-54-document"
+       style="fill:#555">
+      <path
+         d="M 19.5,3 H 9.0027601 C 7.8966662,3 7,3.8983383 7,5.0073299 V 27.99267 C 7,29.101288 7.8909254,30 8.9974219,30 H 24.002578 C 25.105724,30 26,29.101788 26,28.009205 V 10.5 10 L 20,3 Z M 19,4 H 8.9955775 C 8.4457352,4 8,4.4552629 8,4.995457 V 28.004543 C 8,28.554319 8.4547089,29 8.9999602,29 H 24.00004 C 24.552303,29 25,28.555054 25,28.006602 V 11 H 20.997913 C 19.894496,11 19,10.113445 19,8.994081 Z m 1,0.5 V 8.9912152 C 20,9.5483517 20.450651,10 20.996739,10 h 3.703212 z"
+         id="document"
+         inkscape:connector-curvature="0" />
+    </g>
   </g>
 </svg>

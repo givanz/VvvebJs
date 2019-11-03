@@ -719,15 +719,22 @@
 </script>
 
 
+<script id="vvveb-filemanager-folder" type="text/html">
+	<li data-folder="{%=folder%}" class="folder">
+		<label for="{%=folder%}"><span>{%=folderTitle%}</span></label> <input type="checkbox" id="{%=folder%}" />
+		<ol></ol>
+	</li>
+</script>
+
 <script id="vvveb-filemanager-page" type="text/html">
-	<li data-url="{%=url%}" data-page="{%=name%}">
+	<li data-url="{%=url%}" data-page="{%=name%}" class="file">
 		<label for="{%=name%}"><span>{%=title%}</span></label> <input type="checkbox" checked id="{%=name%}" />
 		<ol></ol>
 	</li>
 </script>
 
 <script id="vvveb-filemanager-component" type="text/html">
-	<li data-url="{%=url%}" data-component="{%=name%}" class="file">
+	<li data-url="{%=url%}" data-component="{%=name%}" class="component">
 		<a href="{%=url%}"><span>{%=title%}</span></a>
 	</li>
 </script>
@@ -957,13 +964,12 @@ $(document).ready(function()
 	[
 		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
 		{name:"landing-page", title:"Landing page",  url: "demo/startbootstrap-landing-page/index.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
-		{name:"album", title:"Album",  url: "demo/album/index.html", assets: ['demo/album/album.css']},
-		{name:"blog", title:"Blog",  url: "demo/blog/index.html", assets: ['demo/blog/blog.css']},
-		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html", assets: ['demo/carousel/carousel.css']},
-		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
-		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", assets: ['demo/pricing/pricing.css']},
-		{name:"product", title:"Product",  url: "demo/product/index.html", assets: ['demo/product/product.css']},
-		{name:"ecommerce", title:"eCommerce homepage",  url: "demo/essence/index.html",  config: "demo/essence/vvvebjs.json"},
+		{name:"album", title:"Album",  url: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
+		{name:"blog", title:"Blog",  url: "demo/blog/index.html", folder:"content", assets: ['demo/blog/blog.css']},
+		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html", folder:"content", assets: ['demo/carousel/carousel.css']},
+		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", folder:"content", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
+		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", folder:"ecommerce", assets: ['demo/pricing/pricing.css']},
+		{name:"product", title:"Product",  url: "demo/product/index.html", folder:"ecommerce", assets: ['demo/product/product.css']},
 		//uncomment php code below and rename file to .php extension to load saved html files in the editor
 		/*
 		<?php 
@@ -975,7 +981,6 @@ $(document).ready(function()
 		{name:"<?php echo ucfirst($pathInfo['filename']);?>", title:"<?php echo ucfirst($pathInfo['filename']);?>",  url: "<?php echo $pathInfo['basename'];?>"},
 		<?php } ?>
 		*/
-		{name:"test", title:"test",  url: "http://vvveb_install.givan.ro/"},
 	]);
 	
 	Vvveb.FileManager.loadPage("narrow-jumbotron");

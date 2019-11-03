@@ -13,7 +13,7 @@
 		{ 
 			position: relative; 
 			margin-left: -15px;
-			margin-bottom: 0.2rem;
+			margin-bottom: 0.1rem;
 			list-style: none;
 			color:#555;
 			overflow:hidden;
@@ -37,25 +37,29 @@
 		
 		li.file
 		{
-			margin-left: -1px !important;
-			
 			> label
 			{
-				background: url(../libs/builder/icons/file.svg) 0px 0px no-repeat;
-				background-size:16px 16px;
+				background: url(../libs/builder/icons/file.svg) 12px 0px no-repeat;
+				background-size:19px 18px;
 				cursor: pointer;
-				
-				color: #333;
-				padding-left: 21px;
-				text-decoration: none;
 				display: block;
-				margin-bottom: 0.5rem;
+				padding-left: 35px;
+				margin:0px;
+				font-size:12px;
 
 
 				&:hover
 				{
 					color:$primary;
 				}
+			}
+		}
+		
+		li.folder
+		{
+			> label
+			{
+				padding-left:38px;
 			}
 		}
 
@@ -78,8 +82,8 @@
 				background: url(../libs/builder/icons/arrow-down.svg) 42px 2px no-repeat;
 				background-size:10px 10px;
 				
-				margin: -1.5em 0 0 -44px; /* 15px */
-				padding:0.8rem 0rem;
+				margin: -1.1em 0 0 -44px; /* 15px */
+				padding:0.7rem 0rem;
 				height: 0em;
 				
 				> li { display: none; margin-left: -14px !important; padding-left: 1px; }
@@ -89,7 +93,6 @@
 		li label
 		{
 			background: url(../libs/builder/icons/folder.svg) 15px 1px no-repeat;
-			background: url(../libs/builder/icons/file.svg) 12px 0px no-repeat;
 			background-size:18px 18px;
 			cursor: pointer;
 			display: block;
@@ -105,7 +108,7 @@
 			background: url(../libs/builder/icons/arrow-right.svg) 54px 0px no-repeat;
 			background-size:10px 10px;
 			margin: -1.65em 0 0 -44px; /* 20px */
-			margin: -1.25em 0 0 -55px; /* 20px */
+			margin: -1.1em 0 0 -55px; /* 20px */
 			padding: 2.1em 0 0 80px;
 			height: auto;
 
