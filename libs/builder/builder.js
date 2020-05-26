@@ -338,7 +338,14 @@ Vvveb.Components = {
 						}
 						else
 						{
-							element = element.attr(property.htmlAttr, value);
+							//if value is empty then remove attribute useful for attributes without values like disabled
+							if (value)
+							{
+								element = element.attr(property.htmlAttr, value);
+							} else
+							{
+								element = element.removeAttr(property.htmlAttr);
+							}
 						}
 						
 						Vvveb.Undo.addMutation({type: 'attributes', 

@@ -280,13 +280,65 @@ Vvveb.Components.extend("_base", "_base", {
 		sort: base_sort++,
 		section: style_section,
 		data: {header:"Typography"},
-    }, {
+ 
+	}, {
+        name: "Font size",
+        key: "font-size",
+		htmlAttr: "style",
+        sort: base_sort++,
+		section: style_section,
+        col:6,
+		inline:true,
+        inputtype: CssUnitInput
+	}, {
+        name: "Font weight",
+        key: "font-weight",
+		htmlAttr: "style",
+        sort: base_sort++,
+		section: style_section,
+        col:6,
+		inline:true,
+        inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "Default"
+			}, {	
+				value: "100",
+				text: "Thin"
+			}, {
+				value: "200",
+				text: "Extra-Light"
+			}, {
+				value: "300",
+				text: "Light"
+			}, {
+				value: "400",
+				text: "Normal"
+			}, {
+				value: "500",
+				text: "Medium"
+			}, {
+				value: "600",
+				text: "Semi-Bold"
+			}, {
+				value: "700",
+				text: "Bold"
+			}, {
+				value: "800",
+				text: "Extra-Bold"
+			}, {
+				value: "900",
+				text: "Ultra-Bold"
+			}],
+		}
+   }, {
         name: "Font family",
         key: "font-family",
 		htmlAttr: "style",
         sort: base_sort++,
 		section: style_section,
-        col:6,
+        col:12,
 		inline:true,
         inputtype: SelectInput,
         data: {
@@ -333,49 +385,7 @@ Vvveb.Components.extend("_base", "_base", {
 				value: 'Brush Script MT, sans-serif',
 				text: 'Brush Script'
 			}]
-		}
-	}, {
-        name: "Font weight",
-        key: "font-weight",
-		htmlAttr: "style",
-        sort: base_sort++,
-		section: style_section,
-        col:6,
-		inline:true,
-        inputtype: SelectInput,
-        data: {
-			options: [{
-				value: "",
-				text: "Default"
-			}, {	
-				value: "100",
-				text: "Thin"
-			}, {
-				value: "200",
-				text: "Extra-Light"
-			}, {
-				value: "300",
-				text: "Light"
-			}, {
-				value: "400",
-				text: "Normal"
-			}, {
-				value: "500",
-				text: "Medium"
-			}, {
-				value: "600",
-				text: "Semi-Bold"
-			}, {
-				value: "700",
-				text: "Bold"
-			}, {
-				value: "800",
-				text: "Extra-Bold"
-			}, {
-				value: "900",
-				text: "Ultra-Bold"
-			}],
-		}
+		}		
 	}, {
         name: "Text align",
         key: "text-align",
@@ -1170,7 +1180,7 @@ Vvveb.Components.extend("_base", "html/button", {
         validValues: ["disabled"],
         data: {
             on: "disabled",
-            off: ""
+            off: null
         }
     }]
 });
@@ -1659,8 +1669,9 @@ Vvveb.Components.extend("_base", "html/form", {
 });
 
 Vvveb.Components.extend("_base", "html/textinput", {
-    name: "Text Input",
-	attributes: {"type":"text"},
+    name: "Input",
+	nodes: ["input"],
+	//attributes: {"type":"text"},
     image: "icons/text_input.svg",
     html: '<div class="form-group"><label>Text</label><input type="text" class="form-control"></div></div>',
     properties: [{
@@ -1669,11 +1680,121 @@ Vvveb.Components.extend("_base", "html/textinput", {
         htmlAttr: "value",
         inputtype: TextInput
     }, {
+        name: "Type",
+        key: "type",
+        htmlAttr: "type",
+		inputtype: SelectInput,
+        data: {
+            options: [{
+                value: "text",
+                text: "text"
+            }, {
+                value: "button",
+                text: "button"
+            }, {
+
+                value: "checkbox",
+                text: "checkbox"
+            }, {
+
+                value: "color",
+                text: "color"
+            }, {
+
+                value: "date",
+                text: "date"
+            }, {
+
+                value: "datetime-local",
+                text: "datetime-local"
+            }, {
+
+                value: "email",
+                text: "email"
+            }, {
+
+                value: "file",
+                text: "file"
+            }, {
+
+                value: "hidden",
+                text: "hidden"
+            }, {
+
+                value: "image",
+                text: "image"
+            }, {
+
+                value: "month",
+                text: "month"
+            }, {
+
+                value: "number",
+                text: "number"
+            }, {
+
+                value: "password",
+                text: "password"
+            }, {
+
+                value: "radio",
+                text: "radio"
+            }, {
+
+                value: "range",
+                text: "range"
+            }, {
+
+                value: "reset",
+                text: "reset"
+            }, {
+
+                value: "search",
+                text: "search"
+            }, {
+
+                value: "submit",
+                text: "submit"
+            }, {
+
+                value: "tel",
+                text: "tel"
+            }, {
+
+                value: "text",
+                text: "text"
+            }, {
+
+                value: "time",
+                text: "time"
+            }, {
+
+                value: "url",
+                text: "url"
+            }, {
+
+                value: "week",
+                text: "week"
+            }]
+        }
+    }, {
         name: "Placeholder",
         key: "placeholder",
         htmlAttr: "placeholder",
         inputtype: TextInput
-    }]
+    }, {
+        name: "Disabled",
+        key: "disabled",
+        htmlAttr: "disabled",
+		col:6,
+        inputtype: CheckboxInput,
+	},{
+        name: "Required",
+        key: "required",
+        htmlAttr: "required",
+		col:6,
+        inputtype: CheckboxInput,
+	}]
 });
 
 Vvveb.Components.extend("_base", "html/selectinput", {
@@ -2301,12 +2422,16 @@ Vvveb.Components.extend("_base", "html/button", {
         name: "Autofocus",
         key: "autofocus",
         htmlAttr: "autofocus",
-        inputtype: CheckboxInput
+        inputtype: CheckboxInput,
+		inline:true,
+        col:6,
    	},{
         name: "Disabled",
         key: "disabled",
         htmlAttr: "disabled",
-        inputtype: CheckboxInput
+        inputtype: CheckboxInput,		
+		inline:true,
+        col:6,
     }]
 });   
 
