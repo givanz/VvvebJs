@@ -274,7 +274,6 @@ Vvveb.Components = {
 		if (tagName in this._nodesLookup) return this._nodesLookup[ tagName ];
 	
 		return false;
-		//return false;
 	},
 	
 	render: function(type) {
@@ -301,7 +300,7 @@ Vvveb.Components = {
 		}
 
 		componentsPanelSections[defaultSection].find('[data-header="default"] span').html(component.name);
-		section.html("")	
+		section.html("");	
 	
 		if (component.beforeInit) component.beforeInit(Vvveb.Builder.selectedEl.get(0));
 		
@@ -373,7 +372,7 @@ Vvveb.Components = {
 			var property = component.properties[i];
 			var element = nodeElement;
 			
-			if (property.beforeInit) property.beforeInit(element.get(0)) 
+			if (property.beforeInit) property.beforeInit(element.get(0));
 			
 			if (property.child) element = element.find(property.child);
 			
@@ -616,7 +615,7 @@ Vvveb.Builder = {
 							})
 						}
 						
-						componentsSubList.append(item)
+						componentsSubList.append(item);
 					}
 				}
 			}
@@ -657,10 +656,10 @@ Vvveb.Builder = {
 							item.css({
 								backgroundImage: "url(" + ((block.image.indexOf('//') == -1) ? 'libs/builder/':'') + block.image + ")",
 								backgroundRepeat: "no-repeat"
-							})
+							});
 						}
 						
-						blocksSubList.append(item)
+						blocksSubList.append(item);
 					}
 				}
 			}
@@ -1335,7 +1334,7 @@ Vvveb.Builder = {
         if (start >= 0 && end >= 0) {
             body = html.slice(html.indexOf(">", start) + 1, end);
         } else {
-            body = html
+            body = html;
         }
         
         if (this.runJsOnSetHtml)
