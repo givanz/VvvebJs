@@ -301,7 +301,7 @@ Vvveb.Components.extend("_base", "_base", {
         inputtype: SelectInput,
         data: {
 			options: [{
-				value: "",
+				value: "normal",
 				text: "Default"
 			}, {	
 				value: "100",
@@ -349,13 +349,13 @@ Vvveb.Components.extend("_base", "_base", {
 				value: "Arial, Helvetica, sans-serif",
 				text: "Arial"
 			}, {
-				value: 'Lucida Sans Unicode", "Lucida Grande", sans-serif',
+				value: '\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif',
 				text: 'Lucida Grande'
 			}, {
-				value: 'Palatino Linotype", "Book Antiqua", Palatino, serif',
+				value: '\'Palatino Linotype\', \'Book Antiqua\', Palatino, serif',
 				text: 'Palatino Linotype'
 			}, {
-				value: '"Times New Roman", Times, serif',
+				value: '\'Times New Roman\', Times, serif',
 				text: 'Times New Roman'
 			}, {
 				value: "Georgia, serif",
@@ -364,7 +364,7 @@ Vvveb.Components.extend("_base", "_base", {
 				value: "Tahoma, Geneva, sans-serif",
 				text: "Tahoma"
 			}, {
-				value: 'Comic Sans MS, cursive, sans-serif',
+				value: '\'Comic Sans MS\', cursive, sans-serif',
 				text: 'Comic Sans'
 			}, {
 				value: 'Verdana, Geneva, sans-serif',
@@ -373,19 +373,19 @@ Vvveb.Components.extend("_base", "_base", {
 				value: 'Impact, Charcoal, sans-serif',
 				text: 'Impact'
 			}, {
-				value: 'Arial Black, Gadget, sans-serif',
+				value: '\'Arial Black\', Gadget, sans-serif',
 				text: 'Arial Black'
 			}, {
-				value: 'Trebuchet MS, Helvetica, sans-serif',
+				value: '\'Trebuchet MS\', Helvetica, sans-serif',
 				text: 'Trebuchet'
 			}, {
-				value: 'Courier New", Courier, monospace',
-				text: 'Courier New", Courier, monospace'
+				value: '\'Courier New\', Courier, monospace',
+				text: 'Courier New'
 			}, {
-				value: 'Brush Script MT, sans-serif',
+				value: '\'Brush Script MT\', sans-serif',
 				text: 'Brush Script'
 			}]
-		}		
+		}
 	}, {
         name: "Text align",
         key: "text-align",

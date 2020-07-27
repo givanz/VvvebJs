@@ -560,3 +560,32 @@ var AutocompleteList = $.extend({}, Input, {
 	}
   }
 );
+
+var TagsInput = $.extend({}, Input, {
+
+    events: [
+        ["tagsinput.change", "onTagsInputChange", "input"],
+	 ],
+
+	onTagsInputChange: function(event, value, text) {
+		
+		if (event.data && event.data.element)
+		{
+			event.data.element.trigger('propertyChange', [value, this]);
+		}
+	},
+
+	setValue: function(value) {
+		$('input', this.element).data("tagsInput").setValue(value);
+	},
+
+	init: function(data) {
+		
+		this.element = this.render("tagsinput", data);
+		
+		$('input', this.element).tagsInput(data);//using default parameters
+		
+		return this.element;
+	}
+  }
+);

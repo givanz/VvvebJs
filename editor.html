@@ -61,20 +61,20 @@
 						  <i class="la la-arrows"></i>
 					  </button>
 
-					</div>
-					
-					<div class="btn-group mr-3" role="group">
-					  <button class="btn btn-light" title="Export (Ctrl + E)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-shortcut="ctrl+e">
-						  <i class="la la-save"></i>
-					  </button>
-					  
 					  <button class="btn btn-light" title="Download" id="download-btn" data-vvveb-action="download" data-download="index.html">
 						  <i class="la la-download"></i>
 					  </button>
+
+					</div>
+					
+								
+					<div class="btn-group mr-3 float-right" role="group">
+					  <button class="btn btn-primary btn-icon" title="Export (Ctrl + E)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-url="/admin/?module=editor/editor&action=save" data-v-vvveb-shortcut="ctrl+e">
+						  <i class="la la-save"></i> <span data-v-gettext>Save page</span>
+					  </button>
 					</div>	
 
-
-					<div class="btn-group float-right responsive-btns" role="group">
+					<div class="btn-group float-right mr-3 responsive-btns" role="group">
 		 			 <button id="mobile-view" data-view="mobile" class="btn btn-light"  title="Mobile view" data-vvveb-action="viewport">
 						  <i class="la la-mobile-phone"></i>
 					  </button>
@@ -119,16 +119,19 @@
 					  
 					  <div class="drag-elements">
 
-						<div class="header">							
-							<ul class="nav nav-tabs" id="elements-tabs" role="tablist">
+						<div class="header">
+							<ul class="nav nav-tabs  nav-fill" id="elements-tabs" role="tablist">
 							  <li class="nav-item component-tab">
-								<a class="nav-link active" id="components-tab" data-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="true"><i class="la la-lg la-cube"></i> <div><small>Components</small></div></a>
+								<a class="nav-link active" id="components-tab" data-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="true" title="Components"><img src="libs/builder/icons/product.svg" height="23"> <div><small>Components</small></div></a>
 							  </li>
+							  <!-- li class="nav-item blocks-tab">
+								<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false" title="Sections"><img src="libs/builder/icons/list_group.svg" width="24" height="23"> <div><small>Sections</small></div></a>
+							  </li -->
 							  <li class="nav-item blocks-tab">
-								<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
+								<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false" title="Blocks"><img src="libs/builder/icons/list_group.svg" height="23"> <div><small>Sections</small></div></a>
 							  </li>
 							  <li class="nav-item component-properties-tab" style="display:none">
-								<a class="nav-link" id="properties-tab" data-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
+								<a class="nav-link" id="properties-tab" data-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false" title="Properties"><img src="libs/builder/icons/filters.svg" height="23"> <div><small>Properties</small></div></a>
 							  </li>
 							</ul>
 					
@@ -139,8 +142,8 @@
 										  <input class="form-control form-control-sm component-search" placeholder="Search components" type="text" data-vvveb-action="componentSearch" data-vvveb-on="keyup">
 										  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
 											  <i class="la la-close"></i>
-										  </button>
-									  </div>
+											</button>
+									</div>
 
 									<div class="drag-elements-sidepane sidepane">
 									  <div>
@@ -148,28 +151,86 @@
 										<ul class="components-list clearfix" data-type="leftpanel">
 										</ul>
 
-									  </div>
 									</div>
+								</div>
+							</div>
 							  
-							  </div>
 							  <div class="tab-pane fade" id="blocks" role="tabpanel" aria-labelledby="blocks-tab">
 								  
-								   <div class="search">
-										  <input class="form-control form-control-sm block-search" placeholder="Search blocks" type="text" data-vvveb-action="blockSearch" data-vvveb-on="keyup">
-										  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
-											  <i class="la la-close"></i>
-										  </button>
-									  </div>
 
-									<div class="drag-elements-sidepane sidepane">
-									  <div>
-										  
-										<ul class="blocks-list clearfix" data-type="leftpanel">
+										<ul class="nav nav-tabs nav-fill sections-tabs" id="properties-tabs" role="tablist">
+										  <li class="nav-item content-tab">
+											<a class="nav-link active" data-toggle="tab" href="#sections-new-tab" role="tab" aria-controls="components" aria-selected="true">
+												<i class="la la-plus"></i> <div><span>Add section</span></div></a>
+										  </li>
+										  <li class="nav-item style-tab">
+											<a class="nav-link" data-toggle="tab" href="#sections-list" role="tab" aria-controls="blocks" aria-selected="false">
+												<i class="la la-bars"></i> <div><span>Page Sections</span></div></a>
+										  </li>
 										</ul>
+								
+										<div class="tab-content">
+											 <div class="tab-pane fade show active" id="sections-new-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
 
-									  </div>
-									</div>
-							  
+
+													   <div class="search">
+															  <input class="form-control form-control-sm block-search" placeholder="Search sections" type="text" data-vvveb-action="blockSearch" data-vvveb-on="keyup">
+															  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
+																  <i class="la la-close"></i>
+															  </button>
+														</div>
+
+											  
+														<div class="drag-elements-sidepane sidepane">
+														  <div>
+															  
+															<ul class="blocks-list clearfix" data-type="leftpanel">
+															</ul>
+
+														  </div>
+														</div>
+
+											</div>
+											
+											 <div class="tab-pane fade show" id="sections-list" data-section="style" role="tabpanel" aria-labelledby="style-tab">
+
+								<div class="sections">
+													  
+														<div class="section-item">
+															<div class="handle"></div>
+															<div>
+																
+																<div class="name">Top header <div class="type">header</div></div>
+																
+															</div>
+															<div class="buttons">
+																<a class="delete-btn" href="" title="Remove element"><i class="la la-trash text-danger"></i></a>
+																<a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
+																<a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
+																<a class="properties-btn" href="" title="Properties"><i class="la la-cog"></i></a>
+															</div>
+														</div>														
+														<div class="section-item">
+															<div class="handle"></div>
+															<div>
+																
+																<div class="name">Welcome area <div class="type">section</div></div>
+																
+															</div>
+															<div class="buttons">
+																<a class="delete-btn" href="" title="Remove element"><i class="la la-trash text-danger"></i></a>
+																<a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
+																<a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
+																<a class="properties-btn" href="" title="Properties"><i class="la la-cog"></i></a>
+															</div>
+														</div>														
+														
+												  </div>
+																									
+											</div>
+											
+										</div>
+							
 							  </div>
 							
 								<div class="tab-pane fade" id="properties" role="tabpanel" aria-labelledby="blocks-tab">
@@ -205,10 +266,10 @@
 											</div>
 										</div>
 									</div>
-								</div>
+							  </div>
 							</div>
 						</div>							
-
+					
 					  </div>
 				</div>	
 
@@ -228,11 +289,43 @@
 							<div id="select-box">
 
 								<div id="wysiwyg-editor">
-										<a id="bold-btn" href="" title="Bold"><i><strong>B</strong></i></a>
-										<a id="italic-btn" href="" title="Italic"><i>I</i></a>
-										<a id="underline-btn" href="" title="Underline"><u>u</u></a>
+										<a id="bold-btn" href="" title="Bold"><i class="la la-bold"></i></a>
+										<a id="italic-btn" href="" title="Italic"><i class="la la-italic"></i></a>
+										<a id="underline-btn" href="" title="Underline"><i class="la la-underline"></i></a>
 										<a id="strike-btn" href="" title="Strikeout"><del>S</del></a>
-										<a id="link-btn" href="" title="Create link"><strong>a</strong></a>
+										<a id="link-btn" href="" title="Create link"><i class="la la-link"></i></a>
+										
+										<div class="dropdown">
+										  <a class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="la la-align-left"></i>
+										  </a>
+
+											  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+												<a class="dropdown-item" href="#"><i class="la la-lg la-align-left"></i> Align Left</a>
+												<a class="dropdown-item" href="#"><i class="la la-lg la-align-center"></i> Align Center</a>
+												<a class="dropdown-item" href="#"><i class="la la-lg la-align-right"></i> Align Right</a>
+												<a class="dropdown-item" href="#"><i class="la la-lg la-align-justify"></i> Align Justify</a>
+											  </div>
+										</div>
+										
+										<input name="color" type="color" pattern="#[a-f0-9]{6}" class="form-control">
+										
+										<select class="custom-select">
+											<option value="">Default</option>
+											<option value="Arial, Helvetica, sans-serif">Arial</option>
+											<option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif">Lucida Grande</option>
+											<option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif">Palatino Linotype</option>
+											<option value="'Times New Roman', Times, serif">Times New Roman</option>
+											<option value="Georgia, serif">Georgia, serif</option>
+											<option value="Tahoma, Geneva, sans-serif">Tahoma</option>
+											<option value="'Comic Sans MS', cursive, sans-serif">Comic Sans</option>
+											<option value="Verdana, Geneva, sans-serif">Verdana</option>
+											<option value="Impact, Charcoal, sans-serif">Impact</option>
+											<option value="'Arial Black', Gadget, sans-serif">Arial Black</option>
+											<option value="'Trebuchet MS', Helvetica, sans-serif">Trebuchet</option>
+											<option value="'Courier New', Courier, monospace">Courier New</option>
+											<option value="'Brush Script MT', sans-serif">Brush Script</option>
+										</select>
 								</div>
 
 								<div id="select-actions">
@@ -734,7 +827,7 @@
 </script>
 
 <script id="vvveb-filemanager-page" type="text/html">
-	<li data-url="{%=url%}" data-page="{%=name%}" class="file">
+	<li data-url="{%=url%}" data-file="{%=file%}" data-page="{%=name%}" class="file">
 		<label for="{%=name%}"><span>{%=title%}</span></label> <input type="checkbox" checked id="{%=name%}" />
 		<ol></ol>
 	</li>
@@ -773,18 +866,37 @@
 		<input name="{%=key%}" type="text" class="form-control"/>
 		
 		<div class="form-control autocomplete-list" style="min=height: 150px; overflow: auto;">
-                  <div id="featured-product43"><i class="la la-close"></i> MacBook
-                    <input name="product[]" value="43" type="hidden">
                   </div>
-                                  <div id="featured-product40"><i class="la la-close"></i> iPhone
-                    <input name="product[]" value="40" type="hidden">
                   </div>
-                                  <div id="featured-product42"><i class="la la-close"></i> Apple Cinema 30"
-                    <input name="product[]" value="42" type="hidden">
+	
+</script>
+
+<script id="vvveb-input-tagsinput" type="text/html">
+	
+	<div>
+		<div class="form-control tags-input" style="height:auto;">
+				
+
+				<input name="{%=key%}" type="text" class="form-control" style="border:none;min-width:60px;"/>
                   </div>
-                                  <div id="featured-product30"><i class="la la-close"></i> Canon EOS 5D
-                    <input name="product[]" value="30" type="hidden">
                   </div>
+	
+</script>
+
+<script id="vvveb-section" type="text/html">
+
+	<div class="section-item">
+		<div class="handle"></div>
+		<div>
+			
+			<div class="name">{%=name%} <div class="type">{%=type%}</div></div>
+			
+		</div>
+		<div class="buttons">
+			<a class="delete-btn" href="" title="Remove element"><i class="la la-trash text-danger"></i></a>
+			<a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
+			<a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
+			<a class="properties-btn" href="" title="Properties"><i class="la la-cog"></i></a>
 		</div>
 	</div>
 	
@@ -922,7 +1034,7 @@
 -->
 
 <!-- components-->
-<script src="libs/builder/components-server.js"></script>	
+<!-- script src="libs/builder/components-server.js"></script -->	
 <script src="libs/builder/components-bootstrap4.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
 
@@ -967,16 +1079,17 @@ $(document).ready(function()
 
 	Vvveb.Gui.init();
 	Vvveb.FileManager.init();
+	Vvveb.Sections.init();
 	Vvveb.FileManager.addPages(
 	[
-		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
-		{name:"landing-page", title:"Landing page",  url: "demo/startbootstrap-landing-page/index.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
-		{name:"album", title:"Album",  url: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
-		{name:"blog", title:"Blog",  url: "demo/blog/index.html", folder:"content", assets: ['demo/blog/blog.css']},
-		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html", folder:"content", assets: ['demo/carousel/carousel.css']},
-		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", folder:"content", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
-		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", folder:"ecommerce", assets: ['demo/pricing/pricing.css']},
-		{name:"product", title:"Product",  url: "demo/product/index.html", folder:"ecommerce", assets: ['demo/product/product.css']},
+		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
+		{name:"landing-page", title:"Landing page",  url: "demo/startbootstrap-landing-page/index.html", file: "demo/startbootstrap-landing-page/index.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
+		{name:"album", title:"Album",  url: "demo/album/index.html", file: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
+		{name:"blog", title:"Blog",  url: "demo/blog/index.html", file: "demo/blog/index.html", folder:"content", assets: ['demo/blog/blog.css']},
+		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html",  file: "demo/carousel/index.html", folder:"content", assets: ['demo/carousel/carousel.css']},
+		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", file: "demo/offcanvas/index.html", folder:"content", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
+		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", file: "demo/pricing/index.html", folder:"ecommerce", assets: ['demo/pricing/pricing.css']},
+		{name:"product", title:"Product",  url: "demo/product/index.html", file: "demo/product/index.html", folder:"ecommerce", assets: ['demo/product/product.css']},
 		//uncomment php code below and rename file to .php extension to load saved html files in the editor
 		/*
 		<?php 
