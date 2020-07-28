@@ -1632,7 +1632,7 @@ Vvveb.Gui = {
 			var url = "" + fileName;
 			
 
-			Vvveb.FileManager.addPage(name, title, url);
+			Vvveb.FileManager.addPage(name, {title: url, url: url});
 			event.preventDefault();
 
 			return Vvveb.Builder.saveAjax(url, startTemplateUrl, function (data) {
