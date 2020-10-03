@@ -984,7 +984,7 @@
 			 <label class="col-sm-3 control-label">Page name</label>      
 			<div class="col-sm-9 input">
 				<div>   
-					<input name="title" type="text" class="form-control" placeholder="My page" required>  
+					<input pattern="[0-9a-zA-Z]+" name="title" type="text" class="form-control" placeholder="My page" required>  
 				</div>
 			</div>     
 		</div>
@@ -993,7 +993,7 @@
 			 <label class="col-sm-3 control-label">File name</label>      
 			<div class="col-sm-9 input">
 				<div>   
-					<input name="fileName" type="text" class="form-control" placeholder="my-page.html" required>  
+					<input pattern="([a-zA-Z0-9\s_\\.\-\(\):])+(.html)$" name="fileName" type="text" class="form-control" placeholder="my-page.html" required>  
 				</div>
 			</div>     
 		</div>
