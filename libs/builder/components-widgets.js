@@ -497,7 +497,6 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
   
 	beforeInit: function (node)
 	{
-		
 		return node;
 	},
     

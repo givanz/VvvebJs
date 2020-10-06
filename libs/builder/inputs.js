@@ -98,6 +98,14 @@ var CheckboxInput = $.extend({}, Input, {
         ["change", "onChange", "input"],
 	 ],
 	
+	setValue: function(value) {
+		if (value) {
+			$('input', this.element).attr("checked", true);
+		} else {
+			$('input', this.element).attr("checked", false);
+		}
+	},
+	
 	init: function(data) {
 		return this.render("checkboxinput", data);
 	},
@@ -131,6 +139,18 @@ var LinkInput = $.extend({}, TextInput, {
 	
 	init: function(data) {
 		return this.render("textinput", data);
+	},
+  }
+);
+
+var DateInput = $.extend({}, TextInput, {
+
+    events: [
+        ["change", "onChange", "input"],
+	 ],
+	
+	init: function(data) {
+		return this.render("dateinput", data);
 	},
   }
 );

@@ -598,6 +598,15 @@
 	
 </script>
 
+<script id="vvveb-input-dateinput" type="text/html">
+	
+	<div>
+		<input name="{%=key%}" type="date" class="form-control" 
+			{% if (typeof min_date === 'undefined') { %} min="{%=min_date%}" {% } %} {% if (typeof max_date === 'undefined') { %} max="{%=max_date%}" {% } %}
+		/>
+	</div>
+	
+</script>
 
 <script id="vvveb-input-listinput" type="text/html">
 
@@ -993,7 +1002,25 @@
 			 <label class="col-sm-3 control-label">File name</label>      
 			<div class="col-sm-9 input">
 				<div>   
-					<input name="fileName" type="text" class="form-control" placeholder="my-page.html" required>  
+					<input name="file" type="text" class="form-control" placeholder="my-page.html" required>  
+				</div>
+			</div>     
+		</div>
+		
+		<div class="form-group row" data-key="href">     
+			 <label class="col-sm-3 control-label">Url</label>      
+			<div class="col-sm-9 input">
+				<div>   
+					<input name="url" type="text" class="form-control" placeholder="/my-page.html" required>  
+				</div>
+			</div>     
+		</div>
+		
+		<div class="form-group row" data-key="href">     
+			 <label class="col-sm-3 control-label">Folder</label>      
+			<div class="col-sm-9 input">
+				<div>   
+					<input name="folder" type="text" class="form-control" placeholder="/" required>  
 				</div>
 			</div>     
 		</div>

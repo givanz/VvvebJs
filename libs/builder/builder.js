@@ -656,7 +656,7 @@ Vvveb.Builder = {
 						if (block.image) {
 
 							item.css({
-								backgroundImage: "url(" + ((block.image.indexOf('//') == -1) ? Vvveb.imgBaseUrl:'') + block.image + ")",
+								backgroundImage: "url(" + ((block.image.indexOf('/') == -1) ? Vvveb.imgBaseUrl:'') + block.image + ")",
 								backgroundRepeat: "no-repeat"
 							})
 						}
@@ -1617,26 +1617,21 @@ Vvveb.Gui = {
 		
 		var newPageModal = $('#new-page-modal');
 		
-		newPageModal.modal("show").find("form").off("submit").submit(function( event ) {
+		newPageModal.modal("show").find("form").off("submit").submit(function( e ) {
 
-			var title = $("input[name=title]", newPageModal).val();
-			var startTemplateUrl = $("select[name=startTemplateUrl]", newPageModal).val();
-			var fileName = $("input[name=fileName]", newPageModal).val();
+			var data = {};
+			$.each($(this).serializeArray(), function() {
+				data[this.name] = this.value;
+			});			
 			
-			//replace nonalphanumeric with dashes and lowercase for name
-			var name = title.replace(/\W+/g, '-').toLowerCase();
-				//allow only alphanumeric, dot char for extension (eg .html) and / to allow typing full path including folders
-				fileName = fileName.replace(/[^A-Za-z0-9\.\/]+/g, '-').toLowerCase();
 			
-			//add your server url/prefix/path if needed
-			var url = "" + fileName;
+			Vvveb.FileManager.addPage(name, data);
+			e.preventDefault();
 			
+			var url = "save.php";
 
-			Vvveb.FileManager.addPage(name, title, url);
-			event.preventDefault();
-
-			return Vvveb.Builder.saveAjax(url, startTemplateUrl, function (data) {
-					Vvveb.FileManager.loadPage(name);
+			return Vvveb.Builder.saveAjax(url, data.startTemplateUrl, function (data) {
+					Vvveb.FileManager.loadPage(data.name);
 					Vvveb.FileManager.scrollBottom();
 					newPageModal.modal("hide");
 			});
@@ -1919,7 +1914,6 @@ Vvveb.FileManager = {
 	},
 	
 	getComponents: function(allowedComponents = {}) {
-
 			var tree = [];
 			function getNodeTree (node, parent) {
 				if (node.hasChildNodes()) {

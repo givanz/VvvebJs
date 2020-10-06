@@ -301,7 +301,7 @@ Vvveb.Components.extend("_base", "_base", {
         inputtype: SelectInput,
         data: {
 			options: [{
-				value: "normal",
+				value: "",
 				text: "Default"
 			}, {	
 				value: "100",
@@ -385,6 +385,48 @@ Vvveb.Components.extend("_base", "_base", {
 				value: '\'Brush Script MT\', sans-serif',
 				text: 'Brush Script'
 			}]
+		}
+	}, {
+        name: "Font weight",
+        key: "font-weight",
+		htmlAttr: "style",
+        sort: base_sort++,
+		section: style_section,
+        col:6,
+		inline:true,
+        inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "Default"
+			}, {	
+				value: "100",
+				text: "Thin"
+			}, {
+				value: "200",
+				text: "Extra-Light"
+			}, {
+				value: "300",
+				text: "Light"
+			}, {
+				value: "400",
+				text: "Normal"
+			}, {
+				value: "500",
+				text: "Medium"
+			}, {
+				value: "600",
+				text: "Semi-Bold"
+			}, {
+				value: "700",
+				text: "Bold"
+			}, {
+				value: "800",
+				text: "Extra-Bold"
+			}, {
+				value: "900",
+				text: "Ultra-Bold"
+			}],
 		}
 	}, {
         name: "Text align",

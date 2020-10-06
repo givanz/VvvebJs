@@ -18,9 +18,10 @@ if (isset($_POST['startTemplateUrl']) && !empty($_POST['startTemplateUrl']))
 	$html = substr($_POST['html'], 0, MAX_FILE_LIMIT);
 }
 
-$fileName = sanitizeFileName($_POST['fileName']);
+$fileName = sanitizeFileName($_POST['file']);
 
-if (file_put_contents($fileName, $html)) 
+if (file_put_contents($fileName, $html)) {
 	echo $fileName;
-else 
+} else {
 	echo 'Error saving file '  . $fileName;
+}	

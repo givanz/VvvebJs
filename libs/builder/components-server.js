@@ -129,11 +129,9 @@ Vvveb.Components.add("components/products", {
         key: "products",
         group:"autocomplete",
         htmlAttr:"data-products",
-        inline:true,
-        col:12,
         inputtype: AutocompleteList,
         data: {
-            url: "/admin/?module=editor&action=productsAutocomplete",
+            url: "/admin/?module=editor/editor&action=productsAutocomplete",
         },
     },{
         name: "Number of products",
@@ -197,11 +195,9 @@ Vvveb.Components.add("components/products", {
         group:"automatic",
         key: "category",
 		htmlAttr:"data-category",
-        inline:true,
-        col:12,
         inputtype: AutocompleteList,
         data: {
-            url: "/admin/?module=editor&action=productsAutocomplete",
+            url: "/admin/?module=editor/editor&action=productsAutocomplete",
         },
 
 	},{
@@ -209,22 +205,18 @@ Vvveb.Components.add("components/products", {
         group:"automatic",
         key: "manufacturer",
 		htmlAttr:"data-manufacturer",
-        inline:true,
-        col:12,
         inputtype: AutocompleteList,
         data: {
-            url: "/admin/?module=editor&action=productsAutocomplete",
+            url: "/admin/?module=editor/editor&action=productsAutocomplete",
 		}
 	},{
         name: "Manufacturer 2",
         group:"automatic",
         key: "manufacturer 2",
 		htmlAttr:"data-manufacturer2",
-        inline:true,
-        col:12,
         inputtype: AutocompleteList,
         data: {
-            url: "/admin/?module=editor&action=productsAutocomplete",
+            url: "/admin/?module=editor/editor&action=productsAutocomplete",
         },
     }]
 });
