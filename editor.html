@@ -1,1137 +1,355 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-    <base href="">
-    <title>VvvebJs</title>
-    
-    <link href="css/editor.css" rel="stylesheet">
-    <link href="css/line-awesome.css" rel="stylesheet">
-  </head>
-<body>
-
-
-	<div id="vvveb-builder">
-				
-				<div id="top-panel">
-					<img src="img/logo.png" alt="Vvveb" class="float-left" id="logo">
-					
-					
-					<div class="btn-group float-left" role="group">
-					  <button class="btn btn-light" title="Toggle file manager" id="toggle-file-manager-btn" data-vvveb-action="toggleFileManager" data-toggle="button" aria-pressed="false">
-						  <img src="libs/builder/icons/file-manager-layout.svg" width="20px" height="20px">
-					  </button>
-
-					  <button class="btn btn-light" title="Toggle left column" id="toggle-left-column-btn" data-vvveb-action="toggleLeftColumn" data-toggle="button" aria-pressed="false">
-						  <img src="libs/builder/icons/left-column-layout.svg" width="20px" height="20px">
-					  </button>
-					  
-					  <button class="btn btn-light" title="Toggle right column" id="toggle-right-column-btn" data-vvveb-action="toggleRightColumn" data-toggle="button" aria-pressed="false">
-						  <img src="libs/builder/icons/right-column-layout.svg" width="20px" height="20px">
-					  </button>
-					</div>
-										
-					<div class="btn-group mr-3" role="group">
-					  <button class="btn btn-light" title="Undo (Ctrl/Cmd + Z)" id="undo-btn" data-vvveb-action="undo" data-vvveb-shortcut="ctrl+z">
-						  <i class="la la-undo"></i>
-					  </button>
-
-					  <button class="btn btn-light"  title="Redo (Ctrl/Cmd + Shift + Z)" id="redo-btn" data-vvveb-action="redo" data-vvveb-shortcut="ctrl+shift+z">
-						  <i class="la la-undo la-flip-horizontal"></i>
-					  </button>
-					</div>
-										
-					
-					<div class="btn-group mr-3" role="group">
-					  <button class="btn btn-light" title="Designer Mode (Free component dragging)" id="designer-mode-btn" data-toggle="button" aria-pressed="false" data-vvveb-action="setDesignerMode">
-						  <i class="la la-hand-grab-o"></i>
-					  </button>
-
-					  <button class="btn btn-light" title="Preview" id="preview-btn" type="button" data-toggle="button" aria-pressed="false" data-vvveb-action="preview">
-						  <i class="la la-eye"></i>
-					  </button>
-
-					  <button class="btn btn-light" title="Fullscreen (F11)" id="fullscreen-btn" data-toggle="button" aria-pressed="false" data-vvveb-action="fullscreen">
-						  <i class="la la-arrows"></i>
-					  </button>
-
-					  <button class="btn btn-light" title="Download" id="download-btn" data-vvveb-action="download" data-download="index.html">
-						  <i class="la la-download"></i>
-					  </button>
-
-					</div>
-					
-								
-					<div class="btn-group mr-3 float-right" role="group">
-					  <button class="btn btn-primary btn-icon" title="Export (Ctrl + E)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-url="/admin/?module=editor/editor&action=save" data-v-vvveb-shortcut="ctrl+e">
-						  <i class="la la-save"></i> <span data-v-gettext>Save page</span>
-					  </button>
-					</div>	
-
-					<div class="btn-group float-right mr-3 responsive-btns" role="group">
-		 			 <button id="mobile-view" data-view="mobile" class="btn btn-light"  title="Mobile view" data-vvveb-action="viewport">
-						  <i class="la la-mobile-phone"></i>
-					  </button>
-
-					  <button id="tablet-view"  data-view="tablet" class="btn btn-light"  title="Tablet view" data-vvveb-action="viewport">
-						  <i class="la la-tablet"></i>
-					  </button>
-					  
-					  <button id="desktop-view"  data-view="" class="btn btn-light"  title="Desktop view" data-vvveb-action="viewport">
-						  <i class="la la-laptop"></i>
-					  </button>
-
-					</div>
-										
-				</div>	
-				
-				<div id="left-panel">
-
-					  <div id="filemanager"> 
-							<div class="header">
-								<a href="#" class="text-secondary">Pages</a>
-
-									<div class="btn-group responsive-btns mr-4 float-right" role="group">
-									  <button class="btn btn-link btn-sm" title="New file" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="">
-										  <i class="la la-file"></i> <small>New page</small>
-									  </button>
-									  
-									  <!--  &ensp;
-									  <button class="btn btn-link text-dark p-0"  title="Delete file" id="delete-file-btn" data-vvveb-action="deletePage" data-vvveb-shortcut="">
-										  <i class="la la-trash"></i> <small>Delete</small>
-									  </button> -->
-									</div>
-
-								</div>
-
-								<div class="tree">
-									<ol>
-									</ol>
-								</div>
-					  </div>
-					  
-					  
-					  <div class="drag-elements">
-
-						<div class="header">
-							<ul class="nav nav-tabs  nav-fill" id="elements-tabs" role="tablist">
-							  <li class="nav-item component-tab">
-								<a class="nav-link active" id="components-tab" data-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="true" title="Components"><img src="libs/builder/icons/product.svg" height="23"> <div><small>Components</small></div></a>
-							  </li>
-							  <!-- li class="nav-item blocks-tab">
-								<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false" title="Sections"><img src="libs/builder/icons/list_group.svg" width="24" height="23"> <div><small>Sections</small></div></a>
-							  </li -->
-							  <li class="nav-item blocks-tab">
-								<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false" title="Blocks"><img src="libs/builder/icons/list_group.svg" height="23"> <div><small>Sections</small></div></a>
-							  </li>
-							  <li class="nav-item component-properties-tab" style="display:none">
-								<a class="nav-link" id="properties-tab" data-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false" title="Properties"><img src="libs/builder/icons/filters.svg" height="23"> <div><small>Properties</small></div></a>
-							  </li>
-							</ul>
-					
-							<div class="tab-content">
-							  <div class="tab-pane fade show active" id="components" role="tabpanel" aria-labelledby="components-tab">
-								  
-								   <div class="search">
-										  <input class="form-control form-control-sm component-search" placeholder="Search components" type="text" data-vvveb-action="componentSearch" data-vvveb-on="keyup">
-										  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
-											  <i class="la la-close"></i>
-											</button>
-									</div>
-
-									<div class="drag-elements-sidepane sidepane">
-									  <div>
-										  
-										<ul class="components-list clearfix" data-type="leftpanel">
-										</ul>
-
-									</div>
-								</div>
-							</div>
-							  
-							  <div class="tab-pane fade" id="blocks" role="tabpanel" aria-labelledby="blocks-tab">
-								  
-
-										<ul class="nav nav-tabs nav-fill sections-tabs" id="properties-tabs" role="tablist">
-										  <li class="nav-item content-tab">
-											<a class="nav-link active" data-toggle="tab" href="#sections-new-tab" role="tab" aria-controls="components" aria-selected="true">
-												<i class="la la-plus"></i> <div><span>Add section</span></div></a>
-										  </li>
-										  <li class="nav-item style-tab">
-											<a class="nav-link" data-toggle="tab" href="#sections-list" role="tab" aria-controls="blocks" aria-selected="false">
-												<i class="la la-bars"></i> <div><span>Page Sections</span></div></a>
-										  </li>
-										</ul>
-								
-										<div class="tab-content">
-											 <div class="tab-pane fade show active" id="sections-new-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
-
-
-													   <div class="search">
-															  <input class="form-control form-control-sm block-search" placeholder="Search sections" type="text" data-vvveb-action="blockSearch" data-vvveb-on="keyup">
-															  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
-																  <i class="la la-close"></i>
-															  </button>
-														</div>
-
-											  
-														<div class="drag-elements-sidepane sidepane">
-														  <div>
-															  
-															<ul class="blocks-list clearfix" data-type="leftpanel">
-															</ul>
-
-														  </div>
-														</div>
-
-											</div>
-											
-											 <div class="tab-pane fade show" id="sections-list" data-section="style" role="tabpanel" aria-labelledby="style-tab">
-
-								<div class="sections">
-													  
-														<div class="section-item">
-															<div class="handle"></div>
-															<div>
-																
-																<div class="name">Top header <div class="type">header</div></div>
-																
-															</div>
-															<div class="buttons">
-																<a class="delete-btn" href="" title="Remove element"><i class="la la-trash text-danger"></i></a>
-																<a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
-																<a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
-																<a class="properties-btn" href="" title="Properties"><i class="la la-cog"></i></a>
-															</div>
-														</div>														
-														<div class="section-item">
-															<div class="handle"></div>
-															<div>
-																
-																<div class="name">Welcome area <div class="type">section</div></div>
-																
-															</div>
-															<div class="buttons">
-																<a class="delete-btn" href="" title="Remove element"><i class="la la-trash text-danger"></i></a>
-																<a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
-																<a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
-																<a class="properties-btn" href="" title="Properties"><i class="la la-cog"></i></a>
-															</div>
-														</div>														
-														
-												  </div>
-																									
-											</div>
-											
-										</div>
-							
-							  </div>
-							
-								<div class="tab-pane fade" id="properties" role="tabpanel" aria-labelledby="blocks-tab">
-									<div class="component-properties-sidepane">
-										<div>
-											<div class="component-properties">
-												<ul class="nav nav-tabs nav-fill" id="properties-tabs" role="tablist">
-													  <li class="nav-item content-tab">
-														<a class="nav-link active" data-toggle="tab" href="#content-left-panel-tab" role="tab" aria-controls="components" aria-selected="true">
-															<i class="la la-lg la-cube"></i> <div><span>Content</span></div></a>
-													  </li>
-													  <li class="nav-item style-tab">
-														<a class="nav-link" data-toggle="tab" href="#style-left-panel-tab" role="tab" aria-controls="blocks" aria-selected="false">
-															<i class="la la-lg la-image"></i> <div><span>Style</span></div></a>
-													  </li>
-													  <li class="nav-item advanced-tab">
-														<a class="nav-link" data-toggle="tab" href="#advanced-left-panel-tab" role="tab" aria-controls="blocks" aria-selected="false">
-															<i class="la la-lg la-cog"></i> <div><span>Advanced</span></div></a>
-													  </li>
-													</ul>
-											
-													<div class="tab-content">
-														 <div class="tab-pane fade show active" id="content-left-panel-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
-															<div class="mt-4 text-center">Click on an element to edit.</div>
-														</div>
-														
-														 <div class="tab-pane fade show" id="style-left-panel-tab" data-section="style" role="tabpanel" aria-labelledby="style-tab">
-														</div>
-														
-														 <div class="tab-pane fade show" id="advanced-left-panel-tab" data-section="advanced"  role="tabpanel" aria-labelledby="advanced-tab">
-														</div>
-													</div>
-											</div>
-										</div>
-									</div>
-							  </div>
-							</div>
-						</div>							
-					
-					  </div>
-				</div>	
-
-
-				<div id="canvas">
-					<div id="iframe-wrapper">
-						<div id="iframe-layer">
-							
-							<div id="highlight-box">
-								<div id="highlight-name"></div>
-								
-								<div id="section-actions">
-									<a id="add-section-btn" href="" title="Add element"><i class="la la-plus"></i></a>
-								</div>
-							</div>
-
-							<div id="select-box">
-
-								<div id="wysiwyg-editor">
-										<a id="bold-btn" href="" title="Bold"><i class="la la-bold"></i></a>
-										<a id="italic-btn" href="" title="Italic"><i class="la la-italic"></i></a>
-										<a id="underline-btn" href="" title="Underline"><i class="la la-underline"></i></a>
-										<a id="strike-btn" href="" title="Strikeout"><del>S</del></a>
-										<a id="link-btn" href="" title="Create link"><i class="la la-link"></i></a>
-										
-										<div class="dropdown">
-										  <a class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<i class="la la-align-left"></i>
-										  </a>
-
-											  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												<a class="dropdown-item" href="#"><i class="la la-lg la-align-left"></i> Align Left</a>
-												<a class="dropdown-item" href="#"><i class="la la-lg la-align-center"></i> Align Center</a>
-												<a class="dropdown-item" href="#"><i class="la la-lg la-align-right"></i> Align Right</a>
-												<a class="dropdown-item" href="#"><i class="la la-lg la-align-justify"></i> Align Justify</a>
-											  </div>
-										</div>
-										
-										<input name="color" type="color" pattern="#[a-f0-9]{6}" class="form-control">
-										
-										<select class="custom-select">
-											<option value="">Default</option>
-											<option value="Arial, Helvetica, sans-serif">Arial</option>
-											<option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif">Lucida Grande</option>
-											<option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif">Palatino Linotype</option>
-											<option value="'Times New Roman', Times, serif">Times New Roman</option>
-											<option value="Georgia, serif">Georgia, serif</option>
-											<option value="Tahoma, Geneva, sans-serif">Tahoma</option>
-											<option value="'Comic Sans MS', cursive, sans-serif">Comic Sans</option>
-											<option value="Verdana, Geneva, sans-serif">Verdana</option>
-											<option value="Impact, Charcoal, sans-serif">Impact</option>
-											<option value="'Arial Black', Gadget, sans-serif">Arial Black</option>
-											<option value="'Trebuchet MS', Helvetica, sans-serif">Trebuchet</option>
-											<option value="'Courier New', Courier, monospace">Courier New</option>
-											<option value="'Brush Script MT', sans-serif">Brush Script</option>
-										</select>
-								</div>
-
-								<div id="select-actions">
-									<a id="drag-btn" href="" title="Drag element"><i class="la la-arrows"></i></a>
-									<a id="parent-btn" href="" title="Select parent"><i class="la la-level-down la-rotate-180"></i></a>
-									
-									<a id="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
-									<a id="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
-									<a id="clone-btn" href="" title="Clone element"><i class="la la-copy"></i></a>
-									<a id="delete-btn" href="" title="Remove element"><i class="la la-trash"></i></a>
-								</div>
-							</div>
-							
-							<!-- add section box -->
-							<div id="add-section-box" class="drag-elements">
-
-									<div class="header">							
-										<ul class="nav nav-tabs" id="box-elements-tabs" role="tablist">
-										  <li class="nav-item component-tab">
-											<a class="nav-link active" id="box-components-tab" data-toggle="tab" href="#box-components" role="tab" aria-controls="components" aria-selected="true"><i class="la la-lg la-cube"></i> <div><small>Components</small></div></a>
-										  </li>
-										  <li class="nav-item blocks-tab">
-											<a class="nav-link" id="box-blocks-tab" data-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
-										  </li>
-										  <li class="nav-item component-properties-tab" style="display:none">
-											<a class="nav-link" id="box-properties-tab" data-toggle="tab" href="#box-properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
-										  </li>
-										</ul>
-										
-										<div class="section-box-actions">
-
-											<div id="close-section-btn" class="btn btn-light btn-sm bg-white btn-sm float-right"><i class="la la-close"></i></div>
-										
-											<div class="small mt-1 mr-3 float-right">
-											
-												<div class="custom-control custom-radio custom-control-inline">
-												  <input type="radio" id="add-section-insert-mode-after" value="after" checked="checked" name="add-section-insert-mode" class="custom-control-input">
-												  <label class="custom-control-label" for="add-section-insert-mode-after">After</label>
-												</div>
-												
-												<div class="custom-control custom-radio custom-control-inline">
-												  <input type="radio" id="add-section-insert-mode-inside" value="inside" name="add-section-insert-mode" class="custom-control-input">
-												  <label class="custom-control-label" for="add-section-insert-mode-inside">Inside</label>
-												</div>
-										
-											</div>
-											
-										</div>
-										
-										<div class="tab-content">
-										  <div class="tab-pane fade show active" id="box-components" role="tabpanel" aria-labelledby="components-tab">
-											  
-											   <div class="search">
-													  <input class="form-control form-control-sm component-search" placeholder="Search components" type="text" data-vvveb-action="addBoxComponentSearch" data-vvveb-on="keyup">
-													  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
-														  <i class="la la-close"></i>
-													  </button>
-												  </div>
-
-												<div>
-												  <div>
-													  
-													<ul class="components-list clearfix" data-type="addbox">
-													</ul>
-
-												  </div>
-												</div>
-										  
-										  </div>
-										  <div class="tab-pane fade" id="box-blocks" role="tabpanel" aria-labelledby="blocks-tab">
-											  
-											   <div class="search">
-													  <input class="form-control form-control-sm block-search" placeholder="Search blocks" type="text" data-vvveb-action="addBoxBlockSearch" data-vvveb-on="keyup">
-													  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
-														  <i class="la la-close"></i>
-													  </button>
-												  </div>
-
-												<div>
-												  <div>
-													  
-													<ul class="blocks-list clearfix"  data-type="addbox">
-													</ul>
-
-												  </div>
-												</div>
-										  
-										  </div>
-										
-											<!-- div class="tab-pane fade" id="box-properties" role="tabpanel" aria-labelledby="blocks-tab">
-												<div class="component-properties-sidepane">
-													<div>
-														<div class="component-properties">
-															<div class="mt-4 text-center">Click on an element to edit.</div>
-														</div>
-													</div>
-												</div>
-											</div -->
-										</div>
-									</div>		
-
-							</div>
-							<!-- //add section box -->
-						</div>
-						<iframe src="about:none" id="iframe1"></iframe>
-					</div>
-					
-					
-				</div>
-
-				<div id="right-panel">
-					<div class="component-properties">
-						
-						<ul class="nav nav-tabs nav-fill" id="properties-tabs" role="tablist">
-							  <li class="nav-item content-tab">
-								<a class="nav-link active" data-toggle="tab" href="#content-tab" role="tab" aria-controls="components" aria-selected="true">
-									<i class="la la-lg la-cube"></i> <div><span>Content</span></div></a>
-							  </li>
-							  <li class="nav-item style-tab">
-								<a class="nav-link" data-toggle="tab" href="#style-tab" role="tab" aria-controls="blocks" aria-selected="false">
-									<i class="la la-lg la-image"></i> <div><span>Style</span></div></a>
-							  </li>
-							  <li class="nav-item advanced-tab">
-								<a class="nav-link" data-toggle="tab" href="#advanced-tab" role="tab" aria-controls="blocks" aria-selected="false">
-									<i class="la la-lg la-cog"></i> <div><span>Advanced</span></div></a>
-							  </li>
-							</ul>
-					
-							<div class="tab-content">
-								 <div class="tab-pane fade show active" id="content-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
-								</div>
-								
-								 <div class="tab-pane fade show" id="style-tab" data-section="style" role="tabpanel" aria-labelledby="style-tab">
-								</div>
-								
-								 <div class="tab-pane fade show" id="advanced-tab" data-section="advanced"  role="tabpanel" aria-labelledby="advanced-tab">
-								</div>
-								
-								
-							</div>
-							
-							
-							
-					</div>
-				</div>
-				
-				<div id="bottom-panel">
-
-				<div class="btn-group" role="group">
-
-		 			 <button id="code-editor-btn" data-view="mobile" class="btn btn-sm btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
-						  <i class="la la-code"></i> Code editor
-					  </button>
-					 
-						<div id="toggleEditorJsExecute" class="custom-control custom-checkbox mt-1" style="display:none">
-							<input type="checkbox" class="custom-control-input" id="customCheck" name="example1" data-vvveb-action="toggleEditorJsExecute">
-							<label class="custom-control-label" for="customCheck"><small>Run javascript code on edit</small></label>
-						</div>
-					</div>
-					
-					<div id="vvveb-code-editor">
-						<textarea class="form-control"></textarea>
-					<div>
-
-				</div>	
-			</div>
-		</div>
-
-
-<!-- templates -->
-
-<script id="vvveb-input-textinput" type="text/html">
-	
-	<div>
-		<input name="{%=key%}" type="text" class="form-control"/>
-	</div>
-	
-</script>
-
-<script id="vvveb-input-textareainput" type="text/html">
-	
-	<div>
-		<textarea name="{%=key%}" rows="3" class="form-control"/>
-	</div>
-	
-</script>
-
-<script id="vvveb-input-checkboxinput" type="text/html">
-	
-	<div class="custom-control custom-checkbox">
-		  <input name="{%=key%}" class="custom-control-input" type="checkbox" id="{%=key%}_check">
-		  <label class="custom-control-label" for="{%=key%}_check">{% if (typeof text !== 'undefined') { %} {%=text%} {% } %}</label>
-	</div>
-	
-</script>
-
-<script id="vvveb-input-radioinput" type="text/html">
-	
-	<div>
-	
-		{% for ( var i = 0; i < options.length; i++ ) { %}
-
-		<label class="custom-control custom-radio  {% if (typeof inline !== 'undefined' && inline == true) { %}custom-control-inline{% } %}"  title="{%=options[i].title%}">
-		  <input name="{%=key%}" class="custom-control-input" type="radio" value="{%=options[i].value%}" id="{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}"{% } %}>
-		  <label class="custom-control-label" for="{%=key%}{%=i%}">{%=options[i].text%}</label>
-		</label>
-
-		{% } %}
-
-	</div>
-	
-</script>
-
-<script id="vvveb-input-radiobuttoninput" type="text/html">
-	
-	<div class="btn-group btn-group-toggle  {%if (extraclass) { %}{%=extraclass%}{% } %} clearfix" data-toggle="buttons">
-	
-		{% for ( var i = 0; i < options.length; i++ ) { %}
-
-		<label class="btn  btn-outline-primary  {%if (options[i].checked) { %}active{% } %}  {%if (options[i].extraclass) { %}{%=options[i].extraclass%}{% } %}" for="{%=key%}{%=i%} " title="{%=options[i].title%}">
-		  <input name="{%=key%}" class="custom-control-input" type="radio" value="{%=options[i].value%}" id="{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}"{% } %}>
-		  {%if (options[i].icon) { %}<i class="{%=options[i].icon%}"></i>{% } %}
-		  {%=options[i].text%}
-		</label>
-
-		{% } %}
-				
-	</div>
-	
-</script>
-
-
-<script id="vvveb-input-toggle" type="text/html">
-	
-    <div class="toggle">
-        <input 
-		type="checkbox" 
-		name="{%=key%}" 
-		value="{%=on%}" 
-		{%if (off) { %} data-value-off="{%=off%}" {% } %}
-		{%if (on) { %} data-value-on="{%=on%}" {% } %} 
-		class="toggle-checkbox" 
-		id="{%=key%}">
-        <label class="toggle-label" for="{%=key%}">
-            <span class="toggle-inner"></span>
-            <span class="toggle-switch"></span>
-        </label>
+<div>
+  <div>
+    <img src="img/logo.png" alt="Vvveb">
+    <div role="group">
+      <button title="Toggle file manager" data-vvveb-action="toggleFileManager" data-toggle="button" aria-pressed="false"><img src="libs/builder/icons/file-manager-layout.svg" width="20px" height="20px" alt="file-manager-layout"></button><button title="Toggle left column" data-vvveb-action="toggleLeftColumn" data-toggle="button" aria-pressed="false"><img src="libs/builder/icons/left-column-layout.svg" width="20px" height="20px" alt="left-column-layout"></button><button title="Toggle right column" data-vvveb-action="toggleRightColumn" data-toggle="button" aria-pressed="false"><img src="libs/builder/icons/right-column-layout.svg" width="20px" height="20px" alt="right-column-layout"></button>
     </div>
-	
-</script>
-
-<script id="vvveb-input-header" type="text/html">
-
-		<h6 class="header">{%=header%}</h6>
-	
-</script>
-
-	
-<script id="vvveb-input-select" type="text/html">
-
-	<div>
-
-		<select class="form-control custom-select">
-			{% for ( var i = 0; i < options.length; i++ ) { %}
-			<option value="{%=options[i].value%}">{%=options[i].text%}</option>
-			{% } %}
-		</select>
-	
-	</div>
-	
-</script>
-
-<script id="vvveb-input-dateinput" type="text/html">
-	
-	<div>
-		<input name="{%=key%}" type="date" class="form-control" 
-			{% if (typeof min_date === 'undefined') { %} min="{%=min_date%}" {% } %} {% if (typeof max_date === 'undefined') { %} max="{%=max_date%}" {% } %}
-		/>
-	</div>
-	
-</script>
-
-<script id="vvveb-input-listinput" type="text/html">
-
-	<div class="row">
-
-		{% for ( var i = 0; i < options.length; i++ ) { %}
-		<div class="col-6">
-			<div class="input-group">
-				<input name="{%=key%}_{%=i%}" type="text" class="form-control" value="{%=options[i].text%}"/>
-				<div class="input-group-append">
-					<button class="input-group-text btn btn-sm btn-danger">
-						<i class="la la-trash la-lg"></i>
-					</button>
-				</div>
-			  </div>
-			  <br/>
-		</div>
-		{% } %}
-
-
-		{% if (typeof hide_remove === 'undefined') { %}
-		<div class="col-12">
-		
-			<button class="btn btn-sm btn-outline-primary">
-				<i class="la la-trash la-lg"></i> Add new
-			</button>
-			
-		</div>
-		{% } %}
-			
-	</div>
-	
-</script>
-
-<script id="vvveb-input-grid" type="text/html">
-
-	<div class="row">
-		<div class="mb-1 col-12">
-		
-			<label>Flexbox</label>
-			<select class="form-control custom-select" name="col">
-				
-				<option value="">None</option>
-				{% for ( var i = 1; i <= 12; i++ ) { %}
-				<option value="{%=i%}" {% if ((typeof col !== 'undefined') && col == i) { %} selected {% } %}>{%=i%}</option>
-				{% } %}
-				
-			</select>
-			<br/>
-		</div>
-
-		<div class="col-6">
-			<label>Extra small</label>
-			<select class="form-control custom-select" name="col-xs">
-				
-				<option value="">None</option>
-				{% for ( var i = 1; i <= 12; i++ ) { %}
-				<option value="{%=i%}" {% if ((typeof col_xs !== 'undefined') && col_xs == i) { %} selected {% } %}>{%=i%}</option>
-				{% } %}
-				
-			</select>
-			<br/>
-		</div>
-		
-		<div class="col-6">
-			<label>Small</label>
-			<select class="form-control custom-select" name="col-sm">
-				
-				<option value="">None</option>
-				{% for ( var i = 1; i <= 12; i++ ) { %}
-				<option value="{%=i%}" {% if ((typeof col_sm !== 'undefined') && col_sm == i) { %} selected {% } %}>{%=i%}</option>
-				{% } %}
-				
-			</select>
-			<br/>
-		</div>
-		
-		<div class="col-6">
-			<label>Medium</label>
-			<select class="form-control custom-select" name="col-md">
-				
-				<option value="">None</option>
-				{% for ( var i = 1; i <= 12; i++ ) { %}
-				<option value="{%=i%}" {% if ((typeof col_md !== 'undefined') && col_md == i) { %} selected {% } %}>{%=i%}</option>
-				{% } %}
-				
-			</select>
-			<br/>
-		</div>
-		
-		<div class="col-6 mb-1">
-			<label>Large</label>
-			<select class="form-control custom-select" name="col-lg">
-				
-				<option value="">None</option>
-				{% for ( var i = 1; i <= 12; i++ ) { %}
-				<option value="{%=i%}" {% if ((typeof col_lg !== 'undefined') && col_lg == i) { %} selected {% } %}>{%=i%}</option>
-				{% } %}
-				
-			</select>
-			<br/>
-		</div>
-		
-		{% if (typeof hide_remove === 'undefined') { %}
-		<div class="col-12">
-		
-			<button class="btn btn-sm btn-outline-light text-danger">
-				<i class="la la-trash la-lg"></i> Remove
-			</button>
-			
-		</div>
-		{% } %}
-		
-	</div>
-	
-</script>
-
-<script id="vvveb-input-textvalue" type="text/html">
-	
-	<div class="row">
-		<div class="col-6 mb-1">
-			<label>Value</label>
-			<input name="value" type="text" value="{%=value%}" class="form-control"/>
-		</div>
-
-		<div class="col-6 mb-1">
-			<label>Text</label>
-			<input name="text" type="text" value="{%=text%}" class="form-control"/>
-		</div>
-
-		{% if (typeof hide_remove === 'undefined') { %}
-		<div class="col-12">
-		
-			<button class="btn btn-sm btn-outline-light text-danger">
-				<i class="la la-trash la-lg"></i> Remove
-			</button>
-			
-		</div>
-		{% } %}
-
-	</div>
-	
-</script>
-
-<script id="vvveb-input-rangeinput" type="text/html">
-	
-	<div>
-		<input name="{%=key%}" type="range" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-control"/>
-	</div>
-	
-</script>
-
-<script id="vvveb-input-imageinput" type="text/html">
-	
-	<div>
-		<input name="{%=key%}" type="text" class="form-control"/>
-		<input name="file" type="file" class="form-control"/>
-	</div>
-	
-</script>
-
-<script id="vvveb-input-colorinput" type="text/html">
-	
-	<div>
-		<input name="{%=key%}" type="color" {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %}  pattern="#[a-f0-9]{6}" class="form-control"/>
-	</div>
-	
-</script>
-
-<script id="vvveb-input-bootstrap-color-picker-input" type="text/html">
-	
-	<div>
-		<div id="cp2" class="input-group" title="Using input value">
-		  <input name="{%=key%}" type="text" {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %}	 class="form-control"/>
-		  <span class="input-group-append">
-			<span class="input-group-text colorpicker-input-addon"><i></i></span>
-		  </span>
-		</div>
-	</div>
-
-</script>
-
-<script id="vvveb-input-numberinput" type="text/html">
-	<div>
-		<input name="{%=key%}" type="number" value="{%=value%}" 
-			  {% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %} 
-			  {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %} 
-			  {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %} 
-		class="form-control"/>
-	</div>
-</script>
-
-<script id="vvveb-input-button" type="text/html">
-	<div>
-		<button class="btn btn-sm btn-primary">
-			<i class="la  {% if (typeof icon !== 'undefined') { %} {%=icon%} {% } else { %} la-plus {% } %} la-lg"></i> {%=text%}
-		</button>
-	</div>		
-</script>
-
-<script id="vvveb-input-cssunitinput" type="text/html">
-	<div class="input-group" id="cssunit-{%=key%}">
-		<input name="number" type="number"  {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %} 
-			  {% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %} 
-			  {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %} 
-			  {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %} 
-		class="form-control"/>
-		 <div class="input-group-append">
-		<select class="form-control custom-select small-arrow" name="unit">
-			<option value="em">em</option>
-			<option value="px">px</option>
-			<option value="%">%</option>
-			<option value="rem">rem</option>
-			<option value="auto">auto</option>
-		</select>
-		</div>
-	</div>
-	
-</script>
-
-
-<script id="vvveb-filemanager-folder" type="text/html">
-	<li data-folder="{%=folder%}" class="folder">
-		<label for="{%=folder%}"><span>{%=folderTitle%}</span></label> <input type="checkbox" id="{%=folder%}" />
-		<ol></ol>
-	</li>
-</script>
-
-<script id="vvveb-filemanager-page" type="text/html">
-	<li data-url="{%=url%}" data-file="{%=file%}" data-page="{%=name%}" class="file">
-		<label for="{%=name%}"><span>{%=title%}</span></label> <input type="checkbox" checked id="{%=name%}" />
-		<ol></ol>
-	</li>
-</script>
-
-<script id="vvveb-filemanager-component" type="text/html">
-	<li data-url="{%=url%}" data-component="{%=name%}" class="component">
-		<a href="{%=url%}"><span>{%=title%}</span></a>
-	</li>
-</script>
-
-<script id="vvveb-input-sectioninput" type="text/html">
-
-		<label class="header" data-header="{%=key%}" for="header_{%=key%}"><span>&ensp;{%=header%}</span> <div class="header-arrow"></div></label> 
-		<input class="header_check" type="checkbox" {% if (typeof expanded !== 'undefined' && expanded == false) { %} {% } else { %}checked="true"{% } %} id="header_{%=key%}"> 
-		<div class="section" data-section="{%=key%}"></div>		
-	
-</script>
-
-
-<script id="vvveb-property" type="text/html">
-
-	<div class="form-group {% if (typeof col !== 'undefined' && col != false) { %} col-sm-{%=col%} d-inline-block {% } else { %}row{% } %}" data-key="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
-		
-		{% if (typeof name !== 'undefined' && name != false) { %}<label class="{% if (typeof inline === 'undefined' ) { %}col-sm-4{% } %} control-label" for="input-model">{%=name%}</label>{% } %}
-		
-		<div class="{% if (typeof inline === 'undefined') { %}col-sm-{% if (typeof name !== 'undefined' && name != false) { %}8{% } else { %}12{% } } %} input"></div>
-		
-	</div>		 
-	
-</script>
-
-<script id="vvveb-input-autocompletelist" type="text/html">
-	
-	<div>
-		<input name="{%=key%}" type="text" class="form-control"/>
-		
-		<div class="form-control autocomplete-list" style="min=height: 150px; overflow: auto;">
-                  </div>
-                  </div>
-	
-</script>
-
-<script id="vvveb-input-tagsinput" type="text/html">
-	
-	<div>
-		<div class="form-control tags-input" style="height:auto;">
-				
-
-				<input name="{%=key%}" type="text" class="form-control" style="border:none;min-width:60px;"/>
-                  </div>
-                  </div>
-	
-</script>
-
-<script id="vvveb-section" type="text/html">
-
-	<div class="section-item">
-		<div class="handle"></div>
-		<div>
-			
-			<div class="name">{%=name%} <div class="type">{%=type%}</div></div>
-			
-		</div>
-		<div class="buttons">
-			<a class="delete-btn" href="" title="Remove element"><i class="la la-trash text-danger"></i></a>
-			<a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
-			<a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
-			<a class="properties-btn" href="" title="Properties"><i class="la la-cog"></i></a>
-		</div>
-	</div>
-	
-</script>
-
-
-<!--// end templates -->
-
-
-<!-- export html modal-->
-<div class="modal fade" id="textarea-modal" tabindex="-1" role="dialog" aria-labelledby="textarea-modal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <p class="modal-title text-primary"><i class="la la-lg la-save"></i> Export html</p>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><small><i class="la la-close"></i></small></span>
-        </button>
+    <div role="group">
+      <button title="Export (Ctrl + E)" data-vvveb-action="saveAjax" data-vvveb-url="/admin/?module=editor/editor&amp;action=save" data-v-vvveb-shortcut="ctrl+e"><span data-v-gettext="">Save page</span></button>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div>
+        <a href="#">Pages</a>
+        <div role="group">
+          <button title="New file" data-vvveb-action="newPage" data-vvveb-shortcut=""><small>New page</small></button>
+        </div>
       </div>
-      <div class="modal-body">
-        
-        <textarea rows="25" cols="150" class="form-control"></textarea>
-      
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal"><i class="la la-close"></i> Close</button>
+    </div>
+    <div>
+      <div>
+        <ul role="tablist">
+          <li>
+            <a title="Components" role="tab" href="#components" data-toggle="tab" aria-controls="components" aria-selected="true"><img src="libs/builder/icons/product.svg" height="23" alt="product"></a>
+            <div>
+              <small>Components</small>
+            </div>
+          </li>
+          <li>
+            <a title="Blocks" role="tab" href="#blocks" data-toggle="tab" aria-controls="blocks" aria-selected="false"><img src="libs/builder/icons/list_group.svg" height="23" alt="list_group"></a>
+            <div>
+              <small>Sections</small>
+            </div>
+          </li>
+          <li>
+            <a title="Properties" role="tab" href="#properties" data-toggle="tab" aria-controls="blocks" aria-selected="false"><img src="libs/builder/icons/filters.svg" height="23" alt="filters"></a>
+            <div>
+              <small>Properties</small>
+            </div>
+          </li>
+        </ul>
+        <div>
+          <div role="tabpanel" aria-labelledby="components-tab">
+            <div>
+              <input type="text" placeholder="Search components" data-vvveb-action="componentSearch" data-vvveb-on="keyup">
+            </div>
+          </div>
+          <div role="tabpanel" aria-labelledby="blocks-tab">
+            <ul role="tablist">
+              <li>
+                <div>
+                  Add section
+                </div>
+              </li>
+              <li>
+                <div>
+                  Page Sections
+                </div>
+              </li>
+            </ul>
+            <div>
+              <div role="tabpanel" data-section="content" aria-labelledby="content-tab">
+                <div>
+                  <input type="text" placeholder="Search sections" data-vvveb-action="blockSearch" data-vvveb-on="keyup">
+                </div>
+              </div>
+              <div role="tabpanel" data-section="style" aria-labelledby="style-tab">
+                <div>
+                  <div>
+                    <div>
+                      <div>
+                        Top header
+                        <div>
+                          header
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <div>
+                        Welcome area
+                        <div>
+                          section
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div role="tabpanel" aria-labelledby="blocks-tab">
+            <div>
+              <div>
+                <div>
+                  <ul role="tablist">
+                    <li>
+                      <div>
+                        Content
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        Style
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        Advanced
+                      </div>
+                    </li>
+                  </ul>
+                  <div>
+                    <div role="tabpanel" data-section="content" aria-labelledby="content-tab">
+                      <div>
+                        Click on an element to edit.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- message modal-->
-<div class="modal fade" id="message-modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <p class="modal-title text-primary"><i class="la la-lg la-comment"></i> VvvebJs</p>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><small><i class="la la-close"></i></small></span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Page was successfully saved!.</p>
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-primary">Ok</button> -->
-        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal"><i class="la la-close"></i> Close</button>
+  <div>
+    <div>
+      <div>
+        <div>
+          <div>
+            <del>S</del>
+            <div>
+              <div aria-labelledby="dropdownMenuButton">
+                <a href="#">Align Left</a> <a href="#">Align Center</a> <a href="#">Align Right</a> <a href="#">Align Justify</a>
+              </div>
+            </div><input name="color" pattern="#[a-f0-9]{6}" type="color"><select>
+              <option value="">
+                Default
+              </option>
+              <option value="Arial, Helvetica, sans-serif">
+                Arial
+              </option>
+              <option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif">
+                Lucida Grande
+              </option>
+              <option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif">
+                Palatino Linotype
+              </option>
+              <option value="'Times New Roman', Times, serif">
+                Times New Roman
+              </option>
+              <option value="Georgia, serif">
+                Georgia, serif
+              </option>
+              <option value="Tahoma, Geneva, sans-serif">
+                Tahoma
+              </option>
+              <option value="'Comic Sans MS', cursive, sans-serif">
+                Comic Sans
+              </option>
+              <option value="Verdana, Geneva, sans-serif">
+                Verdana
+              </option>
+              <option value="Impact, Charcoal, sans-serif">
+                Impact
+              </option>
+              <option value="'Arial Black', Gadget, sans-serif">
+                Arial Black
+              </option>
+              <option value="'Trebuchet MS', Helvetica, sans-serif">
+                Trebuchet
+              </option>
+              <option value="'Courier New', Courier, monospace">
+                Courier New
+              </option>
+              <option value="'Brush Script MT', sans-serif">
+                Brush Script
+              </option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <div>
+            <ul role="tablist">
+              <li>
+                <div>
+                  <small>Components</small>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <small>Blocks</small>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <small>Properties</small>
+                </div>
+              </li>
+            </ul>
+            <div>
+              <div>
+                <div>
+                  <input checked="checked" name="add-section-insert-mode" type="radio" value="after"><label for="add-section-insert-mode-after">After</label>
+                </div>
+                <div>
+                  <input name="add-section-insert-mode" type="radio" value="inside"><label for="add-section-insert-mode-inside">Inside</label>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div role="tabpanel" aria-labelledby="components-tab">
+                <div>
+                  <input type="text" placeholder="Search components" data-vvveb-action="addBoxComponentSearch" data-vvveb-on="keyup">
+                </div>
+              </div>
+              <div role="tabpanel" aria-labelledby="blocks-tab">
+                <div>
+                  <input type="text" placeholder="Search blocks" data-vvveb-action="addBoxBlockSearch" data-vvveb-on="keyup">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- new page modal-->
-<div class="modal fade" id="new-page-modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    
-    <form>
-		
-    <div class="modal-content">
-      <div class="modal-header">
-        <p class="modal-title text-primary"><i class="la la-lg la-file"></i> New page</p>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><small><i class="la la-close"></i></small></span>
-        </button>
-      </div>
-
-      <div class="modal-body text">
-		<div class="form-group row" data-key="type">      
-			<label class="col-sm-3 control-label">
-				Template 
-				<abbr class="badge badge-pill badge-secondary" title="This template will be used as a start">?</abbr> 
-			</label>      
-			<div class="col-sm-9 input">
-				<div>    
-					<select class="form-control custom-select" name="startTemplateUrl">        
-						<option value="new-page-blank-template.html">Blank Template</option>        
-						<option value="demo/narrow-jumbotron/index.html">Narrow jumbotron</option>       
-						<option value="demo/album/index.html">Album</option>       
-					</select>    
-				</div>
-			</div>     
-		</div>
-
-		<div class="form-group row" data-key="href">     
-			 <label class="col-sm-3 control-label">Page name</label>      
-			<div class="col-sm-9 input">
-				<div>   
-					<input name="title" type="text" class="form-control" placeholder="My page" required>  
-				</div>
-			</div>     
-		</div>
-		
-		<div class="form-group row" data-key="href">     
-			 <label class="col-sm-3 control-label">File name</label>      
-			<div class="col-sm-9 input">
-				<div>   
-					<input name="file" type="text" class="form-control" placeholder="my-page.html" required>  
-				</div>
-			</div>     
-		</div>
-		
-		<div class="form-group row" data-key="href">     
-			 <label class="col-sm-3 control-label">Url</label>      
-			<div class="col-sm-9 input">
-				<div>   
-					<input name="url" type="text" class="form-control" placeholder="/my-page.html" required>  
-				</div>
-			</div>     
-		</div>
-		
-		<div class="form-group row" data-key="href">     
-			 <label class="col-sm-3 control-label">Folder</label>      
-			<div class="col-sm-9 input">
-				<div>   
-					<input name="folder" type="text" class="form-control" placeholder="/" required>  
-				</div>
-			</div>     
-		</div>
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn btn-primary btn-lg" type="submit"><i class="la la-check"></i> Create page</button>
-        <button class="btn btn-secondary btn-lg" type="reset" data-dismiss="modal"><i class="la la-close"></i> Cancel</button>
+  <div>
+    <div>
+      <ul role="tablist">
+        <li>
+          <div>
+            Content
+          </div>
+        </li>
+        <li>
+          <div>
+            Style
+          </div>
+        </li>
+        <li>
+          <div>
+            Advanced
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <div role="group">
+      <button title="Code editor" data-view="mobile" data-vvveb-action="toggleEditor">Code editor</button>
+      <div>
+        <input name="example1" type="checkbox" data-vvveb-action="toggleEditorJsExecute"><label for="customCheck"><small>Run javascript code on edit</small></label>
       </div>
     </div>
-    
-   </form>		
-
+  </div>
+  <div tabindex="-1" role="dialog" aria-labelledby="textarea-modal" aria-hidden="true">
+    <div role="document">
+      <div>
+        <div>
+          <p>Export html</p>
+        </div>
+        <div>
+          <button type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div tabindex="-1" role="dialog">
+    <div role="document">
+      <div>
+        <div>
+          <p>VvvebJs</p>
+        </div>
+        <div>
+          <p>Page was successfully saved!.</p>
+        </div>
+        <div>
+          <button type="button" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div tabindex="-1" role="dialog">
+    <div role="document">
+      <form>
+        <div>
+          <div>
+            <p>New page</p>
+          </div>
+          <div>
+            <div data-key="type">
+              <label>Template <abbr title="This template will be used as a start">?</abbr></label>
+              <div>
+                <div>
+                  <select name="startTemplateUrl">
+                    <option value="new-page-blank-template.html">
+                      Blank Template
+                    </option>
+                    <option value="demo/narrow-jumbotron/index.html">
+                      Narrow jumbotron
+                    </option>
+                    <option value="demo/album/index.html">
+                      Album
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div data-key="href">
+              <label>Page name</label>
+              <div>
+                <div>
+                  <input name="title" required="" type="text" placeholder="My page">
+                </div>
+              </div>
+            </div>
+            <div data-key="href">
+              <label>File name</label>
+              <div>
+                <div>
+                  <input name="file" required="" type="text" placeholder="my-page.html">
+                </div>
+              </div>
+            </div>
+            <div data-key="href">
+              <label>Url</label>
+              <div>
+                <div>
+                  <input name="url" required="" type="text" placeholder="/my-page.html">
+                </div>
+              </div>
+            </div>
+            <div data-key="href">
+              <label>Folder</label>
+              <div>
+                <div>
+                  <input name="folder" required="" type="text" placeholder="/">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button type="submit">Create page</button> <button type="reset" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
-</div>
-	
-<!-- jquery-->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.hotkeys.js"></script>
-
-<!-- bootstrap-->
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-
-<!-- builder code-->
-<script src="libs/builder/builder.js"></script>	
-<!-- undo manager-->
-<script src="libs/builder/undo.js"></script>	
-<!-- inputs-->
-<script src="libs/builder/inputs.js"></script>	
-
-<!-- bootstrap colorpicker //uncomment bellow scripts to enable -->
-<!--
-<script src="libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-<link href="libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
-<script src="libs/builder/plugin-bootstrap-colorpicker.js"></script>
--->
-
-<!-- components-->
-<!-- script src="libs/builder/components-server.js"></script -->	
-<script src="libs/builder/components-bootstrap4.js"></script>	
-<script src="libs/builder/components-widgets.js"></script>	
-
-<!-- blocks-->
-<script src="libs/builder/blocks-bootstrap4.js"></script>	
-
-<!-- plugins -->
-
-<!-- code mirror - code editor syntax highlight -->
-<link href="libs/codemirror/lib/codemirror.css" rel="stylesheet"/>
-<link href="libs/codemirror/theme/material.css" rel="stylesheet"/>
-<script src="libs/codemirror/lib/codemirror.js"></script>
-<script src="libs/codemirror/lib/xml.js"></script>
-<script src="libs/codemirror/lib/formatting.js"></script>
-<script src="libs/builder/plugin-codemirror.js"></script>	
-
-<!-- jszip - download page as zip -->
-<!-- script src="libs/jszip/jszip.min.js"></script>
-<script src="libs/builder/plugin-jszip.js"></script -->
-
-
-<!-- autocomplete plugin used by autocomplete input-->
-<script src="libs/autocomplete/jquery.autocomplete.js"></script>	
-
-<script>
-$(document).ready(function() 
-{
-	//if url has #no-right-panel set one panel demo
-	if (window.location.hash.indexOf("no-right-panel") != -1)
-	{
-		$("#vvveb-builder").addClass("no-right-panel");
-		$(".component-properties-tab").show();
-		Vvveb.Components.componentPropertiesElement = "#left-panel .component-properties";
-	} else
-	{
-		$(".component-properties-tab").hide();
-	}
-
-	Vvveb.Builder.init('demo/narrow-jumbotron/index.html', function() {
-		//run code after page/iframe is loaded
-	});
-
-	Vvveb.Gui.init();
-	Vvveb.FileManager.init();
-	Vvveb.Sections.init();
-	Vvveb.FileManager.addPages(
-	[
-		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
-		{name:"landing-page", title:"Landing page",  url: "demo/startbootstrap-landing-page/index.html", file: "demo/startbootstrap-landing-page/index.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
-		{name:"album", title:"Album",  url: "demo/album/index.html", file: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
-		{name:"blog", title:"Blog",  url: "demo/blog/index.html", file: "demo/blog/index.html", folder:"content", assets: ['demo/blog/blog.css']},
-		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html",  file: "demo/carousel/index.html", folder:"content", assets: ['demo/carousel/carousel.css']},
-		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", file: "demo/offcanvas/index.html", folder:"content", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
-		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", file: "demo/pricing/index.html", folder:"ecommerce", assets: ['demo/pricing/pricing.css']},
-		{name:"product", title:"Product",  url: "demo/product/index.html", file: "demo/product/index.html", folder:"ecommerce", assets: ['demo/product/product.css']},
-		//uncomment php code below and rename file to .php extension to load saved html files in the editor
-		/*
-		<?php 
-		   $htmlFiles = glob("*.html");
-		   foreach ($htmlFiles as $file) { 
-			   if (in_array($file, array('new-page-blank-template.html', 'editor.html'))) continue;//skip template files
-			   $pathInfo = pathinfo($file);
-		?>
-		{name:"<?php echo ucfirst($pathInfo['filename']);?>", title:"<?php echo ucfirst($pathInfo['filename']);?>",  url: "<?php echo $pathInfo['basename'];?>"},
-		<?php } ?>
-		*/
-	]);
-	
-	Vvveb.FileManager.loadPage("narrow-jumbotron");
-});
-</script>
-</body>
-</html>
+<p>&lt;!--</p>
+<p>Playing with <a href="https://ruwix.com/" rel="nofollow noopener">twisty puzzles</a> is the best way of improving your dexterity and problem solving skills.</p>
