@@ -26,8 +26,14 @@
     "site",
     "builder"
   ],
+  "scripts": {
+    "gulp": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "devDependencies": {
-    "gulp": "github:gulpjs/gulp",
-    "gulp-sass": "^4.0.2"
+    "gulp": "^4.0.2",
+    "gulp-file-include": "^2.3.0",
+    "gulp-format-html": "^1.2.5",
+    "gulp-sass": "^4.1.0"
   }
 }

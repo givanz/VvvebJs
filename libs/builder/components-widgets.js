@@ -80,7 +80,7 @@ Vvveb.Components.extend("_base", "widgets/video", {
     attributes: ["data-component-video"],
     image: "icons/video.svg",
     dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/video.svg" width="100" height="100">', //use image for drag and swap with iframe on drop for drag performance
-    html: '<div data-component-video style="min-height:240px;min-width:240px;position:relative"><iframe frameborder="0" src="https://www.youtube.com/embed/-stFvGmg1A8" style="width:100%;height:100%;position:absolute;left:0px;pointer-events:none"></iframe></div>',
+    html: '<div data-component-video style="min-height:240px;min-width:240px;position:relative"><iframe frameborder="0" src="https://www.youtube.com/embed/3xsP3u-CVO4" style="width:100%;height:100%;position:absolute;left:0px;pointer-events:none"></iframe></div>',
     
     
     //url parameters set with onChange
@@ -88,7 +88,7 @@ Vvveb.Components.extend("_base", "widgets/video", {
     video_id:'',//video id
     url: '', //html5 video src
     autoplay: false,
-    controls: true,
+    controls: false,
     loop: false,
 
 	init: function (node)
@@ -128,19 +128,29 @@ Vvveb.Components.extend("_base", "widgets/video", {
 			switch (this.t)
 			{
 				case 'y':
-				$("#right-panel [data-key=video_id]").show();
-				$("#right-panel [data-key=url]").hide();
-				newnode = $('<div data-component-video><iframe src="https://www.youtube.com/embed/' + this.video_id + '?&amp;autoplay=' + this.autoplay + '&amp;controls=' + this.controls + '&amp;loop=' + this.loop + '" allowfullscreen="true" style="height: 100%; width: 100%;" frameborder="0"></iframe></div>');
+					$("#right-panel [data-key=video_id]").show();
+					$("#right-panel [data-key=url]").hide();
+					newnode = $(`<div data-component-video>
+									<iframe 
+										src="https://www.youtube.com/embed/${this.video_id}?&amp;autoplay=${this.autoplay}&amp;controls=${this.controls}&amp;loop=${this.loop}" allowfullscreen="true" 
+										style="height: 100%; width: 100%;" frameborder="0">
+									</iframe>
+								</div>`);
 				break;
 				case 'v':
-				$("#right-panel [data-key=video_id]").show();
-				$("#right-panel [data-key=url]").hide();
-				newnode = $('<div data-component-video><iframe src="https://player.vimeo.com/video/' + this.video_id + '?&amp;autoplay=' + this.autoplay + '&amp;controls=' + this.controls + '&amp;loop=' + this.loop + '" allowfullscreen="true" style="height: 100%; width: 100%;" frameborder="0"></iframe></div>');
+					$("#right-panel [data-key=video_id]").show();
+					$("#right-panel [data-key=url]").hide();
+					newnode = $(`<div data-component-video>
+									<iframe 
+										src="https://player.vimeo.com/video/${this.video_id}?&amp;autoplay=${this.autoplay}&amp;controls=${this.controls}&amp;loop=${this.loop}" allowfullscreen="true" 
+										style="height: 100%; width: 100%;" frameborder="0">
+									</iframe>
+								</div>`);
 				break;
 				case 'h':
-				$("#right-panel [data-key=video_id]").hide();
-				$("#right-panel [data-key=url]").show();
-				newnode = $('<div data-component-video><video src="' + this.url + '" ' + (this.controls?' controls ':'') + (this.loop?' loop ':'') + ' style="height: 100%; width: 100%;"></video></div>');
+					$("#right-panel [data-key=video_id]").hide();
+					$("#right-panel [data-key=url]").show();
+					newnode = $('<div data-component-video><video src="' + this.url + '" ' + (this.autoplay?' autoplay ':'') + (this.controls?' controls ':'') + (this.loop?' loop ':'') + ' style="height: 100%; width: 100%;"></video></div>');
 				break;
 			}
 			
@@ -178,15 +188,33 @@ Vvveb.Components.extend("_base", "widgets/video", {
     },{
         name: "Autoplay",
         key: "autoplay",
-        inputtype: CheckboxInput
+        inputtype: ToggleInput,
+        data: {
+            on: "true",
+            off: "false"
+        },
+        inline:true,
+        col:4,
     },{
         name: "Controls",
         key: "controls",
-        inputtype: CheckboxInput
+        inputtype: ToggleInput,
+        data: {
+            on: "true",
+            off: "false"
+        },
+        inline:true,
+        col:4,
     },{
         name: "Loop",
         key: "loop",
-        inputtype: CheckboxInput
+        inputtype: ToggleInput,
+        data: {
+            on: "true",
+            off: "false"
+        },
+        inline:true,
+        col:4,
     }]
 });
 

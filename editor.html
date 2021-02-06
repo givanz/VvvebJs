@@ -12,7 +12,6 @@
     <title>VvvebJs</title>
     
     <link href="css/editor.css" rel="stylesheet">
-    <link href="css/line-awesome.css" rel="stylesheet">
   </head>
 <body>
 
@@ -20,63 +19,62 @@
 	<div id="vvveb-builder">
 				
 				<div id="top-panel">
-					<img src="img/logo.png" alt="Vvveb" class="float-left" id="logo">
+					<img src="img/logo.png" alt="Vvveb" class="float-start" id="logo">
 					
-					
-					<div class="btn-group float-left" role="group">
-					  <button class="btn btn-light" title="Toggle file manager" id="toggle-file-manager-btn" data-vvveb-action="toggleFileManager" data-toggle="button" aria-pressed="false">
+					<div class="btn-group float-start" role="group">
+					  <button class="btn btn-light" title="Toggle file manager" id="toggle-file-manager-btn" data-vvveb-action="toggleFileManager" data-bs-toggle="button" aria-pressed="false">
 						  <img src="libs/builder/icons/file-manager-layout.svg" width="20px" height="20px">
 					  </button>
 
-					  <button class="btn btn-light" title="Toggle left column" id="toggle-left-column-btn" data-vvveb-action="toggleLeftColumn" data-toggle="button" aria-pressed="false">
+					  <button class="btn btn-light" title="Toggle left column" id="toggle-left-column-btn" data-vvveb-action="toggleLeftColumn" data-bs-toggle="button" aria-pressed="false">
 						  <img src="libs/builder/icons/left-column-layout.svg" width="20px" height="20px">
 					  </button>
 					  
-					  <button class="btn btn-light" title="Toggle right column" id="toggle-right-column-btn" data-vvveb-action="toggleRightColumn" data-toggle="button" aria-pressed="false">
+					  <button class="btn btn-light" title="Toggle right column" id="toggle-right-column-btn" data-vvveb-action="toggleRightColumn" data-bs-toggle="button" aria-pressed="false">
 						  <img src="libs/builder/icons/right-column-layout.svg" width="20px" height="20px">
 					  </button>
 					</div>
-										
-					<div class="btn-group mr-3" role="group">
+					
+					<div class="btn-group me-3" role="group">
 					  <button class="btn btn-light" title="Undo (Ctrl/Cmd + Z)" id="undo-btn" data-vvveb-action="undo" data-vvveb-shortcut="ctrl+z">
 						  <i class="la la-undo"></i>
 					  </button>
 
-					  <button class="btn btn-light"  title="Redo (Ctrl/Cmd + Shift + Z)" id="redo-btn" data-vvveb-action="redo" data-vvveb-shortcut="ctrl+shift+z">
-						  <i class="la la-undo la-flip-horizontal"></i>
+					  <button class="btn btn-light la-flip-horizontal"  title="Redo (Ctrl/Cmd + Shift + Z)" id="redo-btn" data-vvveb-action="redo" data-vvveb-shortcut="ctrl+shift+z">
+						  <i class="la la-undo"></i>
 					  </button>
 					</div>
 										
 					
-					<div class="btn-group mr-3" role="group">
-					  <button class="btn btn-light" title="Designer Mode (Free component dragging)" id="designer-mode-btn" data-toggle="button" aria-pressed="false" data-vvveb-action="setDesignerMode">
-						  <i class="la la-hand-grab-o"></i>
+					<div class="btn-group me-3" role="group">
+					  <button class="btn btn-light" title="Designer Mode (Free component dragging)" id="designer-mode-btn" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="setDesignerMode">
+						  <i class="la la-hand-rock"></i>
 					  </button>
 
-					  <button class="btn btn-light" title="Preview" id="preview-btn" type="button" data-toggle="button" aria-pressed="false" data-vvveb-action="preview">
+					  <button class="btn btn-light" title="Preview" id="preview-btn" type="button" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="preview">
 						  <i class="la la-eye"></i>
 					  </button>
 
-					  <button class="btn btn-light" title="Fullscreen (F11)" id="fullscreen-btn" data-toggle="button" aria-pressed="false" data-vvveb-action="fullscreen">
-						  <i class="la la-arrows"></i>
+					  <button class="btn btn-light" title="Fullscreen (F11)" id="fullscreen-btn" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="fullscreen">
+						  <i class="la la-expand-arrows-alt"></i>
 					  </button>
 
-					  <button class="btn btn-light" title="Download" id="download-btn" data-vvveb-action="download" data-download="index.html">
+					  <button class="btn btn-light" title="Download" id="download-btn" data-vvveb-action="download" data-v-download="index.html">
 						  <i class="la la-download"></i>
 					  </button>
 
 					</div>
 					
 								
-					<div class="btn-group mr-3 float-right" role="group">
+					<div class="btn-group me-3 float-end" role="group">
 					  <button class="btn btn-primary btn-icon" title="Export (Ctrl + E)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-url="/admin/?module=editor/editor&action=save" data-v-vvveb-shortcut="ctrl+e">
 						  <i class="la la-save"></i> <span data-v-gettext>Save page</span>
 					  </button>
 					</div>	
 
-					<div class="btn-group float-right mr-3 responsive-btns" role="group">
+					<div class="btn-group float-end me-3 responsive-btns" role="group">
 		 			 <button id="mobile-view" data-view="mobile" class="btn btn-light"  title="Mobile view" data-vvveb-action="viewport">
-						  <i class="la la-mobile-phone"></i>
+						  <i class="la la-mobile"></i>
 					  </button>
 
 					  <button id="tablet-view"  data-view="tablet" class="btn btn-light"  title="Tablet view" data-vvveb-action="viewport">
@@ -97,7 +95,7 @@
 							<div class="header">
 								<a href="#" class="text-secondary">Pages</a>
 
-									<div class="btn-group responsive-btns mr-4 float-right" role="group">
+									<div class="btn-group responsive-btns me-4 float-end" role="group">
 									  <button class="btn btn-link btn-sm" title="New file" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="">
 										  <i class="la la-file"></i> <small>New page</small>
 									  </button>
@@ -121,17 +119,17 @@
 
 						<div class="header">
 							<ul class="nav nav-tabs  nav-fill" id="elements-tabs" role="tablist">
-							  <li class="nav-item component-tab">
-								<a class="nav-link active" id="components-tab" data-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="true" title="Components"><img src="libs/builder/icons/product.svg" height="23"> <div><small>Components</small></div></a>
+							  <li class="nav-item component-tab" role="presentation">
+								<a class="nav-link active" id="components-tab" data-bs-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="true" title="Components"><img src="libs/builder/icons/product.svg" height="23"> <div><small>Components</small></div></a>
 							  </li>
 							  <!-- li class="nav-item blocks-tab">
-								<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false" title="Sections"><img src="libs/builder/icons/list_group.svg" width="24" height="23"> <div><small>Sections</small></div></a>
+								<a class="nav-link" id="blocks-tab" data-bs-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false" title="Sections"><img src="libs/builder/icons/list_group.svg" width="24" height="23"> <div><small>Sections</small></div></a>
 							  </li -->
-							  <li class="nav-item blocks-tab">
-								<a class="nav-link" id="blocks-tab" data-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false" title="Blocks"><img src="libs/builder/icons/list_group.svg" height="23"> <div><small>Sections</small></div></a>
+							  <li class="nav-item blocks-tab" role="presentation">
+								<a class="nav-link" id="blocks-tab" data-bs-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false" title="Blocks"><img src="libs/builder/icons/list_group.svg" height="23"> <div><small>Sections</small></div></a>
 							  </li>
-							  <li class="nav-item component-properties-tab" style="display:none">
-								<a class="nav-link" id="properties-tab" data-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false" title="Properties"><img src="libs/builder/icons/filters.svg" height="23"> <div><small>Properties</small></div></a>
+							  <li class="nav-item component-properties-tab" role="presentation" style="display:none">
+								<a class="nav-link" id="properties-tab" data-bs-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false" title="Properties"><img src="libs/builder/icons/filters.svg" height="23"> <div><small>Properties</small></div></a>
 							  </li>
 							</ul>
 					
@@ -160,11 +158,11 @@
 
 										<ul class="nav nav-tabs nav-fill sections-tabs" id="properties-tabs" role="tablist">
 										  <li class="nav-item content-tab">
-											<a class="nav-link active" data-toggle="tab" href="#sections-new-tab" role="tab" aria-controls="components" aria-selected="true">
+											<a class="nav-link active" data-bs-toggle="tab" href="#sections-new-tab" role="tab" aria-controls="components" aria-selected="true">
 												<i class="la la-plus"></i> <div><span>Add section</span></div></a>
 										  </li>
 										  <li class="nav-item style-tab">
-											<a class="nav-link" data-toggle="tab" href="#sections-list" role="tab" aria-controls="blocks" aria-selected="false">
+											<a class="nav-link" data-bs-toggle="tab" href="#sections-list" role="tab" aria-controls="blocks" aria-selected="false">
 												<i class="la la-bars"></i> <div><span>Page Sections</span></div></a>
 										  </li>
 										</ul>
@@ -194,7 +192,7 @@
 											
 											 <div class="tab-pane fade show" id="sections-list" data-section="style" role="tabpanel" aria-labelledby="style-tab">
 
-								<div class="sections">
+													<div class="sections">
 													  
 														<div class="section-item">
 															<div class="handle"></div>
@@ -239,16 +237,16 @@
 											<div class="component-properties">
 												<ul class="nav nav-tabs nav-fill" id="properties-tabs" role="tablist">
 													  <li class="nav-item content-tab">
-														<a class="nav-link active" data-toggle="tab" href="#content-left-panel-tab" role="tab" aria-controls="components" aria-selected="true">
-															<i class="la la-lg la-cube"></i> <div><span>Content</span></div></a>
+														<a class="nav-link active" data-bs-toggle="tab" href="#content-left-panel-tab" role="tab" aria-controls="components" aria-selected="true">
+															<i class="la la-lg la-sliders-h"></i> <div><span>Content</span></div></a>
 													  </li>
 													  <li class="nav-item style-tab">
-														<a class="nav-link" data-toggle="tab" href="#style-left-panel-tab" role="tab" aria-controls="blocks" aria-selected="false">
-															<i class="la la-lg la-image"></i> <div><span>Style</span></div></a>
+														<a class="nav-link" data-bs-toggle="tab" href="#style-left-panel-tab" role="tab" aria-controls="blocks" aria-selected="false">
+															<i class="la la-lg la-paint-brush"></i> <div><span>Style</span></div></a>
 													  </li>
 													  <li class="nav-item advanced-tab">
-														<a class="nav-link" data-toggle="tab" href="#advanced-left-panel-tab" role="tab" aria-controls="blocks" aria-selected="false">
-															<i class="la la-lg la-cog"></i> <div><span>Advanced</span></div></a>
+														<a class="nav-link" data-bs-toggle="tab" href="#advanced-left-panel-tab" role="tab" aria-controls="blocks" aria-selected="false">
+															<i class="la la-lg la-tools"></i> <div><span>Advanced</span></div></a>
 													  </li>
 													</ul>
 											
@@ -296,7 +294,7 @@
 										<a id="link-btn" href="" title="Create link"><i class="la la-link"></i></a>
 										
 										<div class="dropdown">
-										  <a class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  <a class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<i class="la la-align-left"></i>
 										  </a>
 
@@ -308,9 +306,9 @@
 											  </div>
 										</div>
 										
-										<input name="color" type="color" pattern="#[a-f0-9]{6}" class="form-control">
+										<input name="color" type="color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">
 										
-										<select class="custom-select">
+										<select class="form-select">
 											<option value="">Default</option>
 											<option value="Arial, Helvetica, sans-serif">Arial</option>
 											<option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif">Lucida Grande</option>
@@ -329,8 +327,8 @@
 								</div>
 
 								<div id="select-actions">
-									<a id="drag-btn" href="" title="Drag element"><i class="la la-arrows"></i></a>
-									<a id="parent-btn" href="" title="Select parent"><i class="la la-level-down la-rotate-180"></i></a>
+									<a id="drag-btn" href="" title="Drag element"><i class="la la-arrows-alt"></i></a>
+									<a id="parent-btn" href="" title="Select parent" class="la-rotate-180"><i class="la la-level-up-alt"></i></a>
 									
 									<a id="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
 									<a id="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
@@ -345,30 +343,30 @@
 									<div class="header">							
 										<ul class="nav nav-tabs" id="box-elements-tabs" role="tablist">
 										  <li class="nav-item component-tab">
-											<a class="nav-link active" id="box-components-tab" data-toggle="tab" href="#box-components" role="tab" aria-controls="components" aria-selected="true"><i class="la la-lg la-cube"></i> <div><small>Components</small></div></a>
+											<a class="nav-link active" id="box-components-tab" data-bs-toggle="tab" href="#box-components" role="tab" aria-controls="components" aria-selected="true"><i class="la la-lg la-cube"></i> <div><small>Components</small></div></a>
 										  </li>
 										  <li class="nav-item blocks-tab">
-											<a class="nav-link" id="box-blocks-tab" data-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
+											<a class="nav-link" id="box-blocks-tab" data-bs-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
 										  </li>
 										  <li class="nav-item component-properties-tab" style="display:none">
-											<a class="nav-link" id="box-properties-tab" data-toggle="tab" href="#box-properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
+											<a class="nav-link" id="box-properties-tab" data-bs-toggle="tab" href="#box-properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
 										  </li>
 										</ul>
 										
 										<div class="section-box-actions">
 
-											<div id="close-section-btn" class="btn btn-light btn-sm bg-white btn-sm float-right"><i class="la la-close"></i></div>
+											<div id="close-section-btn" class="btn btn-light btn-sm bg-white btn-sm float-end"><i class="la la-times"></i></div>
 										
-											<div class="small mt-1 mr-3 float-right">
+											<div class="small mt-1 me-3 float-end">
 											
-												<div class="custom-control custom-radio custom-control-inline">
-												  <input type="radio" id="add-section-insert-mode-after" value="after" checked="checked" name="add-section-insert-mode" class="custom-control-input">
-												  <label class="custom-control-label" for="add-section-insert-mode-after">After</label>
+												<div class="d-inline me-2">
+												  <input type="radio" id="add-section-insert-mode-after" value="after" checked="checked" name="add-section-insert-mode" class="form-check-input">
+												  <label class="form-check-label" for="add-section-insert-mode-after">After</label>
 												</div>
 												
-												<div class="custom-control custom-radio custom-control-inline">
-												  <input type="radio" id="add-section-insert-mode-inside" value="inside" name="add-section-insert-mode" class="custom-control-input">
-												  <label class="custom-control-label" for="add-section-insert-mode-inside">Inside</label>
+												<div class="d-inline">
+												  <input type="radio" id="add-section-insert-mode-inside" value="inside" name="add-section-insert-mode" class="form-check-input">
+												  <label class="form-check-label" for="add-section-insert-mode-inside">Inside</label>
 												</div>
 										
 											</div>
@@ -380,8 +378,8 @@
 											  
 											   <div class="search">
 													  <input class="form-control form-control-sm component-search" placeholder="Search components" type="text" data-vvveb-action="addBoxComponentSearch" data-vvveb-on="keyup">
-													  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
-														  <i class="la la-close"></i>
+													  <button class="clear-backspace" data-vvveb-action="clearComponentSearch">
+														  <i class="la la-times"></i>
 													  </button>
 												  </div>
 
@@ -400,7 +398,7 @@
 											   <div class="search">
 													  <input class="form-control form-control-sm block-search" placeholder="Search blocks" type="text" data-vvveb-action="addBoxBlockSearch" data-vvveb-on="keyup">
 													  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
-														  <i class="la la-close"></i>
+														  <i class="la la-times"></i>
 													  </button>
 												  </div>
 
@@ -430,7 +428,7 @@
 							</div>
 							<!-- //add section box -->
 						</div>
-						<iframe src="about:none" id="iframe1"></iframe>
+						<iframe src="" id="iframe1"></iframe>
 					</div>
 					
 					
@@ -441,16 +439,16 @@
 						
 						<ul class="nav nav-tabs nav-fill" id="properties-tabs" role="tablist">
 							  <li class="nav-item content-tab">
-								<a class="nav-link active" data-toggle="tab" href="#content-tab" role="tab" aria-controls="components" aria-selected="true">
-									<i class="la la-lg la-cube"></i> <div><span>Content</span></div></a>
+								<a class="nav-link active" data-bs-toggle="tab" href="#content-tab" role="tab" aria-controls="components" aria-selected="true">
+									<i class="la la-lg la-sliders-h"></i> <div><span>Content</span></div></a>
 							  </li>
 							  <li class="nav-item style-tab">
-								<a class="nav-link" data-toggle="tab" href="#style-tab" role="tab" aria-controls="blocks" aria-selected="false">
-									<i class="la la-lg la-image"></i> <div><span>Style</span></div></a>
+								<a class="nav-link" data-bs-toggle="tab" href="#style-tab" role="tab" aria-controls="blocks" aria-selected="false">
+									<i class="la la-lg la-paint-brush"></i> <div><span>Style</span></div></a>
 							  </li>
 							  <li class="nav-item advanced-tab">
-								<a class="nav-link" data-toggle="tab" href="#advanced-tab" role="tab" aria-controls="blocks" aria-selected="false">
-									<i class="la la-lg la-cog"></i> <div><span>Advanced</span></div></a>
+								<a class="nav-link" data-bs-toggle="tab" href="#advanced-tab" role="tab" aria-controls="blocks" aria-selected="false">
+									<i class="la la-lg la-tools"></i> <div><span>Advanced</span></div></a>
 							  </li>
 							</ul>
 					
@@ -480,9 +478,9 @@
 						  <i class="la la-code"></i> Code editor
 					  </button>
 					 
-						<div id="toggleEditorJsExecute" class="custom-control custom-checkbox mt-1" style="display:none">
-							<input type="checkbox" class="custom-control-input" id="customCheck" name="example1" data-vvveb-action="toggleEditorJsExecute">
-							<label class="custom-control-label" for="customCheck"><small>Run javascript code on edit</small></label>
+						<div id="toggleEditorJsExecute" class="form-check mt-1" style="display:none">
+							<input type="checkbox" class="form-check-input" id="runjs" name="runjs" data-vvveb-action="toggleEditorJsExecute">
+							<label class="form-check-label" for="runjs"><small>Run javascript code on edit</small></label>
 						</div>
 					</div>
 					
@@ -515,9 +513,9 @@
 
 <script id="vvveb-input-checkboxinput" type="text/html">
 	
-	<div class="custom-control custom-checkbox">
-		  <input name="{%=key%}" class="custom-control-input" type="checkbox" id="{%=key%}_check">
-		  <label class="custom-control-label" for="{%=key%}_check">{% if (typeof text !== 'undefined') { %} {%=text%} {% } %}</label>
+	<div class="form-check">
+		  <input name="{%=key%}" class="form-check-input" type="checkbox" id="{%=key%}_check">
+		  <label class="form-check-label" for="{%=key%}_check">{% if (typeof text !== 'undefined') { %} {%=text%} {% } %}</label>
 	</div>
 	
 </script>
@@ -528,9 +526,9 @@
 	
 		{% for ( var i = 0; i < options.length; i++ ) { %}
 
-		<label class="custom-control custom-radio  {% if (typeof inline !== 'undefined' && inline == true) { %}custom-control-inline{% } %}"  title="{%=options[i].title%}">
-		  <input name="{%=key%}" class="custom-control-input" type="radio" value="{%=options[i].value%}" id="{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}"{% } %}>
-		  <label class="custom-control-label" for="{%=key%}{%=i%}">{%=options[i].text%}</label>
+		<label class="form-check-input  {% if (typeof inline !== 'undefined' && inline == true) { %}custom-control-inline{% } %}"  title="{%=options[i].title%}">
+		  <input name="{%=key%}" class="form-check-input" type="radio" value="{%=options[i].value%}" id="{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}"{% } %}>
+		  <label class="form-check-label" for="{%=key%}{%=i%}">{%=options[i].text%}</label>
 		</label>
 
 		{% } %}
@@ -541,12 +539,13 @@
 
 <script id="vvveb-input-radiobuttoninput" type="text/html">
 	
-	<div class="btn-group btn-group-toggle  {%if (extraclass) { %}{%=extraclass%}{% } %} clearfix" data-toggle="buttons">
-	
+	<div class="btn-group {%if (extraclass) { %}{%=extraclass%}{% } %} clearfix" role="group">
+		{% var namespace = 'rb-' + Math.floor(Math.random() * 100); %}
+		
 		{% for ( var i = 0; i < options.length; i++ ) { %}
 
-		<label class="btn  btn-outline-primary  {%if (options[i].checked) { %}active{% } %}  {%if (options[i].extraclass) { %}{%=options[i].extraclass%}{% } %}" for="{%=key%}{%=i%} " title="{%=options[i].title%}">
-		  <input name="{%=key%}" class="custom-control-input" type="radio" value="{%=options[i].value%}" id="{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}"{% } %}>
+		<input name="{%=key%}" class="btn-check" type="radio" value="{%=options[i].value%}" id="{%=namespace%}{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="checked" aria-checked="true"{% } %} autocomplete="off">
+		<label class="btn btn-outline-primary {%if (options[i].extraclass) { %}{%=options[i].extraclass%}{% } %}" for="{%=namespace%}{%=key%}{%=i%}" title="{%=options[i].title%}">
 		  {%if (options[i].icon) { %}<i class="{%=options[i].icon%}"></i>{% } %}
 		  {%=options[i].text%}
 		</label>
@@ -588,7 +587,7 @@
 
 	<div>
 
-		<select class="form-control custom-select">
+		<select class="form-select">
 			{% for ( var i = 0; i < options.length; i++ ) { %}
 			<option value="{%=options[i].value%}">{%=options[i].text%}</option>
 			{% } %}
@@ -647,7 +646,7 @@
 		<div class="mb-1 col-12">
 		
 			<label>Flexbox</label>
-			<select class="form-control custom-select" name="col">
+			<select class="form-select" name="col">
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
@@ -660,7 +659,7 @@
 
 		<div class="col-6">
 			<label>Extra small</label>
-			<select class="form-control custom-select" name="col-xs">
+			<select class="form-select" name="col-xs">
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
@@ -673,7 +672,7 @@
 		
 		<div class="col-6">
 			<label>Small</label>
-			<select class="form-control custom-select" name="col-sm">
+			<select class="form-select" name="col-sm">
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
@@ -686,7 +685,7 @@
 		
 		<div class="col-6">
 			<label>Medium</label>
-			<select class="form-control custom-select" name="col-md">
+			<select class="form-select" name="col-md">
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
@@ -699,7 +698,7 @@
 		
 		<div class="col-6 mb-1">
 			<label>Large</label>
-			<select class="form-control custom-select" name="col-lg">
+			<select class="form-select" name="col-lg">
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
@@ -754,7 +753,7 @@
 <script id="vvveb-input-rangeinput" type="text/html">
 	
 	<div>
-		<input name="{%=key%}" type="range" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-control"/>
+		<input name="{%=key%}" type="range" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-range"/>
 	</div>
 	
 </script>
@@ -771,7 +770,7 @@
 <script id="vvveb-input-colorinput" type="text/html">
 	
 	<div>
-		<input name="{%=key%}" type="color" {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %}  pattern="#[a-f0-9]{6}" class="form-control"/>
+		<input name="{%=key%}" type="color" {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %}  pattern="#[a-f0-9]{6}" class="form-control form-control-color"/>
 	</div>
 	
 </script>
@@ -815,7 +814,7 @@
 			  {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %} 
 		class="form-control"/>
 		 <div class="input-group-append">
-		<select class="form-control custom-select small-arrow" name="unit">
+		<select class="form-select small-arrow" name="unit">
 			<option value="em">em</option>
 			<option value="px">px</option>
 			<option value="%">%</option>
@@ -859,7 +858,7 @@
 
 <script id="vvveb-property" type="text/html">
 
-	<div class="form-group {% if (typeof col !== 'undefined' && col != false) { %} col-sm-{%=col%} d-inline-block {% } else { %}row{% } %}" data-key="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
+	<div class="mb-3 {% if (typeof col !== 'undefined' && col != false) { %} col-sm-{%=col%} d-inline-block px-2 {% } else { %}row{% } %}" data-key="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
 		
 		{% if (typeof name !== 'undefined' && name != false) { %}<label class="{% if (typeof inline === 'undefined' ) { %}col-sm-4{% } %} control-label" for="input-model">{%=name%}</label>{% } %}
 		
@@ -921,8 +920,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <p class="modal-title text-primary"><i class="la la-lg la-save"></i> Export html</p>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><small><i class="la la-close"></i></small></span>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <!-- span aria-hidden="true"><small><i class="la la-times"></i></small></span -->
         </button>
       </div>
       <div class="modal-body">
@@ -931,7 +930,7 @@
       
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal"><i class="la la-close"></i> Close</button>
+        <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal"><i class="la la-times"></i> Close</button>
       </div>
     </div>
   </div>
@@ -943,8 +942,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <p class="modal-title text-primary"><i class="la la-lg la-comment"></i> VvvebJs</p>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><small><i class="la la-close"></i></small></span>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <!-- span aria-hidden="true"><small><i class="la la-times"></i></small></span -->
         </button>
       </div>
       <div class="modal-body">
@@ -952,7 +951,7 @@
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-primary">Ok</button> -->
-        <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal"><i class="la la-close"></i> Close</button>
+        <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal"><i class="la la-times"></i> Close</button>
       </div>
     </div>
   </div>
@@ -967,20 +966,20 @@
     <div class="modal-content">
       <div class="modal-header">
         <p class="modal-title text-primary"><i class="la la-lg la-file"></i> New page</p>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><small><i class="la la-close"></i></small></span>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <!-- span aria-hidden="true"><small><i class="la la-times"></i></small></span -->
         </button>
       </div>
 
       <div class="modal-body text">
-		<div class="form-group row" data-key="type">      
+		<div class="mb-3 row" data-key="type">      
 			<label class="col-sm-3 control-label">
 				Template 
 				<abbr class="badge badge-pill badge-secondary" title="This template will be used as a start">?</abbr> 
 			</label>      
 			<div class="col-sm-9 input">
 				<div>    
-					<select class="form-control custom-select" name="startTemplateUrl">        
+					<select class="form-select" name="startTemplateUrl">        
 						<option value="new-page-blank-template.html">Blank Template</option>        
 						<option value="demo/narrow-jumbotron/index.html">Narrow jumbotron</option>       
 						<option value="demo/album/index.html">Album</option>       
@@ -989,7 +988,7 @@
 			</div>     
 		</div>
 
-		<div class="form-group row" data-key="href">     
+		<div class="mb-3 row" data-key="href">     
 			 <label class="col-sm-3 control-label">Page name</label>      
 			<div class="col-sm-9 input">
 				<div>   
@@ -998,7 +997,7 @@
 			</div>     
 		</div>
 		
-		<div class="form-group row" data-key="href">     
+		<div class="mb-3 row" data-key="href">     
 			 <label class="col-sm-3 control-label">File name</label>      
 			<div class="col-sm-9 input">
 				<div>   
@@ -1007,7 +1006,7 @@
 			</div>     
 		</div>
 		
-		<div class="form-group row" data-key="href">     
+		<div class="mb-3 row" data-key="href">     
 			 <label class="col-sm-3 control-label">Url</label>      
 			<div class="col-sm-9 input">
 				<div>   
@@ -1016,7 +1015,7 @@
 			</div>     
 		</div>
 		
-		<div class="form-group row" data-key="href">     
+		<div class="mb-3 row" data-key="href">     
 			 <label class="col-sm-3 control-label">Folder</label>      
 			<div class="col-sm-9 input">
 				<div>   
@@ -1028,7 +1027,7 @@
 
       <div class="modal-footer">
         <button class="btn btn-primary btn-lg" type="submit"><i class="la la-check"></i> Create page</button>
-        <button class="btn btn-secondary btn-lg" type="reset" data-dismiss="modal"><i class="la la-close"></i> Cancel</button>
+        <button class="btn btn-secondary btn-lg" type="reset" data-bs-dismiss="modal"><i class="la la-times"></i> Cancel</button>
       </div>
     </div>
     
@@ -1062,7 +1061,7 @@
 
 <!-- components-->
 <!-- script src="libs/builder/components-server.js"></script -->	
-<script src="libs/builder/components-bootstrap4.js"></script>	
+<script src="libs/builder/components-bootstrap5.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
 
 <!-- blocks-->

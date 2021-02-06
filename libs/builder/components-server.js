@@ -80,17 +80,17 @@ Vvveb.Components.add("components/products", {
     attributes: ["data-component-products"],
 
     image: "icons/products.svg",
-    html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
 
     init: function (node)
 	{
-		$('.form-group[data-group]').hide();
+		$('.mb-3[data-group]').hide();
 		if (node.dataset.type != undefined)
 		{
-			$('.form-group[data-group="'+ node.dataset.type + '"]').show();
+			$('.mb-3[data-group="'+ node.dataset.type + '"]').show();
 		} else
 		{		
-			$('.form-group[data-group]:first').show();
+			$('.mb-3[data-group]:first').show();
 		}
 	},
     properties: [{
@@ -116,8 +116,8 @@ Vvveb.Components.add("components/products", {
         },
 		onChange : function(element, value, input) {
 			
-			$('.form-group[data-group]').hide();
-			$('.form-group[data-group="'+ input.value + '"]').show();
+			$('.mb-3[data-group]').hide();
+			$('.mb-3[data-group="'+ input.value + '"]').show();
 
 			return element;
 		}, 
@@ -225,7 +225,7 @@ Vvveb.Components.add("components/manufacturers", {
     name: "Manufacturers",
     classes: ["component_manufacturers"],
     image: "icons/categories.svg",
-    html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
     properties: [{
         nolabel:false,
         inputtype: TextInput,
@@ -246,7 +246,7 @@ Vvveb.Components.add("components/categories", {
     name: "Categories",
     classes: ["component_categories"],
     image: "icons/categories.svg",
-    html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "Name",
         key: "name",
@@ -258,7 +258,7 @@ Vvveb.Components.add("components/search", {
     name: "Search",
     classes: ["component_search"],
     image: "icons/search.svg",
-    html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "asdasdad",
         key: "src",
@@ -280,7 +280,7 @@ Vvveb.Components.add("components/user", {
     name: "User",
     classes: ["component_user"],
     image: "icons/user.svg",
-    html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "asdasdad",
         key: "src",
@@ -302,7 +302,7 @@ Vvveb.Components.add("components/product_gallery", {
     name: "Product gallery",
     classes: ["component_product_gallery"],
     image: "icons/product_gallery.svg",
-    html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "asdasdad",
         key: "src",
@@ -324,7 +324,7 @@ Vvveb.Components.add("components/cart", {
     name: "Cart",
     classes: ["component_cart"],
     image: "icons/cart.svg",
-    html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "asdasdad",
         key: "src",
@@ -346,7 +346,7 @@ Vvveb.Components.add("components/checkout", {
     name: "Checkout",
     classes: ["component_checkout"],
     image: "icons/checkout.svg",
-    html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "asdasdad",
         key: "src",
@@ -368,7 +368,7 @@ Vvveb.Components.add("components/filters", {
     name: "Filters",
     classes: ["component_filters"],
     image: "icons/filters.svg",
-    html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "asdasdad",
         key: "src",
@@ -390,7 +390,7 @@ Vvveb.Components.add("components/product", {
     name: "Product",
     classes: ["component_product"],
     image: "icons/product.svg",
-    html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "asdasdad",
         key: "src",

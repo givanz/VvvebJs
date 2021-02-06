@@ -216,7 +216,7 @@ Vvveb.Components.extend("_base", "_base", {
 			extraclass:"btn-group-sm btn-group-fullwidth",
             options: [{
                 value: "none",
-                icon:"la la-close",
+                icon:"la la-times",
                 //text: "None",
                 title: "None",
                 checked:true,
@@ -387,48 +387,6 @@ Vvveb.Components.extend("_base", "_base", {
 			}]
 		}
 	}, {
-        name: "Font weight",
-        key: "font-weight",
-		htmlAttr: "style",
-        sort: base_sort++,
-		section: style_section,
-        col:6,
-		inline:true,
-        inputtype: SelectInput,
-        data: {
-			options: [{
-				value: "",
-				text: "Default"
-			}, {	
-				value: "100",
-				text: "Thin"
-			}, {
-				value: "200",
-				text: "Extra-Light"
-			}, {
-				value: "300",
-				text: "Light"
-			}, {
-				value: "400",
-				text: "Normal"
-			}, {
-				value: "500",
-				text: "Medium"
-			}, {
-				value: "600",
-				text: "Semi-Bold"
-			}, {
-				value: "700",
-				text: "Bold"
-			}, {
-				value: "800",
-				text: "Extra-Bold"
-			}, {
-				value: "900",
-				text: "Ultra-Bold"
-			}],
-		}
-	}, {
         name: "Text align",
         key: "text-align",
         htmlAttr: "style",
@@ -440,8 +398,8 @@ Vvveb.Components.extend("_base", "_base", {
         data: {
 			extraclass:"btn-group-sm btn-group-fullwidth",
             options: [{
-                value: "none",
-                icon:"la la-close",
+                value: "",
+                icon:"la la-times",
                 //text: "None",
                 title: "None",
                 checked:true,
@@ -502,7 +460,7 @@ Vvveb.Components.extend("_base", "_base", {
 			extraclass:"btn-group-sm btn-group-fullwidth",
             options: [{
                 value: "none",
-                icon:"la la-close",
+                icon:"la la-times",
                 //text: "None",
                 title: "None",
                 checked:true,
@@ -510,13 +468,13 @@ Vvveb.Components.extend("_base", "_base", {
                 value: "underline",
                 //text: "Left",
                 title: "underline",
-                icon:"la la-long-arrow-down",
+                icon:"la la-long-arrow-alt-down",
                 checked:false,
             }, {
                 value: "overline",
                 //text: "Right",
                 title: "overline",
-                icon:"la la-long-arrow-up",
+                icon:"la la-long-arrow-alt-up",
                 checked:false,
             }, {
                 value: "line-through",
@@ -528,7 +486,7 @@ Vvveb.Components.extend("_base", "_base", {
                 value: "underline overline",
                 //text: "justify",
                 title: "Underline Overline",
-                icon:"la la-arrows-v",
+                icon:"la la-arrows-alt-v",
                 checked:false,
             }],
         },
@@ -1675,7 +1633,7 @@ Vvveb.Components.extend("_base", "html/form", {
     nodes: ["form"],
     image: "icons/form.svg",
     name: "Form",
-    html: '<form><div class="form-group"><label>Text</label><input type="text" class="form-control"></div></div></form>',
+    html: '<form><div class="mb-3"><label>Text</label><input type="text" class="form-control"></div></div></form>',
     properties: [{
         name: "Style",
         key: "style",
@@ -1715,7 +1673,7 @@ Vvveb.Components.extend("_base", "html/textinput", {
 	nodes: ["input"],
 	//attributes: {"type":"text"},
     image: "icons/text_input.svg",
-    html: '<div class="form-group"><label>Text</label><input type="text" class="form-control"></div></div>',
+    html: '<div class="mb-3"><label>Text</label><input type="text" class="form-control"></div></div>',
     properties: [{
         name: "Value",
         key: "value",
@@ -1843,7 +1801,7 @@ Vvveb.Components.extend("_base", "html/selectinput", {
 	nodes: ["select"],
     name: "Select Input",
     image: "icons/select_input.svg",
-    html: '<div class="form-group"><label>Choose an option </label><select class="form-control"><option value="value1">Text 1</option><option value="value2">Text 2</option><option value="value3">Text 3</option></select></div>',
+    html: '<div class="mb-3"><label>Choose an option </label><select class="form-control"><option value="value1">Text 1</option><option value="value2">Text 2</option><option value="value3">Text 3</option></select></div>',
 
 	beforeInit: function (node)
 	{
@@ -1921,7 +1879,7 @@ Vvveb.Components.extend("_base", "html/selectinput", {
 Vvveb.Components.extend("_base", "html/textareainput", {
     name: "Text Area",
     image: "icons/text_area.svg",
-    html: '<div class="form-group"><label>Your response:</label><textarea class="form-control"></textarea></div>'
+    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>'
 });
 Vvveb.Components.extend("_base", "html/radiobutton", {
     name: "Radio Button",
@@ -1951,7 +1909,7 @@ Vvveb.Components.extend("_base", "html/fileinput", {
     name: "Input group",
 	attributes: {"type":"file"},
     image: "icons/text_input.svg",
-    html: '<div class="form-group">\
+    html: '<div class="mb-3">\
 			  <input type="file" class="form-control">\
 			</div>'
 });
@@ -2350,12 +2308,12 @@ Vvveb.Components.extend("_base", "html/paragraph", {
 			extraclass:"btn-group-sm btn-group-fullwidth",
             options: [{
                 value: "",
-                icon:"la la-close",
+                icon:"la la-times",
                 //text: "None",
                 title: "None",
                 checked:true,
             }, {
-                value: "left",
+                value: "text-left",
                 //text: "Left",
                 title: "text-left",
                 icon:"la la-align-left",

@@ -53,6 +53,22 @@ $font-size-base: .875rem;
 
 @import "csstree";
 
+@mixin add-section-btn() {
+		position: relative;
+		bottom: 0px;
+		background: #4285f4;
+		color: #fff;
+		font-size: 18px;
+		border-radius: 20px;
+		width: 32px;
+		height: 32px;
+		padding: 3px 7px;
+		cursor:pointer;
+		display:block;
+		
+		i {font-weight:600}
+}
+
 @mixin component-list-element() {
 		width: 42%;
 		margin: 0% 1% 5% 5%;
@@ -71,8 +87,8 @@ $font-size-base: .875rem;
 		border-left-width:1px;
 		border-top-width:1px;
 		*/
-		background-position: 50% 20%;
-		background-size: auto 42px;
+		background-position: 50% 30%;
+		background-size: auto 35px;
 		z-index: 100;
 		background-color: transparent;
 		cursor:grab;
@@ -83,30 +99,29 @@ $font-size-base: .875rem;
 }
 
 @mixin block-list-element() {
-		width: 90%;
+		width: 100%;
 		height:180px;
+		position:relative;
 		text-align: center;
 		font-weight: normal;
 		font-size: 11px;
 		color: #000;
 		background-repeat: no-repeat;
-		padding-top: 150px;
+		padding-top: 0px;
 		margin-top: 5px;
+		margin-left: 0px;
 
 		border-color:#ddd;
 		border-style:solid;
-		border-width:0px;
-		box-shadow: 0px 0px 2px 1px #ccc;
-		box-shadow:0px 0px 2px 0px rgba(0, 0, 0, 0.2);
-		-webkit-box-shadow:0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+		border-width:1px 0px 1px 0px;
 		
-		background-position: top center;
+		background-position: center;
 		
 		/*		  
 		border-left-width:1px;
 		border-top-width:1px;
 		*/
-		background-size: 250px 150px;
+		background-size: contain;
 		z-index: 100;
 		background-color: #fff;
 		cursor:grab;
@@ -340,11 +355,10 @@ body
 				&.btn-primary {
 					padding: 0 0.7rem;
 					margin-top: 0.2rem;
-					line-height: 1.8rem;						
 				}
 				
 				span {
-					font-size:14px;
+					font-size:12px;
 				}
 			}
 			
@@ -394,13 +408,11 @@ body
 	
 	&.bottom-panel-expand
 	{
-		#bottom-panel
-		{
+		#bottom-panel {
 			height:50%;
 		}	
 		
-		#canvas
-		{
+		#canvas {
 			height:50%;
 		}
 	}
@@ -476,6 +488,11 @@ body
 				min-width:4.5rem;
 				color:$dark;
 				line-height:1.2rem;
+				font-size:0.8rem;
+
+				div {
+					margin-top:.2rem;
+				}
 				
 				i.la-lg
 				{
@@ -485,7 +502,7 @@ body
 				
 				small
 				{
-					font-size:70%;
+					font-size:0.8rem;
 					display:none;
 				}
 				
@@ -532,7 +549,7 @@ body
 		.header > div.section-box-actions 
 		{
 			position:absolute;
-			top:1rem;
+			top:0.5rem;
 			right:1rem;
 		}
 	
@@ -630,16 +647,17 @@ body
 			margin-top:4px;
 		}
 		
-		.custom-select
+		.form-select
 		{
 			height:auto;
 		}
-		.form-control, .custom-select
+		/*
+		.form-control, .form-select
 		{
 			padding:.275rem 0.25rem;
-		}
+		}*/
 
-		.form-group
+		.mb-3
 		{
 			margin-right:0px;			
 			margin-left:0px;			
@@ -898,20 +916,7 @@ body
 		
 		a#add-section-btn
 		{
-			position: relative;
-			bottom: 0px;
-			background: #4285f4;
-			color: #fff;
-			font-size: 18px;
-			border-radius: 20px;
-			width: 32px;
-			height: 32px;
-			padding: 3px 7px;
-			cursor:pointer;
-			display:block;
-			
-			i {font-weight:600}
-			
+			@include add-section-btn()
 		}
 	}
 	
@@ -959,7 +964,24 @@ body
 
 
 
+	#elements-tabs {
+			.nav-item {
+				background:#fff;
+			}
 
+			a {
+				font-size:1.4rem;
+				
+				&.active {
+					//background:$primary;
+					border-top:none;
+					border-left:none;
+					border-right:none;
+					border-bottom-color:$primary;
+					color:$primary;
+				}
+			}
+	}
 		   
 	.nav-tabs .nav-item:first-child .nav-link
 	{
@@ -968,7 +990,11 @@ body
 
 	.nav-tabs .nav-link
 	{
+		padding:0.8rem 0 0.5rem;
 		text-align:center;
+		i {
+			font-size:1.4rem;
+		}
 	}
 
 	.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
@@ -1047,10 +1073,10 @@ li[data-type]
 			{
 				font-size: 11px;
 				font-weight: 600;
-				line-height: 32px;
+				line-height: 28px;
 				text-align: left;
 				//padding-left:1rem;
-				padding:0.5rem 0rem 0.5rem 1rem;
+				padding:0.3rem 1rem;
 			  
 				> a 
 				{
@@ -1135,6 +1161,8 @@ li[data-type]
 		> div {
 			box-shadow: 0px 0px 1px 0px $builder-background-color;
 			box-shadow: 0px 0px 1px 0px rgba(18, 83, 205, 0.7), 0px 0px 5px 0px rgba(18, 83, 205, 0.1);
+			box-shadow:0px 0px 1px 2px rgba(18, 83, 205, 0.05);
+			border:1px solid #ccc;
 			background:#fff;
 			margin:1rem 1rem 0rem;
 			padding:0.2rem 0.5rem 0.2rem 1.4rem;
@@ -1159,7 +1187,7 @@ li[data-type]
 					content: "...";
 					color: #bbb;
 					width: 5px;
-					font-size: 32px;
+					font-size: 28px;
 					word-wrap: break-word;
 					line-height: 7px;
 					vertical-align: middle;
@@ -1218,8 +1246,11 @@ li[data-type]
 		@include block-list-element(); 
 		
 		a {
-			background: #fff;
-			padding: 5px 0px 0px 0px;
+				background: #fafafa;
+				padding: 0px 0px 0px 0px;
+				position:absolute;
+				bottom:0px;
+				width:100%;
 			}
 		}
 	}
@@ -1249,10 +1280,11 @@ li[data-type]
 {
 	@extend .la;
 	@extend .la-angle-down;
-	padding:0.7rem;
+	padding:0.3rem 0.7rem;
 	cursor:pointer;
 	position:absolute;
 	right:15px;
+	top:0;
 	
 	&.expanded
 	{
@@ -1271,8 +1303,7 @@ label.header
 	width: 100%;
 	line-height: 32px;
 	text-align: left;
-	padding:0.3rem 0 0 0.3rem;
-	padding:0.5rem 0rem 0.5rem 0.5rem;
+	padding:0.3rem 0.5rem;
 	border-top: 1px solid #ddd;
 	color: #007bff;
 	cursor:pointer;
@@ -1329,7 +1360,7 @@ div.section, .header > ol
 	{
 		.header-arrow
 		{
-			right:5px;
+			right:10px;
 		}
 
 	}
@@ -1381,7 +1412,7 @@ div.section, .header > ol
 	right: 0px; 
 }
 
-.custom-select {
+.form-select {
     -webkit-appearance: none;
     -moz-appearance: none;
 }
@@ -1396,9 +1427,10 @@ input[type="number"]:focus {
 }
 
 
-.custom-select.small-arrow
+.form-select.small-arrow
 {
-	background-position:right .15rem center;
+	background-position: right .5rem center;
+	background-size: 10px 8px;
 }
 
 .input-group.auto input[type="number"]
@@ -1455,7 +1487,9 @@ ul.autocomplete
     position: absolute;
     overflow: hidden;
     background-color: #fff;
-    border: 1px solid ButtonFace;
+    border: 1px solid #ccc;
+	border-top:none;
+	margin-top: -1px;
     margin: 0px;
     padding: 0px;
     list-style: none;
@@ -1532,9 +1566,7 @@ ul.autocomplete li.selected
 	
 	.nav-link {
 		span {
-			font-size:12px;
+			font-size:0.8rem;;
 		}
 	}
-	
-	
 }

@@ -32,4 +32,5 @@ body {
     align-items: center;
     justify-content: center; }
 
-/*# sourceMappingURL=vvvebjs-editor-helpers.css.map */
+[data-component-video] {
+  pointer-events: none; }

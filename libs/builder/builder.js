@@ -1744,7 +1744,7 @@ Vvveb.Sections = {
 	getSections: function() {
 		var sections = [];
 		var sectionList = 
-			$('> section, > header, > footer', window.FrameDocument.body);
+			$('> section, > header, > footer, > main', window.FrameDocument.body);
 		
 		sectionList.each(function (i, node) {
 
@@ -2024,7 +2024,7 @@ Vvveb.FileManager = {
 		this.currentPage = name;
 		var url = this.pages[name]['url'];
 		
-		Vvveb.Builder.loadUrl(url + (disableCache ? (url.indexOf('?') > -1?'&':'?') + Math.random():''), 
+		Vvveb.Builder.loadUrl(url + (disableCache ? (url.indexOf('?') > -1 ? '&r=':'?r=') + Math.random():''), 
 			function () { 
 				Vvveb.FileManager.loadComponents(allowedComponents); 
 				Vvveb.Sections.loadSections(); 

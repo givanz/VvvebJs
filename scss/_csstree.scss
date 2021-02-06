@@ -79,7 +79,7 @@
 			{
 				background: url(../img/toggle-small-expand.png) 40px 0 no-repeat;
 				background: url(../libs/builder/icons/plus_round.svg) 40px 0px no-repeat;
-				background: url(../libs/builder/icons/arrow-down.svg) 42px 2px no-repeat;
+				background: url(../libs/builder/icons/arrow-right.svg) 42px 2px no-repeat;
 				background-size:10px 10px;
 				
 				margin: -1.1em 0 0 -44px; /* 15px */
@@ -105,15 +105,15 @@
 		{
 			background: url(../img/toggle-small.png) 40px 5px no-repeat;
 			background: url(../libs/builder/icons/minus_round.svg) 40px 5px no-repeat;
-			background: url(../libs/builder/icons/arrow-right.svg) 54px 0px no-repeat;
+			background: url(../libs/builder/icons/arrow-down.svg) 54px 0px no-repeat;
 			background-size:10px 10px;
 			margin: -1.65em 0 0 -44px; /* 20px */
 			margin: -1.1em 0 0 -55px; /* 20px */
 			padding: 2.1em 0 0 80px;
 			height: auto;
 
-			> li { display: block; margin: 0 0 0.125em;  /* 2px */}
-			> li:last-child { margin: 0 0 0.063em; /* 1px */ }
+			> li { display: block; margin: 0 0 0.5em;  /* 2px */}
+			> li:last-child { margin: 0 0 0.7em; /* 1px */ }
 		}
 	}
 }

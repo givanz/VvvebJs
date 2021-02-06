@@ -2,19 +2,16 @@ var gulp = require("gulp"),
 	sass = require("gulp-sass");
 
 
-function compile() {
-	return (
-		gulp
-			.src("scss/**/*.scss")
-			.pipe(sass())
-			.on("error", sass.logError)
-			.pipe(gulp.dest("css"))
-	);
-}
+gulp.task('sass', function() {
+  return gulp.src(['./scss/*.scss'])
+    .pipe(sass())
+    .pipe(gulp.dest('./css'));
+});
 
-function watch() {
-	gulp.watch("scss/**/*.scss", compile);
-}
+gulp.task('watch', function () {
+    gulp.watch(['./scss/*.scss'], gulp.series('sass'));
+});
 
-exports.watch = watch;
-exports.compile = compile;
+
+// Default Task
+gulp.task('default', gulp.series('sass'));
