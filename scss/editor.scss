@@ -33,6 +33,7 @@ $form-select-bg-position: right 0.7rem center;
 $input-btn-padding-y: .4rem;
 $input-btn-padding-x: .5rem;
 $custom-select-padding-y: .4rem;
+$light: #fafafa;
 
 #logo
 {
@@ -126,4 +127,10 @@ $font-size-base: 1rem;
 			padding: 0.5rem 0.5rem;
 		}
 	}
+}
+
+.alert-light {
+    color: #525252;
+    background-color: whitesmoke;
+    border-color: #f0f0f0;
 }
