@@ -12079,6 +12079,10 @@ body {
     width: var(--builder-right-panel-width); }
     #vvveb-builder #right-panel .components-list, #vvveb-builder #right-panel .blocks-list, #vvveb-builder #right-panel .component-properties, #vvveb-builder #right-panel .sections-list {
       width: var(--builder-right-panel-width); }
+    #vvveb-builder #right-panel label.header .header-arrow {
+      right: 10px; }
+    #vvveb-builder #right-panel .nav-link.active {
+      border-top: 2px solid #0d6efd; }
   #vvveb-builder #top-panel {
     height: 50px;
     padding-top: 0.3rem;
@@ -12194,8 +12198,6 @@ body {
     #vvveb-builder .components-list::-webkit-scrollbar-thumb, #vvveb-builder .blocks-list::-webkit-scrollbar-thumb, #vvveb-builder .component-properties::-webkit-scrollbar-thumb, #vvveb-builder .sections-list::-webkit-scrollbar-thumb {
       background-color: rgba(0, 0, 0, 0.15);
       outline: 1px solid slategrey; }
-  #vvveb-builder .component-properties {
-    background: #fff; }
   #vvveb-builder #add-section-box .header > div.section-box-actions {
     position: absolute;
     top: 0.5rem;
@@ -12273,6 +12275,7 @@ body {
       background-color: rgba(0, 0, 0, 0.15);
       outline: 1px solid slategrey; }
   #vvveb-builder .component-properties {
+    background: #fff;
     height: 95%;
     height: calc(100% - 50px);
     /*
@@ -12280,6 +12283,8 @@ body {
 		{
 			padding:.275rem 0.25rem;
 		}*/ }
+    #vvveb-builder .component-properties .tab-content {
+      padding: 0.5rem 0.5rem; }
     #vvveb-builder .component-properties .nav-tabs {
       background: #f5f5f5; }
     #vvveb-builder .component-properties #right-panel {
@@ -12991,6 +12996,9 @@ input[type="number"]:focus {
 
 .form-control::placeholder {
   opacity: 0.7; }
+
+.form-control, .form-select {
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.05) inset; }
 
 .btn-link:hover {
   text-decoration: none; }

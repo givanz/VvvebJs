@@ -342,6 +342,18 @@ body
 		{
 			width:var(--builder-right-panel-width);
 		}
+		
+		label.header
+		{
+			.header-arrow
+			{
+				right:10px;
+			}
+		}
+		
+		.nav-link.active {
+			border-top:2px solid $primary;
+		}
 	}
 	
 	#top-panel
@@ -549,11 +561,6 @@ body
 		
 	}
 	
-	.component-properties
-	{
-		background:#fff;
-	}
-
 	& #add-section-box 
 	{
 		.header > div.section-box-actions 
@@ -635,8 +642,14 @@ body
 	
 	.component-properties
 	{
+		background:#fff;
+
 		height:95%;
 		height:calc(100% - #{$builder-header-top-height});
+		
+		.tab-content {
+			padding: 0.5rem 0.5rem;
+		}
 		
 		.nav-tabs {
 			background:#f5f5f5;
@@ -721,7 +734,7 @@ body
 	// canvas
 	#canvas
 	{
-	        margin-right: $builder-right-panel-width;
+	    margin-right: $builder-right-panel-width;
 		margin-left: $builder-left-panel-width;
 	   	margin-right: var(--builder-right-panel-width);
 		margin-left: var(--builder-left-panel-width);
@@ -1601,6 +1614,10 @@ input[type="number"]:focus {
 .form-control::placeholder
 {
 	opacity:0.7;
+}
+
+.form-control, .form-select {
+	box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.05) inset;
 }
 
 .btn-link:hover {
