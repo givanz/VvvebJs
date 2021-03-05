@@ -161,6 +161,21 @@ var RangeInput = $.extend({}, Input, {
     events: [
         ["change", "onChange", "input"],
 	 ],
+	 
+	onChange: function(event, node) {
+		
+		if (event.data && event.data.element)
+		{
+			$('[data-input-value]', this.parentNode).val(this.value);
+			event.data.element.trigger('propertyChange', [this.value, this]);
+		}
+	},
+	 
+	
+	setValue: function(value) {
+		//$('[data-input-value]', this.element).text(value);
+		return $('input', this.element).val(value);
+	},
 	
 	init: function(data) {
 		return this.render("rangeinput", data);

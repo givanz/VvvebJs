@@ -19,6 +19,7 @@
   <body>
 
       <header class="header clearfix container" id="top-header">
+	<div class="container">
         <nav>
           <ul class="nav nav-pills float-end">
             <li class="nav-item">
@@ -33,22 +34,26 @@
           </ul>
         </nav>
         <h3 class="text-muted">Project name</h3>
+        </div>
       </header>
 
       <section class="jumbotron container bg-light p-4" id="jumbotron">
-        <h1 class="display-3">Jumbotron heading</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+	<div class="container">
+		<h1 class="display-3">Jumbotron heading</h1>
+		<p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+		<p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+	</div>
       </section>
 
-      <section class="container" id="marketing">
+      <section id="marketing">
+		  <div class="container">
 		  <div class="row marketing">
-			<div class="col-lg-6">
+			<div class="col-lg-6" data-vvveb-disabled-area>
 			  <h4>Subheading</h4>
 			  <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 
 			  <h4>Subheading</h4>
-			  <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+			   <p data-vvveb-edit-exception>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
 
 			  <h4>Subheading</h4>
 			  <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
@@ -65,12 +70,14 @@
 			  <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
 			</div>
 		  </div>
+		  </div>
       </section>
 
-      <footer class="footer container" id="page-footer">
-        <p>© Company 2017</p>
+      <footer class="footer" id="page-footer">
+		<div class="container">
+	        <p>© Company 2017</p>
+        </div>
       </footer>
-
 
 </body>
 </html>

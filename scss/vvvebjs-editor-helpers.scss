@@ -16,14 +16,7 @@
 	}
 }
 
-body
-{
-	scrollbar-color: rgba(0,0,0, 0.1) #fff;
-	scrollbar-width: thin;
-	@include webkit-scrollbar();
-}
-
-[data-vvveb-disabled] {
+@mixin disabled-element() {
 	pointer-events:none;
 	position:relative;
 
@@ -47,6 +40,25 @@ body
 	}
 }
 
+body
+{
+	scrollbar-color: rgba(0,0,0, 0.1) #fff;
+	scrollbar-width: thin;
+	@include webkit-scrollbar();
+}
+
+
+[data-vvveb-disabled] {
+	@include disabled-element();
+}
+
+//disable edit on all content except on edit-exception
+[data-vvveb-disabled-area] { 
+
+	& *:not([data-vvveb-edit-exception]) {
+		@include disabled-element();
+	}
+}
 
 
 [data-component-video] {

@@ -65,8 +65,15 @@ $font-size-base: .875rem;
 		padding: 3px 7px;
 		cursor:pointer;
 		display:block;
+		box-shadow:0px 0px 1px 2px rgba(18, 83, 205, 0.05);
 		
 		i {font-weight:600}
+
+		&:hover
+		{
+			text-decoration:none;
+			background:darken( $builder-background-color, 10%)
+		}		
 }
 
 @mixin component-list-element() {
@@ -116,6 +123,8 @@ $font-size-base: .875rem;
 		border-width:1px 0px 1px 0px;
 		
 		background-position: center;
+		box-shadow:0px 1px 5px 0px rgba(0, 0, 0, 0.05);
+		-webkit-box-shadow:0px 1px 5px 0px rgba(0, 0, 0, 0.05);
 		
 		/*		  
 		border-left-width:1px;
@@ -301,7 +310,7 @@ body
 			}
 		}
 		
-		.components-list, .blocks-list, .component-properties
+		.components-list, .blocks-list, .component-properties, .sections-list
 		{
 			width:var(--builder-left-panel-width);
 		}
@@ -329,7 +338,7 @@ body
 		width: $builder-right-panel-width;
 		width: var(--builder-right-panel-width);
 		
-		.components-list, .blocks-list, .component-properties
+		.components-list, .blocks-list, .component-properties, .sections-list
 		{
 			width:var(--builder-right-panel-width);
 		}
@@ -520,7 +529,7 @@ body
 		}
 	}
 	
-	.components-list, .blocks-list, .component-properties
+	.components-list, .blocks-list, .component-properties, .sections-list
 	{
 		height:98%;
 		height:calc(100% - #{$builder-filemanager-height} - #{$drag-items-tabs-height} - #{$builder-header-top-height});
@@ -554,7 +563,7 @@ body
 			right:1rem;
 		}
 	
-		.components-list, .blocks-list, .component-properties {
+		.components-list, .blocks-list, .component-properties, .sections-list {
 			width:auto;
 			height:auto;
 			padding: 0px;
@@ -585,7 +594,7 @@ body
 		}
 		
 					
-		.blocks-list
+		.blocks-list, .sections-list
 		{
 			ol 
 			{
@@ -685,6 +694,20 @@ body
 			.input
 			{
 				width:100%;
+				
+				.input-range {
+					position:relative;
+					
+					input[type="number"] {
+						position: absolute;
+						right: 0;
+						top: -1.8rem;
+						width: 5em;
+						padding: 0.3rem 0.5rem;
+						text-align: center;
+						line-height: 12px;					
+					}
+				}
 			}
 			
 			.custom-control
@@ -831,12 +854,6 @@ body
 		font-size:16px;
 		padding-right:2px;
 		padding:2px 5px;
-		
-		&:hover
-		{
-			text-decoration:none;
-			background:darken( $builder-background-color, 10%)
-		}
 	}
 
 
@@ -1072,7 +1089,7 @@ li[data-type]
  
    > div
    {
-	  height: 100%;
+	  height: 100vh;
 	  overflow-y: auto;
    }	
 	width:100%;
@@ -1174,7 +1191,7 @@ li[data-type]
   }
 }
 
-#blocks
+.blocks, .sections 
 { 
 
 	.block-preview {
@@ -1184,9 +1201,8 @@ li[data-type]
 		z-index: 1000;
 		border: 1px solid #eee;
 	}
-	
 
-	.sections {
+	.sections-container {
 		display:flex;
 		flex-direction:column;
 		width:100%;
@@ -1201,10 +1217,11 @@ li[data-type]
 			border:1px solid #ccc;
 			background:#fff;
 			margin:1rem 1rem 0rem;
-			padding:0.2rem 0.5rem 0.2rem 1.4rem;
+			padding:0.3rem 0.5rem 0.3rem 1.4rem;
 			position:relative;
 			border-radius:3px;
 
+				
 			.controls {
 				cursor:pointer;
 				display:flex;
@@ -1212,8 +1229,8 @@ li[data-type]
 				
 				.handle {
 					width: 15px;
-					background: #fafafa;
-					border-right: 1px solid rgba(66, 133, 244, 0.2);
+					//background: #fafafa;
+					//border-right: 1px solid rgba(66, 133, 244, 0.2);
 					height: 10px;
 					position: absolute;
 					left: 0px;
@@ -1290,8 +1307,8 @@ li[data-type]
 			}
 			
 			.header_check ~ label .header-arrow {
-				right:3px;
-				top:3px;
+				right:0.3rem;
+				top:0.3rem;
 				
 				&:hover {
 					background:rgba(18, 83, 205, 0.1);
@@ -1327,7 +1344,7 @@ li[data-type]
 		{
 			@include block-list-element(); 
 			
-			&:hover:before {
+			&:before {
 				content: " ";
 				background: #fff;
 				width: 100%;
@@ -1335,8 +1352,17 @@ li[data-type]
 				position: absolute;
 				top: 0;
 				left: 0;
-				opacity: 0.9;
+				opacity: 0;
+				transition:opacity 0.7s;
 			} 
+			
+			&:hover{ 
+				//border:1px solid #$builder-background-color;
+				
+				&:before {
+					opacity: 0.7;
+				}
+			}
 			
 			img.preview {
 				display:none;
@@ -1355,7 +1381,7 @@ li[data-type]
 }
 
 
-#components .drag-elements-sidepane,
+.components .drag-elements-sidepane,
 #add-section-box
 {
 	li[data-type]
@@ -1522,10 +1548,14 @@ div.section {
 
 input[type="number"] {
     -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    appearance: textfield;
 }
 input[type="number"]:hover,
 input[type="number"]:focus {
-    -moz-appearance: number-input;
+    -moz-appearance: auto;
+    -webkit-appearance: auto;
+    appearance: auto;
 }
 
 

@@ -9,7 +9,8 @@
 		margin:0;
 		//width: 300px;
 		min-width: $builder-right-panel-width + 15;
-		font-size:12px;
+		font-size:11px;
+		font-weight:500;
 		color:#555;
 
 		li 
@@ -33,7 +34,7 @@
 				> label > span, > a > span  
 				{
 					color:#007bff;
-					//font-weight:600;
+					//font-weight:500;
 				}
 			}
 		}
@@ -42,14 +43,15 @@
 		{
 			> label
 			{
-				background: url(../libs/builder/icons/file.svg) 21px 0px no-repeat;
+				background: url(../libs/builder/icons/file.svg) 24px 0px no-repeat;
 				background-size:21px 21px;
 				cursor: pointer;
 				display: block;
-				padding-left: 49px;
+				padding-left: 56px;
 				margin:0;
-				font-size:12px;
-				line-height:24px;
+				font-size:11px;
+				font-weight:500;
+				line-height:28px;
 
 
 				&:hover
@@ -83,7 +85,7 @@
 			{
 				background: url(../libs/builder/icons/arrow-right.svg) 0px .3rem no-repeat;
 				background-size:12px 12px;
-				margin: -1.5rem 0 0 0rem;
+				margin: -1.8rem 0 0 0rem;
 				padding: 2rem 0 0 2rem;
 				height: 0;
 				
@@ -93,21 +95,22 @@
 		
 		li label
 		{
-			background: url(../libs/builder/icons/folder.svg) 21px 1px no-repeat;
-			background-size:21px 21px;
+			background: url(../libs/builder/icons/folder.svg) 24px 1px no-repeat;
+			background-size:24px 24px;
 			cursor: pointer;
 			display: block;
-			padding-left: 49px;
+			padding-left: 56px;
 			margin:0px;
-			font-size:12px;
-			line-height:24px;
+			font-size:11px;
+			font-weight:500;
+			line-height:28px;
 		}
 
 		li input:checked + ol
 		{
 			background: url(../libs/builder/icons/arrow-down.svg) 0px .1rem no-repeat;
 			background-size:12px 12px;
-			margin: -1.5em 0 0 0rem;
+			margin: -1.8em 0 0 0rem;
 			padding: 2rem 0 0 2rem;
 			height: auto;
 

@@ -11870,7 +11870,8 @@ https://github.com/givanz/VvvebJs
     padding: 0.3rem 0 0 2rem;
     margin: 0;
     min-width: 30vw;
-    font-size: 12px;
+    font-size: 11px;
+    font-weight: 500;
     color: #555; }
     .tree ol li {
       position: relative;
@@ -11884,14 +11885,15 @@ https://github.com/givanz/VvvebJs
       .tree ol li.active > label > span, .tree ol li.active > a > span {
         color: #007bff; }
     .tree ol li.file > label {
-      background: url(../libs/builder/icons/file.svg) 21px 0px no-repeat;
+      background: url(../libs/builder/icons/file.svg) 24px 0px no-repeat;
       background-size: 21px 21px;
       cursor: pointer;
       display: block;
-      padding-left: 49px;
+      padding-left: 56px;
       margin: 0;
-      font-size: 12px;
-      line-height: 24px; }
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 28px; }
       .tree ol li.file > label:hover {
         color: #0d6efd; }
     .tree ol li input {
@@ -11907,7 +11909,7 @@ https://github.com/givanz/VvvebJs
       .tree ol li input + ol {
         background: url(../libs/builder/icons/arrow-right.svg) 0px 0.3rem no-repeat;
         background-size: 12px 12px;
-        margin: -1.5rem 0 0 0rem;
+        margin: -1.8rem 0 0 0rem;
         padding: 2rem 0 0 2rem;
         height: 0; }
         .tree ol li input + ol > li {
@@ -11915,18 +11917,19 @@ https://github.com/givanz/VvvebJs
           margin-left: -14px !important;
           padding-left: 1px; }
     .tree ol li label {
-      background: url(../libs/builder/icons/folder.svg) 21px 1px no-repeat;
-      background-size: 21px 21px;
+      background: url(../libs/builder/icons/folder.svg) 24px 1px no-repeat;
+      background-size: 24px 24px;
       cursor: pointer;
       display: block;
-      padding-left: 49px;
+      padding-left: 56px;
       margin: 0px;
-      font-size: 12px;
-      line-height: 24px; }
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 28px; }
     .tree ol li input:checked + ol {
       background: url(../libs/builder/icons/arrow-down.svg) 0px 0.1rem no-repeat;
       background-size: 12px 12px;
-      margin: -1.5em 0 0 0rem;
+      margin: -1.8em 0 0 0rem;
       padding: 2rem 0 0 2rem;
       height: auto; }
       .tree ol li input:checked + ol > li {
@@ -12058,7 +12061,7 @@ body {
         #vvveb-builder #left-panel #filemanager .tree::-webkit-scrollbar-thumb {
           background-color: rgba(0, 0, 0, 0.15);
           outline: 1px solid slategrey; }
-    #vvveb-builder #left-panel .components-list, #vvveb-builder #left-panel .blocks-list, #vvveb-builder #left-panel .component-properties {
+    #vvveb-builder #left-panel .components-list, #vvveb-builder #left-panel .blocks-list, #vvveb-builder #left-panel .component-properties, #vvveb-builder #left-panel .sections-list {
       width: var(--builder-left-panel-width); }
   #vvveb-builder #right-panel {
     float: right;
@@ -12074,7 +12077,7 @@ body {
     box-shadow: 1px -2px 2px #f3f3f3 inset;
     width: 15vw;
     width: var(--builder-right-panel-width); }
-    #vvveb-builder #right-panel .components-list, #vvveb-builder #right-panel .blocks-list, #vvveb-builder #right-panel .component-properties {
+    #vvveb-builder #right-panel .components-list, #vvveb-builder #right-panel .blocks-list, #vvveb-builder #right-panel .component-properties, #vvveb-builder #right-panel .sections-list {
       width: var(--builder-right-panel-width); }
   #vvveb-builder #top-panel {
     height: 50px;
@@ -12172,7 +12175,7 @@ body {
         color: #0d6efd; }
     #vvveb-builder .drag-elements#add-section-box .nav-item:first-child .nav-link {
       border-left: none; }
-  #vvveb-builder .components-list, #vvveb-builder .blocks-list, #vvveb-builder .component-properties {
+  #vvveb-builder .components-list, #vvveb-builder .blocks-list, #vvveb-builder .component-properties, #vvveb-builder .sections-list {
     height: 98%;
     height: calc(100% - 250px - 40px - 50px);
     height: calc(100% - var(--builder-filemanager-height) - 40px - 50px);
@@ -12180,15 +12183,15 @@ body {
     list-style: none;
     background: #fafbfc;
     overflow-y: hidden; }
-    #vvveb-builder .components-list:hover, #vvveb-builder .blocks-list:hover, #vvveb-builder .component-properties:hover {
+    #vvveb-builder .components-list:hover, #vvveb-builder .blocks-list:hover, #vvveb-builder .component-properties:hover, #vvveb-builder .sections-list:hover {
       overflow-y: auto; }
-    #vvveb-builder .components-list::-webkit-scrollbar, #vvveb-builder .blocks-list::-webkit-scrollbar, #vvveb-builder .component-properties::-webkit-scrollbar {
+    #vvveb-builder .components-list::-webkit-scrollbar, #vvveb-builder .blocks-list::-webkit-scrollbar, #vvveb-builder .component-properties::-webkit-scrollbar, #vvveb-builder .sections-list::-webkit-scrollbar {
       width: 0.5rem;
       background-color: rgba(255, 255, 255, 0.1);
       -webkit-box-shadow: none; }
-    #vvveb-builder .components-list::-webkit-scrollbar-track, #vvveb-builder .blocks-list::-webkit-scrollbar-track, #vvveb-builder .component-properties::-webkit-scrollbar-track {
+    #vvveb-builder .components-list::-webkit-scrollbar-track, #vvveb-builder .blocks-list::-webkit-scrollbar-track, #vvveb-builder .component-properties::-webkit-scrollbar-track, #vvveb-builder .sections-list::-webkit-scrollbar-track {
       -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
-    #vvveb-builder .components-list::-webkit-scrollbar-thumb, #vvveb-builder .blocks-list::-webkit-scrollbar-thumb, #vvveb-builder .component-properties::-webkit-scrollbar-thumb {
+    #vvveb-builder .components-list::-webkit-scrollbar-thumb, #vvveb-builder .blocks-list::-webkit-scrollbar-thumb, #vvveb-builder .component-properties::-webkit-scrollbar-thumb, #vvveb-builder .sections-list::-webkit-scrollbar-thumb {
       background-color: rgba(0, 0, 0, 0.15);
       outline: 1px solid slategrey; }
   #vvveb-builder .component-properties {
@@ -12197,25 +12200,25 @@ body {
     position: absolute;
     top: 0.5rem;
     right: 1rem; }
-  #vvveb-builder #add-section-box .components-list, #vvveb-builder #add-section-box .blocks-list, #vvveb-builder #add-section-box .component-properties {
+  #vvveb-builder #add-section-box .components-list, #vvveb-builder #add-section-box .blocks-list, #vvveb-builder #add-section-box .component-properties, #vvveb-builder #add-section-box .sections-list {
     width: auto;
     height: auto;
     padding: 0px;
     height: 200px; }
-    #vvveb-builder #add-section-box .components-list ol, #vvveb-builder #add-section-box .blocks-list ol, #vvveb-builder #add-section-box .component-properties ol {
+    #vvveb-builder #add-section-box .components-list ol, #vvveb-builder #add-section-box .blocks-list ol, #vvveb-builder #add-section-box .component-properties ol, #vvveb-builder #add-section-box .sections-list ol {
       padding: 0rem 0rem 0rem 1rem; }
-      #vvveb-builder #add-section-box .components-list ol li, #vvveb-builder #add-section-box .blocks-list ol li, #vvveb-builder #add-section-box .component-properties ol li {
+      #vvveb-builder #add-section-box .components-list ol li, #vvveb-builder #add-section-box .blocks-list ol li, #vvveb-builder #add-section-box .component-properties ol li, #vvveb-builder #add-section-box .sections-list ol li {
         width: 14%;
         min-width: 90px;
         float: left;
         margin: 0% 1% 1% 1%; }
-        #vvveb-builder #add-section-box .components-list ol li a, #vvveb-builder #add-section-box .blocks-list ol li a, #vvveb-builder #add-section-box .component-properties ol li a {
+        #vvveb-builder #add-section-box .components-list ol li a, #vvveb-builder #add-section-box .blocks-list ol li a, #vvveb-builder #add-section-box .component-properties ol li a, #vvveb-builder #add-section-box .sections-list ol li a {
           display: block;
           color: #333;
           text-decoration: none;
           text-shadow: none;
           margin-top: 5px; }
-  #vvveb-builder #add-section-box .blocks-list ol li {
+  #vvveb-builder #add-section-box .blocks-list ol li, #vvveb-builder #add-section-box .sections-list ol li {
     width: 100%;
     height: 180px;
     position: relative;
@@ -12231,6 +12234,8 @@ body {
     border-style: solid;
     border-width: 1px 0px 1px 0px;
     background-position: center;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.05);
     /*		  
 		border-left-width:1px;
 		border-top-width:1px;
@@ -12300,6 +12305,16 @@ body {
           font-size: 14px; }
       #vvveb-builder .component-properties .mb-3 .input {
         width: 100%; }
+        #vvveb-builder .component-properties .mb-3 .input .input-range {
+          position: relative; }
+          #vvveb-builder .component-properties .mb-3 .input .input-range input[type="number"] {
+            position: absolute;
+            right: 0;
+            top: -1.8rem;
+            width: 5em;
+            padding: 0.3rem 0.5rem;
+            text-align: center;
+            line-height: 12px; }
       #vvveb-builder .component-properties .mb-3 .custom-control {
         min-height: 1.1rem; }
   #vvveb-builder #canvas {
@@ -12386,9 +12401,6 @@ body {
     font-size: 16px;
     padding-right: 2px;
     padding: 2px 5px; }
-    #vvveb-builder #select-actions a:hover, #vvveb-builder #wysiwyg-editor a:hover, #vvveb-builder #section-actions a#add-section-btn:hover {
-      text-decoration: none;
-      background: #1266f1; }
   #vvveb-builder #wysiwyg-editor {
     top: -2.4rem;
     height: 2.4rem;
@@ -12453,9 +12465,13 @@ body {
       height: 32px;
       padding: 3px 7px;
       cursor: pointer;
-      display: block; }
+      display: block;
+      box-shadow: 0px 0px 1px 2px rgba(18, 83, 205, 0.05); }
       #vvveb-builder #section-actions a#add-section-btn i {
         font-weight: 600; }
+      #vvveb-builder #section-actions a#add-section-btn:hover {
+        text-decoration: none;
+        background: #1266f1; }
   #vvveb-builder #add-section-box {
     width: 50%;
     min-height: 300px;
@@ -12574,7 +12590,7 @@ li[data-type] {
     background-color: rgba(0, 0, 0, 0.15);
     outline: 1px solid slategrey; }
   .drag-elements-sidepane > div {
-    height: 100%;
+    height: 100vh;
     overflow-y: auto; }
   .drag-elements-sidepane ul {
     z-index: 1;
@@ -12630,44 +12646,42 @@ li[data-type] {
               .drag-elements-sidepane ul > li ol li[data-type]:hover a {
                 display: block; }
 
-#blocks .block-preview {
+.blocks .block-preview, .sections .block-preview {
   position: absolute;
   left: 100%;
   height: auto;
   z-index: 1000;
   border: 1px solid #eee; }
 
-#blocks .sections {
+.blocks .sections-container, .sections .sections-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   background: #fff;
   padding-top: 1rem; }
-  #blocks .sections > div.section-item {
+  .blocks .sections-container > div.section-item, .sections .sections-container > div.section-item {
     box-shadow: 0px 0px 1px 0px #4285f4;
     box-shadow: 0px 0px 1px 0px rgba(18, 83, 205, 0.7), 0px 0px 5px 0px rgba(18, 83, 205, 0.1);
     box-shadow: 0px 0px 1px 2px rgba(18, 83, 205, 0.05);
     border: 1px solid #ccc;
     background: #fff;
     margin: 1rem 1rem 0rem;
-    padding: 0.2rem 0.5rem 0.2rem 1.4rem;
+    padding: 0.3rem 0.5rem 0.3rem 1.4rem;
     position: relative;
     border-radius: 3px; }
-    #blocks .sections > div.section-item .controls {
+    .blocks .sections-container > div.section-item .controls, .sections .sections-container > div.section-item .controls {
       cursor: pointer;
       display: flex;
       justify-content: space-between; }
-      #blocks .sections > div.section-item .controls .handle {
+      .blocks .sections-container > div.section-item .controls .handle, .sections .sections-container > div.section-item .controls .handle {
         width: 15px;
-        background: #fafafa;
-        border-right: 1px solid rgba(66, 133, 244, 0.2);
         height: 10px;
         position: absolute;
         left: 0px;
         top: 0px;
         height: 100%;
         cursor: grab; }
-        #blocks .sections > div.section-item .controls .handle::after {
+        .blocks .sections-container > div.section-item .controls .handle::after, .sections .sections-container > div.section-item .controls .handle::after {
           content: "...";
           color: #bbb;
           width: 5px;
@@ -12677,57 +12691,61 @@ li[data-type] {
           vertical-align: middle;
           display: inline-block;
           margin-left: 3px; }
-      #blocks .sections > div.section-item .controls .name {
+      .blocks .sections-container > div.section-item .controls .name, .sections .sections-container > div.section-item .controls .name {
         text-transform: capitalize; }
-      #blocks .sections > div.section-item .controls .type {
+      .blocks .sections-container > div.section-item .controls .type, .sections .sections-container > div.section-item .controls .type {
         color: #777; }
-      #blocks .sections > div.section-item .controls .info {
+      .blocks .sections-container > div.section-item .controls .info, .sections .sections-container > div.section-item .controls .info {
         margin-left: 0.2rem; }
-        #blocks .sections > div.section-item .controls .info .type, #blocks .sections > div.section-item .controls .info .name {
+        .blocks .sections-container > div.section-item .controls .info .type, .blocks .sections-container > div.section-item .controls .info .name, .sections .sections-container > div.section-item .controls .info .type, .sections .sections-container > div.section-item .controls .info .name {
           font-size: 80%; }
-      #blocks .sections > div.section-item .controls .buttons {
+      .blocks .sections-container > div.section-item .controls .buttons, .sections .sections-container > div.section-item .controls .buttons {
         margin-right: 2rem;
         align-self: flex-end; }
-        #blocks .sections > div.section-item .controls .buttons a {
+        .blocks .sections-container > div.section-item .controls .buttons a, .sections .sections-container > div.section-item .controls .buttons a {
           padding: 0.3rem 0.5rem 0.3rem;
           display: inline-block; }
-          #blocks .sections > div.section-item .controls .buttons a:hover {
+          .blocks .sections-container > div.section-item .controls .buttons a:hover, .sections .sections-container > div.section-item .controls .buttons a:hover {
             background-color: rgba(18, 83, 205, 0.1);
             text-decoration: none; }
-        #blocks .sections > div.section-item .controls .buttons .delete-btn,
-        #blocks .sections > div.section-item .controls .buttons .up-btn,
-        #blocks .sections > div.section-item .controls .buttons .down-btn {
+        .blocks .sections-container > div.section-item .controls .buttons .delete-btn,
+        .blocks .sections-container > div.section-item .controls .buttons .up-btn,
+        .blocks .sections-container > div.section-item .controls .buttons .down-btn, .sections .sections-container > div.section-item .controls .buttons .delete-btn,
+        .sections .sections-container > div.section-item .controls .buttons .up-btn,
+        .sections .sections-container > div.section-item .controls .buttons .down-btn {
           visibility: hidden; }
-        #blocks .sections > div.section-item .controls .buttons:hover .delete-btn,
-        #blocks .sections > div.section-item .controls .buttons:hover .up-btn,
-        #blocks .sections > div.section-item .controls .buttons:hover .down-btn {
+        .blocks .sections-container > div.section-item .controls .buttons:hover .delete-btn,
+        .blocks .sections-container > div.section-item .controls .buttons:hover .up-btn,
+        .blocks .sections-container > div.section-item .controls .buttons:hover .down-btn, .sections .sections-container > div.section-item .controls .buttons:hover .delete-btn,
+        .sections .sections-container > div.section-item .controls .buttons:hover .up-btn,
+        .sections .sections-container > div.section-item .controls .buttons:hover .down-btn {
           visibility: visible; }
-    #blocks .sections > div.section-item.drag-over {
+    .blocks .sections-container > div.section-item.drag-over, .sections .sections-container > div.section-item.drag-over {
       border: 2px dashed #0d6efd;
       border-radius: 5px; }
-    #blocks .sections > div.section-item .header_check ~ label {
+    .blocks .sections-container > div.section-item .header_check ~ label, .sections .sections-container > div.section-item .header_check ~ label {
       color: #0d6efd;
       display: block; }
-    #blocks .sections > div.section-item .header_check ~ label .header-arrow {
-      right: 3px;
-      top: 3px; }
-      #blocks .sections > div.section-item .header_check ~ label .header-arrow:hover {
+    .blocks .sections-container > div.section-item .header_check ~ label .header-arrow, .sections .sections-container > div.section-item .header_check ~ label .header-arrow {
+      right: 0.3rem;
+      top: 0.3rem; }
+      .blocks .sections-container > div.section-item .header_check ~ label .header-arrow:hover, .sections .sections-container > div.section-item .header_check ~ label .header-arrow:hover {
         background: rgba(18, 83, 205, 0.1); }
-    #blocks .sections > div.section-item .header_check ~ label .header-arrow:before {
+    .blocks .sections-container > div.section-item .header_check ~ label .header-arrow:before, .sections .sections-container > div.section-item .header_check ~ label .header-arrow:before {
       content: "\f105"; }
-    #blocks .sections > div.section-item .header_check:checked ~ label .header-arrow:before {
+    .blocks .sections-container > div.section-item .header_check:checked ~ label .header-arrow:before, .sections .sections-container > div.section-item .header_check:checked ~ label .header-arrow:before {
       content: "\f107"; }
-    #blocks .sections > div.section-item .header_check:checked ~ .tree {
+    .blocks .sections-container > div.section-item .header_check:checked ~ .tree, .sections .sections-container > div.section-item .header_check:checked ~ .tree {
       display: block; }
-    #blocks .sections > div.section-item .tree {
+    .blocks .sections-container > div.section-item .tree, .sections .sections-container > div.section-item .tree {
       display: none;
       border-top: 1px solid #eee;
       padding: 0.5rem 0rem 0rem;
       margin: 0.5rem 0rem 0rem; }
-      #blocks .sections > div.section-item .tree > ol {
+      .blocks .sections-container > div.section-item .tree > ol, .sections .sections-container > div.section-item .tree > ol {
         padding: 0.3rem 0 0 1.4rem; }
 
-#blocks .drag-elements-sidepane li[data-type] {
+.blocks .drag-elements-sidepane li[data-type], .sections .drag-elements-sidepane li[data-type] {
   width: 100%;
   height: 180px;
   position: relative;
@@ -12743,6 +12761,8 @@ li[data-type] {
   border-style: solid;
   border-width: 1px 0px 1px 0px;
   background-position: center;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.05);
   /*		  
 		border-left-width:1px;
 		border-top-width:1px;
@@ -12752,7 +12772,7 @@ li[data-type] {
   background-color: #fff;
   cursor: grab;
   opacity: 0.75; }
-  #blocks .drag-elements-sidepane li[data-type]:hover:before {
+  .blocks .drag-elements-sidepane li[data-type]:before, .sections .drag-elements-sidepane li[data-type]:before {
     content: " ";
     background: #fff;
     width: 100%;
@@ -12760,10 +12780,13 @@ li[data-type] {
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0.9; }
-  #blocks .drag-elements-sidepane li[data-type] img.preview {
+    opacity: 0;
+    transition: opacity 0.7s; }
+  .blocks .drag-elements-sidepane li[data-type]:hover:before, .sections .drag-elements-sidepane li[data-type]:hover:before {
+    opacity: 0.7; }
+  .blocks .drag-elements-sidepane li[data-type] img.preview, .sections .drag-elements-sidepane li[data-type] img.preview {
     display: none; }
-  #blocks .drag-elements-sidepane li[data-type] a.name {
+  .blocks .drag-elements-sidepane li[data-type] a.name, .sections .drag-elements-sidepane li[data-type] a.name {
     background: #fafafa;
     padding: 0px 0px 0px 0px;
     position: absolute;
@@ -12771,7 +12794,7 @@ li[data-type] {
     width: 100%;
     display: block; }
 
-#components .drag-elements-sidepane li[data-type],
+.components .drag-elements-sidepane li[data-type],
 #add-section-box li[data-type] {
   width: 42%;
   margin: 0% 1% 5% 5%;
@@ -12798,7 +12821,7 @@ li[data-type] {
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.05);
   background-color: #fff; }
-  #components .drag-elements-sidepane li[data-type]:hover,
+  .components .drag-elements-sidepane li[data-type]:hover,
   #add-section-box li[data-type]:hover {
     box-shadow: 0px 0px 1px 0px #4285f4;
     background-color: rgba(66, 133, 244, 0.1); }
@@ -12933,11 +12956,15 @@ div.section, .header > ol {
   -moz-appearance: none; }
 
 input[type="number"] {
-  -moz-appearance: textfield; }
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: textfield; }
 
 input[type="number"]:hover,
 input[type="number"]:focus {
-  -moz-appearance: number-input; }
+  -moz-appearance: auto;
+  -webkit-appearance: auto;
+  appearance: auto; }
 
 .form-select.small-arrow {
   background-position: right .5rem center;
@@ -13044,6 +13071,7 @@ ul.autocomplete li.selected {
   padding: 3px 7px;
   cursor: pointer;
   display: block;
+  box-shadow: 0px 0px 1px 2px rgba(18, 83, 205, 0.05);
   margnin: auto;
   display: none;
   left: 50%;
@@ -13051,6 +13079,9 @@ ul.autocomplete li.selected {
   border-color: #0d6efd; }
   .add-section-btn i {
     font-weight: 600; }
+  .add-section-btn:hover {
+    text-decoration: none;
+    background: #1266f1; }
   .add-section-btn i {
     color: #fff; }
 

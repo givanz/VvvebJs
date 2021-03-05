@@ -67,7 +67,7 @@
 					
 								
 					<div class="btn-group me-3 float-end" role="group">
-					  <button class="btn btn-primary btn-icon" title="Export (Ctrl + E)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-url="/admin/?module=editor/editor&action=save" data-v-vvveb-shortcut="ctrl+e">
+					  <button class="btn btn-primary btn-icon" title="Export (Ctrl + E)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-url="save.php" data-v-vvveb-shortcut="ctrl+e">
 						  <i class="la la-save"></i> <span data-v-gettext>Save page</span>
 					  </button>
 					</div>	
@@ -119,26 +119,33 @@
 						
 						<div class="header">
 							<ul class="nav nav-tabs  nav-fill" id="elements-tabs" role="tablist">
-							  <li class="nav-item blocks-tab">
-								<a class="nav-link active" id="blocks-tab" data-bs-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="true" title="Blocks">
+							  <li class="nav-item sections-tab">
+								<a class="nav-link active" id="sections-tab" data-bs-toggle="tab" href="#sections" role="tab" aria-controls="sections" aria-selected="true" title="Sections">
 									<i class="la la-stream"></i>
 									<!-- img src="../../../js/vvvebjs/icons/list_group.svg" height="23" --> 
 									<!-- div><small>Sections</small></div -->
 								</a>
 							  </li>
 							  <li class="nav-item component-tab">
-								<a class="nav-link" id="components-tab" data-bs-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="false" title="Components">
+								<a class="nav-link" id="components-tab" data-bs-toggle="tab" href="#components-tabs" role="tab" aria-controls="components" aria-selected="false" title="Components">
 									<i class="la la-box"></i>
 									<!-- img src="../../../js/vvvebjs/icons/product.svg" height="23" --> 
 									<!-- div><small>Components</small></div -->
 								</a>
 							  </li>
-							  <!-- li class="nav-item blocks-tab">
-								<a class="nav-link" id="blocks-tab" data-bs-toggle="tab" href="#blocks" role="tab" aria-controls="blocks" aria-selected="false" title="Sections"><img src="../../../js/vvvebjs/icons/list_group.svg" width="24" height="23"> <div><small>Sections</small></div></a>
+							  <!-- li class="nav-item sections-tab">
+								<a class="nav-link" id="sections-tab" data-bs-toggle="tab" href="#sections" role="tab" aria-controls="sections" aria-selected="false" title="Sections"><img src="../../../js/vvvebjs/icons/list_group.svg" width="24" height="23"> <div><small>Sections</small></div></a>
 							  </li -->
 							  <li class="nav-item component-properties-tab" style="display:none">
-								<a class="nav-link" id="properties-tab" data-bs-toggle="tab" href="#properties" role="tab" aria-controls="blocks" aria-selected="false" title="Properties">
+								<a class="nav-link" id="properties-tab" data-bs-toggle="tab" href="#properties" role="tab" aria-controls="properties" aria-selected="false" title="Properties">
 									<i class="la la-cog"></i>
+									<!-- img src="../../../js/vvvebjs/icons/filters.svg" height="23"--> 
+									<!-- div><small>Properties</small></div -->
+								</a>
+							  </li>
+							  <li class="nav-item component-configuration-tab">
+								<a class="nav-link" id="configuration-tab" data-bs-toggle="tab" href="#configuration" role="tab" aria-controls="configuration" aria-selected="false" title="Configuration">
+									<i class="la la-tools"></i>
 									<!-- img src="../../../js/vvvebjs/icons/filters.svg" height="23"--> 
 									<!-- div><small>Properties</small></div -->
 								</a>
@@ -148,26 +155,26 @@
 							<div class="tab-content">
 							  
 							  
-							  <div class="tab-pane fade show active" id="blocks" role="tabpanel" aria-labelledby="blocks-tab">
+							  <div class="tab-pane fade show active sections" id="sections" role="tabpanel" aria-labelledby="sections-tab">
 								  
 
 										<ul class="nav nav-tabs nav-fill sections-tabs" id="properties-tabs" role="tablist">
-										  <li class="nav-item style-tab">
-											<a class="nav-link active" data-bs-toggle="tab" href="#sections-list" role="tab" aria-controls="blocks" aria-selected="true">
-												<i class="la la-th-list"></i> <div><span>Page Sections</span></div></a>
-										  </li>
 										  <li class="nav-item content-tab">
-											<a class="nav-link" data-bs-toggle="tab" href="#sections-new-tab" role="tab" aria-controls="components" aria-selected="false">
+											<a class="nav-link active" data-bs-toggle="tab" href="#sections-new-tab" role="tab" aria-controls="components" aria-selected="false">
 												<i class="la la-plus"></i> <div><span>Add section</span></div></a>
+										  </li>
+										  <li class="nav-item style-tab">
+											<a class="nav-link" data-bs-toggle="tab" href="#sections-list" role="tab" aria-controls="sections" aria-selected="true">
+												<i class="la la-th-list"></i> <div><span>Page Sections</span></div></a>
 										  </li>
 										</ul>
 								
 										<div class="tab-content">
 		
-											 <div class="tab-pane fade show active" id="sections-list" data-section="style" role="tabpanel" aria-labelledby="style-tab">
+											 <div class="tab-pane fade" id="sections-list" data-section="style" role="tabpanel" aria-labelledby="style-tab">
 												<div class="drag-elements-sidepane sidepane">
 												  <div>
-													<div class="sections">
+													<div class="sections-container">
 																													  
 															<div class="section-item" draggable="true">
 																<div class="controls">
@@ -226,11 +233,73 @@
 												</div>
 											</div>
 											
-											<div class="tab-pane fade show" id="sections-new-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
+											<div class="tab-pane fade show active" id="sections-new-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
 
 
 													   <div class="search">
-															  <input class="form-control form-control-sm block-search" placeholder="Search sections" type="text" data-vvveb-action="blockSearch" data-vvveb-on="keyup">
+															  <input class="form-control form-control-sm block-search" placeholder="Search sections" type="text" data-vvveb-action="sectionSearch" data-vvveb-on="keyup">
+															  <button class="clear-backspace"  data-vvveb-action="clearSectionSearch">
+																  <i class="la la-times"></i>
+															  </button>
+														</div>
+
+											  
+														<div class="drag-elements-sidepane sidepane">
+															  <div class="block-preview"><img src=""></div>
+															  <div>
+																<ul class="sections-list clearfix" data-type="leftpanel">
+																</ul>
+
+															  </div>
+														</div>
+
+											</div>
+											
+										</div>
+							
+							  </div>
+							
+								<div class="tab-pane fade show" id="components-tabs" role="tabpanel" aria-labelledby="components-tab">
+								  
+								  
+										<ul class="nav nav-tabs nav-fill sections-tabs" role="tablist">
+										  <li class="nav-item components-tab">
+											<a class="nav-link active" data-bs-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="true">
+												<i class="la la-box"></i> <div><span>Components</span></div></a>
+										  </li>
+										  <li class="nav-item blocks-tab">
+											<a class="nav-link" data-bs-toggle="tab" href="#blocks" role="tab" aria-controls="components" aria-selected="false">
+												<i class="la la-copy"></i> <div><span>Blocks</span></div></a>
+										  </li>
+										</ul>
+								
+										<div class="tab-content">
+		
+											 <div class="tab-pane fade show active components" id="components" data-section="components" role="tabpanel" aria-labelledby="components-tab">
+												 
+												   <div class="search">
+														  <input class="form-control form-control-sm component-search" placeholder="Search components" type="text" data-vvveb-action="componentSearch" data-vvveb-on="keyup">
+														  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
+															  <i class="la la-times"></i>
+															</button>
+													</div>
+
+													<div class="drag-elements-sidepane sidepane">	
+														 <div>
+														  
+														<ul class="components-list clearfix" data-type="leftpanel">
+														</ul>
+
+													</div>											 
+												</div>
+											</div>
+
+											
+											
+											<div class="tab-pane fade show active blocks" id="blocks" data-section="content" role="tabpanel" aria-labelledby="content-tab">
+
+													   <div class="search">
+															  <input class="form-control form-control-sm block-search" placeholder="Search blocks" type="text" data-vvveb-action="blockSearch" data-vvveb-on="keyup">
 															  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
 																  <i class="la la-times"></i>
 															  </button>
@@ -245,33 +314,12 @@
 
 															  </div>
 														</div>
-
 											</div>
 											
 										</div>
-							
-							  </div>
-							
-								<div class="tab-pane fade show" id="components" role="tabpanel" aria-labelledby="components-tab">
-								  
-								   <div class="search">
-										  <input class="form-control form-control-sm component-search" placeholder="Search components" type="text" data-vvveb-action="componentSearch" data-vvveb-on="keyup">
-										  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
-											  <i class="la la-times"></i>
-											</button>
-									</div>
-
-									<div class="drag-elements-sidepane sidepane">
-									  <div>
-										  
-										<ul class="components-list clearfix" data-type="leftpanel">
-										</ul>
-
-									</div>
-								</div>
 							</div>
 
-								<div class="tab-pane fade" id="properties" role="tabpanel" aria-labelledby="blocks-tab">
+								<div class="tab-pane fade" id="properties" role="tabpanel" aria-labelledby="properties-tab">
 									<div class="component-properties-sidepane">
 										<div>
 											<div class="component-properties">
@@ -281,11 +329,11 @@
 															<i class="la la-lg la-sliders-h"></i> <div><span>Content</span></div></a>
 													  </li>
 													  <li class="nav-item style-tab">
-														<a class="nav-link" data-bs-toggle="tab" href="#style-left-panel-tab" role="tab" aria-controls="blocks" aria-selected="false">
+														<a class="nav-link" data-bs-toggle="tab" href="#style-left-panel-tab" role="tab" aria-controls="style" aria-selected="false">
 															<i class="la la-lg la-paint-brush"></i> <div><span>Style</span></div></a>
 													  </li>
 													  <li class="nav-item advanced-tab">
-														<a class="nav-link" data-bs-toggle="tab" href="#advanced-left-panel-tab" role="tab" aria-controls="blocks" aria-selected="false">
+														<a class="nav-link" data-bs-toggle="tab" href="#advanced-left-panel-tab" role="tab" aria-controls="advanced" aria-selected="false">
 															<i class="la la-lg la-tools"></i> <div><span>Advanced</span></div></a>
 													  </li>
 													</ul>
@@ -312,6 +360,34 @@
 										</div>
 									</div>
 							  </div>
+							
+								<div class="tab-pane fade" id="configuration" role="tabpanel" aria-labelledby="configuration-tab">
+									
+									<!-- color palette -->
+									<label class="header" data-header="default" for="header_pallette"><span>Color palette</span>
+										<div class="header-arrow"></div>
+									</label>
+									<input class="header_check" type="checkbox" checked="true" id="header_pallette">
+									<div class="section" data-section="default">
+
+										
+									</div>
+										
+										
+									<!-- typography -->	
+									<label class="header" data-header="element_header" for="header_element_typography"><span>Typography</span>
+										<div class="header-arrow"></div>
+									</label>
+									
+									<input class="header_check" type="checkbox" checked="true" id="header_element_typography">
+									<div class="section" data-section="element_header">
+										
+										
+									</div>
+									
+								
+								</div><!-- end configuration tab -->
+							
 							</div>
 						</div>							
 					
@@ -410,11 +486,11 @@
 										  <li class="nav-item component-tab">
 											<a class="nav-link active" id="box-components-tab" data-bs-toggle="tab" href="#box-components" role="tab" aria-controls="components" aria-selected="true"><i class="la la-lg la-cube"></i> <div><small>Components</small></div></a>
 										  </li>
-										  <li class="nav-item blocks-tab">
-											<a class="nav-link" id="box-blocks-tab" data-bs-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
+										  <li class="nav-item sections-tab">
+											<a class="nav-link" id="box-sections-tab" data-bs-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
 										  </li>
 										  <li class="nav-item component-properties-tab" style="display:none">
-											<a class="nav-link" id="box-properties-tab" data-bs-toggle="tab" href="#box-properties" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
+											<a class="nav-link" id="box-properties-tab" data-bs-toggle="tab" href="#box-properties" role="tab" aria-controls="properties" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
 										  </li>
 										</ul>
 										
@@ -619,7 +695,7 @@
 		{% for ( var i = 0; i < options.length; i++ ) { %}
 
 		<input name="{%=key%}" class="btn-check" type="radio" value="{%=options[i].value%}" id="{%=namespace%}{%=key%}{%=i%}" {%if (options[i].checked) { %}checked="{%=options[i].checked%}"{% } %} autocomplete="off">
-		<label class="btn btn-outline-primary {%if (options[i].checked) { %}active{% } %} {%if (options[i].extraclass) { %}{%=options[i].extraclass%}{% } %}" for="{%=namespace%}{%=key%}{%=i%}" title="{%=options[i].title%}">
+		<label class="btn btn-outline-primary {%if (options[i].extraclass) { %}{%=options[i].extraclass%}{% } %}" for="{%=namespace%}{%=key%}{%=i%}" title="{%=options[i].title%}">
 		  {%if (options[i].icon) { %}<i class="{%=options[i].icon%}"></i>{% } %}
 		  {%=options[i].text%}
 		</label>
@@ -717,7 +793,7 @@
 <script id="vvveb-input-grid" type="text/html">
 
 	<div class="row">
-		<div class="mb-1 col-12">
+		<div class="col-6 mb-2">
 		
 			<label>Flexbox</label>
 			<select class="form-select" name="col">
@@ -728,10 +804,9 @@
 				{% } %}
 				
 			</select>
-			<br/>
 		</div>
 
-		<div class="col-6">
+		<div class="col-6 mb-2">
 			<label>Extra small</label>
 			<select class="form-select" name="col-xs">
 				
@@ -741,10 +816,9 @@
 				{% } %}
 				
 			</select>
-			<br/>
 		</div>
 		
-		<div class="col-6">
+		<!-- div class="col-6">
 			<label>Small</label>
 			<select class="form-select" name="col-sm">
 				
@@ -755,9 +829,9 @@
 				
 			</select>
 			<br/>
-		</div>
+		</div -->
 		
-		<div class="col-6">
+		<div class="col-6 mb-2">
 			<label>Medium</label>
 			<select class="form-select" name="col-md">
 				
@@ -767,10 +841,9 @@
 				{% } %}
 				
 			</select>
-			<br/>
 		</div>
 		
-		<div class="col-6 mb-1">
+		<div class="col-6 mb-2">
 			<label>Large</label>
 			<select class="form-select" name="col-lg">
 				
@@ -780,7 +853,31 @@
 				{% } %}
 				
 			</select>
-			<br/>
+		</div>
+		
+		
+		<div class="col-6 mb-2">
+			<label>Extra large </label>
+			<select class="form-select" name="col-xl">
+				
+				<option value="">None</option>
+				{% for ( var i = 1; i <= 12; i++ ) { %}
+				<option value="{%=i%}" {% if ((typeof col_lg !== 'undefined') && col_lg == i) { %} selected {% } %}>{%=i%}</option>
+				{% } %}
+				
+			</select>
+		</div>
+		
+		<div class="col-6 mb-2">
+			<label>Extra extra large</label>
+			<select class="form-select" name="col-xxl">
+				
+				<option value="">None</option>
+				{% for ( var i = 1; i <= 12; i++ ) { %}
+				<option value="{%=i%}" {% if ((typeof col_lg !== 'undefined') && col_lg == i) { %} selected {% } %}>{%=i%}</option>
+				{% } %}
+				
+			</select>
 		</div>
 		
 		{% if (typeof hide_remove === 'undefined') { %}
@@ -826,8 +923,10 @@
 
 <script id="vvveb-input-rangeinput" type="text/html">
 	
-	<div>
-		<input name="{%=key%}" type="range" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-range"/>
+	<div class="input-range">
+		
+		<input name="{%=key%}" type="range" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-range" data-input-value/>
+		<input name="{%=key%}" type="number" min="{%=min%}" max="{%=max%}" step="{%=step%}" class="form-control" data-input-value/>
 	</div>
 	
 </script>
@@ -1060,7 +1159,7 @@
 <div class="modal fade" id="new-page-modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     
-    <form>
+    <form action="save.php">
 		
     <div class="modal-content">
       <div class="modal-header">
@@ -1091,7 +1190,7 @@
 			 <label class="col-sm-3 control-label">Page name</label>      
 			<div class="col-sm-9 input">
 				<div>   
-					<input name="title" type="text" class="form-control" placeholder="My page" required>  
+					<input name="title" type="text" value="My page" class="form-control" placeholder="My page" required>  
 				</div>
 			</div>     
 		</div>
@@ -1100,25 +1199,27 @@
 			 <label class="col-sm-3 control-label">File name</label>      
 			<div class="col-sm-9 input">
 				<div>   
-					<input name="file" type="text" class="form-control" placeholder="my-page.html" required>  
+					<input name="file" type="text" value="my-page.html" class="form-control" placeholder="my-page.html" required>  
 				</div>
 			</div>     
 		</div>
 		
+		<!-- 
 		<div class="mb-3 row" data-key="href">     
 			 <label class="col-sm-3 control-label">Url</label>      
 			<div class="col-sm-9 input">
 				<div>   
-					<input name="url" type="text" class="form-control" placeholder="/my-page.html" required>  
+					<input name="url" type="text" value="my-page.html" class="form-control" placeholder="/my-page.html" required>  
 				</div>
 			</div>     
 		</div>
+		-->
 		
 		<div class="mb-3 row" data-key="href">     
 			 <label class="col-sm-3 control-label">Folder</label>      
 			<div class="col-sm-9 input">
 				<div>   
-					<input name="folder" type="text" class="form-control" placeholder="/" required>  
+					<input name="folder" type="text" value="my-pages" class="form-control" placeholder="/" required>  
 				</div>
 			</div>     
 		</div>
@@ -1160,8 +1261,13 @@
 
 <!-- components-->
 <!-- script src="libs/builder/components-server.js"></script -->	
+<script src="libs/builder/components-common.js"></script>	
+<script src="libs/builder/components-elements.js"></script>	
 <script src="libs/builder/components-bootstrap5.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
+
+<!-- sections-->
+<script src="libs/builder/sections-bootstrap4.js"></script>	
 
 <!-- blocks-->
 <script src="libs/builder/blocks-bootstrap4.js"></script>	
@@ -1204,7 +1310,7 @@ $(document).ready(function()
 
 	Vvveb.Gui.init();
 	Vvveb.FileManager.init();
-	Vvveb.Sections.init();
+	Vvveb.SectionList.init();
 	Vvveb.FileManager.addPages(
 	[
 		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
@@ -1218,12 +1324,19 @@ $(document).ready(function()
 		//uncomment php code below and rename file to .php extension to load saved html files in the editor
 		/*
 		<?php 
-		   $htmlFiles = glob("*.html");
+		   $htmlFiles = glob('{my-pages/*.html,demo/*\/*.html, demo/*.html}',  GLOB_BRACE);
 		   foreach ($htmlFiles as $file) { 
 			   if (in_array($file, array('new-page-blank-template.html', 'editor.html'))) continue;//skip template files
 			   $pathInfo = pathinfo($file);
+			   $filename = $pathInfo['filename'];
+			   $folder = preg_replace('@/.+?$@', '', $pathInfo['dirname']);
+			   $subfolder = preg_replace('@^.+?/@', '', $pathInfo['dirname']);
+			   if ($filename == 'index' && $subfolder) {
+				   $filename = $subfolder;
+			   }
+			   $url = $pathInfo['dirname'] . '/' . $pathInfo['basename'];
 		?>
-		{name:"<?php echo ucfirst($pathInfo['filename']);?>", title:"<?php echo ucfirst($pathInfo['filename']);?>",  url: "<?php echo $pathInfo['basename'];?>"},
+		{name:"<?php echo ucfirst($filename);?>", file:"<?php echo ucfirst($filename);?>", title:"<?php echo ucfirst($filename);?>",  url: "<?php echo $url;?>", folder:"<?php echo $folder?>"},
 		<?php } ?>
 		*/
 	]);
