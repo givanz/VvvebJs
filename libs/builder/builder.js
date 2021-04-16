@@ -1256,7 +1256,9 @@ Vvveb.Builder = {
 									nextSibling: node.nextSibling});
 
 			self.selectedEl.remove();
-
+			// Reload sections list to show remaining sections
+			Vvveb.SectionList.loadSections();
+			
 			event.preventDefault();
 			return false;
 		});
