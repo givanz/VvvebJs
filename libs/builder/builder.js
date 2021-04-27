@@ -1322,6 +1322,9 @@ Vvveb.Builder = {
 			addSectionComponent(html, ($("[name='add-section-insert-mode']:checked").val() == "after"));
 
 			addSectionBox.hide();
+			
+			// Refresh Page Sections
+			Vvveb.SectionList.loadSections();
 		});
 
 		$(".blocks-list li ol li", addSectionBox).on("click", function(event) {
