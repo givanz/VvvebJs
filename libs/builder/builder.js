@@ -1334,7 +1334,7 @@ Vvveb.Builder = {
 		
 
 		$(".sections-list li ol li", addSectionBox).on("click", function(event) {
-			var html = Vvveb.Secgions.get(this.dataset.type).html;
+			var html = Vvveb.Sections.get(this.dataset.type).html;
 
 			addSectionComponent(html, ($("[name='add-section-insert-mode']:checked").val() == "after"));
 
