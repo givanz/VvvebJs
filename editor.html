@@ -17,7 +17,6 @@
 
 
 	<div id="vvveb-builder">
-				
 				<div id="top-panel">
 					<img src="img/logo.png" alt="Vvveb" class="float-start" id="logo">
 					
@@ -237,7 +236,7 @@
 
 
 													   <div class="search">
-															  <input class="form-control form-control-sm block-search" placeholder="Search sections" type="text" data-vvveb-action="sectionSearch" data-vvveb-on="keyup">
+															  <input class="form-control section-search" placeholder="Search sections" type="text" data-vvveb-action="sectionSearch" data-vvveb-on="keyup">
 															  <button class="clear-backspace"  data-vvveb-action="clearSectionSearch">
 																  <i class="la la-times"></i>
 															  </button>
@@ -278,7 +277,7 @@
 											 <div class="tab-pane fade show active components" id="components" data-section="components" role="tabpanel" aria-labelledby="components-tab">
 												 
 												   <div class="search">
-														  <input class="form-control form-control-sm component-search" placeholder="Search components" type="text" data-vvveb-action="componentSearch" data-vvveb-on="keyup">
+														  <input class="form-control component-search" placeholder="Search components" type="text" data-vvveb-action="componentSearch" data-vvveb-on="keyup">
 														  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
 															  <i class="la la-times"></i>
 															</button>
@@ -299,7 +298,7 @@
 											<div class="tab-pane fade show active blocks" id="blocks" data-section="content" role="tabpanel" aria-labelledby="content-tab">
 
 													   <div class="search">
-															  <input class="form-control form-control-sm block-search" placeholder="Search blocks" type="text" data-vvveb-action="blockSearch" data-vvveb-on="keyup">
+															  <input class="form-control block-search" placeholder="Search blocks" type="text" data-vvveb-action="blockSearch" data-vvveb-on="keyup">
 															  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
 																  <i class="la la-times"></i>
 															  </button>
@@ -427,13 +426,44 @@
 
 							<div id="select-box">
 
-								<div id="wysiwyg-editor">
-										<a id="bold-btn" href="" title="Bold"><i class="la la-bold"></i></a>
-										<a id="italic-btn" href="" title="Italic"><i class="la la-italic"></i></a>
-										<a id="underline-btn" href="" title="Underline"><i class="la la-underline"></i></a>
-										<a id="strike-btn" href="" title="Strikeout"><del>S</del></a>
-										<a id="link-btn" href="" title="Create link"><i class="la la-link"></i></a>
+								<div id="wysiwyg-editor" class="default-editor">
+										<!--
+										<a id="bold-btn" href="" title="Bold">
+											<svg height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+												<path clip-rule="evenodd" d="M56 40V216H148C176.719 216 200 192.719 200 164C200 147.849 192.637 133.418 181.084 123.88C187.926 115.076 192 104.014 192 92C192 63.2812 168.719 40 140 40H56ZM88 144V184H148C159.046 184 168 175.046 168 164C168 152.954 159.046 144 148 144H88ZM88 112V72H140C151.046 72 160 80.9543 160 92C160 103.046 151.046 112 140 112H88Z" fill="#252525" fill-rule="evenodd"/>
+											</svg>	
+										</a>
+										<a id="italic-btn" href="" title="Italic">
+											<svg height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+												<path d="M202 40H84V64H126.182L89.8182 192H54V216H172V192H129.818L166.182 64H202V40Z" fill="#252525"/>
+											</svg>											
+										</a>
+										<a id="underline-btn" href="" title="Underline">
+											<svg height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+												<path clip-rule="evenodd" d="M88 40H60V108.004C60 145.56 90.4446 176.004 128 176.004C165.555 176.004 196 145.56 196 108.004V40H168V108C168 130.091 150.091 148 128 148C105.909 148 88 130.091 88 108V40ZM204 216V192H52V216H204Z" fill="#252525" fill-rule="evenodd"/>
+											</svg>
+										</a>
+										--> 
 										
+										<a id="bold-btn" href="" title="Bold">
+											<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+												<path d="M6,4h8a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+												<path d="M6,12h9a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/></svg>	
+										</a>
+										<a id="italic-btn" href="" title="Italic">
+											<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="19" x2="10" y1="4" y2="4"/><line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="14" x2="5" y1="20" y2="20"/>
+											<line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="15" x2="9" y1="4" y2="20"/></svg>									
+										</a>
+										<a id="underline-btn" href="" title="Underline">
+											<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+												<path d="M6,4v7a6,6,0,0,0,6,6h0a6,6,0,0,0,6-6V4" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" y1="2 y2="2"/>
+												<line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="4" x2="20" y1="22" y2="22"/>
+										</a>
+										
+										
+										<a id="strike-btn" href="" title="Strikeout">
+											<del>S</del>
+										</a>
 										<div class="dropdown">
 										  <a class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<i class="la la-align-left"></i>
@@ -446,9 +476,19 @@
 												<a class="dropdown-item" href="#"><i class="la la-lg la-align-justify"></i> Align Justify</a>
 											  </div>
 										</div>
+										<div class="separator"></div>
+
+										<a id="link-btn" href="" title="Create link">
+											<i class="la la-link">
+										</i></a>
 										
-										<input name="color" type="color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">
+										<div class="separator"></div>
 										
+										<input name="color" type="color" title="Color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">
+										<input name="background-color" type="color" title="Background Color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">
+										
+										<div class="separator"></div>
+
 										<select class="form-select">
 											<option value="">Default</option>
 											<option value="Arial, Helvetica, sans-serif">Arial</option>
@@ -518,7 +558,7 @@
 										  <div class="tab-pane fade show active" id="box-components" role="tabpanel" aria-labelledby="components-tab">
 											  
 											   <div class="search">
-													  <input class="form-control form-control-sm component-search" placeholder="Search components" type="text" data-vvveb-action="addBoxComponentSearch" data-vvveb-on="keyup">
+													  <input class="form-control component-search" placeholder="Search components" type="text" data-vvveb-action="addBoxComponentSearch" data-vvveb-on="keyup">
 													  <button class="clear-backspace" data-vvveb-action="clearComponentSearch">
 														  <i class="la la-times"></i>
 													  </button>
@@ -537,7 +577,7 @@
 										  <div class="tab-pane fade" id="box-blocks" role="tabpanel" aria-labelledby="blocks-tab">
 											  
 											   <div class="search">
-													  <input class="form-control form-control-sm block-search" placeholder="Search blocks" type="text" data-vvveb-action="addBoxBlockSearch" data-vvveb-on="keyup">
+													  <input class="form-control block-search" placeholder="Search blocks" type="text" data-vvveb-action="addBoxBlockSearch" data-vvveb-on="keyup">
 													  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
 														  <i class="la la-times"></i>
 													  </button>
@@ -743,6 +783,26 @@
 			{% } %}
 		</select>
 	
+	</div>
+	
+</script>
+
+<script id="vvveb-input-icon-select" type="text/html">
+
+	<div class="input-list-select">
+		
+		<div class="elements">
+			<div class="row row-cols-4">
+				{% for ( var i = 0; i < options.length; i++ ) { %}
+				<div class="col">
+					<div class="element">
+						{%=options[i].value%}
+						<label>{%=options[i].text%}</label>
+					</div>
+				</div>
+				{% } %}
+			</div>
+		</div>
 	</div>
 	
 </script>
@@ -1022,16 +1082,16 @@
 
 <script id="vvveb-input-sectioninput" type="text/html">
 
-		<label class="header" data-header="{%=key%}" for="header_{%=key%}"><span>&ensp;{%=header%}</span> <div class="header-arrow"></div></label> 
+		<label class="header" data-header="{%=key%}" for="header_{%=key%}"><span>{%=header%}</span> <div class="header-arrow"></div></label> 
 		<input class="header_check" type="checkbox" {% if (typeof expanded !== 'undefined' && expanded == false) { %} {% } else { %}checked="true"{% } %} id="header_{%=key%}"> 
-		<div class="section" data-section="{%=key%}"></div>		
+		<div class="section row" data-section="{%=key%}"></div>		
 	
 </script>
 
 
 <script id="vvveb-property" type="text/html">
 
-	<div class="mb-3 {% if (typeof col !== 'undefined' && col != false) { %} col-sm-{%=col%} d-inline-block px-2 {% } else { %}row{% } %}" data-key="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
+	<div class="mb-3 {% if (typeof col !== 'undefined' && col != false) { %} col-sm-{%=col%} {% } else { %}row{% } %} {% if (typeof inline !== 'undefined' && inline == true) { %}inline{% } %} " data-key="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
 		
 		{% if (typeof name !== 'undefined' && name != false) { %}<label class="{% if (typeof inline === 'undefined' ) { %}col-sm-4{% } %} control-label" for="input-model">{%=name%}</label>{% } %}
 		
@@ -1265,6 +1325,7 @@
 <script src="libs/builder/components-elements.js"></script>	
 <script src="libs/builder/components-bootstrap5.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
+<script src="libs/builder/components-html.js"></script>	
 
 <!-- sections-->
 <script src="libs/builder/sections-bootstrap4.js"></script>	
@@ -1281,6 +1342,24 @@
 <script src="libs/codemirror/lib/xml.js"></script>
 <script src="libs/codemirror/lib/formatting.js"></script>
 <script src="libs/builder/plugin-codemirror.js"></script>	
+
+<!-- 
+Tinymce plugin
+Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist 
+-->
+<!-- 
+<script src="libs/tinymce-dist/tinymce.min.js"></script>
+<script src="libs/builder/plugin-tinymce.js"></script>	
+-->
+
+<!-- 
+CKEditor plugin
+Unzip the latest ckeditor release zip from https://github.com/ckeditor/ckeditor4/releases to libs/ckeditor 
+-->
+<!--
+<script src="libs/ckeditor/ckeditor.js"></script>
+<script src="libs/builder/plugin-ckeditor.js"></script>	
+-->
 
 <!-- jszip - download page as zip -->
 <!-- script src="libs/jszip/jszip.min.js"></script>
@@ -1314,7 +1393,7 @@ $(document).ready(function()
 	Vvveb.FileManager.addPages(
 	[
 		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
-		{name:"landing-page", title:"Landing page",  url: "demo/startbootstrap-landing-page/index.html", file: "demo/startbootstrap-landing-page/index.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
+		{name:"landing-page", title:"Landing page",  url: "demo/landing/index-2.html", file: "demo/landing/index-2.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
 		{name:"album", title:"Album",  url: "demo/album/index.html", file: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
 		{name:"blog", title:"Blog",  url: "demo/blog/index.html", file: "demo/blog/index.html", folder:"content", assets: ['demo/blog/blog.css']},
 		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html",  file: "demo/carousel/index.html", folder:"content", assets: ['demo/carousel/carousel.css']},
@@ -1341,7 +1420,7 @@ $(document).ready(function()
 		*/
 	]);
 	
-	Vvveb.FileManager.loadPage("narrow-jumbotron",);
+	 Vvveb.FileManager.loadPage("narrow-jumbotron");
 });
 </script>
 </body>

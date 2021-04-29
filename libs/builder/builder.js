@@ -568,6 +568,9 @@ Vvveb.Builder = {
 	isPreview : false,
 	runJsOnSetHtml : false,
 	designerMode : false,
+	highlightEnabled : false,
+	selectPadding: 0,
+	leftPanelWidth: 275,
 	
 	init: function(url, callback) {
 
@@ -591,6 +594,10 @@ Vvveb.Builder = {
 		self._initBox();
 
 		self.dragElement = null;
+		
+		self.highlightEnabled = true;
+		
+		self.leftPanelWidth = $("#left-panel").width();
 	},
 	
 /* controls */    	
@@ -809,10 +816,10 @@ Vvveb.Builder = {
 							var offset = self.selectedEl.offset();
 							
 							$("#select-box").css(
-								{"top": offset.top - self.frameDoc.scrollTop() , 
-								 "left": offset.left - self.frameDoc.scrollLeft() , 
-								 "width" : self.selectedEl.outerWidth(), 
-								 "height": self.selectedEl.outerHeight(),
+								{"top": offset.top - self.frameDoc.scrollTop() - self.selectPadding, 
+								 "left": offset.left - self.frameDoc.scrollLeft() - self.selectPadding, 
+								 "width" : self.selectedEl.outerWidth() + self.selectPadding * 2, 
+								 "height": self.selectedEl.outerHeight() + self.selectPadding * 2,
 								 //"display": "block"
 								 });			
 								 
@@ -823,10 +830,10 @@ Vvveb.Builder = {
 							var offset = self.highlightEl.offset();
 							
 							highlightBox.css(
-								{"top": offset.top - self.frameDoc.scrollTop() , 
-								 "left": offset.left - self.frameDoc.scrollLeft() , 
-								 "width" : self.highlightEl.outerWidth(), 
-								 "height": self.highlightEl.outerHeight(),
+								{"top": offset.top - self.frameDoc.scrollTop() - self.selectPadding, 
+								 "left": offset.left - self.frameDoc.scrollLeft() - self.selectPadding, 
+								 "width" : self.highlightEl.outerWidth() + self.selectPadding * 2, 
+								 "height": self.highlightEl.outerHeight() + self.selectPadding * 2,
 								 //"display": "block"
 								 });		
 								 
@@ -986,6 +993,7 @@ Vvveb.Builder = {
 		if (self.texteditEl && self.selectedEl.get(0) != node) 
 		{
 			Vvveb.WysiwygEditor.destroy(self.texteditEl);
+			self.selectPadding = 0;
 			$("#select-box").removeClass("text-edit").find("#select-actions").show();
 			self.texteditEl = null;
 		}
@@ -1000,10 +1008,10 @@ Vvveb.Builder = {
 				var offset = target.offset();
 					
 				$("#select-box").css(
-					{"top": offset.top - self.frameDoc.scrollTop() , 
-					 "left": offset.left - self.frameDoc.scrollLeft() , 
-					 "width" : target.outerWidth(), 
-					 "height": target.outerHeight(),
+					{"top": offset.top - self.frameDoc.scrollTop() - self.selectPadding, 
+					 "left": offset.left - self.frameDoc.scrollLeft() - self.selectPadding,  
+					 "width" : target.outerWidth() + self.selectPadding * 2, 
+					 "height": target.outerHeight() + self.selectPadding * 2,
 					 "display": "block",
 					 });
 			} catch(err) {
@@ -1023,7 +1031,7 @@ Vvveb.Builder = {
 		
 		self.frameHtml.on("mousemove touchmove", function(event) {
 			
-			if (event.target && isElement(event.target)/* && event.originalEvent*/)
+			if (self.highlightEnabled == true && event.target && isElement(event.target)/* && event.originalEvent*/)
 			{
 				self.highlightEl = target = $(event.target);
 				var offset = target.offset();
@@ -1073,8 +1081,8 @@ Vvveb.Builder = {
 						return false;
 					}
 					
-					if (!self.designerMode && self.iconDrag) self.iconDrag.css({'left': x + 275/*left panel width*/, 'top':y - 30 });					
-				}// else //uncomment else to disable parent highlighting when dragging
+					if (!self.designerMode && self.iconDrag) self.iconDrag.css({'left': x + self.leftPanelWidth, 'top':y });					
+				} else //uncomment else to disable parent highlighting when dragging
 				{
 					
 					$("#highlight-box").css(
@@ -1104,6 +1112,7 @@ Vvveb.Builder = {
 			if (self.isDragging)
 			{
 				self.isDragging = false;
+				Vvveb.Builder.highlightEnabled = true;
 				if (self.iconDrag) self.iconDrag.remove();
 				$("#component-clone").remove();
 
@@ -1145,19 +1154,26 @@ Vvveb.Builder = {
 			
 			if (Vvveb.Builder.isPreview == false)
 			{
+				self.selectPadding = 10;
 				self.texteditEl = target = $(event.target);
 
 				Vvveb.WysiwygEditor.edit(self.texteditEl);
 				
-				self.texteditEl.attr({'contenteditable':true, 'spellcheckker':false});
-				
-				self.texteditEl.on("blur keyup paste input", function(event) {
+				_updateSelectBox = function(event) {
+					if (!self.texteditEl) return;
+					var offset = self.selectedEl.offset();
 
 					$("#select-box").css({
-							"width" : self.texteditEl.outerWidth(), 
-							"height": self.texteditEl.outerHeight()
+							"top": offset.top - self.frameDoc.scrollTop() - self.selectPadding, 
+							"left": offset.left - self.frameDoc.scrollLeft() - self.selectPadding, 
+							"width" : self.texteditEl.outerWidth() + self.selectPadding *2, 
+							"height": self.texteditEl.outerHeight() + self.selectPadding *2
 						 });
-				});		
+				};
+				
+				//update select box when the text size is changed
+				self.texteditEl.on("blur keyup paste input", _updateSelectBox);	
+				_updateSelectBox();	
 				
 				$("#select-box").addClass("text-edit").find("#select-actions").hide();
 				$("#highlight-box").hide();
@@ -1192,6 +1208,8 @@ Vvveb.Builder = {
 		
 		$("#drag-btn").on("mousedown", function(event) {
 			$("#select-box").hide();
+			Vvveb.Builder.highlightEnabled = false;
+			
 			self.dragElement = self.selectedEl.css("position","");
 			self.isDragging = true;
 			
@@ -1332,7 +1350,7 @@ Vvveb.Builder = {
 		
 
 		$(".sections-list li ol li", addSectionBox).on("click", function(event) {
-			var html = Vvveb.Secgions.get(this.dataset.type).html;
+			var html = Vvveb.Sections.get(this.dataset.type).html;
 
 			addSectionComponent(html, ($("[name='add-section-insert-mode']:checked").val() == "after"));
 

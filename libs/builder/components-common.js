@@ -84,7 +84,7 @@ Vvveb.Components.add("_base", {
         key: "id",
         htmlAttr: "id",
         sort: base_sort++,
-        inline:true,
+        inline:false,
         col:6,
         inputtype: TextInput
     }, {
@@ -92,7 +92,7 @@ Vvveb.Components.add("_base", {
         key: "class",
         htmlAttr: "class",
         sort: base_sort++,
-        inline:true,
+        inline:false,
         col:6,
         inputtype: TextInput
     }
@@ -116,7 +116,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: SelectInput,
         validValues: ["block", "inline", "inline-block", "none"],
         data: {
@@ -130,6 +130,36 @@ Vvveb.Components.extend("_base", "_base", {
                 value: "inline-block",
                 text: "Inline Block"
             }, {
+                value: "inline-block",
+                text: "Inline Block"
+            }, {
+                value: "flex",
+                text: "Flex"
+            }, {
+                value: "inline-flex",
+                text: "Inline Flex"
+            }, {
+                value: "grid",
+                text: "Grid"
+            }, {
+                value: "inline-grid",
+                text: "Inline grid"
+            }, {
+                value: "table",
+                text: "Table"
+            }, {
+                value: "table-row",
+                text: "Table Row"
+            }, {
+                value: "list-item",
+                text: "List Item"
+            }, {
+                value: "inherit",
+                text: "Inherit"
+            }, {
+                value: "initial",
+                text: "Initial"
+            }, {
                 value: "none",
                 text: "none"
             }]
@@ -141,7 +171,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: SelectInput,
         validValues: ["static", "fixed", "relative", "absolute"],
         data: {
@@ -166,7 +196,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         parent:"",
         inputtype: CssUnitInput
 	}, {
@@ -176,7 +206,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         parent:"",
         inputtype: CssUnitInput
     }, {
@@ -186,7 +216,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         parent:"",
         inputtype: CssUnitInput
 	}, {
@@ -196,7 +226,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         parent:"",
         inputtype: CssUnitInput
     },{
@@ -206,7 +236,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:12,
-        inline:true,
+        inline:false,
         inputtype: RadioButtonInput,
         data: {
 			extraclass:"btn-group-sm btn-group-fullwidth",
@@ -237,7 +267,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:12,
-		inline:true,
+		inline:false,
         parent:"",
         inputtype: RangeInput,
         data:{
@@ -284,7 +314,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Font weight",
@@ -293,7 +323,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: SelectInput,
         data: {
 			options: [{
@@ -335,7 +365,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 	section: style_section,
         col:12,
-	inline:true,
+	inline:false,
         inputtype: SelectInput,
         data: {
 			options: [{
@@ -389,7 +419,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:12,
-        inline:true,
+        inline:false,
         inputtype: RadioButtonInput,
         data: {
 			extraclass:"btn-group-sm btn-group-fullwidth",
@@ -432,7 +462,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Letter spacing",
@@ -441,7 +471,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Text decoration",
@@ -450,7 +480,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:12,
-        inline:true,
+        inline:false,
         inputtype: RadioButtonInput,
         data: {
 			extraclass:"btn-group-sm btn-group-fullwidth",
@@ -546,7 +576,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Height",
@@ -555,7 +585,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Min Width",
@@ -564,7 +594,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Min Height",
@@ -573,7 +603,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Max Width",
@@ -582,7 +612,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Max Height",
@@ -591,7 +621,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }]
 }
@@ -614,7 +644,7 @@ var ComponentBaseMargin = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Right",
@@ -623,7 +653,7 @@ var ComponentBaseMargin = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Bottom",
@@ -632,7 +662,7 @@ var ComponentBaseMargin = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Left",
@@ -641,7 +671,7 @@ var ComponentBaseMargin = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }]
 }
@@ -665,7 +695,7 @@ var ComponentBasePadding = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Right",
@@ -674,7 +704,7 @@ var ComponentBasePadding = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Bottom",
@@ -683,7 +713,7 @@ var ComponentBasePadding = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Left",
@@ -692,7 +722,7 @@ var ComponentBasePadding = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }]
 }
@@ -716,7 +746,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:12,
-		inline:true,
+		inline:false,
         inputtype: SelectInput,
         data: {
 			options: [{
@@ -740,7 +770,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
    	}, {
         name: "Color",
@@ -748,7 +778,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
 		htmlAttr: "style",
         inputtype: ColorInput,
 	}]
@@ -772,7 +802,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Top Right",
@@ -781,7 +811,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Bottom Left",
@@ -790,7 +820,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Bottom Right",
@@ -799,7 +829,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }]
 });    
@@ -925,3 +955,27 @@ Vvveb.Components.extend("_base", "_base", {
     }]
 });    
 
+/*
+
+Vvveb.Components.extend("_base", "_base", {
+	 properties: [
+	 {
+        name: "Font family",
+        key: "font-family",
+		htmlAttr: "style",
+        sort: base_sort++,
+        col:12,
+		inline:false,
+        inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "extended"
+			}, {
+				value: "Ggoogle ",
+				text: "google"
+			}]
+		}
+	}]
+});
+*/
