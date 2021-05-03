@@ -872,20 +872,26 @@ Vvveb.Builder = {
     _getElementType: function(el) {
 		
 		//search for component attribute
-		componentName = '';  
+		var componentName = '';  
+		var componentAttribute = '';  
 		   
-		if (el.attributes)
-		for (var j = 0; j < el.attributes.length; j++){
-			
-		  if (el.attributes[j].nodeName.indexOf('data-component') > -1)	
-		  {
-			componentName = el.attributes[j].nodeName.replace('data-component-', '');	
-		  }
+		if (el.attributes) {
+			for (var j = 0; j < el.attributes.length; j++){
+			  var nodeName = el.attributes[j].nodeName;	
+			  
+			  if (nodeName.indexOf('data-component') > -1)	 {
+				componentName = nodeName.replace('data-component-', '');	
+			  }
+
+			  if (nodeName.indexOf('data-v-') > -1)	 {
+				componentAttribute = (componentAttribute ? componentAttribute + " - " : "") + 
+										nodeName.replace('data-v-', '') + " ";	
+			  }
+			}
 		}
-		
 		if (componentName != '') return componentName;
 
-		return el.tagName;
+		return el.tagName + (componentName ? " - " + componentName : "" ) + (componentAttribute ? " - " + componentAttribute : "");
 	},
 	
 	loadNodeComponent:  function(node) {
@@ -1014,6 +1020,9 @@ Vvveb.Builder = {
 					 "height": target.outerHeight() + self.selectPadding * 2,
 					 "display": "block",
 					 });
+					 
+				Vvveb.Breadcrumb.loadBreadcrumb(target.get(0));
+			
 			} catch(err) {
 				console.log(err);
 				return false;
@@ -2372,6 +2381,52 @@ Vvveb.FileManager = {
 	},
 }
 
+Vvveb.Breadcrumb = {
+	tree:false,	
+	
+	init: function() {
+		this.tree = $(".breadcrumb-navigator > .breadcrumb").html("");
+
+		$(this.tree).on("click", ".breadcrumb-item", function (e) {
+			var node = $(this).data("node");
+			if (node) {
+				node.click();
+			}
+			e.preventDefault();
+		}).on("mouseenter", ".breadcrumb-item", function (e) {
+
+			var node = $(this).data("node");
+
+			delay(
+				() => Vvveb.Builder.frameHtml.animate({
+					scrollTop: $(node).offset().top - ($(node).height() / 2)
+				}, 500),
+			 1000);
+
+			$(node).trigger("mousemove");
+			
+		});
+	},
+	
+	addElement: function(data, element) {
+		var li = $(tmpl("vvveb-breadcrumb-navigaton-item", data));
+		li.data("node", element);			
+		$(this.tree).prepend(li);
+	},
+		
+	loadBreadcrumb: function(element) {
+		this.tree.html("");
+		var currentElement = element;
+		
+		while (currentElement.parentElement) {
+			this.addElement({
+				"name": Vvveb.Builder._getElementType(currentElement).toLowerCase(),
+			}, currentElement);
+			
+			currentElement = currentElement.parentElement;
+		}
+	}
+}
 
 // Toggle fullscreen
 function launchFullScreen(document) {

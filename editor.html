@@ -662,23 +662,33 @@
 				
 				<div id="bottom-panel">
 
-				<div class="btn-group" role="group">
-
-		 			 <button id="code-editor-btn" data-view="mobile" class="btn btn-sm btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
-						  <i class="la la-code"></i> Code editor
-					  </button>
-					 
-						<div id="toggleEditorJsExecute" class="form-check mt-1" style="display:none">
-							<input type="checkbox" class="form-check-input" id="runjs" name="runjs" data-vvveb-action="toggleEditorJsExecute">
-							<label class="form-check-label" for="runjs"><small>Run javascript code on edit</small></label>
+						<div class="breadcrumb-navigator float-start px-2" style="--bs-breadcrumb-divider: '>';">
+							
+						  <ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="#">body</a></li>
+							<li class="breadcrumb-item"><a href="#">section</a></li>
+							<li class="breadcrumb-item"><a href="#">img</a></li>
+						  </ol>			
 						</div>
-					</div>
-					
-					<div id="vvveb-code-editor">
-						<textarea class="form-control"></textarea>
-					<div>
 
-				</div>	
+
+						<div class="btn-group float-end" role="group">
+
+							 <button id="code-editor-btn" data-view="mobile" class="btn btn-sm btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
+								  <i class="la la-code"></i> Code editor
+							  </button>
+							 
+								<div id="toggleEditorJsExecute" class="form-check mt-1" style="display:none">
+									<input type="checkbox" class="form-check-input" id="runjs" name="runjs" data-vvveb-action="toggleEditorJsExecute">
+									<label class="form-check-label" for="runjs"><small>Run javascript code on edit</small></label>
+								</div>
+						</div>
+							
+						<div id="vvveb-code-editor">
+							<textarea class="form-control"></textarea>
+						<div>
+
+				</div>
 			</div>
 		</div>
 
@@ -1069,7 +1079,9 @@
 
 <script id="vvveb-filemanager-page" type="text/html">
 	<li data-url="{%=url%}" data-file="{%=file%}" data-page="{%=name%}" class="file">
-		<label for="{%=name%}"><span>{%=title%}</span></label> <input type="checkbox" id="{%=name%}" />
+		<label for="{%=name%}" {% if (typeof description !== 'undefined') { %} title="{%=description%}" {% } %}>
+			<span>{%=title%}</span>
+		</label> <input type="checkbox" id="{%=name%}" />
 		<ol></ol>
 	</li>
 </script>
@@ -1078,6 +1090,10 @@
 	<li data-url="{%=url%}" data-component="{%=name%}" class="component">
 		<a href="{%=url%}"><span>{%=title%}</span></a>
 	</li>
+</script>
+
+<script id="vvveb-breadcrumb-navigaton-item" type="text/html">
+	<li class="breadcrumb-item"><a href="#">{%=name%}</a></li>
 </script>
 
 <script id="vvveb-input-sectioninput" type="text/html">
@@ -1093,7 +1109,7 @@
 
 	<div class="mb-3 {% if (typeof col !== 'undefined' && col != false) { %} col-sm-{%=col%} {% } else { %}row{% } %} {% if (typeof inline !== 'undefined' && inline == true) { %}inline{% } %} " data-key="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
 		
-		{% if (typeof name !== 'undefined' && name != false) { %}<label class="{% if (typeof inline === 'undefined' ) { %}col-sm-4{% } %} control-label" for="input-model">{%=name%}</label>{% } %}
+		{% if (typeof name !== 'undefined' && name != false) { %}<label class="{% if (typeof inline === 'undefined' ) { %}col-sm-4{% } %} form-label" for="input-model">{%=name%}</label>{% } %}
 		
 		<div class="{% if (typeof inline === 'undefined') { %}col-sm-{% if (typeof name !== 'undefined' && name != false) { %}8{% } else { %}12{% } } %} input"></div>
 		
@@ -1231,7 +1247,7 @@
 
       <div class="modal-body text">
 		<div class="mb-3 row" data-key="type">      
-			<label class="col-sm-3 control-label">
+			<label class="col-sm-3 form-label">
 				Template 
 				<abbr class="badge badge-pill badge-secondary" title="This template will be used as a start">?</abbr> 
 			</label>      
@@ -1247,7 +1263,7 @@
 		</div>
 
 		<div class="mb-3 row" data-key="href">     
-			 <label class="col-sm-3 control-label">Page name</label>      
+			 <label class="col-sm-3 form-label">Page name</label>      
 			<div class="col-sm-9 input">
 				<div>   
 					<input name="title" type="text" value="My page" class="form-control" placeholder="My page" required>  
@@ -1256,7 +1272,7 @@
 		</div>
 		
 		<div class="mb-3 row" data-key="href">     
-			 <label class="col-sm-3 control-label">File name</label>      
+			 <label class="col-sm-3 form-label">File name</label>      
 			<div class="col-sm-9 input">
 				<div>   
 					<input name="file" type="text" value="my-page.html" class="form-control" placeholder="my-page.html" required>  
@@ -1266,7 +1282,7 @@
 		
 		<!-- 
 		<div class="mb-3 row" data-key="href">     
-			 <label class="col-sm-3 control-label">Url</label>      
+			 <label class="col-sm-3 form-label">Url</label>      
 			<div class="col-sm-9 input">
 				<div>   
 					<input name="url" type="text" value="my-page.html" class="form-control" placeholder="/my-page.html" required>  
@@ -1276,7 +1292,7 @@
 		-->
 		
 		<div class="mb-3 row" data-key="href">     
-			 <label class="col-sm-3 control-label">Folder</label>      
+			 <label class="col-sm-3 form-label">Folder</label>      
 			<div class="col-sm-9 input">
 				<div>   
 					<input name="folder" type="text" value="my-pages" class="form-control" placeholder="/" required>  
@@ -1421,6 +1437,7 @@ $(document).ready(function()
 	]);
 	
 	 Vvveb.FileManager.loadPage("narrow-jumbotron");
+	 Vvveb.Breadcrumb.init();
 });
 </script>
 </body>
