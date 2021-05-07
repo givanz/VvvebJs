@@ -281,40 +281,40 @@ Vvveb.Components.extend("_base", "html/badge", {
     classes: ["badge"],
     image: "icons/badge.svg",
     name: "Badge",
-    html: '<span class="badge badge-primary">Primary badge</span>',
+    html: '<span class="badge bg-primary">Primary badge</span>',
     properties: [{
         name: "Color",
         key: "color",
         htmlAttr: "class",
-        validValues:["badge-primary", "badge-secondary", "badge-success", "badge-danger", "badge-warning", "badge-info", "badge-light", "badge-dark"],
+        validValues:["bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-light", "bg-dark"],
         inputtype: SelectInput,
         data: {
             options: [{
                 value: "",
                 text: "Default"
             }, {
-                value: "badge-primary",
+                value: "bg-primary",
                 text: "Primary"
             }, {
-                value: "badge-secondary",
+                value: "bg-secondary",
                 text: "Secondary"
             }, {
-                value: "badge-success",
+                value: "bg-success",
                 text: "Success"
             }, {
-                value: "badge-warning",
+                value: "bg-warning",
                 text: "Warning"
             }, {
-                value: "badge-danger",
+                value: "bg-danger",
                 text: "Danger"
             }, {
-                value: "badge-info",
+                value: "bg-info",
                 text: "Info"
             }, {
-                value: "badge-light",
+                value: "bg-light",
                 text: "Light"
             }, {
-                value: "badge-dark",
+                value: "bg-dark",
                 text: "Dark"
             }]
         }

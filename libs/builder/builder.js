@@ -66,9 +66,6 @@ function isElement(obj){
       (typeof obj.ownerDocument ==="object")/* && obj.tagName != "BODY"*/;
 }
 
-
-var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
-
 if (Vvveb === undefined) var Vvveb = {};
 
 Vvveb.defaultComponent = "_base";
@@ -525,6 +522,39 @@ Vvveb.WysiwygEditor = {
 
 		$("#link-btn").on("click", function (e) {
 				doc.execCommand('createLink',false,"#");
+				e.preventDefault();
+				return false;
+		});
+
+		$("#fore-color").on("change", function (e) {
+				doc.execCommand('foreColor',false,this.value);
+				e.preventDefault();
+				return false;
+		});
+
+		
+		$("#back-color").on("change", function (e) {
+				doc.execCommand('hiliteColor',false,this.value);
+				e.preventDefault();
+				return false;
+		});
+		
+		$("#font-size").on("change", function (e) {
+				doc.execCommand('fontSize',false,this.value);
+				e.preventDefault();
+				return false;
+		});
+
+		$("#font-familly").on("change", function (e) {
+				doc.execCommand('fontName',false,this.value);
+				e.preventDefault();
+				return false;
+		});
+
+		$("#justify-btn a").on("click", function (e) {
+				var command = "justify" + this.dataset.value;
+
+				doc.execCommand(command,false,"#");
 				e.preventDefault();
 				return false;
 		});
@@ -1038,9 +1068,8 @@ Vvveb.Builder = {
 		
 		var self = Vvveb.Builder;
 		
-		self.frameHtml.on("mousemove touchmove", function(event) {
-			
-			if (self.highlightEnabled == true && event.target && isElement(event.target)/* && event.originalEvent*/)
+		self.frameBody.on("mousemove dragover touchmove", function(event) {
+			if (self.highlightEnabled == true && event.target && isElement(event.target) && event.originalEvent)
 			{
 				self.highlightEl = target = $(event.target);
 				var offset = target.offset();
@@ -1048,29 +1077,24 @@ Vvveb.Builder = {
 				var halfHeight = Math.max(height / 2, 50);
 				var width = target.outerWidth();
 				var halfWidth = Math.max(width / 2, 50);
+				var prepend = true;
 				
-				var x = (event.clientX || (event.originalEvent ? event.originalEvent.clientX : 0));
-				var y = (event.clientY || (event.originalEvent ? event.originalEvent.clientY : 0));
-				
+				var x = event.originalEvent.x;
+				var y = event.originalEvent.y;
+
 				if (self.isDragging)
 				{
 					var parent = self.highlightEl;
 
 					try {
-						if (event.originalEvent)
-						{
 							if ((offset.top  < (y - halfHeight)) || (offset.left  < (x - halfWidth)))
 							{
-								 if (isIE11) 
-									self.highlightEl.append(self.dragElement); 
-								 else 
-									self.dragElement.appendTo(parent);
+								self.dragElement.appendTo(parent);
+								prepend = true;
 							} else
 							{
-								if (isIE11) 
-								 self.highlightEl.prepend(self.dragElement); 
-								else 
-									self.dragElement.prependTo(parent);
+								prepend = false;
+								self.dragElement.prependTo(parent);
 							};
 							
 							if (self.designerMode)
@@ -1083,24 +1107,35 @@ Vvveb.Builder = {
 									'top': y - (parentOffset.top - self.frameDoc.scrollTop()),
 									});
 							}
-						}
+							
+							/*
+							$("#drop-highlight-box").css(
+								{"top": offset.top - self.frameDoc.scrollTop() , 
+								 "left": offset.left - self.frameDoc.scrollLeft() , 
+								 "width" : parentWidth, 
+								 "height": "5px",
+								  "display" :"block",
+								 });
+							*/
 						
 					} catch(err) {
 						console.log(err);
 						return false;
 					}
 					
-					if (!self.designerMode && self.iconDrag) self.iconDrag.css({'left': x + self.leftPanelWidth, 'top':y });					
-				} else //uncomment else to disable parent highlighting when dragging
+					if (!self.designerMode && self.iconDrag) {
+						self.iconDrag.css({'left': x + self.leftPanelWidth + 10, 'top': y + 60});					
+					}
+				}// else //uncomment else to disable parent highlighting when dragging
 				{
-					
+
 					$("#highlight-box").css(
 						{"top": offset.top - self.frameDoc.scrollTop() , 
 						 "left": offset.left - self.frameDoc.scrollLeft() , 
 						 "width" : width, 
 						 "height": height,
 						  "display" : event.target.hasAttribute('contenteditable')?"none":"block",
-						  "border":self.isDragging?"1px dashed aqua":"",//when dragging highlight parent with green
+						  "border":self.isDragging?"1px dashed #0d6efd":"",//when dragging highlight parent with green
 						 });
 
 					if (height < 50) 
@@ -1110,19 +1145,20 @@ Vvveb.Builder = {
 					{
 						$("#section-actions").removeClass("outside");	
 					}
+
 					$("#highlight-name").html(self._getElementType(event.target));
-					if (self.isDragging) $("#highlight-name").hide(); else $("#highlight-name").show();//hide tag name when dragging
 				}
 			}	
 			
 		});
 		
-		self.frameHtml.on("mouseup touchend", function(event) {
+		self.frameHtml.on("mouseup dragend touchend", function(event) {
 			if (self.isDragging)
 			{
 				self.isDragging = false;
 				Vvveb.Builder.highlightEnabled = true;
 				if (self.iconDrag) self.iconDrag.remove();
+				$("#section-actions, #highlight-name, #select-box").show();
 				$("#component-clone").remove();
 
 				if (self.dragMoveMutation === false)
@@ -1216,11 +1252,9 @@ Vvveb.Builder = {
 		var self = this;
 		
 		$("#drag-btn").on("mousedown", function(event) {
-			$("#select-box").hide();
-			Vvveb.Builder.highlightEnabled = false;
-			
 			self.dragElement = self.selectedEl.css("position","");
 			self.isDragging = true;
+			$("#section-actions, #highlight-name, #select-box").hide();
 			
 			node = self.dragElement.get(0);
 
@@ -1379,6 +1413,7 @@ Vvveb.Builder = {
 			$this = $(this);
 			
 			$("#component-clone").remove();
+			$("#section-actions, #highlight-name, #select-box").hide();
 			
 			if ($this.data("drag-type") == "component") {
 				self.component = Vvveb.Components.get($this.data("type"));
@@ -1399,7 +1434,7 @@ Vvveb.Builder = {
 			}
 			
 			self.dragElement = $(html);
-			self.dragElement.css("border", "1px dashed #4285f4");
+			//self.dragElement.css("border", "1px dashed #4285f4");
 			
 			if (self.component.dragStart) self.dragElement = self.component.dragStart(self.dragElement);
 
@@ -1420,11 +1455,12 @@ Vvveb.Builder = {
 			return false;
 		});
 		
-		$('body').on('mouseup touchend', function(event) {
+		$('body').on('mouseup dragend touchend', function(event) {
 			if (self.iconDrag && self.isDragging == true)
 			{
 				self.isDragging = false;
 				$("#component-clone").remove();
+				$("#section-actions, #highlight-name, #select-box").show();
 				self.iconDrag.remove();
 				if(self.dragElement){
 					self.dragElement.remove();
@@ -1432,7 +1468,7 @@ Vvveb.Builder = {
 			}
 		});
 		
-		$('body').on('mousemove touchmove', function(event) {
+		$('body').on('mousemove dragover touchmove', function(event) {
 			if (self.iconDrag && self.isDragging == true)
 			{
 				var x = (event.clientX || event.originalEvent.clientX);
@@ -1443,6 +1479,7 @@ Vvveb.Builder = {
 				elementMouseIsOver = document.elementFromPoint(x - 60, y - 40);
 				
 				//if drag elements hovers over iframe switch to iframe mouseover handler	
+				return;
 				if (elementMouseIsOver && elementMouseIsOver.tagName == 'IFRAME')
 				{
 					self.frameBody.trigger("mousemove", event);
@@ -1452,9 +1489,10 @@ Vvveb.Builder = {
 			}
 		});
 		
-		$('.drag-elements-sidepane ul > ol > li > li').on("mouseup touchend", function(event) {
+		$('.drag-elements-sidepane ul > ol > li > li').on("mouseup dragend touchend", function(event) {
 			self.isDragging = false;
-			$("#component-clone").remove();
+			$("#component-clone").remove()
+			$("#section-actions, #highlight-name, #select-box").show();;
 		});
 			
 	},
@@ -2096,6 +2134,7 @@ Vvveb.SectionList = {
 			var node = $(section.html);
 			var sectionType = node[0].tagName.toLowerCase();
 			var afterSection = $(sectionType + ":last", Vvveb.Builder.frameBody);
+			
 			if (afterSection.length) {
 				afterSection.after(node);
 			} else {

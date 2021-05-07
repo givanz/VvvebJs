@@ -12002,8 +12002,8 @@ https://github.com/givanz/VvvebJs
       width: 1em;
       top: 0; }
       .tree ol li input + ol {
-        background: url(../libs/builder/icons/arrow-right.svg) 0px 0.3rem no-repeat;
-        background-size: 12px 12px;
+        background: url(../libs/builder/icons/arrow-right.svg) 5px 0.3rem no-repeat;
+        background-size: 10px 10px;
         margin: -1.8rem 0 0 0rem;
         padding: 2rem 0 0 2rem;
         height: 0; }
@@ -12022,8 +12022,8 @@ https://github.com/givanz/VvvebJs
       font-weight: 500;
       line-height: 28px; }
     .tree ol li input:checked + ol {
-      background: url(../libs/builder/icons/arrow-down.svg) 0px 0.1rem no-repeat;
-      background-size: 12px 12px;
+      background: url(../libs/builder/icons/arrow-down.svg) 5px 0.1rem no-repeat;
+      background-size: 10px 10px;
       margin: -1.8em 0 0 0rem;
       padding: 2rem 0 0 2rem;
       height: auto; }
@@ -12504,6 +12504,16 @@ body {
     top: 0px;
     left: 0px;
     display: none; }
+  #vvveb-builder #drop-highlight-box {
+    position: absolute;
+    border: 2px solid #4285f4;
+    width: 0px;
+    height: 0px;
+    top: 0px;
+    left: 0px;
+    transition: all 0.3s;
+    border-radius: 4px;
+    display: none; }
   #vvveb-builder .text-edit#select-box {
     border-style: dashed;
     /*border-width:1px;*/
@@ -12593,7 +12603,7 @@ body {
           box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
           border: none; }
     #vvveb-builder #wysiwyg-editor.default-editor select {
-      padding: 0 1rem; }
+      padding: 0rem 1.8rem 0 1rem; }
     #vvveb-builder #wysiwyg-editor.default-editor div.dropdown a:after {
       vertical-align: middle !important;
       font-size: 14px;
@@ -12670,9 +12680,9 @@ body {
       font-size: 1.4rem;
       outline: none;
       border: none;
-      padding: 0.3rem 1rem 0.4rem; }
+      padding: 0.3rem 0.2rem 0.4rem; }
       #vvveb-builder #elements-tabs a i {
-        padding: 0.4rem 1.4rem;
+        padding: 0.4rem 0rem;
         border-radius: 3px;
         display: block;
         border: 1px solid transparent; }
@@ -13422,6 +13432,12 @@ input[type="color"] {
           border: 1px solid rgba(13, 110, 253, 0.2);
           color: #0d6efd;
           text-decoration: none; }
+
+#dragElement-clone {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  pointer-events: none; }
 
 .btn-icon {
   font-weight: 600;

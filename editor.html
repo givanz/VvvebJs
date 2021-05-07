@@ -96,7 +96,7 @@
 
 									<div class="btn-group responsive-btns me-4 float-end" role="group">
 									  <button class="btn btn-link btn-sm" title="New file" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="">
-										  <i class="la la-file"></i> <small>New page</small>
+										  <i class="la la-file"></i> <span>New page</span>
 									  </button>
 									  
 									  <!--  &ensp;
@@ -464,17 +464,18 @@
 										<a id="strike-btn" href="" title="Strikeout">
 											<del>S</del>
 										</a>
+										
 										<div class="dropdown">
 										  <a class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<i class="la la-align-left"></i>
 										  </a>
 
-											  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												<a class="dropdown-item" href="#"><i class="la la-lg la-align-left"></i> Align Left</a>
-												<a class="dropdown-item" href="#"><i class="la la-lg la-align-center"></i> Align Center</a>
-												<a class="dropdown-item" href="#"><i class="la la-lg la-align-right"></i> Align Right</a>
-												<a class="dropdown-item" href="#"><i class="la la-lg la-align-justify"></i> Align Justify</a>
-											  </div>
+										  <div id="justify-btn" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<a class="dropdown-item" href="#" data-value="Left"><i class="la la-lg la-align-left"></i> Align Left</a>
+											<a class="dropdown-item" href="#" data-value="Center"><i class="la la-lg la-align-center"></i> Align Center</a>
+											<a class="dropdown-item" href="#" data-value="Right"><i class="la la-lg la-align-right"></i> Align Right</a>
+											<a class="dropdown-item" href="#" data-value="Full"><i class="la la-lg la-align-justify"></i> Align Justify</a>
+										  </div>
 										</div>
 										<div class="separator"></div>
 
@@ -484,12 +485,24 @@
 										
 										<div class="separator"></div>
 										
-										<input name="color" type="color" title="Color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">
-										<input name="background-color" type="color" title="Background Color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">
+										<input id="fore-color" name="color" type="color" title="Color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">
+										<input id="back-color" name="background-color" type="color" title="Background Color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">
 										
 										<div class="separator"></div>
 
-										<select class="form-select">
+										<select id="font-size" class="form-select">
+											<option value="">Default</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											
+										</select>
+										
+										<select id="font-familly" class="form-select">
 											<option value="">Default</option>
 											<option value="Arial, Helvetica, sans-serif">Arial</option>
 											<option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif">Lucida Grande</option>
@@ -608,7 +621,12 @@
 
 							</div>
 							<!-- //add section box -->
+
+							<div id="drop-highlight-box">
+							</div>
 						</div>
+							
+														
 						<iframe src="" id="iframe1">
 						</iframe>
 					</div>
