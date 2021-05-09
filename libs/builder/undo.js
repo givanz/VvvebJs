@@ -124,6 +124,9 @@ Vvveb.Undo = {
 			case 'characterData':
 			  mutation.target.innerHTML = undo ? mutation.oldValue : mutation.newValue;
 			  break;
+			case 'style':
+			  $("#vvvebjs-styles", window.FrameDocument).html( undo ? mutation.oldValue : mutation.newValue );
+			  break;
 			case 'attributes':
 			  value = undo ? mutation.oldValue : mutation.newValue;
 

@@ -329,6 +329,7 @@ Vvveb.Components = {
 						}
 						else if (property.htmlAttr == "style") 
 						{
+							oldStyle = $("#vvvebjs-styles", window.FrameDocument).html();
 							element = Vvveb.StyleManager.setStyle(element, property.key, value);
 						}
 						else if (property.htmlAttr == "innerHTML") 
@@ -347,11 +348,23 @@ Vvveb.Components = {
 							}
 						}
 						
-						Vvveb.Undo.addMutation({type: 'attributes', 
-												target: element.get(0), 
-												attributeName: property.htmlAttr, 
-												oldValue: oldValue, 
-												newValue: element.attr(property.htmlAttr)});
+						if (property.htmlAttr == "style")  {
+							mutation = {
+								type: 'style', 
+								target: element.get(0), 
+								attributeName: property.htmlAttr, 
+								oldValue: oldStyle, 
+								newValue: $("#vvvebjs-styles", window.FrameDocument).html()};
+							
+							Vvveb.Undo.addMutation(mutation);
+						} else {
+								Vvveb.Undo.addMutation(
+									{type: 'attributes', 
+									target: element.get(0), 
+									attributeName: property.htmlAttr, 
+									oldValue: oldValue, 
+									newValue: element.attr(property.htmlAttr)});
+						}
 					}
 
 					if (component.onChange) 
@@ -449,7 +462,11 @@ Vvveb.Components = {
 			{
 				property.inputtype.afterInit(property.input);
 			}
-
+			
+			if (property.afterInit)
+			{
+				property.afterInit(element.get(0), property.input);
+			}
 		}
 		
 		if (component.init) component.init(Vvveb.Builder.selectedEl.get(0));
@@ -874,6 +891,7 @@ Vvveb.Builder = {
 				});
 			
 				Vvveb.WysiwygEditor.init(window.FrameDocument);
+				Vvveb.StyleManager.init(window.FrameDocument);
 				if (self.initCallback) self.initCallback();
 
                 return self._frameLoaded();
@@ -932,7 +950,8 @@ Vvveb.Builder = {
 			component = data.type;
 		else 
 			component = Vvveb.defaultComponent;
-			
+		
+		Vvveb.component = Vvveb.Components.get(component);	
 		Vvveb.Components.render(component);
 
 	},
@@ -1069,6 +1088,7 @@ Vvveb.Builder = {
 		var self = Vvveb.Builder;
 		
 		self.frameBody.on("mousemove dragover touchmove", function(event) {
+
 			if (self.highlightEnabled == true && event.target && isElement(event.target) && event.originalEvent)
 			{
 				self.highlightEl = target = $(event.target);
@@ -1238,6 +1258,12 @@ Vvveb.Builder = {
 					
 					self.selectNode(event.target);
 					self.loadNodeComponent(event.target);
+
+					if (Vvveb.component.resizable) {
+						$("#select-box").addClass("resizable");
+					} else {
+						$("#select-box").removeClass("resizable");
+					}
 				}
 				
 				event.preventDefault();
@@ -1891,8 +1917,126 @@ Vvveb.Gui = {
 }
 
 Vvveb.StyleManager = {
+	
+	styles:{},
+	cssContainer:false,
+	
+	init: function(doc) {
+		if (doc) {
+			
+			var style = false;
+			var _style = false;
+			
+			//check if editor style is present
+			for (let i=0; i < doc.styleSheets.length; i++) {	
+					_style = doc.styleSheets[i];
+					if (_style.ownerNode.id && _style.ownerNode.id == "vvvebjs-styles") {
+						style = _style;
+						break;
+					}
+			}
+			
+			//if style element does not exist create it			
+			if (!style) {
+				this.cssContainer = $('<style id="vvvebjs-styles"></style>');
+				$(doc.head).append(this.cssContainer);
+				return this.cssContainer;
+			}
+			
+			//if style exist then load all css styles for editor
+			for (let j=0; j < style.cssRules.length; j++) {				
+				selector = style.cssRules[j].selectorText;
+				styles = style.cssRules[j].style;
+				
+				if (selector) {
+					this.styles[selector] = {};
+					
+					for (let k=0; k < styles.length; k++) {	
+									
+						property = styles[k];
+						value = styles[property];
+						
+						this.styles[selector][property] = value;
+					}
+				}
+			}
+			
+			return this.cssContainer = $("#vvvebjs-styles", doc); 
+		}
+	},	
+	
+	getSelectorForElement: function(element) {
+		var currentElement = element;
+		var selector = [];
+		
+		while (currentElement.parentElement) {
+			elementSelector = "";
+
+			//stop at a unique element (with id)
+			if (currentElement.id) {
+				elementSelector = "#" + currentElement.id;
+				selector.push(elementSelector);
+				break;
+			} else if (currentElement.classList.length > 0) {
+				//class selector
+				elementSelector = Array.from(currentElement.classList).map(function (className) {
+					return "." + className;
+				}).join("");
+				
+			} else {
+				//element (tag) selector
+				var tag = currentElement.tagName.toLowerCase();
+				//exclude top most element body
+				if (tag != "body") {
+					elementSelector = tag
+				}
+			}
+			
+			if (elementSelector) {
+				selector.push(elementSelector);
+			}
+			
+			currentElement = currentElement.parentElement;
+		}
+		
+		return selector.reverse().join(" > ");
+	},	
+	
 	setStyle: function(element, styleProp, value) {
-		return element.css(styleProp, value);
+		
+		selector = this.getSelectorForElement(element.get(0));	
+		
+		if (!this.styles[selector]) {
+			this.styles[selector] = {};
+		}
+		if (!this.styles[selector][styleProp]) {
+			this.styles[selector][styleProp] = {};
+		}
+		this.styles[selector][styleProp] = value;
+		
+		this.generateCss();
+
+		return element;
+		//return element.css(styleProp, value);
+	},
+	
+	generateCss: function() {
+		var css = "";
+		for (selector in this.styles) {
+			
+				css += `${selector} {`;	
+				for (property in this.styles[selector]) {
+					value = this.styles[selector][property];
+					css += `${property}: ${value};`;
+				}
+				css += '}';
+		}
+
+		this.cssContainer.html(css);
+
+		return element;
+		//uncomment bellow code to set css in element's style attribute 
+		//return element.css(styleProp, value);
 	},
 	
 	
@@ -2411,6 +2555,7 @@ Vvveb.FileManager = {
 			function () { 
 				Vvveb.FileManager.loadComponents(allowedComponents); 
 				Vvveb.SectionList.loadSections(allowedComponents); 
+				Vvveb.StyleManager.init(); 
 			});
 	},
 

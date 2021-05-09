@@ -324,8 +324,9 @@
 											<div class="component-properties">
 												<ul class="nav nav-tabs nav-fill" id="properties-tabs" role="tablist">
 													  <li class="nav-item content-tab">
-														<a class="nav-link active" data-bs-toggle="tab" href="#content-left-panel-tab" role="tab" aria-controls="components" aria-selected="true">
-															<i class="la la-lg la-sliders-h"></i> <div><span>Content</span></div></a>
+														<a class="nav-link content-tab active" data-bs-toggle="tab" href="#content-left-panel-tab" role="tab" aria-controls="components" aria-selected="true">
+															<i class="la la-lg la-sliders-h"></i> <div><span>Content</span></div>
+														</a>
 													  </li>
 													  <li class="nav-item style-tab">
 														<a class="nav-link" data-bs-toggle="tab" href="#style-left-panel-tab" role="tab" aria-controls="style" aria-selected="false">
@@ -529,6 +530,29 @@
 									<a id="clone-btn" href="" title="Clone element"><i class="la la-copy"></i></a>
 									<a id="delete-btn" href="" title="Remove element"><i class="la la-trash"></i></a>
 								</div>
+								
+								<div class="resize">
+									<!-- top -->
+									<div class="top-left">
+									</div>
+									<div class="top-center">
+									</div>
+									<div class="top-right">
+									</div>
+									<!-- center -->
+									<div class="center-left">
+									</div>
+									<div class="center-right">
+									</div>
+									<!-- bottom -->
+									<div class="bottom-left">
+									</div>
+									<div class="bottom-center">
+									</div>
+									<div class="bottom-right">
+									</div>
+								</div>
+
 							</div>
 							
 							<!-- add section box -->
@@ -1158,6 +1182,17 @@
 	
 </script>
 
+<script id="vvveb-input-noticeinput" type="text/html">
+	<div>
+		<div class="alert alert-dismissible fade show alert-{%=type%}" role="alert" style="">		  
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>		  
+			<h6><b>{%=title%}</b></h6> 
+			
+			{%=text%}
+		</div>
+	</div>
+</script>
+
 <script id="vvveb-section" type="text/html">
 	{% var suffix = Math.floor(Math.random() * 10000); %}
 
@@ -1356,7 +1391,7 @@
 <!-- components-->
 <!-- script src="libs/builder/components-server.js"></script -->	
 <script src="libs/builder/components-common.js"></script>	
-<script src="libs/builder/components-elements.js"></script>	
+<!-- script src="libs/builder/components-elements.js"></script -->	
 <script src="libs/builder/components-bootstrap5.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
 <script src="libs/builder/components-html.js"></script>	

@@ -627,3 +627,15 @@ var TagsInput = $.extend({}, Input, {
 	}
   }
 );
+
+
+var NoticeInput = $.extend({}, Input, {
+
+    events: [
+	 ],
+	
+	init: function(data) {
+		return this.render("noticeinput", data);
+	},
+  }
+);
