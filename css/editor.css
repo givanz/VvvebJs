@@ -4465,7 +4465,7 @@ i.la, i.header-arrow {
   width: auto; }
 
 /*!
- * Bootstrap v5.0.0 (https://getbootstrap.com/)
+ * Bootstrap v5.0.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -5771,6 +5771,7 @@ progress {
 
 .table {
   --bs-table-bg: transparent;
+  --bs-table-accent-bg: transparent;
   --bs-table-striped-color: #212529;
   --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
   --bs-table-active-color: #212529;
@@ -5981,7 +5982,7 @@ progress {
       transition: none; } }
   .form-control[type="file"] {
     overflow: hidden; }
-    .form-control[type="file"]:not(:disabled):not(:read-only) {
+    .form-control[type="file"]:not(:disabled):not([readonly]) {
       cursor: pointer; }
   .form-control:focus {
     color: #212529;
@@ -5994,7 +5995,7 @@ progress {
   .form-control::placeholder {
     color: #6c757d;
     opacity: 1; }
-  .form-control:disabled, .form-control:read-only {
+  .form-control:disabled, .form-control[readonly] {
     background-color: #e9ecef;
     opacity: 1; }
   .form-control::file-selector-button {
@@ -6013,7 +6014,7 @@ progress {
     @media (prefers-reduced-motion: reduce) {
       .form-control::file-selector-button {
         transition: none; } }
-  .form-control:hover:not(:disabled):not(:read-only)::file-selector-button {
+  .form-control:hover:not(:disabled):not([readonly])::file-selector-button {
     background-color: #dde0e3; }
   .form-control::-webkit-file-upload-button {
     padding: 0.4rem 0.5rem;
@@ -6031,7 +6032,7 @@ progress {
     @media (prefers-reduced-motion: reduce) {
       .form-control::-webkit-file-upload-button {
         transition: none; } }
-  .form-control:hover:not(:disabled):not(:read-only)::-webkit-file-upload-button {
+  .form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
     background-color: #dde0e3; }
 
 .form-control-plaintext {
@@ -6089,7 +6090,7 @@ textarea.form-control-lg {
   max-width: 3rem;
   height: auto;
   padding: 0.4rem; }
-  .form-control-color:not(:disabled):not(:read-only) {
+  .form-control-color:not(:disabled):not([readonly]) {
     cursor: pointer; }
   .form-control-color::-moz-color-swatch {
     height: 1.5em;
@@ -6459,7 +6460,11 @@ textarea.form-control-lg {
 .was-validated .input-group .form-control:valid, .input-group .form-control.is-valid, .was-validated
 .input-group .form-select:valid,
 .input-group .form-select.is-valid {
-  z-index: 3; }
+  z-index: 1; }
+  .was-validated .input-group .form-control:valid:focus, .input-group .form-control.is-valid:focus, .was-validated
+  .input-group .form-select:valid:focus,
+  .input-group .form-select.is-valid:focus {
+    z-index: 3; }
 
 .invalid-feedback {
   display: none;
@@ -6528,7 +6533,11 @@ textarea.form-control-lg {
 .was-validated .input-group .form-control:invalid, .input-group .form-control.is-invalid, .was-validated
 .input-group .form-select:invalid,
 .input-group .form-select.is-invalid {
-  z-index: 3; }
+  z-index: 2; }
+  .was-validated .input-group .form-control:invalid:focus, .input-group .form-control.is-invalid:focus, .was-validated
+  .input-group .form-select:invalid:focus,
+  .input-group .form-select.is-invalid:focus {
+    z-index: 3; }
 
 .btn {
   display: inline-block;
@@ -8411,12 +8420,6 @@ textarea.form-control-lg {
   padding: 0.75rem;
   word-wrap: break-word; }
 
-.modal-open {
-  overflow: hidden; }
-  .modal-open .modal {
-    overflow-x: hidden;
-    overflow-y: auto; }
-
 .modal {
   position: fixed;
   top: 0;
@@ -8425,7 +8428,8 @@ textarea.form-control-lg {
   display: none;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   outline: 0; }
 
 .modal-dialog {
@@ -12442,7 +12446,7 @@ body {
       #vvveb-builder .component-properties .mb-3.inline .control-label {
         flex-grow: 1; }
       #vvveb-builder .component-properties .mb-3.inline .input {
-        flex: 0 0 auto;
+        flex: 1 1 auto;
         width: auto; }
   #vvveb-builder #canvas {
     margin-right: 15vw;
@@ -12547,9 +12551,9 @@ body {
         cursor: nwse-resize; }
       #vvveb-builder #select-box.resizable .resize .top-center {
         top: 0;
-        margin: -5px auto;
         left: 0;
         right: 0;
+        margin: -5px auto;
         cursor: ns-resize; }
       #vvveb-builder #select-box.resizable .resize .top-right {
         top: 0;
@@ -12562,10 +12566,10 @@ body {
         bottom: 0;
         cursor: ew-resize; }
       #vvveb-builder #select-box.resizable .resize .center-right {
-        margin: auto -5px;
         top: 0;
         bottom: 0;
         right: 0;
+        margin: auto -5px;
         cursor: ew-resize; }
       #vvveb-builder #select-box.resizable .resize .bottom-left {
         bottom: 0;
@@ -12573,9 +12577,9 @@ body {
         cursor: nesw-resize; }
       #vvveb-builder #select-box.resizable .resize .bottom-center {
         bottom: 0;
-        margin: -5px auto;
         left: 0;
         right: 0;
+        margin: -5px auto;
         cursor: ns-resize; }
       #vvveb-builder #select-box.resizable .resize .bottom-right {
         bottom: 0;
@@ -12611,7 +12615,7 @@ body {
       padding: 8px;
       line-height: 1;
       color: #333;
-      font-size: 24px; }
+      font-size: 18px; }
       #vvveb-builder #wysiwyg-editor.default-editor a:last-child {
         border-right: none; }
       #vvveb-builder #wysiwyg-editor.default-editor a:hover {
@@ -12620,7 +12624,7 @@ body {
       display: inline-block;
       background: #ddd;
       width: 1px;
-      height: 24px;
+      height: 18px;
       vertical-align: text-bottom;
       top: 0;
       padding: 0;
@@ -12632,9 +12636,10 @@ body {
       border: none;
       pointer-events: all;
       line-height: 2.2rem;
-      height: 42px;
+      height: 32px;
       padding: 0;
-      box-shadow: none; }
+      box-shadow: none;
+      background-position: right 0.5rem center; }
       #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown[type="color"], #vvveb-builder #wysiwyg-editor.default-editor > select[type="color"], #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"] {
         padding: 3px;
         height: 30px;
@@ -12642,7 +12647,7 @@ body {
         box-shadow: none;
         border: 1px solid #ddd;
         margin: 0 0.5rem;
-        margin-top: 6px;
+        margin-top: 2px;
         border-radius: 3px; }
         #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown[type="color"].form-control-color::-moz-color-swatch, #vvveb-builder #wysiwyg-editor.default-editor > select[type="color"].form-control-color::-moz-color-swatch, #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"].form-control-color::-moz-color-swatch {
           border-radius: 3px;
@@ -12660,8 +12665,7 @@ body {
       font-size: 14px;
       margin-bottom: 0.2rem; }
     #vvveb-builder #wysiwyg-editor.default-editor div.dropdown a.dropdown-item {
-      display: block;
-      font-size: 1rem; }
+      display: block; }
       #vvveb-builder #wysiwyg-editor.default-editor div.dropdown a.dropdown-item i {
         margin-right: 0; }
   #vvveb-builder #section-actions {

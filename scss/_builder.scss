@@ -787,7 +787,7 @@ body
 				}
 				
 				.input {
-					flex: 0 0 auto;
+					flex: 1 1 auto;
 					width: auto;
 				}
 			}
@@ -968,10 +968,10 @@ body
 				
 				//center
 				.center-left {
-					top: 0;
 					left: 0;
-					bottom: 0;
 					margin: auto -5px;
+					top: 0;
+					bottom: 0;
 					cursor: ew-resize;
 				}
 				
@@ -1048,7 +1048,7 @@ body
 				padding:8px;
 				line-height: 1;
 				color:#333;
-				font-size:24px;
+				font-size:18px;
 			
 				&:last-child {
 					border-right:none;
@@ -1064,7 +1064,7 @@ body
 				display: inline-block;
 				background: #ddd;
 				width: 1px;
-				height: 24px;
+				height: 18px;
 				vertical-align: text-bottom;
 				top: 0;
 				padding: 0;
@@ -1080,9 +1080,10 @@ body
 				pointer-events: all;
 				//border-right:1px solid #eee;
 				line-height:2.2rem;
-				height:42px;
+			height:32px;
 				padding:0;
 				box-shadow:none;
+			background-position: right 0.5rem center;
 			
 				&:last-child {
 					//border-right:none;
@@ -1095,7 +1096,7 @@ body
 					box-shadow:none;
 					border:1px solid #ddd;
 					margin:0 0.5rem;
-					margin-top:6px;
+					margin-top:2px;
 					border-radius:3px;
 					
 					  &.form-control-color::-moz-color-swatch{
@@ -1132,7 +1133,7 @@ body
 			
 				a.dropdown-item {
 					display:block;
-					font-size:1rem;
+				//font-size:1rem;
 					
 					i {
 						margin-right:0;

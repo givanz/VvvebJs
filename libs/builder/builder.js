@@ -836,7 +836,7 @@ Vvveb.Builder = {
 		self.iframe = this.documentFrame.get(0);
 		self.iframe.src = url;
 
-	    return this.documentFrame.on("load", function() 
+	return this.documentFrame.on("load", function() 
         {
 				window.FrameWindow = self.iframe.contentWindow;
 				window.FrameDocument = self.iframe.contentWindow.document;
@@ -865,9 +865,6 @@ Vvveb.Builder = {
 							$("#select-box").css(
 								{"top": offset.top - self.frameDoc.scrollTop() - self.selectPadding, 
 								 "left": offset.left - self.frameDoc.scrollLeft() - self.selectPadding, 
-								 "width" : self.selectedEl.outerWidth() + self.selectPadding * 2, 
-								 "height": self.selectedEl.outerHeight() + self.selectPadding * 2,
-								 //"display": "block"
 								 });			
 								 
 						}
@@ -879,13 +876,10 @@ Vvveb.Builder = {
 							highlightBox.css(
 								{"top": offset.top - self.frameDoc.scrollTop() - self.selectPadding, 
 								 "left": offset.left - self.frameDoc.scrollLeft() - self.selectPadding, 
-								 "width" : self.highlightEl.outerWidth() + self.selectPadding * 2, 
-								 "height": self.highlightEl.outerHeight() + self.selectPadding * 2,
-								 //"display": "block"
 								 });		
 								 
 							
-							addSectionBox.hide();
+							//addSectionBox.hide();
 						}
 						
 				});
@@ -1102,6 +1096,69 @@ Vvveb.Builder = {
 				var x = event.originalEvent.x;
 				var y = event.originalEvent.y;
 
+				if (self.isResize) {
+					if (!self.initialPosition) {
+						self.initialPosition = {x,y};
+					}
+					
+					var deltaX = x - self.initialPosition.x; 
+					var deltaY = y - self.initialPosition.y; 
+					
+					offset = self.selectedEl.offset();
+					
+					width = self.initialSize.width;
+					height = self.initialSize.height;
+					
+					switch (self.resizeHandler) {
+						// top
+						case "top-left":
+							height -= deltaY; 
+							width -= deltaX; 
+						break;
+						
+						case "top-center":
+							height -= deltaY; 
+						break;
+						
+						case "top-right":
+							height -= deltaY; 
+							width += deltaX; 
+						break;
+						
+						// center 
+						case "center-left":
+							width -= deltaX; 
+						break;
+						
+						case "center-right":
+							width += deltaX; 
+						break;
+						
+						// bottom 
+						case "bottom-left":
+							width -= deltaX; 
+							height += deltaY; 
+						break;
+						
+						case "bottom-center":
+							height += deltaY; 
+						break;
+						
+						case "bottom-right":
+							width += deltaX; 
+							height += deltaY; 
+						break;
+					}
+				
+					self.selectedEl.attr({width, height});
+					$("#select-box").css(
+						{"top": offset.top - self.frameDoc.scrollTop() , 
+						 "left": offset.left - self.frameDoc.scrollLeft() , 
+						 "width" : width, 
+						 "height": self.selectedEl.outerHeight(),
+						 });					
+				
+				} else
 				if (self.isDragging)
 				{
 					var parent = self.highlightEl;
@@ -1146,7 +1203,7 @@ Vvveb.Builder = {
 					if (!self.designerMode && self.iconDrag) {
 						self.iconDrag.css({'left': x + self.leftPanelWidth + 10, 'top': y + 60});					
 					}
-				}// else //uncomment else to disable parent highlighting when dragging
+				} else //uncomment else to disable parent highlighting when dragging
 				{
 
 					$("#highlight-box").css(
@@ -1173,6 +1230,8 @@ Vvveb.Builder = {
 		});
 		
 		self.frameHtml.on("mouseup dragend touchend", function(event) {
+			self.isResize = false;
+			
 			if (self.isDragging)
 			{
 				self.isDragging = false;
@@ -1290,6 +1349,18 @@ Vvveb.Builder = {
 								oldNextSibling: node.nextSibling};
 				
 			//self.selectNode(false);
+			event.preventDefault();
+			return false;
+		});
+		
+		$(".resize > div").on("mousedown", function(event) {
+			$("#section-actions, #highlight-name, #highlight-box").hide();
+			
+			self.isResize = true;
+			self.initialSize = {"width" : self.selectedEl.outerWidth(), "height" : self.selectedEl.outerHeight()};
+			self.initialPosition = false;
+			self.resizeHandler = this.className;
+
 			event.preventDefault();
 			return false;
 		});
@@ -2017,6 +2088,7 @@ Vvveb.StyleManager = {
 		this.generateCss();
 
 		return element;
+        	//uncomment bellow code to set css in element's style attribute 
 		//return element.css(styleProp, value);
 	},
 	
@@ -2035,8 +2107,6 @@ Vvveb.StyleManager = {
 		this.cssContainer.html(css);
 
 		return element;
-		//uncomment bellow code to set css in element's style attribute 
-		//return element.css(styleProp, value);
 	},
 	
 	
@@ -2213,11 +2283,6 @@ Vvveb.SectionList = {
 			300);
 
 			node.click();
-			//Vvveb.Builder.selectNode(node);
-			//Vvveb.Builder.loadNodeComponent(node);
-			
-			//e.preventDefault();
-			//return false;
 		}).on("mouseenter", "li[data-component] label", function (e) {
 			node = $(e.currentTarget.parentNode).data("node");
 
@@ -2457,11 +2522,7 @@ Vvveb.FileManager = {
 			
 
 			node.click();
-			//Vvveb.Builder.selectNode(node);
-			//Vvveb.Builder.loadNodeComponent(node);
 			
-			//e.preventDefault();
-			//return false;
 		}).on("mouseenter", "li[data-component] label", function (e) {
 
 			node = $(e.currentTarget.parentNode).data("node");
