@@ -78,8 +78,14 @@ $font-size-base: 16px;
 }
 
 @mixin component-list-element() {
-		width: 42%;
-		margin: 0% 1% 5% 5%;
+		width: var(--builder-component-list-element-width);
+		min-width:100px;
+		height:100px;
+		
+		flex-direction: column-reverse;
+		display: flex;
+    		
+		margin: 0% 1% 3% 3%;
 		text-align: center;
 		font-weight: normal;
 		font-size: 11px;
@@ -88,22 +94,30 @@ $font-size-base: 16px;
 		padding-top: 60px;
 		padding-bottom: 7px;
 
-		border-color:#dfdfdf;
+		border-color:#e5e5e5;
 		border-style:solid;
 		border-width:1px;
+		border-radius: 3px;
 		/*		  
 		border-left-width:1px;
 		border-top-width:1px;
 		*/
 		background-position: 50% 30%;
-		background-size: auto 56%;
+		background-size: auto 42px;
 		z-index: 100;
 		background-color: transparent;
 		cursor:grab;
-		opacity:0.75;
-		box-shadow:0px 1px 5px 0px rgba(0, 0, 0, 0.05);
-		-webkit-box-shadow:0px 1px 5px 0px rgba(0, 0, 0, 0.05);
+		//opacity:0.75;
+		box-shadow:0px 1px 4px 0px rgba(0, 0, 0, 0.05);
+		-webkit-box-shadow:0px 1px 4px 0px rgba(0, 0, 0, 0.05);
 		background-color:#fff;
+		
+		a {
+			min-height: 20px;
+			white-space: break-spaces;
+			//line-height: 12px;
+			padding:0 3px;
+		}
 }
 
 @mixin block-list-element() {
@@ -118,10 +132,11 @@ $font-size-base: 16px;
 		padding-top: 0px;
 		margin:1rem auto;
 
-		border-color:#ccc;
+		display:block;
+		border-color:#ddd;
 		border-style:solid;
 		border-width:1px;
-		border-radius:3px;
+		border-radius:0px;
 		
 		background-position: center;
 		box-shadow:0px 1px 5px 0px rgba(0, 0, 0, 0.15);
@@ -142,7 +157,8 @@ $font-size-base: 16px;
 			background: rgba(255,255,255,0.9);
 			background: rgba(0,0,0,0.7);
 			background: rgba(13, 110, 253, 0.8);
-			color:#fff;
+			background: rgba(255, 255, 255, 0.9);
+			color:#333;
 			padding: 0.5rem 0;
 			position:absolute;
 			bottom:0px;
@@ -150,12 +166,14 @@ $font-size-base: 16px;
 			left:0;
 			//display:none;
 			font-size:12px;
+			border-top:1px solid rgba(0, 0, 0, 0.1);
 		}		
 		
 		&:hover{ 
-			border:2px solid $primary;
-			box-shadow:0px 1px 5px 0px rgba(13, 110, 253, 0.05);
-			-webkit-box-shadow:0px 1px 5px 0px rgba(13, 110, 253, 0.05);
+			//outline:1px solid $primary;
+			border-color:$primary;
+			box-shadow:0px 1px 5px 0px rgba(13, 110, 253, 0.15);
+			-webkit-box-shadow:0px 1px 5px 0px rgba(13, 110, 253, 0.15);
 
 			
 			&:before {
@@ -200,35 +218,44 @@ body
     @include media-breakpoint-up(sm) { 
 		--builder-left-panel-width:25vw;
 		--builder-right-panel-width:25vw;
+		--builder-component-list-element-width:90%;
+		
     }
     
     @include media-breakpoint-up(md) { 
 		--builder-left-panel-width:25vw;
 		--builder-right-panel-width:25vw;
+		--builder-component-list-element-width:90%;
     }
 
     @include media-breakpoint-up(lg) { 
 		--builder-left-panel-width:250px;
 		--builder-right-panel-width:250px;
+		--builder-component-list-element-width:44%;
     }
     
     @include media-breakpoint-up(xl) { 
 		--builder-left-panel-width:300px;
 		--builder-right-panel-width:300px;
+		--builder-component-list-element-width:44%;
     }
 
     @media (min-width: 1600px) {
 		--builder-left-panel-width: 350px;
 		--builder-right-panel-width: 350px;
+		--builder-component-list-element-width:44%;
     }
 
     @media (min-width: 2000px) {
 		--builder-left-panel-width: 400px;
 		--builder-right-panel-width: 400px;
+		--builder-component-list-element-width:28%;
     }
 	
 	scrollbar-color: rgba(0,0,0, 0.1) #fff;
 	scrollbar-width: thin;
+	-webkit-font-smoothing:subpixel-antialiased;
+
 	@include webkit-scrollbar();
 }
 
@@ -487,7 +514,9 @@ body
 
 		> .header
 		{
+		    .nav {
 			background:#f9f9f9;
+		    }
 			
 			.search 
 			{	
@@ -495,8 +524,9 @@ body
 				.form-control
 				{
 					border-color:#fff;
-					border-bottom-color: #ddd;
+					border-bottom-color: #eee;
 					border-radius:0px;
+					box-shadow:none;
 				}
 				
 				.form-control:focus
@@ -593,7 +623,7 @@ body
 		height:300%;
 		overflow-x: hidden;
 		list-style:none;
-		background: #fafbfc;
+		background: #fafafa;
 		//scrollbar on hover
 		overflow-y:hidden;
 		
@@ -608,6 +638,10 @@ body
 	
 	& #add-section-box 
 	{
+    
+       		 animation: popup-animation  .1s cubic-bezier(0,0,.2,1) 0s;
+       		 animation-fill-mode: forwards;
+    
 		.header > div.section-box-actions 
 		{
 			position:absolute;
@@ -631,7 +665,7 @@ body
 					width:14%;
 					min-width:90px;
 					float:left;
-					margin:0% 1% 1% 1%;
+					margin:0% 1% 2% 1%;
 					
 					a
 					{
@@ -745,8 +779,8 @@ body
 			> label
 			{
 				font-size:11px;
-				margin-bottom:5px;
 				font-weight:600;
+				margin-bottom:5px;
 				color:#555;
 				flex-grow:1;
 				
@@ -1169,17 +1203,18 @@ body
 	{
 		width: 50%;
 		min-height: 300px;
-		max-height: 400px;
+		max-height: 480px;
 		position: absolute;
 		background: #fff;
 		top: 100px;
 		left: 100px;
-		box-shadow: 0px 0px 2px 0px #ccc;
+		box-shadow: 0 8px 24px rgba(0,0,0,0.07);
 		border: 1px solid #ddd;
 		min-width: 500px;
-		max-width: 800px;
+		max-width: 700px;
 		pointer-events:auto;
 		display:none;
+		z-index:10;
 		background:#fff;
 	}
 
@@ -1326,7 +1361,7 @@ li[data-type]
  
   @include webkit-scrollbar();
  
-   > div
+   > div:hover
    {
 	  height: 100vh;
 	  overflow-y: auto;
@@ -1982,7 +2017,7 @@ ul.autocomplete li.selected
 .add-section-btn {
 	@include add-section-btn()
 	margnin:auto;
-	font-size: 20px;
+	font-size: 21px;
 	width: 36px;
 	height: 36px;
 	
@@ -2136,4 +2171,16 @@ input[type="color"] {
 	border:1px solid rgba(0,0,0, 0.15);
 	border-radius:4px;
 	pointer-events:none;
+}
+
+
+
+@keyframes popup-animation {
+    0% {
+        transform: translateY(-3rem) scaleY(0) scaleX(0);
+    }
+
+    to {
+        transform: translateY(0) scaleY(1) scaleX(1);
+    }
 }

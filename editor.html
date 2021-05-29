@@ -566,9 +566,11 @@
 										  <li class="nav-item sections-tab">
 											<a class="nav-link" id="box-sections-tab" data-bs-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
 										  </li>
+                          <!--
 										  <li class="nav-item component-properties-tab" style="display:none">
 											<a class="nav-link" id="box-properties-tab" data-bs-toggle="tab" href="#box-properties" role="tab" aria-controls="properties" aria-selected="false"><i class="la la-lg la-cog"></i> <div><small>Properties</small></div></a>
 										  </li>
+                          -->
 										</ul>
 										
 										<div class="section-box-actions">
@@ -1052,6 +1054,16 @@
 	
 </script>
 
+<script id="vvveb-input-imageinput-gallery" type="text/html">
+	
+	<div>
+		<img id="thumb-{%=key%}" class="img-fluid rounded" data-target-input="#input-{%=key%}" data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="">
+		<input name="{%=key%}" type="text" class="form-control mt-1" id="input-{%=key%}"/>
+		<button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#input-{%=key%}" data-target-thumb="#thumb-{%=key%}"><i class="la la-image la-lg"></i>&ensp;Set image</button>
+	</div>
+	
+</script>
+
 <script id="vvveb-input-colorinput" type="text/html">
 	
 	<div>
@@ -1381,6 +1393,15 @@
 <!-- inputs-->
 <script src="libs/builder/inputs.js"></script>	
 
+
+<!-- media gallery -->
+<link href="libs/media/media.css" rel="stylesheet">
+<script>
+window.mediaPath = 'media';
+</script>
+<script src="libs/media/media.js"></script>	
+<script src="libs/builder/plugin-media.js"></script>	
+
 <!-- bootstrap colorpicker //uncomment bellow scripts to enable -->
 <!--
 <script src="libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
@@ -1411,6 +1432,7 @@
 <script src="libs/codemirror/lib/xml.js"></script>
 <script src="libs/codemirror/lib/formatting.js"></script>
 <script src="libs/builder/plugin-codemirror.js"></script>	
+
 
 <!-- 
 Tinymce plugin

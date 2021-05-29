@@ -63,7 +63,7 @@ $font-size-base: 1rem;
 
 .btn-icon
 {
-	font-weight:600;
+	font-weight:500;
 	text-transform:capitalize;
 	margin-bottom:0px;
 	padding:0.5rem 2rem;
@@ -72,7 +72,7 @@ $font-size-base: 1rem;
 	{
 		display: inline-block;
 		margin-right:0.3rem;
-		font-size: 21px;
+		//font-size: 21px;
 		opacity:0.7;
 	}
 	
@@ -94,8 +94,9 @@ $font-size-base: 1rem;
 		}
 	}
 	
-	&.btn-outline-secondary
-	{
+	&.btn-outline-secondary {
+		box-shadow:0px 0px 2px 1px rgba(0, 0, 0, 0.07), -1px 1px 2px 0px rgba(255, 255, 255, 0.15) inset;
+		box-shadow:1px 1px 1px 0px rgba(0, 0, 0, 0.07);
 	}
 	
 	&.btn-gray
@@ -125,13 +126,37 @@ $font-size-base: 1rem;
 	
 	&.btn-sm {
 		i {
-			padding: 0.5rem 0.5rem;
+			//padding: 0.5rem 0.5rem;
 		}
 	}
+}
+
+label.form-check .form-check-input {
+    float: none;
+    vertical-align: middle;
+    margin-right: 0.2rem;
+}
+.form-check .form-check-input {
+    position: relative;
+    box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.07) inset;
 }
 
 .alert-light {
     color: #525252;
     background-color: whitesmoke;
     border-color: #f0f0f0;
+}
+
+.modal-full .modal-dialog.modal-xl {
+    max-width: 90%;
+}
+
+.modal-full .modal-dialog.modal-xl.modal-dialog-scrollable .modal-content {
+	min-height:50%;
+}
+
+.btn-outline-secondary
+{
+	color:#555;
+	border-color:#ddd;
 }

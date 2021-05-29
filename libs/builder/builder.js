@@ -1231,13 +1231,13 @@ Vvveb.Builder = {
 		
 		self.frameHtml.on("mouseup dragend touchend", function(event) {
 			self.isResize = false;
+			$("#section-actions, #highlight-name, #select-box").show();
 			
 			if (self.isDragging)
 			{
 				self.isDragging = false;
 				Vvveb.Builder.highlightEnabled = true;
 				if (self.iconDrag) self.iconDrag.remove();
-				$("#section-actions, #highlight-name, #select-box").show();
 				$("#component-clone").remove();
 
 				if (self.dragMoveMutation === false)
@@ -1324,7 +1324,7 @@ Vvveb.Builder = {
 						$("#select-box").removeClass("resizable");
 					}
 				}
-				
+				$("#add-section-box").hide();
 				event.preventDefault();
 				return false;
 			}	
@@ -2311,9 +2311,9 @@ Vvveb.SectionList = {
 		
 		$(".sections-list").on("mouseenter", "li[data-section]", function (e) {
 			var src = $("img", this).attr("src");
-			$(".block-preview img").attr("src", src );
+			$(".block-preview img").attr("src", src ).show();
 		}).on("mouseleave", "li[data-section]", function (e) {
-			$(".block-preview img").attr("src", "");
+			$(".block-preview img").attr("src", "").hide();
 		});
 		/*
 		$(this.selector).on("click", ".up-btn", function (e) {
