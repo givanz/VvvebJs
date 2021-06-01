@@ -36,8 +36,11 @@ if (isset($_POST['startTemplateUrl']) && !empty($_POST['startTemplateUrl']))
 	$html = substr($_POST['html'], 0, MAX_FILE_LIMIT);
 }
 
+$folder = $_POST['folder'];
 $file = sanitizeFileName($_POST['file']);
-
+if(!is_dir( __DIR__ . "/" . $folder )){
+	mkdir( __DIR__ . "/" . $folder ,  0777, true);
+}
 if (file_put_contents($file, $html)) {
 	echo "File saved $file";
 } else {
