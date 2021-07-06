@@ -1,3 +1,9 @@
+function ucFirst(str) {
+  if (!str) return str;
+
+  return str[0].toUpperCase() + str.slice(1);
+}
+
 let mediaScanUrl = 'scan.php';
 
 class MediaModal {
@@ -20,48 +26,65 @@ class MediaModal {
 			  </div>
 			  <div class="modal-body">
 	
-                       <div class="filemanager">
+                      <div class="filemanager">
 
-						<div class="top-right">
-                                                
-                            <div class="search">
-                                                           
-                                <input type="search" placeholder="Find a file.." />
-                            </div>
-                            
-                            <button class="btn btn-outline-secondary btn-sm btn-icon me-4 float-end" 
-                               data-bs-toggle="collapse" 
-                               data-bs-target=".upload" 
-                               aria-expanded="false" 
-                               >
-                               <i class="la la-image la-lg"></i>
-                                Upload new file
-                            </button>
-           
+						<div class="top-right d-flex justify-content-between">
+                             
+                            <div class="align-left">          
+								<div class="breadcrumbs"></div>
+							</div>
+                                       
+                                   
+                            <div class="align-right">                   
+								<div class="search">
+									<input type="search" id="media-search-input" placeholder="Find a file.." />
+								</div>
+								
+								<button class="btn btn-outline-secondary btn-sm btn-icon me-5 float-end" 
+								   data-bs-toggle="collapse" 
+								   data-bs-target=".upload" 
+								   aria-expanded="false" 
+								   >
+								   <i class="la la-image la-lg"></i>
+									Upload new file
+								</button>
+							</div>
+							
 						</div>
 
-						<div class="breadcrumbs"></div>
+						<div class="top-panel">
+
+							<div class="upload collapse">
+							   <h3>Drop or choose files to upload</h3>
+							   
+							   <input type="file" multiple class=""> 
+							</div>
 
 
-                        <div class="upload collapse toggle-panel">
-                           <h3>Drop or choose files to upload</h3>
-                           
-                           <input type="file" multiple class=""> 
-                        </div>
-                    
-						<ul class="data"></ul>
-
-						<div class="nothingfound">
-							<div class="nofiles"></div>
-							<span>No files here.</span>
 						</div>
-
+						
+						<div class="display-panel">
+							
+							<ul class="data" id="media-files"></ul>
+						
+							<div class="nothingfound">
+								<div class="nofiles"></div>
+								<span>No files here.</span>
+							</div>
+						</div>
 					</div>
 
 			  </div>
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary save-btn">Add selected</button>
+			  <div class="modal-footer justify-content-between">
+			  
+				<div class="align-left">
+			
+				</div>
+			  
+				<div class="align-right">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary save-btn">Add selected</button>
+				</div>
 			  </div>
 			</div>
 		  </div>
@@ -75,7 +98,6 @@ class MediaModal {
 		this.fileList = null;
 		this.mediaPath = "/public/media/";
 		this.type = "single";
-		
 	}
 	
 	addModalHtml()
@@ -86,31 +108,58 @@ class MediaModal {
 	
 	save() 
 	{
+		
 		let file = $("#MediaModal .files input:checked").eq(0).val();
-		$(this.targetInput).val(this.mediaPath + file).trigger("change");
-		$(this.targetThumb).attr("src", this.mediaPath + file);
+		if (this.targetInput) {
+			$(this.targetInput).val(file).trigger("change");
+		}
+
+		if (file.indexOf("//") == -1) {
+			file = this.mediaPath + file;
+		}
+
+		if (this.targetThumb) {
+			$(this.targetThumb).attr("src", file);
+		}
+		
+		if (this.callback) {
+			this.callback(file);
+		}
+		
 		if (this.isModal) $("#MediaModal").modal('hide');
 	}
 	
-	init()
-	{
-		if (!this.isInit)
-		{
+	init() {
+		if (!this.isInit) {
 			if (this.isModal) this.addModalHtml();
+			let self = this;
+
 			this.initGallery();
 			this.isInit = true;
+
+			$(window).trigger( "mediaModal:init", { type:this.type, targetInput:this.targetInput, targetThumb:this.targetThumb, callback:this.callback} );
 		}
 	}
 	
-	open(element)
+	open(element, callback)
 	{
-		this.init();
-		this.targetInput = element.dataset.targetInput;
-		this.targetThumb = element.dataset.targetThumb;
-		if (element.dataset.type) {
-			this.type = element.dataset.type;
+		if (element instanceof Element) {
+			this.targetInput = element.dataset.targetInput;
+			this.targetThumb = element.dataset.targetThumb;
+			if (element.dataset.type) {
+				this.type = element.dataset.type;
+			}
+		} else if (element) {
+			this.targetInput = element.targetInput;
+			this.targetThumb = element.targetThumb;
+			if (element.type) {
+				this.type = element.type;
+			}
 		}
 		
+		this.callback = callback;
+		this.init();
+
 		if (this.isModal) $('#MediaModal').modal('show');
 	}
 
@@ -133,7 +182,6 @@ class MediaModal {
 
 			var folders = [],
 				files = [];
-				
 				
 			$(window).trigger('hashchange');	
 		});
@@ -166,8 +214,7 @@ class MediaModal {
 		// Listening for keyboard input on the search field.
 		// We are using the "input" event which detects cut and paste
 		// in addition to keyboard input.
-
-		this.filemanager.find('input').on('input', function(e){
+		this.filemanager.find('input[type=search]').on('input', function(e){
 
 			var folders = [];
 			var files = [];
@@ -217,7 +264,6 @@ class MediaModal {
 			}
 
 		});
-
 
 		// Clicking on folders
 
@@ -312,7 +358,6 @@ class MediaModal {
 				// if there is no hash
 
 				else {
-					console.dir(this.response);
 					this.currentPath = this.response[0].path;
 					this.breadcrumbsUrls.push(this.response[0].path);
 					this.render(this.searchByPath(this.response[0].path));
@@ -334,8 +379,6 @@ _
 		// Locates a file by path
 
 		searchByPath(dir) {
-					console.dir(dir);
-
 			var path = dir.split('/'),
 				demo = this.response,
 				flag = 0;
@@ -364,22 +407,21 @@ _
 			let files = [];
 
 			let _searchData = function (data, searchTerms) { 
-				data.forEach(function(d){
-					if(d.type === 'folder') {
+			data.forEach(function(d){
+				if(d.type === 'folder') {
 
 						_searchData(d.items,searchTerms);
 
 						if(d.name.toLowerCase().indexOf(searchTerms) >= 0) {
-							folders.push(d);
-						}
+						folders.push(d);
 					}
-					else if(d.type === 'file') {
+				}
+				else if(d.type === 'file') {
 						if(d.name.toLowerCase().indexOf(searchTerms) >= 0) {
-							files.push(d);
-							console.log(d);
-						}
+						files.push(d);
 					}
-				});
+				}
+			});
 			};
 			
 			_searchData(data, searchTerms);
@@ -480,7 +522,15 @@ _
 					var file = $('<li class="files">\
 									<label class="form-check">\
 									  <input type="' + ((_this.type == "single") ? "radio" : "checkbox") + '" class="form-check-input" value="' + f.path + '" name="file[]"><span class="form-check-label"></span>\
-									  <div href="#\" class="files">'+icon+'<div class="info"><span class="name">'+ name +'</span> <span class="details">'+fileSize+'</span> <!-- a href="#">View info</a --></div></div>\
+									  <div href="#\" class="files">'+icon+'<div class="info"><div class="name">'+ name +'</div><span class="details">'+fileSize+'</span>\
+										<a href="javascript:void(0);" class="preview-link"><i class="la la-search-plus"></i></a>\
+										 <div class="preview">\
+											<img src="' + _this.mediaPath + f.path + '">\
+											<div>\
+												<span class="name">'+ name +'</span><span class="details">'+fileSize+'</span>\
+											</div>\
+										</div>\
+									  </div>\
 									</label>\
 								</li>');
 					file.appendTo(_this.fileList);

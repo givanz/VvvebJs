@@ -42,7 +42,9 @@ var ImageInput = $.extend({}, Input, {
 	},
     
     onClick: function(e) {
-        Vvveb.MediaModal = new MediaModal(true);
+        if (!Vvveb.MediaModal) {
+			Vvveb.MediaModal = new MediaModal(true);
+		}
 		Vvveb.MediaModal.mediaPath = window.mediaPath;
 		Vvveb.MediaModal.open(this);        
     },

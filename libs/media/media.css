@@ -4,10 +4,13 @@
 -------------------------*/
 
 
-.filemanager {
-	position: relative;
+#MediaModal .modal-body, .filemanager {
+	position: static;
 }
 
+#MediaModal .modal-body {
+	min-height:50vh;
+}
 
 /*-------------------------
 	Breadcrumps
@@ -45,9 +48,6 @@
 
 
 .filemanager .top-right {
-	position: absolute;
-	padding-right: 30px;
-	cursor: pointer;
 	right: 0;
 	font-size: 17px;
 	color: #333;
@@ -56,7 +56,9 @@
 }
 
 .filemanager .search {
-    float:right;
+	float:right;
+    position:relative;
+	cursor: pointer;
 }
 
 
@@ -127,7 +129,7 @@
 	height: 14px;
 	border-radius: 50%;
 	border: 2px solid #333;
-	right: 20px;
+	right: 10px;
 }
 
 .filemanager .search:after {
@@ -138,7 +140,7 @@
 	border-radius: 2px;
 	position: absolute;
 	top: 18px;
-	right: 19px;
+	right: 9px;
 	-webkit-transform: rotate(-45deg);
 	transform: rotate(-45deg);
 }
@@ -150,7 +152,6 @@
 	width: 250px;
 	height: 35px;
 	padding-left: 20px;
-    margin-right:1.5rem;
 	text-decoration-color: #4d535e;
 	font-size: 14px;
 	font-weight: 400;
@@ -202,7 +203,9 @@
 	list-style-type: none;
 	margin: 10px;
 	display: inline-block;
+	/*
 	position: relative;
+	*/
 	overflow: hidden;
 	padding: 0.3em;
 	z-index: 1;
@@ -227,31 +230,30 @@
 }
 
 .filemanager .data li a {
-	display:block;
 }
 
 .filemanager .data li label.form-check {
 	font-size:1.2rem;
-	margin-top: -4px;
-	margin-left: -1px;
 	height:100%;
+	padding:0;
 }
 
 .filemanager .data li label.form-check .form-check-input {
-	margin-top:0;
     border-color: #ddd;
+    float:right;
 }
 
 .filemanager .data li .info {
 	//margin-top:1rem;
+	//margin-top: 15px;
 }
 
 .filemanager .data li .name {
 	color: #333;
-	font-size: 15px;
+	font-size: 1rem;
 	font-weight: 500;
-	line-height: 20px;
-	white-space: nowrap;
+	line-height: 1.4rem;
+	max-height:3rem;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
@@ -334,14 +336,40 @@
 .files .image
 {
 	display:inline-block;
-	margin:0px 20px 0px 5px;
-	border-radius:8px;
-	max-width:80px;
-	max-height:80px;
+	margin:0px 10px 0px 0px;
+	max-width:200px;
+	max-height:120px;
 	background-position: center center;
 	background-size: 100%; 
 	background-repeat:no-repeat;
 	float:left;
+}
+.files .preview 
+{
+	display:none;
+	position:absolute;
+	top:0;
+	right:0;
+	z-index:10000;
+	max-width:50%;
+	max-height:100%;
+	border-left:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	background:#fff;
+}
+
+.files .preview-link:hover + .preview, 
+.files .preview-link:focus + .preview, 
+.files .preview-link + .preview:hover {
+	display:block;
+}
+
+.files .preview > img {
+	display:block;
+	margin:auto;
+}
+.files .preview > div {
+    padding: 2rem; 
 }
 
 .icon {
@@ -397,7 +425,7 @@
 	border-radius: 0.25em;
 	color: #FFF;
 	display: inline-block;
-	margin: 0px 20px 0px 5px;
+	margin: 15px 20px 0px 5px;
 	position: relative;
 	overflow: hidden;
 	box-shadow: 1.74em -2.1em 0 0 #A4A7AC inset;
