@@ -1414,7 +1414,9 @@ Vvveb.Builder = {
 									nextSibling: node.nextSibling});
 
 			self.selectedEl.remove();
-
+			// Reload sections list to show remaining sections
+			Vvveb.SectionList.loadSections();
+			
 			event.preventDefault();
 			return false;
 		});
@@ -1478,6 +1480,9 @@ Vvveb.Builder = {
 			addSectionComponent(html, ($("[name='add-section-insert-mode']:checked").val() == "after"));
 
 			addSectionBox.hide();
+			
+			// Refresh Page Sections
+			Vvveb.SectionList.loadSections();
 		});
 
 		$(".blocks-list li ol li", addSectionBox).on("click", function(event) {

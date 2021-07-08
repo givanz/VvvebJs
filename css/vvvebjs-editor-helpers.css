@@ -32,10 +32,10 @@ body {
     align-items: center;
     justify-content: center; }
 
-[data-vvveb-disabled-area] *:not([data-vvveb-edit-exception]) {
+[data-vvveb-disabled-area] *:not([data-vvveb-edit-exception]):not([data-vvveb-edit-exception] *) {
   pointer-events: none;
   position: relative; }
-  [data-vvveb-disabled-area] *:not([data-vvveb-edit-exception])::after {
+  [data-vvveb-disabled-area] *:not([data-vvveb-edit-exception]):not([data-vvveb-edit-exception] *)::after {
     content: "Non-editable area";
     position: absolute;
     left: 0px;
