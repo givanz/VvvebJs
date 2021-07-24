@@ -53,5 +53,10 @@ body {
     align-items: center;
     justify-content: center; }
 
-[data-component-video] {
+[data-component-video] > iframe {
   pointer-events: none; }
+
+[contenteditable="true"] {
+  outline: none; }
+  [contenteditable="true"]:focus-visible {
+    outline: none; }

@@ -9,7 +9,7 @@
 		margin:0;
 		//width: 300px;
 		min-width: $builder-right-panel-width + 15;
-		font-size:11px;
+		font-size:12px;
 		font-weight:500;
 		color:#555;
 
@@ -49,7 +49,7 @@
 				display: block;
 				padding-left: 56px;
 				margin:0;
-				font-size:11px;
+				font-size:12px;
 				font-weight:500;
 				line-height:28px;
 
@@ -83,8 +83,8 @@
 			
 			 + ol
 			{
-				background: url(../libs/builder/icons/arrow-right.svg) 0px .3rem no-repeat;
-				background-size:12px 12px;
+				background: url(../libs/builder/icons/arrow-right.svg) 5px .3rem no-repeat;
+				background-size:10px 10px;
 				margin: -1.8rem 0 0 0rem;
 				padding: 2rem 0 0 2rem;
 				height: 0;
@@ -101,15 +101,15 @@
 			display: block;
 			padding-left: 56px;
 			margin:0px;
-			font-size:11px;
+			font-size:12px;
 			font-weight:500;
 			line-height:28px;
 		}
 
 		li input:checked + ol
 		{
-			background: url(../libs/builder/icons/arrow-down.svg) 0px .1rem no-repeat;
-			background-size:12px 12px;
+			background: url(../libs/builder/icons/arrow-down.svg) 5px .1rem no-repeat;
+			background-size:10px 10px;
 			margin: -1.8em 0 0 0rem;
 			padding: 2rem 0 0 2rem;
 			height: auto;

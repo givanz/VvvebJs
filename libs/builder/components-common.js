@@ -84,7 +84,7 @@ Vvveb.Components.add("_base", {
         key: "id",
         htmlAttr: "id",
         sort: base_sort++,
-        inline:true,
+        inline:false,
         col:6,
         inputtype: TextInput
     }, {
@@ -92,7 +92,7 @@ Vvveb.Components.add("_base", {
         key: "class",
         htmlAttr: "class",
         sort: base_sort++,
-        inline:true,
+        inline:false,
         col:6,
         inputtype: TextInput
     }
@@ -102,21 +102,61 @@ Vvveb.Components.add("_base", {
 //display
 Vvveb.Components.extend("_base", "_base", {
 	 properties: [
-     {
+	 {
         key: "display_header",
         inputtype: SectionInput,
         name:false,
         sort: base_sort++,
 		section: style_section,
         data: {header:"Display"},
-    }, {
+     }, {
+	key: "linked_styles_check",
+        sort: base_sort++,
+        section: style_section,
+        inline:false,
+        col:12,
+        inputtype: NoticeInput,
+        data: {
+			type:'warning',
+			title:'Linked styles',
+			text:'This element shares styles with other <a class="linked-elements-hover" href="#"><b class="elements-count">4</b> elements</a>, to apply styles <b>only for this element</b> enter a <b>unique id</b> eg: <i>marketing-heading</i> in in <br/><a class="id-input" href="#content-tab" role="tab" aria-controls="components" aria-selected="false" href="#content-tab">Content > General > Id</a>.<br/><span class="text-muted small"></span>',
+		},
+		afterInit:function(node, inputElement) {
+			var selector = Vvveb.StyleManager.getSelectorForElement(node);
+			var elements = $(selector, window.FrameDocument);
+
+			if (elements.length <= 1) {
+				inputElement.hide();
+			} else {
+				$(".elements-count", inputElement).html(elements.length);
+				$(".text-muted", inputElement).html(selector);
+				
+				$(".id-input", inputElement).click(function (){
+					$(".content-tab a").each(function() {
+						this.click();
+					});
+					
+					setTimeout(function () { $("[name=id]").trigger("focus") }, 700);;
+					
+				});
+				
+				$(".linked-elements-hover", inputElement).
+				on("mouseenter", function (){
+					elements.css("outline","2px dotted blue");
+				}).
+				on("mouseleave", function (){
+					elements.css("outline","");
+				});
+			}
+		},	 
+	 }, {
         name: "Display",
         key: "display",
         htmlAttr: "style",
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: SelectInput,
         validValues: ["block", "inline", "inline-block", "none"],
         data: {
@@ -130,6 +170,36 @@ Vvveb.Components.extend("_base", "_base", {
                 value: "inline-block",
                 text: "Inline Block"
             }, {
+                value: "inline-block",
+                text: "Inline Block"
+            }, {
+                value: "flex",
+                text: "Flex"
+            }, {
+                value: "inline-flex",
+                text: "Inline Flex"
+            }, {
+                value: "grid",
+                text: "Grid"
+            }, {
+                value: "inline-grid",
+                text: "Inline grid"
+            }, {
+                value: "table",
+                text: "Table"
+            }, {
+                value: "table-row",
+                text: "Table Row"
+            }, {
+                value: "list-item",
+                text: "List Item"
+            }, {
+                value: "inherit",
+                text: "Inherit"
+            }, {
+                value: "initial",
+                text: "Initial"
+            }, {
                 value: "none",
                 text: "none"
             }]
@@ -141,7 +211,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: SelectInput,
         validValues: ["static", "fixed", "relative", "absolute"],
         data: {
@@ -166,7 +236,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         parent:"",
         inputtype: CssUnitInput
 	}, {
@@ -176,7 +246,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         parent:"",
         inputtype: CssUnitInput
     }, {
@@ -186,7 +256,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         parent:"",
         inputtype: CssUnitInput
 	}, {
@@ -196,7 +266,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         parent:"",
         inputtype: CssUnitInput
     },{
@@ -206,7 +276,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:12,
-        inline:true,
+        inline:false,
         inputtype: RadioButtonInput,
         data: {
 			extraclass:"btn-group-sm btn-group-fullwidth",
@@ -237,7 +307,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:12,
-		inline:true,
+		inline:false,
         parent:"",
         inputtype: RangeInput,
         data:{
@@ -284,7 +354,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Font weight",
@@ -293,7 +363,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: SelectInput,
         data: {
 			options: [{
@@ -331,11 +401,11 @@ var ComponentBaseTypography = {
     }, {
         name: "Font family",
         key: "font-family",
-	htmlAttr: "style",
+		htmlAttr: "style",
         sort: base_sort++,
-	section: style_section,
+		section: style_section,
         col:12,
-	inline:true,
+		inline:false,
         inputtype: SelectInput,
         data: {
 			options: [{
@@ -389,7 +459,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:12,
-        inline:true,
+        inline:false,
         inputtype: RadioButtonInput,
         data: {
 			extraclass:"btn-group-sm btn-group-fullwidth",
@@ -432,7 +502,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Letter spacing",
@@ -441,7 +511,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Text decoration",
@@ -450,7 +520,7 @@ var ComponentBaseTypography = {
         sort: base_sort++,
 		section: style_section,
         col:12,
-        inline:true,
+        inline:false,
         inputtype: RadioButtonInput,
         data: {
 			extraclass:"btn-group-sm btn-group-fullwidth",
@@ -546,7 +616,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Height",
@@ -555,7 +625,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Min Width",
@@ -564,7 +634,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Min Height",
@@ -573,7 +643,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Max Width",
@@ -582,7 +652,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Max Height",
@@ -591,7 +661,7 @@ var ComponentBaseSize = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }]
 }
@@ -614,7 +684,7 @@ var ComponentBaseMargin = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Right",
@@ -623,7 +693,7 @@ var ComponentBaseMargin = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Bottom",
@@ -632,7 +702,7 @@ var ComponentBaseMargin = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Left",
@@ -641,7 +711,7 @@ var ComponentBaseMargin = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }]
 }
@@ -665,7 +735,7 @@ var ComponentBasePadding = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Right",
@@ -674,7 +744,7 @@ var ComponentBasePadding = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Bottom",
@@ -683,7 +753,7 @@ var ComponentBasePadding = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Left",
@@ -692,7 +762,7 @@ var ComponentBasePadding = {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }]
 }
@@ -716,7 +786,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:12,
-		inline:true,
+		inline:false,
         inputtype: SelectInput,
         data: {
 			options: [{
@@ -740,7 +810,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
    	}, {
         name: "Color",
@@ -748,7 +818,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
 		htmlAttr: "style",
         inputtype: ColorInput,
 	}]
@@ -772,7 +842,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
 	}, {
         name: "Top Right",
@@ -781,7 +851,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Bottom Left",
@@ -790,7 +860,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }, {
         name: "Bottom Right",
@@ -799,7 +869,7 @@ Vvveb.Components.extend("_base", "_base", {
         sort: base_sort++,
 		section: style_section,
         col:6,
-		inline:true,
+		inline:false,
         inputtype: CssUnitInput
     }]
 });    
@@ -925,3 +995,27 @@ Vvveb.Components.extend("_base", "_base", {
     }]
 });    
 
+/*
+
+Vvveb.Components.extend("_base", "_base", {
+	 properties: [
+	 {
+        name: "Font family",
+        key: "font-family",
+		htmlAttr: "style",
+        sort: base_sort++,
+        col:12,
+		inline:false,
+        inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "extended"
+			}, {
+				value: "Ggoogle ",
+				text: "google"
+			}]
+		}
+	}]
+});
+*/

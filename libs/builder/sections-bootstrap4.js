@@ -17,7 +17,7 @@ https://github.com/givanz/Vvvebjs
 */
 
 Vvveb.SectionsGroup['Bootstrap'] =
-["bootstrap4/signin-split", "bootstrap4/slider-header", "bootstrap4/image-gallery", "bootstrap4/video-header", "bootstrap4/about-team", "bootstrap4/portfolio-one-column", "bootstrap4/portfolio-two-column", "bootstrap4/portfolio-three-column", "bootstrap4/portfolio-four-column"];
+["bootstrap4/signin-split",  "bootstrap4/image-gallery", "bootstrap4/video-header", "bootstrap4/slider-header", "bootstrap4/about-team", "bootstrap4/portfolio-one-column", "bootstrap4/portfolio-two-column", "bootstrap4/portfolio-three-column", "bootstrap4/portfolio-four-column"];
 
 
 Vvveb.Sections.add("bootstrap4/signin-split", {
@@ -46,8 +46,8 @@ Vvveb.Sections.add("bootstrap4/signin-split", {
                   <label for="inputPassword">Password</label>
                 </div>
 
-                <div class="form-check-input mb-3">
-                  <input type="checkbox" class="btn-check" id="customCheck1">
+                <div class="mb-3">
+                  <input type="checkbox" class="form-check-input" id="customCheck1">
                   <label class="custom-control-label" for="customCheck1">Remember password</label>
                 </div>
                 <button class="btn btn-lg btn-primary btn-section btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
@@ -90,7 +90,7 @@ Vvveb.Sections.add("bootstrap4/signin-split", {
 
 .form-label-group>input,
 .form-label-group>label {
-  padding: var(--input-padding-y) var(--input-padding-x);
+  padding: 1rem 1rem;
   height: auto;
   border-radius: 2rem;
 }
@@ -99,7 +99,7 @@ Vvveb.Sections.add("bootstrap4/signin-split", {
   position: absolute;
   top: 0;
   left: 0;
-  display: section;
+  display: block;
   width: 100%;
   margin-bottom: 0;
   line-height: 1.5;
@@ -137,8 +137,8 @@ Vvveb.Sections.add("bootstrap4/signin-split", {
 }
 
 .form-label-group input:not(:placeholder-shown)~label {
-  padding-top: calc(var(--input-padding-y) / 3);
-  padding-bottom: calc(var(--input-padding-y) / 3);
+  padding-top: 0.5;
+  padding-bottom: 0.5;
   font-size: 12px;
   color: #777;
 }
@@ -163,62 +163,62 @@ Vvveb.Sections.add("bootstrap4/image-gallery", {
   <div class="row text-center text-lg-left">
 
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/pWkk7iiCoDM/400x300" alt="">
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aob0ukAYfuI/400x300" alt="">
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EUfxH-pze7s/400x300" alt="">
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/M185_qYH8vg/400x300" alt="">
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/sesveuG_rNo/400x300" alt="">
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/AvhMzHwiE_0/400x300" alt="">
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/2gYsZUmockw/400x300" alt="">
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/EMSDtjVHdQ8/400x300" alt="">
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/8mUEy0ABdNE/400x300" alt="">
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/G9Rfc1qccH4/400x300" alt="">
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/aJeH0KcFkuc/400x300" alt="">
           </a>
     </div>
     <div class="col-lg-3 col-md-4 col-6">
-      <a href="#" class="d-section mb-4 h-100">
+      <a href="#" class="d-block mb-4 h-100">
             <img class="img-fluid img-thumbnail" src="https://source.unsplash.com/p2TQ-3Bh3Oo/400x300" alt="">
           </a>
     </div>
@@ -244,21 +244,21 @@ Vvveb.Sections.add("bootstrap4/slider-header", {
     <div class="carousel-inner" role="listbox">
       <!-- Slide One - Set the background image for this slide in the line below -->
       <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/LAaSoL0LrYs/1920x1080')">
-        <div class="carousel-caption d-none d-md-section">
+        <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">First Slide</h2>
           <p class="lead">This is a description for the first slide.</p>
         </div>
       </div>
       <!-- Slide Two - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('https://source.unsplash.com/bF2vsubyHcQ/1920x1080')">
-        <div class="carousel-caption d-none d-md-section">
+        <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">Second Slide</h2>
           <p class="lead">This is a description for the second slide.</p>
         </div>
       </div>
       <!-- Slide Three - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('https://source.unsplash.com/szFUQoyvrxM/1920x1080')">
-        <div class="carousel-caption d-none d-md-section">
+        <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">Third Slide</h2>
           <p class="lead">This is a description for the third slide.</p>
         </div>

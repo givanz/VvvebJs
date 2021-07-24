@@ -2,6 +2,9 @@
 
 
 ## Drag and drop website builder javascript library.
+
+For a full featured CMS using VvvebJs check [Vvveb CMS](https://github.com/givanz/Vvveb)
+
 Built with jQuery and Bootstrap 4.
 
 [Two panel Live Demo](https://www.vvveb.com/vvvebjs/editor.html)

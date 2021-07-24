@@ -131,6 +131,24 @@ var SelectInput = $.extend({}, Input, {
   }
 );
 
+var IconSelectInput = $.extend({}, Input, {
+	
+    events: [
+        ["change", "onChange", "select"],
+	 ],
+	
+
+	setValue: function(value) {
+		$('select', this.element).val(value);
+	},
+	
+	init: function(data) {
+		return this.render("icon-select", data);
+	},
+	
+  }
+);
+
 
 var LinkInput = $.extend({}, TextInput, {
 
@@ -607,5 +625,17 @@ var TagsInput = $.extend({}, Input, {
 		
 		return this.element;
 	}
+  }
+);
+
+
+var NoticeInput = $.extend({}, Input, {
+
+    events: [
+	 ],
+	
+	init: function(data) {
+		return this.render("noticeinput", data);
+	},
   }
 );
