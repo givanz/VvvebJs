@@ -1988,58 +1988,65 @@ Vvveb.Gui = {
 }
 
 Vvveb.StyleManager = {
-	
-	styles:{},
-	cssContainer:false,
-	
-	init: function(doc) {
+
+	styles: {},
+	cssContainer: false,
+	mobileWidth: '320px',
+	tabletWidth: '768px',
+
+	init: function (doc) {
 		if (doc) {
-			
+
 			var style = false;
 			var _style = false;
-			
+
 			//check if editor style is present
-			for (let i=0; i < doc.styleSheets.length; i++) {	
-					_style = doc.styleSheets[i];
-					if (_style.ownerNode.id && _style.ownerNode.id == "vvvebjs-styles") {
-						style = _style;
-						break;
-					}
+			for (let i = 0; i < doc.styleSheets.length; i++) {
+				_style = doc.styleSheets[i];
+				if (_style.ownerNode.id && _style.ownerNode.id == "vvvebjs-styles") {
+					style = _style;
+					break;
+				}
 			}
-			
+
 			//if style element does not exist create it			
 			if (!style) {
 				this.cssContainer = $('<style id="vvvebjs-styles"></style>');
 				$(doc.head).append(this.cssContainer);
 				return this.cssContainer;
 			}
-			
+
 			//if style exist then load all css styles for editor
-			for (let j=0; j < style.cssRules.length; j++) {				
-				selector = style.cssRules[j].selectorText;
-				styles = style.cssRules[j].style;
-				
-				if (selector) {
-					this.styles[selector] = {};
-					
-					for (let k=0; k < styles.length; k++) {	
-									
-						property = styles[k];
-						value = styles[property];
-						
-						this.styles[selector][property] = value;
+			for (let j = 0; j < style.cssRules.length; j++) {
+				media = (typeof style.cssRules[j].media === "undefined") ? "desktop" : (style.cssRules[j].media[0] === "screen and (max-width: 1220px)") ? "tablet" : (style.cssRules[j].media[0] === "screen and (max-width: 320px)") ? "mobile" : "desktop";
+
+				selector = (media === "desktop") ? style.cssRules[j].selectorText : style.cssRules[j].cssRules[0].selectorText;
+				styles = (media === "desktop") ? style.cssRules[j].style : style.cssRules[j].cssRules[0].style;
+
+				if (media) {
+					this.styles[media] = {};
+					if (selector) {
+						this.styles[media][selector] = {};
+
+						for (let k = 0; k < styles.length; k++) {
+
+							property = styles[k];
+							value = styles[property];
+
+							this.styles[media][selector][property] = value;
+						}
 					}
 				}
 			}
-			
-			return this.cssContainer = $("#vvvebjs-styles", doc); 
+
+			return this.cssContainer = $("#vvvebjs-styles", doc);
 		}
-	},	
-	
-	getSelectorForElement: function(element) {
+	},
+
+	getSelectorForElement: function (element) {
 		var currentElement = element;
 		var selector = [];
-		
+
 		while (currentElement.parentElement) {
 			elementSelector = "";
 
@@ -2053,7 +2060,7 @@ Vvveb.StyleManager = {
 				elementSelector = Array.from(currentElement.classList).map(function (className) {
 					return "." + className;
 				}).join("");
-				
+
 			} else {
 				//element (tag) selector
 				var tag = currentElement.tagName.toLowerCase();
@@ -2062,74 +2069,102 @@ Vvveb.StyleManager = {
 					elementSelector = tag
 				}
 			}
-			
+
 			if (elementSelector) {
 				selector.push(elementSelector);
 			}
-			
+
 			currentElement = currentElement.parentElement;
 		}
-		
+
 		return selector.reverse().join(" > ");
-	},	
-	
-	setStyle: function(element, styleProp, value) {
-		
-		selector = this.getSelectorForElement(element.get(0));	
-		
-		if (!this.styles[selector]) {
-			this.styles[selector] = {};
+	},
+
+	setStyle: function (element, styleProp, value) {
+
+		selector = this.getSelectorForElement(element.get(0));
+		media = $("#canvas").hasClass("tablet") ? "tablet" : $("#canvas").hasClass("mobile") ? "mobile" : "desktop";
+
+		//styles[media][selector][styleProp] = value
+		if (!this.styles[media]) {
+			this.styles[media] = {};
 		}
-		if (!this.styles[selector][styleProp]) {
-			this.styles[selector][styleProp] = {};
+		if (!this.styles[media][selector]) {
+			this.styles[media][selector] = {};
 		}
-		this.styles[selector][styleProp] = value;
-		
-		this.generateCss();
+		if (!this.styles[media][selector][styleProp]) {
+			this.styles[media][selector][styleProp] = {};
+		}
+		this.styles[media][selector][styleProp] = value;
+
+		this.generateCss(media);
 
 		return element;
-        	//uncomment bellow code to set css in element's style attribute 
+		//uncomment bellow code to set css in element's style attribute 
 		//return element.css(styleProp, value);
 	},
-	
-	generateCss: function() {
+
+	generateCss: function (media) {
+		//var css = "";
+		//for (selector in this.styles[media]) {
+
+		//	css += `${selector} {`;
+		//	for (property in this.styles[media][selector]) {
+		//		value = this.styles[media][selector][property];
+		//		css += `${property}: ${value};`;
+		//	}
+		//	css += '}';
+		//}
+
+		//this.cssContainer.html(css);
+
+		//return element;
 		var css = "";
-		for (selector in this.styles) {
-			
-				css += `${selector} {`;	
-				for (property in this.styles[selector]) {
-					value = this.styles[selector][property];
+		for (media in this.styles) {
+			if (media === "tablet" || media === "mobile") {
+				css += `@media screen and (max-width: ${(media === 'tablet') ? this.tabletWidth : this.mobileWidth}){`
+			}
+			for (selector in this.styles[media]) {
+				css += `${selector} {`;
+				for (property in this.styles[media][selector]) {
+					value = this.styles[media][selector][property];
 					css += `${property}: ${value};`;
 				}
 				css += '}';
+			}
+			if (media === "tablet" || media === "mobile") {
+				css += `}`
+			}
 		}
 
 		this.cssContainer.html(css);
 
 		return element;
 	},
-	
-	
-	_getCssStyle: function(element, styleProp){
+
+
+	_getCssStyle: function (element, styleProp) {
 		var value = "";
 		var el = element.get(0);
-		
+
+		selector = this.getSelectorForElement(el);
+		media = $("#canvas").hasClass("tablet") ? "tablet" : $("#canvas").hasClass("mobile") ? "mobile" : "desktop";
+
 		if (el.style && el.style.length > 0 && el.style[styleProp])//check inline
 			var value = el.style[styleProp];
-		else
-		if (el.currentStyle)	//check defined css
-			var value = el.currentStyle[styleProp];
-		else if (window.getComputedStyle)
-		{
-			var value = document.defaultView.getDefaultComputedStyle ? 
-							document.defaultView.getDefaultComputedStyle(el,null).getPropertyValue(styleProp) : 
-							window.getComputedStyle(el,null).getPropertyValue(styleProp);
+		else if (this.styles[media][selector][styleProp]) {	//check defined css
+			var value = this.styles[media][selector][styleProp];
 		}
-		
+		else if (window.getComputedStyle) {
+			var value = document.defaultView.getDefaultComputedStyle ?
+				document.defaultView.getDefaultComputedStyle(el, null).getPropertyValue(styleProp) :
+				window.getComputedStyle(el, null).getPropertyValue(styleProp);
+		}
+
 		return value;
 	},
-	
-	getStyle: function(element,styleProp){
+
+	getStyle: function (element, styleProp) {
 		return this._getCssStyle(element, styleProp);
 	}
 }
