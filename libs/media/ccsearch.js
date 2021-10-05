@@ -57,6 +57,13 @@ class CCsearchDisplay extends CCsearch {
 		return html;
 	}
 	
+	showLoading() {
+		$("#ccsearch-results").html(`
+		<div class="spinner-border" style="width: 5rem; height: 5rem;margin: 5rem auto; display:block" role="status">
+		  <span class="visually-hidden">Loading...</span>
+		</div>`);
+	}
+	
 	setFilters() {
 		this.filtersParameters = $("#cc-search-form").serialize();
 		//this.setFiltersParams(filters);
@@ -101,8 +108,7 @@ class CCsearchDisplay extends CCsearch {
 			items.push( item );
 		  });
 		 
-		  $("#ccsearch-results").html(items.join( "" ));
-		  console.log(data);
+		$("#ccsearch-results").html(items.join( "" ));
 		 //pagination
 		const maxpages = 15;		  
 		let pages =  data['page_count'];
@@ -156,12 +162,13 @@ class CCsearchDisplay extends CCsearch {
 	page(pageNo) {
 		this.pageNo = pageNo;
 		this.filtersParameters = $("#cc-search-form").serialize() + "&page=" + pageNo;
+		this.showLoading();
 		this.getResults(this.displayResults);
-		console.log(this.filtersParameters);
 	}
 	
 	search() {
 		this.setFilters();
+		this.showLoading();
 		this.getResults(this.displayResults);
 	}
 	

@@ -100,14 +100,12 @@ class MediaModal {
 		this.type = "single";
 	}
 	
-	addModalHtml()
-	{
+	addModalHtml() {
 		if (this.isModal) $("body").append(this.modalHtml);
 		$("#MediaModal .save-btn").on("click", () => this.save());
 	}
 	
-	save() 
-	{
+	save() {
 		
 		let file = $("#MediaModal .files input:checked").eq(0).val();
 		if (this.targetInput) {
@@ -141,8 +139,7 @@ class MediaModal {
 		}
 	}
 	
-	open(element, callback)
-	{
+	open(element, callback) {
 		if (element instanceof Element) {
 			this.targetInput = element.dataset.targetInput;
 			this.targetThumb = element.dataset.targetThumb;
@@ -164,8 +161,7 @@ class MediaModal {
 	}
 
 
-	initGallery() 
-	{
+	initGallery() {
 		this.filemanager = $('.filemanager'),
 		this.breadcrumbs = $('.breadcrumbs'),
 		this.fileList = this.filemanager.find('.data');
@@ -431,7 +427,48 @@ _
 
 
 		// Render the HTML for the file manager
+		
+		
 
+		addFile(f, selected) {
+				let _this= this;
+				var fileSize = _this.bytesToSize(f.size),
+						name = _this.escapeHTML(f.name),
+						fileType = name.split('.'),
+						icon = '<span class="icon file"></span>';
+
+					fileType = fileType[fileType.length-1];
+					
+					if (fileType == "jpg" || fileType == "jpeg" || fileType == "png" || fileType == "gif" || fileType == "svg" || fileType == "webp") {
+						//icon = '<div class="image" style="background-image: url(' + _this.mediaPath + f.path + ');"></div>';
+						icon = '<img class="image" loading="lazy" src="' + _this.mediaPath + f.path + '">';
+					} else {
+						icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
+					}
+					//icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
+
+				
+				var file = $('<li class="files">\
+						<label class="form-check">\
+						  <input type="' + ((_this.type == "single") ? "radio" : "checkbox") + '" class="form-check-input" value="' + f.path + '" name="file[]" ' + ((selected == "single") ? "checked" : "") + '><span class="form-check-label"></span>\
+						  <div href="#\" class="files">'+icon+'<div class="info"><div class="name">'+ name +'</div><span class="details">'+fileSize+'</span>\
+							<a href="javascript:void(0);" class="preview-link"><i class="la la-search-plus"></i></a>\
+							 <div class="preview">\
+								<img src="' + _this.mediaPath + f.path + '">\
+								<div>\
+									<span class="name">'+ name +'</span><span class="details">'+fileSize+'</span>\
+								</div>\
+							</div>\
+						  </div>\
+						</label>\
+					</li>');
+				
+				let fileelement = file.appendTo(_this.fileList);
+				if (selected) {
+					$("input[type='radio'], input[type='checkbox']", fileelement).prop("checked", true);
+				}
+		}
+		
 		render(data) {
 
 
@@ -504,36 +541,8 @@ _
 
 				scannedFiles.forEach(function(f) {
 
-					var fileSize = _this.bytesToSize(f.size),
-						name = _this.escapeHTML(f.name),
-						fileType = name.split('.'),
-						icon = '<span class="icon file"></span>';
-
-					fileType = fileType[fileType.length-1];
+					_this.addFile(f);
 					
-					if (fileType == "jpg" || fileType == "png") {
-						//icon = '<div class="image" style="background-image: url(' + _this.mediaPath + f.path + ');"></div>';
-						icon = '<img class="image" loading="lazy" src="' + _this.mediaPath + f.path + '">';
-					} else {
-						icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
-					}
-					//icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
-
-					var file = $('<li class="files">\
-									<label class="form-check">\
-									  <input type="' + ((_this.type == "single") ? "radio" : "checkbox") + '" class="form-check-input" value="' + f.path + '" name="file[]"><span class="form-check-label"></span>\
-									  <div href="#\" class="files">'+icon+'<div class="info"><div class="name">'+ name +'</div><span class="details">'+fileSize+'</span>\
-										<a href="javascript:void(0);" class="preview-link"><i class="la la-search-plus"></i></a>\
-										 <div class="preview">\
-											<img src="' + _this.mediaPath + f.path + '">\
-											<div>\
-												<span class="name">'+ name +'</span><span class="details">'+fileSize+'</span>\
-											</div>\
-										</div>\
-									  </div>\
-									</label>\
-								</li>');
-					file.appendTo(_this.fileList);
 				});
 
 			}

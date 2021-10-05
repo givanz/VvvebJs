@@ -2152,7 +2152,7 @@ Vvveb.StyleManager = {
 
 		if (el.style && el.style.length > 0 && el.style[styleProp])//check inline
 			var value = el.style[styleProp];
-		else if (this.styles[media][selector][styleProp]) {	//check defined css
+		else if (this.styles[media] !== undefined &&  this.styles[media][selector] !== undefined && this.styles[media][selector][styleProp] !== undefined) {	//check defined css
 			var value = this.styles[media][selector][styleProp];
 		}
 		else if (window.getComputedStyle) {

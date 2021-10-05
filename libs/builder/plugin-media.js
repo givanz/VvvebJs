@@ -1,4 +1,4 @@
-var ImageInput = $.extend({}, Input, {
+var ImageInput = $.extend({}, ImageInput, {
 
     events: [
         ["change", "onChange", "input[type=text]"],
@@ -7,7 +7,7 @@ var ImageInput = $.extend({}, Input, {
 	 ],
 
 	setValue: function(value) {
-		if (value.indexOf("data:image") == -1)
+		if (value.indexOf("data:image") == -1 && value != "none")
 		{
 				$('input[type="text"]', this.element).val(value);
 				$('img', this.element).attr("src",value);
@@ -40,13 +40,64 @@ var ImageInput = $.extend({}, Input, {
 				}
 		};
 	},
+	
+	onUpload: function(event, node) {
+		
+		if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+            //reader.readAsBinaryString(this.files[0]);
+            file = this.files[0];
+        }
+
+		function imageIsLoaded(e) {
+				
+				image = e.target.result;
+				
+				var formData = new FormData();
+				formData.append("file", file);
+				formData.append("mediaPath", Vvveb.MediaModal.mediaPath + Vvveb.MediaModal.currentPath);
+				formData.append("onlyFilename", true);
     
-    onClick: function(e) {
-        if (!Vvveb.MediaModal) {
-			Vvveb.MediaModal = new MediaModal(true);
+				$.ajax({
+					type: "POST",
+					url: 'upload.php',//set your server side upload script url
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function (data) {
+						Vvveb.MediaModal.addFile(
+						{
+							name:data,
+							type:"file",
+							path: Vvveb.MediaModal.currentPath + "/" + data,
+							size:1
+						}, 
+						true);
+					},
+					error: function (data) {
+						alert(data.responseText);
+					}
+				});		
 		}
-		Vvveb.MediaModal.mediaPath = window.mediaPath;
-		Vvveb.MediaModal.open(this);        
+	},
+		
+    
+    onClick: function(e, element) {
+		let modal = Vvveb.MediaModal;
+		if (!modal) {
+			modal = new MediaModal(true);
+			modal.mediaPath = window.mediaPath;
+		}
+		
+		modal.open(this);        
+		
+		if (!Vvveb.MediaModal) {
+			$(".filemanager input[type=file]").on("change", ImageInput.onUpload);
+		}
+		
+		Vvveb.MediaModal = modal;
     },
     
 	init: function(data) {

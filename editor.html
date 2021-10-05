@@ -1482,7 +1482,7 @@ $(document).ready(function()
 	Vvveb.Gui.init();
 	Vvveb.FileManager.init();
 	Vvveb.SectionList.init();
-	Vvveb.FileManager.addPages(
+	var pages = 
 	[
 		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
 		{name:"landing-page", title:"Landing page",  url: "demo/landing/index-2.html", file: "demo/landing/index-2.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
@@ -1492,7 +1492,7 @@ $(document).ready(function()
 		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", file: "demo/offcanvas/index.html", folder:"content", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
 		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", file: "demo/pricing/index.html", folder:"ecommerce", assets: ['demo/pricing/pricing.css']},
 		{name:"product", title:"Product",  url: "demo/product/index.html", file: "demo/product/index.html", folder:"ecommerce", assets: ['demo/product/product.css']},
-		//uncomment php code below and rename file to .php extension to load saved html files in the editor
+		//uncomment php code below and rename file to .php extension to load saved html files in the editor or use editor.php
 		/*
 		<?php 
 		   $htmlFiles = glob('{my-pages/*.html,demo/*\/*.html, demo/*.html}',  GLOB_BRACE);
@@ -1510,10 +1510,12 @@ $(document).ready(function()
 		{name:"<?php echo ucfirst($filename);?>", file:"<?php echo ucfirst($filename);?>", title:"<?php echo ucfirst($filename);?>",  url: "<?php echo $url;?>", folder:"<?php echo $folder?>"},
 		<?php } ?>
 		*/
-	]);
+	];
 	
-	 Vvveb.FileManager.loadPage("narrow-jumbotron");
-	 Vvveb.Breadcrumb.init();
+	Vvveb.FileManager.addPages(pages);
+	
+	Vvveb.FileManager.loadPage("narrow-jumbotron");
+	Vvveb.Breadcrumb.init();
 });
 </script>
 </body>
