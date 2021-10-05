@@ -55,9 +55,17 @@ class MediaModal {
 						<div class="top-panel">
 
 							<div class="upload collapse">
+
+								<button id="upload-close" type="button" class="btn btn-sm btn-light" aria-label="Close" data-bs-toggle="collapse" data-bs-target=".upload" aria-expanded="true">
+								   <span aria-hidden="true"><i class="la la-times la-lg"></i></span>
+								</button>
+								
+								
 							   <h3>Drop or choose files to upload</h3>
 							   
 							   <input type="file" multiple class=""> 
+								
+								<div class="status"></div>
 							</div>
 
 
@@ -105,6 +113,17 @@ class MediaModal {
 		$("#MediaModal .save-btn").on("click", () => this.save());
 	}
 	
+	showUploadLoading() {
+		$("#MediaModal .upload .status").html(`
+		<div class="spinner-border" style="width: 5rem; height: 5rem;margin: 5rem auto; display:block" role="status">
+		  <span class="visually-hidden">Loading...</span>
+		</div>`);
+	}
+
+	hideUploadLoading() {
+		$("#MediaModal .upload .status").html('');
+	}
+	
 	save() {
 		
 		let file = $("#MediaModal .files input:checked").eq(0).val();
@@ -135,6 +154,8 @@ class MediaModal {
 			this.initGallery();
 			this.isInit = true;
 
+			$(".filemanager input[type=file]").on("change", this.onUpload);
+			
 			$(window).trigger( "mediaModal:init", { type:this.type, targetInput:this.targetInput, targetThumb:this.targetThumb, callback:this.callback} );
 		}
 	}
@@ -426,10 +447,52 @@ _
 		}
 
 
-		// Render the HTML for the file manager
-		
-		
+		onUpload(event) {
+			let file;
+			if (this.files && this.files[0]) {
+				Vvveb.MediaModal.showUploadLoading();
+				var reader = new FileReader();
+				reader.onload = imageIsLoaded;
+				reader.readAsDataURL(this.files[0]);
+				//reader.readAsBinaryString(this.files[0]);
+				file = this.files[0];
+			}
 
+			function imageIsLoaded(e) {
+					
+					let image = e.target.result;
+					
+					var formData = new FormData();
+					formData.append("file", file);
+					formData.append("mediaPath", Vvveb.MediaModal.mediaPath + Vvveb.MediaModal.currentPath);
+					formData.append("onlyFilename", true);
+		
+					$.ajax({
+						type: "POST",
+						url: 'upload.php',//set your server side upload script url
+						data: formData,
+						processData: false,
+						contentType: false,
+						success: function (data) {
+							
+							Vvveb.MediaModal.addFile({
+								name:data,
+								type:"file",
+								path: Vvveb.MediaModal.currentPath + "/" + data,
+								size:1
+							},true);
+							
+							Vvveb.MediaModal.hideUploadLoading();
+							
+						},
+						error: function (data) {
+							alert(data.responseText);
+							Vvveb.MediaModal.hideUploadLoading();
+						}
+					});		
+			}
+		}	
+	
 		addFile(f, selected) {
 				let _this= this;
 				var fileSize = _this.bytesToSize(f.size),
@@ -468,9 +531,9 @@ _
 					$("input[type='radio'], input[type='checkbox']", fileelement).prop("checked", true);
 				}
 		}
+
 		
 		render(data) {
-
 
 			var scannedFolders = [],
 				scannedFiles = [];

@@ -75,6 +75,12 @@
     padding:1rem 4rem;
 }
 
+.filemanager .upload button#upload-close {
+	position:absolute;
+	right:1rem;
+	z-index:1000
+}
+
 .filemanager .upload input[type=file] {
     position:absolute;
     z-index:100;
