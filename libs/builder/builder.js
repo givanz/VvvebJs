@@ -1597,7 +1597,7 @@ Vvveb.Builder = {
 	removeHelpers: function (html, keepHelperAttributes = false)
 	{
 		//tags like stylesheets or scripts 
-		html = html.replace(/<.*?data-vvveb-helpers.*?>/gi, "");
+		html = html.replace(/<[^>]+?data-vvveb-helpers.+?>/gi, "");
 		//attributes
 		if (!keepHelperAttributes)
 		{

@@ -45,7 +45,7 @@ class MediaModal {
 								   data-bs-target=".upload" 
 								   aria-expanded="false" 
 								   >
-								   <i class="la la-image la-lg"></i>
+								   <i class="la la-cloud-upload-alt la-lg"></i>
 									Upload new file
 								</button>
 							</div>

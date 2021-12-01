@@ -66,7 +66,7 @@ Vvveb.Undo = {
 			this.undoIndex++;
 		*/
 		Vvveb.Builder.frameBody.trigger("vvveb.undo.add");
-		this.mutations.splice(++this.undoIndex, 0, mutation);
+		this.mutations.splice(++this.undoIndex, this.mutations.length - this.undoIndex, mutation);
 	 },
 
 	restore : function(mutation, undo) {	
