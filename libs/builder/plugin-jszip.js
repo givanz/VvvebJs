@@ -1,78 +1,95 @@
 Vvveb.Gui.download =
 function () {
-
-    function isLocalUrl(url)
-    {
-        return url.indexOf("//") == -1;
+    let assets = [];
+    
+    function addUrl(url, href, binary) {
+        assets.push({url, href, binary});
     }
 
-    function addUrl(url)
-    {
-        if (isLocalUrl(url)) assets.push(url);
-    }
-
-
-    var html = Vvveb.Builder.frameHtml;
-    var assets = [];
+    let html = Vvveb.Builder.frameHtml;
 
     //stylesheets
     $("link[href$='.css']", html).each(function(i, e) {
-        addUrl(e.getAttribute("href"));
+        addUrl(e.href, e.getAttribute("href"), false);
     });
 
-    //javascript
+    //javascripts
     $("script[src$='.js']", html).each(function(i, e) {
-        addUrl(e.getAttribute("src"));
+        addUrl(e.src, e.getAttribute("src"), false);
     });
     
     //images
     $("img[src]", html).each(function(i, e) {
-        addUrl(e.getAttribute("src"));
+        addUrl(e.src, e.getAttribute("src"), true);
     });
 
-console.dir(assets);
-return;
 
-    var zip = new JSZip();
-    zip.file("Hello.txt", "Hello World\n");
-    var img = zip.folder("images");
-    img.file("smile.gif", imgData, {base64: true});
-    zip.generateAsync({type:"blob"})
-    .then(function(content) {
-        // see FileSaver.js
-        saveAs(content, "template.zip");
-    });
+    let zip = new JSZip();
+    let promises = [];
+    
+    for (i in assets) {
+        let asset = assets[i];
+        let url = asset.url;
+        let href = asset.href;
+        let binary = asset.binary;
+        
+        let filename = href.substring(href.lastIndexOf('/')+1);
+        
+        promises.push(new Promise((resolve, reject) => {
+
+          let request = new XMLHttpRequest();
+          request.open('GET', url);
+          if (binary) {
+            request.responseType = 'blob';
+          } else {
+            request.responseType = 'text';
+          }
+
+          request.onload = function() {
+            if (request.status === 200) {
+              resolve({url, href, filename, binary, data:request.response});
+            } else {
+              reject(Error('Error code:' + request.statusText));
+            }
+          };
+
+          request.onerror = function() {
+              reject(Error('There was a network error.'));
+          };
+
+          // Send the request
+          request.send();          
+        /*  
+        $.ajax({
+          url: url,
+          type: 'GET',
+         
+          success: function (data) {
+            resolve({url, href, filename, binary, data});
+          },
+          error: function (error) {
+            reject(error)
+          },
+        });
+        */ 
+     }));
+    }
+    
+    Promise.all(promises).then((data) => {
+        let html = Vvveb.Builder.getHtml();
+        
+        for (i in data) {
+            let file = data[i];
+            html = html.replace(file.href, file.filename);
+            zip.file(file.filename, file.data, {base64: file.binary});
+        }
+        
+        zip.file("index.html", html);
+        zip.generateAsync({type:"blob"})
+        .then(function(content) {
+            saveAs(content, "template.zip");
+        });
+    }).catch((error) => {
+        console.log(error)
+  })
 };
-/*
-
-filename = /[^\/]+$/.exec(Vvveb.Builder.iframe.src)[0];
-uriContent = "data:application/octet-stream,"  + encodeURIComponent(Vvveb.Builder.getHtml());
-
-var link = document.createElement('a');
-if ('download' in link)
-{
-    link.download = filename;
-    link.href = uriContent;
-    link.target = "_blank";
-    
-    document.body.appendChild(link);
-    result = link.click();
-    document.body.removeChild(link);
-    link.remove();
-    
-} else
-{
-    location.href = uriContent;
-}
-
-
-var zip = new JSZip();
-zip.file("Hello.txt", "Hello World\n");
-var img = zip.folder("images");
-img.file("smile.gif", imgData, {base64: true});
-zip.generateAsync({type:"blob"})
-.then(function(content) {
-    // see FileSaver.js
-    saveAs(content, "example.zip");
-});
-*/
