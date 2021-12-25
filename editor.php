@@ -16,7 +16,7 @@ foreach ($htmlFiles as $file) {
    $url = $pathInfo['dirname'] . '/' . $pathInfo['basename'];
    $name = ucfirst($filename);
 
-  $files .= "{name:'$name', file:'$filename', title:'$name',  url: '$url', folder:'$folder'},";
+  $files = "{name:'$name', file:'$filename', title:'$name',  url: '$url', folder:'$folder'},";
 } 
 
 
