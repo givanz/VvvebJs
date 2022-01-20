@@ -11,16 +11,18 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/editor.css" rel="stylesheet">
-    <script src="../../js/bootstrap.min.js"></script>
 
     <!-- Custom styles for this template -->
     <link href="narrow-jumbotron.css" rel="stylesheet">
-    
+
+    <!-- Animate on scroll library -->
+    <script src="../../libs/aos/aos.js"></script>
+    <link href="../../libs/aos/aos.css" rel="stylesheet">
 </head>
 	
   <body>
 
-      <header class="header clearfix container" id="top-header">
+   <header class="header clearfix container" id="top-header" data-aos="zoom-in" data-aos-delay="100">
 	<div class="container">
         <nav>
           <ul class="nav nav-pills float-end">
@@ -41,17 +43,17 @@
 
       <section class="jumbotron container bg-light p-4" id="jumbotron">
 	<div class="container">
-		<h1>Jumbotron heading</h1>
-		<p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-		<img class="rounded mw-100 my-5" src="https://source.unsplash.com/9UVmlIb0wJU/500x500">
-		<p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+		<h1 data-aos="fade-up" data-aos-delay="100">Jumbotron heading</h1>
+		<p class="lead" data-aos="fade-up" data-aos-delay="200">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+		<img class="rounded mw-100 my-5" data-aos="fade-up" data-aos-delay="300" src="https://source.unsplash.com/9UVmlIb0wJU/500x500">
+		<p><a class="btn btn-lg btn-primary" href="#" role="button" data-aos="fade-up" data-aos-delay="100">Sign up today</a></p>
 	</div>
       </section>
 
       <section id="marketing">
 		  <div class="container">
 		  <div class="row marketing">
-			<div class="col-lg-6" data-vvveb-disabled-area>
+			<div class="col-lg-6" data-aos="fade-up" data-aos-delay="400" data-vvveb-disabled-area>
 			  <h4>Subheading</h4>
 			  <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 
@@ -62,7 +64,7 @@
 			  <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
 			</div>
 
-			<div class="col-lg-6" >
+			<div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
 			  <h4>Subheading</h4>
 			  <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
 
@@ -76,11 +78,14 @@
 		  </div>
       </section>
 
-      <footer class="footer" id="page-footer">
+      <footer class="footer" id="page-footer" data-aos="fade-up" data-aos-delay="600">
 		<div class="container">
 	        <p>© Company 2017</p>
         </div>
       </footer>
 
+	<script>
+		AOS.init();
+	</script>
 </body>
 </html>

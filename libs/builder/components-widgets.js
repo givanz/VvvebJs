@@ -23,7 +23,9 @@ Vvveb.Components.extend("_base", "widgets/googlemaps", {
     attributes: ["data-component-maps"],
     image: "icons/map.svg",
     dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/maps.png">',
-    html: '<div data-component-maps style="min-height:240px;min-width:240px;position:relative"><iframe frameborder="0" src="https://maps.google.com/maps?&z=1&t=q&output=embed" width="100" height="100" style="width:100%;height:100%;position:absolute;left:0px;pointer-events:none"></iframe></div>',
+    html: '<div data-component-maps style="min-height:240px;min-width:240px;position:relative"><iframe frameborder="0" src="https://maps.google.com/maps?&z=1&t=q&output=embed" width="100" height="100" style="width:100%;height:100%;left:0px;pointer-events:none"></iframe></div>',
+    resizable:true,//show select box resize handlers
+    resizeMode:"css",
     
     
     //url parameters
@@ -383,8 +385,10 @@ Vvveb.Components.extend("_base", "widgets/facebookpage", {
 			<script>(function(d, s, id) {\
 			  var appId = document.getElementsByClassName("fb-page")[0].dataset.appid;\
 			  var js, fjs = d.getElementsByTagName(s)[0];\
+			  js.nonce = "5YzD1JaS";\
+			  js.crossorigin = "anonymous";\
 			  js = d.createElement(s); js.id = id;\
-			  js.src = \'https://connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v3.0&appId=" + appId + "&autoLogAppEvents=1\';\
+			  js.src = \'https://connect.facebook.net/en_EN/sdk.js#xfbml=1&version=v3.0&appId=\' + appId + \'&autoLogAppEvents=1\';\
 			  fjs.parentNode.insertBefore(js, fjs);\
 			}(document, \'script\', \'facebook-jssdk\'));</script></div>',
 
@@ -428,6 +432,13 @@ Vvveb.Components.extend("_base", "widgets/facebookpage", {
 	   
 	   console.log(node.parent());
 	   console.log(node.parent().html());
+
+
+	   $("[data-fbcssmodules]", Vvveb.Builder.frameHead).remove();
+	   $("[data-fbcssmodules]", Vvveb.Builder.frameBody).remove();
+	   $("script[src^='https://connect.facebook.net']", Vvveb.Builder.frameHead).remove();
+
+
 	   node.parent().html(newElement.html());
 
 	   console.log(newElement);

@@ -70,6 +70,7 @@ function changeNodeName(node, newNodeName)
 
 var base_sort = 100;//start sorting for base component from 100 to allow extended properties to be first
 var style_section = 'style';
+var advanced_section = 'advanced';
 
 Vvveb.Components.add("_base", {
     name: "Element",

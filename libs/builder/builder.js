@@ -21,6 +21,10 @@ https://github.com/givanz/VvvebJs
 // John Resig - https://johnresig.com/ - MIT Licensed
 (function(){
   var cache = {};
+  var startTag = "{%";
+  var endTag = "%}";
+  var re1 = new RegExp(`((^|${endTag})[^\t]*)'`,"g");
+  var re2 = new RegExp(`\t=(.*?)${endTag}`,"g");
   
   this.tmpl = function tmpl(str, data){
     // Figure out if we're getting a template, or if we need to
@@ -40,11 +44,11 @@ https://github.com/givanz/VvvebJs
         // Convert the template into pure JavaScript
         str
           .replace(/[\r\t\n]/g, " ")
-          .split("{%").join("\t")
-          .replace(/((^|%})[^\t]*)'/g, "$1\r")
-          .replace(/\t=(.*?)%}/g, "',$1,'")
+          .split(startTag).join("\t")
+          .replace(re1, "$1\r")
+          .replace(re2, "',$1,'")
           .split("\t").join("');")
-          .split("%}").join("p.push('")
+          .split(endTag).join("p.push('")
           .split("\r").join("\\'")
       + "');}return p.join('');");
     // Provide some basic currying to the user
@@ -288,7 +292,9 @@ Vvveb.Components = {
 		{
 			var sectionName = this.dataset.section;
 			componentsPanelSections[sectionName] = $(this);
-			
+			$('.section[data-section!="default"]', this).remove();
+			$('label[for!="header_default"]', this).remove();
+			$('input[id!="header_default"]', this).remove();
 		});
 		
 		var section = componentsPanelSections[defaultSection].find('.section[data-section="default"]');
@@ -426,6 +432,9 @@ Vvveb.Components = {
 					});
 				} 
 
+				if (!value && property.defaultValue) {
+					value = property.defaultValue;
+				}
 				property.inputtype.setValue(value);
 			}
 			
@@ -437,7 +446,6 @@ Vvveb.Components = {
 				propertySection = property.section;
 			}
 			
-
 			if (property.inputtype == SectionInput)
 			{
 				section = componentsPanelSections[propertySection].find('.section[data-section="' + property.key + '"]');
@@ -1150,7 +1158,11 @@ Vvveb.Builder = {
 						break;
 					}
 				
+				    if (self.resizeMode == "css") {
+				        self.selectedEl.css({width, height});
+				    } else {
 					self.selectedEl.attr({width, height});
+				    }
 					$("#select-box").css(
 						{"top": offset.top - self.frameDoc.scrollTop() , 
 						 "left": offset.left - self.frameDoc.scrollLeft() , 
@@ -1320,6 +1332,7 @@ Vvveb.Builder = {
 
 					if (Vvveb.component.resizable) {
 						$("#select-box").addClass("resizable");
+                      				  self.resizeMode = Vvveb.component.resizeMode;
 					} else {
 						$("#select-box").removeClass("resizable");
 					}
@@ -1630,7 +1643,9 @@ Vvveb.Builder = {
          
          html = this.removeHelpers(html, keepHelperAttributes);
          
-         var filter = $(window).triggerHandler("vvveb.getHtml.after", html);
+	$(window).triggerHandler("vvveb.getHtml.after", doc);
+         
+         var filter = $(window).triggerHandler("vvveb.getHtml.filter", html);
          if (filter) return filter;
          
          return html;

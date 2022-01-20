@@ -244,7 +244,7 @@
 
 											  
 														<div class="drag-elements-sidepane sidepane">
-															  <div class="block-preview"><img src=""></div>
+															  <div class="block-preview"><img src="" style="display:none"></div>
 															  <div>
 																<ul class="sections-list clearfix" data-type="leftpanel">
 																</ul>
@@ -350,10 +350,6 @@
 														</div>
 														
 														 <div class="tab-pane fade show" id="advanced-left-panel-tab" data-section="advanced"  role="tabpanel" aria-labelledby="advanced-tab">
-															<div class="alert alert-dismissible fade show alert-info m-3" role="alert" style="">		  
-																<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>		  
-																<strong>No advanced properties!</strong><br> This component does not have advanced properties.		
-															</div>
 														</div>
 													</div>
 											</div>
@@ -580,7 +576,7 @@
 										
 										<div class="section-box-actions">
 
-											<div id="close-section-btn" class="btn btn-light btn-sm bg-white btn-sm float-end"><i class="la la-times"></i></div>
+											<div id="close-section-btn" class="btn btn-light btn-sm bg-white btn-sm float-end"><i class="la la-times la-lg"></i></div>
 										
 											<div class="small mt-1 me-3 float-end">
 											
@@ -695,10 +691,6 @@
 								</div>
 								
 								 <div class="tab-pane fade show" id="advanced-tab" data-section="advanced"  role="tabpanel" aria-labelledby="advanced-tab">
-										<div class="alert alert-dismissible fade show alert-info m-3" role="alert" style="">		  
-											<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>		  
-											<strong>No advanced properties!</strong><br> This component does not have advanced properties.		
-										</div>
 								</div>
 								
 								
@@ -837,9 +829,15 @@
 	<div>
 
 		<select class="form-select">
-			{% for ( var i = 0; i < options.length; i++ ) { %}
+			{% var optgroup = false; for ( var i = 0; i < options.length; i++ ) { %}
+				{% if (options[i].optgroup) {  %}
+					{% if (optgroup) {  %}
+						</optgroup>
+					{% } %}
+					<optgroup label="{%=options[i].optgroup%}">
+				{% optgroup = true; } else { %}
 			<option value="{%=options[i].value%}">{%=options[i].text%}</option>
-			{% } %}
+			{% } } %}
 		</select>
 	
 	</div>
@@ -851,7 +849,7 @@
 	<div class="input-list-select">
 		
 		<div class="elements">
-			<div class="row row-cols-4">
+			<div class="row">
 				{% for ( var i = 0; i < options.length; i++ ) { %}
 				<div class="col">
 					<div class="element">
@@ -1241,11 +1239,11 @@
 		<div class="tree">
 			<ol >
 				<li data-component="Products" class="file">							
-					<label for="idNaN" style="background-image:url(http://demo.givan.ro/js/vvvebjs/icons/products.svg)"><span>Products</span></label>							
+					<label for="idNaN" style="background-image:url(/js/vvvebjs/icons/products.svg)"><span>Products</span></label>							
 					<input type="checkbox" id="idNaN">
 				</li>
 				<li data-component="Posts" class="file">							
-					<label for="idNaN" style="background-image:url(http://demo.givan.ro/js/vvvebjs/icons/posts.svg)"><span>Posts</span></label>							
+					<label for="idNaN" style="background-image:url(/js/vvvebjs/icons/posts.svg)"><span>Posts</span></label>							
 					<input type="checkbox" id="idNaN">
 				</li>
 			</ol>
@@ -1418,6 +1416,7 @@ window.mediaPath = 'media';
 <!-- components-->
 <!-- script src="libs/builder/components-server.js"></script -->	
 <script src="libs/builder/components-common.js"></script>	
+<script src="libs/builder/plugin-aos.js"></script>
 <!-- script src="libs/builder/components-elements.js"></script -->	
 <script src="libs/builder/components-bootstrap5.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	

@@ -30,22 +30,22 @@ Vvveb.Components.extend("_base", "html/heading", {
         data:{
 			options: [{
                 value: "1",
-                text: "1"
+                text: "Heading 1"
             }, {
                 value: "2",
-                text: "2"
+                text: "Heading 2"
             }, {
                 value: "3",
-                text: "3"
+                text: "Heading 3"
             }, {
                 value: "4",
-                text: "4"
+                text: "Heading 4"
             }, {
                 value: "5",
-                text: "5"
+                text: "Heading 5"
             }, {
                 value: "6",
-                text: "6"
+                text: "Heading 6"
             }]
        },
     }]
@@ -358,6 +358,7 @@ Vvveb.Components.extend("_base", "html/video", {
     html: '<video width="320" height="240" playsinline loop autoplay><source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4"><video>',
     dragHtml: '<img  width="320" height="240" src="' + Vvveb.baseUrl + 'icons/video.svg">',
 	image: "icons/video.svg",
+    resizable:true,//show select box resize handlers
     properties: [{
         name: "Src",
         child: "source",
