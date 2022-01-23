@@ -378,7 +378,7 @@ Vvveb.Components = {
 						element = component.onChange(element, property, value, input);
 					}
 					
-					if (!property.child && !property.parent) Vvveb.Builder.selectNode(element);
+					if (!property.child || !property.parent) Vvveb.Builder.selectNode(element);
 					
 					return element;
 			});				
@@ -626,6 +626,7 @@ Vvveb.Builder = {
 	highlightEnabled : false,
 	selectPadding: 0,
 	leftPanelWidth: 275,
+	ignoreClasses: ["clearfix"],
 	
 	init: function(url, callback) {
 
@@ -2033,7 +2034,10 @@ Vvveb.StyleManager = {
 
 			//if style exist then load all css styles for editor
 			for (let j = 0; j < style.cssRules.length; j++) {
-				media = (typeof style.cssRules[j].media === "undefined") ? "desktop" : (style.cssRules[j].media[0] === "screen and (max-width: 1220px)") ? "tablet" : (style.cssRules[j].media[0] === "screen and (max-width: 320px)") ? "mobile" : "desktop";
+				media = (typeof style.cssRules[j].media === "undefined") ? 
+					"desktop" : (style.cssRules[j].media[0] === "screen and (max-width: 1220px)") 
+					? "tablet" : (style.cssRules[j].media[0] === "screen and (max-width: 320px)") 
+					? "mobile" : "desktop";
 
 				selector = (media === "desktop") ? style.cssRules[j].selectorText : style.cssRules[j].cssRules[0].selectorText;
 				styles = (media === "desktop") ? style.cssRules[j].style : style.cssRules[j].cssRules[0].style;
@@ -2063,18 +2067,21 @@ Vvveb.StyleManager = {
 		var selector = [];
 
 		while (currentElement.parentElement) {
-			elementSelector = "";
+			let elementSelector = "";
+			let classSelector = Array.from(currentElement.classList).map(function (className) {
+					if (Vvveb.Builder.ignoreClasses.indexOf(className) == -1) {
+						return "." + className;
+					}
+				}).join("");
 
 			//stop at a unique element (with id)
 			if (currentElement.id) {
 				elementSelector = "#" + currentElement.id;
 				selector.push(elementSelector);
 				break;
-			} else if (currentElement.classList.length > 0) {
+			} else if (elementSelector) {
 				//class selector
-				elementSelector = Array.from(currentElement.classList).map(function (className) {
-					return "." + className;
-				}).join("");
+				elementSelector = elementSelector;
 
 			} else {
 				//element (tag) selector

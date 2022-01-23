@@ -149,6 +149,86 @@ var IconSelectInput = $.extend({}, Input, {
   }
 );
 
+var HtmlListSelectInput = $.extend({}, Input, {
+	
+	data:{},
+	cache:{},
+	
+    events: [
+        //["click", "onChange", "li"],
+        ["change", "onListChange", "select"],
+        ["keyup", "searchElement", "input.search"],
+        ["click", "clearSearch", "button.clear-backspace"],
+	 ],
+	
+	clearSearch : function(event) {
+		let element = event.data.element;
+		$("input.search", element).val("").keyup();
+	},
+
+
+	searchElement : function(event) {
+		let element = event.data.element;
+		searchText = this.value;
+		
+		delay(() => {
+			
+			$("li", element).hide().each(function () {
+				$this = $(this);
+				if (this.title.indexOf(searchText) > -1) $this.show();
+			});
+			
+		}, 500);
+	},	
+
+	onElementClick: function(event) {
+		let data = event.data.input.data;
+		let svg = $(data.insertElement, this);
+		let value = svg.get(0).outerHTML;
+		event.data.element.trigger('propertyChange', [value, this]);
+	},
+	
+	onListChange: function(event) {
+		let input = event.data.input;
+		let element = event.data.element;
+		let url = input.data.url.replace('{value}', this.value);
+		
+		$(".elements", element).html(`<div class="p-4"><div class="spinner-border spinner-border-sm" role="status">
+		  <span class="visually-hidden">Loading...</span>
+		</div> Loading...</div>`);
+		//cache ajax requests
+		if (input.cache[url] != undefined) {
+			$(".elements", element).html(input.cache[url]);
+		} else {
+			//$(".elements", element).load(url);
+			$.ajax({
+				url: url,
+				cache: true,
+				dataType: "html",
+				success: function(data) {
+					input.cache[url] = data;
+					$(".elements", element).html(data);
+				}
+			});
+		}
+	},
+	
+	setValue: function(value) {
+		$('select', this.element).val(value);
+	},
+	
+	init: function(data) {
+		this.data = data;
+		this.events.push(["click", "onElementClick", data.clickElement]);
+		let template = this.render("html-list-select", data);
+		//load first set
+		$("select", template).change();
+		return template;
+	},
+	
+  }
+);
+
 
 var LinkInput = $.extend({}, TextInput, {
 

@@ -19,6 +19,8 @@ $(window).on("vvveb.getHtml.after", function(event, doc) {
 	$("[data-aos]", doc).addClass("aos-init aos-animate");
 });
 
+//ignore aos classes for styles
+Vvveb.Builder.ignoreClasses = Vvveb.Builder.ignoreClasses.concat(["aos-init", "aos-animate"]);
 
 var aosAnimations = [
 		{
@@ -120,7 +122,7 @@ var aosAnimations = [
 			text: "Zoom out right"
 		}			
 ];
-
+/*
 var aosEasing = [
 		{
 			value: "",
@@ -181,7 +183,7 @@ var aosEasing = [
 			text: "ease-in-out-quart"
 		}
 ];	
-
+*/
 var ComponentBaseAnimateScroll = {
 	 properties: [{
 		key: "animate_header",
@@ -210,7 +212,7 @@ var ComponentBaseAnimateScroll = {
 			}
 			return node;
 		}
-	}, {
+/*	}, {
         name: "Animation easing",
         key: "easing",
 		htmlAttr: "data-aos-easing",
@@ -219,7 +221,7 @@ var ComponentBaseAnimateScroll = {
 		inputtype: SelectInput,
 		data: {
 			options: aosEasing,
-		}
+		}*/
 	}, {
         name: "Duration",
         key: "duration",

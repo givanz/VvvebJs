@@ -517,59 +517,6 @@ body
 		    .nav {
 			background:#f9f9f9;
 		    }
-			
-			.search 
-			{	
-				position:relative;
-				.form-control
-				{
-					border-color:#fff;
-					border-bottom-color: #eee;
-					border-radius:0px;
-					box-shadow:none;
-				}
-				
-				.form-control:focus
-				{
-					border-color:#80bdff;
-				}
-				
-
-				.form-control::placeholder
-				{
-					/*font-size: $font-size-sm;*/
-					font-size: .75rem;
-				}
-
-				
-				.clear-backspace
-				{
-					border:none;
-					background:none;
-
-					position: absolute;
-					top: 7px;
-					right: 5px;
-					
-					i {
-						font-size:13px;
-					}
-
-					opacity:0.8;
-					
-					&:hover
-					{
-						opacity:1;
-						background:#eee;
-					}
-				}
-				
-				input:focus + #clear-backspace,
-				input:hover + #clear-backspace
-				{
-					opacity:1;
-				}					
-			}
 		}
 		
 		
@@ -612,6 +559,60 @@ body
 		&#add-section-box .nav-item:first-child .nav-link
 		{
 			border-left:none;
+		}
+	}
+	
+	.search{	
+		
+		position:relative;
+		
+		.form-control
+		{
+			border-color:#fff;
+			border-bottom-color: #eee;
+			border-radius:0px;
+			box-shadow:none;
+		}
+		
+		.form-control:focus
+		{
+			border-color:#80bdff;
+		}
+		
+
+		.form-control::placeholder
+		{
+			/*font-size: $font-size-sm;*/
+			font-size: .75rem;
+		}
+
+		
+		.clear-backspace
+		{
+			border:none;
+			background:none;
+
+			position: absolute;
+			top: 7px;
+			right: 5px;
+			
+			i {
+				font-size:13px;
+			}
+
+			opacity:0.8;
+			
+			&:hover
+			{
+				opacity:1;
+				background:#eee;
+			}
+		}
+		
+		input:focus + #clear-backspace,
+		input:hover + #clear-backspace
+		{
+			opacity:1;
 		}
 	}
 	
@@ -795,13 +796,14 @@ body
 				//width:100%;
 				.input-range {
 					position:relative;
+					padding-top:0.4rem;
 					
 					input[type="number"] {
 						position: absolute;
 						right: 0;
-						top: -1.8rem;
+						top: -0.7rem;
 						width: 5em;
-						padding: 0.3rem 0.5rem;
+						padding: 0.1rem 0.2rem;
 						text-align: center;
 						line-height: 12px;					
 					}
@@ -1189,7 +1191,8 @@ body
 
 		&.outside
 		{
-			bottom:-25px;
+			//bottom:-25px;
+			display:none !important;
 		}
 
 		
@@ -2182,5 +2185,20 @@ input[type="color"] {
 
     to {
         transform: translateY(0) scaleY(1) scaleX(1);
+    }
+}
+
+/* input-html-list-select */
+.input-html-list-select {
+	.elements {
+		margin-top:5px;
+		max-height:300px;
+		overflow-y:auto;
+		overflow-x:hidden;
+		border:1px solid #eee;
+		
+		li {
+			cursor:pointer;
+		}
     }
 }

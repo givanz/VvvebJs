@@ -864,6 +864,43 @@
 	
 </script>
 
+<script id="vvveb-input-html-list-select" type="text/html">
+
+	<div class="input-html-list-select">
+		
+		<div class="current-element">
+		
+		</div>
+		
+		<div class="popup">
+			<select class="form-select">
+				{% var optgroup = false; for ( var i = 0; i < options.length; i++ ) { %}
+					{% if (options[i].optgroup) {  %}
+						{% if (optgroup) {  %}
+							</optgroup>
+						{% } %}
+						<optgroup label="{%=options[i].optgroup%}">
+					{% optgroup = true; } else { %}
+					<option value="{%=options[i].value%}">{%=options[i].text%}</option>
+				{% } } %}
+			</select>
+			
+		      <div class="search">
+				  <input class="form-control search" placeholder="Search elements" type="text">
+				  <button class="clear-backspace">
+					  <i class="la la-times"></i>
+				  </button>
+			</div>
+			
+			<div class="elements">
+					{%=elements%}
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</script>
+
 <script id="vvveb-input-dateinput" type="text/html">
 	
 	<div>
@@ -1417,7 +1454,7 @@ window.mediaPath = 'media';
 <!-- script src="libs/builder/components-server.js"></script -->	
 <script src="libs/builder/components-common.js"></script>	
 <script src="libs/builder/plugin-aos.js"></script>
-<!-- script src="libs/builder/components-elements.js"></script -->	
+<script src="libs/builder/components-elements.js"></script>	
 <script src="libs/builder/components-bootstrap5.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
 <script src="libs/builder/components-html.js"></script>	

@@ -111,6 +111,7 @@ Vvveb.Components.extend("_base", "_base", {
 		section: style_section,
         data: {header:"Display"},
      }, {
+		//linked styles notice message
 	key: "linked_styles_check",
         sort: base_sort++,
         section: style_section,
@@ -995,6 +996,225 @@ Vvveb.Components.extend("_base", "_base", {
 		}
     }]
 });    
+
+//Background image
+Vvveb.Components.extend("_base", "_base", {
+	 properties: [{
+		key: "background_image_header",
+		inputtype: SectionInput,
+		name:false,
+		sort: base_sort++,
+		section: style_section,
+		data: {header:"Background Image", expanded:false},
+	 },{
+        name: "Image",
+        key: "Image",
+        sort: base_sort++,
+		section: style_section,
+		//htmlAttr: "style",
+        inputtype: ImageInput,
+        
+        init: function(node) {
+			var image = $(node).css("background-image").replace(/^url\(['"]?(.+)['"]?\)/, '$1');
+			return image;
+        },
+
+		onChange: function(node, value) {
+			
+			$(node).css('background-image', 'url(' + value + ')');
+			
+			return node;
+		}        
+
+   	}, {
+        name: "Repeat",
+        key: "background-repeat",
+        sort: base_sort++,
+		section: style_section,
+		htmlAttr: "style",
+        inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "Default"
+			}, {	
+				value: "repeat-x",
+				text: "repeat-x"
+			}, {
+				value: "repeat-y",
+				text: "repeat-y"
+			}, {
+				value: "no-repeat",
+				text: "no-repeat"
+			}],
+		}
+   	}, {
+        name: "Size",
+        key: "background-size",
+        sort: base_sort++,
+		section: style_section,
+		htmlAttr: "style",
+        inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "Default"
+			}, {	
+				value: "contain",
+				text: "contain"
+			}, {
+				value: "cover",
+				text: "cover"
+			}],
+		}
+   	}, {
+        name: "Position x",
+        key: "background-position-x",
+        sort: base_sort++,
+		section: style_section,
+		htmlAttr: "style",
+        col:6,
+		inline:true,
+		inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "Default"
+			}, {	
+				value: "center",
+				text: "center"
+			}, {	
+				value: "right",
+				text: "right"
+			}, {
+				value: "left",
+				text: "left"
+			}],
+		}
+   	}, {
+        name: "Position y",
+        key: "background-position-y",
+        sort: base_sort++,
+		section: style_section,
+		htmlAttr: "style",
+        col:6,
+		inline:true,
+		inputtype: SelectInput,
+        data: {
+			options: [{
+				value: "",
+				text: "Default"
+			}, {	
+				value: "center",
+				text: "center"
+			}, {	
+				value: "top",
+				text: "top"
+			}, {
+				value: "bottom",
+				text: "bottom"
+			}],
+		}
+    }]
+});    
+
+//Device visibility
+var ComponentDeviceVisibility = {
+	 properties: [{
+		key: "visibility_header",
+		inputtype: SectionInput,
+		name:false,
+		sort: base_sort++,
+		section: advanced_section,
+		data: {header:"Hide based on device screen width"},
+	}, {
+        name: "Extra small devices",
+        key: "hidexs",
+        col:6,
+		inline:true,
+		sort: base_sort++,
+		section: advanced_section,
+        htmlAttr: "class",
+        validValues: ["d-xs-none"],
+        inputtype: ToggleInput,
+        data: {
+            on: "d-xs-none",
+            off: ""
+        }
+	}, {
+        name: "Small devices",
+        key: "hidesm",
+        col:6,
+		inline:true,
+		sort: base_sort++,
+		section: advanced_section,
+        htmlAttr: "class",
+        validValues: ["d-sm-none"],
+        inputtype: ToggleInput,
+        data: {
+            on: "d-sm-none",
+            off: ""
+        }
+	}, {
+        name: "Medium devices",
+        key: "hidemd",
+        col:6,
+		inline:true,
+		sort: base_sort++,
+		section: advanced_section,
+        htmlAttr: "class",
+        validValues: ["d-md-none"],
+        inputtype: ToggleInput,
+        data: {
+            on: "d-md-none",
+            off: ""
+        }
+	}, {
+        name: "Large devices",
+        key: "hidelg",
+        col:6,
+		inline:true,
+		sort: base_sort++,
+		section: advanced_section,
+        htmlAttr: "class",
+        validValues: ["d-lg-none"],
+        inputtype: ToggleInput,
+        data: {
+            on: "d-lg-none",
+            off: ""
+        }
+	}, {
+        name: "Xl devices",
+        key: "hidexl",
+        col:6,
+		inline:true,
+		sort: base_sort++,
+		section: advanced_section,
+        htmlAttr: "class",
+        validValues: ["d-xl-none"],
+        inputtype: ToggleInput,
+        data: {
+            on: "d-xl-none",
+            off: ""
+        }
+	}, {
+        name: "Xxl devices",
+        key: "hidexxl",
+        col:6,
+		inline:true,
+		sort: base_sort++,
+		section: advanced_section,
+        htmlAttr: "class",
+        validValues: ["d-xxl-none"],
+        inputtype: ToggleInput,
+        data: {
+            on: "d-xxl-none",
+            off: ""
+        }
+    }]
+};
+
+Vvveb.Components.extend("_base", "_base", ComponentDeviceVisibility);
 
 /*
 

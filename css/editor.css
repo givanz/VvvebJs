@@ -4465,7 +4465,7 @@ i.la, i.header-arrow {
   width: auto; }
 
 /*!
- * Bootstrap v5.1.1 (https://getbootstrap.com/)
+ * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
@@ -5002,9 +5002,9 @@ progress {
   --bs-gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
-  margin-top: calc(var(--bs-gutter-y) * -1);
-  margin-right: calc(var(--bs-gutter-x) * -.5);
-  margin-left: calc(var(--bs-gutter-x) * -.5); }
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-.5 * var(--bs-gutter-x));
+  margin-left: calc(-.5 * var(--bs-gutter-x)); }
   .row > * {
     flex-shrink: 0;
     width: 100%;
@@ -5820,8 +5820,8 @@ progress {
     vertical-align: inherit; }
   .table > thead {
     vertical-align: bottom; }
-  .table > :not(:last-child) > :last-child > * {
-    border-bottom-color: currentColor; }
+  .table > :not(:first-child) {
+    border-top: 2px solid currentColor; }
 
 .caption-top {
   caption-side: top; }
@@ -5837,7 +5837,10 @@ progress {
 .table-borderless > :not(caption) > * > * {
   border-bottom-width: 0; }
 
-.table-striped > tbody > tr:nth-of-type(odd) {
+.table-borderless > :not(:first-child) {
+  border-top-width: 0; }
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-accent-bg: var(--bs-table-striped-bg);
   color: var(--bs-table-striped-color); }
 
@@ -5845,7 +5848,7 @@ progress {
   --bs-table-accent-bg: var(--bs-table-active-bg);
   color: var(--bs-table-active-color); }
 
-.table-hover > tbody > tr:hover {
+.table-hover > tbody > tr:hover > * {
   --bs-table-accent-bg: var(--bs-table-hover-bg);
   color: var(--bs-table-hover-color); }
 
@@ -6165,13 +6168,15 @@ textarea.form-control-lg {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
-  font-size: 0.875rem; }
+  font-size: 0.875rem;
+  border-radius: 0.2rem; }
 
 .form-select-lg {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
-  font-size: 1.25rem; }
+  font-size: 1.25rem;
+  border-radius: 0.3rem; }
 
 .form-check {
   display: block;
@@ -12566,33 +12571,6 @@ body {
     padding-top: 0rem; }
     #vvveb-builder .drag-elements > .header .nav {
       background: #f9f9f9; }
-    #vvveb-builder .drag-elements > .header .search {
-      position: relative; }
-      #vvveb-builder .drag-elements > .header .search .form-control {
-        border-color: #fff;
-        border-bottom-color: #eee;
-        border-radius: 0px;
-        box-shadow: none; }
-      #vvveb-builder .drag-elements > .header .search .form-control:focus {
-        border-color: #80bdff; }
-      #vvveb-builder .drag-elements > .header .search .form-control::placeholder {
-        /*font-size: $font-size-sm;*/
-        font-size: .75rem; }
-      #vvveb-builder .drag-elements > .header .search .clear-backspace {
-        border: none;
-        background: none;
-        position: absolute;
-        top: 7px;
-        right: 5px;
-        opacity: 0.8; }
-        #vvveb-builder .drag-elements > .header .search .clear-backspace i {
-          font-size: 13px; }
-        #vvveb-builder .drag-elements > .header .search .clear-backspace:hover {
-          opacity: 1;
-          background: #eee; }
-      #vvveb-builder .drag-elements > .header .search input:focus + #clear-backspace,
-      #vvveb-builder .drag-elements > .header .search input:hover + #clear-backspace {
-        opacity: 1; }
     #vvveb-builder .drag-elements .nav-item .nav-link {
       text-align: center;
       border-top-color: #fff;
@@ -12612,6 +12590,33 @@ body {
         color: #0d6efd; }
     #vvveb-builder .drag-elements#add-section-box .nav-item:first-child .nav-link {
       border-left: none; }
+  #vvveb-builder .search {
+    position: relative; }
+    #vvveb-builder .search .form-control {
+      border-color: #fff;
+      border-bottom-color: #eee;
+      border-radius: 0px;
+      box-shadow: none; }
+    #vvveb-builder .search .form-control:focus {
+      border-color: #80bdff; }
+    #vvveb-builder .search .form-control::placeholder {
+      /*font-size: $font-size-sm;*/
+      font-size: .75rem; }
+    #vvveb-builder .search .clear-backspace {
+      border: none;
+      background: none;
+      position: absolute;
+      top: 7px;
+      right: 5px;
+      opacity: 0.8; }
+      #vvveb-builder .search .clear-backspace i {
+        font-size: 13px; }
+      #vvveb-builder .search .clear-backspace:hover {
+        opacity: 1;
+        background: #eee; }
+    #vvveb-builder .search input:focus + #clear-backspace,
+    #vvveb-builder .search input:hover + #clear-backspace {
+      opacity: 1; }
   #vvveb-builder .components-list, #vvveb-builder .blocks-list, #vvveb-builder .component-properties, #vvveb-builder .sections-list {
     height: 98%;
     height: calc(100% - 250px - 40px - 50px);
@@ -12767,13 +12772,14 @@ body {
       #vvveb-builder .component-properties .mb-3 > label i {
         font-size: 14px; }
     #vvveb-builder .component-properties .mb-3 .input .input-range {
-      position: relative; }
+      position: relative;
+      padding-top: 0.4rem; }
       #vvveb-builder .component-properties .mb-3 .input .input-range input[type="number"] {
         position: absolute;
         right: 0;
-        top: -1.8rem;
+        top: -0.7rem;
         width: 5em;
-        padding: 0.3rem 0.5rem;
+        padding: 0.1rem 0.2rem;
         text-align: center;
         line-height: 12px; }
     #vvveb-builder .component-properties .mb-3 .custom-control {
@@ -13013,7 +13019,7 @@ body {
     left: 50%;
     left: calc(50% - 12px); }
     #vvveb-builder #section-actions.outside {
-      bottom: -25px; }
+      display: none !important; }
     #vvveb-builder #section-actions a#add-section-btn {
       position: relative;
       bottom: 0px;
@@ -13858,6 +13864,16 @@ input[type="color"] {
     transform: translateY(-3rem) scaleY(0) scaleX(0); }
   to {
     transform: translateY(0) scaleY(1) scaleX(1); } }
+
+/* input-html-list-select */
+.input-html-list-select .elements {
+  margin-top: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid #eee; }
+  .input-html-list-select .elements li {
+    cursor: pointer; }
 
 .btn-icon {
   font-weight: 500;
