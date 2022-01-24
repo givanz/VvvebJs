@@ -1,0 +1,3 @@
+https://github.com/lusaxweb/iconsax
+
+Iconsax are the official icons of the Vuesax framework, these icons can be used for personal and commercial use for free, but they cannot be sold and distributed under another name, they cannot be used to create templates or ui kits without permission, if desired to use the iconsax icon pack for these purposes, you should contact: https://lusaxweb.net/contact
