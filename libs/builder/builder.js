@@ -103,6 +103,25 @@ Vvveb.Components = {
 		return this._components[type];
 	},
 
+	updateProperty: function(type, key, value) {
+		let properties = this._components[type]["properties"];
+		for (property in properties) {
+			if (key == properties[property]["key"])  {
+				return this._components[type]["properties"][property] = 
+				Object.assign(properties[property], value);
+			}
+		}
+	},
+
+	getProperty: function(type, key) {
+		let properties = this._components[type]["properties"];
+		for (property in properties) {
+			if (key == properties[property]["key"])  {
+				return properties[property];
+			}
+		}
+	},
+
 	add: function(type, data) {
 		data.type = type;
 		
@@ -518,68 +537,142 @@ Vvveb.WysiwygEditor = {
 	oldValue: '',
 	doc:false,
 	
+
+	editorSetStyle: function (tag, style = {}, toggle = false) {
+		let iframeWindow = Vvveb.Builder.iframe.contentWindow;
+		let selection = iframeWindow.getSelection();
+		let element = this.element;
+		let range;
+
+		if (!tag) {
+			tag = "span";
+		}
+
+		if (selection.rangeCount > 0) {
+			//check if the whole text is inside an existing node to use the node directly
+			if ((selection.baseNode.nextSibling == null && selection.baseNode.previousSibling == null 
+				&& selection.anchorOffset == 0 && selection.focusOffset == selection.baseNode.length) 
+				|| (selection.anchorOffset == selection.focusOffset)) {
+					
+				element = selection.baseNode.parentNode;
+				
+			} else {
+				element = document.createElement(tag);
+				range = selection.getRangeAt(0);
+				range.surroundContents(element);
+				range.selectNodeContents(element.childNodes[0], 0); 
+			}
+		}
+		
+		if (element && style) {
+			for (name in style) {
+
+				if ( !style[name] || 
+					(toggle && element.style.getPropertyValue(name))) {
+
+					element.style.removeProperty(name);
+					
+				} else {
+					element.style.setProperty(name, style[name]);
+				}
+			}
+		}
+		
+		//if edited text is an empty span remove the span
+		if (element.tagName == "SPAN" && element.style.length == 0 && element.attributes.length <= 1) {
+			let textNode = iframeWindow.document.createTextNode(element.innerText);
+			element.replaceWith(textNode);
+			element = textNode;
+
+			range = iframeWindow.document.createRange();
+			range.selectNodeContents(element);
+			selection.removeAllRanges();
+			selection.addRange(range);		
+        }
+		
+		return element;
+	},
+	
 	init: function(doc) {
 		this.doc = doc;
+		let self = this;
 		
 		$("#bold-btn").on("click", function (e) {
-				doc.execCommand('bold',false,null);
+				//doc.execCommand('bold',false,null);
+				//self.editorSetStyle("b", {"font-weight" : "bold"}, true);
+				self.editorSetStyle(false, {"font-weight" : "bold"}, true);
 				e.preventDefault();
 				return false;
 		});
 
 		$("#italic-btn").on("click", function (e) {
-				doc.execCommand('italic',false,null);
+				//self.editorSetStyle("i", {"font-style" : "italic"}, true);
+				self.editorSetStyle(false, {"font-style" : "italic"}, true);
 				e.preventDefault();
 				return false;
 		});
 
 		$("#underline-btn").on("click", function (e) {
-				doc.execCommand('underline',false,null);
+				//self.editorSetStyle("u", {"text-decoration" : "underline"}, true);
+				self.editorSetStyle(false, {"text-decoration" : "underline"}, true);
 				e.preventDefault();
 				return false;
 		});
 		
 		$("#strike-btn").on("click", function (e) {
-				doc.execCommand('strikeThrough',false,null);
+				//self.editorSetStyle("strike",  {"text-decoration" : "line-through"}, true);
+				self.editorSetStyle(false,  {"text-decoration" : "line-through"}, true);
 				e.preventDefault();
 				return false;
 		});
 
 		$("#link-btn").on("click", function (e) {
-				doc.execCommand('createLink',false,"#");
+				self.editorSetStyle("a");
 				e.preventDefault();
 				return false;
 		});
 
 		$("#fore-color").on("change", function (e) {
-				doc.execCommand('foreColor',false,this.value);
+				//doc.execCommand('foreColor',false,this.value);
+				self.editorSetStyle(false, {"color" : this.value});
 				e.preventDefault();
 				return false;
 		});
 
 		
 		$("#back-color").on("change", function (e) {
-				doc.execCommand('hiliteColor',false,this.value);
+				//doc.execCommand('hiliteColor',false,this.value);
+				self.editorSetStyle(false, {"background-color" : this.value});
 				e.preventDefault();
 				return false;
 		});
 		
 		$("#font-size").on("change", function (e) {
-				doc.execCommand('fontSize',false,this.value);
+				//doc.execCommand('fontSize',false,this.value);
+				self.editorSetStyle(false, {"font-size" : this.value});
 				e.preventDefault();
 				return false;
 		});
+	
+		let sizes = "<option value=''>Default</option>";
+		for (i = 1;i <= 128; i++) {
+			sizes += "<option value='"+ i +"px'>"+ i +"</option>";
+		}
+		$("#font-size").html(sizes);		
 
-		$("#font-familly").on("change", function (e) {
-				doc.execCommand('fontName',false,this.value);
+		$("#font-family").on("change", function (e) {
+				let option = this.options[this.selectedIndex];
+				let element = self.editorSetStyle(false, {"font-family" : this.value});
+				FontsManager.addFont(option.dataset.provider, this.value, element);
+				//doc.execCommand('fontName',false,this.value);
 				e.preventDefault();
 				return false;
 		});
 
 		$("#justify-btn a").on("click", function (e) {
-				var command = "justify" + this.dataset.value;
-
-				doc.execCommand(command,false,"#");
+				//var command = "justify" + this.dataset.value;
+				//doc.execCommand(command,false,"#");
+				self.editorSetStyle(false, {"text-align" : this.dataset.value});
 				e.preventDefault();
 				return false;
 		});
@@ -600,6 +693,8 @@ Vvveb.WysiwygEditor = {
 		this.element = element;
 		this.isActive = true;
 		this.oldValue = element.html();
+		
+		$("#font-familly").val(getComputedStyle(element[0])['font-family']);
 	},
 
 	destroy: function(element) {
@@ -1289,8 +1384,7 @@ Vvveb.Builder = {
 
 		self.frameHtml.on("dblclick", function(event) {
 			
-			if (Vvveb.Builder.isPreview == false)
-			{
+			if (Vvveb.Builder.isPreview == false) {
 				self.selectPadding = 10;
 				self.texteditEl = target = $(event.target);
 
@@ -1320,10 +1414,8 @@ Vvveb.Builder = {
 		
 		self.frameHtml.on("click", function(event) {
 			
-			if (Vvveb.Builder.isPreview == false)
-			{
-				if (event.target)
-				{
+			if (Vvveb.Builder.isPreview == false){
+				if (event.target) {
 					//if component properties is loaded in left panel tab instead of right panel show tab
 					if ($(".component-properties-tab").is(":visible"))//if properites tab is enabled/visible 
 						$('.component-properties-tab a').show().tab('show'); 
@@ -1643,8 +1735,9 @@ Vvveb.Builder = {
          html +=  doc.documentElement.innerHTML + "\n</html>";
          
          html = this.removeHelpers(html, keepHelperAttributes);
+         FontsManager.cleanUnusedFonts();
          
-	$(window).triggerHandler("vvveb.getHtml.after", doc);
+	 $(window).triggerHandler("vvveb.getHtml.after", doc);
          
          var filter = $(window).triggerHandler("vvveb.getHtml.filter", html);
          if (filter) return filter;
@@ -2079,15 +2172,15 @@ Vvveb.StyleManager = {
 				elementSelector = "#" + currentElement.id;
 				selector.push(elementSelector);
 				break;
-			} else if (elementSelector) {
+			} else if (classSelector) {
 				//class selector
-				elementSelector = elementSelector;
+				elementSelector = classSelector;
 
 			} else {
 				//element (tag) selector
 				var tag = currentElement.tagName.toLowerCase();
-				//exclude top most element body
-				if (tag != "body") {
+				//exclude top most element body unless the parent element is body
+				if (tag != "body" || (tag == "body" && selector.length <= 1)) {
 					elementSelector = tag
 				}
 			}
@@ -2730,6 +2823,47 @@ Vvveb.Breadcrumb = {
 	}
 }
 
+FontsManager = {
+	
+	activeFonts:[],
+	providers: {},//{"google":GoogleFontsManager};
+	
+	addProvider: function(provider, Obj) {
+		this.providers[provider] = Obj;
+	},
+	
+	//add also element so we can keep track of the used fonts to remove unused ones
+	addFont: function(provider, fontFamily, element = false) {
+		if (!provider) return;
+		
+		let providerObj = this.providers[provider];
+		if (providerObj) {
+			providerObj.addFont(fontFamily);
+			this.activeFonts.push({provider, fontFamily, element});
+		}
+	},
+	
+	removeFont: function(provider, fontFamily) {
+		let providerObj = this.providers[provider];
+		if (provider!= "default" && providerObj) {
+			providerObj.removeFont(fontFamily);
+		}
+	},
+	
+	//check if the added fonts are still used for the elements they were set and remove unused ones
+	cleanUnusedFonts: function (){
+		for (i in this.activeFonts) {
+			let elementFont = this.activeFonts[i];
+			if (elementFont.element) {
+				if (getComputedStyle(elementFont.element)['font-family'] != elementFont.fontFamily) {
+					this.removeFont(elementFont.provider, elementFont.fontFamily);
+				}
+			}
+		}
+	}
+};
+
+
 // Toggle fullscreen
 function launchFullScreen(document) {
   if(document.documentElement.requestFullScreen) {
@@ -2761,3 +2895,48 @@ function launchFullScreen(document) {
 			document.documentElement.msRequestFullscreen();
   }
 }
+
+
+let fontList = [{
+	value: "",
+	text: "Default"
+}, {
+	value: "Arial, Helvetica, sans-serif",
+	text: "Arial"
+}, {
+	value: '\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif',
+	text: 'Lucida Grande'
+}, {
+	value: '\'Palatino Linotype\', \'Book Antiqua\', Palatino, serif',
+	text: 'Palatino Linotype'
+}, {
+	value: '\'Times New Roman\', Times, serif',
+	text: 'Times New Roman'
+}, {
+	value: "Georgia, serif",
+	text: "Georgia, serif"
+}, {
+	value: "Tahoma, Geneva, sans-serif",
+	text: "Tahoma"
+}, {
+	value: '\'Comic Sans MS\', cursive, sans-serif',
+	text: 'Comic Sans'
+}, {
+	value: 'Verdana, Geneva, sans-serif',
+	text: 'Verdana'
+}, {
+	value: 'Impact, Charcoal, sans-serif',
+	text: 'Impact'
+}, {
+	value: '\'Arial Black\', Gadget, sans-serif',
+	text: 'Arial Black'
+}, {
+	value: '\'Trebuchet MS\', Helvetica, sans-serif',
+	text: 'Trebuchet'
+}, {
+	value: '\'Courier New\', Courier, monospace',
+	text: 'Courier New'
+}, {
+	value: '\'Brush Script MT\', sans-serif',
+	text: 'Brush Script'
+}];

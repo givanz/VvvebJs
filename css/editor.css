@@ -4631,10 +4631,6 @@ dd {
 blockquote {
   margin: 0 0 1rem; }
 
-b,
-strong {
-  font-weight: bolder; }
-
 small, .small {
   font-size: 0.875em; }
 
@@ -12930,6 +12926,7 @@ body {
         cursor: nwse-resize; }
   #vvveb-builder #select-actions, #vvveb-builder #wysiwyg-editor {
     position: absolute;
+    z-index: 1;
     right: -1px;
     top: -25px;
     background: #4285f4;

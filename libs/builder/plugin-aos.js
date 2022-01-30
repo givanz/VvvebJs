@@ -27,7 +27,6 @@ var aosAnimations = [
 			value: "",
 			text: "[none]"
 		}, {
-			value: "",
 		    //Fade animations
 			optgroup: "Fade animations"
 		}, {

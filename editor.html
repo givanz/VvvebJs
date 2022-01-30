@@ -494,31 +494,46 @@
 
 										<select id="font-size" class="form-select">
 											<option value="">Default</option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											
+											<option value="8px">8 px</option>
+											<option value="9px">9 px</option>
+											<option value="10px">10 px</option>
+											<option value="11px">11 px</option>
+											<option value="12px">12 px</option>
+											<option value="13px">13 px</option>
+											<option value="14px">14 px</option>
+											<option value="15px">15 px</option>
+											<option value="16px">16 px</option>
+											<option value="17px">17 px</option>
+											<option value="18px">18 px</option>
+											<option value="19px">19 px</option>
+											<option value="20px">20 px</option>
+											<option value="21px">21 px</option>
+											<option value="22px">22 px</option>
+											<option value="23px">23 px</option>
+											<option value="24px">24 px</option>
+											<option value="25px">25 px</option>
+											<option value="26px">26 px</option>
+											<option value="27px">27 px</option>
+											<option value="28px">28 px</option>
 										</select>
 										
-										<select id="font-familly" class="form-select">
+										<select id="font-family" class="form-select">
 											<option value="">Default</option>
-											<option value="Arial, Helvetica, sans-serif">Arial</option>
-											<option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif">Lucida Grande</option>
-											<option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif">Palatino Linotype</option>
-											<option value="'Times New Roman', Times, serif">Times New Roman</option>
-											<option value="Georgia, serif">Georgia, serif</option>
-											<option value="Tahoma, Geneva, sans-serif">Tahoma</option>
-											<option value="'Comic Sans MS', cursive, sans-serif">Comic Sans</option>
-											<option value="Verdana, Geneva, sans-serif">Verdana</option>
-											<option value="Impact, Charcoal, sans-serif">Impact</option>
-											<option value="'Arial Black', Gadget, sans-serif">Arial Black</option>
-											<option value="'Trebuchet MS', Helvetica, sans-serif">Trebuchet</option>
-											<option value="'Courier New', Courier, monospace">Courier New</option>
-											<option value="'Brush Script MT', sans-serif">Brush Script</option>
+											<optgroup label="System default">
+												<option value="Arial, Helvetica, sans-serif">Arial</option>
+												<option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif">Lucida Grande</option>
+												<option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif">Palatino Linotype</option>
+												<option value="'Times New Roman', Times, serif">Times New Roman</option>
+												<option value="Georgia, serif">Georgia, serif</option>
+												<option value="Tahoma, Geneva, sans-serif">Tahoma</option>
+												<option value="'Comic Sans MS', cursive, sans-serif">Comic Sans</option>
+												<option value="Verdana, Geneva, sans-serif">Verdana</option>
+												<option value="Impact, Charcoal, sans-serif">Impact</option>
+												<option value="'Arial Black', Gadget, sans-serif">Arial Black</option>
+												<option value="'Trebuchet MS', Helvetica, sans-serif">Trebuchet</option>
+												<option value="'Courier New', Courier, monospace">Courier New</option>
+												<option value="'Brush Script MT', sans-serif">Brush Script</option>
+											</optgroup>
 										</select>
 								</div>
 
@@ -836,7 +851,15 @@
 					{% } %}
 					<optgroup label="{%=options[i].optgroup%}">
 				{% optgroup = true; } else { %}
-			<option value="{%=options[i].value%}">{%=options[i].text%}</option>
+			<option value="{%=options[i].value%}" 
+				{% 
+					for (attr in options[i]) {
+							if (attr != "value" && attr != "text") {
+						 %} 
+							{%=attr%}={%=options[i][attr]%} 
+						{% } 
+					} %}>
+			{%=options[i].text%}</option>
 			{% } } %}
 		</select>
 	
@@ -867,6 +890,43 @@
 <script id="vvveb-input-html-list-select" type="text/html">
 
 	<div class="input-html-list-select">
+		
+		<div class="current-element">
+		
+		</div>
+		
+		<div class="popup">
+			<select class="form-select">
+				{% var optgroup = false; for ( var i = 0; i < options.length; i++ ) { %}
+					{% if (options[i].optgroup) {  %}
+						{% if (optgroup) {  %}
+							</optgroup>
+						{% } %}
+						<optgroup label="{%=options[i].optgroup%}">
+					{% optgroup = true; } else { %}
+					<option value="{%=options[i].value%}">{%=options[i].text%}</option>
+				{% } } %}
+			</select>
+			
+		      <div class="search">
+				  <input class="form-control search" placeholder="Search elements" type="text">
+				  <button class="clear-backspace">
+					  <i class="la la-times"></i>
+				  </button>
+			</div>
+			
+			<div class="elements">
+					{%=elements%}
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</script>
+
+<script id="vvveb-input-html-list-dropdown" type="text/html">
+
+	<div class="input-html-list-select" {% if (typeof id !== "undefined") { %} id={%=id%} {% } %}>
 		
 		<div class="current-element">
 		
@@ -1440,7 +1500,7 @@
 window.mediaPath = 'media';
 </script>
 <script src="libs/media/media.js"></script>	
-<script src="libs/media/openverse.js"></script>
+<script src="libs/media/openverse.js"></script>	
 <script src="libs/builder/plugin-media.js"></script>	
 
 <!-- bootstrap colorpicker //uncomment bellow scripts to enable -->
@@ -1452,6 +1512,7 @@ window.mediaPath = 'media';
 
 <!-- components-->
 <!-- script src="libs/builder/components-server.js"></script -->	
+<script src="libs/builder/plugin-google-fonts.js"></script>	
 <script src="libs/builder/components-common.js"></script>	
 <script src="libs/builder/plugin-aos.js"></script>
 <script src="libs/builder/components-elements.js"></script>	

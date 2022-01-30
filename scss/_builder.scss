@@ -1046,6 +1046,7 @@ body
 	#select-actions, #wysiwyg-editor
 	{
 		position:absolute;
+		z-index:1;
 		right:-1px;
 		top:-25px;
 		background:$builder-background-color;

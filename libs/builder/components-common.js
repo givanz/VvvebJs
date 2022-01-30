@@ -112,7 +112,7 @@ Vvveb.Components.extend("_base", "_base", {
         data: {header:"Display"},
      }, {
 		//linked styles notice message
-	key: "linked_styles_check",
+		key: "linked_styles_check",
         sort: base_sort++,
         section: style_section,
         inline:false,
@@ -410,49 +410,7 @@ var ComponentBaseTypography = {
 		inline:false,
         inputtype: SelectInput,
         data: {
-			options: [{
-				value: "",
-				text: "Default"
-			}, {
-				value: "Arial, Helvetica, sans-serif",
-				text: "Arial"
-			}, {
-				value: '\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif',
-				text: 'Lucida Grande'
-			}, {
-				value: '\'Palatino Linotype\', \'Book Antiqua\', Palatino, serif',
-				text: 'Palatino Linotype'
-			}, {
-				value: '\'Times New Roman\', Times, serif',
-				text: 'Times New Roman'
-			}, {
-				value: "Georgia, serif",
-				text: "Georgia, serif"
-			}, {
-				value: "Tahoma, Geneva, sans-serif",
-				text: "Tahoma"
-			}, {
-				value: '\'Comic Sans MS\', cursive, sans-serif',
-				text: 'Comic Sans'
-			}, {
-				value: 'Verdana, Geneva, sans-serif',
-				text: 'Verdana'
-			}, {
-				value: 'Impact, Charcoal, sans-serif',
-				text: 'Impact'
-			}, {
-				value: '\'Arial Black\', Gadget, sans-serif',
-				text: 'Arial Black'
-			}, {
-				value: '\'Trebuchet MS\', Helvetica, sans-serif',
-				text: 'Trebuchet'
-			}, {
-				value: '\'Courier New\', Courier, monospace',
-				text: 'Courier New'
-			}, {
-				value: '\'Brush Script MT\', sans-serif',
-				text: 'Brush Script'
-			}]
+			options: fontList
 		}
 	}, {
         name: "Text align",
@@ -1215,28 +1173,3 @@ var ComponentDeviceVisibility = {
 };
 
 Vvveb.Components.extend("_base", "_base", ComponentDeviceVisibility);
-
-/*
-
-Vvveb.Components.extend("_base", "_base", {
-	 properties: [
-	 {
-        name: "Font family",
-        key: "font-family",
-		htmlAttr: "style",
-        sort: base_sort++,
-        col:12,
-		inline:false,
-        inputtype: SelectInput,
-        data: {
-			options: [{
-				value: "",
-				text: "extended"
-			}, {
-				value: "Ggoogle ",
-				text: "google"
-			}]
-		}
-	}]
-});
-*/
