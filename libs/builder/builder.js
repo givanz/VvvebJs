@@ -74,7 +74,10 @@ if (Vvveb === undefined) var Vvveb = {};
 
 Vvveb.defaultComponent = "_base";
 Vvveb.preservePropertySections = true;
-Vvveb.dragIcon = 'icon';//icon = use component icon when dragging | html = use component html to create draggable element
+//icon = use component icon when dragging | html = use component html to create draggable element
+Vvveb.dragIcon = 'icon';
+//if empty the html of the component is used to view dropping in real time but for large elements it can jump around for this you can set a html placeholder with this option
+Vvveb.dragHtml = '<div style="background:limegreen;;width:100%;height:3px;border:1px solid limegreen;box-shadow:0px 0px 2px 1px rgba(0,0,0,0.14);"></div>';
 
 Vvveb.baseUrl =  document.currentScript?document.currentScript.src.replace(/[^\/]*?\.js$/,''):'';
 Vvveb.imgBaseUrl =  Vvveb.baseUrl;
@@ -1311,7 +1314,7 @@ Vvveb.Builder = {
 					if (!self.designerMode && self.iconDrag) {
 						self.iconDrag.css({'left': x + self.leftPanelWidth + 10, 'top': y + 60});					
 					}
-				} else //uncomment else to disable parent highlighting when dragging
+				}// else //uncomment else to disable parent highlighting when dragging
 				{
 
 					$("#highlight-box").css(
@@ -1350,12 +1353,12 @@ Vvveb.Builder = {
 
 				if (self.dragMoveMutation === false)
 				{				
-					if (self.component.dragHtml) //if dragHtml is set for dragging then set real component html
-					{
+					if (self.component.dragHtml || Vvveb.dragHtml) { //if dragHtml is set for dragging then set real component html
 						newElement = $(self.component.html);
 						self.dragElement.replaceWith(newElement);
 						self.dragElement = newElement;
-					}
+					} 
+					
 					if (self.component.afterDrop) self.dragElement = self.component.afterDrop(self.dragElement);
 				}
 				
@@ -1627,12 +1630,12 @@ Vvveb.Builder = {
 			else if ($this.data("drag-type") == "block") {
 				self.component = Vvveb.Blocks.get($this.data("type"));
 			}
-			
-			if (self.component.dragHtml)
-			{
+
+			if (self.component.dragHtml) {
 				html = self.component.dragHtml;
-			} else
-			{
+			} else if (Vvveb.dragHtml) { 
+				html = Vvveb.dragHtml;
+			} else {
 				html = self.component.html;
 			}
 			

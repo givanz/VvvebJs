@@ -61,10 +61,10 @@ $.ajax({
 			FontsManager.addFont(option.dataset.provider, value, node);
 			return node;
 		};
-		list = list.data.options;
-		list.push({optgroup:"Google Fonts"});
-		list = list.concat(googlefontNames);
+		
+		list.data.options.push({optgroup:"Google Fonts"});
+		list.data.options = list.data.options.concat(googlefontNames);
 
-		Vvveb.Components.updateProperty("_base", "font-family", {data:{options: list}});
+		Vvveb.Components.updateProperty("_base", "font-family", {data:list.data});
 	}
 });
