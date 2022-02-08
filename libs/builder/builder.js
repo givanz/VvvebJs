@@ -609,6 +609,7 @@ Vvveb.WysiwygEditor = {
 		});
 
 		$("#italic-btn").on("click", function (e) {
+				//doc.execCommand('italic',false,null);
 				//self.editorSetStyle("i", {"font-style" : "italic"}, true);
 				self.editorSetStyle(false, {"font-style" : "italic"}, true);
 				e.preventDefault();
@@ -616,6 +617,7 @@ Vvveb.WysiwygEditor = {
 		});
 
 		$("#underline-btn").on("click", function (e) {
+				//doc.execCommand('underline',false,null);
 				//self.editorSetStyle("u", {"text-decoration" : "underline"}, true);
 				self.editorSetStyle(false, {"text-decoration" : "underline"}, true);
 				e.preventDefault();
@@ -623,6 +625,7 @@ Vvveb.WysiwygEditor = {
 		});
 		
 		$("#strike-btn").on("click", function (e) {
+				//doc.execCommand('strikeThrough',false,null);
 				//self.editorSetStyle("strike",  {"text-decoration" : "line-through"}, true);
 				self.editorSetStyle(false,  {"text-decoration" : "line-through"}, true);
 				e.preventDefault();
@@ -630,6 +633,7 @@ Vvveb.WysiwygEditor = {
 		});
 
 		$("#link-btn").on("click", function (e) {
+				//doc.execCommand('createLink',false,"#");
 				self.editorSetStyle("a");
 				e.preventDefault();
 				return false;
@@ -752,6 +756,8 @@ Vvveb.Builder = {
 		self.highlightEnabled = true;
 		
 		self.leftPanelWidth = $("#left-panel").width();
+		
+		self.adjustListsHeight();
 	},
 	
 /* controls */    	
@@ -850,7 +856,7 @@ Vvveb.Builder = {
 						item = $(`<li data-section="${group}" data-type="${sectionType}" data-search="${section.name.toLowerCase()}">
 									<a class="name" href="#">${section.name}</a>
 									<a class="add-section-btn" href="" title="Add section"><i class="la la-plus"></i></a>
-									<img class="preview" src="">
+									<img class="preview" src="" loading="lazy">
 								</li>`);
 
 						if (section.image) {
@@ -858,7 +864,7 @@ Vvveb.Builder = {
 							var image = ((section.image.indexOf('/') == -1) ? Vvveb.imgBaseUrl:'') + section.image;
 							
 							item.css({
-								backgroundImage: "url(" + image + ")",
+								//backgroundImage: "url(" + image + ")",
 								backgroundRepeat: "no-repeat"
 							}).find("img").attr("src", image);
 							
@@ -907,6 +913,7 @@ Vvveb.Builder = {
 					{
 						item = $(`<li data-section="${group}" data-drag-type="block" data-type="${blockType}" data-search="${block.name.toLowerCase()}">
 									<a class="name" href="#">${block.name}</a>
+									<img class="preview" src="" loading="lazy">
 								</li>`);
 
 						if (block.image) {
@@ -927,6 +934,28 @@ Vvveb.Builder = {
 			}
 		});
 	 },
+	 
+	 adjustListsHeight: function () {
+		 let lists = $(".drag-elements-sidepane > div:not(.block-preview)");
+		 let properties =$(".component-properties >.tab-content");
+		 let wHeight = $(window).height();
+
+		 function adjust(elements) {	
+			 let maxOffset = 0;
+			 
+			 elements.each(function (i,e) {
+				 maxOffset = Math.max(maxOffset, e.getBoundingClientRect()["top"]);
+			});
+			
+			 elements.each(function (i,e) {
+				 e.style.height = (wHeight - maxOffset) + "px";
+			});
+		}
+		
+		adjust(lists);
+		adjust(properties);
+	},
+	 
 	
 	loadUrl : function(url, callback) {	
 		var self = this;
@@ -988,6 +1017,8 @@ Vvveb.Builder = {
 							
 							//addSectionBox.hide();
 						}
+						
+						self.adjustListsHeight();
 						
 				});
 			

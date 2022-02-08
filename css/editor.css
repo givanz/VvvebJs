@@ -12399,15 +12399,15 @@ body {
       --builder-left-panel-width: 400px;
       --builder-right-panel-width: 400px;
       --builder-component-list-element-width:28%; } }
-  body::-webkit-scrollbar {
+  body ::-webkit-scrollbar {
     width: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    -webkit-box-shadow: none; }
-  body::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
-  body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.05); }
+  body ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.05); }
+  body ::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.15);
-    outline: 1px solid slategrey; }
+    border-radius: 10px; }
 
 .modal-content {
   font-size: .875rem; }
@@ -12417,9 +12417,6 @@ body {
 
 #vvveb-builder {
   display: block;
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: row;
   height: 100%; }
   #vvveb-builder #left-panel, #vvveb-builder #right-panel {
     border-color: #ddd;
@@ -12445,10 +12442,7 @@ body {
     width: 15vw;
     width: calc(var(--builder-left-panel-width));
     height: 100%;
-    max-height: 100%;
-    flex: 1 1 0;
-    display: flex;
-    flex-direction: column; }
+    max-height: 100%; }
     #vvveb-builder #left-panel #filemanager {
       width: 30vw;
       width: calc( var(--builder-left-panel-width));
@@ -12473,20 +12467,10 @@ body {
         height: 200px;
         height: calc( var(--builder-filemanager-height) - 50px);
         padding: 0.5rem 0rem;
-        overflow-y: hidden;
-        overflow-x: hidden;
+        overflow: hidden;
         resize: vertical; }
         #vvveb-builder #left-panel #filemanager .tree:hover {
           overflow-y: auto; }
-        #vvveb-builder #left-panel #filemanager .tree::-webkit-scrollbar {
-          width: 0.5rem;
-          background-color: rgba(255, 255, 255, 0.1);
-          -webkit-box-shadow: none; }
-        #vvveb-builder #left-panel #filemanager .tree::-webkit-scrollbar-track {
-          -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
-        #vvveb-builder #left-panel #filemanager .tree::-webkit-scrollbar-thumb {
-          background-color: rgba(0, 0, 0, 0.15);
-          outline: 1px solid slategrey; }
     #vvveb-builder #left-panel .components-list, #vvveb-builder #left-panel .blocks-list, #vvveb-builder #left-panel .component-properties, #vvveb-builder #left-panel .sections-list {
       width: var(--builder-left-panel-width); }
     #vvveb-builder #left-panel .component-properties {
@@ -12614,25 +12598,8 @@ body {
     #vvveb-builder .search input:hover + #clear-backspace {
       opacity: 1; }
   #vvveb-builder .components-list, #vvveb-builder .blocks-list, #vvveb-builder .component-properties, #vvveb-builder .sections-list {
-    height: 98%;
-    height: calc(100% - 250px - 40px - 50px);
-    height: calc(100% - var(--builder-filemanager-height) - 40px - 50px + 100);
-    height: 300%;
-    overflow-x: hidden;
     list-style: none;
-    background: #fafafa;
-    overflow-y: hidden; }
-    #vvveb-builder .components-list:hover, #vvveb-builder .blocks-list:hover, #vvveb-builder .component-properties:hover, #vvveb-builder .sections-list:hover {
-      overflow-y: auto; }
-    #vvveb-builder .components-list::-webkit-scrollbar, #vvveb-builder .blocks-list::-webkit-scrollbar, #vvveb-builder .component-properties::-webkit-scrollbar, #vvveb-builder .sections-list::-webkit-scrollbar {
-      width: 0.5rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      -webkit-box-shadow: none; }
-    #vvveb-builder .components-list::-webkit-scrollbar-track, #vvveb-builder .blocks-list::-webkit-scrollbar-track, #vvveb-builder .component-properties::-webkit-scrollbar-track, #vvveb-builder .sections-list::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
-    #vvveb-builder .components-list::-webkit-scrollbar-thumb, #vvveb-builder .blocks-list::-webkit-scrollbar-thumb, #vvveb-builder .component-properties::-webkit-scrollbar-thumb, #vvveb-builder .sections-list::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.15);
-      outline: 1px solid slategrey; }
+    background: #fafafa; }
   #vvveb-builder #add-section-box {
     animation: popup-animation 0.1s cubic-bezier(0, 0, 0.2, 1) 0s;
     animation-fill-mode: forwards; }
@@ -12661,7 +12628,7 @@ body {
             margin-top: 5px; }
     #vvveb-builder #add-section-box .blocks-list ol li, #vvveb-builder #add-section-box .sections-list ol li {
       width: 92%;
-      height: 180px;
+      height: auto;
       position: relative;
       text-align: center;
       font-weight: normal;
@@ -12709,7 +12676,7 @@ body {
         #vvveb-builder #add-section-box .blocks-list ol li:hover:before, #vvveb-builder #add-section-box .sections-list ol li:hover:before {
           opacity: 0.3; }
         #vvveb-builder #add-section-box .blocks-list ol li:hover a.name, #vvveb-builder #add-section-box .sections-list ol li:hover a.name {
-          display: block; }
+          visibility: visible; }
   #vvveb-builder .component-properties-sidepane {
     z-index: 0;
     margin: 0;
@@ -12727,15 +12694,6 @@ body {
       min-height: 950px;
       height: 200%;
       width: 100%; }
-    #vvveb-builder .component-properties-sidepane::-webkit-scrollbar {
-      width: 0.5rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      -webkit-box-shadow: none; }
-    #vvveb-builder .component-properties-sidepane::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
-    #vvveb-builder .component-properties-sidepane::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.15);
-      outline: 1px solid slategrey; }
   #vvveb-builder .component-properties {
     background: #fff;
     height: 95%;
@@ -12746,7 +12704,9 @@ body {
 			padding:.275rem 0.25rem;
 		}*/ }
     #vvveb-builder .component-properties .tab-content {
-      padding: 0.5rem 0; }
+      padding: 0.5rem 0;
+      overflow-x: hidden;
+      overflow-y: auto; }
     #vvveb-builder .component-properties .nav-tabs {
       background: #f9f9f9; }
     #vvveb-builder .component-properties #right-panel {
@@ -12982,8 +12942,6 @@ body {
       background-position: right 0.5rem center; }
       #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown[type="color"], #vvveb-builder #wysiwyg-editor.default-editor > select[type="color"], #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"] {
         padding: 3px;
-        height: 30px;
-        width: 32px;
         box-shadow: none;
         border: 1px solid #ddd;
         margin: 0 0.5rem;
@@ -13063,11 +13021,6 @@ body {
     padding: 2px 5px;
     display: inline-block;
     border-radius: 3px 3px 0px 0px; }
-  #vvveb-builder ::-webkit-scrollbar {
-    width: 0.8em;
-    background: #fafafa; }
-  #vvveb-builder ::-webkit-scrollbar-thumb {
-    background: #ccc; }
   #vvveb-builder #elements-tabs {
     overflow: hidden; }
     #vvveb-builder #elements-tabs .nav-item {
@@ -13120,8 +13073,6 @@ li[data-type] {
   width: var(--builder-component-list-element-width);
   min-width: 100px;
   height: 100px;
-  flex-direction: column-reverse;
-  display: flex;
   margin: 0% 1% 3% 3%;
   text-align: center;
   font-weight: normal;
@@ -13163,20 +13114,12 @@ li[data-type] {
   -ms-user-select: none;
   user-select: none;
   width: 100%;
-  height: 1300px;
+  overflow: hidden;
   width: 100%; }
-  .drag-elements-sidepane::-webkit-scrollbar {
-    width: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    -webkit-box-shadow: none; }
-  .drag-elements-sidepane::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
-  .drag-elements-sidepane::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.15);
-    outline: 1px solid slategrey; }
-  .drag-elements-sidepane > div:hover {
-    height: 100vh;
-    overflow-y: auto; }
+  .drag-elements-sidepane > div {
+    overflow: hidden; }
+    .drag-elements-sidepane > div:hover {
+      overflow-y: auto; }
   .drag-elements-sidepane ul {
     z-index: 1;
     margin: 0;
@@ -13229,7 +13172,7 @@ li[data-type] {
               opacity: 1;
               text-align: center; }
               .drag-elements-sidepane ul > li ol li[data-type]:hover a {
-                display: block; }
+                visibility: visible; }
 
 .blocks .block-preview, .sections .block-preview {
   position: absolute;
@@ -13239,8 +13182,6 @@ li[data-type] {
   border: 1px solid #eee; }
 
 .blocks .sections-container, .sections .sections-container {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   background: #fff;
   padding-top: 1rem; }
@@ -13336,7 +13277,7 @@ li[data-type] {
 
 .blocks .drag-elements-sidepane li[data-type], .sections .drag-elements-sidepane li[data-type] {
   width: 92%;
-  height: 180px;
+  height: auto;
   position: relative;
   text-align: center;
   font-weight: normal;
@@ -13383,7 +13324,7 @@ li[data-type] {
     .blocks .drag-elements-sidepane li[data-type]:hover:before, .sections .drag-elements-sidepane li[data-type]:hover:before {
       opacity: 0.3; }
     .blocks .drag-elements-sidepane li[data-type]:hover a.name, .sections .drag-elements-sidepane li[data-type]:hover a.name {
-      display: block; }
+      visibility: visible; }
   .blocks .drag-elements-sidepane li[data-type]:before, .sections .drag-elements-sidepane li[data-type]:before {
     content: " ";
     background: #fff;
@@ -13395,17 +13336,15 @@ li[data-type] {
     opacity: 0;
     transition: opacity 0.7s; }
   .blocks .drag-elements-sidepane li[data-type] img.preview, .sections .drag-elements-sidepane li[data-type] img.preview {
-    display: none; }
+    max-width: 100%; }
   .blocks .drag-elements-sidepane li[data-type] a.name, .sections .drag-elements-sidepane li[data-type] a.name {
-    display: none; }
+    visibility: hidden; }
 
 .components .drag-elements-sidepane li[data-type],
 #add-section-box li[data-type] {
   width: var(--builder-component-list-element-width);
   min-width: 100px;
   height: 100px;
-  flex-direction: column-reverse;
-  display: flex;
   margin: 0% 1% 3% 3%;
   text-align: center;
   font-weight: normal;
@@ -13708,11 +13647,12 @@ ul.autocomplete li.selected {
   display: block;
   box-shadow: 0px 0px 1px 2px rgba(18, 83, 205, 0.05);
   box-shadow: 0px 3px 7px 1px rgba(0, 0, 0, 0.1), 1px 2px 7px 1px rgba(255, 255, 255, 0.1) inset;
-  margnin: auto;
+  margin: auto;
+  position: absolute;
   font-size: 21px;
   width: 36px;
   height: 36px;
-  display: none;
+  visibility: hidden;
   top: 50%;
   left: 50%;
   margin-top: -18px;
@@ -13822,12 +13762,14 @@ input[type="color"] {
   padding: 2px;
   box-shadow: none; }
   input[type="color"].form-control-color::-moz-color-swatch {
+    min-width: 21px;
+    min-height: 21px;
     border-radius: 3px;
     box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
     border: none; }
   input[type="color"].form-control-color::-webkit-color-swatch {
-    width: 21px;
-    height: 21px;
+    min-width: 21px;
+    min-height: 21px;
     border-radius: 3px;
     box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
     border: none; }
