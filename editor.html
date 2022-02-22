@@ -236,16 +236,22 @@
 
 
 													   <div class="search">
-															  <input class="form-control section-search" placeholder="Search sections" type="text" data-vvveb-action="sectionSearch" data-vvveb-on="keyup">
-															  <button class="clear-backspace"  data-vvveb-action="clearSectionSearch">
+															  <div class="expand">
+																  <a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></a>
+																  <a href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></a> 
+															  </div>	
+
+															  <input class="form-control section-search" placeholder="Search sections" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
+															  <button class="clear-backspace"  data-vvveb-action="clearSearch" title="Clear search">
 																  <i class="la la-times"></i>
 															  </button>
 														</div>
 
-											  
+													
 														<div class="drag-elements-sidepane sidepane">
 															  <div class="block-preview"><img src="" style="display:none"></div>
 															  <div>
+																  
 																<ul class="sections-list clearfix" data-type="leftpanel">
 																</ul>
 
@@ -277,8 +283,13 @@
 											 <div class="tab-pane fade show active components" id="components" data-section="components" role="tabpanel" aria-labelledby="components-tab">
 												 
 												   <div class="search">
-														  <input class="form-control component-search" placeholder="Search components" type="text" data-vvveb-action="componentSearch" data-vvveb-on="keyup">
-														  <button class="clear-backspace"  data-vvveb-action="clearComponentSearch">
+														  <div class="expand">
+															  <a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></a>
+															  <a href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></a> 
+														  </div>	
+
+														  <input class="form-control component-search" placeholder="Search components" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
+														  <button class="clear-backspace" data-vvveb-action="clearSearch">
 															  <i class="la la-times"></i>
 															</button>
 													</div>
@@ -298,8 +309,13 @@
 											<div class="tab-pane fade show active blocks" id="blocks" data-section="content" role="tabpanel" aria-labelledby="content-tab">
 
 													   <div class="search">
-															  <input class="form-control block-search" placeholder="Search blocks" type="text" data-vvveb-action="blockSearch" data-vvveb-on="keyup">
-															  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
+															  <div class="expand">
+																  <a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></a>
+																  <a href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></a> 
+															  </div>	
+
+															  <input class="form-control block-search" placeholder="Search blocks" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
+															  <button class="clear-backspace" data-vvveb-action="clearSearch">
 																  <i class="la la-times"></i>
 															  </button>
 														</div>
@@ -347,7 +363,7 @@
 														</div>
 														
 														 <div class="tab-pane fade show" id="style-left-panel-tab" data-section="style" role="tabpanel" aria-labelledby="style-tab">
-														</div>
+														 </div>
 														
 														 <div class="tab-pane fade show" id="advanced-left-panel-tab" data-section="advanced"  role="tabpanel" aria-labelledby="advanced-tab">
 														</div>
@@ -364,12 +380,7 @@
 										<div class="header-arrow"></div>
 									</label>
 									<input class="header_check" type="checkbox" checked="true" id="header_pallette">
-									<div class="section" data-section="default">
 
-										
-									</div>
-										
-										
 									<!-- typography -->	
 									<label class="header" data-header="element_header" for="header_element_typography"><span>Typography</span>
 										<div class="header-arrow"></div>
@@ -613,8 +624,13 @@
 										  <div class="tab-pane fade show active" id="box-components" role="tabpanel" aria-labelledby="components-tab">
 											  
 											   <div class="search">
-													  <input class="form-control component-search" placeholder="Search components" type="text" data-vvveb-action="addBoxComponentSearch" data-vvveb-on="keyup">
-													  <button class="clear-backspace" data-vvveb-action="clearComponentSearch">
+													  <div class="expand">
+														  <a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></a>
+														  <a href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></a> 
+													  </div>	
+
+													  <input class="form-control component-search" placeholder="Search components" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
+													  <button class="clear-backspace" data-vvveb-action="clearSearch">
 														  <i class="la la-times"></i>
 													  </button>
 												  </div>
@@ -632,8 +648,13 @@
 										  <div class="tab-pane fade" id="box-blocks" role="tabpanel" aria-labelledby="blocks-tab">
 											  
 											   <div class="search">
-													  <input class="form-control block-search" placeholder="Search blocks" type="text" data-vvveb-action="addBoxBlockSearch" data-vvveb-on="keyup">
-													  <button class="clear-backspace"  data-vvveb-action="clearBlockSearch">
+													  <div class="expand">
+														  <a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></a>
+														  <a href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></a> 
+													  </div>	
+
+													  <input class="form-control block-search" placeholder="Search blocks" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
+													  <button class="clear-backspace"  data-vvveb-action="clearSearch">
 														  <i class="la la-times"></i>
 													  </button>
 												  </div>

@@ -553,7 +553,7 @@ Vvveb.WysiwygEditor = {
 
 		if (selection.rangeCount > 0) {
 			//check if the whole text is inside an existing node to use the node directly
-			if ((selection.baseNode.nextSibling == null && selection.baseNode.previousSibling == null 
+			if ((selection.baseNode && selection.baseNode.nextSibling == null && selection.baseNode.previousSibling == null 
 				&& selection.anchorOffset == 0 && selection.focusOffset == selection.baseNode.length) 
 				|| (selection.anchorOffset == selection.focusOffset)) {
 					
@@ -670,7 +670,7 @@ Vvveb.WysiwygEditor = {
 		$("#font-family").on("change", function (e) {
 				let option = this.options[this.selectedIndex];
 				let element = self.editorSetStyle(false, {"font-family" : this.value});
-				FontsManager.addFont(option.dataset.provider, this.value, element);
+				Vvveb.FontsManager.addFont(option.dataset.provider, this.value, element);
 				//doc.execCommand('fontName',false,this.value);
 				e.preventDefault();
 				return false;
@@ -1769,7 +1769,7 @@ Vvveb.Builder = {
          html +=  doc.documentElement.innerHTML + "\n</html>";
          
          html = this.removeHelpers(html, keepHelperAttributes);
-         FontsManager.cleanUnusedFonts();
+         Vvveb.FontsManager.cleanUnusedFonts();
          
 	 $(window).triggerHandler("vvveb.getHtml.after", doc);
          
@@ -1984,26 +1984,12 @@ Vvveb.Gui = {
 	fullscreen : function () {
 		launchFullScreen(document); // the whole page
 	},
-	
-	componentSearch : function () {
-		searchText = this.value;
+
+	search : function () {
+		let searchText = this.value;
+		let panel = $("div > ul", this.parentNode.parentNode)
 		
-		$("#left-panel .components-list li ol li").each(function () {
-			$this = $(this);
-			
-			$this.hide();
-			if ($this.data("search").indexOf(searchText) > -1) $this.show();
-		});
-	},
-	
-	clearComponentSearch : function () {
-		$(".component-search").val("").keyup();
-	},
-	
-	blockSearch : function () {
-		searchText = this.value;
-		
-		$("#left-panel .blocks-list li ol li").each(function () {
+		$("li ol li", panel).each(function () {
 			$this = $(this);
 			
 			$this.hide();
@@ -2011,48 +1997,18 @@ Vvveb.Gui = {
 		});
 	},
 
-	sectionSearch : function () {
-		searchText = this.value;
-		
-		$("#left-panel .sections-list li ol li").each(function () {
-			$this = $(this);
-			
-			$this.hide();
-			if ($this.data("search").indexOf(searchText) > -1) $this.show();
-		});
+	clearSearch : function (e) {
+		$("input", this.parentNode).val("").keyup();
 	},
 	
-	clearBlockSearch : function () {
-		$(".block-search").val("").keyup();
+	expand : function (e) {
+		$('input.header_check[type="checkbox"]', this.parentNode.parentNode.parentNode).prop("checked", true)
 	},
 
-	clearSectionSearch : function () {
-		$(".section-search").val("").keyup();
+	collapse : function (e) {
+		$('input.header_check[type="checkbox"]', this.parentNode.parentNode.parentNode).prop("checked", false)
 	},
 	
-	addBoxComponentSearch : function () {
-		searchText = this.value;
-		
-		$("#add-section-box .components-list li ol li").each(function () {
-			$this = $(this);
-			
-			$this.hide();
-			if ($this.data("search").indexOf(searchText) > -1) $this.show();
-		});
-	},
-	
-	
-	addBoxBlockSearch : function () {
-		searchText = this.value;
-		
-		$("#add-section-box .blocks-list li ol li").each(function () {
-			$this = $(this);
-			
-			$this.hide();
-			if ($this.data("search").indexOf(searchText) > -1) $this.show();
-		});
-	},
-
 
 	//Pages, file/components tree 
 	newPage : function () {
@@ -2857,7 +2813,7 @@ Vvveb.Breadcrumb = {
 	}
 }
 
-FontsManager = {
+Vvveb.FontsManager = {
 	
 	activeFonts:[],
 	providers: {},//{"google":GoogleFontsManager};

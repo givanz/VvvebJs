@@ -112,6 +112,7 @@ Vvveb.Components.extend("_base", "_base", {
         data: {header:"Display"},
      }, {
 		//linked styles notice message
+		name:"",
 		key: "linked_styles_check",
         sort: base_sort++,
         section: style_section,

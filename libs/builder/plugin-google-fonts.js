@@ -31,7 +31,7 @@ GoogleFontsManager = {
 }
 
 
-FontsManager.addProvider("google", GoogleFontsManager);
+Vvveb.FontsManager.addProvider("google", GoogleFontsManager);
 	
 let googleFonts = {};
 let googlefontNames = [];
@@ -58,7 +58,7 @@ $.ajax({
 		let list = Vvveb.Components.getProperty("_base", "font-family");
 		list.onChange = function (node,value, input, component) {
 			let option = input.options[input.selectedIndex];
-			FontsManager.addFont(option.dataset.provider, value, node);
+			Vvveb.FontsManager.addFont(option.dataset.provider, value, node);
 			return node;
 		};
 		

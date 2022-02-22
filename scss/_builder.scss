@@ -582,14 +582,14 @@ body
 			background:none;
 
 			position: absolute;
-			top: 7px;
-			right: 5px;
+			top: 5px;
+			right: 12px;
 			
 			i {
 				font-size:13px;
 			}
 
-			opacity:0.8;
+			opacity:0.5;
 			
 			&:hover
 			{
@@ -598,10 +598,29 @@ body
 			}
 		}
 		
-		input:focus + #clear-backspace,
-		input:hover + #clear-backspace
+		input:focus + .clear-backspace,
+		input:hover + .clear-backspace
 		{
 			opacity:1;
+			background:#eee;
+		}
+		
+		.expand {
+			position: absolute;
+			top: 7px;
+			right: 3px; 
+			
+			a {
+				padding:0.2rem;
+				
+				&:hover {
+					background:#eee;
+				}
+			}
+		}
+		
+		.expand ~ .clear-backspace {
+			right: 56px;
 		}
 	}
 	
@@ -1997,6 +2016,7 @@ ul.autocomplete li.selected
 	font-size: 21px;
 	width: 36px;
 	height: 36px;
+	line-height: 36px;	
 	
 	visibility:hidden;
 	top:50%;
@@ -2175,4 +2195,13 @@ input[type="color"] {
 			cursor:pointer;
 		}
     }
+}
+
+.tab-content > .active{
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+img.preview {
+	max-width:100%;
 }

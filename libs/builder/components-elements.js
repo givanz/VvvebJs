@@ -17,8 +17,10 @@ https://github.com/givanz/Vvvebjs
 */
 
 Vvveb.ComponentsGroup['Elements'] = [
-"elements/svg-icon",
+	"elements/svg-icon"
 ];
+
+
 
 Vvveb.Components.extend("_base","elements/svg-icon", {
     nodes: ["svg"],
@@ -46,7 +48,7 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
 			return newElement;
 		},
 		data: {
-			url: Vvveb.baseUrl + "../../resources/svg/{value}/index.html",
+			url: Vvveb.baseUrl + "../../resources/svg/icons/{value}/index.html",
 			clickElement:"li",
 			insertElement:"svg",
 			elements: 'Loading ...',
@@ -84,8 +86,8 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
                 value: "olicons",
                 text: "Olicons"
             }, {
-				value: "open-iconic",
-				text: "Open iconic"
+		value: "open-iconic",
+		text: "Open iconic"
             }, {
                 value: "boxicons",
                 text: "Box icons"
@@ -208,7 +210,7 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
 
 
 Vvveb.Components.add("elements/svg-element", {
-    nodes: ["path", "line", "polygon", "rect", "circle", "ellipse", "g"],
+    nodes: ["path", "line", "polyline", "polygon", "rect", "circle", "ellipse", "g"],
     name: "Svg element",
     image: "icons/star.svg",
     html: ``,
