@@ -66,5 +66,8 @@ $.ajax({
 		list.data.options = list.data.options.concat(googlefontNames);
 
 		Vvveb.Components.updateProperty("_base", "font-family", {data:list.data});
+		
+		//update default font list
+		fontList = list.data.options;
 	}
 });

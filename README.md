@@ -5,33 +5,41 @@
 
 For a full featured CMS using VvvebJs check [Vvveb CMS](https://github.com/givanz/Vvveb)
 
-Built with jQuery and Bootstrap 4.
+Built with jQuery and Bootstrap 5.
 
-[Two panel Live Demo](https://www.vvveb.com/vvvebjs/editor.html)
-
-[One panel Live Demo](https://www.vvveb.com/vvvebjs/editor.html#no-right-panel)
+## [Live Demo](https://www.vvveb.com/vvvebjs/editor.html)
 
 [![npm](https://img.shields.io/npm/v/vvvebjs.svg)](https://www.npmjs.com/package/vvvebjs)
 
-Using [Startbootstrap landing page](https://startbootstrap.com/template-overviews/landing-page/) for demo page and Bootstrap 4 components.
+Using [Vvveb landing page template](https://github.com/givanz/Vvveb-landing-bootstrap5-template) for demo page and Bootstrap 5 sections and blocks.
 
-<img src="https://www.vvveb.com/img/browser.png?v=1">
+<img src="https://www.vvveb.com/img/browser.png">
 
 ### Features
 
-* Components and blocks/snippets drag and drop.
+* Components and blocks/snippets drag and drop and in page insert.
 * Undo/Redo operations.
 * One or two panels interface.
 * File manager and component hierarchy navigation.
-* Add new page.
-* Live code editor.
+* Add new page modal with template and folder options.
+* Live code editor with codemirror plugin syntax highlighting.
 * Image upload with example php script included.
 * Page download or export html or save page on server with example php script included.
-* Components/Blocks list search.
-* Bootstrap 4 components.
+* Components/Sections/Blocks list search.
+* Bootstrap 5 components.
+* Media gallery with integrated CC0 image search and server upload support.
+* Image, video and iframe elements resize handles.
+* Elements breadcrumb for easier parent elements selection.
+* Full Google fonts list support for font selection.
 * Youtube, Google maps, Charts.js etc widgets.
+* Optional CKEditor plugin to replace builtin text editor.
+* Zip download plugin to download the page and all assets as zip file.
+* SVG Icon component bundled with hundreds of free icons.
+* Animate on scroll support for page elements.
+* Theme global typography and color pallette editor.
 
-By default the editor comes with Bootstrap 4 and Widgets components and can be extended with any kind of components and inputs.
+
+By default the editor comes with Bootstrap 5 and Widgets components and can be extended with any kind of components and inputs.
 
 ## Usage
 
@@ -51,20 +59,28 @@ By default the editor comes with Bootstrap 4 and Widgets components and can be e
 <!-- inputs-->
 <script src="libs/builder/inputs.js"></script>	
 <!-- components-->
-<script src="libs/builder/components-bootstrap4.js"></script>	
+<script src="libs/builder/components-bootstrap5.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
 
 
 <script>
-$(document).ready(function() 
-{
-	Vvveb.Builder.init('demo/index.html', function() {
-		//load code after page is loaded here
-		Vvveb.Gui.init();
-	});
+$(document).ready(function()  {
+	Vvveb.Gui.init();
+	Vvveb.FileManager.init();
+	Vvveb.SectionList.init();
+	var pages = 
+	[
+		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
+		{name:"album", title:"Album",  url: "demo/album/index.html", file: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
+	];
+	
+	Vvveb.FileManager.addPages(pages);
+	Vvveb.FileManager.loadPage("narrow-jumbotron");
+	Vvveb.Breadcrumb.init();
 });
 </script>
 ```
+
 For editor html and components/input javascript templates check editor.html
 
 For css changes edit scss/editor.scss and scss/_builder.scss
@@ -75,33 +91,7 @@ For documentation check the [wiki](https://github.com/givanz/VvvebJs/wiki)
 
 ## Support
 
-If you like the project you can support it with a [PayPal donation](https://paypal.me/zgivan) or become a backer/sponsor via [Open Collective](https://opencollective.com/vvvebjs)
-
-
-<a href="https://opencollective.com/vvvebjs/sponsors/0/website"><img src="https://opencollective.com/vvvebjs/sponsors/0/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/sponsors/1/website"><img src="https://opencollective.com/vvvebjs/sponsors/1/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/sponsors/2/website"><img src="https://opencollective.com/vvvebjs/sponsors/2/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/sponsors/3/website"><img src="https://opencollective.com/vvvebjs/sponsors/3/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/sponsors/4/website"><img src="https://opencollective.com/vvvebjs/sponsors/4/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/sponsors/5/website"><img src="https://opencollective.com/vvvebjs/sponsors/5/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/sponsors/6/website"><img src="https://opencollective.com/vvvebjs/sponsors/6/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/sponsors/7/website"><img src="https://opencollective.com/vvvebjs/sponsors/7/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/sponsors/8/website"><img src="https://opencollective.com/vvvebjs/sponsors/8/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/sponsors/9/website"><img src="https://opencollective.com/vvvebjs/sponsors/9/avatar"></a>
-
-<a href="https://opencollective.com/vvvebjs/backers/0/website"><img src="https://opencollective.com/vvvebjs/backers/0/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/1/website"><img src="https://opencollective.com/vvvebjs/backers/1/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/2/website"><img src="https://opencollective.com/vvvebjs/backers/2/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/3/website"><img src="https://opencollective.com/vvvebjs/backers/3/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/4/website"><img src="https://opencollective.com/vvvebjs/backers/4/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/5/website"><img src="https://opencollective.com/vvvebjs/backers/5/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/6/website"><img src="https://opencollective.com/vvvebjs/backers/6/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/7/website"><img src="https://opencollective.com/vvvebjs/backers/7/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/8/website"><img src="https://opencollective.com/vvvebjs/backers/8/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/9/website"><img src="https://opencollective.com/vvvebjs/backers/9/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/10/website"><img src="https://opencollective.com/vvvebjs/backers/10/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/11/website"><img src="https://opencollective.com/vvvebjs/backers/11/avatar"></a>
-<a href="https://opencollective.com/vvvebjs/backers/12/website"><img src="https://opencollective.com/vvvebjs/backers/12/avatar"></a>
+If you like the project you can support it with a [PayPal donation](https://paypal.me/zgivan)
 
 
 ## License

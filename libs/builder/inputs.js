@@ -300,26 +300,26 @@ var CssUnitInput = $.extend({}, Input, {
 
     events: [
         ["change", "onChange", "select"],
-        ["change keyup mouseup", "onChange", "input"],
+        ["change keyup", "onChange", "input"],
 	 ],
 		
 	onChange: function(event) {
-		
 		if (event.data && event.data.element)
 		{
+			let number = $("input", event.data.element).val();
+			let unit = $("select", event.data.element).val();
 			input = event.data.input;
 			if (this.value != "") input[this.name] = this.value;// this.name = unit or number	
-			if (input['unit'] == "") input['unit'] = "px";//if unit is not set use default px
-			
-			var value = "";	
-			if (input.unit == "auto")  {
+			if (unit == "") unit = "px";//if unit is not set use default px
+		
+			let value = "";	
+			if (unit == "auto")  {
 				$(event.data.element).addClass("auto"); 
-				value = input.unit;
+				value = unit;
 			}
-			else 
-			{
+			else  {
 				$(event.data.element).removeClass("auto"); 
-				value = input.number + input.unit;
+				value = number + (unit ? unit : "");
 			}
 			
 			event.data.element.trigger('propertyChange', [value, this]);
@@ -327,8 +327,8 @@ var CssUnitInput = $.extend({}, Input, {
 	},
 	
 	setValue: function(value) {
-		this.number = parseInt(value);
-		this.unit = value.replace(this.number, '');
+		this.number = parseFloat(value);
+		this.unit = value.replace(this.number, '').trim();
 		
 		if (this.unit == "auto") $(this.element).addClass("auto");
 
@@ -345,16 +345,18 @@ var CssUnitInput = $.extend({}, Input, {
 var ColorInput = $.extend({}, Input, {
 
 	 //html5 color input only supports setting values as hex colors even if the picker returns only rgb
-	 rgb2hex: function(rgb) {
+	 rgb2hex: function(value) {
+		 value = value.trim();
 		 
-		 if (rgb) {
-			 rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+		 if (value && (rgb = value.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i))) {
 			 
 			 return (rgb && rgb.length === 4) ? "#" +
 			  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
 			  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
 			  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : rgb;
 		 }
+		 
+		 return value;
 	},
 
     events: [

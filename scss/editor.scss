@@ -58,6 +58,8 @@ $font-size-base: 1rem;
 
 @import "line-awesome/line-awesome";
 @import "bootstrap/bootstrap";
+/* override boostrap colors with css variables to allow dynamic color change*/ 
+@import "bootstrap-css-vars";
 @import "builder";
 
 

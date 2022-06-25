@@ -205,7 +205,7 @@ $font-size-base: 16px;
 
 body
 {
-	background:#eee;
+	//background:#eee;
 	--builder-filemanager-height: #{$builder-filemanager-height};
 	--builder-canvas-margin: #{$builder-canvas-margin};
 	
@@ -2116,6 +2116,7 @@ input[type="color"] {
 	border-radius: 3px;
 	padding: 2px;
 	box-shadow:none;
+	float:right;
 	
 	  &.form-control-color::-moz-color-swatch{
 			min-width: 21px;

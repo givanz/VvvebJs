@@ -375,24 +375,47 @@
 							
 								<div class="tab-pane fade" id="configuration" role="tabpanel" aria-labelledby="configuration-tab">
 									
-									<!-- color palette -->
-									<label class="header" data-header="default" for="header_pallette"><span>Color palette</span>
-										<div class="header-arrow"></div>
-									</label>
-									<input class="header_check" type="checkbox" checked="true" id="header_pallette">
+									<div class="drag-elements-sidepane sidepane">
+									<div>
+										<div class="component-properties">
+											<!-- color palette -->
+											<!--
+											<label class="header" data-header="default" for="header_pallette"><span>Global styles</span>
+												<div class="header-arrow"></div>
+											</label> -->
+											<input class="header_check" type="checkbox" checked="true" id="header_pallette">
+											<div class="tab-pane section px-0" data-section="content">
 
-									<!-- typography -->	
-									<label class="header" data-header="element_header" for="header_element_typography"><span>Typography</span>
-										<div class="header-arrow"></div>
-									</label>
+												
+												<div class="mb-3  col-sm-6  inline " data-key="background-color">      <label class=" form-label" for="input-model">Background Color</label>      <div class=" input"><div>   <input name="background-color" type="color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">  </div></div>     </div>
+												
+												
+												
+												<div class="mb-3  col-sm-6  inline " data-key="background-color">      <label class=" form-label" for="input-model">Background Color</label>      <div class=" input"><div>   <input name="background-color" type="color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">  </div></div>     </div>
+												
+												
+												
+												
+											</div>
+												
+												
+											<!-- typography -->	
+											<!-- 
+											<label class="header" data-header="element_header" for="header_element_typography"><span>Typography</span>
+												<div class="header-arrow"></div>
+											</label>
+											
+											<input class="header_check" type="checkbox" checked="true" id="header_element_typography">
+											<div class="section" data-section="element_header">
+											
+											</div> 
+											-->
 									
-									<input class="header_check" type="checkbox" checked="true" id="header_element_typography">
-									<div class="section" data-section="element_header">
-										
-										
 									</div>
+								</div>
+								</div>
 									
-								
+									
 								</div><!-- end configuration tab -->
 							
 							</div>
@@ -1521,7 +1544,7 @@
 window.mediaPath = 'media';
 </script>
 <script src="libs/media/media.js"></script>	
-<script src="libs/media/openverse.js"></script>	
+<script src="libs/media/openverse.js"></script>
 <script src="libs/builder/plugin-media.js"></script>	
 
 <!-- bootstrap colorpicker //uncomment bellow scripts to enable -->
@@ -1542,10 +1565,10 @@ window.mediaPath = 'media';
 <script src="libs/builder/components-html.js"></script>	
 
 <!-- sections-->
-<script src="libs/builder/sections-bootstrap4.js"></script>	
+<script src="libs/builder/sections-bootstrap4.js"></script>
 
 <!-- blocks-->
-<script src="libs/builder/blocks-bootstrap4.js"></script>	
+<script src="libs/builder/blocks-bootstrap4.js"></script>
 
 <!-- plugins -->
 
@@ -1609,7 +1632,7 @@ $(document).ready(function()
 	var pages = 
 	[
 		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
-		{name:"landing-page", title:"Landing page",  url: "demo/landing/index-2.html", file: "demo/landing/index-2.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
+		{name:"landing-page", title:"Landing page",  url: "demo/landing/index.html", file: "demo/landing/index.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
 		{name:"album", title:"Album",  url: "demo/album/index.html", file: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
 		{name:"blog", title:"Blog",  url: "demo/blog/index.html", file: "demo/blog/index.html", folder:"content", assets: ['demo/blog/blog.css']},
 		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html",  file: "demo/carousel/index.html", folder:"content", assets: ['demo/carousel/carousel.css']},

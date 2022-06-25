@@ -302,15 +302,21 @@ Vvveb.Components = {
 		//return false;
 	},
 	
-	render: function(type) {
+	render: function(type, panel = false) {
 
 		var component = this._components[type];
+		
+		if (panel) {
+			componentsPanel = panel;
+		} else {
+			panel = this.componentPropertiesElement;
+		}
 
-		var componentsPanel = $(this.componentPropertiesElement);
+		var componentsPanel = $(panel);
 		var defaultSection = this.componentPropertiesDefaultSection;
 		var componentsPanelSections = {};
 
-		$(this.componentPropertiesElement + " .tab-pane").each(function ()
+		$(panel + " .tab-pane").each(function ()
 		{
 			var sectionName = this.dataset.section;
 			componentsPanelSections[sectionName] = $(this);
@@ -428,6 +434,7 @@ Vvveb.Components = {
 
 			property.input = property.inputtype.init(property.data);
 			
+			let value;
 			if (property.init)
 			{
 				property.inputtype.setValue(property.init(element.get(0)));
@@ -436,14 +443,14 @@ Vvveb.Components = {
 				if (property.htmlAttr == "style")
 				{
 					//value = element.css(property.key);//jquery css returns computed style
-					var value = Vvveb.StyleManager.getStyle(element, property.key);//getStyle returns declared style
+					value = Vvveb.StyleManager.getStyle(element, property.key);//getStyle returns declared style
 				} else
 				if (property.htmlAttr == "innerHTML")
 				{
-					var value = Vvveb.ContentManager.getHtml(element);
+					value = Vvveb.ContentManager.getHtml(element);
 				} else
 				{
-					var value = element.attr(property.htmlAttr);
+					value = element.attr(property.htmlAttr);
 				}
 
 				//if attribute is class check if one of valid values is included as class to set the select
@@ -457,6 +464,13 @@ Vvveb.Components = {
 				if (!value && property.defaultValue) {
 					value = property.defaultValue;
 				}
+
+				property.inputtype.setValue(value);
+			} else {
+				if (!value && property.defaultValue) {
+					value = property.defaultValue;
+				}
+
 				property.inputtype.setValue(value);
 			}
 			
@@ -1024,6 +1038,8 @@ Vvveb.Builder = {
 			
 				Vvveb.WysiwygEditor.init(window.FrameDocument);
 				Vvveb.StyleManager.init(window.FrameDocument);
+				Vvveb.ColorPaletteManager.init(window.FrameDocument);
+
 				if (self.initCallback) self.initCallback();
 
                 return self._frameLoaded();
@@ -2186,8 +2202,12 @@ Vvveb.StyleManager = {
 	},
 
 	setStyle: function (element, styleProp, value) {
-
-		selector = this.getSelectorForElement(element.get(0));
+		if (typeof(element) == "string") {
+			selector = element;
+		} else {
+			selector = this.getSelectorForElement(element.get(0));
+		}
+		
 		media = $("#canvas").hasClass("tablet") ? "tablet" : $("#canvas").hasClass("mobile") ? "mobile" : "desktop";
 
 		//styles[media][selector][styleProp] = value
@@ -2252,7 +2272,12 @@ Vvveb.StyleManager = {
 		var value = "";
 		var el = element.get(0);
 
-		selector = this.getSelectorForElement(el);
+		if (typeof(element) == "string") {
+			selector = element;
+		} else {
+			selector = this.getSelectorForElement(el);
+		}
+
 		media = $("#canvas").hasClass("tablet") ? "tablet" : $("#canvas").hasClass("mobile") ? "mobile" : "desktop";
 
 		if (el.style && el.style.length > 0 && el.style[styleProp])//check inline
@@ -2504,7 +2529,7 @@ Vvveb.SectionList = {
 				scrollTop: $(node).offset().top
 			}, 1000);
 			
-			node.click();
+			delay(() => node.click(), 1000);
 			
 			node = node.get(0);
 			Vvveb.Undo.addMutation({type: 'childList', 
@@ -2512,7 +2537,7 @@ Vvveb.SectionList = {
 									addedNodes: [node], 
 									nextSibling: node.nextSibling});								
 
-			
+
 			self.loadSections();
 			e.preventDefault();
 		});
@@ -2845,12 +2870,68 @@ Vvveb.FontsManager = {
 		for (i in this.activeFonts) {
 			let elementFont = this.activeFonts[i];
 			if (elementFont.element) {
-				if (getComputedStyle(elementFont.element)['font-family'] != elementFont.fontFamily) {
+				//if (getComputedStyle(elementFont.element)['font-family'] != elementFont.fontFamily) {
+				if (Vvveb.StyleManager.getStyle(element,'font-family') != elementFont.fontFamily) {
 					this.removeFont(elementFont.provider, elementFont.fontFamily);
 				}
 			}
 		}
 	}
+};
+
+Vvveb.ColorPaletteManager = {
+	
+	getAllCSSVariableNames:  function (styleSheets = document.styleSheets, selector){
+	   let cssVars = {"font": {}, "color" : {}, "dimensions": {}};
+	   for(var i = 0; i < styleSheets.length; i++){
+		  try{ 
+			 let cssRules =  styleSheets[i].cssRules;
+			 for( var j = 0; j < cssRules.length; j++){
+				try{
+				   let style = cssRules[j].style;	
+				   if (selector && cssRules[j].selectorText && cssRules[j].selectorText != selector) continue;
+				   for(var k = 0; k < style.length; k++){
+					  let name = style[k];
+					  let value = style.getPropertyValue(name).trim();
+					  let type = "";
+					  
+					  
+					  if(name.startsWith("--")){
+						//ignore bootstrap rgb variables
+						if (name.endsWith("-rgb")) continue;
+						//ignore variables depending on other variables
+						if (value.startsWith("var(")) continue;
+
+						 let friendlyName = name.replace("--bs-","").replaceAll("-", " ");  
+						 
+						 if (value.startsWith("#")) {
+							 type = "color";
+						} else if (value.indexOf('"') > 0) {
+							type = "font";
+						} else if (value.endsWith('em') > 0 || value.endsWith('px') > 0) {
+							type = "dimensions";
+						} else if (!isNaN(parseFloat(value))) {
+							type = "dimensions";
+						}
+
+						if (type) {
+							 if (!cssVars[type]) cssVars[type] = {};
+							 cssVars[type][name] = {value, type, friendlyName};
+						 }
+					  }
+				   }
+				} catch (error) {}
+			 }
+		  } catch (error) {}
+	   }
+	   return cssVars;
+	},
+	
+	init: function(document) {
+		Vvveb.Builder.selectedEl = $(document.body);
+		Vvveb.Components.render("config/bootstrap", "#configuration .component-properties")
+	},
+	
 };
 
 
@@ -2894,13 +2975,13 @@ let fontList = [{
 	value: "Arial, Helvetica, sans-serif",
 	text: "Arial"
 }, {
-	value: '\'Lucida Sans Unicode\', \'Lucida Grande\', sans-serif',
+	value: "'Lucida Sans Unicode', 'Lucida Grande', sans-serif",
 	text: 'Lucida Grande'
 }, {
-	value: '\'Palatino Linotype\', \'Book Antiqua\', Palatino, serif',
+	value: "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
 	text: 'Palatino Linotype'
 }, {
-	value: '\'Times New Roman\', Times, serif',
+	value: "'Times New Roman', Times, serif",
 	text: 'Times New Roman'
 }, {
 	value: "Georgia, serif",
@@ -2909,24 +2990,24 @@ let fontList = [{
 	value: "Tahoma, Geneva, sans-serif",
 	text: "Tahoma"
 }, {
-	value: '\'Comic Sans MS\', cursive, sans-serif',
+	value: "'Comic Sans MS', cursive, sans-serif",
 	text: 'Comic Sans'
 }, {
-	value: 'Verdana, Geneva, sans-serif',
+	value: "Verdana, Geneva, sans-serif",
 	text: 'Verdana'
 }, {
-	value: 'Impact, Charcoal, sans-serif',
+	value: "Impact, Charcoal, sans-serif",
 	text: 'Impact'
 }, {
-	value: '\'Arial Black\', Gadget, sans-serif',
+	value: "'Arial Black', Gadget, sans-serif",
 	text: 'Arial Black'
 }, {
-	value: '\'Trebuchet MS\', Helvetica, sans-serif',
+	value: "'Trebuchet MS', Helvetica, sans-serif",
 	text: 'Trebuchet'
 }, {
-	value: '\'Courier New\', Courier, monospace',
+	value: "'Courier New', Courier, monospace",
 	text: 'Courier New'
 }, {
-	value: '\'Brush Script MT\', sans-serif',
+	value: "'Brush Script MT', sans-serif",
 	text: 'Brush Script'
 }];
