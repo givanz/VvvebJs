@@ -1,7 +1,18 @@
 # VvvebJs
+Powerful and easy to use drag and drop builder javascript library for blogs, websites or ecommerce stores.
+Unlimited design powers with an easy to use interface, change anything on your website with a few clicks
 
+**Security**: Vvveb is 100% safe against sql injections, a vulerability that affects most CMSs.
 
-## Drag and drop website builder javascript library.
+**Unlimited theme flexibility**: Vvveb uses plain html for templating for maximum flexibility, convert any html template to a theme in just a few minutes.
+
+**Ecommerce**: Vvveb is a full featured ecommerce platform with advanced functionality.
+
+**Localization**: Publish content in multiple languages or sell in different currencies.
+
+**Demo import**: Built in demo import functionality helps you lunch your website faster by providing initial content and configuration.
+
+**Open source and free**: Open source code means transparency and collaboration.
 
 For a full featured CMS using VvvebJs check [Vvveb CMS](https://github.com/givanz/Vvveb)
 
@@ -15,7 +26,7 @@ Using [Vvveb landing page template](https://github.com/givanz/Vvveb-landing-boot
 
 <img src="https://www.vvveb.com/img/browser.png">
 
-### Features
+### Additional Features
 
 * Components and blocks/snippets drag and drop and in page insert.
 * Undo/Redo operations.
