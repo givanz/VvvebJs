@@ -422,6 +422,7 @@ Vvveb.Components = {
 			if (property.beforeInit) property.beforeInit(element.get(0)) 
 			
 			if (property.child) element = element.find(property.child);
+			if (property.parent) element = element.parent(property.parent);
 			
 			if (property.data) {
 				property.data["key"] = property.key;
