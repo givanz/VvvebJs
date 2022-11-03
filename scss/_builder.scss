@@ -126,7 +126,7 @@ $font-size-base: 16px;
 		font-size: 11px;
 		color: #000;
 		background-repeat: no-repeat;
-		padding-top: 0px;
+		padding: 0px;
 		margin:1rem auto;
 
 		display:block;
@@ -607,11 +607,13 @@ body
 		
 		.expand {
 			position: absolute;
-			top: 7px;
+			top: 4px;
 			right: 3px; 
 			
-			a {
+			button {
 				padding:0.2rem;
+				background:transparent;
+				border:none;
 				
 				&:hover {
 					background:#eee;
@@ -1149,6 +1151,7 @@ body
 							border: none;
 						}				  
 				}
+
 			}
 			
 			select {

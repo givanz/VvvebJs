@@ -117,7 +117,7 @@ Vvveb.Components = {
 	},
 
 	getProperty: function(type, key) {
-		let properties = this._components[type]["properties"];
+		let properties = this._components[type] ? this._components[type]["properties"] : [];
 		for (property in properties) {
 			if (key == properties[property]["key"])  {
 				return properties[property];
@@ -305,6 +305,7 @@ Vvveb.Components = {
 	render: function(type, panel = false) {
 
 		var component = this._components[type];
+		if (!component) return;
 		
 		if (panel) {
 			componentsPanel = panel;
@@ -334,7 +335,7 @@ Vvveb.Components = {
 		}
 
 		componentsPanelSections[defaultSection].find('[data-header="default"] span').html(component.name);
-		section.html("")	
+		section.html("");	
 	
 		if (component.beforeInit) component.beforeInit(Vvveb.Builder.selectedEl.get(0));
 		
@@ -2018,11 +2019,11 @@ Vvveb.Gui = {
 	},
 	
 	expand : function (e) {
-		$('input.header_check[type="checkbox"]', this.parentNode.parentNode.parentNode).prop("checked", true)
+		$('input.header_check[type="checkbox"]', this.parentNode.parentNode.parentNode).prop("checked", true);
 	},
 
 	collapse : function (e) {
-		$('input.header_check[type="checkbox"]', this.parentNode.parentNode.parentNode).prop("checked", false)
+		$('input.header_check[type="checkbox"]', this.parentNode.parentNode.parentNode).prop("checked", false);
 	},
 	
 
@@ -2263,8 +2264,6 @@ Vvveb.StyleManager = {
 		}
 
 		this.cssContainer.html(css);
-
-		return element;
 	},
 
 
@@ -2906,7 +2905,7 @@ Vvveb.ColorPaletteManager = {
 						 
 						 if (value.startsWith("#")) {
 							 type = "color";
-						} else if (value.indexOf('"') > 0) {
+						} else if (value.indexOf('"') >= 0 || value.indexOf("'") >= 0) {
 							type = "font";
 						} else if (value.endsWith('em') > 0 || value.endsWith('px') > 0) {
 							type = "dimensions";
@@ -2927,6 +2926,7 @@ Vvveb.ColorPaletteManager = {
 	   return cssVars;
 	},
 	
+
 	init: function(document) {
 		Vvveb.Builder.selectedEl = $(document.body);
 		Vvveb.Components.render("config/bootstrap", "#configuration .component-properties")

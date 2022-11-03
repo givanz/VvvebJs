@@ -56,18 +56,20 @@ $.ajax({
 		$("#font-family").append(fontSelect);	
 
 		let list = Vvveb.Components.getProperty("_base", "font-family");
-		list.onChange = function (node,value, input, component) {
-			let option = input.options[input.selectedIndex];
-			Vvveb.FontsManager.addFont(option.dataset.provider, value, node);
-			return node;
-		};
-		
-		list.data.options.push({optgroup:"Google Fonts"});
-		list.data.options = list.data.options.concat(googlefontNames);
+		if (list) {
+			list.onChange = function (node,value, input, component) {
+				let option = input.options[input.selectedIndex];
+				Vvveb.FontsManager.addFont(option.dataset.provider, value, node);
+				return node;
+			};
+			
+			list.data.options.push({optgroup:"Google Fonts"});
+			list.data.options = list.data.options.concat(googlefontNames);
 
-		Vvveb.Components.updateProperty("_base", "font-family", {data:list.data});
-		
-		//update default font list
-		fontList = list.data.options;
+			Vvveb.Components.updateProperty("_base", "font-family", {data:list.data});
+			
+			//update default font list
+			fontList = list.data.options;
+		}
 	}
 });

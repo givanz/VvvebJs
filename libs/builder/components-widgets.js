@@ -82,7 +82,7 @@ Vvveb.Components.extend("_base", "widgets/video", {
     attributes: ["data-component-video"],
     image: "icons/video.svg",
     dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/video.svg" width="100" height="100">', //use image for drag and swap with iframe on drop for drag performance
-    html: '<div data-component-video style="min-height:240px;min-width:240px;position:relative"><iframe frameborder="0" src="https://www.youtube.com/embed/3xsP3u-CVO4" style="width:100%;height:100%;position:absolute;left:0px;pointer-events:none"></iframe></div>',
+    html: '<div data-component-video style="min-height:240px;min-width:240px;position:relative"><iframe frameborder="0" src="https://www.youtube.com/embed/M7lc1UVf-VE" style="width:100%;height:100%;position:absolute;left:0px;pointer-events:none"></iframe></div>',
     
     
     //url parameters set with onChange

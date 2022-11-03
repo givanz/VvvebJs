@@ -237,8 +237,8 @@
 
 													   <div class="search">
 															  <div class="expand">
-																  <a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></a>
-																  <a href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></a> 
+																  <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></button> 
+																  <button title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
 															  </div>	
 
 															  <input class="form-control section-search" placeholder="Search sections" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
@@ -284,8 +284,8 @@
 												 
 												   <div class="search">
 														  <div class="expand">
-															  <a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></a>
-															  <a href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></a> 
+																  <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></button> 
+																  <button title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
 														  </div>	
 
 														  <input class="form-control component-search" placeholder="Search components" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
@@ -310,8 +310,8 @@
 
 													   <div class="search">
 															  <div class="expand">
-																  <a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></a>
-																  <a href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></a> 
+																  <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></button> 
+																  <button title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
 															  </div>	
 
 															  <input class="form-control block-search" placeholder="Search blocks" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
@@ -1542,6 +1542,7 @@
 <link href="libs/media/media.css" rel="stylesheet">
 <script>
 window.mediaPath = 'media';
+//Vvveb.themeBaseUrl = 'demo/landing/';
 </script>
 <script src="libs/media/media.js"></script>	
 <script src="libs/media/openverse.js"></script>
@@ -1565,6 +1566,7 @@ window.mediaPath = 'media';
 <script src="libs/builder/components-html.js"></script>	
 
 <!-- sections-->
+<!-- <script src="demo/landing/sections/sections.js"></script>	-->
 <script src="libs/builder/sections-bootstrap4.js"></script>
 
 <!-- blocks-->
@@ -1629,10 +1631,11 @@ $(document).ready(function()
 	Vvveb.Gui.init();
 	Vvveb.FileManager.init();
 	Vvveb.SectionList.init();
+
 	var pages = 
 	[
 		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
-		{name:"landing-page", title:"Landing page",  url: "demo/landing/index.html", file: "demo/landing/index.html", assets: ['demo/startbootstrap-landing-page/css/landing-page.min.css']},
+		{name:"landing-page", title:"Landing page",  url: "demo/landing/index.html", file: "demo/landing/index.html", assets: ['demo/landing/css/style.css']},
 		{name:"album", title:"Album",  url: "demo/album/index.html", file: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
 		{name:"blog", title:"Blog",  url: "demo/blog/index.html", file: "demo/blog/index.html", folder:"content", assets: ['demo/blog/blog.css']},
 		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html",  file: "demo/carousel/index.html", folder:"content", assets: ['demo/carousel/carousel.css']},
@@ -1660,8 +1663,7 @@ $(document).ready(function()
 	];
 	
 	Vvveb.FileManager.addPages(pages);
-	
-	Vvveb.FileManager.loadPage("narrow-jumbotron");
+	//Vvveb.FileManager.loadPage("landing-page");
 	Vvveb.Breadcrumb.init();
 });
 </script>
