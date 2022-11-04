@@ -1820,10 +1820,11 @@ Vvveb.Builder = {
 		//return self.documentFrame.attr("srcdoc", html);
 	},
 	
-	saveAjax: function(fileName, startTemplateUrl, callback, saveUrl)
+	saveAjax: function(fileName, startTemplateUrl, folder, callback, saveUrl)
 	{
 		var data = {};
 		data["file"] = (fileName && fileName != "") ? fileName : Vvveb.FileManager.getCurrentFileName();
+		data["folder"] =  (folder && folder != "") ? folder : Vvveb.FileManager.getCurrentFolder();
 		data["startTemplateUrl"] = startTemplateUrl;
 		if (!startTemplateUrl || startTemplateUrl == null)
 		{
@@ -1944,9 +1945,9 @@ Vvveb.Gui = {
 	saveAjax : function () {
 		
 		var saveUrl = this.dataset.vvvebUrl;
-		var url = Vvveb.FileManager.getPageData('file');
+		var url = Vvveb.FileManager.getCurrentUrl();
 		
-		return Vvveb.Builder.saveAjax(url, null, function (data) {
+		return Vvveb.Builder.saveAjax(url, null, null, function (data) {
 			var messageModal = new bootstrap.Modal(document.getElementById('message-modal'), {
 			  keyboard: false
 			});
@@ -2045,7 +2046,7 @@ Vvveb.Gui = {
 			Vvveb.FileManager.addPage(data.name, data);
 			e.preventDefault();
 			
-			return Vvveb.Builder.saveAjax(data.file, data.startTemplateUrl, function (data) {
+			return Vvveb.Builder.saveAjax(data.file, data.startTemplateUrl, data.folder, function (data) {
 					Vvveb.FileManager.loadPage(name);
 					Vvveb.FileManager.scrollBottom();
 					newPageModal.modal("hide");
@@ -2764,6 +2765,14 @@ Vvveb.FileManager = {
         }
 	},
 	
+    getCurrentFolder: function() {
+		if (this.currentPage)
+        {
+            var folder = this.pages[this.currentPage]['folder'];
+            folder = folder ? folder + '/': ''; 
+            return folder;
+        }
+	},
 	reloadCurrentPage: function() {
 		if (this.currentPage)
 		return this.loadPage(this.currentPage);
