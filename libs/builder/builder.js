@@ -1841,8 +1841,8 @@ Vvveb.Builder = {
 		{
 			data["html"] = this.getHtml();
 		}
-
-		$.ajax({
+		
+		var ajaxOpt = {
 			type: "POST",
 			url: saveUrl,//set your server side save script url
 			data: data,
@@ -1857,7 +1857,16 @@ Vvveb.Builder = {
 			error: function (data) {
 				alert(data.responseText);
 			}
-		});					
+		};
+		
+		var ajaxOptMod = $(window).triggerHandler("vvveb.saveAjax", ajaxOpt);
+         	if (ajaxOptMod === false) 
+			return;
+		
+		if( ajaxOptMod && $.isPlainObject(ajaxOptMod) )
+			ajaxOpt = ajaxOptMod;
+
+		$.ajax(ajaxOpt);					
 	},
 	
 	setDesignerMode: function(designerMode = false)
