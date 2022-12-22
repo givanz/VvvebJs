@@ -697,7 +697,7 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
                			<form class="form-signin" action="" method="">
                				<input type="text" class="form-control" placeholder="Username" required autofocus>
                				<input type="password" class="form-control" placeholder="Password" required>
-               				<input type="submit" class="btn btn-lg btn-default btn-block" value="Sign In" />
+               				<input type="submit" class="btn btn-lg btn-default w-100" value="Sign In" />
                			</form>
                			<div id="tabs" data-tabs="tabs">
                				<p class="text-center"><a href="#register" data-toggle="tab">Need an Account?</a></p>
@@ -709,7 +709,7 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
 								<input type="text" class="form-control" placeholder="User Name ..." required autofocus>
 								<input type="email" class="form-control" placeholder="Emaill Address ..." required>
 								<input type="password" class="form-control" placeholder="Password ..." required>
-								<input type="submit" class="btn btn-lg btn-default btn-block" value="Sign Up" />
+								<input type="submit" class="btn btn-lg btn-default w-100" value="Sign Up" />
 							</form>
 							<div id="tabs" data-tabs="tabs">
                			<p class="text-center"><a href="#login" data-toggle="tab">Have an Account?</a></p>
@@ -751,7 +751,7 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
 							<form class="form-signin" action="" method="">
 								<input type="hidden" class="form-control" value="User Name">
 								<input type="password" class="form-control" placeholder="Password" autofocus required>
-								<input type="submit" class="btn btn-lg btn-default btn-block" value="Sign In" />
+								<input type="submit" class="btn btn-lg btn-default w-100" value="Sign In" />
 							</form>
 							<p class="text-center"><a href="#login" data-toggle="tab">Back to Login</a></p>
                		<p class="text-center"><a href="#select" data-toggle="tab">Select another Account</a></p>
@@ -763,7 +763,7 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
 							<form class="form-signin" action="" method="">
 								<input type="hidden" class="form-control" value="User Name">
 								<input type="password" class="form-control" placeholder="Password" autofocus required>
-								<input type="submit" class="btn btn-lg btn-default btn-block" value="Sign In" />
+								<input type="submit" class="btn btn-lg btn-default w-100" value="Sign In" />
 							</form>
 							<p class="text-center"><a href="#login" data-toggle="tab">Back to Login</a></p>
                		<p class="text-center"><a href="#select" data-toggle="tab">Select another Account</a></p>
@@ -945,7 +945,7 @@ Vvveb.Blocks.add("bootstrap4/pricing-1", {
 					<li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
 				</ul>
 				<div class="panel-footer">
-					<a class="btn btn-lg btn-block btn-danger" href="#">BUY NOW!</a>
+					<a class="btn btn-lg w-100 btn-danger" href="#">BUY NOW!</a>
 				</div>
 			</div>
 		</div>
@@ -967,7 +967,7 @@ Vvveb.Blocks.add("bootstrap4/pricing-1", {
 					<li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
 				</ul>
 				<div class="panel-footer">
-					<a class="btn btn-lg btn-block btn-warning" href="#">BUY NOW!</a>
+					<a class="btn btn-lg w-100 btn-warning" href="#">BUY NOW!</a>
 				</div>
 			</div>
 		</div>
@@ -989,7 +989,7 @@ Vvveb.Blocks.add("bootstrap4/pricing-1", {
 					<li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
 				</ul>
 				<div class="panel-footer">
-					<a class="btn btn-lg btn-block btn-success" href="#">BUY NOW!</a>
+					<a class="btn btn-lg w-100 btn-success" href="#">BUY NOW!</a>
 				</div>
 			</div>
 		</div>

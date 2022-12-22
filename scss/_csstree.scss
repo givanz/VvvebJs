@@ -2,13 +2,15 @@
 .tree
 {
 	width:100%;
+	padding:0;
 
-	ol
+	> ol
 	{
-		padding: 0.3rem 0 0 2rem;
+		padding: 0rem 0 0 0rem;
 		margin:0;
 		//width: 300px;
-		min-width: $builder-right-panel-width + 15;
+		//min-width: $builder-right-panel-width + 15;
+		//margin:0 0.5rem;
 		font-size:12px;
 		font-weight:500;
 		color:#555;
@@ -16,7 +18,7 @@
 		li 
 		{ 
 			position: relative; 
-			margin-left: -15px;
+			//margin-left: -15px;
 			margin-bottom: 0.3rem;
 			list-style: none;
 			color:#555;
@@ -33,7 +35,7 @@
 				//color:#fff;
 				> label > span, > a > span  
 				{
-					color:#007bff;
+					//color:#007bff;
 					//font-weight:500;
 				}
 			}
@@ -41,13 +43,22 @@
 		
 		li.file
 		{
+			border:1px solid transparent;
+			
+			&:hover, &.active {
+				background-color:rgba($primary, 0.07);
+				//border: 1px solid rgba($primary, 0.05);
+			}
+			
 			> label
 			{
-				background: url(../libs/builder/icons/file.svg) 24px 0px no-repeat;
+				background: url(../libs/builder/icons/file.svg);
+				background-position:8px 4px;
 				background-size:21px 21px;
+				background-repeat:no-repeat;
 				cursor: pointer;
 				display: block;
-				padding-left: 56px;
+				padding-left: 35px;
 				margin:0;
 				font-size:12px;
 				font-weight:500;
@@ -77,15 +88,15 @@
 			opacity: 0;
 			z-index: 2;
 			cursor: pointer;
-			height: 1em;
-			width: 1em;
+			height: 2em;
+			width: 2em;
 			top: 0;
 			
 			 + ol
 			{
 				background: url(../libs/builder/icons/arrow-right.svg) 5px .3rem no-repeat;
-				background-size:10px 10px;
-				margin: -1.8rem 0 0 0rem;
+				background-size:12px 12px;
+				margin: -1.9rem 0 0 0rem;
 				padding: 2rem 0 0 2rem;
 				height: 0;
 				
@@ -109,9 +120,9 @@
 		li input:checked + ol
 		{
 			background: url(../libs/builder/icons/arrow-down.svg) 5px .1rem no-repeat;
-			background-size:10px 10px;
+			background-size:12px 12px;
 			margin: -1.8em 0 0 0rem;
-			padding: 2rem 0 0 2rem;
+			padding: 2rem 0 0 3rem;
 			height: auto;
 
 			> li { display: block; margin: 0 0 0.5em;  /* 2px */}

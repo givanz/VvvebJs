@@ -717,6 +717,7 @@ Vvveb.WysiwygEditor = {
 		this.oldValue = element.html();
 		
 		$("#font-familly").val(getComputedStyle(element[0])['font-family']);
+		element.focus();
 	},
 
 	destroy: function(element) {
@@ -1005,6 +1006,7 @@ Vvveb.Builder = {
 				
 				$(window.FrameWindow).on( "unload", function(event) {
 					$(".loading-message").addClass("active");
+					Vvveb.Undo.reset();
 				});
 				
 				$(window.FrameWindow).on("scroll resize", function(event) {
@@ -1064,6 +1066,16 @@ Vvveb.Builder = {
 		
 		$(window).triggerHandler("vvveb.iframe.loaded", self.frameDoc);
 		$(".loading-message").removeClass("active");
+
+
+		//enable save button only if changes are made
+		Vvveb.Builder.frameBody.on("vvveb.undo.add vvveb.undo.restore", function (e) { 
+			if (Vvveb.Undo.hasChanges()){
+				$(".save-btn").removeAttr("disabled");
+			} else {
+				$(".save-btn").attr("disabled", "true");
+			}
+		});		
     },	
     
     _getElementType: function(el) {
@@ -1783,10 +1795,10 @@ Vvveb.Builder = {
          + (doc.doctype.systemId ? ' "' + doc.doctype.systemId + '"' : '')
          + ">\n";
           
-         html +=  doc.documentElement.innerHTML + "\n</html>";
-         
-         html = this.removeHelpers(html, keepHelperAttributes);
          Vvveb.FontsManager.cleanUnusedFonts();
+         
+         html +=  doc.documentElement.innerHTML + "\n</html>";
+         html = this.removeHelpers(html, keepHelperAttributes);
          
 	 $(window).triggerHandler("vvveb.getHtml.after", doc);
          
@@ -1838,6 +1850,8 @@ Vvveb.Builder = {
 			success: function (data) {
 				
 				if (callback) callback(data);
+				Vvveb.Undo.reset();
+				$(".save-btn").attr("disabled", "true");
 				
 			},
 			error: function (data) {
@@ -1867,7 +1881,9 @@ Vvveb.CodeEditor = {
 		});
 
 		//load code on document changes
-		Vvveb.Builder.frameBody.on("vvveb.undo.add vvveb.undo.restore", function (e) { Vvveb.CodeEditor.setValue();});
+		Vvveb.Builder.frameBody.on("vvveb.undo.add vvveb.undo.restore", function (e) { 
+			Vvveb.CodeEditor.setValue();
+		});
 		//load code when a new url is loaded
 		Vvveb.Builder.documentFrame.on("load", function (e) { Vvveb.CodeEditor.setValue();});
 
@@ -1942,11 +1958,17 @@ Vvveb.Gui = {
 	
 	//post html content through ajax to save to filesystem/db
 	saveAjax : function () {
-		
+		var btn = $(this);
 		var saveUrl = this.dataset.vvvebUrl;
 		var url = Vvveb.FileManager.getPageData('file');
+
+		$(".loading", btn).toggleClass("d-none");
+		$(".button-text", btn).toggleClass("d-none");
 		
 		return Vvveb.Builder.saveAjax(url, null, function (data) {
+			$(".loading", btn).toggleClass("d-none");
+			$(".button-text", btn).toggleClass("d-none");
+
 			var messageModal = new bootstrap.Modal(document.getElementById('message-modal'), {
 			  keyboard: false
 			});
@@ -2097,7 +2119,7 @@ Vvveb.Gui = {
 		$("#vvveb-builder").toggleClass("no-right-panel");
 		$(".component-properties-tab").toggle();
 		
-		Vvveb.Components.componentPropertiesElement = (rightColumnEnabled ? "#right-panel" :"#left-panel") + " .component-properties";
+		Vvveb.Components.componentPropertiesElement = (rightColumnEnabled ? "#right-panel" :"#left-panel #properties") + " .component-properties";
 		if ($("#properties").is(":visible")) $('.component-tab a').show().tab('show'); 
 
 	},
@@ -2769,16 +2791,17 @@ Vvveb.FileManager = {
 		return this.loadPage(this.currentPage);
 	},
 	
-	loadPage: function(name, allowedComponents = false, disableCache = true) {
+	loadPage: function(name, allowedComponents = false, disableCache = true, loadComponents = false) {
 		$("[data-page]", this.tree).removeClass("active");
 		$("[data-page='" + name + "']", this.tree).addClass("active");
 
 		this.currentPage = name;
 		var url = this.pages[name]['url'];
+		$(".btn-preview-url").attr("href", url);
 		
 		Vvveb.Builder.loadUrl(url + (disableCache ? (url.indexOf('?') > -1 ? '&r=':'?r=') + Math.random():''), 
 			function () { 
-				Vvveb.FileManager.loadComponents(allowedComponents); 
+				if (loadComponents) { Vvveb.FileManager.loadComponents(allowedComponents); }
 				Vvveb.SectionList.loadSections(allowedComponents); 
 				Vvveb.StyleManager.init(); 
 			});
@@ -2925,7 +2948,6 @@ Vvveb.ColorPaletteManager = {
 	   }
 	   return cssVars;
 	},
-	
 
 	init: function(document) {
 		Vvveb.Builder.selectedEl = $(document.body);

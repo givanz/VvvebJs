@@ -52,7 +52,6 @@ MutationRecord.oldValue 			String 		The return value depends on the MutationReco
  
 Vvveb.Undo = {
 	
-	undos: [],
 	mutations: [],
 	undoIndex: -1,
 	enabled:true,
@@ -65,8 +64,8 @@ Vvveb.Undo = {
 			this.mutations.push(mutation);
 			this.undoIndex++;
 		*/
-		Vvveb.Builder.frameBody.trigger("vvveb.undo.add");
 		this.mutations.splice(++this.undoIndex, this.mutations.length - this.undoIndex, mutation);
+		Vvveb.Builder.frameBody.trigger("vvveb.undo.add", mutation);
 	 },
 
 	restore : function(mutation, undo) {	
@@ -138,7 +137,7 @@ Vvveb.Undo = {
 			break;
 		}
 		
-		Vvveb.Builder.frameBody.trigger("vvveb.undo.restore");
+		Vvveb.Builder.frameBody.trigger("vvveb.undo.restore", mutation);
 	 },
 	 
 	undo : function() {	
@@ -156,5 +155,10 @@ Vvveb.Undo = {
 	hasChanges : function() {	
 		return this.mutations.length;
 	},
+
+	reset : function() {	
+		this.mutations = [];
+		this.undoIndex = -1;
+	}
 };
 

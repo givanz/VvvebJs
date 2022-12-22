@@ -15,7 +15,6 @@
   </head>
 <body>
 
-
 	<div id="vvveb-builder">
 				<div id="top-panel">
 					<img src="img/logo.png" alt="Vvveb" class="float-start" id="logo">
@@ -67,11 +66,29 @@
 								
 					<div class="btn-group me-3 float-end" role="group">
 					  <button class="btn btn-primary btn-icon" title="Export (Ctrl + E)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-url="save.php" data-v-vvveb-shortcut="ctrl+e">
-						  <i class="la la-save"></i> <span data-v-gettext>Save page</span>
+
+						<span class="loading d-none">
+						<i class="la la-save"></i>
+						  <span class="spinner-border spinner-border-sm align-middle" role="status" aria-hidden="true">
+						  </span>
+						  <span>Saving </span> ... </span>
+
+						<span class="button-text">
+						  <i class="la la-save"></i> <span>Save page</span>
+						</span>	
+
 					  </button>
 					</div>	
 
-					<div class="btn-group float-end me-3 responsive-btns" role="group">
+
+					  <div class="float-end me-3">
+
+					    <a href="#" class="btn btn-outline-primary border-0 btn-sm btn-preview-url" target="blank">View page <i class="la la-external-link-alt la-lg"></i>
+					    </a>
+
+					    <div class="btn-group responsive-btns" role="group">
+
+
 		 			 <button id="mobile-view" data-view="mobile" class="btn btn-light"  title="Mobile view" data-vvveb-action="viewport">
 						  <i class="la la-mobile"></i>
 					  </button>
@@ -88,6 +105,9 @@
 										
 				</div>	
 				
+     				   </div>
+
+
 				<div id="left-panel">
 
 					  <div id="filemanager"> 
@@ -648,8 +668,8 @@
 											  
 											   <div class="search">
 													  <div class="expand">
-														  <a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></a>
-														  <a href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></a> 
+														  <button a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></button>
+														  <button href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
 													  </div>	
 
 													  <input class="form-control component-search" placeholder="Search components" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
@@ -672,8 +692,8 @@
 											  
 											   <div class="search">
 													  <div class="expand">
-														  <a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></a>
-														  <a href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></a> 
+														  <button href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></buttona>
+														  <button href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
 													  </div>	
 
 													  <input class="form-control block-search" placeholder="Search blocks" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
@@ -1051,9 +1071,9 @@
 <script id="vvveb-input-grid" type="text/html">
 
 	<div class="row">
-		<div class="col-6 mb-2">
+		<div class="col-6">
 		
-			<label>Flexbox</label>
+			<label>Extra small</label>
 			<select class="form-select" name="col">
 				
 				<option value="">None</option>
@@ -1063,20 +1083,9 @@
 				
 			</select>
 		</div>
-
-		<div class="col-6 mb-2">
-			<label>Extra small</label>
-			<select class="form-select" name="col-xs">
-				
-				<option value="">None</option>
-				{% for ( var i = 1; i <= 12; i++ ) { %}
-				<option value="{%=i%}" {% if ((typeof col_xs !== 'undefined') && col_xs == i) { %} selected {% } %}>{%=i%}</option>
-				{% } %}
-				
-			</select>
-		</div>
 		
-		<!-- div class="col-6">
+		
+		<div class="col-6">
 			<label>Small</label>
 			<select class="form-select" name="col-sm">
 				
@@ -1086,10 +1095,9 @@
 				{% } %}
 				
 			</select>
-			<br/>
-		</div -->
+		</div>
 		
-		<div class="col-6 mb-2">
+		<div class="col-6">
 			<label>Medium</label>
 			<select class="form-select" name="col-md">
 				
@@ -1101,7 +1109,7 @@
 			</select>
 		</div>
 		
-		<div class="col-6 mb-2">
+		<div class="col-6">
 			<label>Large</label>
 			<select class="form-select" name="col-lg">
 				
@@ -1114,7 +1122,7 @@
 		</div>
 		
 		
-		<div class="col-6 mb-2">
+		<div class="col-6">
 			<label>Extra large </label>
 			<select class="form-select" name="col-xl">
 				
@@ -1126,7 +1134,7 @@
 			</select>
 		</div>
 		
-		<div class="col-6 mb-2">
+		<div class="col-6">
 			<label>Extra extra large</label>
 			<select class="form-select" name="col-xxl">
 				
@@ -1201,7 +1209,7 @@
 <script id="vvveb-input-imageinput-gallery" type="text/html">
 	
 	<div>
-		<img id="thumb-{%=key%}" class="img-fluid rounded" data-target-input="#input-{%=key%}" data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="">
+		<img id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}" data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225">
 		<input name="{%=key%}" type="text" class="form-control mt-1" id="input-{%=key%}"/>
 		<button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#input-{%=key%}" data-target-thumb="#thumb-{%=key%}"><i class="la la-image la-lg"></i>&ensp;Set image</button>
 	</div>
@@ -1280,7 +1288,7 @@
 		<label for="{%=name%}" {% if (typeof description !== 'undefined') { %} title="{%=description%}" {% } %}>
 			<span>{%=title%}</span>
 		</label> <input type="checkbox" id="{%=name%}" />
-		<ol></ol>
+		<!-- <ol></ol> -->
 	</li>
 </script>
 
@@ -1542,7 +1550,7 @@
 <link href="libs/media/media.css" rel="stylesheet">
 <script>
 window.mediaPath = 'media';
-//Vvveb.themeBaseUrl = 'demo/landing/';
+Vvveb.themeBaseUrl = 'demo/landing/';
 </script>
 <script src="libs/media/media.js"></script>	
 <script src="libs/media/openverse.js"></script>
@@ -1566,7 +1574,7 @@ window.mediaPath = 'media';
 <script src="libs/builder/components-html.js"></script>	
 
 <!-- sections-->
-<!-- <script src="demo/landing/sections/sections.js"></script>	-->
+<!-- <script src="demo/landing/sections/sections.js"></script> -->
 <script src="libs/builder/sections-bootstrap4.js"></script>
 
 <!-- blocks-->
@@ -1613,18 +1621,7 @@ Unzip the latest ckeditor release zip from https://github.com/ckeditor/ckeditor4
 <script>
 $(document).ready(function() 
 {
-	//if url has #no-right-panel set one panel demo
-	if (window.location.hash.indexOf("no-right-panel") != -1)
-	{
-		$("#vvveb-builder").addClass("no-right-panel");
-		$(".component-properties-tab").show();
-		Vvveb.Components.componentPropertiesElement = "#left-panel .component-properties";
-	} else
-	{
-		$(".component-properties-tab").hide();
-	}
-
-	Vvveb.Builder.init('demo/narrow-jumbotron/index.html', function() {
+	Vvveb.Builder.init('about:none', function() {
 		//run code after page/iframe is loaded
 	});
 
@@ -1663,8 +1660,13 @@ $(document).ready(function()
 	];
 	
 	Vvveb.FileManager.addPages(pages);
-	//Vvveb.FileManager.loadPage("landing-page");
+	Vvveb.FileManager.loadPage("narrow-jumbotron");
 	Vvveb.Breadcrumb.init();
+
+	//if url has #no-right-panel set one panel demo
+	if (window.location.hash.indexOf("no-right-panel") != -1) {
+		Vvveb.Gui.toggleRightColumn();
+	}
 });
 </script>
 </body>

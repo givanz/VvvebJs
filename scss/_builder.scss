@@ -103,6 +103,7 @@ $font-size-base: 16px;
 		background-size: auto 42px;
 		z-index: 100;
 		background-color: transparent;
+		cursor:move;
 		cursor:grab;
 		//opacity:0.75;
 		box-shadow:0px 1px 4px 0px rgba(0, 0, 0, 0.05);
@@ -169,12 +170,12 @@ $font-size-base: 16px;
 		&:hover{ 
 			//outline:1px solid $primary;
 			border-color:$primary;
-			box-shadow:0px 1px 5px 0px rgba(13, 110, 253, 0.15);
-			-webkit-box-shadow:0px 1px 5px 0px rgba(13, 110, 253, 0.15);
+			box-shadow:0px 1px 5px 2px rgba(13, 110, 253, 0.25);
+			-webkit-box-shadow:0px 1px 5px 2px rgba(13, 110, 253, 0.25);
 
 			
 			&:before {
-				opacity: 0.3;
+				opacity: 0.15;
 			}
 			
 			a.name {
@@ -344,7 +345,7 @@ body
 			{
 				height:$builder-filemanager-height - $builder-header-top-height;
 				height:calc( var(--builder-filemanager-height) - #{$builder-header-top-height});
-				padding:0.5rem 0rem;
+				padding:0.5rem; 
 				overflow: hidden;
 				
 				&:hover{
@@ -371,6 +372,8 @@ body
 	{
 		float:right;
 		right:0px;
+		overflow:hidden;
+
 		
 		border-left-width: 1px;	
 		//border-top-width: 1px;	
@@ -404,10 +407,10 @@ body
 		
 		.nav-link {
 			color:#333;
-			border-top:2px solid transparent;
+			//border-top:2px solid transparent;
 			
 			&.active {
-				border-top:2px solid $primary;
+				border-top:1px solid rgba($primary, 0.8);
 				color:$primary;
 			}
 		}
@@ -427,12 +430,16 @@ body
 		{
 			.btn
 			{
-				padding: 0.25rem 0.5rem;
-				font-size: 1.25rem;
+				
+				&.btn-light {
+					font-size: 1.25rem;
+					padding: 0.25rem 0.5rem;
+				}
 				
 				&.btn-primary {
-					padding: 0 1rem;
+					padding:0.3rem 1.2rem;
 					margin-top: 0.2rem;
+					
 					i {
 						font-size:21px;
 					}
@@ -447,8 +454,10 @@ body
 			{
 				.btn
 				{
-					font-size: 1.6rem;
-					padding:0rem 0.5rem
+					&.btn-light {
+						font-size: 1.6rem;
+						padding:0rem 0.5rem
+					}
 				}
 			}
 		}
@@ -504,7 +513,7 @@ body
 		> .header
 		{
 		    .nav {
-			background:#f9f9f9;
+               		 background:#f7f7f7;
 		    }
 		}
 		
@@ -656,6 +665,7 @@ body
 			ol 
 			{
 				padding:0rem 0rem 0rem 1rem;
+				list-style:none;
 				
 				li
 				{
@@ -682,6 +692,8 @@ body
 		{
 			ol 
 			{
+				list-style:none;
+				
 				li
 				{
 					@include block-list-element();
@@ -732,7 +744,7 @@ body
 		}
 		
 		.nav-tabs {
-			background:#f9f9f9;
+			background:#f7f7f7;
 		}
 		
 		#right-panel
@@ -1190,8 +1202,8 @@ body
 
 		&.outside
 		{
-			//bottom:-25px;
-			display:none !important;
+			bottom:-30px;
+			//display:none !important;
 		}
 
 		
@@ -1252,9 +1264,17 @@ body
 				
 				i {
 					padding: 0.4rem 0rem;
+					font-size:1.4rem;
 					border-radius: 3px;
 					display:block;
 					border:1px solid transparent;
+				}
+	
+							
+				&:hover {
+					i {
+						border:1px solid rgba(13, 110, 253, 0.2);
+					}
 				}
 				
 				&.active {
@@ -1262,8 +1282,9 @@ body
 					border-top:none;
 					border-left:none;
 					border-right:none;
-					//border-top-color:$primary;
+					border-top-color:rgba($primary, 0.8);
 					color:$primary;
+					box-shadow:none;
 					//border-top-width:2px;
 					//background: rgba(13, 110, 253, 0.05);
 					//border:2px solid rgba(13, 110, 253, 0.1);
@@ -1285,9 +1306,11 @@ body
 	.nav-tabs .nav-link
 	{
 		padding:0.8rem 0 0.5rem;
+		padding:0.8rem 0 0.8rem;
 		text-align:center;
 		i {
-			font-size:1.4rem;
+			font-size:1.6rem;
+			line-height:1.2rem;
 		}
 	}
 
@@ -1296,9 +1319,12 @@ body
 
 		//color: #495057;
 		background-color: #fff;
-		border-color: $primary #dee2e6 #fff #dee2e6;
-		border-top-width:2px;
+		//border-color: $primary #dee2e6 #fff #dee2e6;
+		//border-top-width:2px;
 		border-radius: 0px;
+		background: linear-gradient( 0deg, #fff 70%, rgba(13, 110, 253, 0.03) 100%);
+		box-shadow: 0px -5px 5px 5px rgba(13, 110, 253, 0.05);
+		border-top:1px solid rgba($primary, 0.8);
 
 	}
 	.nav-fill .nav-link
@@ -1310,7 +1336,7 @@ body
 	.sections-tabs {
 	
 		.nav-link {
-			padding:1.1rem 0;
+			//padding:1.1rem 0;
 
 			i, div {
 				display:inline-block;
@@ -1323,7 +1349,7 @@ body
 		
 		
 			span {
-				//font-size:0.8rem;;
+				//font-size:0.8rem;
 			}
 		}
 	}
@@ -1334,7 +1360,7 @@ li[data-type]
 {
 	@include component-list-element(); 
 	/*border-width:1px;*/
-	list-style: none;
+	//list-style: none;
 	a {
 		//display:none;
 	}
@@ -1375,7 +1401,7 @@ li[data-type]
 	  > li
 	  {	
 	  
-		list-style: none;
+		//list-style: none;
 		float: none;
 		clear:both;
 
@@ -1418,11 +1444,12 @@ li[data-type]
 			margin:0px;
 			padding:0rem;
 			padding-bottom:0rem;
+			list-style:none;
 			
 			@extend .clearfix;
 		 
 			li {
-			  list-style: none;
+			  //list-style: none;
 			  float: left;
 
 				a {
@@ -1435,7 +1462,7 @@ li[data-type]
 
 			&[data-type] {
 				border:none;
-				list-style: none;
+				//list-style: none;
 				
 				a {
 					//display:none;
@@ -1471,7 +1498,8 @@ li[data-type]
 		left: 100%;
 		height:auto;
 		z-index: 1000;
-		border: 1px solid #eee;
+		border: 1px solid #ddd;
+		box-shadow:0px 0px 1px 2px rgba(18, 83, 205, 0.05);
 	}
 
 	.sections-container {
@@ -1584,8 +1612,9 @@ li[data-type]
 			}
 			
 			.header_check ~ label .header-arrow {
-				right:0.3rem;
-				top:0.5rem;
+				right:0.5rem;
+				top:0.7rem;
+				padding:0.4rem 0.5rem;
 				
 				&:hover {
 					background:rgba(18, 83, 205, 0.1);
@@ -1609,7 +1638,8 @@ li[data-type]
 				padding: 0.5rem 0rem 0rem;
 				margin: 0.5rem 0rem 0rem;
 				> ol  {
-					padding:0.3rem 0 0 1.4rem;
+					//list-style:none;
+					//padding:0.3rem 0 0 1.4rem;
 				}
 			}
 		}
@@ -1625,13 +1655,14 @@ li[data-type]
 			&:before {
 				content: " ";
 				background: #fff;
+				background:  $builder-background-color;
 				width: 100%;
 				height: 100%;
 				position: absolute;
 				top: 0;
 				left: 0;
 				opacity: 0;
-				transition:opacity 0.7s;
+				transition:opacity 0.5s;
 			} 
 			
 			img.preview {
@@ -1655,10 +1686,14 @@ li[data-type]
 	{
 		@include component-list-element(); 
 		
-		&:hover
-		{
+		&:hover  {
 			box-shadow: 0px 0px 1px 0px $builder-background-color;
 			background-color:rgba( $builder-background-color, 0.1);
+			border-color:rgba( $builder-background-color, 0.2);
+			
+			a {
+				color:$builder-background-color;
+			}
 		}
 	}
 }
@@ -2006,7 +2041,7 @@ ul.autocomplete li.selected
 	
 	.nav-link {
 		span {
-			font-size:0.8rem;;
+			font-size:12px;
 		}
 	}
 }

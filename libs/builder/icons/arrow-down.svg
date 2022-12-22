@@ -13,7 +13,8 @@
    version="1.1"
    id="svg6"
    sodipodi:docname="arrow-down.svg"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   fill="currentColor">
   <metadata
      id="metadata12">
     <rdf:RDF>
@@ -49,6 +50,7 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg6" />
   <path
+     fill="#555"
      d="M 12.996,14.937 24,25.941 35.004,14.937 38.4,18.333 24,32.733 9.6,18.333 Z"
      id="path2"
      inkscape:connector-curvature="0"

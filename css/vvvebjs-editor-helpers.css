@@ -60,3 +60,6 @@ body {
   outline: none; }
   [contenteditable="true"]:focus-visible {
     outline: none; }
+
+.vvveb-hidden {
+  display: none !important; }

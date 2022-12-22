@@ -25,7 +25,7 @@ var tinyMceOptions = {
   inline:false,//see comment above
   toolbar_mode: 'floating',
   toolbar_persist: true,
-  plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help quickbars emoticons',
+  plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help quickbars emoticons',
   //imagetools_cors_hosts: ['picsum.photos'],
   menubar: false,//'file edit view insert format tools table help',
   toolbar: [
@@ -55,6 +55,12 @@ var tinyMceOptions = {
   */
   importcss_append: true,
   file_picker_callback: function (callback, value, meta) {
+		if (!Vvveb.MediaModal) {
+			Vvveb.MediaModal = new MediaModal(true);
+			Vvveb.MediaModal.mediaPath = mediaPath;
+		}
+		Vvveb.MediaModal.open(null, callback);
+	return;
 	/* Provide file and text for the link dialog */
 	if (meta.filetype === 'file') {
 	  callback('https://www.google.com/logos/google.jpg', { text: 'My text' });
@@ -81,7 +87,9 @@ var tinyMceOptions = {
   */
   height: 600,
   image_caption: true,
+  quickbars_insert_toolbar: 'quickmedia quicklink quicktable',
   quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+  //quickbars_image_toolbar: 'alignleft aligncenter alignright | rotateleft rotateright | imageoptions',
   noneditable_noneditable_class: 'mceNonEditable',
   toolbar_mode: 'sliding',
   contextmenu: 'link image imagetools table',
