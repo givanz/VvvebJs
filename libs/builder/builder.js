@@ -344,7 +344,7 @@ Vvveb.Components = {
 		var fn = function(component, property) {
 			return property.input.on('propertyChange', function (event, value, input) {
 					
-					var element = Vvveb.Builder.selectedEl;
+					var element = selectedElement = Vvveb.Builder.selectedEl;
 					
 					if (property.child) element = element.find(property.child);
 					if (property.parent) element = element.parent(property.parent);
@@ -407,7 +407,8 @@ Vvveb.Components = {
 						element = component.onChange(element, property, value, input);
 					}
 					
-					if (!property.child || !property.parent) Vvveb.Builder.selectNode(element);
+					//if (!property.child || !property.parent) Vvveb.Builder.selectNode(element);
+					Vvveb.Builder.selectNode(selectedElement);
 					
 					return element;
 			});				
@@ -420,7 +421,7 @@ Vvveb.Components = {
 			var property = component.properties[i];
 			var element = nodeElement;
 			
-			if (property.beforeInit) property.beforeInit(element.get(0)) 
+			if (property.beforeInit) property.beforeInit(element.get(0));
 			
 			if (property.child) element = element.find(property.child);
 			
@@ -829,7 +830,7 @@ Vvveb.Builder = {
 							})
 						}
 						
-						componentsSubList.append(item)
+						componentsSubList.append(item);
 					}
 				}
 			}
@@ -944,7 +945,7 @@ Vvveb.Builder = {
 							
 						}
 						
-						blocksSubList.append(item)
+						blocksSubList.append(item);
 					}
 				}
 			}
@@ -1817,7 +1818,7 @@ Vvveb.Builder = {
         if (start >= 0 && end >= 0) {
             body = html.slice(html.indexOf(">", start) + 1, end);
         } else {
-            body = html
+            body = html;
         }
         
         if (this.runJsOnSetHtml)
@@ -1842,21 +1843,17 @@ Vvveb.Builder = {
 			data["html"] = this.getHtml();
 		}
 
-		$.ajax({
+		return $.ajax({
 			type: "POST",
 			url: saveUrl,//set your server side save script url
 			data: data,
 			cache: false,
-			success: function (data) {
-				
+		}).done(function (data) {
 				if (callback) callback(data);
 				Vvveb.Undo.reset();
 				$(".save-btn").attr("disabled", "true");
-				
-			},
-			error: function (data) {
+		}).fail(function (data) {
 				alert(data.responseText);
-			}
 		});					
 	},
 	
@@ -1912,6 +1909,14 @@ Vvveb.CodeEditor = {
 	}
 }
 
+
+function displayToast(bg, message) {
+	$("#top-toast .toast-body").html(message);
+	$("#top-toast .toast-header").removeClass(["bg-danger", "bg-success"]).addClass(bg);
+	$("#top-toast .toast").addClass("show");
+	delay(() => $("#top-toast .toast").removeClass("show"), 5000);
+}			
+
 Vvveb.Gui = {
 	
 	init: function() {
@@ -1965,17 +1970,32 @@ Vvveb.Gui = {
 		$(".loading", btn).toggleClass("d-none");
 		$(".button-text", btn).toggleClass("d-none");
 		
-		return Vvveb.Builder.saveAjax(url, null, function (data) {
-			$(".loading", btn).toggleClass("d-none");
-			$(".button-text", btn).toggleClass("d-none");
-
+		return Vvveb.Builder.saveAjax(url, null, null, saveUrl).done(function (data, text) {
+			/*
+			//use modal to show save status
 			var messageModal = new bootstrap.Modal(document.getElementById('message-modal'), {
 			  keyboard: false
 			});
 			
 			$("#message-modal .modal-body").html(data);
-			messageModal.show()
-		}, saveUrl);		
+			messageModal.show();
+			*/
+			
+			//use toast to show save status
+
+			let bg = "bg-success";
+			if (data.success || text == "success") {		
+				$(".save-btn").attr("disabled", "true");
+			} else {
+				bg = "bg-danger";
+			}
+			displayToast(bg, data.message ?? data);
+		}, saveUrl).fail(function (data, text, errorThrown) {
+			displayToast("bg-danger", "Error saving!");
+		}, saveUrl).always(function (data) {
+			$(".loading", btn).toggleClass("d-none");
+			$(".button-text", btn).toggleClass("d-none");
+		});
 	},
 	
 	download : function () {
@@ -2061,7 +2081,8 @@ Vvveb.Gui = {
 				data[this.name] = this.value;
 			});			
 
-			var name = data['name'] = data['file'];
+			data['title']  = data['file'].replace('/', '').replace('.html', '');
+			var name = data['name'] = data['folder'].replace('/', '_') + "-" + data['title'];
 			data['url']  = data['file'] = data['folder'] + "/" + data['file'];
 			
 			Vvveb.FileManager.addPage(data.name, data);
@@ -2072,6 +2093,9 @@ Vvveb.Gui = {
 					Vvveb.FileManager.scrollBottom();
 					newPageModal.modal("hide");
 			}, this.action);
+			
+			e.preventDefault();
+			return false;
 		});
 		
 	},
@@ -2579,7 +2603,7 @@ Vvveb.SectionList = {
 			$('> section, > header, > footer, > main, > nav', window.FrameDocument.body);
 		
 			sectionList.each(function (i, node) {
-			var id = node.id ? node.id : node.dataset.name;
+			var id = node.id ? node.id : (node.title ? node.title : node.className);
 			if (!id) {
 					id = 'section-' +  Math.floor(Math.random() * 10000);
 			}
@@ -2691,6 +2715,20 @@ Vvveb.FileManager = {
 			return false;
 		});
 		
+		$(this.tree).on("click", ".delete", function (e) {
+			let element = $(e.target).closest("li");
+			Vvveb.FileManager.deletePage(element, e);
+			e.preventDefault();
+			return false;
+		});
+
+		$(this.tree).on("click", ".rename", function (e) {
+			let element = $(e.target).closest("li");
+			Vvveb.FileManager.renamePage(element, e);
+			e.preventDefault();
+			return false;
+		});
+		
 		$(this.tree).on("click", "li[data-page] label", function (e) {
 			var page = $(this.parentNode).data("page");
 			if (page) Vvveb.FileManager.loadPage(page, allowedComponents);
@@ -2724,6 +2762,68 @@ Vvveb.FileManager = {
 		});
 	},
 	
+	deletePage: function(element, e) {
+		let page = element[0].dataset;
+		if (confirm(`Are you sure you want to delete "${page.file}"template?`)) {
+			$.ajax({
+				type: "POST",
+				url: deleteUrl,//set your server side save script url
+				data: {file:page.file},
+				success: function (data) {
+					let bg = "bg-success";
+					if (data.success) {		
+						$(".save-btn").attr("disabled", "true");
+					} else {
+						bg = "bg-danger";
+					}
+
+					displayToast("bg-success", data.message);
+				},
+				error: function (data) {
+					displayToast("bg-error", data.responseText);
+				}
+			});
+			element.remove();
+		}
+	},	
+	
+	renamePage: function(element, e) {
+		let page = element[0].dataset;
+		let newfile = prompt(`Enter new file name for "${page.file}"`, page.file);
+		let _self = this;
+		if (newfile) {
+			$.ajax({
+				type: "POST",
+				url: renameUrl,//set your server side save script url
+				data: {file:page.file, newfile:newfile},
+				success: function (data) {
+					let bg = "bg-success";
+					if (data.success) {		
+						$(".save-btn").attr("disabled", "true");
+					} else {
+						bg = "bg-danger";
+					}
+
+					displayToast("bg-success", data.message);
+
+
+					_self.pages[page.page]["file"] = newfile;
+					$("> label span", element).html(friendlyName(newfile.replace(/.*[\/\\]+/, '')).replace('.html', ''));
+					page.url = page.url.replace(page.file, newfile);
+					page.file = newfile;
+					_self.pages[page.page]["url"] = page.url;
+					_self.pages[page.page]["file"] = page.file;
+					
+				},
+				error: function (data) {
+					displayToast("bg-error", data.responseText);
+				}
+			});
+
+			
+		}
+	},
+	
 	addPage: function(name, data) {
 		this.pages[name] = data;
 		data['name'] = name;
@@ -2746,8 +2846,7 @@ Vvveb.FileManager = {
 	},
 	
 	addPages: function(pages) {
-		for (page in pages)
-		{
+		for (page in pages) {
 			this.addPage(pages[page]['name'], pages[page]);
 		}
 	},
@@ -2792,8 +2891,13 @@ Vvveb.FileManager = {
 	},
 	
 	loadPage: function(name, allowedComponents = false, disableCache = true, loadComponents = false) {
+		let page = $("[data-page='" + name + "']", this.tree);
+		//remove active from current active page
 		$("[data-page]", this.tree).removeClass("active");
-		$("[data-page='" + name + "']", this.tree).addClass("active");
+		//set loaded page as active
+		page.addClass("active");
+		//open parent folder if closed
+		$("> input[type=checkbox]", $(page).parents("[data-folder]")).prop("checked", true);
 
 		this.currentPage = name;
 		var url = this.pages[name]['url'];
@@ -2901,6 +3005,12 @@ Vvveb.FontsManager = {
 	}
 };
 
+	
+function friendlyName(name) {
+	name = name.replaceAll("--bs-","").replaceAll("-", " ").trim();  
+	return name = name[0].toUpperCase() + name.slice(1);
+}
+
 Vvveb.ColorPaletteManager = {
 	
 	getAllCSSVariableNames:  function (styleSheets = document.styleSheets, selector){
@@ -2947,6 +3057,46 @@ Vvveb.ColorPaletteManager = {
 		  } catch (error) {}
 	   }
 	   return cssVars;
+	},
+	
+	getCssWithVars:  function (styleSheets = document.styleSheets, vars){
+	   let cssVars = {};
+	   let css = "";
+	   let cssStyles = "";
+	   for(var i = 0; i < styleSheets.length; i++){
+		  try{ 
+			 let cssRules =  styleSheets[i].cssRules;
+			 for( var j = 0; j < cssRules.length; j++){
+				try{
+				   let style = cssRules[j].style;	
+				   //if (selector && cssRules[j].selectorText && cssRules[j].selectorText != selector) continue;
+				   cssStyles = "";
+				   for(var k = 0; k < style.length; k++){
+					  let name = style[k];
+					  let value = style.getPropertyValue(name);
+					  if(name.startsWith('--bs-btn-')) {
+						  for (v in vars) {
+							  if (value == vars[v]) {
+								  cssVars[name] = v;
+								  cssStyles += name + ":var(" + v + ");\n";
+							}
+						  }
+					  }
+					  
+				   }
+				   if (cssStyles) {
+				   css += cssRules[j].selectorText + "{\n"
+				   css += cssStyles;
+				   css += "}\n";
+					}
+				} catch (error) {}
+			 }
+		  } catch (error) {}
+	   }
+	   return cssVars;
+	},
+
+	addProvider: function(provider, Obj) {
 	},
 
 	init: function(document) {

@@ -12,7 +12,6 @@
 		//min-width: $builder-right-panel-width + 15;
 		//margin:0 0.5rem;
 		font-size:12px;
-		font-weight:500;
 		color:#555;
 
 		li 
@@ -47,7 +46,15 @@
 			
 			&:hover, &.active {
 				background-color:rgba($primary, 0.07);
+			}
+			
+			&:hover {
+				background-color:rgba($primary, 0.07);
 				//border: 1px solid rgba($primary, 0.05);
+				
+				.file-actions {
+					display:block;
+				}
 			}
 			
 			> label
@@ -61,13 +68,27 @@
 				padding-left: 35px;
 				margin:0;
 				font-size:12px;
-				font-weight:500;
 				line-height:28px;
+				max-height:2rem;
 
 
 				&:hover
 				{
 					color:$primary;
+				}
+			}
+			
+			.file-actions {
+				display:none;
+				position:absolute;
+				top:-1px;
+				right:5px;
+				
+				.btn {
+					padding:0.25rem 0.3rem;
+					line-height:1;
+					border-radius:4px;
+					border-color:rgba($primary, 0.15);
 				}
 			}
 		}
@@ -77,6 +98,14 @@
 			> label
 			{
 				//padding-left:38px;
+			}
+		}
+
+		li.page
+		{
+			> label
+			{
+				background-image: url(../libs/builder/icons/panel.svg);
 			}
 		}
 
@@ -113,7 +142,6 @@
 			padding-left: 56px;
 			margin:0px;
 			font-size:12px;
-			font-weight:500;
 			line-height:28px;
 		}
 

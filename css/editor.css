@@ -37,8 +37,7 @@ i.la, i.header-arrow {
   display: inline-block;
   font-style: normal;
   font-variant: normal;
-  text-rendering: auto;
-  line-height: 1; }
+  text-rendering: auto; }
 
 @font-face {
   font-family: Line Awesome Brands;
@@ -13110,7 +13109,6 @@ https://github.com/givanz/VvvebJs
     padding: 0rem 0 0 0rem;
     margin: 0;
     font-size: 12px;
-    font-weight: 500;
     color: #555; }
     .tree > ol li {
       position: relative;
@@ -13124,6 +13122,10 @@ https://github.com/givanz/VvvebJs
       border: 1px solid transparent; }
       .tree > ol li.file:hover, .tree > ol li.file.active {
         background-color: rgba(27, 116, 208, 0.07); }
+      .tree > ol li.file:hover {
+        background-color: rgba(27, 116, 208, 0.07); }
+        .tree > ol li.file:hover .file-actions {
+          display: block; }
       .tree > ol li.file > label {
         background: url(../libs/builder/icons/file.svg);
         background-position: 8px 4px;
@@ -13134,10 +13136,22 @@ https://github.com/givanz/VvvebJs
         padding-left: 35px;
         margin: 0;
         font-size: 12px;
-        font-weight: 500;
-        line-height: 28px; }
+        line-height: 28px;
+        max-height: 2rem; }
         .tree > ol li.file > label:hover {
           color: #1B74D0; }
+      .tree > ol li.file .file-actions {
+        display: none;
+        position: absolute;
+        top: -1px;
+        right: 5px; }
+        .tree > ol li.file .file-actions .btn {
+          padding: 0.25rem 0.3rem;
+          line-height: 1;
+          border-radius: 4px;
+          border-color: rgba(27, 116, 208, 0.15); }
+    .tree > ol li.page > label {
+      background-image: url(../libs/builder/icons/panel.svg); }
     .tree > ol li input {
       position: absolute;
       left: 0;
@@ -13166,7 +13180,6 @@ https://github.com/givanz/VvvebJs
       padding-left: 56px;
       margin: 0px;
       font-size: 12px;
-      font-weight: 500;
       line-height: 28px; }
     .tree > ol li input:checked + ol {
       background: url(../libs/builder/icons/arrow-down.svg) 5px 0.1rem no-repeat;
@@ -13284,7 +13297,7 @@ body {
         padding: 0.0rem 0.5rem;
         padding: 0rem 0rem 0.5rem 1rem; }
         #vvveb-builder #left-panel #filemanager .header a {
-          color: #007bff; }
+          color: #1B74D0; }
       #vvveb-builder #left-panel #filemanager .tree {
         height: 200px;
         height: calc( var(--builder-filemanager-height) - 50px);
@@ -13319,7 +13332,7 @@ body {
     #vvveb-builder #right-panel .nav-link {
       color: #333; }
       #vvveb-builder #right-panel .nav-link.active {
-        border-top: 1px solid rgba(27, 116, 208, 0.8);
+        border-top: 1px solid rgba(27, 116, 208, 0.7);
         color: #1B74D0; }
   #vvveb-builder #top-panel {
     height: 50px;
@@ -13333,10 +13346,10 @@ body {
       font-size: 1.25rem;
       padding: 0.25rem 0.5rem; }
     #vvveb-builder #top-panel .btn-group .btn.btn-primary {
-      padding: 0.3rem 1.2rem;
       margin-top: 0.2rem; }
       #vvveb-builder #top-panel .btn-group .btn.btn-primary i {
-        font-size: 21px; }
+        font-size: 21px;
+        line-height: 21px; }
     #vvveb-builder #top-panel .btn-group .btn span {
       font-size: 14px; }
     #vvveb-builder #top-panel .btn-group.responsive-btns .btn.btn-light {
@@ -13458,7 +13471,7 @@ body {
           margin: 0% 1% 2% 1%; }
           #vvveb-builder #add-section-box .components-list ol li a, #vvveb-builder #add-section-box .blocks-list ol li a, #vvveb-builder #add-section-box .component-properties ol li a, #vvveb-builder #add-section-box .sections-list ol li a {
             display: block;
-            color: #333;
+            color: #555;
             text-decoration: none;
             text-shadow: none;
             margin-top: 5px; }
@@ -13497,7 +13510,7 @@ body {
         #vvveb-builder #add-section-box .blocks-list ol li a.name, #vvveb-builder #add-section-box .sections-list ol li a.name {
           background: rgba(255, 255, 255, 0.9);
           background: rgba(0, 0, 0, 0.7);
-          background: rgba(13, 110, 253, 0.8);
+          background: rgba(27, 116, 208, 0.7);
           background: rgba(255, 255, 255, 0.9);
           color: #333;
           padding: 0.5rem 0;
@@ -13509,8 +13522,8 @@ body {
           border-top: 1px solid rgba(0, 0, 0, 0.1); }
         #vvveb-builder #add-section-box .blocks-list ol li:hover, #vvveb-builder #add-section-box .sections-list ol li:hover {
           border-color: #1B74D0;
-          box-shadow: 0px 1px 5px 2px rgba(13, 110, 253, 0.25);
-          -webkit-box-shadow: 0px 1px 5px 2px rgba(13, 110, 253, 0.25); }
+          box-shadow: 0px 1px 5px 2px rgba(27, 116, 208, 0.25);
+          -webkit-box-shadow: 0px 1px 5px 2px rgba(27, 116, 208, 0.25); }
           #vvveb-builder #add-section-box .blocks-list ol li:hover:before, #vvveb-builder #add-section-box .sections-list ol li:hover:before {
             opacity: 0.15; }
           #vvveb-builder #add-section-box .blocks-list ol li:hover a.name, #vvveb-builder #add-section-box .sections-list ol li:hover a.name {
@@ -13635,7 +13648,7 @@ body {
         display: block; }
   #vvveb-builder #highlight-box {
     position: absolute;
-    border: 1px solid #4285f4;
+    border: 1px solid #1B74D0;
     width: 0px;
     height: 0px;
     top: 0px;
@@ -13643,7 +13656,7 @@ body {
     display: none; }
   #vvveb-builder #drop-highlight-box {
     position: absolute;
-    border: 2px solid #4285f4;
+    border: 2px solid #1B74D0;
     width: 0px;
     height: 0px;
     top: 0px;
@@ -13660,8 +13673,8 @@ body {
     border-radius: 0 0 3px 3px; }
   #vvveb-builder #select-box {
     position: absolute;
-    border: 1px solid #4285f4;
-    background: rgba(66, 133, 244, 0.1);
+    border: 1px solid #1B74D0;
+    background: rgba(27, 116, 208, 0.1);
     width: 0px;
     height: 0px;
     top: 0px;
@@ -13677,10 +13690,10 @@ body {
       #vvveb-builder #select-box.resizable .resize > div {
         position: absolute;
         pointer-events: all;
-        border: 2px solid #4285f4;
+        border: 2px solid #1B74D0;
         width: 10px;
         height: 10px;
-        background-color: rgba(66, 133, 244, 0.1);
+        background-color: rgba(27, 116, 208, 0.1);
         margin: -5px; }
       #vvveb-builder #select-box.resizable .resize .top-left {
         top: 0;
@@ -13727,7 +13740,7 @@ body {
     z-index: 1;
     right: -1px;
     top: -25px;
-    background: #4285f4;
+    background: #1B74D0;
     color: #fff;
     padding: 0px 0px;
     border-radius: 3px 3px 0px 0px; }
@@ -13816,7 +13829,7 @@ body {
     #vvveb-builder #section-actions a#add-section-btn {
       position: relative;
       bottom: 0px;
-      background: #4285f4;
+      background: #1B74D0;
       color: #fff;
       font-size: 18px;
       border-radius: 24px;
@@ -13831,7 +13844,7 @@ body {
         font-weight: 600; }
       #vvveb-builder #section-actions a#add-section-btn:hover {
         text-decoration: none;
-        background: #1266f1; }
+        background: #155ba3; }
   #vvveb-builder #add-section-box {
     width: 50%;
     min-height: 300px;
@@ -13849,7 +13862,7 @@ body {
     z-index: 10;
     background: #fff; }
   #vvveb-builder #highlight-name {
-    background: #4285f4;
+    background: #1B74D0;
     font-size: 12px;
     color: #fff;
     position: relative;
@@ -13875,18 +13888,18 @@ body {
         display: block;
         border: 1px solid transparent; }
       #vvveb-builder #elements-tabs a:hover i {
-        border: 1px solid rgba(13, 110, 253, 0.2); }
+        border: 1px solid rgba(27, 116, 208, 0.2); }
       #vvveb-builder #elements-tabs a.active {
         border-top: none;
         border-left: none;
         border-right: none;
-        border-top-color: rgba(27, 116, 208, 0.8);
+        border-top-color: rgba(27, 116, 208, 0.7);
         color: #1B74D0;
         box-shadow: none; }
         #vvveb-builder #elements-tabs a.active i {
-          background: rgba(13, 110, 253, 0.05);
-          border: 1px solid rgba(13, 110, 253, 0.2);
-          color: #0d6efd; }
+          background: rgba(27, 116, 208, 0.05);
+          border: 1px solid rgba(27, 116, 208, 0.2);
+          color: #1B74D0; }
   #vvveb-builder .nav-tabs .nav-item:first-child .nav-link {
     border-left: none; }
   #vvveb-builder .nav-tabs .nav-link {
@@ -13900,9 +13913,9 @@ body {
   #vvveb-builder .nav-tabs .nav-item.show .nav-link {
     background-color: #fff;
     border-radius: 0px;
-    background: linear-gradient(0deg, #fff 70%, rgba(13, 110, 253, 0.03) 100%);
-    box-shadow: 0px -5px 5px 5px rgba(13, 110, 253, 0.05);
-    border-top: 1px solid rgba(27, 116, 208, 0.8); }
+    background: linear-gradient(0deg, #fff 70%, rgba(27, 116, 208, 0.03) 100%);
+    box-shadow: 0px -5px 5px 5px rgba(27, 116, 208, 0.05);
+    border-top: 1px solid rgba(27, 116, 208, 0.7); }
   #vvveb-builder .nav-fill .nav-link {
     padding-left: 0rem;
     padding-right: 0rem; }
@@ -13988,7 +14001,7 @@ li[data-type] {
           padding: 0.5rem 1.8rem; }
           .drag-elements-sidepane ul > li.header label > a {
             padding-left: 1rem;
-            color: #007bff; }
+            color: #1B74D0; }
         .drag-elements-sidepane ul > li.header:first-child {
           margin-top: 0rem;
           border-top: none; }
@@ -14000,7 +14013,7 @@ li[data-type] {
         .drag-elements-sidepane ul > li ol li {
           float: left; }
           .drag-elements-sidepane ul > li ol li a {
-            color: #333;
+            color: #555;
             text-decoration: none;
             text-shadow: none; }
           .drag-elements-sidepane ul > li ol li[data-type] {
@@ -14029,7 +14042,7 @@ li[data-type] {
   background: #fff;
   padding-top: 1rem; }
   .blocks .sections-container > div.section-item, .sections .sections-container > div.section-item {
-    box-shadow: 0px 0px 1px 0px #4285f4;
+    box-shadow: 0px 0px 1px 0px #1B74D0;
     box-shadow: 0px 0px 1px 0px rgba(18, 83, 205, 0.7), 0px 0px 5px 0px rgba(18, 83, 205, 0.1);
     box-shadow: 0px 0px 1px 2px rgba(18, 83, 205, 0.05);
     border: 1px solid #ccc;
@@ -14102,7 +14115,7 @@ li[data-type] {
     .blocks .sections-container > div.section-item .header_check ~ label .header-arrow, .sections .sections-container > div.section-item .header_check ~ label .header-arrow {
       right: 0.5rem;
       top: 0.7rem;
-      padding: 0.4rem 0.5rem; }
+      padding: 0.3rem 0.5rem; }
       .blocks .sections-container > div.section-item .header_check ~ label .header-arrow:hover, .sections .sections-container > div.section-item .header_check ~ label .header-arrow:hover {
         background: rgba(18, 83, 205, 0.1); }
     .blocks .sections-container > div.section-item .header_check ~ label .header-arrow:before, .sections .sections-container > div.section-item .header_check ~ label .header-arrow:before {
@@ -14149,7 +14162,7 @@ li[data-type] {
   .blocks .drag-elements-sidepane li[data-type] a.name, .sections .drag-elements-sidepane li[data-type] a.name {
     background: rgba(255, 255, 255, 0.9);
     background: rgba(0, 0, 0, 0.7);
-    background: rgba(13, 110, 253, 0.8);
+    background: rgba(27, 116, 208, 0.7);
     background: rgba(255, 255, 255, 0.9);
     color: #333;
     padding: 0.5rem 0;
@@ -14161,8 +14174,8 @@ li[data-type] {
     border-top: 1px solid rgba(0, 0, 0, 0.1); }
   .blocks .drag-elements-sidepane li[data-type]:hover, .sections .drag-elements-sidepane li[data-type]:hover {
     border-color: #1B74D0;
-    box-shadow: 0px 1px 5px 2px rgba(13, 110, 253, 0.25);
-    -webkit-box-shadow: 0px 1px 5px 2px rgba(13, 110, 253, 0.25); }
+    box-shadow: 0px 1px 5px 2px rgba(27, 116, 208, 0.25);
+    -webkit-box-shadow: 0px 1px 5px 2px rgba(27, 116, 208, 0.25); }
     .blocks .drag-elements-sidepane li[data-type]:hover:before, .sections .drag-elements-sidepane li[data-type]:hover:before {
       opacity: 0.15; }
     .blocks .drag-elements-sidepane li[data-type]:hover a.name, .sections .drag-elements-sidepane li[data-type]:hover a.name {
@@ -14170,7 +14183,7 @@ li[data-type] {
   .blocks .drag-elements-sidepane li[data-type]:before, .sections .drag-elements-sidepane li[data-type]:before {
     content: " ";
     background: #fff;
-    background: #4285f4;
+    background: #1B74D0;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -14220,12 +14233,12 @@ li[data-type] {
     padding: 0 3px; }
   .components .drag-elements-sidepane li[data-type]:hover,
   #add-section-box li[data-type]:hover {
-    box-shadow: 0px 0px 1px 0px #4285f4;
-    background-color: rgba(66, 133, 244, 0.1);
-    border-color: rgba(66, 133, 244, 0.2); }
+    box-shadow: 0px 0px 1px 0px #1B74D0;
+    background-color: rgba(27, 116, 208, 0.1);
+    border-color: rgba(27, 116, 208, 0.2); }
     .components .drag-elements-sidepane li[data-type]:hover a,
     #add-section-box li[data-type]:hover a {
-      color: #4285f4; }
+      color: #1B74D0; }
 
 /*
 #right-panel 
@@ -14249,7 +14262,7 @@ label.header {
   text-align: left;
   padding: 0.3rem 0.8rem;
   border-top: 1px solid #ddd;
-  color: #007bff;
+  color: #1B74D0;
   cursor: pointer;
   position: relative; }
   label.header:first-child {
@@ -14323,7 +14336,7 @@ div.section, .header > ol {
 .toggle-inner:before {
   content: "ON";
   padding-left: 14px;
-  background-color: #007BFF; }
+  background-color: #1B74D0; }
 
 .toggle-inner:after {
   content: "OFF";
@@ -14358,7 +14371,9 @@ div.section, .header > ol {
 input[type="number"] {
   -moz-appearance: textfield;
   -webkit-appearance: textfield;
-  appearance: textfield; }
+  appearance: textfield;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem; }
 
 input[type="number"]:hover,
 input[type="number"]:focus {
@@ -14370,11 +14385,18 @@ input[type="number"]:focus {
   background-position: right .5rem center;
   background-size: 10px 8px; }
 
+.input-group.css-unit .form-select.small-arrow {
+  max-width: 100px;
+  padding-left: 0.5rem;
+  padding-right: 1.2em; }
+
 .input-group.auto input[type="number"] {
   display: none; }
 
 .input-group.auto .input-group-append {
   width: 100%; }
+  .input-group.auto .input-group-append .form-select.small-arrow {
+    max-width: 100%; }
 
 .btn-group.btn-group-fullwidth {
   display: flex;
@@ -14431,11 +14453,11 @@ ul.autocomplete li.selected {
 
 .btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active, .show > .btn-light.dropdown-toggle {
   box-shadow: 0px 0px 1px 0px rgba(255, 255, 255, 0.1);
-  background-color: rgba(66, 133, 244, 0.07);
+  background-color: rgba(27, 116, 208, 0.07);
   border-radius: 0px;
   border-color: transparent; }
   .btn-light:not(:disabled):not(.disabled):active:focus, .btn-light:not(:disabled):not(.disabled).active:focus, .show > .btn-light.dropdown-toggle:focus {
-    box-shadow: 0px 0px 1px 0px rgba(66, 133, 244, 0.2); }
+    box-shadow: 0px 0px 1px 0px rgba(27, 116, 208, 0.2); }
 
 .input-list-select .elements {
   max-height: 300px;
@@ -14484,7 +14506,7 @@ ul.autocomplete li.selected {
 .add-section-btn {
   position: relative;
   bottom: 0px;
-  background: #4285f4;
+  background: #1B74D0;
   color: #fff;
   font-size: 18px;
   border-radius: 24px;
@@ -14511,7 +14533,7 @@ ul.autocomplete li.selected {
     font-weight: 600; }
   .add-section-btn:hover {
     text-decoration: none;
-    background: #1266f1; }
+    background: #155ba3; }
   .add-section-btn i {
     color: #fff; }
 
@@ -14637,8 +14659,8 @@ input[type="color"] {
         border-radius: 4px;
         border: 1px solid #eee; }
         .breadcrumb-navigator .breadcrumb .breadcrumb-item a:hover {
-          background: rgba(13, 110, 253, 0.05);
-          border: 1px solid rgba(13, 110, 253, 0.2);
+          background: rgba(27, 116, 208, 0.05);
+          border: 1px solid rgba(27, 116, 208, 0.2);
           color: #0d6efd;
           text-decoration: none; }
 
@@ -14675,7 +14697,7 @@ img.preview {
   font-weight: 500;
   text-transform: capitalize;
   margin-bottom: 0px;
-  padding: 0.5rem 2rem; }
+  padding: 0.4rem 2rem; }
   .btn-icon i:first-child {
     display: inline-block;
     margin-right: 0.3rem;

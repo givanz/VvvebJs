@@ -25,7 +25,7 @@ $builder-right-panel-width:300px !default;
 $builder-canvas-margin:0px !default;
 $builder-filemanager-height:250px !default;
 $drag-items-tabs-height:40px !default;
-$builder-background-color: #4285f4 !default;
+$builder-background-color: $blue !default;
 
 $canvas-width-substract: $builder-left-panel-width + $builder-right-panel-width + $builder-canvas-margin;
 $canvas-no-right-width-substract: $builder-left-panel-width  + $builder-canvas-margin;
@@ -56,7 +56,8 @@ $font-size-base: 16px;
 @mixin add-section-btn() {
 		position: relative;
 		bottom: 0px;
-		background: #4285f4;
+		//background: #4285f4;
+		background: $blue;
 		color: #fff;
 		font-size: 18px;
 		border-radius: 24px;
@@ -154,7 +155,7 @@ $font-size-base: 16px;
 			//background: #fafafa;
 			background: rgba(255,255,255,0.9);
 			background: rgba(0,0,0,0.7);
-			background: rgba(13, 110, 253, 0.8);
+			background: rgba($primary, 0.7);
 			background: rgba(255, 255, 255, 0.9);
 			color:#333;
 			padding: 0.5rem 0;
@@ -170,8 +171,8 @@ $font-size-base: 16px;
 		&:hover{ 
 			//outline:1px solid $primary;
 			border-color:$primary;
-			box-shadow:0px 1px 5px 2px rgba(13, 110, 253, 0.25);
-			-webkit-box-shadow:0px 1px 5px 2px rgba(13, 110, 253, 0.25);
+			box-shadow:0px 1px 5px 2px rgba($primary, 0.25);
+			-webkit-box-shadow:0px 1px 5px 2px rgba($primary, 0.25);
 
 			
 			&:before {
@@ -335,9 +336,8 @@ body
 				padding:0.0rem 0.5rem;
 				padding:0rem 0rem 0.5rem 1rem;
 			  
-				a 
-				{
-				  color: #007bff;
+				a {
+				  color: $primary;
 				}
 			}
 			
@@ -410,7 +410,7 @@ body
 			//border-top:2px solid transparent;
 			
 			&.active {
-				border-top:1px solid rgba($primary, 0.8);
+				border-top:1px solid rgba($primary, 0.7);
 				color:$primary;
 			}
 		}
@@ -437,11 +437,12 @@ body
 				}
 				
 				&.btn-primary {
-					padding:0.3rem 1.2rem;
+					//padding:0.3rem 1.2rem;
 					margin-top: 0.2rem;
 					
 					i {
 						font-size:21px;
+						line-height:21px;
 					}
 				}
 				
@@ -677,7 +678,7 @@ body
 					a
 					{
 						display:block;
-						color: #333;
+						color: #555;
 						text-decoration: none;
 						text-shadow: none;
 						margin-top:5px;
@@ -1273,7 +1274,7 @@ body
 							
 				&:hover {
 					i {
-						border:1px solid rgba(13, 110, 253, 0.2);
+						border:1px solid rgba($primary, 0.2);
 					}
 				}
 				
@@ -1282,7 +1283,7 @@ body
 					border-top:none;
 					border-left:none;
 					border-right:none;
-					border-top-color:rgba($primary, 0.8);
+					border-top-color:rgba($primary, 0.7);
 					color:$primary;
 					box-shadow:none;
 					//border-top-width:2px;
@@ -1290,9 +1291,9 @@ body
 					//border:2px solid rgba(13, 110, 253, 0.1);
 					
 					i {
-						background: rgba(13, 110, 253, 0.05);
-						border:1px solid rgba(13, 110, 253, 0.2);
-						color: rgb(13, 110, 253);
+						background: rgba($primary, 0.05);
+						border:1px solid rgba($primary, 0.2);
+						color: $primary;
 					}
 				}
 			}
@@ -1322,9 +1323,9 @@ body
 		//border-color: $primary #dee2e6 #fff #dee2e6;
 		//border-top-width:2px;
 		border-radius: 0px;
-		background: linear-gradient( 0deg, #fff 70%, rgba(13, 110, 253, 0.03) 100%);
-		box-shadow: 0px -5px 5px 5px rgba(13, 110, 253, 0.05);
-		border-top:1px solid rgba($primary, 0.8);
+		background: linear-gradient( 0deg, #fff 70%, rgba($primary, 0.03) 100%);
+		box-shadow: 0px -5px 5px 5px rgba($primary, 0.05);
+		border-top:1px solid rgba($primary, 0.7);
 
 	}
 	.nav-fill .nav-link
@@ -1427,7 +1428,7 @@ li[data-type]
 				> a 
 				{
 				  padding-left: 1rem;
-				  color: #007bff;
+				  color: $primary;
 				}
 			   
 			}
@@ -1453,7 +1454,7 @@ li[data-type]
 			  float: left;
 
 				a {
-				  color: #333;
+				  color: #555;
 				  text-decoration: none;
 				  text-shadow: none;
 				  //margin-top:0px;
@@ -1614,7 +1615,7 @@ li[data-type]
 			.header_check ~ label .header-arrow {
 				right:0.5rem;
 				top:0.7rem;
-				padding:0.4rem 0.5rem;
+				padding:0.3rem 0.5rem;
 				
 				&:hover {
 					background:rgba(18, 83, 205, 0.1);
@@ -1731,7 +1732,7 @@ label.header
 	text-align: left;
 	padding:0.3rem 0.8rem;
 	border-top: 1px solid #ddd;
-	color: #007bff;
+	color: $primary;
 	cursor:pointer;
 	position:relative;
 
@@ -1820,7 +1821,7 @@ div.section {
 .toggle-inner:before {
 	content: "ON";
 	padding-left: 14px;
-	background-color: #007BFF;
+	background-color: $primary;
 }
 .toggle-inner:after {
 	content: "OFF";
@@ -1853,6 +1854,8 @@ input[type="number"] {
     -moz-appearance: textfield;
     -webkit-appearance: textfield;
     appearance: textfield;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
 }
 input[type="number"]:hover,
 input[type="number"]:focus {
@@ -1868,6 +1871,14 @@ input[type="number"]:focus {
 	background-size: 10px 8px;
 }
 
+.input-group.css-unit  {
+	.form-select.small-arrow {
+	    max-width: 100px;
+		padding-left: 0.5rem;
+		padding-right: 1.2em;
+	}
+}
+
 .input-group.auto input[type="number"]
 {
 	display:none;
@@ -1876,6 +1887,9 @@ input[type="number"]:focus {
 .input-group.auto .input-group-append
 {
 	width:100%;
+	.form-select.small-arrow {
+	    max-width: 100%;
+	}
 }
 
 
@@ -2192,8 +2206,8 @@ input[type="color"] {
 				border:1px solid #eee;
 				
 				&:hover {
-					background: rgba(13, 110, 253, 0.05);
-					border: 1px solid rgba(13, 110, 253, 0.2);
+					background: rgba($primary, 0.05);
+					border: 1px solid rgba($primary, 0.2);
 					color: #0d6efd;
 					text-decoration:none;
 				}

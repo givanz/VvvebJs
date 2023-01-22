@@ -431,7 +431,7 @@ Vvveb.Components.extend("_base", "html/pageitem", {
         key: "href",
         htmlAttr: "href",
         child:".page-link",
-        inputtype: TextInput
+        inputtype: LinkInput
     }, {
         name: "Disabled",
         key: "disabled",
@@ -888,7 +888,7 @@ Vvveb.Components.add("html/gridcolumn", {
         inline:false,
         inputtype: GridInput,
         data: {hide_remove:true},
-		
+
 		beforeInit: function(node) {
 			_class = $(node).attr("class");
 			
@@ -1028,7 +1028,6 @@ Vvveb.Components.extend("_base", "html/paragraph", {
         key: "text-align",
         htmlAttr: "class",
         inline:false,
-        inputtype: SelectInput,
         validValues: ["", "text-start", "text-center", "text-end"],
         inputtype: RadioButtonInput,
         data: {

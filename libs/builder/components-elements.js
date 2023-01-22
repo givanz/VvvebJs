@@ -17,7 +17,11 @@ https://github.com/givanz/Vvvebjs
 */
 
 Vvveb.ComponentsGroup['Elements'] = [
-	"elements/svg-icon"
+/*sections */
+"elements/section", 
+"elements/footer", 
+"elements/header", 
+"elements/svg-icon"
 ];
 
 
@@ -252,4 +256,226 @@ Vvveb.Components.add("elements/svg-element", {
 			step:1
 		}			
 	}]
+});  
+
+/* Section */
+let ComponentSectionContent = [{
+        name: "Title",
+        key: "title",
+        htmlAttr: "title",
+        inputtype: TextInput
+    }, {
+        name: "Container width",
+        key: "container-width",
+		child:"> .container, > .container-fluid",
+        htmlAttr: "class",
+        validValues: ["container", "container-fluid"],
+        inputtype: RadioButtonInput,
+        data: {
+			extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+				value: "container",
+				icon:"la la-box",
+				text: "Boxed",
+				title: "Boxed"
+			}, 
+			{
+				value: "container-fluid",
+				icon:"la la-arrows-alt-h",
+				title: "Full",
+				text: "Full"
+			}]
+        }
+	}, {
+        name: "Container height",
+        key: "container-height",
+		child:"> .container:first-child, > .container-fluid:first-child",
+        htmlAttr: "class",
+        validValues: ["", "vh-100"],
+        inputtype: RadioButtonInput,
+        data: {
+			extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+				value: "container",
+				icon:"la la-expand",
+				text: "Auto",
+				title: "Auto",
+				checked:true,
+			}, 
+			{
+				value: "vh-100",
+				icon:"la la-arrows-alt-v",
+				title: "Full",
+				text: "Full"
+			}]
+        }
+/*	}, {
+        key: "section_separators",
+        inputtype: SectionInput,
+        name:false,
+        sort: base_sort++,
+		//section: style_section,
+        data: {header:"Separators"},
+	},{
+        name: false,
+        key: "type",
+        inputtype: RadioButtonInput,
+		htmlAttr:"data-separators",
+        data: {
+            inline: true,
+            extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+                value: "top",
+                text: "Top Separator",
+                title: "Top Separator",
+                icon:"la la-arrow-up",
+            }, {
+                value: "bottom",
+                text: "Bottom Separator",
+                title: "Bottom Separator",
+                icon:"la la-arrow-down",
+            }],
+        },
+		onChange : function(element, value, input) {
+			
+			$('.mb-3[data-group]').hide();
+			$('.mb-3[data-group="'+ input.value + '"]').show();
+
+			return element;
+		}, 
+		init: function(node) {
+			return node.dataset.type;
+		}			
+	}, {
+        key: "section_background_header",
+        inputtype: SectionInput,
+        name:false,
+        sort: base_sort++,
+		//section: style_section,
+        data: {header:"Background"},
+   },{
+        name: false,
+        key: "type",
+        inputtype: RadioButtonInput,
+		htmlAttr:"data-type",
+        data: {
+            inline: true,
+            extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+                value: "none",
+                text: "None",
+                title: "None",
+                checked:true,
+            }, {
+                value: "image",
+                icon:"la la-image",
+                text: "Image",
+                title: "Image",      
+			}, {
+                value: "gradient",
+                icon:"la la-palette",
+                text: "Gradient",
+                title: "Gradient",
+			}, {
+                value: "video",
+                icon:"la la-video",
+                text: "Video",
+                title: "Video",
+			}, {
+                value: "slideshow",
+                icon:"la la-arrows-alt-h",
+                text: "Slider",
+                title: "Slider",
+            }],
+        },
+		onChange : function(element, value, input) {
+			
+			$('.mb-3[data-group]').hide();
+			$('.mb-3[data-group="'+ input.value + '"]').show();
+
+			return element;
+		}, 
+		init: function(node) {
+			return node.dataset.type;
+		},            
+*/    }   
+];
+   
+
+let ComponentSectionStyle =  [{
+		key: "Section Style",
+		inputtype: SectionInput,
+		name:false,
+		section: style_section,
+		data: {header:"Style"},
+}];
+
+let ComponentSectionAdvanced =  [{
+		key: "Section Advanced",
+		inputtype: SectionInput,
+		name:false,
+		section: advanced_section,
+		data: {header:"Advanced"},
+ 
+}];
+
+
+Vvveb.Components.add("elements/section", {
+    nodes: ["section"],
+    name: "Section",
+    image: "icons/stream-solid.svg",
+    init: function (node)
+	{
+		$('.mb-3[data-group]').hide();
+		if (node.dataset.type != undefined)
+		{
+			$('.mb-3[data-group="'+ node.dataset.type + '"]').show();
+		} else
+		{		
+			$('.mb-3[data-group]:first').show();
+		}
+	},	
+    html: `<section>
+				<div class="container">
+					<h1>Section</h1>
+				</div>
+			</section>`,
+    properties: [
+		...ComponentSectionContent, 
+		...ComponentSectionStyle,
+		...ComponentSectionAdvanced
+	]
+});  
+
+Vvveb.Components.add("elements/header", {
+    nodes: ["header"],
+    name: "Header",
+    image: "icons/stream-solid.svg",
+    html: `<header>
+				<div class="container">
+					<h1>Section</h1>
+				</div>
+			</header>`,
+    properties: [
+		...ComponentSectionContent, 
+		...ComponentSectionStyle,
+		...ComponentSectionAdvanced
+	]
+});  
+
+
+Vvveb.Components.add("elements/footer", {
+    nodes: ["footer"],
+    name: "Footer",
+    image: "icons/stream-solid.svg",
+    html: `<footer>
+				<div class="container">
+					<h1>Section</h1>
+				</div>
+			</footer>`,
+    properties: [
+		...ComponentSectionContent, 
+		...ComponentSectionStyle,
+		...ComponentSectionAdvanced
+	]
 });  

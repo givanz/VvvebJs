@@ -17,11 +17,11 @@ foreach ($htmlFiles as $file) {
    $url = $pathInfo['dirname'] . '/' . $pathInfo['basename'];
    $name = ucfirst($filename);
 
-  $files .= "{name:'$name', file:'$filename', title:'$name',  url: '$url', folder:'$folder'},";
+  $files .= "{name:'$name', file:'$file', title:'$name',  url: '$url', folder:'$folder'},";
 } 
 
 
 //replace files list from html with the dynamic list from demo folder
-$html = str_replace('(pages)', "([$files])", $html);
+$html = str_replace('(pages);', "([$files]);", $html);
 
 echo $html;

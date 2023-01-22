@@ -112,11 +112,11 @@
 
 					  <div id="filemanager"> 
 							<div class="header">
-								<a href="#" class="text-secondary">Pages</a>
+								<span class="text-secondary"><i class="la la-file la-lg"></i> Pages</span>
 
-									<div class="btn-group responsive-btns me-4 float-end" role="group">
-									  <button class="btn btn-link btn-sm" title="New file" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="">
-										  <i class="la la-file"></i> <span>New page</span>
+									<div class="btn-group responsive-btns me-1 float-end" role="group">
+									  <button class="btn btn-outline-primary btn-sm border-0" title="New file" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="">
+										   <span>New page</span> <i class="la la-plus"></i>
 									  </button>
 									  
 									  <!--  &ensp;
@@ -647,16 +647,16 @@
 
 											<div id="close-section-btn" class="btn btn-light btn-sm bg-white btn-sm float-end"><i class="la la-times la-lg"></i></div>
 										
-											<div class="small mt-1 me-3 float-end">
+							<div class="mt-2 me-3 float-end">
 											
-												<div class="d-inline me-2">
+								<div class="form-check d-inline-block me-1">
 												  <input type="radio" id="add-section-insert-mode-after" value="after" checked="checked" name="add-section-insert-mode" class="form-check-input">
-												  <label class="form-check-label" for="add-section-insert-mode-after">After</label>
+								  <label class="form-check-label small" for="add-section-insert-mode-after">After</label>
 												</div>
 												
-												<div class="d-inline">
+								<div class="form-check d-inline-block">
 												  <input type="radio" id="add-section-insert-mode-inside" value="inside" name="add-section-insert-mode" class="form-check-input">
-												  <label class="form-check-label" for="add-section-insert-mode-inside">Inside</label>
+								  <label class="form-check-label small" for="add-section-insert-mode-inside">Inside</label>
 												</div>
 										
 											</div>
@@ -668,8 +668,8 @@
 											  
 											   <div class="search">
 													  <div class="expand">
-														  <button a href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></button>
-														  <button href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
+														  <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></button>
+														  <button title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
 													  </div>	
 
 													  <input class="form-control component-search" placeholder="Search components" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
@@ -692,8 +692,8 @@
 											  
 											   <div class="search">
 													  <div class="expand">
-														  <button href="#" class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></buttona>
-														  <button href="#" title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
+														  <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></buttona>
+														  <button title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
 													  </div>	
 
 													  <input class="form-control block-search" placeholder="Search blocks" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
@@ -1256,7 +1256,7 @@
 </script>
 
 <script id="vvveb-input-cssunitinput" type="text/html">
-	<div class="input-group" id="cssunit-{%=key%}">
+	<div class="input-group css-unit" id="cssunit-{%=key%}">
 		<input name="number" type="number"  {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %} 
 			  {% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %} 
 			  {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %} 
@@ -1265,9 +1265,17 @@
 		 <div class="input-group-append">
 		<select class="form-select small-arrow" name="unit">
 			<option value="em">em</option>
+			<option value="rem">rem</option>
 			<option value="px">px</option>
 			<option value="%">%</option>
-			<option value="rem">rem</option>
+			<option value="vw">vw</option>
+			<option value="vh">vh</option>
+			<option value="ex">ex</option>
+			<option value="ch">ch</option>
+			<option value="cm">cm</option>
+			<option value="mm">mm</option>
+			<option value="in">in</option>
+			<option value="pt">pt</option>
 			<option value="auto">auto</option>
 		</select>
 		</div>
@@ -1284,9 +1292,13 @@
 </script>
 
 <script id="vvveb-filemanager-page" type="text/html">
-	<li data-url="{%=url%}" data-file="{%=file%}" data-page="{%=name%}" class="file">
+	<li data-url="{%=url%}" data-file="{%=file%}" data-page="{%=name%}" class="file{% if (typeof className !== 'undefined') { %} {%=className%}{% } %}">
 		<label for="{%=name%}" {% if (typeof description !== 'undefined') { %} title="{%=description%}" {% } %}>
 			<span>{%=title%}</span>
+			<div class="file-actions">
+				<button href="#" class="rename btn btn-outline-primary" title="Rename"><i class="la la-pen"></i></button>
+				<button href="#" class="delete btn btn-outline-danger" title="Delete"><i class="la la-trash"></i></button>
+			</div>
 		</label> <input type="checkbox" id="{%=name%}" />
 		<!-- <ol></ol> -->
 	</li>
@@ -1456,7 +1468,7 @@
 		
     <div class="modal-content">
       <div class="modal-header">
-        <p class="modal-title text-primary"><i class="la la-lg la-file"></i> New page</p>
+        <h6 class="modal-title text-primary fw-normal"><i class="la la-lg la-file"></i> New page</h6>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <!-- span aria-hidden="true"><small><i class="la la-times"></i></small></span -->
         </button>
@@ -1464,9 +1476,12 @@
 
       <div class="modal-body text">
 		<div class="mb-3 row" data-key="type">      
-			<label class="col-sm-3 form-label">
+			<label class="col-sm-3 col-form-label">
 				Template 
-				<abbr class="badge badge-pill badge-secondary" title="This template will be used as a start">?</abbr> 
+				<abbr title="The contents of this template will be used as a start for the new template">
+                    <i class="la la-lg la-question-circle text-primary"></i>
+				</abbr>
+				
 			</label>      
 			<div class="col-sm-9 input">
 				<div>    
@@ -1480,7 +1495,7 @@
 		</div>
 
 		<div class="mb-3 row" data-key="href">     
-			 <label class="col-sm-3 form-label">Page name</label>      
+			 <label class="col-sm-3 col-form-label">Page name</label>      
 			<div class="col-sm-9 input">
 				<div>   
 					<input name="title" type="text" value="My page" class="form-control" placeholder="My page" required>  
@@ -1489,7 +1504,7 @@
 		</div>
 		
 		<div class="mb-3 row" data-key="href">     
-			 <label class="col-sm-3 form-label">File name</label>      
+			 <label class="col-sm-3 col-form-label">File name</label>      
 			<div class="col-sm-9 input">
 				<div>   
 					<input name="file" type="text" value="my-page.html" class="form-control" placeholder="my-page.html" required>  
@@ -1509,7 +1524,7 @@
 		-->
 		
 		<div class="mb-3 row" data-key="href">     
-			 <label class="col-sm-3 form-label">Folder</label>      
+			 <label class="col-sm-3 col-form-label">Save to folder</label>      
 			<div class="col-sm-9 input">
 				<div>   
 					<input name="folder" type="text" value="my-pages" class="form-control" placeholder="/" required>  
@@ -1519,8 +1534,8 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-primary btn-lg" type="submit"><i class="la la-check"></i> Create page</button>
         <button class="btn btn-secondary btn-lg" type="reset" data-bs-dismiss="modal"><i class="la la-times"></i> Cancel</button>
+		<button class="btn btn-primary btn-lg" type="submit"><i class="la la-check"></i> Create page</button>
       </div>
     </div>
     
@@ -1528,6 +1543,25 @@
 
   </div>
 </div>
+
+<!-- save toast -->
+<div class="toast-container position-fixed end-0 bottom-0 me-3 mb-3" id="top-toast">
+  <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+	    <div class="toast-header text-white">
+			<strong class="me-auto">Page save</strong>
+			<!-- <small class="badge bg-success">status</small> -->
+			<button type="button" class="btn-close text-white px-2" data-bs-dismiss="toast" aria-label="Close"></button>
+		</div>
+		<div class="toast-body ">
+			<div class="flex-grow-1">
+			  <div class="message">Elements saved!
+				  <div>Template backup was saved!</div>
+				  <div>Template was saved!</div>
+			  </div>
+			  <div><a class="btn btn-success  btn-icon btn-sm w-100 mt-2" href="">View page</a></div>
+			</div>
+		</div>
+	</div>
 </div>
 	
 <!-- jquery-->
@@ -1619,17 +1653,10 @@ Unzip the latest ckeditor release zip from https://github.com/ckeditor/ckeditor4
 <script src="libs/autocomplete/jquery.autocomplete.js"></script>	
 
 <script>
-$(document).ready(function() 
-{
-	Vvveb.Builder.init('about:none', function() {
-		//run code after page/iframe is loaded
-	});
+let renameUrl = 'save.php?action=rename';
+let deleteUrl = 'save.php?action=delete';	
 
-	Vvveb.Gui.init();
-	Vvveb.FileManager.init();
-	Vvveb.SectionList.init();
-
-	var pages = 
+let pages = 
 	[
 		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
 		{name:"landing-page", title:"Landing page",  url: "demo/landing/index.html", file: "demo/landing/index.html", assets: ['demo/landing/css/style.css']},
@@ -1659,8 +1686,20 @@ $(document).ready(function()
 		*/
 	];
 	
+$(function() {
+
+	let firstPage = Object.keys(pages)[0];
+	Vvveb.Builder.init(pages[firstPage]["url"], function() {
+		//load code after page is loaded here
+	});
+
+	Vvveb.Gui.init();
+	Vvveb.FileManager.init();
+	Vvveb.SectionList.init();
+	Vvveb.Breadcrumb.init();
+	
 	Vvveb.FileManager.addPages(pages);
-	Vvveb.FileManager.loadPage("narrow-jumbotron");
+	Vvveb.FileManager.loadPage(pages[firstPage]["name"]);
 	Vvveb.Breadcrumb.init();
 
 	//if url has #no-right-panel set one panel demo
