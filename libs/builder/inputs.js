@@ -69,6 +69,54 @@ var TextInput = $.extend({}, Input, {
   }
 );
 
+var TelInput = $.extend({}, Input, {
+
+    events: [
+        ["blur", "onChange", "input"],
+	 ],
+
+	init: function(data) {
+		return this.render("telinput", data);
+	},
+  }
+);
+
+var EmailInput = $.extend({}, Input, {
+
+    events: [
+        ["blur", "onChange", "input"],
+	 ],
+
+	init: function(data) {
+		return this.render("emailinput", data);
+	},
+  }
+);
+
+var DateInput = $.extend({}, Input, {
+
+    events: [
+        ["blur", "onChange", "input"],
+	 ],
+
+	init: function(data) {
+		return this.render("dateinput", data);
+	},
+  }
+);
+
+var TimeInput = $.extend({}, Input, {
+
+    events: [
+        ["blur", "onChange", "input"],
+	 ],
+
+	init: function(data) {
+		return this.render("timeinput", data);
+	},
+  }
+);
+
 var TextareaInput = $.extend({}, Input, {
 
     events: [

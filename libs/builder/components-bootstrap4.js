@@ -69,7 +69,41 @@ function changeNodeName(node, newNodeName)
 }
 
 Vvveb.ComponentsGroup['Bootstrap 4'] =
-["html/container", "html/gridrow", "html/button", "html/buttongroup", "html/buttontoolbar", "html/heading", "html/image", "html/jumbotron", "html/alert", "html/card", "html/listgroup", "html/hr", "html/taglabel", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination", "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/table", "html/paragraph", "html/link", "html/video", "html/button"];
+["html/container",
+ "html/gridrow",
+ "html/button",
+ "html/buttongroup",
+ "html/buttontoolbar",
+ "html/heading",
+ "html/image",
+ "html/jumbotron",
+ "html/alert",
+ "html/card",
+ "html/listgroup",
+ "html/hr",
+ "html/taglabel",
+ "html/badge",
+ "html/progress",
+ "html/navbar",
+ "html/breadcrumbs",
+ "html/pagination",
+ "html/form",
+ "html/textinput",
+ "html/telinput",
+ "html/emailinput",
+ "html/numberinput",
+ "html/dateinput",
+ "html/timeinput",
+ "html/textareainput",
+ "html/selectinput",
+ "html/fileinput",
+ "html/checkbox",
+ "html/radiobutton",
+ "html/table",
+ "html/paragraph",
+ "html/link",
+ "html/video",
+ "html/button"];
 
 
 var base_sort = 100;//start sorting for base component from 100 to allow extended properties to be first
@@ -1795,6 +1829,120 @@ Vvveb.Components.extend("_base", "html/textinput", {
 		col:6,
         inputtype: CheckboxInput,
 	}]
+});
+
+Vvveb.Components.extend("_base", "html/emailinput", {
+    name: "Email Input",
+	attributes: {"type":"email"},
+    image: "icons/text_input.svg",
+    html: '<div class="form-group"><label>Text</label><input type="text" class="form-control"></div></div>',
+    properties: [{
+        name: "Value",
+        key: "value",
+        htmlAttr: "value",
+        inputtype: EmailInput
+    }, {
+        name: "Placeholder",
+        key: "placeholder",
+        htmlAttr: "placeholder",
+        inputtype: TextInput
+    }]
+});
+
+Vvveb.Components.extend("_base", "html/telinput", {
+    name: "Phone Number Input",
+	attributes: {"type":"tel"},
+    image: "icons/text_input.svg",
+    html: '<div class="form-group"><label>Text</label><input type="text" class="form-control"></div></div>',
+    properties: [{
+        name: "Value",
+        key: "value",
+        htmlAttr: "value",
+        inputtype: TelInput
+    }, {
+        name: "Placeholder",
+        key: "placeholder",
+        htmlAttr: "placeholder",
+        inputtype: TextInput
+    }]
+});
+
+Vvveb.Components.extend("_base", "html/numberinput", {
+    name: "Number Input",
+	attributes: {"type":"number"},
+    image: "icons/text_input.svg",
+    html: '<div class="form-group"><label>Text</label><input type="text" class="form-control"></div></div>',
+    properties: [{
+        name: "Value",
+        key: "value",
+        htmlAttr: "value",
+        inputtype: NumberInput
+    }, {
+        name: "Placeholder",
+        key: "placeholder",
+        htmlAttr: "placeholder",
+        inputtype: TextInput
+    }, {
+        name: "Min",
+        key: "min",
+        htmlAttr: "min",
+        inputtype: NumberInput
+    }, {
+        name: "Max",
+        key: "max",
+        htmlAttr: "max",
+        inputtype: NumberInput
+    }, {
+         name: "Step",
+         key: "step",
+         htmlAttr: "step",
+         inputtype: NumberInput
+    }]
+});
+
+Vvveb.Components.extend("_base", "html/dateinput", {
+    name: "Date Input",
+	attributes: {"type":"date"},
+    image: "icons/text_input.svg",
+    html: '<div class="form-group"><label>Text</label><input type="text" class="form-control"></div></div>',
+    properties: [{
+        name: "Value",
+        key: "value",
+        htmlAttr: "value",
+        inputtype: DateInput
+    }, {
+        name: "Min",
+        key: "min",
+        htmlAttr: "min",
+        inputtype: DateInput
+    }, {
+        name: "Max",
+        key: "max",
+        htmlAttr: "max",
+        inputtype: DateInput
+    }]
+});
+Vvveb.Components.extend("_base", "html/timeinput", {
+    name: "Time Input",
+	attributes: {"type":"time"},
+    image: "icons/text_input.svg",
+    html: '<div class="form-group"><label>Text</label><input type="text" class="form-control"></div></div>',
+    properties: [{
+        name: "Value",
+        key: "value",
+        htmlAttr: "value",
+        inputtype: TimeInput
+    }, {
+        name: "Min",
+        key: "min",
+        htmlAttr: "min",
+        inputtype: TimeInput
+    }, {
+        name: "Max",
+        key: "max",
+        htmlAttr: "max",
+        inputtype: TimeInput
+    }]
 });
 
 Vvveb.Components.extend("_base", "html/selectinput", {

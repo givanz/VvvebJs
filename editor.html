@@ -823,10 +823,26 @@
 	
 </script>
 
+<script id="vvveb-input-emailinput" type="text/html">
+
+	<div>
+		<input name="{%=key%}" type="email" class="form-control"/>
+	</div>
+
+</script>
+
+<script id="vvveb-input-telinput" type="text/html">
+
+	<div>
+		<input name="{%=key%}" type="tel" class="form-control"/>
+	</div>
+
+</script>
+
 <script id="vvveb-input-textareainput" type="text/html">
 	
 	<div>
-		<textarea name="{%=key%}" rows="3" class="form-control"/>
+		<textarea name="{%=key%}" rows="3" class="form-control"></textarea>
 	</div>
 	
 </script>
@@ -1243,6 +1259,24 @@
 			  {% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %} 
 			  {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %} 
 			  {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %} 
+		class="form-control"/>
+	</div>
+</script>
+
+<script id="vvveb-input-dateinput" type="text/html">
+	<div>
+		<input name="{%=key%}" type="date" value="{%=value%}"
+		{% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %}
+		{% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %}
+		class="form-control"/>
+	</div>
+</script>
+
+<script id="vvveb-input-timeinput" type="text/html">
+	<div>
+		<input name="{%=key%}" type="time" value="{%=value%}"
+		{% if (typeof min !== 'undefined' && min != false) { %}min="{%=min%}"{% } %}
+		{% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %}
 		class="form-control"/>
 	</div>
 </script>
