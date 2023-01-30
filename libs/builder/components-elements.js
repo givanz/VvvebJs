@@ -1,5 +1,5 @@
 /*
-Copyright 2017 - present Ziadin Givan
+Copyright 2017 Ziadin Givan
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,7 +21,8 @@ Vvveb.ComponentsGroup['Elements'] = [
 "elements/section", 
 "elements/footer", 
 "elements/header", 
-"elements/svg-icon"
+"elements/svg-icon",
+"elements/gallery",
 ];
 
 
@@ -256,6 +257,166 @@ Vvveb.Components.add("elements/svg-element", {
 			step:1
 		}			
 	}]
+});  
+
+//Gallery
+Vvveb.Components.add("elements/gallery", {
+    attributes: ["data-component-gallery"],
+    name: "Gallery",
+    image: "icons/images.svg",
+    html: `
+			<div class="gallery masonry has-shadow" data-component-gallery>
+				<div class="item">
+					<a>
+						<img src="/media/7.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="/media/2.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="/media/15.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="/media/4.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="/media/5.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="/media/6.jpg">
+					</a>
+				</div>
+				<div class="item">
+					<a>
+						<img src="/media/7.jpg">
+					</a>
+				</div>
+			</div>
+			`,
+		properties: [{
+			name: "Masonry layout",
+			key: "masonry",
+			htmlAttr: "class",
+			validValues: ["masonry", "flex"],
+			inputtype: ToggleInput,
+			data: {
+				on: "masonry",
+				off: "flex"
+			},
+			setGroup: group => {
+				$('.mb-3[data-group]').attr('style','display:none !important');
+				$('.mb-3[data-group="'+ group + '"]').attr('style','');
+			}, 		
+			onChange : function(node, value, input)  {
+				this.setGroup(value);
+				return node;
+			}, 
+			init: function (node) {
+				if ($(node).hasClass("masonry")) {
+					return "masonry";
+				} else {
+					return "flex";
+				}
+			},   			
+		}, {
+			name: "Image shadow",
+			key: "shadow",
+			htmlAttr: "class",
+			validValues: [ "", "has-shadow"],
+			inputtype: ToggleInput,
+			data: {
+				on: "has-shadow",
+				off: ""
+			},
+		}, {
+			name: "Horizontal gap",
+			key: "column-gap",
+			htmlAttr: "style",
+			inputtype: CssUnitInput,
+			data:{
+				max: 100,
+				min:0,
+				step:1
+			}
+	   }, {
+			name: "Vertical gap",
+			key: "margin-bottom",
+			htmlAttr: "style",
+			child: ".item",
+			inputtype: CssUnitInput,
+			data:{
+				max: 100,
+				min:0,
+				step:1
+			}
+	   }, {
+			name: "Images per row masonry",
+			key: "column-count",
+			group:"masonry",
+			htmlAttr: "style",
+			inputtype: RangeInput,
+			data:{
+				max: 12,
+				min:1,
+				step:1
+			}
+		}, {
+			name: "Images per row flex",
+			group:"flex",
+			key: "flex-basis",
+			child: ".item",
+			htmlAttr: "style",
+			inputtype: RangeInput,
+			data:{
+				max: 12,
+				min:1,
+				step:1
+			},
+			onChange: function(node, value, input, component, inputElement) {
+				if (value) {
+					value = 100 / value;
+					value += "%";
+				} 
+				
+				return value;
+			}  			
+	   }, {
+			name: "",
+			key: "addChild",
+			inputtype: ButtonInput,
+			data: {text:"Add image", icon:"la la-plus"},
+			onChange: function(node) {
+				 $(node).append('<div class="item"><a><img src="/media/15.jpg"></a></div>');
+				 
+				 //render component properties again to include the new image
+				 //Vvveb.Components.render("ellements/gallery");
+				 
+				 return node;
+			}
+	}],
+    init(node)	{
+		
+		$('.mb-3[data-group]').attr('style','display:none !important');
+		
+		let source = "flex";
+		if ($(node).hasClass("masonry")) {
+			source = "masonry";
+		} else {
+			source = "flex";
+		}
+
+		$('.mb-3[data-group="'+ source + '"]').attr('style','');
+	}	
 });  
 
 /* Section */

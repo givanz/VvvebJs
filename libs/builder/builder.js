@@ -349,9 +349,14 @@ Vvveb.Components = {
 					if (property.child) element = element.find(property.child);
 					if (property.parent) element = element.parent(property.parent);
 					
-					if (property.onChange)
-					{
-						element = property.onChange(element, value, input, component);
+					if (property.onChange) {
+						let ret = property.onChange(element, value, input, component);
+						//if on change returns an object then is returning the dom node otherwise is returning the new value
+						if (typeof ret == "object")  {
+							element = ret;
+						} else {
+							value = ret;
+						}
 					}/* else */
 					if (property.htmlAttr)
 					{
@@ -2100,10 +2105,6 @@ Vvveb.Gui = {
 		
 	},
 	
-	deletePage : function () {
-		
-	},
-
 	setDesignerMode : function () {
 		//aria-pressed attribute is updated after action is called and we check for false instead of true
 		var designerMode = this.attributes["aria-pressed"].value != "true";
@@ -2769,18 +2770,18 @@ Vvveb.FileManager = {
 				type: "POST",
 				url: deleteUrl,//set your server side save script url
 				data: {file:page.file},
-				success: function (data) {
+				success: function (data, text) {
 					let bg = "bg-success";
 					if (data.success) {		
 						$(".save-btn").attr("disabled", "true");
 					} else {
-						bg = "bg-danger";
+						//bg = "bg-danger";
 					}
 
-					displayToast("bg-success", data.message);
+					displayToast(bg, data.message ?? data);
 				},
 				error: function (data) {
-					displayToast("bg-error", data.responseText);
+					displayToast("bg-danger", data.responseText);
 				}
 			});
 			element.remove();
@@ -2796,15 +2797,15 @@ Vvveb.FileManager = {
 				type: "POST",
 				url: renameUrl,//set your server side save script url
 				data: {file:page.file, newfile:newfile},
-				success: function (data) {
+				success: function (data, text) {
 					let bg = "bg-success";
 					if (data.success) {		
 						$(".save-btn").attr("disabled", "true");
 					} else {
-						bg = "bg-danger";
+						//bg = "bg-danger";
 					}
 
-					displayToast("bg-success", data.message);
+					displayToast(bg, data.message ?? data);
 
 
 					_self.pages[page.page]["file"] = newfile;
@@ -2816,7 +2817,7 @@ Vvveb.FileManager = {
 					
 				},
 				error: function (data) {
-					displayToast("bg-error", data.responseText);
+					displayToast("bg-danger", data.responseText);
 				}
 			});
 
@@ -2866,13 +2867,15 @@ Vvveb.FileManager = {
 	},
 	
 	getCurrentUrl: function() {
-		if (this.currentPage)
+		if (this.currentPage) {
 		return this.pages[this.currentPage]['url'];
+		}
 	},	
     
    	getPageData: function(key) {
-		if (this.currentPage)
+		if (this.currentPage) {
 		return this.pages[this.currentPage][key];
+		}
 	},	
     
     
@@ -3094,9 +3097,6 @@ Vvveb.ColorPaletteManager = {
 		  } catch (error) {}
 	   }
 	   return cssVars;
-	},
-
-	addProvider: function(provider, Obj) {
 	},
 
 	init: function(document) {

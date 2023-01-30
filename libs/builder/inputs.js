@@ -235,7 +235,12 @@ var LinkInput = $.extend({}, TextInput, {
     events: [
         ["change", "onChange", "input"],
 	 ],
-	
+	/*
+	setValue: function(value) {
+		//value = value.replace(/(?<!\/)www\./, 'https://www.');
+		$('input', this.element).val(value);
+	},
+	*/
 	init: function(data) {
 		return this.render("textinput", data);
 	},
@@ -491,6 +496,14 @@ var ToggleInput = $.extend({}, TextInput, {
 		}
 	},
 
+	setValue: function(value) {
+		if (value == $('input', this.element).attr("data-value-on")) {
+			$('input', this.element).attr("checked", true);
+		} else {
+			$('input', this.element).attr("checked", false);
+		}
+	},
+	
     events: [
         ["change", "onChange", "input"],
 	 ],

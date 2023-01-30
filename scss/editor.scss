@@ -65,6 +65,7 @@ $font-size-base: 1rem;
 /* override boostrap colors with css variables to allow dynamic color change*/ 
 @import "bootstrap-css-vars";
 @import "builder";
+@import "components/gallery";
 
 
 .btn-icon

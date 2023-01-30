@@ -9,7 +9,7 @@ var ImageInput = $.extend({}, ImageInput, {
 	setValue: function(value) {
 		if (value.indexOf("data:image") == -1 && value != "none") {
 				$('input[type="text"]', this.element).val(value);
-				$('img', this.element).attr("src",(value.indexOf("//") > -1 ? '' : Vvveb.themeBaseUrl) + value);
+				$('img', this.element).attr("src",(value.indexOf("//") > -1 || value.indexOf("media/") > -1? '' : Vvveb.themeBaseUrl) + value);
 		}
 	},
 

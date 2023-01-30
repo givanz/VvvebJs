@@ -879,18 +879,16 @@
 
 <script id="vvveb-input-toggle" type="text/html">
 	
-    <div class="toggle">
+    <div class="form-check form-switch">
         <input 
 		type="checkbox" 
 		name="{%=key%}" 
 		value="{%=on%}" 
 		{%if (off) { %} data-value-off="{%=off%}" {% } %}
 		{%if (on) { %} data-value-on="{%=on%}" {% } %} 
-		class="toggle-checkbox" 
+		class="form-check-input" type="checkbox" role="switch"
 		id="{%=key%}">
-        <label class="toggle-label" for="{%=key%}">
-            <span class="toggle-inner"></span>
-            <span class="toggle-switch"></span>
+        <label class="form-check-label"for="{%=key%}">
         </label>
     </div>
 	
