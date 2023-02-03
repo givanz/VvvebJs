@@ -17,7 +17,17 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-//This script is used by image upload input to save the image on the server and return the image url to be set as image src attribute.
+/*
+This script is used by image upload input to save the image on the server and return the image url to be set as image src attribute.
+*/ 
+
+$uploadDenyExtensions = ['php'];
+$uploadAllowExtensions = ['ico','jpg','jpeg','png','gif','webp'];
+
+function showError($error) {
+	header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+	die($error);
+}
 
 function sanitizeFileName($file)
 {
@@ -34,11 +44,28 @@ if (isset($_POST['mediaPath'])) {
 	define('UPLOAD_PATH', '/');
 }
 
-$destination = UPLOAD_FOLDER . UPLOAD_PATH . '/' . $_FILES['file']['name'];
+$fileName  = $_FILES['file']['name'];
+$extension = strtolower(substr($fileName, strrpos($fileName, '.') + 1));
+
+//check if extension is on deny list
+if (in_array($extension, $uploadDenyExtensions)) {
+	showError("File type $extension not allowed!");
+}
+
+/*
+//comment deny code above and uncomment this code to change to a more restrictive allowed list
+// check if extension is on allow list
+if (in_array($extension, $uploadDenyExtensions)) {
+	showError("File type $extension not allowed!");
+}
+*/
+
+
+$destination = UPLOAD_FOLDER . UPLOAD_PATH . '/' . $fileName;
 move_uploaded_file($_FILES['file']['tmp_name'], $destination);
 
 if (isset($_POST['onlyFilename'])) {
-	echo $_FILES['file']['name'];
+	echo $fileName;
 } else {
-	echo UPLOAD_PATH . $_FILES['file']['name'];
+	echo UPLOAD_PATH . $fileName;
 }

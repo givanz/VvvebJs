@@ -22,6 +22,8 @@ define('MAX_FILE_LIMIT', 1024 * 1024 * 2);//2 Megabytes max html file size
 function sanitizeFileName($file) {
 	//sanitize, remove double dot .. and remove get parameters if any
 	$file = __DIR__ . '/' . preg_replace('@\?.*$@' , '', preg_replace('@\.{2,}@' , '', preg_replace('@[^\/\\a-zA-Z0-9\-\._]@', '', $file)));
+	//allow only .html extension
+	$file = preg_replace('/\..+$/', '', $file) . '.html';
 	return $file;
 }
 
@@ -72,7 +74,7 @@ if ($action) {
 			}
 		break;
 		default:
-		showError("Invalid action '$action'!");
+			showError("Invalid action '$action'!");
 	}
 } else {
 	//save page

@@ -478,6 +478,18 @@ body
 		right: var(--builder-right-panel-width);
 		background-color:#fff;
 		
+		> div {
+			position:relative;
+		
+			.btn-group {
+				position:absolute;
+				right:0;
+				top:0;
+				background:#fff;
+			}
+		}
+		
+	
 		#vvveb-code-editor 
 		{
 			//height:calc( 100% - #{$builder-bottom-panel-height});
@@ -819,6 +831,10 @@ body
 						line-height: 12px;					
 					}
 				}
+				
+				[type="color"] {
+					float:right;
+				}
 			}
 			
 			.custom-control
@@ -1138,12 +1154,12 @@ body
 				}
 				
 				&[type="color"] {
-					padding: 3px;
+					padding: 5px;
 					//height:30px;
 					//width:32px;
 					box-shadow:none;
-					border:1px solid #ddd;
-					margin:0 0.5rem;
+					border:1px dashed #ddd;
+					margin:0;
 					margin-top:2px;
 					border-radius:3px;
 					
@@ -1173,6 +1189,7 @@ body
 			
 			div.dropdown{ 
 			
+			
 				a:after {
 					vertical-align:middle !important;
 					font-size: 14px;
@@ -1181,7 +1198,7 @@ body
 			
 				a.dropdown-item {
 					display:block;
-				//font-size:1rem;
+					font-size:1rem;
 					
 					i {
 						margin-right:0;
@@ -2168,7 +2185,6 @@ input[type="color"] {
 	border-radius: 3px;
 	padding: 2px;
 	box-shadow:none;
-	float:right;
 	
 	  &.form-control-color::-moz-color-swatch{
 			min-width: 21px;
@@ -2190,10 +2206,12 @@ input[type="color"] {
 
 
 .breadcrumb-navigator {
-	padding:0.4rem 1rem 0;
+	padding:0.4rem 1rem;
 	
 	.breadcrumb {
 		font-size:90%;
+		min-height:18px;
+		margin:0;
 		
 		.breadcrumb-item {
 			padding:0.2rem 0.5rem;

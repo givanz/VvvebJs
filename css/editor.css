@@ -13367,6 +13367,13 @@ body {
     right: 15vw;
     right: var(--builder-right-panel-width);
     background-color: #fff; }
+    #vvveb-builder #bottom-panel > div {
+      position: relative; }
+      #vvveb-builder #bottom-panel > div .btn-group {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: #fff; }
     #vvveb-builder #bottom-panel #vvveb-code-editor {
       width: 100%;
       height: 100%;
@@ -13589,6 +13596,8 @@ body {
         padding: 0.1rem 0.2rem;
         text-align: center;
         line-height: 12px; }
+    #vvveb-builder .component-properties .mb-3 .input [type="color"] {
+      float: right; }
     #vvveb-builder .component-properties .mb-3 .custom-control {
       min-height: 1.1rem; }
     #vvveb-builder .component-properties .mb-3.inline {
@@ -13792,10 +13801,10 @@ body {
       box-shadow: none;
       background-position: right 0.5rem center; }
       #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown[type="color"], #vvveb-builder #wysiwyg-editor.default-editor > select[type="color"], #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"] {
-        padding: 3px;
+        padding: 5px;
         box-shadow: none;
-        border: 1px solid #ddd;
-        margin: 0 0.5rem;
+        border: 1px dashed #ddd;
+        margin: 0;
         margin-top: 2px;
         border-radius: 3px; }
         #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown[type="color"].form-control-color::-moz-color-swatch, #vvveb-builder #wysiwyg-editor.default-editor > select[type="color"].form-control-color::-moz-color-swatch, #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"].form-control-color::-moz-color-swatch {
@@ -13814,7 +13823,8 @@ body {
       font-size: 14px;
       margin-bottom: 0.2rem; }
     #vvveb-builder #wysiwyg-editor.default-editor div.dropdown a.dropdown-item {
-      display: block; }
+      display: block;
+      font-size: 1rem; }
       #vvveb-builder #wysiwyg-editor.default-editor div.dropdown a.dropdown-item i {
         margin-right: 0; }
   #vvveb-builder #section-actions {
@@ -14631,8 +14641,7 @@ input[type="color"] {
   height: 28px;
   border-radius: 3px;
   padding: 2px;
-  box-shadow: none;
-  float: right; }
+  box-shadow: none; }
   input[type="color"].form-control-color::-moz-color-swatch {
     min-width: 21px;
     min-height: 21px;
@@ -14647,9 +14656,11 @@ input[type="color"] {
     border: none; }
 
 .breadcrumb-navigator {
-  padding: 0.4rem 1rem 0; }
+  padding: 0.4rem 1rem; }
   .breadcrumb-navigator .breadcrumb {
-    font-size: 90%; }
+    font-size: 90%;
+    min-height: 18px;
+    margin: 0; }
     .breadcrumb-navigator .breadcrumb .breadcrumb-item {
       padding: 0.2rem 0.5rem; }
       .breadcrumb-navigator .breadcrumb .breadcrumb-item a {

@@ -781,27 +781,34 @@
 				</div>
 				
 				<div id="bottom-panel">
+					
+						<div>
 
-						<div class="breadcrumb-navigator float-start px-2" style="--bs-breadcrumb-divider: '>';">
-							
-						  <ol class="breadcrumb">
-							<li class="breadcrumb-item"><a href="#">body</a></li>
-							<li class="breadcrumb-item"><a href="#">section</a></li>
-							<li class="breadcrumb-item"><a href="#">img</a></li>
-						  </ol>			
-						</div>
+							<div class="breadcrumb-navigator float-start px-2" style="--bs-breadcrumb-divider: '>';">
+								
+							  <ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#">body</a></li>
+								<li class="breadcrumb-item"><a href="#">section</a></li>
+								<li class="breadcrumb-item"><a href="#">img</a></li>
+							  </ol>			
+							</div>
 
 
-						<div class="btn-group float-end" role="group">
+							<div class="btn-group" role="group">
 
-							 <button id="code-editor-btn" data-view="mobile" class="btn btn-sm btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
-								  <i class="la la-code"></i> Code editor
-							  </button>
-							 
-								<div id="toggleEditorJsExecute" class="form-check mt-1" style="display:none">
+								<div id="toggleEditorJsExecute" class="form-check" style="display:none">
 									<input type="checkbox" class="form-check-input" id="runjs" name="runjs" data-vvveb-action="toggleEditorJsExecute">
 									<label class="form-check-label" for="runjs"><small>Run javascript code on edit</small></label>
 								</div>
+							
+							
+								  <button id="code-editor-btn" data-view="mobile" class="btn btn-sm btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
+									  <i class="la la-code"></i> Code editor
+								  </button>
+								 
+
+							</div>
+							
 						</div>
 							
 						<div id="vvveb-code-editor">
@@ -826,7 +833,7 @@
 <script id="vvveb-input-textareainput" type="text/html">
 	
 	<div>
-		<textarea name="{%=key%}" rows="3" class="form-control"/>
+		<textarea name="{%=key%}" {% if (typeof rows !== 'undefined') { %} rows="{%=rows%}" {% } else { %} rows="3" {% } %} class="form-control"/>
 	</div>
 	
 </script>
@@ -905,7 +912,7 @@
 
 	<div>
 
-		<select class="form-select">
+		<select class="form-select" name="{%=key%}">
 			{% var optgroup = false; for ( var i = 0; i < options.length; i++ ) { %}
 				{% if (options[i].optgroup) {  %}
 					{% if (optgroup) {  %}
@@ -1163,12 +1170,12 @@
 	<div class="row">
 		<div class="col-6 mb-1">
 			<label>Value</label>
-			<input name="value" type="text" value="{%=value%}" class="form-control"/>
+			<input name="value" type="text" value="{%=value%}" class="form-control" autocomplete="off" />
 		</div>
 
 		<div class="col-6 mb-1">
 			<label>Text</label>
-			<input name="text" type="text" value="{%=text%}" class="form-control"/>
+			<input name="text" type="text" value="{%=text%}" class="form-control" autocomplete="off" />
 		</div>
 
 		{% if (typeof hide_remove === 'undefined') { %}
@@ -1599,11 +1606,11 @@ Vvveb.themeBaseUrl = 'demo/landing/';
 <!-- script src="libs/builder/components-server.js"></script -->	
 <script src="libs/builder/plugin-google-fonts.js"></script>	
 <script src="libs/builder/components-common.js"></script>	
+<script src="libs/builder/components-html.js"></script>	
 <script src="libs/builder/plugin-aos.js"></script>
 <script src="libs/builder/components-elements.js"></script>	
 <script src="libs/builder/components-bootstrap5.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
-<script src="libs/builder/components-html.js"></script>	
 
 <!-- sections-->
 <!-- <script src="demo/landing/sections/sections.js"></script> -->

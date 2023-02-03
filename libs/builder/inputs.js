@@ -579,6 +579,10 @@ var TextValueInput = $.extend({}, Input, {
 	    ["click", "onChange", "button" /*'select'*/],
 	 ],
 	
+	setValue: function(value) {
+		return false;
+	},
+		
 	init: function(data) {
 		return this.render("textvalue", data);
 	},

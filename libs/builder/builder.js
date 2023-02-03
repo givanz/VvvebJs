@@ -407,13 +407,15 @@ Vvveb.Components = {
 						}
 					}
 
-					if (component.onChange) 
-					{
+					if (component.onChange) {
 						element = component.onChange(element, property, value, input);
 					}
 					
-					//if (!property.child || !property.parent) Vvveb.Builder.selectNode(element);
-					Vvveb.Builder.selectNode(selectedElement);
+					if (property.child || property.parent) {
+						Vvveb.Builder.selectNode(selectedElement);
+					} else {
+						Vvveb.Builder.selectNode(element);
+					}
 					
 					return element;
 			});				
@@ -614,6 +616,11 @@ Vvveb.WysiwygEditor = {
 			selection.addRange(range);		
         }
 		
+		//select link element to edit link etc
+		if (tag == "a") {
+			Vvveb.Builder.selectNode(element);
+			Vvveb.Builder.loadNodeComponent(element);
+		}
 		return element;
 	},
 	
@@ -1212,8 +1219,7 @@ Vvveb.Builder = {
 			return;
 		}
 		
-		if (self.texteditEl && self.selectedEl.get(0) != node) 
-		{
+		if (self.texteditEl && self.selectedEl.get(0) != node) {
 			Vvveb.WysiwygEditor.destroy(self.texteditEl);
 			self.selectPadding = 0;
 			$("#select-box").removeClass("text-edit").find("#select-actions").show();
@@ -2496,7 +2502,8 @@ Vvveb.SectionList = {
 			node.click();
 		}).on("mouseenter", "li[data-component] label", function (e) {
 			node = $(e.currentTarget.parentNode).data("node");
-
+			$(node).css("outline","2px dotted blue");
+			/*
 			delay(
 				() => Vvveb.Builder.frameHtml.animate({
 					scrollTop: $(node).offset().top - ($(node).height() / 2)
@@ -2504,6 +2511,10 @@ Vvveb.SectionList = {
 			1000);
 
 			$(node).trigger("mousemove");
+			*/ 
+		}).on("mouseleave",  "li[data-component] label",  function (e){
+			node = $(e.currentTarget.parentNode).data("node");
+			$(node).css("outline","");
 		});		
 		
 		$(this.selector).on("dragstart", "> div", this.dragStart);
@@ -2927,15 +2938,21 @@ Vvveb.Breadcrumb = {
 		this.tree = $(".breadcrumb-navigator > .breadcrumb").html("");
 
 		$(this.tree).on("click", ".breadcrumb-item", function (e) {
-			var node = $(this).data("node");
+			let node = $(this).data("node");
 			if (node) {
 				node.click();
+
+				delay(
+					() => Vvveb.Builder.frameHtml.animate({
+						scrollTop: $(node).offset().top - ($(node).height() / 2)
+					}, 500),
+				 100);
 			}
 			e.preventDefault();
 		}).on("mouseenter", ".breadcrumb-item", function (e) {
-
-			var node = $(this).data("node");
-
+			let node = $(this).data("node");
+			$(node).css("outline","2px dotted blue");
+			/*
 			delay(
 				() => Vvveb.Builder.frameHtml.animate({
 					scrollTop: $(node).offset().top - ($(node).height() / 2)
@@ -2943,8 +2960,13 @@ Vvveb.Breadcrumb = {
 			 1000);
 
 			$(node).trigger("mousemove");
+			*/
 			
+		}).on("mouseleave", ".breadcrumb-item", function (e){
+			let node = $(this).data("node");
+			$(node).css("outline","");
 		});
+
 	},
 	
 	addElement: function(data, element) {
@@ -3101,7 +3123,7 @@ Vvveb.ColorPaletteManager = {
 
 	init: function(document) {
 		Vvveb.Builder.selectedEl = $(document.body);
-		Vvveb.Components.render("config/bootstrap", "#configuration .component-properties")
+		Vvveb.Components.render("config/bootstrap", "#configuration .component-properties");
 	},
 	
 };

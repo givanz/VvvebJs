@@ -17,7 +17,7 @@ https://github.com/givanz/Vvvebjs
 */
 
 Vvveb.ComponentsGroup['Bootstrap 5'] =
-["html/container", "html/gridrow", "html/btn", "html/buttongroup", "html/buttontoolbar", "html/heading", "html/image", "html/alert", "html/card", "html/listgroup", "html/hr", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination", "html/form","html/table", "html/paragraph"];
+["html/container", "html/gridrow", "html/btn", "html/btn-link", "html/buttongroup", "html/buttontoolbar", "html/alert", "html/card", "html/listgroup", "html/badge", "html/progress", "html/navbar", "html/breadcrumbs", "html/pagination"];
 
 
 Vvveb.Components.extend("_base", "html/container", {
@@ -66,19 +66,15 @@ Vvveb.Components.extend("_base", "html/container", {
     }],
 });
 
-Vvveb.Components.extend("_base", "html/btn", {
-    classes: ["btn", "btn-link"],
+Vvveb.Components.extend("html/link", "html/btn", {
+    classes: ["btn"],
+    nodes: null,
     name: "Button",
     image: "icons/button.svg",
-    html: '<button type="button" class="btn btn-primary">Primary</button>',
+    html: '<a class="btn btn-primary">Primary</a>',
     properties: [{
-        name: "Link To",
-        key: "href",
-        htmlAttr: "href",
-        inputtype: LinkInput
-    }, {
-        name: "Type",
-        key: "type",
+        name: "Background",
+        key: "background",
         htmlAttr: "class",
         inputtype: SelectInput,
         validValues: ["btn-default", "btn-primary", "btn-info", "btn-success", "btn-warning", "btn-info", "btn-light", "btn-dark", "btn-outline-primary", "btn-outline-info", "btn-outline-success", "btn-outline-warning", "btn-outline-info", "btn-outline-light", "btn-outline-dark", "btn-link"],
@@ -151,15 +147,19 @@ Vvveb.Components.extend("_base", "html/btn", {
                 text: "Small"
             }]
         }
-    }, {
-        name: "Target",
-        key: "target",
-        htmlAttr: "target",
-        inputtype: TextInput
-    }, {
+   	},{
+        name: "Autofocus",
+        key: "autofocus",
+        htmlAttr: "autofocus",
+        inputtype: CheckboxInput,
+		inline:true,
+        col:6,
+   	},{
         name: "Disabled",
         key: "disabled",
         htmlAttr: "class",
+		inline:true,
+        col:6,
         inputtype: ToggleInput,
         validValues: ["disabled"],
         data: {
@@ -168,6 +168,7 @@ Vvveb.Components.extend("_base", "html/btn", {
         }
     }]
 });
+	
 Vvveb.Components.extend("_base", "html/buttongroup", {
     classes: ["btn-group"],
     name: "Button Group",
@@ -325,7 +326,7 @@ Vvveb.Components.extend("_base", "html/card", {
     image: "icons/panel.svg",
     name: "Card",
     html: '<div class="card">\
-		  <img class="card-img-top" src="' +  Vvveb.baseUrl + 'icons/image.svg" alt="Card image cap" width="128" height="128">\
+		  <img class="card-img-top bg-light" src="' +  Vvveb.baseUrl + 'icons/image.svg" alt="Card image cap">\
 		  <div class="card-body">\
 			<h4 class="card-title">Card title</h4>\
 			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>\
@@ -333,27 +334,129 @@ Vvveb.Components.extend("_base", "html/card", {
 		  </div>\
 		</div>'
 });
+
 Vvveb.Components.extend("_base", "html/listgroup", {
     name: "List Group",
     image: "icons/list_group.svg",
     classes: ["list-group"],
-    html: '<ul class="list-group">\n  <li class="list-group-item">\n    <span class="badge">14</span>\n    Cras justo odio\n  </li>\n  <li class="list-group-item">\n    <span class="badge">2</span>\n    Dapibus ac facilisis in\n  </li>\n  <li class="list-group-item">\n    <span class="badge">1</span>\n    Morbi leo risus\n  </li>\n</ul>'
+    html: '<ul class="list-group">\n  <li class="list-group-item">\n    <span class="badge bg-success">14</span>\n    Cras justo odio\n  </li>\n  <li class="list-group-item">\n    <span class="badge bg-primary">2</span>\n    Dapibus ac facilisis in\n  </li>\n  <li class="list-group-item">\n    <span class="badge bg-danger">1</span>\n    Morbi leo risus\n  </li>\n</ul>',
+	properties: [{
+        name: "Flush",
+        key: "flush",
+        htmlAttr: "class",
+        validValues: ["", "list-group-flush"],
+        inputtype: ToggleInput,
+        data: {
+            on: "list-group-flush",
+            off: ""
+        }
+    },{
+        name: "Numbered",
+        key: "numbered",
+        htmlAttr: "class",
+        validValues: ["", "list-group-numbered"],
+        inputtype: ToggleInput,
+        data: {
+            on: "list-group-numbered",
+            off: ""
+        }
+    },{
+        name: "Horizontal",
+        key: "horizontal",
+        htmlAttr: "class",
+        validValues: ["", "list-group-horizontal"],
+        inputtype: ToggleInput,
+        data: {
+            on: "list-group-horizontal",
+            off: ""
+        }
+    }]    
 });
+
 Vvveb.Components.extend("_base", "html/listitem", {
     name: "List Item",
     classes: ["list-group-item"],
-    html: '<li class="list-group-item"><span class="badge">14</span> Cras justo odio</li>'
+    html: '<li class="list-group-item"><span class="badge bg-primary">14</span> Cras justo odio</li>',
+	properties: [{
+        name: "Background",
+        key: "background",
+        htmlAttr: "class",
+        validValues:["list-group-item-primary", "list-group-item-secondary", "list-group-item-success", "list-group-item-danger", "list-group-item-warning", "list-group-item-info", "list-group-item-light", "list-group-item-dark"],
+        inputtype: SelectInput,
+        data: {
+            options: [{
+                value: "",
+                text: "Default"
+            }, {
+                value: "list-group-item-primary",
+                text: "Primary"
+            }, {
+                value: "list-group-item-secondary",
+                text: "Secondary"
+            }, {
+                value: "list-group-item-success",
+                text: "Success"
+            }, {
+                value: "list-group-item-warning",
+                text: "Warning"
+            }, {
+                value: "list-group-item-danger",
+                text: "Danger"
+            }, {
+                value: "list-group-item-info",
+                text: "Info"
+            }, {
+                value: "list-group-item-light",
+                text: "Light"
+            }, {
+                value: "list-group-item-dark",
+                text: "Dark"
+            }]
+        }
+     },	{
+        name: "Active",
+        key: "active",
+        htmlAttr: "class",
+        validValues: ["", "active"],
+        inputtype: ToggleInput,
+        inline:true,
+        col:6,
+        data: {
+            on: "active",
+            off: ""
+        }
+    },{
+        name: "Disabled",
+        key: "disabled",
+        htmlAttr: "class",
+        validValues: ["", "disabled"],
+        inputtype: ToggleInput,
+        inline:true,
+        col:6,
+        data: {
+            on: "disabled",
+            off: ""
+        }
+    }]    
 });
+
 Vvveb.Components.extend("_base", "html/breadcrumbs", {
     classes: ["breadcrumb"],
     name: "Breadcrumbs",
     image: "icons/breadcrumbs.svg",
-    html: '<ol class="breadcrumb">\
-		  <li class="breadcrumb-item active"><a href="#">Home</a></li>\
-		  <li class="breadcrumb-item active"><a href="#">Library</a></li>\
-		  <li class="breadcrumb-item active">Data 3</li>\
-		</ol>'
+    html: `<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="#">Home</a></li>
+			<li class="breadcrumb-item"><a href="#">Library</a></li>
+			s<li class="breadcrumb-item active" aria-current="page"><a href="#">Book</a></li>
+		  </ol>`,
+	properties: [{
+		name: "Divider",
+		key: "--bs-breadcrumb-divider",
+		htmlAttr: "style",
+		inputtype: TextInput
+	}]        
 });
+
 Vvveb.Components.extend("_base", "html/breadcrumbitem", {
 	classes: ["breadcrumb-item"],
     name: "Breadcrumb Item",
@@ -389,16 +492,16 @@ Vvveb.Components.extend("_base", "html/pagination", {
         key: "size",
         htmlAttr: "class",
         inputtype: SelectInput,
-        validValues: ["btn-lg", "btn-sm"],
+        validValues: ["pagination-lg", "pagination-sm"],
         data: {
             options: [{
                 value: "",
                 text: "Default"
             }, {
-                value: "btn-lg",
+                value: "pagination-lg",
                 text: "Large"
             }, {
-                value: "btn-sm",
+                value: "pagination-sm",
                 text: "Small"
             }]
         }
@@ -432,6 +535,16 @@ Vvveb.Components.extend("_base", "html/pageitem", {
         htmlAttr: "href",
         child:".page-link",
         inputtype: LinkInput
+    }, {
+        name: "Active",
+        key: "active",
+        htmlAttr: "class",
+        validValues: ["active"],
+        inputtype: ToggleInput,
+        data: {
+            on: "active",
+            off: ""
+        }
     }, {
         name: "Disabled",
         key: "disabled",
@@ -523,30 +636,31 @@ Vvveb.Components.extend("_base", "html/navbar", {
     classes: ["navbar"],
     image: "icons/navbar.svg",
     name: "Nav Bar",
-    html: '<nav class="navbar navbar-expand-lg navbar-light bg-light">\
-		  <a class="navbar-brand" href="#">Navbar</a>\
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">\
-			<span class="navbar-toggler-icon"></span>\
-		  </button>\
-		\
-		  <div class="collapse navbar-collapse" id="navbarSupportedContent">\
-			<ul class="navbar-nav me-auto">\
-			  <li class="nav-item active">\
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>\
-			  </li>\
-			  <li class="nav-item">\
-				<a class="nav-link" href="#">Link</a>\
-			  </li>\
-			  <li class="nav-item">\
-				<a class="nav-link disabled" href="#">Disabled</a>\
-			  </li>\
-			</ul>\
-			<form class="form-inline my-2 my-lg-0">\
-			  <input class="form-control me-sm-2" type="text" placeholder="Search" aria-label="Search">\
-			  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>\
-			</form>\
-		  </div>\
-		</nav>',
+    html: `<nav class="navbar navbar-expand-lg bg-light bg-body-tertiary">
+			  <div class="container-fluid">
+				<a class="navbar-brand" href="#">Navbar</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+				  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+					  <a class="nav-link active" aria-current="page" href="#">Home</a>
+					</li>
+					<li class="nav-item">
+					  <a class="nav-link" href="#">Link</a>
+					</li>
+					<li class="nav-item">
+					  <a class="nav-link disabled">Disabled</a>
+					</li>
+				  </ul>
+				  <form class="d-flex" role="search">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				  </form>
+				</div>
+			  </div>
+			</nav>`,
     
     properties: [{
         name: "Color theme",
@@ -599,278 +713,6 @@ Vvveb.Components.extend("_base", "html/navbar", {
     }]
 });
 
-Vvveb.Components.extend("_base", "html/form", {
-    nodes: ["form"],
-    image: "icons/form.svg",
-    name: "Form",
-    html: '<form><div class="mb-3"><label>Text</label><input type="text" class="form-control"></div></div></form>',
-    properties: [{
-        name: "Style",
-        key: "style",
-        htmlAttr: "class",
-        validValues: ["", "form-search", "form-inline", "form-horizontal"],
-        inputtype: SelectInput,
-        data: {
-            options: [{
-                value: "",
-                text: "Default"
-            }, {
-                value: "form-search",
-                text: "Search"
-            }, {
-                value: "form-inline",
-                text: "Inline"
-            }, {
-                value: "form-horizontal",
-                text: "Horizontal"
-            }]
-        }
-    }, {
-        name: "Action",
-        key: "action",
-        htmlAttr: "action",
-        inputtype: TextInput
-    }, {
-        name: "Method",
-        key: "method",
-        htmlAttr: "method",
-        inputtype: TextInput
-    }]
-});
-
-Vvveb.Components.extend("_base", "html/table", {
-    nodes: ["table"],
-    classes: ["table"],
-    image: "icons/table.svg",
-    name: "Table",
-    html: '<table class="table">\
-		  <thead>\
-			<tr>\
-			  <th>#</th>\
-			  <th>First Name</th>\
-			  <th>Last Name</th>\
-			  <th>Username</th>\
-			</tr>\
-		  </thead>\
-		  <tbody>\
-			<tr>\
-			  <th scope="row">1</th>\
-			  <td>Mark</td>\
-			  <td>Otto</td>\
-			  <td>@mdo</td>\
-			</tr>\
-			<tr>\
-			  <th scope="row">2</th>\
-			  <td>Jacob</td>\
-			  <td>Thornton</td>\
-			  <td>@fat</td>\
-			</tr>\
-			<tr>\
-			  <th scope="row">3</th>\
-			  <td>Larry</td>\
-			  <td>the Bird</td>\
-			  <td>@twitter</td>\
-			</tr>\
-		  </tbody>\
-		</table>',
-    properties: [
-	{
-        name: "Type",
-        key: "type",
-		htmlAttr: "class",
-        validValues: ["table-primary", "table-secondary", "table-success", "table-danger", "table-warning", "table-info", "table-light", "table-dark", "table-white"],
-        inputtype: SelectInput,
-        data: {
-            options: [{
-				value: "Default",
-				text: ""
-			}, {
-				value: "table-primary",
-				text: "Primary"
-			}, {
-				value: "table-secondary",
-				text: "Secondary"
-			}, {
-				value: "table-success",
-				text: "Success"
-			}, {
-				value: "table-danger",
-				text: "Danger"
-			}, {
-				value: "table-warning",
-				text: "Warning"
-			}, {
-				value: "table-info",
-				text: "Info"
-			}, {
-				value: "table-light",
-				text: "Light"
-			}, {
-				value: "table-dark",
-				text: "Dark"
-			}, {
-				value: "table-white",
-				text: "White"
-			}]
-        }
-    },
-	{
-        name: "Responsive",
-        key: "responsive",
-        htmlAttr: "class",
-        validValues: ["table-responsive"],
-        inputtype: ToggleInput,
-        data: {
-            on: "table-responsive",
-            off: ""
-        }
-    },   
-	{
-        name: "Small",
-        key: "small",
-        htmlAttr: "class",
-        validValues: ["table-sm"],
-        inputtype: ToggleInput,
-        data: {
-            on: "table-sm",
-            off: ""
-        }
-    },   
-	{
-        name: "Hover",
-        key: "hover",
-        htmlAttr: "class",
-        validValues: ["table-hover"],
-        inputtype: ToggleInput,
-        data: {
-            on: "table-hover",
-            off: ""
-        }
-    },   
-	{
-        name: "Bordered",
-        key: "bordered",
-        htmlAttr: "class",
-        validValues: ["table-bordered"],
-        inputtype: ToggleInput,
-        data: {
-            on: "table-bordered",
-            off: ""
-        }
-    },   
-	{
-        name: "Striped",
-        key: "striped",
-        htmlAttr: "class",
-        validValues: ["table-striped"],
-        inputtype: ToggleInput,
-        data: {
-            on: "table-striped",
-            off: ""
-        }
-    },   
-	{
-        name: "Inverse",
-        key: "inverse",
-        htmlAttr: "class",
-        validValues: ["table-inverse"],
-        inputtype: ToggleInput,
-        data: {
-            on: "table-inverse",
-            off: ""
-        }
-    },   
-    {
-        name: "Head options",
-        key: "head",
-        htmlAttr: "class",
-        child:"thead",
-        inputtype: SelectInput,
-        validValues: ["", "thead-inverse", "thead-default"],
-        data: {
-            options: [{
-                value: "",
-                text: "None"
-            }, {
-                value: "thead-default",
-                text: "Default"
-            }, {
-                value: "thead-inverse",
-                text: "Inverse"
-            }]
-        }
-    }]
-});
-Vvveb.Components.extend("_base", "html/tablerow", {
-    nodes: ["tr"],
-    name: "Table Row",
-    html: "<tr><td>Cell 1</td><td>Cell 2</td><td>Cell 3</td></tr>",
-    properties: [{
-        name: "Type",
-        key: "type",
-        htmlAttr: "class",
-        inputtype: SelectInput,
-        validValues: ["", "success", "danger", "warning", "active"],
-        data: {
-            options: [{
-                value: "",
-                text: "Default"
-            }, {
-                value: "success",
-                text: "Success"
-            }, {
-                value: "error",
-                text: "Error"
-            }, {
-                value: "warning",
-                text: "Warning"
-            }, {
-                value: "active",
-                text: "Active"
-            }]
-        }
-    }]
-});
-Vvveb.Components.extend("_base", "html/tablecell", {
-    nodes: ["td"],
-    name: "Table Cell",
-    html: "<td>Cell</td>"
-});
-Vvveb.Components.extend("_base", "html/tableheadercell", {
-    nodes: ["th"],
-    name: "Table Header Cell",
-    html: "<th>Head</th>"
-});
-Vvveb.Components.extend("_base", "html/tablehead", {
-    nodes: ["thead"],
-    name: "Table Head",
-    html: "<thead><tr><th>Head 1</th><th>Head 2</th><th>Head 3</th></tr></thead>",
-    properties: [{
-        name: "Type",
-        key: "type",
-        htmlAttr: "class",
-        inputtype: SelectInput,
-        validValues: ["", "success", "danger", "warning", "info"],
-        data: {
-            options: [{
-                value: "",
-                text: "Default"
-            }, {
-                value: "success",
-                text: "Success"
-            }, {
-                value: "anger",
-                text: "Error"
-            }, {
-                value: "warning",
-                text: "Warning"
-            }, {
-                value: "info",
-                text: "Info"
-            }]
-        }
-    }]
-});
 Vvveb.Components.extend("_base", "html/tablebody", {
     nodes: ["tbody"],
     name: "Table Body",
@@ -1017,46 +859,3 @@ Vvveb.Components.add("html/gridrow", {
 	}]
 });
 
-
-Vvveb.Components.extend("_base", "html/paragraph", {
-    nodes: ["p"],
-    name: "Paragraph",
-	image: "icons/paragraph.svg",
-	html: '<p>Lorem ipsum</p>',
-    properties: [{
-        name: "Text align",
-        key: "text-align",
-        htmlAttr: "class",
-        inline:false,
-        validValues: ["", "text-start", "text-center", "text-end"],
-        inputtype: RadioButtonInput,
-        data: {
-			extraclass:"btn-group-sm btn-group-fullwidth",
-            options: [{
-                value: "",
-                icon:"la la-times",
-                //text: "None",
-                title: "None",
-                checked:true,
-            }, {
-                value: "text-start",
-                //text: "Left",
-                title: "text-start",
-                icon:"la la-align-left",
-                checked:false,
-            }, {
-                value: "text-center",
-                //text: "Center",
-                title: "Center",
-                icon:"la la-align-center",
-                checked:false,
-            }, {
-                value: "text-end",
-                //text: "Right",
-                title: "Right",
-                icon:"la la-align-right",
-                checked:false,
-            }],
-        },
-	}]
-});

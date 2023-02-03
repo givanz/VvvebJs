@@ -7,9 +7,11 @@ var ImageInput = $.extend({}, ImageInput, {
 	 ],
 
 	setValue: function(value) {
-		if (value.indexOf("data:image") == -1 && value != "none") {
-				$('input[type="text"]', this.element).val(value);
-				$('img', this.element).attr("src",(value.indexOf("//") > -1 || value.indexOf("media/") > -1? '' : Vvveb.themeBaseUrl) + value);
+		if (value && value.indexOf("data:image") == -1 && value != "none") {
+			$('input[type="text"]', this.element).val(value);
+			$('img', this.element).attr("src",(value.indexOf("//") > -1 || value.indexOf("media/") > -1? '' : Vvveb.themeBaseUrl) + value);
+		} else {
+			$('img', this.element).attr("src", Vvveb.baseUrl + 'icons/image.svg');
 		}
 	},
 

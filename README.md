@@ -3,7 +3,7 @@
 
 ## Drag and drop website builder javascript library.
 
-For a full featured CMS using VvvebJs check [Vvveb CMS](https://github.com/givanz/Vvveb)
+For a full featured CMS using VvvebJs check [Vvveb CMS](https://www.vvveb.com)
 
 Built with jQuery and Bootstrap 5.
 
@@ -41,9 +41,37 @@ Using [Vvveb landing page template](https://github.com/givanz/Vvveb-landing-boot
 
 By default the editor comes with Bootstrap 5 and Widgets components and can be extended with any kind of components and inputs.
 
+## Install
+
+Clone the repository or download a release then open `editor.html`
+
+Because of browser iframe security you need to use a webserver such as xampp and open `http://localhost/editor.html`
+
+To use the image upload or page save feature you need to have php installed.
+
+#### Scss
+
+To compile scss to css first install gulp 
+
+```bash
+npm i
+```
+
+Then you can run 
+
+```bash
+npm run gulp
+```
+
+or use watch to compile on file change.
+
+```bash
+npm run gulp watch
+```
+
 ## Usage
 
-```html
+```js
 <!-- jquery-->
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.hotkeys.js"></script>
@@ -62,28 +90,44 @@ By default the editor comes with Bootstrap 5 and Widgets components and can be e
 <script src="libs/builder/components-bootstrap5.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
 
-
 <script>
-$(document).ready(function()  {
+let pages = [
+ {
+	name:"narrow-jumbotron", 
+	title:"Jumbotron", 
+	url: "demo/narrow-jumbotron/index.html", 
+	file: "demo/narrow-jumbotron/index.html"
+  },
+  {name:"landing-page", title:"Landing page", url: "demo/landing/index.html", file: "demo/landing/index.html"},
+];
+	
+$(function() {
+
+	let firstPage = Object.keys(pages)[0];
+	Vvveb.Builder.init(pages[firstPage]["url"], function() {
+		//load code after page is loaded here
+	});
+
 	Vvveb.Gui.init();
 	Vvveb.FileManager.init();
 	Vvveb.SectionList.init();
-	var pages = 
-	[
-		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
-		{name:"album", title:"Album",  url: "demo/album/index.html", file: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
-	];
+	Vvveb.Breadcrumb.init();
 	
 	Vvveb.FileManager.addPages(pages);
-	Vvveb.FileManager.loadPage("narrow-jumbotron");
+	Vvveb.FileManager.loadPage(pages[firstPage]["name"]);
 	Vvveb.Breadcrumb.init();
+
+	//if url has #no-right-panel set one panel demo
+	if (window.location.hash.indexOf("no-right-panel") != -1) {
+		Vvveb.Gui.toggleRightColumn();
+	}
 });
-</script>
+<script>
 ```
 
-For editor html and components/input javascript templates check editor.html
+For editor html and components/input javascript templates edit `editor.html`
 
-For css changes edit scss/editor.scss and scss/_builder.scss
+For css changes edit `scss/editor.scss` and `scss/_builder.scss`
 
 ## Documentation
 
@@ -91,8 +135,11 @@ For documentation check the [wiki](https://github.com/givanz/VvvebJs/wiki)
 
 ## Support
 
-If you like the project you can support it with a [PayPal donation](https://paypal.me/zgivan)
+If you like the project you can support it with a [PayPal donation](https://paypal.me/zgivan) or become a backer/sponsor via [Open Collective](https://opencollective.com/vvvebjs)
 
+
+<a href="https://opencollective.com/vvvebjs/sponsors/0/website"><img src="https://opencollective.com/vvvebjs/sponsors/0/avatar"></a>
+<a href="https://opencollective.com/vvvebjs/backers/0/website"><img src="https://opencollective.com/vvvebjs/backers/0/avatar"></a>
 
 ## License
 

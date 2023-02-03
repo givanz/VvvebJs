@@ -53,7 +53,13 @@ body {
     align-items: center;
     justify-content: center; }
 
-[data-component-video] > iframe {
+/*
+Prevents iframe mouse events that prevents clicking on the component  
+ */
+[data-component-video] > iframe,
+[data-component-maps] > iframe,
+[data-component-twitter] > iframe,
+[data-component-openstreetmap] > iframe {
   pointer-events: none; }
 
 [contenteditable="true"] {

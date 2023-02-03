@@ -1,5 +1,5 @@
 Vvveb.ComponentsGroup['Base'] =
-["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/link", "html/video", "html/button"];
+["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/link", "html/video", "html/button", "html/paragraph", "html/blockquote", "html/list", "html/table", "html/preformatted", "html/audio", "html/video"];
 
 Vvveb.Components.extend("_base", "html/heading", {
     image: "icons/heading.svg",
@@ -55,19 +55,52 @@ Vvveb.Components.extend("_base", "html/heading", {
 Vvveb.Components.extend("_base", "html/link", {
     nodes: ["a"],
     name: "Link",
-    html: '<a href="#" class="d-inline-block"><span>Link</span></a>',
+    html: '<a href="#" rel="noopener">Link Text</a>',
 	image: "icons/link.svg",
     properties: [{
+        name: "Text",
+        key: "text",
+        htmlAttr: "innerHTML",
+        inputtype: TextInput
+    }, {
         name: "Url",
         key: "href",
         htmlAttr: "href",
         inputtype: LinkInput
     }, {
+        name: "Rel",
+        key: "rel",
+        htmlAttr: "rel",
+        inputtype: LinkInput
+    }, {
         name: "Target",
         key: "target",
         htmlAttr: "target",
-        inputtype: TextInput
-    }]
+        inputtype: SelectInput,
+        data:{
+			options: [{
+                value: "",
+                text: ""
+            }, {
+                value: "_blank",
+                text: "Blank"
+            }, {
+                value: "_parent",
+                text: "Parent"
+            }, {
+                value: "_self",
+                text: "Self"
+            }, {
+                value: "_top",
+                text: "Top"
+            }]
+       },
+    }, {
+        name: "Download",
+        key: "download",
+        htmlAttr: "download",
+        inputtype: CheckboxInput,
+	}]
 });
 
 Vvveb.Components.extend("_base", "html/image", {
@@ -105,7 +138,8 @@ Vvveb.Components.extend("_base", "html/image", {
         inputtype: TextInput
     }]
 });
-Vvveb.Components.add("html/hr", {
+
+Vvveb.Components.extend("_base", "html/hr", {
     image: "icons/hr.svg",
     nodes: ["hr"],
     name: "Horizontal Rule",
@@ -241,19 +275,19 @@ Vvveb.Components.extend("_base", "html/selectinput", {
 
 	beforeInit: function (node)
 	{
+		console.log(node);
 		properties = [];
 		var i = 0;
 		
-		$(node).find('option').each(function() {
-
+		$(node).find('option').each(function(e) {
 			data = {"value": this.value, "text": this.text};
-			
 			i++;
 			properties.push({
 				name: "Option " + i,
 				key: "option" + i,
 				//index: i - 1,
 				optionNode: this,
+				inline:true,
 				inputtype: TextValueInput,
 				data: data,
 				onChange: function(node, value, input) {
@@ -322,26 +356,78 @@ Vvveb.Components.extend("_base", "html/radiobutton", {
     name: "Radio Button",
 	attributes: {"type":"radio"},
     image: "icons/radio.svg",
-    html: '<label class="radio"><input type="radio"> Radio</label>',
+    html: `<div class="form-check">
+			  <label class="form-check-label">
+				<input class="form-check-input" type="radio" name="radiobutton"> Option 1
+			  </label>
+			</div>
+			<div class="form-check">
+			  <label class="form-check-label">
+				<input class="form-check-input" type="radio" name="radiobutton" checked> Option 2
+			  </label>
+			</div>
+			<div class="form-check">
+			  <label class="form-check-label">
+				<input class="form-check-input" type="radio" name="radiobutton"> Option 3
+			  </label>
+			</div>`,
     properties: [{
         name: "Name",
         key: "name",
         htmlAttr: "name",
-        inputtype: TextInput
-    }]
+        inputtype: TextInput,
+        //inline:true,
+        //col:6
+    },{
+        name: "Value",
+        key: "value",
+        htmlAttr: "value",
+        inputtype: TextInput,
+        //inline:true,
+        //col:6
+    },{
+		name: "Checked",
+        key: "checked",
+        htmlAttr: "Checked",
+        inputtype: CheckboxInput,
+        //inline:true,
+        //col:6
+     }]
 });
+
 Vvveb.Components.extend("_base", "html/checkbox", {
     name: "Checkbox",
     attributes: {"type":"checkbox"},
     image: "icons/checkbox.svg",
-    html: '<label class="checkbox"><input type="checkbox"> Checkbox</label>',
+    html: `<div class="form-check">
+			  <label class="form-check-label">
+				<input class="form-check-input" type="checkbox" value=""> Default checkbox
+			  </label>
+			</div>`,
     properties: [{
         name: "Name",
         key: "name",
         htmlAttr: "name",
-        inputtype: TextInput
-    }]
+        inputtype: TextInput,
+        //inline:true,
+        //col:6
+    },{
+        name: "Value",
+        key: "value",
+        htmlAttr: "value",
+        inputtype: TextInput,
+        //inline:true,
+        //col:6
+    },{
+		name: "Checked",
+        key: "checked",
+        htmlAttr: "Checked",
+        inputtype: CheckboxInput,
+        //inline:true,
+        //col:6
+     }]
 });
+
 Vvveb.Components.extend("_base", "html/fileinput", {
     name: "Input group",
 	attributes: {"type":"file"},
@@ -400,7 +486,18 @@ Vvveb.Components.extend("_base", "html/video", {
         key: "controls",
         htmlAttr: "controls",
         inputtype: CheckboxInput
-    }]
+    },{
+		name:"",
+		key: "autoplay_warning",
+        inline:false,
+        col:12,
+        inputtype: NoticeInput,
+        data: {
+			type:'warning',
+			title:'Autoplay',
+			text:'Most browsers allow autoplay only if video is muted and plays inline'
+		}
+	}]
 });
 
 
@@ -444,11 +541,582 @@ Vvveb.Components.extend("_base", "html/button", {
 		inline:true,
         col:6,
    	},{
-        name: "Disabled",
+		name: "Disabled",
         key: "disabled",
         htmlAttr: "disabled",
-        inputtype: CheckboxInput,		
+		inline:true,
+        col:6,
+        inputtype: CheckboxInput,
 		inline:true,
         col:6,
 	}]
 });
+
+Vvveb.Components.extend("_base", "html/paragraph", {
+    nodes: ["p"],
+    name: "Paragraph",
+	image: "icons/paragraph.svg",
+	html: '<p>Lorem ipsum</p>',
+    properties: [{
+        name: "Text align",
+        key: "text-align",
+        htmlAttr: "class",
+        inline:false,
+        validValues: ["", "text-start", "text-center", "text-end"],
+        inputtype: RadioButtonInput,
+        data: {
+			extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+                value: "",
+                icon:"la la-times",
+                //text: "None",
+                title: "None",
+                checked:true,
+            }, {
+                value: "text-start",
+                //text: "Left",
+                title: "text-start",
+                icon:"la la-align-left",
+                checked:false,
+            }, {
+                value: "text-center",
+                //text: "Center",
+                title: "Center",
+                icon:"la la-align-center",
+                checked:false,
+            }, {
+                value: "text-end",
+                //text: "Right",
+                title: "Right",
+                icon:"la la-align-right",
+                checked:false,
+            }],
+        },
+	}]
+});
+
+Vvveb.Components.extend("_base", "html/blockquote", {
+    nodes: ["blockquote"],
+    name: "Blockquote",
+	image: "icons/blockquote.svg",
+	html: `<blockquote>
+				Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil..
+			</blockquote>`,
+});
+
+Vvveb.Components.extend("_base", "html/list", {
+    nodes: ["ul", "ol"],
+    name: "List",
+	image: "icons/list.svg",
+	html: `<ul>
+				<li>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil..</li>
+				<li>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil..</li>
+				<li>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil..</li>
+			</ul>`,
+});
+
+Vvveb.Components.extend("_base", "html/preformatted", {
+    nodes: ["pre"],
+    name: "Preformatted",
+	image: "icons/paragraph.svg",
+	html: `<pre>Today I shall be meeting with interference, 
+ingratitude, insolence, disloyalty, ill-will, and
+selfishness all of them due to the offenders'
+ignorance of what is good or evil..</pre>`,
+    properties: [{
+        name: "Text",
+        key: "text",
+        inline:false,
+        htmlAttr: "innerHTML",
+        inputtype: TextareaInput,
+        data:{
+			rows:20,
+		}
+    }]
+});
+
+Vvveb.Components.extend("_base", "html/form", {
+    nodes: ["form"],
+    image: "icons/form.svg",
+    name: "Form",
+    html: `<form action="" method="POST">
+	  <div class="mb-3">
+		<label for="exampleInputEmail1" class="form-label">Email address</label>
+		<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+		<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+	  </div>
+	  <div class="mb-3">
+		<label for="exampleInputPassword1" class="form-label">Password</label>
+		<input type="password" class="form-control" id="exampleInputPassword1">
+	  </div>
+	  <div class="mb-3 form-check">
+		<input type="checkbox" class="form-check-input" id="exampleCheck1">
+		<label class="form-check-label" for="exampleCheck1">Check me out</label>
+	  </div>
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>`,
+    properties: [/*{
+        name: "Style",
+        key: "style",
+        htmlAttr: "class",
+        validValues: ["", "form-search", "form-inline", "form-horizontal"],
+        inputtype: SelectInput,
+        data: {
+            options: [{
+                value: "",
+                text: "Default"
+            }, {
+                value: "form-search",
+                text: "Search"
+            }, {
+                value: "form-inline",
+                text: "Inline"
+            }, {
+                value: "form-horizontal",
+                text: "Horizontal"
+            }]
+        }
+    }, */{
+        name: "Action",
+        key: "action",
+        htmlAttr: "action",
+        inputtype: TextInput
+    }, {
+        name: "Method",
+        key: "method",
+        htmlAttr: "method",
+        inputtype: SelectInput,
+        data: {
+            options: [{
+                value: "post",
+                text: "Post"
+            }, {
+                value: "get",
+                text: "Get"
+            }]
+        }
+    }, {
+        name: "Encoding type",
+        key: "enctype",
+        htmlAttr: "enctype",
+        inputtype: SelectInput,
+        data: {
+            options: [{
+                value: "",
+                text: ""
+            }, {
+                value: "application/x-www-form-urlencoded",
+                text: "Url encoded (default)"
+            }, {
+                value: "multipart/form-data",
+                text: "Multipart (for file upload)"
+            }, {
+                value: "text/plain",
+                text: "Text plain"
+            }]
+        }
+    }]
+});
+
+Vvveb.Components.extend("_base", "html/tablerow", {
+    nodes: ["tr"],
+    name: "Table Row",
+    html: "<tr><td>Cell 1</td><td>Cell 2</td><td>Cell 3</td></tr>",
+    properties: [{
+        name: "Type",
+        key: "type",
+        htmlAttr: "class",
+        inputtype: SelectInput,
+        validValues: ["", "success", "danger", "warning", "active"],
+        data: {
+            options: [{
+                value: "",
+                text: "Default"
+            }, {
+                value: "success",
+                text: "Success"
+            }, {
+                value: "error",
+                text: "Error"
+            }, {
+                value: "warning",
+                text: "Warning"
+            }, {
+                value: "active",
+                text: "Active"
+            }]
+        }
+    }]
+});
+Vvveb.Components.extend("_base", "html/tablecell", {
+    nodes: ["td"],
+    name: "Table Cell",
+    html: "<td>Cell</td>"
+});
+
+Vvveb.Components.extend("_base", "html/tableheadercell", {
+    nodes: ["th"],
+    name: "Table Header Cell",
+    html: "<th>Head</th>"
+});
+
+Vvveb.Components.extend("_base", "html/tablehead", {
+    nodes: ["thead"],
+    name: "Table Head",
+    html: "<thead><tr><th>Head 1</th><th>Head 2</th><th>Head 3</th></tr></thead>",
+    properties: [{
+        name: "Type",
+        key: "type",
+        htmlAttr: "class",
+        inputtype: SelectInput,
+        validValues: ["", "success", "danger", "warning", "info"],
+        data: {
+            options: [{
+                value: "",
+                text: "Default"
+            }, {
+                value: "success",
+                text: "Success"
+            }, {
+                value: "anger",
+                text: "Error"
+            }, {
+                value: "warning",
+                text: "Warning"
+            }, {
+                value: "info",
+                text: "Info"
+            }]
+        }
+    }]
+});
+
+Vvveb.Components.extend("_base", "html/table", {
+    nodes: ["table"],
+    classes: ["table"],
+    image: "icons/table.svg",
+    name: "Table",
+    html: `<table class="table table-striped table-hover">
+			  <thead>
+				<tr>
+				  <th scope="col">#</th>
+				  <th scope="col">First</th>
+				  <th scope="col">Last</th>
+				  <th scope="col">Handle</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <th scope="row">1</th>
+				  <td>Mark</td>
+				  <td>Otto</td>
+				  <td>@mdo</td>
+				</tr>
+				<tr>
+				  <th scope="row">2</th>
+				  <td>Jacob</td>
+				  <td>Thornton</td>
+				  <td>@fat</td>
+				</tr>
+				<tr>
+				  <th scope="row">3</th>
+				  <td colspan="2">Larry the Bird</td>
+				  <td>@twitter</td>
+				</tr>
+			  </tbody>
+			</table>`,
+    properties: [
+	{
+        name: "Type",
+        key: "type",
+		htmlAttr: "class",
+        validValues: ["table-primary", "table-secondary", "table-success", "table-danger", "table-warning", "table-info", "table-light", "table-dark", "table-white"],
+        inputtype: SelectInput,
+        data: {
+            options: [{
+				value: "Default",
+				text: ""
+			}, {
+				value: "table-primary",
+				text: "Primary"
+			}, {
+				value: "table-secondary",
+				text: "Secondary"
+			}, {
+				value: "table-success",
+				text: "Success"
+			}, {
+				value: "table-danger",
+				text: "Danger"
+			}, {
+				value: "table-warning",
+				text: "Warning"
+			}, {
+				value: "table-info",
+				text: "Info"
+			}, {
+				value: "table-light",
+				text: "Light"
+			}, {
+				value: "table-dark",
+				text: "Dark"
+			}, {
+				value: "table-white",
+				text: "White"
+			}]
+        }
+    },
+	{
+        name: "Responsive",
+        key: "responsive",
+        htmlAttr: "class",
+        validValues: ["table-responsive"],
+        inputtype: ToggleInput,
+        data: {
+            on: "table-responsive",
+            off: ""
+        }
+    },   
+	{
+        name: "Small",
+        key: "small",
+        htmlAttr: "class",
+        validValues: ["table-sm"],
+        inputtype: ToggleInput,
+        data: {
+            on: "table-sm",
+            off: ""
+        }
+    },   
+	{
+        name: "Hover",
+        key: "hover",
+        htmlAttr: "class",
+        validValues: ["table-hover"],
+        inputtype: ToggleInput,
+        data: {
+            on: "table-hover",
+            off: ""
+        }
+    },   
+	{
+        name: "Bordered",
+        key: "bordered",
+        htmlAttr: "class",
+        validValues: ["table-bordered"],
+        inputtype: ToggleInput,
+        data: {
+            on: "table-bordered",
+            off: ""
+        }
+    },   
+	{
+        name: "Striped",
+        key: "striped",
+        htmlAttr: "class",
+        validValues: ["table-striped"],
+        inputtype: ToggleInput,
+        data: {
+            on: "table-striped",
+            off: ""
+        }
+    },   
+	{
+        name: "Inverse",
+        key: "inverse",
+        htmlAttr: "class",
+        validValues: ["table-inverse"],
+        inputtype: ToggleInput,
+        data: {
+            on: "table-inverse",
+            off: ""
+        }
+    },   
+    {
+        name: "Head options",
+        key: "head",
+        htmlAttr: "class",
+        child:"thead",
+        inputtype: SelectInput,
+        validValues: ["", "thead-dark", "thead-light"],
+        data: {
+            options: [{
+                value: "",
+                text: "None"
+            }, {
+                value: "thead-default",
+                text: "Default"
+            }, {
+                value: "thead-inverse",
+                text: "Inverse"
+            }]
+        }
+    }]
+});
+
+Vvveb.Components.extend("_base", "html/audio", {
+    nodes: ["audio"],
+    attributes: ["data-component-audio"],
+    name: "Audio",
+    image: "icons/audio.svg",
+    html: `<figure data-component-audio><audio controls src="#"></audio></figure>`,
+    properties: [{
+        name: "Src",
+        key: "src",
+        child:"audio",
+        htmlAttr: "src",
+        inputtype: LinkInput
+	}, {
+       	key: "audio_options",
+        inputtype: SectionInput,
+        name:false,
+        data: {header:"Options"},
+    }, {
+		name: "Autoplay",
+        key: "autoplay",
+        htmlAttr: "autoplay",
+        child:"audio",
+        inputtype: CheckboxInput,
+        inline:true,
+        col:4,
+/*    }, {
+        name: "Controls",
+        key: "controls",
+        htmlAttr: "controls",
+        inputtype: CheckboxInput,
+        child:"audio",
+        inline:true,
+        col:4,
+*/    }, {
+        name: "Loop",
+        key: "loop",
+        htmlAttr: "loop",
+        inputtype: CheckboxInput,
+        child:"audio",
+        inline:true,
+        col:4
+    }]
+});
+
+Vvveb.Components.extend("_base", "html/video", {
+    nodes: ["video"],
+    name: "Video",
+    image: "icons/video.svg",
+    html: `<video controls playsinline src="/media/Sky Clouds Royalty Free HD Video Footage [CC0] [fmngCpy1O2E].webm" poster="/media/Sky Clouds Royalty Free HD Video Footage [CC0] [fmngCpy1O2E].webp"></video>`,
+    properties: [{
+        name: "Poster",
+        key: "poster",
+        htmlAttr: "poster",
+        inputtype: ImageInput
+    }, {
+        name: "Src",
+        key: "src",
+        htmlAttr: "src",
+        inputtype: LinkInput
+    },{
+		key: "video_options",
+        inputtype: SectionInput,
+        name:false,
+        data: {header:"Options"},
+    }, {
+		name: "Auto play",
+        key: "autoplay",
+        htmlAttr: "autoplay",
+        inputtype: CheckboxInput,
+        data: {
+            on: "true",
+            off: "false"
+        },
+        inline:true,
+        col:4,
+	}, {
+        name: "Controls",
+        key: "controls",
+        htmlAttr: "controls",
+        inputtype: CheckboxInput,
+        data: {
+            on: "true",
+            off: "false"
+        },
+        inline:true,
+        col:4,
+    }, {
+        name: "Loop",
+        key: "loop",
+        htmlAttr: "loop",
+        inputtype: CheckboxInput,
+        data: {
+            on: "true",
+            off: "false"
+        },
+        inline:true,
+        col:4,
+    }, {
+        name: "Play inline",
+        key: "playsinline",
+        htmlAttr: "playsinline",
+        inputtype: CheckboxInput,
+        data: {
+            on: "true",
+            off: "false"
+        },
+        inline:true,
+        col:4,
+	}, {
+        name: "Muted",
+        key: "muted",
+        htmlAttr: "muted",
+        inputtype: CheckboxInput,
+        data: {
+            on: "true",
+            off: "false"
+        },
+        inline:true,
+        col:4,
+    },{
+		name:"",
+		key: "autoplay_warning",
+        inline:false,
+        col:12,
+        inputtype: NoticeInput,
+        data: {
+			type:'warning',
+			title:'Autoplay',
+			text:'Most browsers allow auto play only if video is muted and plays inline'
+		}
+	}]
+});
+
+Vvveb.Components.extend("_base", "html/pdf", {
+    attributes: ["data-component-pdf"],
+    image: "icons/pdf.svg",
+    name: "Pdf embed",
+    html: `<object data="" type="application/pdf" data-component-pdf></object>`,
+    properties: [{
+        name: "Data",
+        key: "data",
+        htmlAttr: "data",
+        inputtype: TextInput
+    }]
+});
+
+Vvveb.Components.extend("_base", "html/embed", {
+    attributes: ["data-component-embed"],
+    image: "icons/embed.svg",
+    name: "Embed",
+    html: `<object data="" type="application/pdf" data-component-pdf></object>`,
+    properties: [{
+        name: "Data",
+        key: "data",
+        htmlAttr: "data",
+        inputtype: TextInput
+    }]
+});
+
+
+
+/*
+Vvveb.ComponentsGroup['Base'] =
+["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/link", "html/video", "html/button", "html/paragraph", "html/blockquote", "html/list", "html/table", "html/preformatted"];
+
+*/
