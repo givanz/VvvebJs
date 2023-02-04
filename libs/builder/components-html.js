@@ -52,67 +52,70 @@ Vvveb.Components.extend("_base", "html/heading", {
 });    
 
 
+let linkComponentProperties = [
+/*	{
+		name: "Text",
+		key: "text",
+		sort:1,
+		htmlAttr: "innerText",
+		inputtype: TextInput
+	},*/
+	{
+		name: "Url",
+		key: "href",
+		sort:2,
+		htmlAttr: "href",
+		inputtype: LinkInput
+	}, {
+		name: "Rel",
+		key: "rel",
+		sort:3,
+		htmlAttr: "rel",
+		inputtype: LinkInput
+	}, {
+		name: "Target",
+		key: "target",
+		sort:4,
+		htmlAttr: "target",
+		inputtype: SelectInput,
+		data:{
+			options: [{
+				value: "",
+				text: ""
+			}, {
+				value: "_blank",
+				text: "Blank"
+			}, {
+				value: "_parent",
+				text: "Parent"
+			}, {
+				value: "_self",
+				text: "Self"
+			}, {
+				value: "_top",
+				text: "Top"
+			}]
+	   },
+	}, {
+		name: "Download",
+		sort:5,
+		key: "download",
+		htmlAttr: "download",
+		inputtype: CheckboxInput,
+}];
+
 Vvveb.Components.extend("_base", "html/link", {
     nodes: ["a"],
     name: "Link",
     html: '<a href="#" rel="noopener">Link Text</a>',
 	image: "icons/link.svg",
-    properties: [{
-        name: "Text",
-        key: "text",
-        htmlAttr: "innerHTML",
-        inputtype: TextInput
-    }, {
-        name: "Url",
-        key: "href",
-        htmlAttr: "href",
-        inputtype: LinkInput
-    }, {
-        name: "Rel",
-        key: "rel",
-        htmlAttr: "rel",
-        inputtype: LinkInput
-    }, {
-        name: "Target",
-        key: "target",
-        htmlAttr: "target",
-        inputtype: SelectInput,
-        data:{
-			options: [{
-                value: "",
-                text: ""
-            }, {
-                value: "_blank",
-                text: "Blank"
-            }, {
-                value: "_parent",
-                text: "Parent"
-            }, {
-                value: "_self",
-                text: "Self"
-            }, {
-                value: "_top",
-                text: "Top"
-            }]
-       },
-    }, {
-        name: "Download",
-        key: "download",
-        htmlAttr: "download",
-        inputtype: CheckboxInput,
-	}]
+    properties: linkComponentProperties
 });
 
 Vvveb.Components.extend("_base", "html/image", {
     nodes: ["img"],
     name: "Image",
     html: '<img src="' +  Vvveb.baseUrl + 'icons/image.svg" class="mw-100">',
-    /*
-    afterDrop: function (node)
-	{
-		node.attr("src", '');
-		return node;
-	},*/
     image: "icons/image.svg",
     resizable:true,//show select box resize handlers
     
@@ -136,7 +139,57 @@ Vvveb.Components.extend("_base", "html/image", {
         key: "alt",
         htmlAttr: "alt",
         inputtype: TextInput
-    }]
+    },{
+		key: "link_options",
+        inputtype: SectionInput,
+        name:false,
+        data: {header:"Link"},
+    },{
+        name: "Enable link",
+        key: "enable_link",
+        inputtype: CheckboxInput,
+        data: {
+            className: "form-switch"
+        },
+		setGroup: value => {
+			let group = $('.mb-3[data-group="link"]');
+			if (value) {	
+				group.attr('style','');
+			} else {
+				group.attr('style','display:none !important');
+			}
+		}, 		
+		onChange : function(node, value, input)  {
+			this.setGroup(value);
+			if (value) {
+				$(node).wrap('<a href="#"></a>');
+			} else {
+				$(node).unwrap('a');
+			}
+			return node;
+		}, 
+		init: function (node) {
+			let value = node.parentNode.tagName.toLowerCase() == "a"
+			this.setGroup(value);
+			return value;
+		}
+	}].concat(
+	    //add link properties after setting parent to <a> element
+		linkComponentProperties.map(
+		(el) => {let a = Object.assign({}, el);a["parent"] = "a";a["group"] = "link";return a}
+	)),
+	
+    init(node)	{
+
+		let group = $('.mb-3[data-group="link"]');
+		if (node.parentNode.tagName.toLowerCase() == "a") {	
+			group.attr('style','');
+		} else {
+			group.attr('style','display:none !important');
+		}
+
+		return node;
+	}	
 });
 
 Vvveb.Components.extend("_base", "html/hr", {
@@ -487,8 +540,8 @@ Vvveb.Components.extend("_base", "html/video", {
         htmlAttr: "controls",
         inputtype: CheckboxInput
     },{
-		name:"",
-		key: "autoplay_warning",
+	name:"",
+	key: "autoplay_warning",
         inline:false,
         col:12,
         inputtype: NoticeInput,
@@ -1074,8 +1127,8 @@ Vvveb.Components.extend("_base", "html/video", {
         inline:true,
         col:4,
     },{
-		name:"",
-		key: "autoplay_warning",
+	name:"",
+	key: "autoplay_warning",
         inline:false,
         col:12,
         inputtype: NoticeInput,

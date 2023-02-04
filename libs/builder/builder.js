@@ -362,28 +362,22 @@ Vvveb.Components = {
 					{
 						oldValue = element.attr(property.htmlAttr);
 						
-						if (property.htmlAttr == "class" && property.validValues) 
-						{
+						if (property.htmlAttr == "class" && property.validValues) {
 							element.removeClass(property.validValues.join(" "));
 							element = element.addClass(value);
 						}
-						else if (property.htmlAttr == "style") 
-						{
+						else if (property.htmlAttr == "style") {
 							oldStyle = $("#vvvebjs-styles", window.FrameDocument).html();
 							element = Vvveb.StyleManager.setStyle(element, property.key, value);
-						}
-						else if (property.htmlAttr == "innerHTML") 
-						{
+						} else if (property.htmlAttr == "innerHTML")  {
 							element = Vvveb.ContentManager.setHtml(element, value);
-						}
-						else
-						{
+						} else if (property.htmlAttr == "innerText")  {
+							element = Vvveb.ContentManager.setText(element, value);
+						} else {
 							//if value is empty then remove attribute useful for attributes without values like disabled
-							if (value)
-							{
+							if (value) {
 								element = element.attr(property.htmlAttr, value);
-							} else
-							{
+							} else {
 								element = element.removeAttr(property.htmlAttr);
 							}
 						}
@@ -431,6 +425,7 @@ Vvveb.Components = {
 			if (property.beforeInit) property.beforeInit(element.get(0));
 			
 			if (property.child) element = element.find(property.child);
+			if (property.parent) element = element.parent(property.parent);
 			
 			if (property.data) {
 				property.data["key"] = property.key;
@@ -454,11 +449,11 @@ Vvveb.Components = {
 					//value = element.css(property.key);//jquery css returns computed style
 					value = Vvveb.StyleManager.getStyle(element, property.key);//getStyle returns declared style
 				} else
-				if (property.htmlAttr == "innerHTML")
-				{
+				if (property.htmlAttr == "innerHTML") {
 					value = Vvveb.ContentManager.getHtml(element);
-				} else
-				{
+				} else if (property.htmlAttr == "innerText") {
+					value = Vvveb.ContentManager.getText(element);
+				} else {
 					value = element.attr(property.htmlAttr);
 				}
 
@@ -689,7 +684,7 @@ Vvveb.WysiwygEditor = {
 				return false;
 		});
 	
-		let sizes = "<option value=''>Default</option>";
+		let sizes = "<option value=''> - Font size - </option>";
 		for (i = 1;i <= 128; i++) {
 			sizes += "<option value='"+ i +"px'>"+ i +"</option>";
 		}
@@ -2367,6 +2362,14 @@ Vvveb.ContentManager = {
 	getHtml: function(element) {
 		return element.html();
 	},
+
+	setText: function(element, text) {
+		return element.text(text);
+	},
+	
+	getText: function(element) {
+		return element.text();
+	},
 };
 
 function getNodeTree (node, parent, allowedComponents) {
@@ -2501,8 +2504,8 @@ Vvveb.SectionList = {
 
 			node.click();
 		}).on("mouseenter", "li[data-component] label", function (e) {
-			node = $(e.currentTarget.parentNode).data("node");
-			$(node).css("outline","2px dotted blue");
+			node = $($(e.currentTarget.parentNode).data("node"));
+			node.css("outline","1px dashed blue");
 			/*
 			delay(
 				() => Vvveb.Builder.frameHtml.animate({
@@ -2513,8 +2516,9 @@ Vvveb.SectionList = {
 			$(node).trigger("mousemove");
 			*/ 
 		}).on("mouseleave",  "li[data-component] label",  function (e){
-			node = $(e.currentTarget.parentNode).data("node");
-			$(node).css("outline","");
+			node = $($(e.currentTarget.parentNode).data("node"));
+			node.css("outline","");
+			if (node.attr("style") == "") node.removeAttr("style");
 		});		
 		
 		$(this.selector).on("dragstart", "> div", this.dragStart);
@@ -2950,8 +2954,8 @@ Vvveb.Breadcrumb = {
 			}
 			e.preventDefault();
 		}).on("mouseenter", ".breadcrumb-item", function (e) {
-			let node = $(this).data("node");
-			$(node).css("outline","2px dotted blue");
+			let node = $($(this).data("node"));
+			node.css("outline","1px dashed blue");
 			/*
 			delay(
 				() => Vvveb.Builder.frameHtml.animate({
@@ -2963,9 +2967,10 @@ Vvveb.Breadcrumb = {
 			*/
 			
 		}).on("mouseleave", ".breadcrumb-item", function (e){
-			let node = $(this).data("node");
-			$(node).css("outline","");
-		});
+			let node = $($(this).data("node"));
+			node.css("outline","");
+			if (node.attr("style") == "") node.removeAttr("style");
+});
 
 	},
 	

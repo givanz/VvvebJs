@@ -166,6 +166,11 @@ Vvveb.Components.extend("html/link", "html/btn", {
             on: "disabled",
             off: null
         }
+    },{
+	key: "link_options",
+        inputtype: SectionInput,
+        name:false,
+        data: {header:"Link"},
     }]
 });
 	

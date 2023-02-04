@@ -496,20 +496,20 @@
 										</a>
 										--> 
 										
-										<a id="bold-btn" href="" title="Bold">
+										<a id="bold-btn" class="hint" href="" title="Bold" aria-label="Bold">
 											<svg height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
 												<path d="M6,4h8a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
 												<path d="M6,12h9a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
 											</svg>	
 										</a>
-										<a id="italic-btn" href="" title="Italic">
+										<a id="italic-btn" class="hint" href="" title="Italic" aria-label="Italic">
 											<svg height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
 												<line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="19" x2="10" y1="4" y2="4"/>
                                                 <line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="14" x2="5" y1="20" y2="20"/>
 												<line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="15" x2="9" y1="4" y2="20"/>
 											</svg>									
 										</a>
-										<a id="underline-btn" href="" title="Underline">
+										<a id="underline-btn" class="hint" href="" title="Underline" aria-label="Underline">
 											<svg height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
 												<path d="M6,4v7a6,6,0,0,0,6,6h0a6,6,0,0,0,6-6V4" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" y1="2" y2="2"/>
 												<line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="4" x2="20" y1="22" y2="22"/>
@@ -517,13 +517,13 @@
 										</a>
 										
 										
-										<a id="strike-btn" href="" title="Strikeout">
+										<a id="strike-btn" class="hint" href="" title="Strikeout" aria-label="Strikeout">
 											<del>S</del>
 										</a>
 										
 										<div class="dropdown">
 										  <a class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<i class="la la-align-left"></i>
+											<span class="hint" aria-label="Text align"><i class="la la-align-left"></i></span>
 										  </a>
 
 										  <div id="justify-btn" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -535,19 +535,19 @@
 										</div>
 										<div class="separator"></div>
 
-										<a id="link-btn" href="" title="Create link">
+										<a id="link-btn" class="hint" href="" title="Create link" aria-label="Create link">
 											<i class="la la-link">
 										</i></a>
 										
 										<div class="separator"></div>
 										
-										<input id="fore-color" name="color" type="color" title="Color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">
-										<input id="back-color" name="background-color" type="color" title="Background Color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">
+										<input id="fore-color" name="color" type="color" aria-label="Text color" pattern="#[a-f0-9]{6}" class="form-control form-control-color hint">
+										<input id="back-color" name="background-color" type="color" aria-label="Background color" pattern="#[a-f0-9]{6}" class="form-control form-control-color hint">
 										
 										<div class="separator"></div>
 
-										<select id="font-size" class="form-select">
-											<option value="">Default</option>
+										<select id="font-size" class="form-select" aria-label="Font size">
+											<option value="">- Font size -</option>
 											<option value="8px">8 px</option>
 											<option value="9px">9 px</option>
 											<option value="10px">10 px</option>
@@ -571,8 +571,10 @@
 											<option value="28px">28 px</option>
 										</select>
 										
-										<select id="font-family" class="form-select">
-											<option value="">Default</option>
+										<div class="separator"></div>
+										
+										<select id="font-family" class="form-select" title="Font family">
+											<option value=""> - Font family - </option>
 											<optgroup label="System default">
 												<option value="Arial, Helvetica, sans-serif">Arial</option>
 												<option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif">Lucida Grande</option>
@@ -796,9 +798,9 @@
 
 							<div class="btn-group" role="group">
 
-								<div id="toggleEditorJsExecute" class="form-check" style="display:none">
+								<div id="toggleEditorJsExecute" class="form-check mt-1" style="display:none">
 									<input type="checkbox" class="form-check-input" id="runjs" name="runjs" data-vvveb-action="toggleEditorJsExecute">
-									<label class="form-check-label" for="runjs"><small>Run javascript code on edit</small></label>
+									<label class="form-check-label" for="runjs"><small>Run javascript code on edit</small></label>&ensp;
 								</div>
 							
 							
@@ -840,7 +842,7 @@
 
 <script id="vvveb-input-checkboxinput" type="text/html">
 	
-	<div class="form-check">
+	<div class="form-check{% if (typeof className !== 'undefined') { %} {%=className%}{% } %}">
 		  <input name="{%=key%}" class="form-check-input" type="checkbox" id="{%=key%}_check">
 		  <label class="form-check-label" for="{%=key%}_check">{% if (typeof text !== 'undefined') { %} {%=text%} {% } %}</label>
 	</div>

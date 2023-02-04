@@ -13796,16 +13796,17 @@ body {
       border: none;
       pointer-events: all;
       line-height: 2.2rem;
-      height: 32px;
+      height: 34px;
       padding: 0;
-      box-shadow: none;
-      background-position: right 0.5rem center; }
+      box-shadow: none; }
       #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown[type="color"], #vvveb-builder #wysiwyg-editor.default-editor > select[type="color"], #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"] {
-        padding: 5px;
+        padding: 4px;
+        height: 30px;
+        width: 32px;
         box-shadow: none;
         border: 1px dashed #ddd;
         margin: 0;
-        margin-top: 2px;
+        margin: 3px;
         border-radius: 3px; }
         #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown[type="color"].form-control-color::-moz-color-swatch, #vvveb-builder #wysiwyg-editor.default-editor > select[type="color"].form-control-color::-moz-color-swatch, #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"].form-control-color::-moz-color-swatch {
           border-radius: 3px;
@@ -13817,7 +13818,8 @@ body {
           box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25);
           border: none; }
     #vvveb-builder #wysiwyg-editor.default-editor select {
-      padding: 0rem 1.8rem 0 1rem; }
+      padding: 0rem 1.8rem 0 1rem;
+      margin-top: 2px; }
     #vvveb-builder #wysiwyg-editor.default-editor div.dropdown a:after {
       vertical-align: middle !important;
       font-size: 14px;
@@ -14039,33 +14041,25 @@ li[data-type] {
               .drag-elements-sidepane ul > li ol li[data-type]:hover a {
                 visibility: visible; }
 
-.blocks .block-preview, .sections .block-preview {
-  position: absolute;
-  left: 100%;
-  height: auto;
-  z-index: 1000;
-  border: 1px solid #ddd;
-  box-shadow: 0px 0px 1px 2px rgba(18, 83, 205, 0.05); }
-
-.blocks .sections-container, .sections .sections-container {
+.sections-container {
   width: 100%;
   background: #fff;
   padding-top: 1rem; }
-  .blocks .sections-container > div.section-item, .sections .sections-container > div.section-item {
+  .sections-container > div.section-item {
     box-shadow: 0px 0px 1px 0px #1B74D0;
     box-shadow: 0px 0px 1px 0px rgba(18, 83, 205, 0.7), 0px 0px 5px 0px rgba(18, 83, 205, 0.1);
     box-shadow: 0px 0px 1px 2px rgba(18, 83, 205, 0.05);
     border: 1px solid #ccc;
     background: #fff;
-    margin: 1rem 1rem 0rem;
+    margin: 0rem 0rem 1rem;
     padding: 0.3rem 0.5rem 0.3rem 1.4rem;
     position: relative;
     border-radius: 3px; }
-    .blocks .sections-container > div.section-item .controls, .sections .sections-container > div.section-item .controls {
+    .sections-container > div.section-item .controls {
       cursor: pointer;
       display: flex;
       justify-content: space-between; }
-      .blocks .sections-container > div.section-item .controls .handle, .sections .sections-container > div.section-item .controls .handle {
+      .sections-container > div.section-item .controls .handle {
         width: 20px;
         height: 10px;
         position: absolute;
@@ -14073,7 +14067,7 @@ li[data-type] {
         top: 0px;
         height: 100%;
         cursor: grab; }
-        .blocks .sections-container > div.section-item .controls .handle::after, .sections .sections-container > div.section-item .controls .handle::after {
+        .sections-container > div.section-item .controls .handle::after {
           content: "...";
           color: #bbb;
           width: 5px;
@@ -14084,61 +14078,65 @@ li[data-type] {
           display: inline-block;
           margin-left: 5px;
           margin-top: 3px; }
-      .blocks .sections-container > div.section-item .controls .name, .sections .sections-container > div.section-item .controls .name {
+      .sections-container > div.section-item .controls .name {
         text-transform: capitalize;
         font-weight: 500; }
-      .blocks .sections-container > div.section-item .controls .type, .sections .sections-container > div.section-item .controls .type {
+      .sections-container > div.section-item .controls .type {
         color: #777; }
-      .blocks .sections-container > div.section-item .controls .info, .sections .sections-container > div.section-item .controls .info {
+      .sections-container > div.section-item .controls .info {
         margin-left: 0.2rem; }
-        .blocks .sections-container > div.section-item .controls .info .name, .sections .sections-container > div.section-item .controls .info .name {
+        .sections-container > div.section-item .controls .info .name {
           font-size: 13px; }
-        .blocks .sections-container > div.section-item .controls .info .type, .sections .sections-container > div.section-item .controls .info .type {
+        .sections-container > div.section-item .controls .info .type {
           font-size: 12px; }
-      .blocks .sections-container > div.section-item .controls .buttons, .sections .sections-container > div.section-item .controls .buttons {
+      .sections-container > div.section-item .controls .buttons {
         margin-right: 2rem;
         margin-top: 0.2rem; }
-        .blocks .sections-container > div.section-item .controls .buttons a, .sections .sections-container > div.section-item .controls .buttons a {
+        .sections-container > div.section-item .controls .buttons a {
           padding: 0.3rem 0.5rem 0.3rem;
           display: inline-block; }
-          .blocks .sections-container > div.section-item .controls .buttons a:hover, .sections .sections-container > div.section-item .controls .buttons a:hover {
+          .sections-container > div.section-item .controls .buttons a:hover {
             background-color: rgba(18, 83, 205, 0.1);
             text-decoration: none; }
-        .blocks .sections-container > div.section-item .controls .buttons .delete-btn,
-        .blocks .sections-container > div.section-item .controls .buttons .up-btn,
-        .blocks .sections-container > div.section-item .controls .buttons .down-btn, .sections .sections-container > div.section-item .controls .buttons .delete-btn,
-        .sections .sections-container > div.section-item .controls .buttons .up-btn,
-        .sections .sections-container > div.section-item .controls .buttons .down-btn {
+        .sections-container > div.section-item .controls .buttons .delete-btn,
+        .sections-container > div.section-item .controls .buttons .up-btn,
+        .sections-container > div.section-item .controls .buttons .down-btn {
           visibility: hidden; }
-        .blocks .sections-container > div.section-item .controls .buttons:hover .delete-btn,
-        .blocks .sections-container > div.section-item .controls .buttons:hover .up-btn,
-        .blocks .sections-container > div.section-item .controls .buttons:hover .down-btn, .sections .sections-container > div.section-item .controls .buttons:hover .delete-btn,
-        .sections .sections-container > div.section-item .controls .buttons:hover .up-btn,
-        .sections .sections-container > div.section-item .controls .buttons:hover .down-btn {
+        .sections-container > div.section-item .controls .buttons:hover .delete-btn,
+        .sections-container > div.section-item .controls .buttons:hover .up-btn,
+        .sections-container > div.section-item .controls .buttons:hover .down-btn {
           visibility: visible; }
-    .blocks .sections-container > div.section-item.drag-over, .sections .sections-container > div.section-item.drag-over {
+    .sections-container > div.section-item.drag-over {
       border: 2px dashed #1B74D0;
       border-radius: 5px; }
-    .blocks .sections-container > div.section-item .header_check ~ label, .sections .sections-container > div.section-item .header_check ~ label {
+    .sections-container > div.section-item .header_check ~ label {
       color: #1B74D0;
       display: block; }
-    .blocks .sections-container > div.section-item .header_check ~ label .header-arrow, .sections .sections-container > div.section-item .header_check ~ label .header-arrow {
+    .sections-container > div.section-item .header_check ~ label .header-arrow {
       right: 0.5rem;
       top: 0.7rem;
       padding: 0.3rem 0.5rem; }
-      .blocks .sections-container > div.section-item .header_check ~ label .header-arrow:hover, .sections .sections-container > div.section-item .header_check ~ label .header-arrow:hover {
+      .sections-container > div.section-item .header_check ~ label .header-arrow:hover {
         background: rgba(18, 83, 205, 0.1); }
-    .blocks .sections-container > div.section-item .header_check ~ label .header-arrow:before, .sections .sections-container > div.section-item .header_check ~ label .header-arrow:before {
+    .sections-container > div.section-item .header_check ~ label .header-arrow:before {
       content: "\f105"; }
-    .blocks .sections-container > div.section-item .header_check:checked ~ label .header-arrow:before, .sections .sections-container > div.section-item .header_check:checked ~ label .header-arrow:before {
+    .sections-container > div.section-item .header_check:checked ~ label .header-arrow:before {
       content: "\f107"; }
-    .blocks .sections-container > div.section-item .header_check:checked ~ .tree, .sections .sections-container > div.section-item .header_check:checked ~ .tree {
+    .sections-container > div.section-item .header_check:checked ~ .tree {
       display: block; }
-    .blocks .sections-container > div.section-item .tree, .sections .sections-container > div.section-item .tree {
+    .sections-container > div.section-item .tree {
       display: none;
       border-top: 1px solid #eee;
       padding: 0.5rem 0rem 0rem;
       margin: 0.5rem 0rem 0rem; }
+
+.blocks .block-preview, .sections .block-preview {
+  position: absolute;
+  left: 100%;
+  height: auto;
+  z-index: 1000;
+  border: 1px solid #ddd;
+  box-shadow: 0px 0px 1px 2px rgba(18, 83, 205, 0.05); }
 
 .blocks .drag-elements-sidepane li[data-type], .sections .drag-elements-sidepane li[data-type] {
   width: 92%;
@@ -14703,6 +14701,56 @@ input[type="color"] {
 
 img.preview {
   max-width: 100%; }
+
+.hint {
+  position: relative;
+  /*
+    input:hover + &,
+    select:focus + &, */ }
+  .hint:before {
+    position: absolute;
+    bottom: 100%;
+    margin-bottom: -11px;
+    left: calc(50% - 6px);
+    content: '';
+    z-index: 1000001;
+    transform: translateY(-8px);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1000000;
+    pointer-events: none;
+    transition: .3s ease;
+    transition-delay: 0s;
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9); }
+  .hint:after {
+    content: attr(aria-label);
+    bottom: 100%;
+    left: 50%;
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 12px;
+    white-space: nowrap;
+    text-shadow: 0 -1px 0 #000;
+    box-shadow: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    transform: translateX(-50%);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1000000;
+    pointer-events: none;
+    transition: .3s ease;
+    transition-delay: 0s; }
+  .hint:hover:before, .hint:hover:after {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: .1s;
+    transform: translateX(-50%) translateY(-8px); }
+  .hint:hover:before {
+    transform: translateY(-8px); }
 
 .gallery {
   column-count: 4;

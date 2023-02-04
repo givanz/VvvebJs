@@ -21,7 +21,7 @@ https://github.com/givanz/VvvebJs
 This script is used by image upload input to save the image on the server and return the image url to be set as image src attribute.
 */ 
 
-$uploadDenyExtensions = ['php'];
+$uploadDenyExtensions  = ['php'];
 $uploadAllowExtensions = ['ico','jpg','jpeg','png','gif','webp'];
 
 function showError($error) {
@@ -55,11 +55,10 @@ if (in_array($extension, $uploadDenyExtensions)) {
 /*
 //comment deny code above and uncomment this code to change to a more restrictive allowed list
 // check if extension is on allow list
-if (in_array($extension, $uploadDenyExtensions)) {
+if (!in_array($extension, $uploadAllowExtensions)) {
 	showError("File type $extension not allowed!");
 }
 */
-
 
 $destination = UPLOAD_FOLDER . UPLOAD_PATH . '/' . $fileName;
 move_uploaded_file($_FILES['file']['tmp_name'], $destination);
