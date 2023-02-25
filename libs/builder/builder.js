@@ -367,6 +367,7 @@ Vvveb.Components = {
 							element = element.addClass(value);
 						}
 						else if (property.htmlAttr == "style") {
+							//keep old style for undo
 							oldStyle = $("#vvvebjs-styles", window.FrameDocument).html();
 							element = Vvveb.StyleManager.setStyle(element, property.key, value);
 						} else if (property.htmlAttr == "innerHTML")  {
@@ -1383,6 +1384,12 @@ Vvveb.Builder = {
 					}
 				}// else //uncomment else to disable parent highlighting when dragging
 				{
+					//if text editor is open check if the highlighted element is not inside the editor
+					if (Vvveb.WysiwygEditor.isActive )  {
+						if (self.texteditEl.get(0).contains(event.target)) {
+							return true;
+						}
+					}
 
 					$("#highlight-box").css(
 						{"top": offset.top - self.frameDoc.scrollTop() , 
@@ -1455,29 +1462,32 @@ Vvveb.Builder = {
 		self.frameHtml.on("dblclick", function(event) {
 			
 			if (Vvveb.Builder.isPreview == false) {
-				self.selectPadding = 10;
-				self.texteditEl = target = $(event.target);
+				
+				if (!Vvveb.WysiwygEditor.isActive)  {
+					self.selectPadding = 10;
+					self.texteditEl = target = $(event.target);
 
-				Vvveb.WysiwygEditor.edit(self.texteditEl);
-				
-				_updateSelectBox = function(event) {
-					if (!self.texteditEl) return;
-					var offset = self.selectedEl.offset();
+					Vvveb.WysiwygEditor.edit(self.texteditEl);
+					
+					_updateSelectBox = function(event) {
+						if (!self.texteditEl) return;
+						var offset = self.selectedEl.offset();
 
-					$("#select-box").css({
-							"top": offset.top - self.frameDoc.scrollTop() - self.selectPadding, 
-							"left": offset.left - self.frameDoc.scrollLeft() - self.selectPadding, 
-							"width" : self.texteditEl.outerWidth() + self.selectPadding *2, 
-							"height": self.texteditEl.outerHeight() + self.selectPadding *2
-						 });
-				};
-				
-				//update select box when the text size is changed
-				self.texteditEl.on("blur keyup paste input", _updateSelectBox);	
-				_updateSelectBox();	
-				
-				$("#select-box").addClass("text-edit").find("#select-actions").hide();
-				$("#highlight-box").hide();
+						$("#select-box").css({
+								"top": offset.top - self.frameDoc.scrollTop() - self.selectPadding, 
+								"left": offset.left - self.frameDoc.scrollLeft() - self.selectPadding, 
+								"width" : self.texteditEl.outerWidth() + self.selectPadding *2, 
+								"height": self.texteditEl.outerHeight() + self.selectPadding *2
+							 });
+					};
+					
+					//update select box when the text size is changed
+					self.texteditEl.on("blur keyup paste input", _updateSelectBox);	
+					_updateSelectBox();	
+					
+					$("#select-box").addClass("text-edit").find("#select-actions").hide();
+					$("#highlight-box").hide();
+				}
 			}
 		});
 		
@@ -1486,6 +1496,11 @@ Vvveb.Builder = {
 			
 			if (Vvveb.Builder.isPreview == false){
 				if (event.target) {
+					if (Vvveb.WysiwygEditor.isActive )  {
+						if (self.texteditEl.get(0).contains(event.target)) {
+							return true;
+						}
+					}
 					//if component properties is loaded in left panel tab instead of right panel show tab
 					if ($(".component-properties-tab").is(":visible"))//if properites tab is enabled/visible 
 						$('.component-properties-tab a').show().tab('show'); 
@@ -1499,10 +1514,10 @@ Vvveb.Builder = {
 					} else {
 						$("#select-box").removeClass("resizable");
 					}
+					$("#add-section-box").hide();
+					event.preventDefault();
+					return false;
 				}
-				$("#add-section-box").hide();
-				event.preventDefault();
-				return false;
 			}	
 			
 		});
@@ -2033,6 +2048,8 @@ Vvveb.Gui = {
 	toggleEditor : function () {
 		$("#vvveb-builder").toggleClass("bottom-panel-expand");
 		$("#toggleEditorJsExecute").toggle();
+		//hide breadcrumb when showing the editor
+		$(".breadcrumb-navigator .breadcrumb").toggle();
 		Vvveb.CodeEditor.toggle();
 	},
 	
@@ -2970,8 +2987,7 @@ Vvveb.Breadcrumb = {
 			let node = $($(this).data("node"));
 			node.css("outline","");
 			if (node.attr("style") == "") node.removeAttr("style");
-});
-
+		});
 	},
 	
 	addElement: function(data, element) {

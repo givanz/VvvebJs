@@ -14654,10 +14654,10 @@ input[type="color"] {
     border: none; }
 
 .breadcrumb-navigator {
-  padding: 0.4rem 1rem; }
+  padding: 0.4rem 1rem;
+  min-height: 30px; }
   .breadcrumb-navigator .breadcrumb {
     font-size: 90%;
-    min-height: 18px;
     margin: 0; }
     .breadcrumb-navigator .breadcrumb .breadcrumb-item {
       padding: 0.2rem 0.5rem; }

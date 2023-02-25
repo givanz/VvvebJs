@@ -477,6 +477,7 @@ body
 		right: $builder-right-panel-width;
 		right: var(--builder-right-panel-width);
 		background-color:#fff;
+		//transition:height 0.5s;
 		
 		> div {
 			position:relative;
@@ -2209,10 +2210,10 @@ input[type="color"] {
 
 .breadcrumb-navigator {
 	padding:0.4rem 1rem;
+	min-height:30px;
 	
 	.breadcrumb {
 		font-size:90%;
-		min-height:18px;
 		margin:0;
 		
 		.breadcrumb-item {
