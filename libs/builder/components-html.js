@@ -1166,7 +1166,31 @@ Vvveb.Components.extend("_base", "html/embed", {
     }]
 });
 
-
+Vvveb.Components.extend("_base", "html/html", {
+    nodes: ["html"],
+    name: "Html Page",
+    image: "icons/posts.svg",
+    html: `<html><body></body></html>`,
+    properties: [{
+        name: "Title",
+        key: "title",
+        htmlAttr: "innerHTML",
+        inputtype: TextInput,
+        child:"title",
+    }, {
+        name: "Meta description",
+        key: "description",
+        htmlAttr: "content",
+        inputtype: TextInput,
+        child:'meta[name=description]',
+    }, {
+        name: "Meta keywords",
+        key: "keywords",
+        htmlAttr: "content",
+        inputtype: TextInput,
+        child:'meta[name=keywords]',
+    }]
+});
 
 /*
 Vvveb.ComponentsGroup['Base'] =
