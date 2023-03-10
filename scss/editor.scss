@@ -34,16 +34,17 @@ $form-select-bg-position: right 0.7rem center;
 $input-btn-padding-y: .4rem;
 $input-btn-padding-x: .5rem;
 $custom-select-padding-y: .4rem;
-$light: #fafafa;
-$blue:#2c4bff;
-$blue:#075BE3;
-$blue:#2047F4;
-$blue:#1B74D0;
+//$light: var(--bs-secondary-bg-subtle);
+//$blue:#495ffb;
 
 #logo
 {
 	margin-left: 0.5rem;
 	margin-top: 0.15rem;
+	
+	html[data-bs-theme="dark"] & {
+	    filter: brightness(3);
+	}
 }
 
 $input-height: default;
@@ -62,8 +63,6 @@ $font-size-base: 1rem;
 
 @import "line-awesome/line-awesome";
 @import "bootstrap/bootstrap";
-/* override boostrap colors with css variables to allow dynamic color change*/ 
-@import "bootstrap-css-vars";
 @import "builder";
 @import "components/gallery";
 
@@ -87,11 +86,11 @@ $font-size-base: 1rem;
 	{
 		border-width:0px;
 		box-shadow:0px 0px 1px 0px #3478f2;
-		background-color:#fff;
+		background-color:var(--bs-body-bg);
 
 		&:hover
 		{
-			color:$primary;
+			color:var(--bs-link-color-rgb);
 			background:$gray-100;
 		}
 		
@@ -149,9 +148,9 @@ label.form-check .form-check-input {
 }
 
 .alert-light {
-    color: #525252;
-    background-color: whitesmoke;
-    border-color: #f0f0f0;
+    //color: #525252;
+    //background-color: whitesmoke;
+    //border-color: #f0f0f0;
 }
 
 .modal-full .modal-dialog.modal-xl {
@@ -164,6 +163,25 @@ label.form-check .form-check-input {
 
 .btn-outline-secondary
 {
-	color:#555;
-	border-color:#ddd;
+	//color:#555;
+	//border-color:#ddd;
+}
+
+
+.align-left {
+	float:left;
+	margin-bottom: 25px;
+    max-width: 50%;
+}
+
+.align-right {
+	float:right;
+	margin-bottom: 25px;
+    max-width: 50%;
+}
+
+.align-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

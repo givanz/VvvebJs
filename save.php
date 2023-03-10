@@ -19,11 +19,14 @@ https://github.com/givanz/VvvebJs
 
 define('MAX_FILE_LIMIT', 1024 * 1024 * 2);//2 Megabytes max html file size
 
-function sanitizeFileName($file) {
+function sanitizeFileName($file, $allowedExtension = 'html') {
 	//sanitize, remove double dot .. and remove get parameters if any
 	$file = __DIR__ . '/' . preg_replace('@\?.*$@' , '', preg_replace('@\.{2,}@' , '', preg_replace('@[^\/\\a-zA-Z0-9\-\._]@', '', $file)));
+	
 	//allow only .html extension
-	$file = preg_replace('/\..+$/', '', $file) . '.html';
+	if ($allowedExtension) {
+		$file = preg_replace('/\..+$/', '', $file) . ".$allowedExtension";
+	}
 	return $file;
 }
 
@@ -44,7 +47,7 @@ if (isset($_POST['startTemplateUrl']) && !empty($_POST['startTemplateUrl'])) {
 }
 
 if (isset($_POST['file'])) {
-	$file = sanitizeFileName($_POST['file']);
+	$file = sanitizeFileName($_POST['file'], false);
 }
 
 if (isset($_GET['action'])) {
@@ -55,7 +58,7 @@ if ($action) {
 	//file manager actions, delete and rename
 	switch ($action) {
 		case 'rename':
-			$newfile = sanitizeFileName($_POST['newfile']);
+			$newfile = sanitizeFileName($_POST['newfile'], false);
 			if ($file && $newfile) {
 				if (rename($file, $newfile)) {
 					echo "File '$file' renamed to '$newfile'";

@@ -1952,6 +1952,11 @@ Vvveb.Gui = {
 				$(window.FrameDocument, window.FrameWindow).bind('keydown', this.dataset.vvvebShortcut, Vvveb.Gui[this.dataset.vvvebAction]);
 			}
 		});
+
+		let theme = localStorage.getItem("theme", "dark");
+		if (theme) {
+			$("html").attr("data-bs-theme", theme);
+		}
 	},
 	
 	undo : function () {
@@ -2155,6 +2160,7 @@ Vvveb.Gui = {
 	toggleLeftColumn: function () {
 		Vvveb.Gui.togglePanel("#left-panel", "--builder-left-panel-width");
 	},
+
 	
 	toggleRightColumn: function (rightColumnEnabled = null) {
 		rightColumnEnabled = Vvveb.Gui.togglePanel("#right-panel", "--builder-right-panel-width");
@@ -2165,6 +2171,24 @@ Vvveb.Gui = {
 		Vvveb.Components.componentPropertiesElement = (rightColumnEnabled ? "#right-panel" :"#left-panel #properties") + " .component-properties";
 		if ($("#properties").is(":visible")) $('.component-tab a').show().tab('show'); 
 
+	},
+
+	darkMode: function () {
+		let theme = $("html").attr("data-bs-theme");
+		
+		if (theme == "dark") {
+			theme = "light";
+			$(".btn-dark-mode i").removeClass("la-moon").addClass("la-sun");
+		} else if (theme == "light" || theme == "auto") {
+			theme = "dark";
+			$(".btn-dark-mode i").removeClass("la-sun").addClass("la-moon");
+		} else {
+			theme = "auto";
+		}
+		
+		$("html").attr("data-bs-theme", theme);
+		localStorage.setItem('theme', theme);
+		//document.cookie = 'theme=' + theme;
 	},
 }
 
@@ -2757,7 +2781,14 @@ Vvveb.FileManager = {
 
 		$(this.tree).on("click", ".rename", function (e) {
 			let element = $(e.target).closest("li");
-			Vvveb.FileManager.renamePage(element, e);
+			Vvveb.FileManager.renamePage(element, e, false);
+			e.preventDefault();
+			return false;
+		});
+
+		$(this.tree).on("click", ".duplicate", function (e) {
+			let element = $(e.target).closest("li");
+			Vvveb.FileManager.renamePage(element, e, true);
 			e.preventDefault();
 			return false;
 		});
@@ -2820,7 +2851,7 @@ Vvveb.FileManager = {
 		}
 	},	
 	
-	renamePage: function(element, e) {
+	renamePage: function(element, e, duplicate = false) {
 		let page = element[0].dataset;
 		let newfile = prompt(`Enter new file name for "${page.file}"`, page.file);
 		let _self = this;
@@ -2828,7 +2859,7 @@ Vvveb.FileManager = {
 			$.ajax({
 				type: "POST",
 				url: renameUrl,//set your server side save script url
-				data: {file:page.file, newfile:newfile},
+				data: {file:page.file, newfile:newfile, duplicate},
 				success: function (data, text) {
 					let bg = "bg-success";
 					if (data.success) {		
@@ -2838,14 +2869,23 @@ Vvveb.FileManager = {
 					}
 
 					displayToast(bg, data.message ?? data);
+					let baseName = newfile.replace('.html', '');
+					let newName = friendlyName(newfile.replace(/.*[\/\\]+/, '')).replace('.html', '');
 
-
+					if (duplicate) {
+						let data = _self.pages[page.page];
+						data["file"] = newfile;
+						data["title"] = newName;
+						Vvveb.FileManager.addPage(baseName, data);
+					} else {
 					_self.pages[page.page]["file"] = newfile;
-					$("> label span", element).html(friendlyName(newfile.replace(/.*[\/\\]+/, '')).replace('.html', ''));
+						_self.pages[page.page]["title"] = newName;
+						$("> label span", element).html(newName);
 					page.url = page.url.replace(page.file, newfile);
 					page.file = newfile;
 					_self.pages[page.page]["url"] = page.url;
 					_self.pages[page.page]["file"] = page.file;
+					}
 					
 				},
 				error: function (data) {

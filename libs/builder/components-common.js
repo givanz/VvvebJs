@@ -16,7 +16,7 @@ limitations under the License.
 https://github.com/givanz/Vvvebjs
 */
 
-bgcolorClasses = ["bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-light", "bg-dark", "bg-white"]
+bgcolorClasses = ["bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-body-secondary", "bg-dark", "bg-white"]
 
 bgcolorSelectOptions = 
 [{
@@ -42,7 +42,7 @@ bgcolorSelectOptions =
 	value: "bg-info",
 	text: "Info"
 }, {
-	value: "bg-light",
+	value: "bg-body-secondary",
 	text: "Light"
 }, {
 	value: "bg-dark",
@@ -1063,7 +1063,7 @@ Vvveb.Components.add("config/bootstrap", {
 		var i = 0;
 		var j = 0;
 
-		let cssVars = Vvveb.ColorPaletteManager.getAllCSSVariableNames(window.FrameDocument.styleSheets, ":root");
+		let cssVars = Vvveb.ColorPaletteManager.getAllCSSVariableNames(window.FrameDocument.styleSheets/*, ":root"*/);
 		
 		for (type in cssVars) {
 			properties.push({

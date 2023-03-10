@@ -1,19 +1,28 @@
 # VvvebJs
 
+<p align="center">
+  <img src="https://www.vvveb.com/admin/themes/default/img/biglogo.png" alt="Vvveb">
+  <br><br>
+  <strong>Drag and drop website builder javascript library.</strong>
+  <br>
+  <span>Built with jQuery and Bootstrap 5.</span>
+</p>
+<p align="center">
+  <a href="https://www.vvveb.com">Website</a> |
+  <a href="https://github.com/givanz/VvvebJs/wiki">Documentation</a> |
+  <a href="https://github.com/givanz/VvvebJs/discussions">Forum</a> |
+  <a href="https://twitter.com/vvvebcms">Twitter</a> 
+</p>
 
-## Drag and drop website builder javascript library.
-
-For a full featured CMS using VvvebJs check [Vvveb CMS](https://www.vvveb.com)
-
-Built with jQuery and Bootstrap 5.
 
 ## [Live Demo](https://www.vvveb.com/vvvebjs/editor.html)
 
-[![npm](https://img.shields.io/npm/v/vvvebjs.svg)](https://www.npmjs.com/package/vvvebjs)
+For a full featured open source CMS using VvvebJs check [Vvveb CMS](https://www.vvveb.com)
 
 Using [Vvveb landing page template](https://github.com/givanz/Vvveb-landing-bootstrap5-template) for demo page and Bootstrap 5 sections and blocks.
 
-<img src="https://www.vvveb.com/img/browser.png">
+<img src="https://www.vvveb.com/img/dark-theme.png">
+<img src="https://www.vvveb.com/img/light-theme.png">
 
 ### Features
 

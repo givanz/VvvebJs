@@ -18,14 +18,14 @@ https://github.com/givanz/VvvebJs
 
 $builder-header-top-height:50px !default;
 $builder-bottom-panel-height:35px !default;
-$builder-border-color: #ddd !default;
+$builder-border-color: var(--bs-border-color) !default;
 
 $builder-left-panel-width:300px !default;
 $builder-right-panel-width:300px !default;
 $builder-canvas-margin:0px !default;
 $builder-filemanager-height:250px !default;
 $drag-items-tabs-height:40px !default;
-$builder-background-color: $blue !default;
+$builder-background-color: var(--bs-primary) !default;
 
 $canvas-width-substract: $builder-left-panel-width + $builder-right-panel-width + $builder-canvas-margin;
 $canvas-no-right-width-substract: $builder-left-panel-width  + $builder-canvas-margin;
@@ -47,7 +47,6 @@ $builder-left-panel-width-xl:15vw;
 $builder-right-panel-width-xl:15vw;
 
 
-
 $font-size-base: 16px;
 
 
@@ -57,8 +56,8 @@ $font-size-base: 16px;
 		position: relative;
 		bottom: 0px;
 		//background: #4285f4;
-		background: $blue;
-		color: #fff;
+		background:$builder-background-color;
+		color: var(--bs-white);
 		font-size: 18px;
 		border-radius: 24px;
 		width: 32px;
@@ -74,7 +73,7 @@ $font-size-base: 16px;
 		&:hover
 		{
 			text-decoration:none;
-			background:darken( $builder-background-color, 10%)
+			filter:brightness(1.2);
 		}		
 }
 
@@ -92,7 +91,7 @@ $font-size-base: 16px;
 		padding-top: 60px;
 		padding-bottom: 7px;
 
-		border-color:#e5e5e5;
+		//border-color:var(--bs-border-color-rgb);
 		border-style:solid;
 		border-width:1px;
 		border-radius: 3px;
@@ -100,22 +99,36 @@ $font-size-base: 16px;
 		border-left-width:1px;
 		border-top-width:1px;
 		*/
+		background-color: var(--bs-white);
+		border-color: var(--bs-border-color);
+		border-color:var(--bs-gray-300);
+		
 		background-position: 50% 30%;
 		background-size: auto 42px;
 		z-index: 100;
-		background-color: transparent;
 		cursor:move;
 		cursor:grab;
 		//opacity:0.75;
 		box-shadow:0px 1px 4px 0px rgba(0, 0, 0, 0.05);
 		-webkit-box-shadow:0px 1px 4px 0px rgba(0, 0, 0, 0.05);
-		background-color:#fff;
 		
 		a {
 			min-height: 20px;
 			white-space: break-spaces;
 			//line-height: 12px;
 			padding:0 3px;
+		}
+		
+		&[data-drag-type="component"] {
+			html[data-bs-theme="dark"] & {
+					filter: invert(100%);
+					border-color:var(--bs-gray-500);
+					background-color:transparent;
+					
+					a {
+						color:var(--bs-gray-900);
+					}
+				}
 		}
 }
 
@@ -132,7 +145,7 @@ $font-size-base: 16px;
 		margin:1rem auto;
 
 		display:block;
-		border-color:#ddd;
+		border-color:var(--bs-border-color);
 		border-style:solid;
 		border-width:1px;
 		border-radius:0px;
@@ -147,17 +160,17 @@ $font-size-base: 16px;
 		*/
 		background-size: 100%;
 		z-index: 100;
-		background-color: #fff;
+		background-color: var(--bs-body-bg);
 		cursor:grab;
 		opacity:1;
 		
 		a.name {
-			//background: #fafafa;
+			//background: var(--bs-secondary-bg-subtle);
 			background: rgba(255,255,255,0.9);
 			background: rgba(0,0,0,0.7);
-			background: rgba($primary, 0.7);
+			background: rgba(var(--bs-link-color-rgb), 0.7);
 			background: rgba(255, 255, 255, 0.9);
-			color:#333;
+			color:var(--bs-body-color);
 			padding: 0.5rem 0;
 			position:absolute;
 			bottom:0px;
@@ -169,10 +182,10 @@ $font-size-base: 16px;
 		}		
 		
 		&:hover{ 
-			//outline:1px solid $primary;
-			border-color:$primary;
-			box-shadow:0px 1px 5px 2px rgba($primary, 0.25);
-			-webkit-box-shadow:0px 1px 5px 2px rgba($primary, 0.25);
+			//outline:1px solid var(--bs-link-color-rgb);
+			border-color:var(--bs-link-color-rgb);
+			box-shadow:0px 1px 5px 2px rgba(var(--bs-link-color-rgb), 0.25);
+			-webkit-box-shadow:0px 1px 5px 2px rgba(var(--bs-link-color-rgb), 0.25);
 
 			
 			&:before {
@@ -207,7 +220,7 @@ $font-size-base: 16px;
 
 body
 {
-	//background:#eee;
+	//background:var(--bs-border-color);
 	--builder-filemanager-height: #{$builder-filemanager-height};
 	--builder-canvas-margin: #{$builder-canvas-margin};
 	
@@ -253,7 +266,7 @@ body
 		--builder-component-list-element-width:28%;
     }
 	
-	scrollbar-color: rgba(0,0,0, 0.1) #fff;
+	scrollbar-color: rgba(0,0,0, 0.1) var(--bs-body-bg);
 	scrollbar-width: thin;
 	-webkit-font-smoothing:subpixel-antialiased;
 
@@ -281,7 +294,7 @@ body
 		border-style:solid;
 		border-width:0px;
 		
-		background-color: #fff;
+		background-color: var(--bs-body-bg);
 		height: 100%;
 
 		position: fixed;
@@ -301,10 +314,11 @@ body
 		-moz-box-shadow: 1px 0px 2px rgba(0,0,0,.1);
 		-webkit-box-shadow: 1px 0px 2px rgba(0,0,0,.1);
 */
-		background:-moz-linear-gradient(left, #fff 85%, #fafbfc 100%);
-		background:-webkit-linear-gradient(left, #fff 85%, #fafbfc 100%);
-		background:linear-gradient(left, #fff 85%, #fafbfc 100%);
-		box-shadow: -1px -2px 2px #f3f3f3 inset;
+		/*
+		background:-moz-linear-gradient(left, var(--bs-body-bg) 85%, #fafbfc 100%);
+		background:-webkit-linear-gradient(left, var(--bs-body-bg) 85%, #fafbfc 100%);
+		background:linear-gradient(left, var(--bs-body-bg) 85%, #fafbfc 100%);
+		box-shadow: -1px -2px 2px #f3f3f3 inset;*/
 
 		width: $builder-left-panel-width;
 		width: calc(var(--builder-left-panel-width));
@@ -318,7 +332,7 @@ body
 			width:$builder-right-panel-width + 15;
 			//height: var(--builder-filemanager-height);
 			width:calc( var(--builder-left-panel-width));
-			border-bottom: 1px solid #ddd;
+			border-bottom: 1px solid var(--bs-border-color);
 		
 			.header
 			{
@@ -331,13 +345,13 @@ body
 				line-height: 2rem;
 				text-align: left;
 				padding-left: 1rem;
-				border-bottom: 1px solid #ddd;
+				border-bottom: 1px solid var(--bs-border-color);
 				margin-bottom:0rem;
 				padding:0.0rem 0.5rem;
 				padding:0rem 0rem 0.5rem 1rem;
 			  
 				a {
-				  color: $primary;
+				  color: var(--bs-link-color-rgb);
 				}
 			}
 			
@@ -383,9 +397,9 @@ body
 		-moz-transition: margin-right 0.1s linear;
 		-webkit-transition: margin-right 0.1s linear;
 
-		background:-moz-linear-gradient(right, #fff 85%, #fafbfc 100%);
-		background:-webkit-linear-gradient(right, #fff 85%, #fafbfc 100%);
-		background:linear-gradient(right, #fff 85%, #fafbfc 100%);
+		background:-moz-linear-gradient(right, var(--bs-body-bg) 85%, #fafbfc 100%);
+		background:-webkit-linear-gradient(right, var(--bs-body-bg) 85%, #fafbfc 100%);
+		background:linear-gradient(right, var(--bs-body-bg) 85%, #fafbfc 100%);
 		box-shadow: 1px -2px 2px #f3f3f3 inset;
 		
 				
@@ -406,12 +420,12 @@ body
 		}
 		
 		.nav-link {
-			color:#333;
+			//color:var(--bs-body-color);
 			//border-top:2px solid transparent;
 			
 			&.active {
-				border-top:1px solid rgba($primary, 0.7);
-				color:$primary;
+				border-top:1px solid rgba(var(--bs-link-color-rgb), 0.7);
+				//color:var(--bs-link-color-rgb);
 			}
 		}
 	}
@@ -420,16 +434,15 @@ body
 	{
 		height:$builder-header-top-height;
 		padding-top:0.3rem;
-		border-bottom:1px solid #ccc;
+		border-bottom:1px solid var(--bs-border-color);
 		text-align:center;
-		background-color:#fafafa;
+		background-color:var(--bs-secondary-bg-subtle);
 		overflow:hidden;
 		width:100%;
 		
 		.btn-group
 		{
-			.btn
-			{
+			.btn {
 				
 				&.btn-light {
 					font-size: 1.25rem;
@@ -470,14 +483,13 @@ body
 		height:$builder-bottom-panel-height;
 		bottom:0px;
 		position:fixed;
-		border-top:1px solid #ddd;
+		border-top:1px solid var(--bs-border-color);
 		left: $builder-left-panel-width;
 		left: calc($builder-left-panel-width +  $builder-canvas-margin);
 		left: calc( var(--builder-left-panel-width) + var(--builder-canvas-margin));
 		right: $builder-right-panel-width;
 		right: var(--builder-right-panel-width);
-		background-color:#fff;
-		//transition:height 0.5s;
+		background-color:var(--bs-body-bg);
 		
 		> div {
 			position:relative;
@@ -486,7 +498,7 @@ body
 				position:absolute;
 				right:0;
 				top:0;
-				background:#fff;
+				background:var(--bs-body-bg);
 			}
 		}
 		
@@ -505,7 +517,7 @@ body
 				border:none;
 				font-size:14px;
 				margin-bottom:10px;
-				background:#fafafa;
+				background:var(--bs-secondary-bg-subtle);
 			}
 		}
 	}
@@ -527,7 +539,7 @@ body
 		> .header
 		{
 		    .nav {
-               		 background:#f7f7f7;
+                background:var(--bs-secondary-bg-subtle);
 		    }
 		}
 		
@@ -538,10 +550,10 @@ body
 			.nav-link
 			{
 				text-align:center;
-				border-top-color: #fff;
+				border-top-color: var(--bs-body-bg);
 				border-radius:0px;
 				min-width:4.5rem;
-				color:$dark;
+				color:var(--bs-body-color);
 				line-height:1.2rem;
 				//font-size:0.9rem;
 
@@ -563,7 +575,7 @@ body
 				
 				&.active, &:hover
 				{
-					color:$primary;
+					color:var(--bs-link-color-rgb);
 				}
 			}
 		}
@@ -580,8 +592,8 @@ body
 		
 		.form-control
 		{
-			border-color:#fff;
-			border-bottom-color: #eee;
+			border-color:var(--bs-body-bg);
+			border-bottom-color: var(--bs-border-color);
 			border-radius:0px;
 			box-shadow:none;
 		}
@@ -617,7 +629,7 @@ body
 			&:hover
 			{
 				opacity:1;
-				background:#eee;
+				background:var(--bs-border-color);
 			}
 		}
 		
@@ -625,7 +637,7 @@ body
 		input:hover + .clear-backspace
 		{
 			opacity:1;
-			background:#eee;
+			background:var(--bs-border-color);
 		}
 		
 		.expand {
@@ -637,9 +649,10 @@ body
 				padding:0.2rem;
 				background:transparent;
 				border:none;
+				color: var(--bs-body-color);
 				
 				&:hover {
-					background:#eee;
+					background:var(--bs-border-color);
 				}
 			}
 		}
@@ -652,7 +665,7 @@ body
 	.components-list, .blocks-list, .component-properties, .sections-list
 	{
 		list-style:none;
-		background: #fafafa;
+		background: var(--bs-secondary-bg-subtle);
 		//scrollbar on hover
 	}
 	
@@ -691,7 +704,7 @@ body
 					a
 					{
 						display:block;
-						color: #555;
+						color: var(--bs-gray-900);
 						text-decoration: none;
 						text-shadow: none;
 						margin-top:5px;
@@ -746,7 +759,7 @@ body
 	
 	.component-properties
 	{
-		background:#fff;
+		background:var(--bs-body-bg);
 
 		height:95%;
 		height:calc(100% - #{$builder-header-top-height});
@@ -758,7 +771,7 @@ body
 		}
 		
 		.nav-tabs {
-			background:#f7f7f7;
+			background:var(--bs-secondary-bg-subtle);
 		}
 		
 		#right-panel
@@ -806,7 +819,7 @@ body
 				font-size:11px;
 				font-weight:600;
 				margin-bottom:5px;
-				color:#555;
+				color:var(--bs-body-color);
 				flex-grow:1;
 				
 				i
@@ -949,7 +962,8 @@ body
 	#highlight-box
 	{
 		position:absolute;
-		border:1px solid $builder-background-color;
+		border:1px solid var(--bs-primary);
+		color:var(--bs-white);
 		width:0px;
 		height:0px;
 		top:0px;
@@ -960,7 +974,8 @@ body
 	#drop-highlight-box
 	{
 		position:absolute;
-		border:2px solid $builder-background-color;
+		border:2px solid var(--bs-primary);
+		color:var(--bs-white);
 		width:0px;
 		height:0px;
 		top:0px;
@@ -983,7 +998,8 @@ body
 	#select-box
 	{
 		position:absolute;
-		border:1px solid $builder-background-color;
+		border:1px solid var(--bs-primary);
+		color:var(--bs-white);
 		background:rgba( $builder-background-color, 0.1);//rgba(66, 133, 244, 0.1);
 		width:0px;
 		height:0px;
@@ -1002,7 +1018,7 @@ body
 				> div {
 					position: absolute;
 					pointer-events:all;
-					border: 2px solid $builder-background-color;
+					border: 2px solid var(--bs-primary);
 					width: 10px;
 					height: 10px;
 					background-color: rgba( $builder-background-color, 0.1);
@@ -1077,8 +1093,8 @@ body
 		z-index:1;
 		right:-1px;
 		top:-25px;
-		background:$builder-background-color;
-		color:#fff;
+		background:var(--bs-primary);
+		color:var(--bs-body-bg);
 		padding:0px 0px;
 		border-radius:3px 3px 0px 0px;
 	}
@@ -1087,7 +1103,8 @@ body
 	#select-actions a, #wysiwyg-editor.default-editor a, #section-actions a#add-section-btn
 	{
 		pointer-events: auto;
-		color:#fff;
+		color:var(--bs-white);
+		text-decoration:none;
 		font-size:16px;
 		padding-right:2px;
 		padding:2px 5px;
@@ -1102,8 +1119,8 @@ body
 		right:auto;
 		left:-1px;
 		display:none;
-		color:#111;
-		background:#fff;
+		color:var(--bs-body-color);
+		background:var(--bs-body-bg);
 		border: 1px solid rgba(0,0,0,0.3);
 		pointer-events: auto;
 
@@ -1112,7 +1129,7 @@ body
 				display:inline-block;
 				padding:8px;
 				line-height: 1;
-				color:#333;
+				color:var(--bs-body-color);
 				font-size:18px;
 			
 				&:last-child {
@@ -1120,14 +1137,14 @@ body
 				}
 				
 				&:hover {
-					background:#eee;
+				background:var(--bs-border-color);
 				}
 				
 			}
 			
 			div.separator {
 				display: inline-block;
-				background: #ddd;
+				background: var(--bs-border-color);
 				width: 1px;
 				height: 18px;
 				vertical-align: text-bottom;
@@ -1143,7 +1160,7 @@ body
 				vertical-align: top;
 				border: none;
 				pointer-events: all;
-				//border-right:1px solid #eee;
+			//border-right:1px solid var(--bs-border-color);
 				line-height:2.2rem;
 				height:34px;
 				padding:0;
@@ -1159,7 +1176,7 @@ body
 					height:30px;
 					width:32px;
 					box-shadow:none;
-					border:1px dashed #ddd;
+					border:1px dashed var(--bs-border-color);
 					margin:0;
 					margin:3px;
 					border-radius:3px;
@@ -1238,24 +1255,24 @@ body
 		min-height: 300px;
 		max-height: 480px;
 		position: absolute;
-		background: #fff;
+		background: var(--bs-body-bg);
 		top: 100px;
 		left: 100px;
 		box-shadow: 0 8px 24px rgba(0,0,0,0.07);
-		border: 1px solid #ddd;
+		border: 1px solid var(--bs-border-color);
 		min-width: 500px;
 		max-width: 700px;
 		pointer-events:auto;
 		display:none;
 		z-index:10;
-		background:#fff;
+		background:var(--bs-body-bg);
 	}
 
 	#highlight-name
 	{
-		background:$builder-background-color;
+		background:var(--bs-primary);
+		color:var(--bs-white);
 		font-size:12px;
-		color:#fff;
 		position:relative;
 		top:-22px;
 		left:-1px;
@@ -1272,7 +1289,7 @@ body
 			overflow:hidden;
 			
 			.nav-item {
-				background:#fff;
+				background:var(--bs-body-bg);
 			}
 	
 			a {
@@ -1292,26 +1309,26 @@ body
 							
 				&:hover {
 					i {
-						border:1px solid rgba($primary, 0.2);
+						border:1px solid rgba(var(--bs-link-color-rgb), 0.2);
 					}
 				}
 				
 				&.active {
-					//background:$primary;
+					//background:var(--bs-link-color-rgb);
 					border-top:none;
 					border-left:none;
 					border-right:none;
-					border-top-color:rgba($primary, 0.7);
-					color:$primary;
+					border-top-color:rgba(var(--bs-link-color-rgb), 0.7);
+					color:var(--bs-link-color-rgb);
 					box-shadow:none;
 					//border-top-width:2px;
 					//background: rgba(13, 110, 253, 0.05);
 					//border:2px solid rgba(13, 110, 253, 0.1);
 					
 					i {
-						background: rgba($primary, 0.05);
-						border:1px solid rgba($primary, 0.2);
-						color: $primary;
+						background: rgba(var(--bs-link-color-rgb), 0.05);
+						border:1px solid rgba(var(--bs-link-color-rgb), 0.2);
+						color: var(--bs-link-color-rgb);
 					}
 				}
 			}
@@ -1337,13 +1354,13 @@ body
 	.nav-tabs .nav-item.show .nav-link {
 
 		//color: #495057;
-		background-color: #fff;
-		//border-color: $primary #dee2e6 #fff #dee2e6;
+		background-color: var(--bs-body-bg);
+		//border-color: var(--bs-link-color-rgb) #dee2e6 var(--bs-body-bg) #dee2e6;
 		//border-top-width:2px;
 		border-radius: 0px;
-		background: linear-gradient( 0deg, #fff 70%, rgba($primary, 0.03) 100%);
-		box-shadow: 0px -5px 5px 5px rgba($primary, 0.05);
-		border-top:1px solid rgba($primary, 0.7);
+		background: linear-gradient( 0deg, var(--bs-body-bg) 70%, rgba(var(--bs-link-color-rgb), 0.03) 100%);
+		box-shadow: 0px -5px 5px 5px rgba(var(--bs-link-color-rgb), 0.05);
+		border-top:1px solid rgba(var(--bs-link-color-rgb), 0.7);
 
 	}
 	.nav-fill .nav-link
@@ -1431,7 +1448,7 @@ li[data-type]
 			padding: 0;
 			width: 100%;
 			position:relative;
-			//border-top: 1px solid #ddd;
+			//border-top: 1px solid var(--bs-border-color);
 
 			label
 			{
@@ -1446,7 +1463,7 @@ li[data-type]
 				> a 
 				{
 				  padding-left: 1rem;
-				  color: $primary;
+				  color: var(--bs-link-color-rgb);
 				}
 			   
 			}
@@ -1472,7 +1489,7 @@ li[data-type]
 			  float: left;
 
 				a {
-				  color: #555;
+				  color: var(--bs-body-color);
 				  text-decoration: none;
 				  text-shadow: none;
 				  //margin-top:0px;
@@ -1492,7 +1509,7 @@ li[data-type]
 				  cursor:grab;
 				  cursor:-moz-grab;
 				  cursor:-webkit-grab;
-				  background-color: #fff;
+				  background-color: var(--bs-body-bg);
 				  opacity:1;
 				  text-align:center;
 
@@ -1512,16 +1529,16 @@ li[data-type]
 
 .sections-container {
 width:100%;
-background:#fff;
+	background:var(--bs-body-bg);
 padding-top:1rem;
 
 > div.section-item {
 
-	box-shadow: 0px 0px 1px 0px $builder-background-color;
+		box-shadow: 0px 0px 1px 0px var(--bs-primary);
 	box-shadow: 0px 0px 1px 0px rgba(18, 83, 205, 0.7), 0px 0px 5px 0px rgba(18, 83, 205, 0.1);
 	box-shadow:0px 0px 1px 2px rgba(18, 83, 205, 0.05);
-	border:1px solid #ccc;
-	background:#fff;
+		border:1px solid var(--bs-border-color);
+		background:var(--bs-body-bg);
 	margin:0rem 0rem 1rem;
 	padding:0.3rem 0.5rem 0.3rem 1.4rem;
 	position:relative;
@@ -1535,7 +1552,7 @@ padding-top:1rem;
 		
 		.handle {
 			width: 20px;
-			//background: #fafafa;
+				//background: var(--bs-secondary-bg-subtle);
 			//border-right: 1px solid rgba(66, 133, 244, 0.2);
 			height: 10px;
 			position: absolute;
@@ -1610,12 +1627,12 @@ padding-top:1rem;
 	
 	
 	&.drag-over {
-		border:2px dashed $primary;
+			border:2px dashed var(--bs-link-color-rgb);
 		border-radius: 5px;
 	}
 	
 	.header_check ~ label {
-		color:$primary;
+			color:var(--bs-link-color-rgb);
 		display:block;
 	}
 	
@@ -1642,7 +1659,7 @@ padding-top:1rem;
 	
 	.tree {
 		display: none;
-		border-top: 1px solid #eee;
+			border-top: 1px solid var(--bs-border-color);
 		padding: 0.5rem 0rem 0rem;
 		margin: 0.5rem 0rem 0rem;
 		> ol  {
@@ -1662,7 +1679,7 @@ padding-top:1rem;
 		left: 100%;
 		height:auto;
 		z-index: 1000;
-		border: 1px solid #ddd;
+		border: 1px solid var(--bs-border-color);
 		box-shadow:0px 0px 1px 2px rgba(18, 83, 205, 0.05);
 	}	
 
@@ -1675,8 +1692,8 @@ padding-top:1rem;
 			
 			&:before {
 				content: " ";
-				background: #fff;
-				background:  $builder-background-color;
+				background: var(--bs-body-bg);
+				background:  var(--bs-primary);
 				width: 100%;
 				height: 100%;
 				position: absolute;
@@ -1708,12 +1725,12 @@ padding-top:1rem;
 		@include component-list-element(); 
 		
 		&:hover  {
-			box-shadow: 0px 0px 1px 0px $builder-background-color;
-			background-color:rgba( $builder-background-color, 0.1);
-			border-color:rgba( $builder-background-color, 0.2);
+			box-shadow: 0px 0px 1px 0px var(--bs-primary);
+			background-color:rgba(var(--bs-primary-rgb), 0.05) !important;
+			border-color:rgba(var(--bs-primary-rgb), 0.5) !important;
 			
 			a {
-				color:$builder-background-color;
+				color:var(--bs-primary);
 			}
 		}
 	}
@@ -1751,8 +1768,8 @@ label.header
 	line-height: 32px;
 	text-align: left;
 	padding:0.3rem 0.8rem;
-	border-top: 1px solid #ddd;
-	color: $primary;
+	border-top: 1px solid var(--bs-border-color);
+	color: var(--bs-link-color-rgb);
 	cursor:pointer;
 	position:relative;
 
@@ -1827,7 +1844,7 @@ div.section {
 }
 .toggle-label {
 	display: block; overflow: hidden; cursor: pointer;
-	border: 2px solid #FFFFFF; border-radius: 30px;
+	border: 2px solid var(--bs-body-bg); border-radius: 30px;
 }
 .toggle-inner {
 	display: block; width: 200%; margin-left: -100%;
@@ -1841,7 +1858,7 @@ div.section {
 .toggle-inner:before {
 	content: "ON";
 	padding-left: 14px;
-	background-color: $primary;
+	background-color: var(--bs-link-color-rgb);
 }
 .toggle-inner:after {
 	content: "OFF";
@@ -1851,10 +1868,10 @@ div.section {
 }
 .toggle-switch {
 	display: block; width: 18px; margin: 4px;
-	background: #FFFFFF;
+	background: var(--bs-body-bg);
 	position: absolute; top: 0; bottom: 0;
 	right: 39px;
-	border: 2px solid #FFFFFF; border-radius: 30px;
+	border: 2px solid var(--bs-body-bg); border-radius: 30px;
 	transition: all 0.3s ease-in 0s; 
 }
 .toggle-checkbox:checked + .toggle-label .toggle-inner {
@@ -1927,7 +1944,7 @@ input[type="number"]:focus {
 
 .btn-group .btn.btn-gray.active
 {
-	background-color:#ddd;
+	background-color:var(--bs-border-color);
 }
 
 .btn-group .btn i
@@ -1959,8 +1976,8 @@ ul.autocomplete
 {
     position: absolute;
     overflow: hidden;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
 	border-top:none;
 	margin-top: -1px;
     margin: 0px;
@@ -1982,7 +1999,7 @@ ul.autocomplete li
 ul.autocomplete li.selected 
 {
   background-color: Highlight ; 
-  color: #fff;
+  color: var(--bs-body-bg);
 }
 
 
@@ -2021,8 +2038,8 @@ ul.autocomplete li.selected
 			text-align:center;
 			
 			&:hover {
-				border-color:$primary;
-				color:$primary;
+				border-color:var(--bs-link-color-rgb);
+				color:var(--bs-link-color-rgb);
 			}
 			
 			label {
@@ -2067,7 +2084,7 @@ ul.autocomplete li.selected
 
 
 #sections-list {
-	background:#fff;
+	background:var(--bs-body-bg);
 }
 
 
@@ -2095,9 +2112,9 @@ ul.autocomplete li.selected
 	left:50%;
 	margin-top: -18px;
 	margin-left: -18px;
-	border-color:$primary;
+	border-color:var(--bs-link-color-rgb);
 	i {
-		color:#fff;
+		color:var(--bs-body-bg);
 	}
 }
 
@@ -2130,7 +2147,7 @@ ul.autocomplete li.selected
 }
 
 .dot-3 {
-  background-color: $primary;
+  background-color: var(--bs-link-color-rgb);
   animation: dot-3-move 2s ease infinite, index 6s ease infinite;
 }
 
@@ -2220,15 +2237,16 @@ input[type="color"] {
 			padding:0.2rem 0.5rem;
 			
 			a {
-				color:#000;
-				background: #fafafa;
+				color:var(--bs-body-color);
+				background: var(--bs-secondary-bg-subtle);
 				padding: 0.2rem 0.4rem;
 				border-radius: 4px;
-				border:1px solid #eee;
+				border:1px solid var(--bs-border-color);
+				text-decoration:none;
 				
 				&:hover {
-					background: rgba($primary, 0.05);
-					border: 1px solid rgba($primary, 0.2);
+					background: rgba(var(--bs-link-color-rgb), 0.05);
+					border: 1px solid rgba(var(--bs-link-color-rgb), 0.2);
 					color: #0d6efd;
 					text-decoration:none;
 				}
@@ -2263,7 +2281,7 @@ input[type="color"] {
 		max-height:300px;
 		overflow-y:auto;
 		overflow-x:hidden;
-		border:1px solid #eee;
+		border:1px solid var(--bs-border-color);
 		
 		li {
 			cursor:pointer;
@@ -2310,7 +2328,7 @@ img.preview {
 		left: 50%;
 
 		background: rgba(0,0,0, 0.9);
-		color: #fff;
+		color: var(--bs-body-bg);
 		padding: 8px 10px;
 		font-size: 12px;
 		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -2346,3 +2364,79 @@ img.preview {
     }
 }	
 
+.btn-light {
+	--bs-btn-bg:transparent;
+	border-color:transparent;
+	color:var(--bs-body-text);
+	&:hover {
+		//background-color:var(--bs-border-color);
+	}
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--bs-link-color);
+}	
+
+/*,.upload-collapse input[type=file]::file-selector-button */
+/*
+.upload-collapse {
+	margin: 3rem;
+	padding: 0rem;
+	padding: 0rem;
+	border: 3px dashed var(--bs-border-color);
+	position: relative;
+	min-height: 150px;
+	h3 {
+		padding: 2rem 4rem;
+	}
+	button#upload-close {
+		position: absolute;
+		right: 1rem;
+		z-index: 1000;
+	}
+	input[type=file] {
+		position: absolute;
+		z-index: 100;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		padding: 6rem 4rem 4rem;
+		display: block !important;
+		font-size: 1rem;
+		&::-webkit-file-upload-button {
+			visibility: hidden;
+		}
+		&::before {
+			content: 'Choose files';
+			color: white;
+			display: inline-block;
+			background: gradient(top, rgba(var(--bs-link-color-rgb), 0.85),  var(--bs-link-color));
+			background: -webkit-linear-gradient(top, rgba(var(--bs-link-color-rgb), 0.85),  var(--bs-link-color));
+			border: 1px solid var(--bs-link-color-rgb);
+			border-radius: 3px;
+			padding: 0.7rem 1.4rem;
+			outline: none;
+			white-space: nowrap;
+			-webkit-user-select: none;
+			cursor: pointer;
+			//text-shadow: 1px 1px var(--bs-gray-100);
+			font-size: 1rem;
+			font-weight: 500;
+			box-shadow:1px 1px 2px 1px rgba(0, 0, 0, 0.07), -1px 1px 2px 0px rgba(255, 255, 255, 0.15) inset;
+		}
+		&:hover {
+			&::before {
+				border-color: rgba(var(--bs-link-color-rgb), 0.7);
+			}
+		}
+		&:active {
+			outline: 0;
+			&::before {
+				background: gradient(top, var(--bs-link-color), rgba(var(--bs-link-color-rgb), 0.85));
+				background: -webkit-linear-gradient(top, var(--bs-link-color), rgba(var(--bs-link-color-rgb), 0.85));
+			}
+		}
+	}
+}
+*/

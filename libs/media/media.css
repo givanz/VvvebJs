@@ -18,7 +18,7 @@
 
 
 .filemanager .breadcrumbs {
-	color: #333;
+	color: var(--bs-primary-text);
 	margin-left:20px;
 	font-size: 1.2rem;
 	//font-weight: 500;
@@ -26,7 +26,7 @@
 }
 
 .filemanager .breadcrumbs a:link, .breadcrumbs a:visited {
-	color: #333;
+	color: var(--bs-primary-text);
 	text-decoration: none;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .filemanager .breadcrumbs .arrow {
-	color:  #ccc;
+	color: var(--bs-border-color);
 	font-size: 24px;
 	font-weight: 500;
 	line-height: 20px;
@@ -50,9 +50,13 @@
 .filemanager .top-right {
 	right: 0;
 	font-size: 17px;
-	color: #333;
+	background-color: var(--bs-body-bg);
+	color: var(--bs-primary-text);
 	display: block;
-	height: 40px;
+    position: sticky;
+    top: 0;
+    padding: 1rem;
+	z-index:2;
 }
 
 .filemanager .search {
@@ -62,26 +66,26 @@
 }
 
 
-.filemanager .upload {
+.filemanager .upload-collapse {
     margin:3rem;
     padding:0rem;
     padding:1rem;
-    border:3px dashed #ccc;
+    border:3px dashed var(--bs-border-color);
     position:relative;
     min-height:200px;
 }
 
-.filemanager .upload h3 {
+.filemanager .upload-collapse h3 {
     padding:1rem 4rem;
 }
 
-.filemanager .upload button#upload-close {
+.filemanager .upload-collapse button#upload-close {
 	position:absolute;
 	right:1rem;
 	z-index:1000
 }
 
-.filemanager .upload input[type=file] {
+.filemanager .upload-collapse input[type=file] {
     position:absolute;
     z-index:100;
     top:0;
@@ -93,13 +97,13 @@
     font-size:1rem;
 }
 
-.filemanager .upload input[type=file]::-webkit-file-upload-button
+.filemanager .upload-collapse input[type=file]::-webkit-file-upload-button
 /*,.filemanager .upload input[type=file]::file-selector-button */
 {
   visibility: hidden;
 }
 
-.filemanager .upload input[type=file]::before {
+.filemanager .upload-collapse input[type=file]::before {
   content: 'Choose files';
   color: white;
   display: inline-block;
@@ -116,13 +120,13 @@
   font-weight:500;
   box-shadow:1px 1px 2px 1px rgba(0, 0, 0, 0.07), -1px 1px 2px 0px rgba(255, 255, 255, 0.15) inset;
 }
-.filemanager .upload input[type=file]:hover::before {
+.filemanager .upload-collapse input[type=file]:hover::before {
   border-color: black;
 }
-.filemanager .upload input[type=file]:active {
+.filemanager .upload-collapse input[type=file]:active {
   outline: 0;
 }
-.filemanager .upload input[type=file]:active::before {
+.filemanager .upload-collapse input[type=file]:active::before {
   background: -webkit-linear-gradient(top, #0a58ca, #0d6efd); 
 }
 
@@ -203,7 +207,7 @@
 .filemanager .data li {
 	border-radius: 3px;
 	/*background-color: #fafafa;*/
-	border: 1px solid #eee;
+	border: 1px solid var(--bs-border-color);
 	width: 300px;
 	height: 118px;
 	list-style-type: none;
@@ -236,6 +240,7 @@
 }
 
 .filemanager .data li a {
+	text-decoration:none;
 }
 
 .filemanager .data li label.form-check {
@@ -255,7 +260,6 @@
 }
 
 .filemanager .data li .name {
-	color: #333;
 	font-size: 1rem;
 	font-weight: 500;
 	line-height: 1.4rem;
@@ -265,7 +269,7 @@
 }
 
 .filemanager .data li .details {
-	color: #777;
+	color:var(--bs-secondary-text);
 	font-size: 13px;
 	font-weight: 400;
 	white-space: nowrap;
@@ -359,9 +363,9 @@
 	z-index:10000;
 	max-width:50%;
 	max-height:100%;
-	border-left:1px solid #ccc;
-	border-bottom:1px solid #ccc;
-	background:#fff;
+	background-color:var(--bs-body-bg);
+	border-left:1px solid var(--bs-border-color);
+	border-bottom:1px solid var(--bs-border-color);
 }
 
 .files .preview-link:hover + .preview, 

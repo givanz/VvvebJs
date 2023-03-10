@@ -292,7 +292,7 @@ Vvveb.Components.extend("_base", "html/badge", {
         name: "Color",
         key: "color",
         htmlAttr: "class",
-        validValues:["bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-light", "bg-dark"],
+        validValues:["bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-body-secondary", "bg-dark"],
         inputtype: SelectInput,
         data: {
             options: [{
@@ -317,7 +317,7 @@ Vvveb.Components.extend("_base", "html/badge", {
                 value: "bg-info",
                 text: "Info"
             }, {
-                value: "bg-light",
+                value: "bg-body-secondary",
                 text: "Light"
             }, {
                 value: "bg-dark",
@@ -331,7 +331,7 @@ Vvveb.Components.extend("_base", "html/card", {
     image: "icons/panel.svg",
     name: "Card",
     html: '<div class="card">\
-		  <img class="card-img-top bg-light" src="' +  Vvveb.baseUrl + 'icons/image.svg" alt="Card image cap">\
+		  <img class="card-img-top bg-body-secondary" src="' +  Vvveb.baseUrl + 'icons/image.svg" alt="Card image cap">\
 		  <div class="card-body">\
 			<h4 class="card-title">Card title</h4>\
 			<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card\'s content.</p>\
@@ -641,7 +641,7 @@ Vvveb.Components.extend("_base", "html/navbar", {
     classes: ["navbar"],
     image: "icons/navbar.svg",
     name: "Nav Bar",
-    html: `<nav class="navbar navbar-expand-lg bg-light bg-body-tertiary">
+    html: `<nav class="navbar navbar-expand-lg bg-body-secondary bg-body-tertiary">
 			  <div class="container-fluid">
 				<a class="navbar-brand" href="#">Navbar</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">

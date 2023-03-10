@@ -42,7 +42,7 @@ class MediaModal {
 								
 								<button class="btn btn-outline-secondary btn-sm btn-icon me-5 float-end" 
 								   data-bs-toggle="collapse" 
-								   data-bs-target=".upload" 
+								   data-bs-target=".upload-collapse" 
 								   aria-expanded="false" 
 								   >
 								   <i class="la la-cloud-upload-alt la-lg"></i>
@@ -54,12 +54,11 @@ class MediaModal {
 
 						<div class="top-panel">
 
-							<div class="upload collapse">
+							<div class="upload-collapse collapse">
 
-								<button id="upload-close" type="button" class="btn btn-sm btn-light" aria-label="Close" data-bs-toggle="collapse" data-bs-target=".upload" aria-expanded="true">
+								<button id="upload-close" type="button" class="btn btn-sm btn-light" aria-label="Close" data-bs-toggle="collapse" data-bs-target=".upload-collapse" aria-expanded="true">
 								   <span aria-hidden="true"><i class="la la-times la-lg"></i></span>
 								</button>
-								
 								
 							   <h3>Drop or choose files to upload</h3>
 							   
@@ -114,14 +113,14 @@ class MediaModal {
 	}
 	
 	showUploadLoading() {
-		$("#MediaModal .upload .status").html(`
+		$("#MediaModal .upload-collapse .status").html(`
 		<div class="spinner-border" style="width: 5rem; height: 5rem;margin: 5rem auto; display:block" role="status">
 		  <span class="visually-hidden">Loading...</span>
 		</div>`);
 	}
 
 	hideUploadLoading() {
-		$("#MediaModal .upload .status").html('');
+		$("#MediaModal .upload-collapse .status").html('');
 	}
 	
 	save() {
@@ -155,6 +154,8 @@ class MediaModal {
 			this.isInit = true;
 
 			$(".filemanager input[type=file]").on("change", this.onUpload);
+			$(".filemanager").on("click", ".btn-delete", this.deleteFile);
+			$(".filemanager").on("click", ".btn-rename", this.renameFile);
 			
 			$(window).trigger( "mediaModal:init", { type:this.type, targetInput:this.targetInput, targetThumb:this.targetThumb, callback:this.callback} );
 		}
@@ -475,12 +476,18 @@ _
 						contentType: false,
 						success: function (data) {
 							
-							Vvveb.MediaModal.addFile({
+							let fileElement = Vvveb.MediaModal.addFile({
 								name:data,
 								type:"file",
 								path: Vvveb.MediaModal.currentPath + "/" + data,
 								size:1
 							},true);
+							
+							 $([document.documentElement, document.body]).animate({
+								scrollTop:fileElement.offset().top
+							}, 1000, function () {
+								fileElement.fadeOut().fadeIn('slow');
+							});
 							
 							Vvveb.MediaModal.hideUploadLoading();
 							
@@ -493,8 +500,71 @@ _
 			}
 		}	
 	
+		deleteFile(e) {
+			let parent = $(this).parents("li");
+			let file = $('input[type="hidden"]', parent).val();
+			if (confirm(`Are you sure you want to delete "${file}"template?`)) {
+				$.ajax({
+					method:"POST",
+					url: deleteUrl,//set your server side save script url
+					data: {file},
+				}).done(function(data) {
+
+					let bg = "bg-success";
+					if (data.success) {		
+					} else {
+						//bg = "bg-danger";
+					}
+					
+					$("#top-toast .toast-body").html(data)
+					$("#top-toast .toast-header").removeClass(["bg-danger", "bg-success"]).addClass(bg);
+					$("#top-toast .toast").addClass("show");
+					delay(() => $("#top-toast .toast").removeClass("show"), 5000)
+				}).fail(function (data) {
+					alert(data.responseText);
+					displayToast("bg-danger", data.responseText);						
+				}).always(function (data) {
+				});					
+
+				parent.remove();
+			}
+		}
+
+		renameFile(e) {
+			let parent = $(this).parents("li");
+			let file = $('input[type="hidden"]', parent).val();
+			let newfile = prompt(`Enter new file name for "${file}"`, file);
+
+			if (newfile) {
+				$.ajax({
+					method:"POST",
+					url: renameUrl,//set your server side save script url
+					data: {file, newfile},
+				}).done(function(data) {
+
+					let bg = "bg-success";
+					if (data.success) {		
+					} else {
+						//bg = "bg-danger";
+					}
+					
+					$("#top-toast .toast-body").html(data)
+					$("#top-toast .toast-header").removeClass(["bg-danger", "bg-success"]).addClass(bg);
+					$("#top-toast .toast").addClass("show");
+					delay(() => $("#top-toast .toast").removeClass("show"), 5000)
+				}).fail(function (data) {
+					alert(data.responseText);
+					displayToast("bg-danger", data.responseText);						
+				}).always(function (data) {
+				});		
+			}
+		}
+		
 		addFile(f, selected) {
 				let _this= this;
+				let isImage = false;
+				let actions = '';
+				
 				var fileSize = _this.bytesToSize(f.size),
 						name = _this.escapeHTML(f.name),
 						fileType = name.split('.'),
@@ -503,19 +573,31 @@ _
 					fileType = fileType[fileType.length-1];
 					
 					if (fileType == "jpg" || fileType == "jpeg" || fileType == "png" || fileType == "gif" || fileType == "svg" || fileType == "webp") {
+						
 						//icon = '<div class="image" style="background-image: url(' + _this.mediaPath + f.path + ');"></div>';
 						icon = '<img class="image" loading="lazy" src="' + _this.mediaPath + f.path + '">';
+						isImage = true;
 					} else {
 						icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
 					}
 					//icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
 
 				
+				
+				actions += '<a href="javascript:void(0);" title="Rename" class="btn btn-outline-primary btn-sm border-0 btn-rename"><i class="la la-edit"></i></a> <a href="javascript:void(0);" title="Delete" class="btn btn-outline-danger btn-sm border-0 btn-delete"><i class="la la-trash"></i></a>';
+
+				let userActions = $(window).triggerHandler( "mediaModal:fileActions", { file: _this.mediaPath + f.path, name, fileType, fileSize, isImage, fileType, actions} );
+
+				if (userActions) actions = userActions;
+				if (isImage) actions += '<a href="javascript:void(0);" class="preview-link p-2"><i class="la la-search-plus"></i></a>';
+
+				
 				var file = $('<li class="files">\
 						<label class="form-check">\
+						<input type="hidden" value="' +  _this.mediaPath + f.path + '" name="filename[]">\
 						  <input type="' + ((_this.type == "single") ? "radio" : "checkbox") + '" class="form-check-input" value="' + f.path + '" name="file[]" ' + ((selected == "single") ? "checked" : "") + '><span class="form-check-label"></span>\
 						  <div href="#\" class="files">'+icon+'<div class="info"><div class="name">'+ name +'</div><span class="details">'+fileSize+'</span>\
-							<a href="javascript:void(0);" class="preview-link"><i class="la la-search-plus"></i></a>\
+							' + actions + '\
 							 <div class="preview">\
 								<img src="' + _this.mediaPath + f.path + '">\
 								<div>\
@@ -530,6 +612,8 @@ _
 				if (selected) {
 					$("input[type='radio'], input[type='checkbox']", fileelement).prop("checked", true);
 				}
+				
+				return file;
 		}
 
 		

@@ -38,8 +38,8 @@
 						  <i class="la la-undo"></i>
 					  </button>
 
-					  <button class="btn btn-light la-flip-horizontal"  title="Redo (Ctrl/Cmd + Shift + Z)" id="redo-btn" data-vvveb-action="redo" data-vvveb-shortcut="ctrl+shift+z">
-						  <i class="la la-undo"></i>
+            <button class="btn btn-light" title="Redo (Ctrl/Cmd + Shift + Z)" id="redo-btn" data-vvveb-action="redo" data-vvveb-shortcut="ctrl+shift+z">
+              <i class="la la-undo la-flip-horizontal"></i>
 					  </button>
 					</div>
 										
@@ -83,8 +83,14 @@
 
 					  <div class="float-end me-3">
 
-					    <a href="#" class="btn btn-outline-primary border-0 btn-sm btn-preview-url" target="blank">View page <i class="la la-external-link-alt la-lg"></i>
-					    </a>
+					    <button class="btn btn-light border-0 btn-sm btn-dark-mode" data-vvveb-action="darkMode">
+							<!-- i class="la la-adjust la-lg"></i -->
+							<i class="la la-sun la-lg"></i>
+						</button>
+						
+					    <a href="#" class="btn btn-outline-primary border-0 btn-sm btn-preview-url" target="blank">
+							View page <i class="la la-external-link-alt la-lg"></i>
+						</a>
 
 					    <div class="btn-group responsive-btns" role="group">
 
@@ -174,7 +180,7 @@
 							<div class="tab-content">
 							  
 							  
-							  <div class="tab-pane fade show active sections" id="sections" role="tabpanel" aria-labelledby="sections-tab">
+							  <div class="tab-pane show active sections" id="sections" role="tabpanel" aria-labelledby="sections-tab">
 								  
 
 										<ul class="nav nav-tabs nav-fill sections-tabs" id="properties-tabs" role="tablist">
@@ -190,7 +196,7 @@
 								
 										<div class="tab-content">
 		
-											 <div class="tab-pane fade" id="sections-list" data-section="style" role="tabpanel" aria-labelledby="style-tab">
+											 <div class="tab-pane" id="sections-list" data-section="style" role="tabpanel" aria-labelledby="style-tab">
 												<div class="drag-elements-sidepane sidepane">
 												  <div>
 													<div class="sections-container p-4">
@@ -252,7 +258,7 @@
 												</div>
 											</div>
 											
-											<div class="tab-pane fade show active" id="sections-new-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
+											<div class="tab-pane show active" id="sections-new-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
 
 
 													   <div class="search">
@@ -284,7 +290,7 @@
 							
 							  </div>
 							
-								<div class="tab-pane fade show" id="components-tabs" role="tabpanel" aria-labelledby="components-tab">
+								<div class="tab-pane show" id="components-tabs" role="tabpanel" aria-labelledby="components-tab">
 								  
 								  
 										<ul class="nav nav-tabs nav-fill sections-tabs" role="tablist">
@@ -300,7 +306,7 @@
 								
 										<div class="tab-content">
 		
-											 <div class="tab-pane fade show active components" id="components" data-section="components" role="tabpanel" aria-labelledby="components-tab">
+											 <div class="tab-pane show active components" id="components" data-section="components" role="tabpanel" aria-labelledby="components-tab">
 												 
 												   <div class="search">
 														  <div class="expand">
@@ -326,7 +332,7 @@
 
 											
 											
-											<div class="tab-pane fade show active blocks" id="blocks" data-section="content" role="tabpanel" aria-labelledby="content-tab">
+											<div class="tab-pane show active blocks" id="blocks" data-section="content" role="tabpanel" aria-labelledby="content-tab">
 
 													   <div class="search">
 															  <div class="expand">
@@ -354,7 +360,7 @@
 										</div>
 							</div>
 
-								<div class="tab-pane fade" id="properties" role="tabpanel" aria-labelledby="properties-tab">
+								<div class="tab-pane" id="properties" role="tabpanel" aria-labelledby="properties-tab">
 									<div class="component-properties-sidepane">
 										<div>
 											<div class="component-properties">
@@ -375,17 +381,17 @@
 													</ul>
 											
 													<div class="tab-content">
-														 <div class="tab-pane fade show active" id="content-left-panel-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
-															<div class="alert alert-dismissible fade show alert-light m-3" role="alert" style="">		  
+														 <div class="tab-pane show active" id="content-left-panel-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
+															<div class="alert alert-dismissible fade show alert-secondary m-3" role="alert" style="">		  
 																<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>		  
 																<strong>No selected element!</strong><br> Click on an element to edit.		
 															</div>
 														</div>
 														
-														 <div class="tab-pane fade show" id="style-left-panel-tab" data-section="style" role="tabpanel" aria-labelledby="style-tab">
+														 <div class="tab-pane show" id="style-left-panel-tab" data-section="style" role="tabpanel" aria-labelledby="style-tab">
 														 </div>
 														
-														 <div class="tab-pane fade show" id="advanced-left-panel-tab" data-section="advanced"  role="tabpanel" aria-labelledby="advanced-tab">
+														 <div class="tab-pane show" id="advanced-left-panel-tab" data-section="advanced"  role="tabpanel" aria-labelledby="advanced-tab">
 														</div>
 													</div>
 											</div>
@@ -393,7 +399,7 @@
 									</div>
 							  </div>
 							
-								<div class="tab-pane fade" id="configuration" role="tabpanel" aria-labelledby="configuration-tab">
+								<div class="tab-pane" id="configuration" role="tabpanel" aria-labelledby="configuration-tab">
 									
 									<div class="drag-elements-sidepane sidepane">
 									<div>
@@ -498,21 +504,21 @@
 										
 										<a id="bold-btn" class="hint" href="" title="Bold" aria-label="Bold">
 											<svg height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-												<path d="M6,4h8a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-												<path d="M6,12h9a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+												<path d="M6,4h8a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+												<path d="M6,12h9a4,4,0,0,1,4,4h0a4,4,0,0,1-4,4H6Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
 											</svg>	
 										</a>
 										<a id="italic-btn" class="hint" href="" title="Italic" aria-label="Italic">
 											<svg height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-												<line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="19" x2="10" y1="4" y2="4"/>
-                                                <line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="14" x2="5" y1="20" y2="20"/>
-												<line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="15" x2="9" y1="4" y2="20"/>
+												<line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="19" x2="10" y1="4" y2="4"/>
+                                                <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="14" x2="5" y1="20" y2="20"/>
+												<line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="15" x2="9" y1="4" y2="20"/>
 											</svg>									
 										</a>
 										<a id="underline-btn" class="hint" href="" title="Underline" aria-label="Underline">
 											<svg height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-												<path d="M6,4v7a6,6,0,0,0,6,6h0a6,6,0,0,0,6-6V4" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" y1="2" y2="2"/>
-												<line fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="4" x2="20" y1="22" y2="22"/>
+												<path d="M6,4v7a6,6,0,0,0,6,6h0a6,6,0,0,0,6-6V4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" y1="2" y2="2"/>
+												<line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="4" x2="20" y1="22" y2="22"/>
 											</svg>
 										</a>
 										
@@ -533,6 +539,7 @@
 											<a class="dropdown-item" href="#" data-value="Full"><i class="la la-lg la-align-justify"></i> Align Justify</a>
 										  </div>
 										</div>
+										
 										<div class="separator"></div>
 
 										<a id="link-btn" class="hint" href="" title="Create link" aria-label="Create link">
@@ -666,7 +673,7 @@
 										</div>
 										
 										<div class="tab-content">
-										  <div class="tab-pane fade show active" id="box-components" role="tabpanel" aria-labelledby="components-tab">
+										  <div class="tab-pane show active" id="box-components" role="tabpanel" aria-labelledby="components-tab">
 											  
 											   <div class="search">
 													  <div class="expand">
@@ -690,7 +697,7 @@
 												</div>
 										  
 										  </div>
-										  <div class="tab-pane fade" id="box-blocks" role="tabpanel" aria-labelledby="blocks-tab">
+										  <div class="tab-pane" id="box-blocks" role="tabpanel" aria-labelledby="blocks-tab">
 											  
 											   <div class="search">
 													  <div class="expand">
@@ -715,7 +722,7 @@
 										  
 										  </div>
 										
-											<!-- div class="tab-pane fade" id="box-properties" role="tabpanel" aria-labelledby="blocks-tab">
+											<!-- div class="tab-pane" id="box-properties" role="tabpanel" aria-labelledby="blocks-tab">
 												<div class="component-properties-sidepane">
 													<div>
 														<div class="component-properties">
@@ -761,17 +768,17 @@
 							</ul>
 					
 							<div class="tab-content">
-								 <div class="tab-pane fade show active" id="content-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
-									<div class="alert alert-dismissible fade show alert-light m-3" role="alert" style="">		  
+								 <div class="tab-pane show active" id="content-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
+									<div class="alert alert-dismissible fade show alert-secondary m-3" role="alert" style="">		  
 										<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>		  
 										<strong>No selected element!</strong><br> Click on an element to edit.		
 									</div>
 								</div>
 								
-								 <div class="tab-pane fade show" id="style-tab" data-section="style" role="tabpanel" aria-labelledby="style-tab">
+								 <div class="tab-pane show" id="style-tab" data-section="style" role="tabpanel" aria-labelledby="style-tab">
 								</div>
 								
-								 <div class="tab-pane fade show" id="advanced-tab" data-section="advanced"  role="tabpanel" aria-labelledby="advanced-tab">
+								 <div class="tab-pane show" id="advanced-tab" data-section="advanced"  role="tabpanel" aria-labelledby="advanced-tab">
 								</div>
 								
 								
@@ -1303,8 +1310,9 @@
 		<label for="{%=name%}" {% if (typeof description !== 'undefined') { %} title="{%=description%}" {% } %}>
 			<span>{%=title%}</span>
 			<div class="file-actions">
-				<button href="#" class="rename btn btn-outline-primary" title="Rename"><i class="la la-pen"></i></button>
 				<button href="#" class="delete btn btn-outline-danger" title="Delete"><i class="la la-trash"></i></button>
+				<button href="#" class="rename btn btn-outline-primary" title="Rename"><i class="la la-pen"></i></button>
+				<button href="#" class="duplicate btn btn-outline-primary" title="Clone"><i class="la la-copy"></i></button>
 			</div>
 		</label> <input type="checkbox" id="{%=name%}" />
 		<!-- <ol></ol> -->
