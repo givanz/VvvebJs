@@ -4,7 +4,7 @@ $la-line-height-base: 1 !default;
 $la-border-color: #eee !default;
 $la-inverse: #fff !default;
 $la-version: 1.3.0 !default;
-$la-li-width: (20em / 14) !default;
+$la-li-width: calc(20em / 14) !default;
 
 @function la-content($la-var) {
   @return unquote("\"#{ $la-var }\"");

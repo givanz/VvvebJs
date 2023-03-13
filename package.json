@@ -34,6 +34,7 @@
     "gulp": "^4.0.2",
     "gulp-file-include": "^2.3.0",
     "gulp-format-html": "^1.2.5",
-    "gulp-sass": "^4.1.0"
+    "sass": "^1.59.2",
+    "gulp-sass": "^5.1.0"
   }
 }
