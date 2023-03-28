@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "author": "Ziadin Givan",
   "license": "Apache-2.0",
-  "homepage": "http://www.vvveb.com/vvvebjs/editor.html",
+  "homepage": "https://www.vvveb.com/vvvebjs/editor.html",
   "main": "libs/builder/builder.js",
   "repository": {
     "type": "git",
@@ -34,7 +34,8 @@
     "gulp": "^4.0.2",
     "gulp-file-include": "^2.3.0",
     "gulp-format-html": "^1.2.5",
-    "sass": "^1.59.2",
+    "sass": "^1.60.0",
+	"node-sass": "^8.0.0",
     "gulp-sass": "^5.1.0"
   }
 }

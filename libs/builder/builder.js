@@ -1819,7 +1819,7 @@ Vvveb.Builder = {
           
          Vvveb.FontsManager.cleanUnusedFonts();
          
-         html +=  doc.documentElement.innerHTML + "\n</html>";
+         html +=  doc.documentElement.outerHTML;
          html = this.removeHelpers(html, keepHelperAttributes);
          
 	 $(window).triggerHandler("vvveb.getHtml.after", doc);
