@@ -21,7 +21,7 @@ Vvveb.CodeEditor = {
 			this.isActive = true;
 			this.codemirror.getDoc().on("change", function (e, v) { 
 				if (v.origin != "setValue")
-				delay(Vvveb.Builder.setHtml(e.getValue()), 1000);
+				delay(() => Vvveb.Builder.setHtml(e.getValue()), 1000);
 			});
 		}
 		

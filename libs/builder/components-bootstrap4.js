@@ -16,7 +16,7 @@ limitations under the License.
 https://github.com/givanz/Vvvebjs
 */
 
-bgcolorClasses = ["bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-light", "bg-dark", "bg-white"]
+bgcolorClasses = ["bg-primary", "bg-secondary", "bg-success", "bg-danger", "bg-warning", "bg-info", "bg-light-subtle", "bg-dark", "bg-white"]
 
 bgcolorSelectOptions = 
 [{
@@ -42,7 +42,7 @@ bgcolorSelectOptions =
 	value: "bg-info",
 	text: "Info"
 }, {
-	value: "bg-light",
+	value: "bg-light-subtle",
 	text: "Light"
 }, {
 	value: "bg-dark",
@@ -1553,7 +1553,7 @@ Vvveb.Components.extend("_base", "html/navbar", {
     classes: ["navbar"],
     image: "icons/navbar.svg",
     name: "Nav Bar",
-    html: '<nav class="navbar navbar-expand-lg navbar-light bg-light">\
+    html: '<nav class="navbar navbar-expand-lg navbar-light bg-light-subtle">\
 		  <a class="navbar-brand" href="#">Navbar</a>\
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">\
 			<span class="navbar-toggler-icon"></span>\

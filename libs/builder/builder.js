@@ -461,9 +461,12 @@ Vvveb.Components = {
 				//if attribute is class check if one of valid values is included as class to set the select
 				if (value && property.htmlAttr == "class" && property.validValues)
 				{
-					value = value.split(" ").filter(function(el) {
+					let valid = value.split(" ").filter(function(el) {
 						return property.validValues.indexOf(el) != -1
 					});
+					if (valid && valid.length) {
+						value = valid[0];
+					}
 				} 
 
 				if (!value && property.defaultValue) {
@@ -1018,6 +1021,15 @@ Vvveb.Builder = {
 					Vvveb.Undo.reset();
 				});
 				
+				//prevent accidental clicks on links when editing text
+				$(window.FrameDocument).on("click", "a", function(event) {
+					console.log(Vvveb.WysiwygEditor.isActive);
+					if (Vvveb.WysiwygEditor.isActive)  {
+						event.preventDefault();
+						return false;
+					}
+				});
+				
 				$(window.FrameWindow).on("scroll resize", function(event) {
 				
 						if (self.selectedEl)
@@ -1080,9 +1092,9 @@ Vvveb.Builder = {
 		//enable save button only if changes are made
 		Vvveb.Builder.frameBody.on("vvveb.undo.add vvveb.undo.restore", function (e) { 
 			if (Vvveb.Undo.hasChanges()){
-				$(".save-btn").removeAttr("disabled");
+				$("#top-panel .save-btn").removeAttr("disabled");
 			} else {
-				$(".save-btn").attr("disabled", "true");
+				$("#top-panel .save-btn").attr("disabled", "true");
 			}
 		});		
     },	
@@ -1832,26 +1844,36 @@ Vvveb.Builder = {
 	
 	setHtml: function(html) 
 	{
-		//update only body to avoid breaking iframe css/js relative paths
-		start = html.indexOf("<body");
-        end = html.indexOf("</body");		
-
-        if (start >= 0 && end >= 0) {
-            body = html.slice(html.indexOf(">", start) + 1, end);
-        } else {
-            body = html;
-        }
-        
-        if (this.runJsOnSetHtml)
-			self.frameBody.html(body);
-		else
-			window.FrameDocument.body.innerHTML = body;
-        
+		//documentElement.innerHTML resets <head> each time and the page flickers
+		//return window.FrameDocument.documentElement.innerHTML = html;
 		
-		//below methods brake document relative css and js paths
-		//return self.iframe.outerHTML = html;
-		//return self.documentFrame.html(html);
-		//return self.documentFrame.attr("srcdoc", html);
+		function getTag(html, tag, outerHtml = false) {
+			start = html.indexOf("<" + tag);
+			end = html.indexOf("</" + tag);		
+
+			if (start >= 0 && end >= 0) {
+				if (outerHtml)
+					return html.slice(start, end + 3 + tag.length);
+				else
+					return html.slice(html.indexOf(">", start) + 1, end);
+			} else {
+				return html;
+			}
+		}
+
+		if (this.runJsOnSetHtml)
+			this.frameBody.html(getTag(html, "body"));
+		else
+			window.FrameDocument.body.innerHTML = getTag(html, "body");
+			
+		//use outerHTML if you want to set body tag attributes
+		//window.FrameDocument.body.outerHTML = getTag(html, "body", true);
+
+		//set head html only if changed to avoid page flicker
+		let headHtml = getTag(html, "head");
+		if (window.FrameDocument.head.innerHTML != headHtml) {
+			window.FrameDocument.head.innerHTML = getTag(html, "head");
+		}
 	},
 	
 	saveAjax: function(fileName, startTemplateUrl, callback, saveUrl)
@@ -1872,7 +1894,7 @@ Vvveb.Builder = {
 		}).done(function (data) {
 				if (callback) callback(data);
 				Vvveb.Undo.reset();
-				$(".save-btn").attr("disabled", "true");
+			$("#top-panel .save-btn").attr("disabled", "true");
 		}).fail(function (data) {
 				alert(data.responseText);
 		});					
@@ -2011,7 +2033,7 @@ Vvveb.Gui = {
 
 			let bg = "bg-success";
 			if (data.success || text == "success") {		
-				$(".save-btn").attr("disabled", "true");
+				$("#top-panel .save-btn").attr("disabled", "true");
 			} else {
 				bg = "bg-danger";
 			}
@@ -2836,7 +2858,7 @@ Vvveb.FileManager = {
 				success: function (data, text) {
 					let bg = "bg-success";
 					if (data.success) {		
-						$(".save-btn").attr("disabled", "true");
+						$("#top-panel .save-btn").attr("disabled", "true");
 					} else {
 						//bg = "bg-danger";
 					}
@@ -2863,7 +2885,7 @@ Vvveb.FileManager = {
 				success: function (data, text) {
 					let bg = "bg-success";
 					if (data.success) {		
-						$(".save-btn").attr("disabled", "true");
+						$("#top-panel .save-btn").attr("disabled", "true");
 					} else {
 						//bg = "bg-danger";
 					}
