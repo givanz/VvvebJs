@@ -466,6 +466,8 @@ Vvveb.Components = {
 					});
 					if (valid && valid.length) {
 						value = valid[0];
+					} else  {
+						value = "";
 					}
 				} 
 
@@ -1023,7 +1025,6 @@ Vvveb.Builder = {
 				
 				//prevent accidental clicks on links when editing text
 				$(window.FrameDocument).on("click", "a", function(event) {
-					console.log(Vvveb.WysiwygEditor.isActive);
 					if (Vvveb.WysiwygEditor.isActive)  {
 						event.preventDefault();
 						return false;
@@ -1894,7 +1895,7 @@ Vvveb.Builder = {
 		}).done(function (data) {
 				if (callback) callback(data);
 				Vvveb.Undo.reset();
-			$("#top-panel .save-btn").attr("disabled", "true");
+				$("#top-panel .save-btn").attr("disabled", "true");
 		}).fail(function (data) {
 				alert(data.responseText);
 		});					
@@ -1976,6 +1977,9 @@ Vvveb.Gui = {
 		});
 
 		let theme = localStorage.getItem("theme", "dark");
+		if ((!theme || theme === 'auto') && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			theme = "dark";
+		} 
 		if (theme) {
 			$("html").attr("data-bs-theme", theme);
 		}

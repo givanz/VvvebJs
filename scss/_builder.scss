@@ -336,7 +336,7 @@ body
 		
 			.header
 			{
-				font-size: 11px;
+				font-size: 12px;
 				font-weight: 600;
 				height: 2rem;
 				margin: 0;
@@ -779,9 +779,9 @@ body
 			color:#777;
 		}
 
-		&, select, input
+		&, select, input[type="text"]
 		{
-			font-size:12px;
+			//font-size:12px;
 		}
 
 		label
@@ -2088,7 +2088,7 @@ ul.autocomplete li.selected
 }
 
 
-.sections-tabs {
+.sections-tabs, .component-properties {
 	
 	.nav-link {
 		span {
