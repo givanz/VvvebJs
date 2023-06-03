@@ -164,8 +164,8 @@ $font-size-base: 16px;
 		cursor:grab;
 		opacity:1;
 		
-		a.name {
-			//background: var(--bs-secondary-bg-subtle);
+		.name {
+			//background: rgba(var(--bs-secondary-color-rgb), 0.03);
 			background: rgba(255,255,255,0.9);
 			background: rgba(0,0,0,0.7);
 			background: rgba(var(--bs-link-color-rgb), 0.7);
@@ -192,7 +192,7 @@ $font-size-base: 16px;
 				opacity: 0.15;
 			}
 			
-			a.name {
+			.name {
 				visibility:visible;
 			}
 		}		
@@ -1513,7 +1513,7 @@ li[data-type]
 				  opacity:1;
 				  text-align:center;
 
-				  a {
+				  .add-section-btn {
 					//color:$blue;
 					visibility:visible;
 				  }
@@ -1708,7 +1708,7 @@ padding-top:1rem;
 				max-width:100%;
 			}
 			
-			a.name {
+			.name {
 				//display:none;
 				visibility:hidden;
 			}
@@ -2296,6 +2296,7 @@ input[type="color"] {
 
 img.preview {
 	max-width:100%;
+	margin:auto;
 }
 
 

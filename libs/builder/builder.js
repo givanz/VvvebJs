@@ -831,9 +831,9 @@ Vvveb.Builder = {
 					if (component)
 					{
 						item = $(`<li data-section="${group}" data-drag-type="component" data-type="${componentType}" data-search="${component.name.toLowerCase()}">
-							<a href="#">${component.name}</a>
+							<span>${component.name}</span>
 						</li>`);
-						//item = $('<li data-section="' + group + '" data-drag-type=component data-type="' + componentType + '" data-search="' + component.name.toLowerCase() + '"><a href="#">' + component.name + "</a></li>");
+						//item = $('<li data-section="' + group + '" data-drag-type=component data-type="' + componentType + '" data-search="' + component.name.toLowerCase() + '"><span>' + component.name + "</span></li>");
 
 						if (component.image) {
 
@@ -884,8 +884,8 @@ Vvveb.Builder = {
 					if (section)
 					{
 						item = $(`<li data-section="${group}" data-type="${sectionType}" data-search="${section.name.toLowerCase()}">
-									<a class="name" href="#">${section.name}</a>
-									<a class="add-section-btn" href="" title="Add section"><i class="la la-plus"></i></a>
+									<span class="name">${section.name}</span>
+									<div class="add-section-btn" title="Add section"><i class="la la-plus"></i></div>
 									<img class="preview" src="" loading="lazy">
 								</li>`);
 
@@ -942,7 +942,7 @@ Vvveb.Builder = {
 					if (block)
 					{
 						item = $(`<li data-section="${group}" data-drag-type="block" data-type="${blockType}" data-search="${block.name.toLowerCase()}">
-									<a class="name" href="#">${block.name}</a>
+									<span class="name">${block.name}</span>
 									<img class="preview" src="" loading="lazy">
 								</li>`);
 
