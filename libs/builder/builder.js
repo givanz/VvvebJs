@@ -1112,6 +1112,12 @@ Vvveb.Builder = {
 			  
 			  if (nodeName.indexOf('data-component') > -1)	 {
 				componentName = nodeName.replace('data-component-', '');	
+				return [componentName, "component"];
+			  }		  
+			  
+			  if (nodeName.indexOf('data-v-component-') > -1)	 {
+				componentName = nodeName.replace('data-v-component-', '');	
+				return [componentName,"component"];
 			  }
 
 			  if (nodeName.indexOf('data-v-') > -1)	 {
@@ -1120,9 +1126,16 @@ Vvveb.Builder = {
 			  }
 			}
 		}
-		if (componentName != '') return componentName;
 
-		return el.tagName + (componentName ? " - " + componentName : "" ) + (componentAttribute ? " - " + componentAttribute : "");
+		if (componentAttribute != '') return [componentAttribute, "attribute"];
+		
+		if (el.id) {
+			componentName = "#" + el.id;
+		} else {
+			componentName = (el.className && (typeof el.className == "string")) ? "." + el.className.split(" ")[0] : "";
+		}
+		
+		return [componentName, el.tagName];
 	},
 	
 	loadNodeComponent:  function(node) {
@@ -1260,7 +1273,9 @@ Vvveb.Builder = {
 			}
 		}
 			 
-		$("#highlight-name").html(this._getElementType(node));
+		let elementType = this._getElementType(node);
+		$("#highlight-name .type").html(elementType[0]);
+		$("#highlight-name .name").html(elementType[1]);
 		
 	},
 
@@ -1421,7 +1436,9 @@ Vvveb.Builder = {
 						$("#section-actions").removeClass("outside");	
 					}
 
-					$("#highlight-name").html(self._getElementType(event.target));
+					let elementType = self._getElementType(event.target);
+					$("#highlight-name .type").html(elementType[0]);
+					$("#highlight-name .name").html(elementType[1]);
 				}
 			}	
 			
@@ -1454,6 +1471,9 @@ Vvveb.Builder = {
 				node = self.dragElement.get(0);
 				self.selectNode(node);
 				self.loadNodeComponent(node);
+				//if component properties is loaded in left panel tab instead of right panel show tab
+				if ($(".component-properties-tab").is(":visible"))//if properites tab is enabled/visible 
+						$('.component-properties-tab a').show().tab('show'); 				
 
 				if (self.dragMoveMutation === false)
 				{
@@ -3038,7 +3058,11 @@ Vvveb.Breadcrumb = {
 			e.preventDefault();
 		}).on("mouseenter", ".breadcrumb-item", function (e) {
 			let node = $($(this).data("node"));
-			node.css("outline","1px dashed blue");
+			node.get(0).dispatchEvent(new MouseEvent("mousemove", {
+				bubbles: true,
+				cancelable: true,
+			}))
+			//node.css("outline","1px dashed blue");
 			/*
 			delay(
 				() => Vvveb.Builder.frameHtml.animate({
@@ -3049,11 +3073,12 @@ Vvveb.Breadcrumb = {
 			$(node).trigger("mousemove");
 			*/
 			
-		}).on("mouseleave", ".breadcrumb-item", function (e){
+		})/*.on("mouseleave", ".breadcrumb-item", function (e){
 			let node = $($(this).data("node"));
 			node.css("outline","");
 			if (node.attr("style") == "") node.removeAttr("style");
-		});
+		});*/
+
 	},
 	
 	addElement: function(data, element) {
@@ -3067,8 +3092,12 @@ Vvveb.Breadcrumb = {
 		var currentElement = element;
 		
 		while (currentElement.parentElement) {
+			let elementType = Vvveb.Builder._getElementType(currentElement);
+			let el = elementType[1].toLowerCase();
+		
 			this.addElement({
-				"name": Vvveb.Builder._getElementType(currentElement).toLowerCase(),
+				"name":  el + " " + elementType[0],
+				"className": "el-" + el
 			}, currentElement);
 			
 			currentElement = currentElement.parentElement;

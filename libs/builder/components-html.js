@@ -1,5 +1,5 @@
 Vvveb.ComponentsGroup['Base'] =
-["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/link", "html/video", "html/button", "html/paragraph", "html/blockquote", "html/list", "html/table", "html/preformatted", "html/audio", "html/video"];
+["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput"/*, "html/fileinput"*/, "html/checkbox", "html/radiobutton", "html/link", "html/video", "html/button", "html/paragraph", "html/blockquote", "html/list", "html/table", "html/preformatted", "html/audio", "html/video"];
 
 Vvveb.Components.extend("_base", "html/heading", {
     image: "icons/heading.svg",
@@ -128,12 +128,12 @@ Vvveb.Components.extend("_base", "html/image", {
         name: "Width",
         key: "width",
         htmlAttr: "width",
-        inputtype: TextInput
+        inputtype: NumberInput
     }, {
         name: "Height",
         key: "height",
         htmlAttr: "height",
-        inputtype: TextInput
+        inputtype: NumberInput
     }, {
         name: "Alt",
         key: "alt",
@@ -231,7 +231,98 @@ Vvveb.Components.extend("_base", "html/hr", {
     image: "icons/hr.svg",
     nodes: ["hr"],
     name: "Horizontal Rule",
-    html: "<hr>"
+    html: "<hr>",
+	properties:[{
+        name: "Type",
+        key: "border-color",
+		htmlAttr: "class",
+        validValues: ["border-primary", "border-secondary", "border-success", "border-danger", "border-warning", "border-info", "border-light", "border-dark", "border-white"],
+        inputtype: SelectInput,
+        data: {
+            options: [{
+				value: "Default",
+				text: ""
+			}, {
+				value: "border-primary",
+				text: "Primary"
+			}, {
+				value: "border-secondary",
+				text: "Secondary"
+			}, {
+				value: "border-success",
+				text: "Success"
+			}, {
+				value: "border-danger",
+				text: "Danger"
+			}, {
+				value: "border-warning",
+				text: "Warning"
+			}, {
+				value: "border-info",
+				text: "Info"
+			}, {
+				value: "border-light",
+				text: "Light"
+			}, {
+				value: "border-dark",
+				text: "Dark"
+			}, {
+				value: "border-white",
+				text: "White"
+			}]
+        }
+    },{
+        name: "Border",
+        key: "border-size",
+		htmlAttr: "class",
+        validValues: ["border-1", "border-2", "border-3", "border-4", "border-5"],
+        inputtype: SelectInput,
+        data: {
+            options: [{
+				value: "Default",
+				text: ""
+			}, {
+				value: "border-1",
+				text: "Size 1"
+			}, {
+				value: "border-2",
+				text: "Size 2"
+			}, {
+				value: "border-3",
+				text: "Size 3"
+			}, {
+				value: "border-4",
+				text: "Size 4"
+			}, {
+				value: "border-5",
+				text: "Size 5"
+			}]
+        }
+    },{
+        name: "Opacity",
+        key: "opacity",
+		htmlAttr: "class",
+        validValues: ["opacity-25", "opacity-50", "opacity-75", "opacity-100"],
+        inputtype: SelectInput,
+        data: {
+            options: [{
+				value: "Default",
+				text: ""
+			}, {
+				value: "opacity-25",
+				text: "Opacity 25%"
+			}, {
+				value: "opacity-50",
+				text: "Opacity 50%"
+			}, {
+				value: "opacity-75",
+				text: "Opacity 75%"
+			}, {
+				value: "opacity-100",
+				text: "Opacity 100%"
+			}]
+        }
+    }]
 });
 
 Vvveb.Components.extend("_base", "html/label", {
@@ -252,8 +343,13 @@ Vvveb.Components.extend("_base", "html/textinput", {
 	nodes: ["input"],
 	//attributes: {"type":"text"},
     image: "icons/text_input.svg",
-    html: '<div class="mb-3"><label>Text</label><input type="text" class="form-control"></div></div>',
+    html: '<input type="text" class="form-control">',
     properties: [{
+        name: "Name",
+        key: "name",
+        htmlAttr: "name",
+        inputtype: TextInput
+    }, {
         name: "Value",
         key: "value",
         htmlAttr: "value",
@@ -345,12 +441,14 @@ Vvveb.Components.extend("_base", "html/textinput", {
         key: "disabled",
         htmlAttr: "disabled",
 		col:6,
+		inline:true,
         inputtype: CheckboxInput,
 	},{
         name: "Required",
         key: "required",
         htmlAttr: "required",
 		col:6,
+		inline:true,
         inputtype: CheckboxInput,
     }]
 });
@@ -359,11 +457,10 @@ Vvveb.Components.extend("_base", "html/selectinput", {
 	nodes: ["select"],
     name: "Select Input",
     image: "icons/select_input.svg",
-    html: '<div class="mb-3"><label>Choose an option </label><select class="form-control"><option value="value1">Text 1</option><option value="value2">Text 2</option><option value="value3">Text 3</option></select></div>',
+    html: '<select class="form-control"><option value="value1">Text 1</option><option value="value2">Text 2</option><option value="value3">Text 3</option></select>',
 
 	beforeInit: function (node)
 	{
-		console.log(node);
 		properties = [];
 		var i = 0;
 		
@@ -397,20 +494,37 @@ Vvveb.Components.extend("_base", "html/selectinput", {
 				},	
 			});
 		});
-		
 		//remove all option properties
 		this.properties = this.properties.filter(function(item) {
 			return item.key.indexOf("option") === -1;
 		});
 		
 		//add remaining properties to generated column properties
-		properties.push(this.properties[0]);
+		this.properties =  properties.concat(this.properties);
 		
-		this.properties = properties;
 		return node;
 	},
     
     properties: [{
+        name: "Name",
+        key: "name",
+        htmlAttr: "name",
+        inputtype: TextInput
+    }, {
+        name: "Disabled",
+        key: "disabled",
+        htmlAttr: "disabled",
+		col:6,
+		inline:true,
+        inputtype: CheckboxInput,
+	},{
+        name: "Required",
+        key: "required",
+        htmlAttr: "required",
+		col:6,
+		inline:true,
+        inputtype: CheckboxInput,
+    }, {
         name: "Option",
         key: "option1",
         inputtype: TextValueInput
@@ -436,9 +550,50 @@ Vvveb.Components.extend("_base", "html/selectinput", {
 });
 
 Vvveb.Components.extend("_base", "html/textareainput", {
+	nodes: ["textarea"],
     name: "Text Area",
     image: "icons/text_area.svg",
-    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>'
+    html: '<textarea class="form-control"></textarea>',
+	properties: [{
+        name: "Name",
+        key: "name",
+        htmlAttr: "name",
+        inputtype: TextInput
+    }, {
+        name: "Value",
+        key: "value",
+        htmlAttr: "value",
+        inputtype: TextInput
+    }, {
+        name: "Placeholder",
+        key: "placeholder",
+        htmlAttr: "placeholder",
+        inputtype: TextInput
+    }, {
+        name: "Columns",
+        key: "cols",
+        htmlAttr: "cols",
+        inputtype: NumberInput
+    }, {
+        name: "Rows",
+        key: "rows",
+        htmlAttr: "rows",
+        inputtype: NumberInput
+    }, {
+        name: "Disabled",
+        key: "disabled",
+        htmlAttr: "disabled",
+		col:6,
+		inline:true,
+        inputtype: CheckboxInput,
+	},{
+        name: "Required",
+        key: "required",
+        htmlAttr: "required",
+		col:6,
+		inline:true,
+        inputtype: CheckboxInput,
+    }]	
 });
 Vvveb.Components.extend("_base", "html/radiobutton", {
     name: "Radio Button",
@@ -480,6 +635,20 @@ Vvveb.Components.extend("_base", "html/radiobutton", {
         inputtype: CheckboxInput,
         //inline:true,
         //col:6
+	},{
+        name: "Disabled",
+        key: "disabled",
+        htmlAttr: "disabled",
+		col:6,
+		inline:true,
+        inputtype: CheckboxInput,
+	},{
+        name: "Required",
+        key: "required",
+        htmlAttr: "required",
+		col:6,
+		inline:true,
+        inputtype: CheckboxInput,
      }]
 });
 
@@ -513,18 +682,31 @@ Vvveb.Components.extend("_base", "html/checkbox", {
         inputtype: CheckboxInput,
         //inline:true,
         //col:6
+	},{
+        name: "Disabled",
+        key: "disabled",
+        htmlAttr: "disabled",
+		col:6,
+		inline:true,
+        inputtype: CheckboxInput,
+	},{
+        name: "Required",
+        key: "required",
+        htmlAttr: "required",
+		col:6,
+		inline:true,
+        inputtype: CheckboxInput,
      }]
 });
 
+/*
 Vvveb.Components.extend("_base", "html/fileinput", {
     name: "Input group",
 	attributes: {"type":"file"},
     image: "icons/text_input.svg",
-    html: '<div class="mb-3">\
-			  <input type="file" class="form-control">\
-			</div>'
+    html: '<input type="file" class="form-control">'
 });
-
+*/
 
 Vvveb.Components.extend("_base", "html/video", {
     nodes: ["video"],
@@ -632,8 +814,6 @@ Vvveb.Components.extend("_base", "html/button", {
 		name: "Disabled",
         key: "disabled",
         htmlAttr: "disabled",
-		inline:true,
-        col:6,
         inputtype: CheckboxInput,
 		inline:true,
         col:6,
@@ -690,6 +870,13 @@ Vvveb.Components.extend("_base", "html/blockquote", {
 	html: `<blockquote>
 				Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil..
 			</blockquote>`,
+    properties: [{
+        name: "Cite",
+        key: "cite",
+        inline:false,
+        htmlAttr: "cite",
+        inputtype: TextInput,
+    }]
 });
 
 Vvveb.Components.extend("_base", "html/list", {

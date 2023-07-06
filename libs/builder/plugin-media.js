@@ -25,6 +25,7 @@ var ImageInput = $.extend({}, ImageInput, {
 			
 			if (img.src) {
 				src = img.src;
+				//src = img.getAttribute("src");
 			}
 			
 			if (src) {

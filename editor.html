@@ -474,7 +474,10 @@
 							</div>
 							
 							<div id="highlight-box">
-								<div id="highlight-name"></div>
+								<div id="highlight-name">
+								  <span class="name"></span>
+								  <span class="type"></span>
+								</div>
 								
 								<div id="section-actions">
 									<a id="add-section-btn" href="" title="Add element"><i class="la la-plus"></i></a>
@@ -1326,7 +1329,7 @@
 </script>
 
 <script id="vvveb-breadcrumb-navigaton-item" type="text/html">
-	<li class="breadcrumb-item"><a href="#">{%=name%}</a></li>
+	<li class="breadcrumb-item"><a href="#" {% if (typeof className !== 'undefined') { %}class="{%=className%}"{% } %}>{%=name%}</a></li>
 </script>
 
 <script id="vvveb-input-sectioninput" type="text/html">

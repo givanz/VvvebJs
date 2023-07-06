@@ -1,14 +1,14 @@
 body {
-  scrollbar-color: rgba(0, 0, 0, 0.1) #fff;
+  scrollbar-color: rgba(var(--bs-body-color-rgb), 0.1) #fff;
   scrollbar-width: thin; }
   body::-webkit-scrollbar {
     width: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(var(--bs-body-bg-rgb), 0.1);
     -webkit-box-shadow: none; }
   body::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.05); }
+    -webkit-box-shadow: inset 0 0 1px rgba(var(--bs-body-color-rgb), 0.05); }
   body::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(var(--bs-body-color-rgb), 0.15);
     outline: 1px solid slategrey; }
 
 [data-vvveb-disabled] {
