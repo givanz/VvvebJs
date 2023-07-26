@@ -52,7 +52,12 @@ function () {
         let binary = asset.binary;
         
         let filename = href.substring(href.lastIndexOf('/')+1);
-        
+        let path = href.substring(0, href.lastIndexOf('/')).replace(/\.\.\//g, "");
+        if (href.indexOf("://") > 0) {
+			//ignore path for external assets
+			path = "";
+		}
+
         promises.push(new Promise((resolve, reject) => {
 
           let request = new XMLHttpRequest();
@@ -65,9 +70,11 @@ function () {
 
           request.onload = function() {
             if (request.status === 200) {
-              resolve({url, href, filename, binary, data:request.response});
+              resolve({url, href, filename, path, binary, data:request.response, status:request.status});
             } else {
-              reject(Error('Error code:' + request.statusText));
+              //reject(Error('Error code:' + request.statusText));
+              console.error('Error code:' + request.statusText);
+              resolve({status:request.status});
             }
           };
 
@@ -76,7 +83,11 @@ function () {
           };
 
           // Send the request
-          request.send();          
+          try {
+			request.send();          
+		 } catch (error) {
+			  console.error(error);
+		 }
         /*  
         $.ajax({
           url: url,
@@ -98,14 +109,27 @@ function () {
         
         for (i in data) {
             let file = data[i];
-            html = html.replace(file.href, file.filename);
-            zip.file(file.filename, file.data, {base64: file.binary});
+            let folder = zip;
+            
+            if (file.status == 200) {
+				if (file.path) {
+					file.path = file.path.replace(/^\//, "");
+					folder = zip.folder(file.path);
+				} else {
+					folder = zip;
+				}
+				
+				let url =  (file.path ? file.path + "/" : "") + file.filename.trim().replace(/^\//, "");
+				html = html.replace(file.href, url);
+								
+				folder.file(file.filename, file.data, {base64: file.binary});
+			}
         }
         
         zip.file("index.html", html);
         zip.generateAsync({type:"blob"})
         .then(function(content) {
-            saveAs(content, "template.zip");
+            saveAs(content, Vvveb.FileManager.getCurrentPage());
         });
     }).catch((error) => {
         console.log(error)

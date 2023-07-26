@@ -2989,6 +2989,10 @@ Vvveb.FileManager = {
 		return this.pages[this.currentPage]['url'];
 		}
 	},	
+
+	getCurrentPage: function() {
+		return this.currentPage;
+	},	
     
    	getPageData: function(key) {
 		if (this.currentPage) {
