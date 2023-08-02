@@ -25,7 +25,7 @@ function sanitizeFileName($file, $allowedExtension = 'html') {
 	
 	//allow only .html extension
 	if ($allowedExtension) {
-		$file = preg_replace('/\..+$/', '', $file) . ".$allowedExtension";
+		$file = preg_replace('/\.[^.]+$/', '', $file) . ".$allowedExtension";
 	}
 	return $file;
 }
