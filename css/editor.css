@@ -15454,6 +15454,57 @@ img.preview {
 .btn-outline-primary {
   --bs-btn-color: var(--bs-link-color); }
 
+.form-switch-lg {
+  font-size: 1rem;
+  min-height: 1rem; }
+
+/* theme specific styes needed by section component */
+body > section, body > footer, body > header {
+  position: relative;
+  /*
+		&.overlay {
+			position: relative;
+			
+			
+			&:before {
+				z-index: 1;
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				content: "";
+				background: rgba(0,0,0, 0.4);
+			}
+		}*/ }
+  body > section .background-container, body > section .overlay, body > footer .background-container, body > footer .overlay, body > header .background-container, body > header .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; }
+    body > section .background-container img, body > section .overlay img, body > footer .background-container img, body > footer .overlay img, body > header .background-container img, body > header .overlay img {
+      width: 100%; }
+  body > section .overlay, body > footer .overlay, body > header .overlay {
+    z-index: -1;
+    background: #000;
+    opacity: 0.6; }
+  body > section .separator, body > footer .separator, body > header .separator {
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    color: #fff;
+    /*> svg, */ }
+    body > section .separator > img, body > footer .separator > img, body > header .separator > img {
+      width: 100%;
+      height: 100%; }
+    body > section .separator.bottom, body > footer .separator.bottom, body > header .separator.bottom {
+      bottom: 0; }
+    body > section .separator.top, body > footer .separator.top, body > header .separator.top {
+      top: 0px; }
+
 .gallery {
   column-count: 4;
   column-gap: 20px; }

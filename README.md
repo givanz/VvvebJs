@@ -142,6 +142,31 @@ For css changes edit `scss/editor.scss` and `scss/_builder.scss`
 
 For documentation check the [wiki](https://github.com/givanz/VvvebJs/wiki)
 
+## Save page
+
+Save page function needs either php or node
+
+### PHP
+
+If you use xampp or a shared hosting account php should work without any change.
+
+Saving is done using [save.php](save.php)
+
+### Node
+
+For node go to VvvebJs folder and run
+
+```bash
+npm install express
+node save.js
+```
+
+Open http://localhost:8080/editor.html
+
+Saving is done using [save.js](save.js)
+
+## Usage
+
 ## Support
 
 If you like the project you can support it with a [PayPal donation](https://paypal.me/zgivan) or become a backer/sponsor via [Open Collective](https://opencollective.com/vvvebjs)

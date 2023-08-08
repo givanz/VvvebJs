@@ -967,21 +967,22 @@ Vvveb.Builder = {
 	 
 	 adjustListsHeight: function () {
 		 let lists = $(".drag-elements-sidepane > div:not(.block-preview)");
-		 let properties =$(".component-properties >.tab-content");
+		 let properties = $(".component-properties > .tab-content");
 		 let wHeight = $(window).height();
 
-		 function adjust(elements) {	
-			 let maxOffset = 0;
+		let maxOffset = 0;
 			 
+		 function adjust(elements) {	
 			 elements.each(function (i,e) {
+				 e.style.height = "";
 				 maxOffset = Math.max(maxOffset, e.getBoundingClientRect()["top"]);
+				 e.style.height = (wHeight -  e.getBoundingClientRect()["top"]) + "px";
 			});
-			
+			/*
 			 elements.each(function (i,e) {
 				 e.style.height = (wHeight - maxOffset) + "px";
-			});
+			});*/
 		}
-		
 		adjust(lists);
 		adjust(properties);
 	},
@@ -2184,19 +2185,22 @@ Vvveb.Gui = {
 		var panel = $(panel);
 		var body = $("body");
 		var prevValue = body.css(cssVar);
-		if (prevValue !== "0px") 
-		{
+		let visible = false;
+		
+		if (prevValue !== "0px") {
 			panel.data("layout-toggle", prevValue);
 			body.css(cssVar, "0px");
 			panel.hide();
-			return false;
-		} else
-		{
+			visible = false;
+		} else {
 			prevValue= panel.data("layout-toggle");
 			body.css(cssVar, '');
 			panel.show();
-			return true;
+			visible = true;
 		}
+		
+		Vvveb.Builder.adjustListsHeight();
+		return visible;
 	},
 
 	toggleFileManager: function () {
@@ -2216,7 +2220,8 @@ Vvveb.Gui = {
 		
 		Vvveb.Components.componentPropertiesElement = (rightColumnEnabled ? "#right-panel" :"#left-panel #properties") + " .component-properties";
 		if ($("#properties").is(":visible")) $('.component-tab a').show().tab('show'); 
-
+		
+		Vvveb.Builder.adjustListsHeight();
 	},
 
 	darkMode: function () {
@@ -2297,7 +2302,9 @@ Vvveb.StyleManager = {
 		}
 	},
 
-	getSelectorForElement: function (element) {
+	getSelectorForElement: function(element) {
+		if (!element) return '';
+		
 		var currentElement = element;
 		var selector = [];
 
@@ -2402,7 +2409,9 @@ Vvveb.StyleManager = {
 	},
 
 
-	_getCssStyle: function (element, styleProp) {
+	_getCssStyle: function(element, styleProp){
+		if (!element.length) return '';
+		
 		var value = "";
 		var el = element.get(0);
 

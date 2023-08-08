@@ -2396,4 +2396,79 @@ img.preview {
 
 .btn-outline-primary {
     --bs-btn-color: var(--bs-link-color);
+}	
+
+.form-switch-lg {
+	font-size: 1rem;
+    min-height: 1rem;
+}
+
+
+/* theme specific styes needed by section component */
+body {
+	> section, > footer, > header { 
+		position:relative;
+		//padding:5rem 0;
+		
+		.background-container, .overlay {
+			position:absolute;
+			top:0;
+			left:0;
+			z-index:-2;
+			width:100%;
+			height:100%;
+			overflow:hidden;
+			
+			&::before {
+			}
+			
+			img {
+				width:100%;
+			}
+		}
+
+		.overlay {
+			z-index:-1;
+			background: #000;
+			opacity: 0.6;
+		}
+
+		.separator {
+
+			z-index:2;
+			position:absolute;
+			width:100%;
+			//height:5rem;
+			color:#fff;
+			
+			/*> svg, */>  img {
+				width:100%;
+				height:100%;
+			}
+			
+			&.bottom {
+				bottom:0;
+			}
+			
+			&.top {
+				top:0px;
+			}
+		}
+		/*
+		&.overlay {
+			position: relative;
+			
+			
+			&:before {
+				z-index: 1;
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				top: 0;
+				content: "";
+				background: rgba(0,0,0, 0.4);
+			}
+		}*/
+	}
 }

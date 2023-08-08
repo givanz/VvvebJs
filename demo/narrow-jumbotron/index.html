@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="icon" href="../../favicon.ico">
+    <base href>
 
     <title>Narrow Jumbotron Template for Bootstrap</title>
 
@@ -50,12 +51,12 @@
       </header>
 
       <section class="jumbotron p-4" id="jumbotron">
-		<div class="container  bg-light">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" fill="#0d6efd" data-aos="fade-up" data-aos-delay="100" style="fill:var(--bs-blue)">
+		<div class="container">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64" fill="#0d6efd" data-aos="fade-up" data-aos-delay="100" style="fill:var(--bs-blue)" class>
 				<path d="M 30.335938 12.546875 L 20.164063 11.472656 L 16 2.132813 L 11.835938 11.472656 L 1.664063 12.546875 L 9.261719 19.394531 L 7.140625 29.398438 L 16 24.289063 L 24.859375 29.398438 L 22.738281 19.394531 Z"></path>
 			</svg>
 
-			<h1 data-aos="fade-up" data-aos-delay="200">Jumbotron heading</h1>
+			<h1 data-aos="fade-up" data-aos-delay="200" class>Jumbotron heading !!!</h1>
 			<p class="lead" data-aos="fade-up" data-aos-delay="300">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
 
 			<img class="rounded mw-100 my-5" data-aos="fade-up" data-aos-delay="400" src="https://source.unsplash.com/9UVmlIb0wJU/500x500">
@@ -91,42 +92,48 @@
 		  </div>
       </section>
 
+		<section id="video">
+			<div class="container">
+				<video width="320" height="240" playsinline loop muted controls src="../../media/sample.webm" poster="../../media/sample.webp"><video>
+			</video></video></div>
+		</section>	
+			
 		<section id="gallery">
 			<div class="container">
 				<div class="gallery masonry has-shadow" data-component-gallery>
 					<div class="item">
 						<a>
-							<img src="/media/7.jpg">
+							<img src="../../media/7.jpg">
 						</a>
 					</div>
 					<div class="item">
 						<a>
-							<img src="/media/2.jpg">
+							<img src="../../media/2.jpg">
 						</a>
 					</div>
 					<div class="item">
 						<a>
-							<img src="/media/15.jpg">
+							<img src="../../media/15.jpg">
 						</a>
 					</div>
 					<div class="item">
 						<a>
-							<img src="/media/4.jpg">
+							<img src="../../media/4.jpg">
 						</a>
 					</div>
 					<div class="item">
 						<a>
-							<img src="/media/5.jpg">
+							<img src="../../media/5.jpg">
 						</a>
 					</div>
 					<div class="item">
 						<a>
-							<img src="/media/6.jpg">
+							<img src="../../media/6.jpg">
 						</a>
 					</div>
 					<div class="item">
 						<a>
-							<img src="/media/7.jpg">
+							<img src="../../media/7.jpg">
 						</a>
 					</div>
 				</div>
@@ -142,5 +149,7 @@
 	<script>
 		AOS.init();
 	</script>
+
+
 </body>
 </html>

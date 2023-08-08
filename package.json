@@ -11,6 +11,7 @@
     "url": "https://github.com/givanz/VvvebJs.git"
   },
   "dependencies": {
+    "express": "^4.18.2",
     "jquery": "^3.0"
   },
   "keywords": [
@@ -34,8 +35,8 @@
     "gulp": "^4.0.2",
     "gulp-file-include": "^2.3.0",
     "gulp-format-html": "^1.2.5",
-    "sass": "^1.60.0",
-	"node-sass": "^8.0.0",
-    "gulp-sass": "^5.1.0"
+    "gulp-sass": "^5.1.0",
+    "node-sass": "^8.0.0",
+    "sass": "^1.60.0"
   }
 }

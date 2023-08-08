@@ -1228,7 +1228,17 @@
 	<div>
 		<img id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}" data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225">
 		<input name="{%=key%}" type="text" class="form-control mt-1" id="input-{%=key%}"/>
-		<button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#input-{%=key%}" data-target-thumb="#thumb-{%=key%}"><i class="la la-image la-lg"></i>&ensp;Set image</button>
+		<button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#input-{%=key%}" data-target-thumb="#thumb-{%=key%}"><i class="la la-image la-lg"></i>&ensp;<span>Set image</span></button>
+	</div>
+	
+</script>
+
+<script id="vvveb-input-videoinput-gallery" type="text/html">
+	
+	<div>
+		<video id="thumb-v{%=key%}" class="img-thumbnail p-0" data-target-input="#input-v{%=key%}" data-target-thumb="#thumb-v{%=key%}" style="cursor:pointer" src="" width="225" height="225" playsinline loop muted controls></video>
+		<input name="v{%=key%}" type="text" class="form-control mt-1" id="input-v{%=key%}"/>
+		<button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#vinput-v{%=key%}" data-target-thumb="#thumb-v{%=key%}"><i class="la la-video la-lg"></i>&ensp;<span>Set video</span></button>
 	</div>
 	
 </script>
@@ -1334,9 +1344,9 @@
 
 <script id="vvveb-input-sectioninput" type="text/html">
 
-		<label class="header" data-header="{%=key%}" for="header_{%=key%}"><span>{%=header%}</span> <div class="header-arrow"></div></label> 
+		<label class="header" data-header="{%=key%}" for="header_{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}><span>{%=header%}</span> <div class="header-arrow"></div></label> 
 		<input class="header_check" type="checkbox" {% if (typeof expanded !== 'undefined' && expanded == false) { %} {% } else { %}checked="true"{% } %} id="header_{%=key%}"> 
-		<div class="section row" data-section="{%=key%}"></div>		
+		<div class="section row" data-section="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}></div>		
 	
 </script>
 
@@ -1601,7 +1611,7 @@
 <!-- media gallery -->
 <link href="libs/media/media.css" rel="stylesheet">
 <script>
-window.mediaPath = 'media';
+window.mediaPath = '../../media';
 Vvveb.themeBaseUrl = 'demo/landing/';
 </script>
 <script src="libs/media/media.js"></script>	
@@ -1622,6 +1632,7 @@ Vvveb.themeBaseUrl = 'demo/landing/';
 <script src="libs/builder/components-html.js"></script>	
 <script src="libs/builder/plugin-aos.js"></script>
 <script src="libs/builder/components-elements.js"></script>	
+<script src="libs/builder/section.js"></script>	
 <script src="libs/builder/components-bootstrap5.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
 

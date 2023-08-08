@@ -1,5 +1,5 @@
 Vvveb.ComponentsGroup['Base'] =
-["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput"/*, "html/fileinput"*/, "html/checkbox", "html/radiobutton", "html/link", "html/video", "html/button", "html/paragraph", "html/blockquote", "html/list", "html/table", "html/preformatted", "html/audio", "html/video"];
+["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput"/*, "html/fileinput"*/, "html/checkbox", "html/radiobutton", "html/link", "html/button", "html/paragraph", "html/blockquote", "html/list", "html/table", "html/preformatted", "html/audio", "html/video"];
 
 Vvveb.Components.extend("_base", "html/heading", {
     image: "icons/heading.svg",
@@ -711,16 +711,21 @@ Vvveb.Components.extend("_base", "html/fileinput", {
 Vvveb.Components.extend("_base", "html/video", {
     nodes: ["video"],
     name: "Video",
-    html: '<video width="320" height="240" playsinline loop autoplay><source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4"><video>',
+    html: '<video width="320" height="240" playsinline loop autoplay muted src="../../media/sample.webm" poster="../../media/sample.webp"><video>',
     dragHtml: '<img  width="320" height="240" src="' + Vvveb.baseUrl + 'icons/video.svg">',
 	image: "icons/video.svg",
     resizable:true,//show select box resize handlers
     properties: [{
-        name: "Src",
-        child: "source",
+        name: "Video",
+        //child: "source",
         key: "src",
         htmlAttr: "src",
-        inputtype: LinkInput
+        inputtype: VideoInput
+    },{       
+		name: "Poster",
+        key: "poster",
+        htmlAttr: "poster",
+        inputtype: ImageInput
     },{
         name: "Width",
         key: "width",
@@ -765,7 +770,7 @@ Vvveb.Components.extend("_base", "html/video", {
         data: {
 			type:'warning',
 			title:'Autoplay',
-			text:'Most browsers allow autoplay only if video is muted and plays inline'
+			text:'Most browsers allow auto play only if video is muted and plays inline'
 		}
 	}]
 });
@@ -867,8 +872,11 @@ Vvveb.Components.extend("_base", "html/blockquote", {
     nodes: ["blockquote"],
     name: "Blockquote",
 	image: "icons/blockquote.svg",
-	html: `<blockquote>
-				Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil..
+	html: `<blockquote cite="https://en.wikipedia.org/wiki/Marcus_Aurelius">
+				<p>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil.</p>
+				<cite class="small">
+					<a href="https://en.wikipedia.org/wiki/Marcus_Aurelius" class="text-decoration-none" target="blank">Marcus Aurelius</a>
+				</cite>	
 			</blockquote>`,
     properties: [{
         name: "Cite",
@@ -1273,94 +1281,6 @@ Vvveb.Components.extend("_base", "html/audio", {
     }]
 });
 
-Vvveb.Components.extend("_base", "html/video", {
-    nodes: ["video"],
-    name: "Video",
-    image: "icons/video.svg",
-    html: `<video controls playsinline src="/media/Sky Clouds Royalty Free HD Video Footage [CC0] [fmngCpy1O2E].webm" poster="/media/Sky Clouds Royalty Free HD Video Footage [CC0] [fmngCpy1O2E].webp"></video>`,
-    properties: [{
-        name: "Poster",
-        key: "poster",
-        htmlAttr: "poster",
-        inputtype: ImageInput
-    }, {
-        name: "Src",
-        key: "src",
-        htmlAttr: "src",
-        inputtype: LinkInput
-    },{
-		key: "video_options",
-        inputtype: SectionInput,
-        name:false,
-        data: {header:"Options"},
-    }, {
-		name: "Auto play",
-        key: "autoplay",
-        htmlAttr: "autoplay",
-        inputtype: CheckboxInput,
-        data: {
-            on: "true",
-            off: "false"
-        },
-        inline:true,
-        col:4,
-	}, {
-        name: "Controls",
-        key: "controls",
-        htmlAttr: "controls",
-        inputtype: CheckboxInput,
-        data: {
-            on: "true",
-            off: "false"
-        },
-        inline:true,
-        col:4,
-    }, {
-        name: "Loop",
-        key: "loop",
-        htmlAttr: "loop",
-        inputtype: CheckboxInput,
-        data: {
-            on: "true",
-            off: "false"
-        },
-        inline:true,
-        col:4,
-    }, {
-        name: "Play inline",
-        key: "playsinline",
-        htmlAttr: "playsinline",
-        inputtype: CheckboxInput,
-        data: {
-            on: "true",
-            off: "false"
-        },
-        inline:true,
-        col:4,
-	}, {
-        name: "Muted",
-        key: "muted",
-        htmlAttr: "muted",
-        inputtype: CheckboxInput,
-        data: {
-            on: "true",
-            off: "false"
-        },
-        inline:true,
-        col:4,
-    },{
-	name:"",
-	key: "autoplay_warning",
-        inline:false,
-        col:12,
-        inputtype: NoticeInput,
-        data: {
-			type:'warning',
-			title:'Autoplay',
-			text:'Most browsers allow auto play only if video is muted and plays inline'
-		}
-	}]
-});
 
 Vvveb.Components.extend("_base", "html/pdf", {
     attributes: ["data-component-pdf"],
