@@ -6785,7 +6785,7 @@ textarea.form-control-lg {
 .btn {
   --bs-btn-padding-x: 0.5rem;
   --bs-btn-padding-y: 0.4rem;
-  --bs-btn-font-family: ;
+  --bs-btn-font-family: var(--bs-btn-font-family);
   --bs-btn-font-size: 1rem;
   --bs-btn-font-weight: 400;
   --bs-btn-line-height: 1.5;
@@ -13984,9 +13984,9 @@ body {
     transition: margin-right 0.1s linear;
     -moz-transition: margin-right 0.1s linear;
     -webkit-transition: margin-right 0.1s linear;
-    background: -moz-linear-gradient(right, var(--bs-body-bg) 85%, #fafbfc 100%);
-    background: -webkit-linear-gradient(right, var(--bs-body-bg) 85%, #fafbfc 100%);
-    background: linear-gradient(right, var(--bs-body-bg) 85%, #fafbfc 100%);
+    background: -moz-linear-gradient(to right, var(--bs-body-bg) 85%, #fafbfc 100%);
+    background: -webkit-linear-gradient(to right, var(--bs-body-bg) 85%, #fafbfc 100%);
+    background: linear-gradient(to right, var(--bs-body-bg) 85%, #fafbfc 100%);
     box-shadow: 1px -2px 2px #f3f3f3 inset;
     width: 15vw;
     width: var(--builder-right-panel-width); }
@@ -14292,11 +14292,11 @@ body {
       border: none; }
     #vvveb-builder #canvas.tablet {
       width: 768px !important;
-      left: calc(50% - calc(768 / 2)15vw);
+      left: calc(50% - calc(768 / 2) + 15vw);
       left: calc(50% - ((768px / 2) + var(--builder-left-panel-width))); }
     #vvveb-builder #canvas.mobile {
       width: 320px !important;
-      left: calc(50% - calc(320 / 2)15vw);
+      left: calc(50% - calc(320 / 2) + 15vw);
       left: calc(50% - ((320px / 2) + var(--builder-left-panel-width))); }
   #vvveb-builder.preview #canvas {
     width: 100%;
@@ -14430,7 +14430,7 @@ body {
   #vvveb-builder #wysiwyg-editor {
     top: auto;
     bottom: 100%;
-    height: -44px;
+    height: 44px;
     right: auto;
     left: -1px;
     display: none;
@@ -14709,7 +14709,7 @@ li[data-type] {
           .drag-elements-sidepane ul > li ol li[data-type] {
             border: none; }
             .drag-elements-sidepane ul > li ol li[data-type]:hover {
-              cursor: hand;
+              /*cursor: hand;*/
               cursor: grab;
               cursor: -moz-grab;
               cursor: -webkit-grab;
