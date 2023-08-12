@@ -21,15 +21,15 @@
 					
 					<div class="btn-group float-start" role="group">
 					  <button class="btn btn-light" title="Toggle file manager" id="toggle-file-manager-btn" data-vvveb-action="toggleFileManager" data-bs-toggle="button" aria-pressed="false">
-						  <img src="libs/builder/icons/file-manager-layout.svg" width="20px" height="20px">
+						  <img src="libs/builder/icons/file-manager-layout.svg" width="20" height="20" alt="" role="presentation">
 					  </button>
 
 					  <button class="btn btn-light" title="Toggle left column" id="toggle-left-column-btn" data-vvveb-action="toggleLeftColumn" data-bs-toggle="button" aria-pressed="false">
-						  <img src="libs/builder/icons/left-column-layout.svg" width="20px" height="20px">
+						  <img src="libs/builder/icons/left-column-layout.svg" width="20" height="20" alt="" role="presentation">
 					  </button>
 					  
 					  <button class="btn btn-light" title="Toggle right column" id="toggle-right-column-btn" data-vvveb-action="toggleRightColumn" data-bs-toggle="button" aria-pressed="false">
-						  <img src="libs/builder/icons/right-column-layout.svg" width="20px" height="20px">
+						  <img src="libs/builder/icons/right-column-layout.svg" width="20" height="20" alt="" role="presentation">
 					  </button>
 					</div>
 					
@@ -275,7 +275,7 @@
 
 													
 														<div class="drag-elements-sidepane sidepane">
-															  <div class="block-preview"><img src="" style="display:none"></div>
+															  <div class="block-preview"><!-- img src="" style="display:none" --></div>
 															  <div>
 																  
 																<ul class="sections-list clearfix" data-type="leftpanel">
@@ -348,7 +348,7 @@
 
 											  
 														<div class="drag-elements-sidepane sidepane">
-															  <div class="block-preview"><img src=""></div>
+															  <div class="block-preview"><!-- img src="" --></div>
 															  <div>
 																<ul class="blocks-list clearfix" data-type="leftpanel">
 																</ul>
@@ -409,7 +409,7 @@
 											<label class="header" data-header="default" for="header_pallette"><span>Global styles</span>
 												<div class="header-arrow"></div>
 											</label> -->
-											<input class="header_check" type="checkbox" checked="true" id="header_pallette">
+											<input class="header_check" type="checkbox" checked id="header_pallette">
 											<div class="tab-pane section px-0" data-section="content">
 
 												
@@ -704,7 +704,7 @@
 											  
 											   <div class="search">
 													  <div class="expand">
-														  <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></buttona>
+														  <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></button>
 														  <button title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
 													  </div>	
 
@@ -772,7 +772,7 @@
 					
 							<div class="tab-content">
 								 <div class="tab-pane show active" id="content-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
-									<div class="alert alert-dismissible fade show alert-light m-3" role="alert" style="">		  
+									<div class="alert alert-dismissible fade show alert-light m-3" role="alert">		  
 										<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>		  
 										<strong>No selected element!</strong><br> Click on an element to edit.		
 									</div>
@@ -826,7 +826,7 @@
 						<div id="vvveb-code-editor">
 							<textarea class="form-control"></textarea>
 						<div>
-
+				</div>
 				</div>
 			</div>
 		</div>
@@ -1368,7 +1368,7 @@
 	<div>
 		<input name="{%=key%}" type="text" class="form-control"/>
 		
-		<div class="form-control autocomplete-list" style="min=height: 150px; overflow: auto;">
+		<div class="form-control autocomplete-list" style="min-height: 150px; overflow: auto;">
                   </div>
                   </div>
 	
@@ -1388,7 +1388,7 @@
 
 <script id="vvveb-input-noticeinput" type="text/html">
 	<div>
-		<div class="alert alert-dismissible fade show alert-{%=type%}" role="alert" style="">		  
+		<div class="alert alert-dismissible fade show alert-{%=type%}" role="alert">		  
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>		  
 			<h6><b>{%=title%}</b></h6> 
 			
