@@ -19,7 +19,7 @@
 
 For a full featured open source CMS using VvvebJs check [Vvveb CMS](https://www.vvveb.com)
 
-Using [Vvveb landing page template](https://github.com/givanz/Vvveb-landing-bootstrap5-template) for demo page and Bootstrap 5 sections and blocks.
+Using [Vvveb landing page template](https://github.com/givanz/landing) for demo page and Bootstrap 5 sections and blocks.
 
 <img src="https://www.vvveb.com/img/dark-theme.png">
 <img src="https://www.vvveb.com/img/light-theme.png">
