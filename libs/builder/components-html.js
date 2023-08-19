@@ -1,5 +1,5 @@
 Vvveb.ComponentsGroup['Base'] =
-["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput"/*, "html/fileinput"*/, "html/checkbox", "html/radiobutton", "html/link", "html/button", "html/paragraph", "html/blockquote", "html/list", "html/table", "html/preformatted", "html/audio", "html/video"];
+["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput"/*, "html/fileinput"*/, "html/checkbox", "html/radiobutton", "html/link", "html/button", "html/paragraph", "html/blockquote", "html/list", "html/table", "html/preformatted", "html/audio", "html/video","html/iframe"];
 
 Vvveb.Components.extend("_base", "html/heading", {
     image: "icons/heading.svg",
@@ -1339,3 +1339,29 @@ Vvveb.ComponentsGroup['Base'] =
 ["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput", "html/fileinput", "html/checkbox", "html/radiobutton", "html/link", "html/video", "html/button", "html/paragraph", "html/blockquote", "html/list", "html/table", "html/preformatted"];
 
 */
+
+Vvveb.Components.extend("_base", "html/iframe", {
+	attributes: ["data-component-iframe"],
+    name: "Iframe",
+    image: "icons/file.svg",
+    html: '<div data-component-iframe><iframe src="https://www.vvveb.com" width="320" height="240"></iframe></div>',
+	properties: [{
+        name: "Src",
+        key: "src",
+        htmlAttr: "src",
+        child:"iframe",
+        inputtype: TextInput
+    }, {
+        name: "Width",
+        key: "width",
+        htmlAttr: "width",
+        child:"iframe",
+        inputtype: TextInput
+    }, {
+        name: "Height",
+        key: "height",
+        htmlAttr: "height",
+        child:"iframe",
+        inputtype: TextInput
+	}]	
+});
