@@ -10,8 +10,6 @@ app.use(bodyParser.urlencoded({
 }));
  
 app.post('/save.php', (req, res) => {
-  console.log(req);
-
   const { file, action, startTemplateUrl, html } = req.body;
 
   let result = "File saved!";
@@ -20,7 +18,7 @@ app.post('/save.php', (req, res) => {
 	try {
 	  fs.writeFileSync(file, html);
 	} catch (err) {
-	  result = "Eror saving file!";
+	  result = "Error saving file!";
 	  console.error(err);
 	}
 

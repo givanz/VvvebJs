@@ -32,9 +32,6 @@ class OpenVerse {
 		this.baseUrl = 'https://api.openverse.engineering/v1/images?format=json&filter_dead=true&';
 		this.currentUrl = this.baseUrl;
 		this.filtersParameters = "";
-		
-		this.authenticate();
-		
 	}
 	
 	authenticate() {
@@ -215,6 +212,7 @@ class OpenVerseDisplay extends OpenVerse {
 	}
 	
 	search() {
+		this.pageNo = 1;
 		this.setFilters();
 		this.showLoading();
 		this.getResults(this.displayResults);
@@ -288,6 +286,8 @@ class OpenVerseDisplay extends OpenVerse {
 	
 	init() {
 		let self = this ;
+		this.authenticate();
+		
 		$("#MediaModal .top-panel").append(self.topPanel());
 		$("#MediaModal .display-panel").append(self.displayPanel());
 		$("#MediaModal .top-right .align-right").append(self.toggleBtn());

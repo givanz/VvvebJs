@@ -609,6 +609,8 @@
 									
 									<a id="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
 									<a id="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
+
+								<a id="save-reusable-btn" href="" title="Save as reusable" class="mx-2"><i class="la la-save"></i></a>
 									<a id="clone-btn" href="" title="Clone element"><i class="la la-copy"></i></a>
 									<a id="delete-btn" href="" title="Remove element"><i class="la la-trash"></i></a>
 								</div>
@@ -657,7 +659,7 @@
 										
 										<div class="section-box-actions">
 
-											<div id="close-section-btn" class="btn btn-light btn-sm bg-white btn-sm float-end"><i class="la la-times la-lg"></i></div>
+							<div id="close-section-btn" class="btn btn-light btn-sm float-end mt-1"><i class="la la-times la-lg"></i></div>
 										
 							<div class="mt-2 me-3 float-end">
 											
@@ -898,7 +900,7 @@
 
 <script id="vvveb-input-toggle" type="text/html">
 	
-    <div class="form-check form-switch">
+    <div class="form-check form-switch {% if (typeof className !== 'undefined') { %} {%=className%}{% } %}">
         <input 
 		type="checkbox" 
 		name="{%=key%}" 
@@ -1684,6 +1686,7 @@ Unzip the latest ckeditor release zip from https://github.com/ckeditor/ckeditor4
 <script>
 let renameUrl = 'save.php?action=rename';
 let deleteUrl = 'save.php?action=delete';	
+let saveReusableUrl = 'save.php?action=saveReusable';	
 
 let pages = 
 	[

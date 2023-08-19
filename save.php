@@ -76,6 +76,34 @@ if ($action) {
 				}
 			}
 		break;
+		case 'saveReusable':
+		    //block or section
+			$type = $_POST['type'] ?? false;
+			$name = $_POST['name'] ?? false;
+			$html = $_POST['html'] ?? false;
+			
+			if ($type && $name && $html) {
+				
+				$file = sanitizeFileName("$type/$name");
+				$dir = dirname($file);
+				if (!is_dir($dir)) {
+					echo "$dir folder does not exist\n";
+					if (mkdir($dir, 0777, true)) {
+						echo "$dir folder was created\n";
+					} else {
+						showError("Error creating folder '$dir'\n");
+					}				
+				}
+				
+				if (file_put_contents($file, $html)) {
+					echo "File saved '$file'";
+				} else {
+					showError("Error saving file '$file'\nPossible causes are missing write permission or incorrect file path!");
+				}
+			} else {
+				showError("Missing reusable element data!\n");
+			}
+		break;
 		default:
 			showError("Invalid action '$action'!");
 	}

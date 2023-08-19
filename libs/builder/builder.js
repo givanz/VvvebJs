@@ -77,7 +77,8 @@ Vvveb.preservePropertySections = true;
 //icon = use component icon when dragging | html = use component html to create draggable element
 Vvveb.dragIcon = 'icon';
 //if empty the html of the component is used to view dropping in real time but for large elements it can jump around for this you can set a html placeholder with this option
-Vvveb.dragHtml = '<div style="background:limegreen;;width:100%;height:3px;border:1px solid limegreen;box-shadow:0px 0px 2px 1px rgba(0,0,0,0.14);"></div>';
+Vvveb.dragElementStyle = "background:limegreen;;width:100%;height:3px;border:1px solid limegreen;box-shadow:0px 0px 2px 1px rgba(0,0,0,0.14);overflow:hidden;";
+Vvveb.dragHtml = '<div style="' + Vvveb.dragElementStyle + '"></div>';
 
 Vvveb.baseUrl =  document.currentScript?document.currentScript.src.replace(/[^\/]*?\.js$/,''):'';
 Vvveb.imgBaseUrl =  Vvveb.baseUrl;
@@ -895,7 +896,7 @@ Vvveb.Builder = {
 							
 							item.css({
 								//backgroundImage: "url(" + image + ")",
-								backgroundRepeat: "no-repeat"
+								//backgroundRepeat: "no-repeat"
 							}).find("img").attr("src", image);
 							
 							
@@ -951,8 +952,8 @@ Vvveb.Builder = {
 							var image = ((block.image.indexOf('/') == -1) ? Vvveb.imgBaseUrl:'') + block.image;
 							
 							item.css({
-								backgroundImage: "url(" + image + ")",
-								backgroundRepeat: "no-repeat"
+								//backgroundImage: "url(" + image + ")",
+								//backgroundRepeat: "no-repeat"
 							}).find("img").attr("src", image);
 							
 							
@@ -976,7 +977,7 @@ Vvveb.Builder = {
 			 elements.each(function (i,e) {
 				 e.style.height = "";
 				 maxOffset = Math.max(maxOffset, e.getBoundingClientRect()["top"]);
-				 e.style.height = (wHeight -  e.getBoundingClientRect()["top"]) + "px";
+				 e.style.height = (wHeight -  maxOffset) + "px";
 			});
 			/*
 			 elements.each(function (i,e) {
@@ -1459,12 +1460,16 @@ Vvveb.Builder = {
 				if (self.dragMoveMutation === false)
 				{				
 					if (self.component.dragHtml || Vvveb.dragHtml) { //if dragHtml is set for dragging then set real component html
-						newElement = $(self.component.html);
-						self.dragElement.replaceWith(newElement);
-						self.dragElement = newElement;
+						if (self.component) {
+							newElement = $(self.component.html);
+							self.dragElement.replaceWith(newElement);
+							self.dragElement = newElement;
+						}
 					} 
 					
 					if (self.component.afterDrop) self.dragElement = self.component.afterDrop(self.dragElement);
+				} else {
+					self.dragElement.attr("style", "");
 				}
 				
 				self.dragElement.css("border", "");
@@ -1562,7 +1567,7 @@ Vvveb.Builder = {
 		var self = this;
 		
 		$("#drag-btn").on("mousedown", function(event) {
-			self.dragElement = self.selectedEl.css("position","");
+			self.dragElement = self.selectedEl.attr("style",Vvveb.dragElementStyle);
 			self.isDragging = true;
 			$("#section-actions, #highlight-name, #select-box").hide();
 			
@@ -1623,6 +1628,24 @@ Vvveb.Builder = {
 			
 			self.selectNode(node);
 			self.loadNodeComponent(node);
+			
+			event.preventDefault();
+			return false;
+		});
+
+		$("#save-reusable-btn").on("click", function(event) {
+			
+			node = self.selectedEl.get(0);
+
+			let type = 'block';
+			if (node.tagName.toLowerCase() == 'section') {
+				type = 'section';
+			}
+			
+			let name = prompt("Enter name for new reusable " + type, '');
+			if (name) {
+				Vvveb.Builder.saveElement(node, type, name);
+			}
 			
 			event.preventDefault();
 			return false;
@@ -1730,7 +1753,7 @@ Vvveb.Builder = {
 		var self = this;
 		self.isDragging = false;	
 		
-		$('.drag-elements-sidepane ul > li > ol > li[data-drag-type]').on("mousedown touchstart", function(event) {
+		$("body").on("mousedown touchstart", ".drag-elements-sidepane ul > li > ol > li[data-drag-type]", function(event) {
 			
 			$this = $(this);
 			
@@ -1896,6 +1919,54 @@ Vvveb.Builder = {
 		if (window.FrameDocument.head.innerHTML != headHtml) {
 			window.FrameDocument.head.innerHTML = getTag(html, "head");
 		}
+	},
+	
+	saveElement: function(element, type, name, callback) {
+		if (type == 'section') {
+			Vvveb.Sections.add('reusable/'+ name, {
+				name,
+				image: "img/logo-small.png",
+				html: element.outerHTML});
+			
+			if (Vvveb.SectionsGroup["Reusable"] === undefined) {
+				Vvveb.SectionsGroup["Reusable"] = [];
+			}
+			
+			Vvveb.SectionsGroup["Reusable"].push('reusable/'+ name);
+			Vvveb.Builder.loadSectionGroups();
+		} else {
+			Vvveb.Blocks.add('reusable/'+ name, {
+				name,
+				image: "img/logo-small.png",
+				html: element.outerHTML});
+			
+			if (Vvveb.BlocksGroup["Reusable"] === undefined) {
+				Vvveb.BlocksGroup["Reusable"] = [];
+			}
+			
+			Vvveb.BlocksGroup["Reusable"].push('reusable/'+ name);
+			Vvveb.Builder.loadBlockGroups();
+		}
+		
+		let data = {type, name, html:element.outerHTML};
+		return $.ajax({
+			type: "POST",
+			url: saveReusableUrl,//set your server side save script url
+			data: data,
+			cache: false,
+		}).done(function (data, text) {
+			if (callback) callback(data);
+			let bg = "bg-success";
+			if (data.success || text == "success") {		
+			} else {
+				bg = "bg-danger";
+			}
+			
+			displayToast(bg, data.message ?? data);			
+		}).fail(function (data) {
+			displayToast("bg-danger", "Error saving!");
+			alert(data.responseText);
+		});		
 	},
 	
 	saveAjax: function(fileName, startTemplateUrl, callback, saveUrl)
@@ -2095,6 +2166,9 @@ Vvveb.Gui = {
 	
 	viewport : function () {
 		$("#canvas").attr("class", this.dataset.view);
+		$("#iframe1").removeAttr("style");
+		$(".responsive-btns .active").removeClass("active");
+		if (this.dataset.view) $(this).addClass("active");
 	},
 	
 	toggleEditor : function () {
@@ -2664,13 +2738,21 @@ Vvveb.SectionList = {
 			var section = Vvveb.Sections.get(this.parentNode.dataset.type);
 			var node = $(section.html);
 			var sectionType = node[0].tagName.toLowerCase();
-			var afterSection = $(sectionType + ":last", Vvveb.Builder.frameBody);
+			var afterSection = $("> " + sectionType + ":last", Vvveb.Builder.frameBody);
 			
 			if (afterSection.length) {
 				afterSection.after(node);
 			} else {
-				if (sectionType != "footer") {
-					afterSection = $("footer:first", Vvveb.Builder.frameBody);		
+				if (sectionType == "nav") {
+					afterSection = $("> nav:first,> header:first", Vvveb.Builder.frameBody);		
+					
+					if (afterSection.length) {
+						afterSection.before(node);
+					} else {
+						$(Vvveb.Builder.frameBody).append(node);
+					}
+				} else if (sectionType != "footer") {
+					afterSection = $("body > footer:last", Vvveb.Builder.frameBody);		
 					
 					if (afterSection.length) {
 						afterSection.before(node);

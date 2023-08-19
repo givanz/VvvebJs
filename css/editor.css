@@ -6785,7 +6785,6 @@ textarea.form-control-lg {
 .btn {
   --bs-btn-padding-x: 0.5rem;
   --bs-btn-padding-y: 0.4rem;
-  --bs-btn-font-family: var(--bs-btn-font-family);
   --bs-btn-font-size: 1rem;
   --bs-btn-font-weight: 400;
   --bs-btn-line-height: 1.5;
@@ -7427,7 +7426,6 @@ textarea.form-control-lg {
   --bs-dropdown-color: #dee2e6;
   --bs-dropdown-bg: #343a40;
   --bs-dropdown-border-color: var(--bs-border-color-translucent);
-  --bs-dropdown-box-shadow: ;
   --bs-dropdown-link-color: #dee2e6;
   --bs-dropdown-link-hover-color: #fff;
   --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
@@ -7523,7 +7521,6 @@ textarea.form-control-lg {
 .nav {
   --bs-nav-link-padding-x: 1rem;
   --bs-nav-link-padding-y: 0.5rem;
-  --bs-nav-link-font-weight: ;
   --bs-nav-link-color: var(--bs-link-color);
   --bs-nav-link-hover-color: var(--bs-link-hover-color);
   --bs-nav-link-disabled-color: var(--bs-secondary-color);
@@ -7678,7 +7675,6 @@ textarea.form-control-lg {
 .navbar-nav {
   --bs-nav-link-padding-x: 0;
   --bs-nav-link-padding-y: 0.5rem;
-  --bs-nav-link-font-weight: ;
   --bs-nav-link-color: var(--bs-navbar-color);
   --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
   --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
@@ -7978,19 +7974,13 @@ textarea.form-control-lg {
   --bs-card-spacer-y: 1rem;
   --bs-card-spacer-x: 1rem;
   --bs-card-title-spacer-y: 0.5rem;
-  --bs-card-title-color: ;
-  --bs-card-subtitle-color: ;
   --bs-card-border-width: var(--bs-border-width);
   --bs-card-border-color: var(--bs-border-color-translucent);
   --bs-card-border-radius: var(--bs-border-radius);
-  --bs-card-box-shadow: ;
   --bs-card-inner-border-radius: calc(var(--bs-border-radius) - (var(--bs-border-width)));
   --bs-card-cap-padding-y: 0.5rem;
   --bs-card-cap-padding-x: 1rem;
   --bs-card-cap-bg: rgba(var(--bs-body-color-rgb), 0.03);
-  --bs-card-cap-color: ;
-  --bs-card-height: ;
-  --bs-card-color: ;
   --bs-card-bg: var(--bs-body-bg);
   --bs-card-img-overlay-padding: 1rem;
   --bs-card-group-margin: 0.75rem;
@@ -8248,8 +8238,6 @@ textarea.form-control-lg {
   --bs-breadcrumb-padding-x: 0;
   --bs-breadcrumb-padding-y: 0;
   --bs-breadcrumb-margin-bottom: 1rem;
-  --bs-breadcrumb-bg: ;
-  --bs-breadcrumb-border-radius: ;
   --bs-breadcrumb-divider-color: var(--bs-secondary-color);
   --bs-breadcrumb-item-padding-x: 0.5rem;
   --bs-breadcrumb-item-active-color: var(--bs-secondary-color);
@@ -8840,7 +8828,6 @@ textarea.form-control-lg {
   --bs-toast-spacing: 1.5rem;
   --bs-toast-max-width: 350px;
   --bs-toast-font-size: 0.875rem;
-  --bs-toast-color: ;
   --bs-toast-bg: rgba(var(--bs-body-bg-rgb), 0.85);
   --bs-toast-border-width: var(--bs-border-width);
   --bs-toast-border-color: var(--bs-border-color-translucent);
@@ -8897,7 +8884,6 @@ textarea.form-control-lg {
   --bs-modal-width: 500px;
   --bs-modal-padding: 1rem;
   --bs-modal-margin: 0.5rem;
-  --bs-modal-color: ;
   --bs-modal-bg: var(--bs-body-bg);
   --bs-modal-border-color: var(--bs-border-color-translucent);
   --bs-modal-border-width: var(--bs-border-width);
@@ -8911,7 +8897,6 @@ textarea.form-control-lg {
   --bs-modal-header-border-width: var(--bs-border-width);
   --bs-modal-title-line-height: 1.5;
   --bs-modal-footer-gap: 0.5rem;
-  --bs-modal-footer-bg: ;
   --bs-modal-footer-border-color: var(--bs-border-color);
   --bs-modal-footer-border-width: var(--bs-border-width);
   position: fixed;
@@ -9139,7 +9124,6 @@ textarea.form-control-lg {
   --bs-tooltip-max-width: 200px;
   --bs-tooltip-padding-x: 0.5rem;
   --bs-tooltip-padding-y: 0.25rem;
-  --bs-tooltip-margin: ;
   --bs-tooltip-font-size: 0.875rem;
   --bs-tooltip-color: var(--bs-body-bg);
   --bs-tooltip-bg: var(--bs-emphasis-color);
@@ -13811,6 +13795,7 @@ https://github.com/givanz/VvvebJs
         right: 5px; }
         .tree > ol li.file .file-actions .btn {
           padding: 0.25rem 0.3rem;
+          font-size: 0.875rem;
           line-height: 1;
           border-radius: 4px;
           border-color: rgba(13, 110, 253, 0.15); }
@@ -13849,7 +13834,7 @@ https://github.com/givanz/VvvebJs
       background: url(../libs/builder/icons/arrow-down.svg) 5px 0.1rem no-repeat;
       background-size: 12px 12px;
       margin: -1.8em 0 0 0rem;
-      padding: 2rem 0 0 3rem;
+      padding: 2rem 0 0 2,5rem;
       height: auto; }
       .tree > ol li input:checked + ol > li {
         display: block;
@@ -13938,7 +13923,7 @@ body {
 		background:-moz-linear-gradient(left, var(--bs-body-bg) 85%, #fafbfc 100%);
 		background:-webkit-linear-gradient(left, var(--bs-body-bg) 85%, #fafbfc 100%);
 		background:linear-gradient(left, var(--bs-body-bg) 85%, #fafbfc 100%);
-		box-shadow: -1px -2px 2px #f3f3f3 inset;*/
+		box-shadow: -1px -2px 2px var(--bs-border-color) inset;*/
     width: 15vw;
     width: calc(var(--builder-left-panel-width));
     height: 100%;
@@ -13987,7 +13972,7 @@ body {
     background: -moz-linear-gradient(to right, var(--bs-body-bg) 85%, #fafbfc 100%);
     background: -webkit-linear-gradient(to right, var(--bs-body-bg) 85%, #fafbfc 100%);
     background: linear-gradient(to right, var(--bs-body-bg) 85%, #fafbfc 100%);
-    box-shadow: 1px -2px 2px #f3f3f3 inset;
+    box-shadow: 1px -2px 2px var(--bs-border-color) inset;
     width: 15vw;
     width: var(--builder-right-panel-width); }
     #vvveb-builder #right-panel .components-list, #vvveb-builder #right-panel .blocks-list, #vvveb-builder #right-panel .component-properties, #vvveb-builder #right-panel .sections-list {
@@ -14093,11 +14078,11 @@ body {
       top: 0.5rem;
       right: 12px;
       opacity: 0.5; }
-      #vvveb-builder .search .clear-backspace i {
-        font-size: 13px; }
       #vvveb-builder .search .clear-backspace:hover {
         opacity: 1;
         background: var(--bs-border-color); }
+    #vvveb-builder .search i {
+      font-size: 13px; }
     #vvveb-builder .search input:focus + .clear-backspace,
     #vvveb-builder .search input:hover + .clear-backspace {
       opacity: 1;
@@ -14107,7 +14092,7 @@ body {
       top: 4px;
       right: 3px; }
       #vvveb-builder .search .expand button {
-        padding: 0.2rem;
+        padding: 0.25rem;
         background: transparent;
         border: none;
         color: var(--bs-body-color); }
@@ -14199,6 +14184,8 @@ body {
             opacity: 0.15; }
           #vvveb-builder #add-section-box .blocks-list ol li:hover .name, #vvveb-builder #add-section-box .sections-list ol li:hover .name {
             visibility: visible; }
+        #vvveb-builder #add-section-box .blocks-list ol li[data-section="Reusable"] .name, #vvveb-builder #add-section-box .sections-list ol li[data-section="Reusable"] .name {
+          visibility: visible; }
   #vvveb-builder .component-properties-sidepane {
     z-index: 0;
     margin: 0;
@@ -14233,7 +14220,7 @@ body {
       background: rgba(var(--bs-secondary-color-rgb), 0.03); }
     #vvveb-builder .component-properties #right-panel {
       color: #777; }
-    #vvveb-builder .component-properties, #vvveb-builder .component-properties select, #vvveb-builder .component-properties input {
+    #vvveb-builder .component-properties, #vvveb-builder .component-properties select, #vvveb-builder .component-properties input[type="text"] {
       font-size: 12px; }
     #vvveb-builder .component-properties label {
       margin-top: 4px; }
@@ -14291,13 +14278,21 @@ body {
       height: 100%;
       border: none; }
     #vvveb-builder #canvas.tablet {
-      width: 768px !important;
-      left: calc(50% - calc(768 / 2) + 15vw);
-      left: calc(50% - ((768px / 2) + var(--builder-left-panel-width))); }
+      background: var(--bs-border-color); }
+      #vvveb-builder #canvas.tablet #iframe-wrapper {
+        width: 768px;
+        margin: auto;
+        position: relative; }
+        #vvveb-builder #canvas.tablet #iframe-wrapper iframe {
+          resize: both; }
     #vvveb-builder #canvas.mobile {
-      width: 320px !important;
-      left: calc(50% - calc(320 / 2) + 15vw);
-      left: calc(50% - ((320px / 2) + var(--builder-left-panel-width))); }
+      background: var(--bs-border-color); }
+      #vvveb-builder #canvas.mobile #iframe-wrapper {
+        width: 320px;
+        margin: auto;
+        position: relative; }
+        #vvveb-builder #canvas.mobile #iframe-wrapper iframe {
+          resize: both; }
   #vvveb-builder.preview #canvas {
     width: 100%;
     margin-left: 0px;
@@ -14422,15 +14417,19 @@ body {
     border-radius: 3px 3px 0px 0px; }
   #vvveb-builder #select-actions a, #vvveb-builder #wysiwyg-editor.default-editor a, #vvveb-builder #section-actions a#add-section-btn {
     pointer-events: auto;
-    color: var(--bs-white);
+    color: inherit;
     text-decoration: none;
     font-size: 16px;
     padding-right: 2px;
     padding: 2px 5px; }
+    #vvveb-builder #select-actions a:hover, #vvveb-builder #wysiwyg-editor.default-editor a:hover, #vvveb-builder #section-actions a#add-section-btn:hover {
+      background-color: rgba(var(--bs-body-color-rgb), 0.3); }
+  #vvveb-builder #section-actions a#add-section-btn:hover {
+    background-color: rgba(var(--bs-primary-rgb), 0.9); }
   #vvveb-builder #wysiwyg-editor {
     top: auto;
     bottom: 100%;
-    height: 44px;
+    height: -44px;
     right: auto;
     left: -1px;
     display: none;
@@ -14671,6 +14670,7 @@ li[data-type] {
     z-index: 1;
     margin: 0;
     padding: 0;
+    padding-bottom: 2rem;
     white-space: nowrap;
     text-align: center; }
     .drag-elements-sidepane ul > li {
@@ -14709,7 +14709,6 @@ li[data-type] {
           .drag-elements-sidepane ul > li ol li[data-type] {
             border: none; }
             .drag-elements-sidepane ul > li ol li[data-type]:hover {
-              /*cursor: hand;*/
               cursor: grab;
               cursor: -moz-grab;
               cursor: -webkit-grab;
@@ -14867,6 +14866,8 @@ li[data-type] {
       opacity: 0.15; }
     .blocks .drag-elements-sidepane li[data-type]:hover .name, .sections .drag-elements-sidepane li[data-type]:hover .name {
       visibility: visible; }
+  .blocks .drag-elements-sidepane li[data-type][data-section="Reusable"] .name, .sections .drag-elements-sidepane li[data-type][data-section="Reusable"] .name {
+    visibility: visible; }
   .blocks .drag-elements-sidepane li[data-type]:before, .sections .drag-elements-sidepane li[data-type]:before {
     content: " ";
     background: var(--bs-body-bg);
@@ -15146,14 +15147,17 @@ ul.autocomplete li.selected {
   background-color: Highlight;
   color: var(--bs-body-bg); }
 
+/*
 .btn-light:not(:disabled):not(.disabled):active, .btn-light:not(:disabled):not(.disabled).active, .show > .btn-light.dropdown-toggle {
-  box-shadow: 0px 0px 1px 0px rgba(255, 255, 255, 0.1);
-  background-color: rgba(var(--bs-primary), 0.07);
-  border-radius: 0px;
-  border-color: transparent; }
-  .btn-light:not(:disabled):not(.disabled):active:focus, .btn-light:not(:disabled):not(.disabled).active:focus, .show > .btn-light.dropdown-toggle:focus {
-    box-shadow: 0px 0px 1px 0px rgba(var(--bs-primary), 0.2); }
-
+	box-shadow: 0px 0px 1px 0px rgba( 255,255,255, 0.1);
+	background-color:rgba( $builder-background-color, 0.07);
+	border-radius:0px;
+	border-color: transparent;
+	&:focus {
+		box-shadow: 0px 0px 1px 0px rgba( $builder-background-color, 0.2);
+	}
+}
+*/
 .input-list-select .elements {
   max-height: 300px;
   overflow-y: auto;
