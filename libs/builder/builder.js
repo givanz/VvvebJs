@@ -690,7 +690,7 @@ Vvveb.WysiwygEditor = {
 				e.preventDefault();
 				return false;
 		});
-	
+
 		let sizes = "<option value=''> - Font size - </option>";
 		for (i = 1;i <= 128; i++) {
 			sizes += "<option value='"+ i +"px'>"+ i +"</option>";
@@ -2187,6 +2187,12 @@ Vvveb.Gui = {
 		(Vvveb.Builder.isPreview == true)?Vvveb.Builder.isPreview = false:Vvveb.Builder.isPreview = true;
 		$("#iframe-layer").toggle();
 		$("#vvveb-builder").toggleClass("preview");
+	},
+
+	erase : function () {
+		if(confirm('Clean the current Canvas ?')){
+			Vvveb.Builder.setHtml('');
+		}
 	},
 	
 	fullscreen : function () {
