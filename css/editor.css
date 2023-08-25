@@ -13761,17 +13761,14 @@ https://github.com/givanz/VvvebJs
       list-style: none;
       color: var(--bs-body-color);
       overflow: hidden; }
-      html[data-bs-theme="dark"] .tree > ol li > label {
-        color: #333;
-        filter: invert(100%); }
       .tree > ol li:hover {
         color: #007bff; }
     .tree > ol li.file {
       border: 1px solid transparent; }
       .tree > ol li.file:hover, .tree > ol li.file.active {
-        background-color: rgba(13, 110, 253, 0.07); }
+        background-color: rgba(var(--bs-link-color), 0.07); }
       .tree > ol li.file:hover {
-        background-color: rgba(13, 110, 253, 0.07); }
+        background-color: rgba(var(--bs-link-color), 0.07); }
         .tree > ol li.file:hover .file-actions {
           display: block; }
       .tree > ol li.file > label {
@@ -13787,7 +13784,7 @@ https://github.com/givanz/VvvebJs
         line-height: 28px;
         max-height: 2rem; }
         .tree > ol li.file > label:hover {
-          color: #0d6efd; }
+          color: var(--bs-link-color); }
       .tree > ol li.file .file-actions {
         display: none;
         position: absolute;
@@ -13798,7 +13795,7 @@ https://github.com/givanz/VvvebJs
           font-size: 0.875rem;
           line-height: 1;
           border-radius: 4px;
-          border-color: rgba(13, 110, 253, 0.15); }
+          --bs-btn-border-color: rgba(var(--bs-link-color-rgb), 0.15); }
     .tree > ol li.page > label {
       background-image: url(../libs/builder/icons/panel.svg); }
     .tree > ol li input {

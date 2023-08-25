@@ -25,8 +25,8 @@
 			
 			> label {
 				html[data-bs-theme="dark"] & { 
-					color: #333;
-					filter: invert(100%);
+					//color: #333;
+					//filter: invert(100%);
 				}
 			}
 			
@@ -37,7 +37,7 @@
 			
 			&.active
 			{
-				//background-color:$primary;
+				//background-color:var(--bs-link-color);
 				//color:#fff;
 				> label > span, > a > span  
 				{
@@ -52,12 +52,12 @@
 			border:1px solid transparent;
 			
 			&:hover, &.active {
-				background-color:rgba($primary, 0.07);
+				background-color:rgba(var(--bs-link-color), 0.07);
 			}
 			
 			&:hover {
-				background-color:rgba($primary, 0.07);
-				//border: 1px solid rgba($primary, 0.05);
+				background-color:rgba(var(--bs-link-color), 0.07);
+				//border: 1px solid rgba(var(--bs-link-color), 0.05);
 				
 				.file-actions {
 					display:block;
@@ -81,7 +81,7 @@
 
 				&:hover
 				{
-					color:$primary;
+					color:var(--bs-link-color);
 				}
 			}
 			
@@ -96,7 +96,7 @@
 					font-size:0.875rem;
 					line-height:1;
 					border-radius:4px;
-					border-color:rgba($primary, 0.15);
+					--bs-btn-border-color: rgba(var(--bs-link-color-rgb), 0.15);
 				}
 			}
 		}

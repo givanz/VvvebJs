@@ -700,8 +700,8 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
                				<input type="submit" class="btn btn-lg btn-default w-100" value="Sign In" />
                			</form>
                			<div id="tabs" data-tabs="tabs">
-               				<p class="text-center"><a href="#register" data-toggle="tab">Need an Account?</a></p>
-               				<p class="text-center"><a href="#select" data-toggle="tab">Select Account</a></p>
+               				<p class="text-center"><a href="#register" data-bs-toggle="tab">Need an Account?</a></p>
+               				<p class="text-center"><a href="#select" data-bs-toggle="tab">Select Account</a></p>
               				</div>
 						</div>
 						<div class="tab-pane" id="register">
@@ -712,13 +712,13 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
 								<input type="submit" class="btn btn-lg btn-default w-100" value="Sign Up" />
 							</form>
 							<div id="tabs" data-tabs="tabs">
-               			<p class="text-center"><a href="#login" data-toggle="tab">Have an Account?</a></p>
+               			<p class="text-center"><a href="#login" data-bs-toggle="tab">Have an Account?</a></p>
               			</div>
 						</div>
 						<div class="tab-pane" id="select">
 							<div id="tabs" data-tabs="tabs">
 								<div class="media account-select">
-									<a href="#user1" data-toggle="tab">
+									<a href="#user1" data-bs-toggle="tab">
 										<div class="pull-left">		
 											<img class="select-img" src="https://source.unsplash.com/9UVmlIb0wJU/500x500"
                     alt="">
@@ -730,7 +730,7 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
 								</div>
                                 <hr />
 								<div class="media account-select">
-									<a href="#user2" data-toggle="tab">
+									<a href="#user2" data-bs-toggle="tab">
 										<div class="pull-left">		
 											<img class="select-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                     alt="">
@@ -741,7 +741,7 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
 									</a>
 								</div>
                                 <hr />
-               			<p class="text-center"><a href="#login" data-toggle="tab">Back to Login</a></p>
+               			<p class="text-center"><a href="#login" data-bs-toggle="tab">Back to Login</a></p>
               			</div>
 						</div>
 						<div class="tab-pane" id="user1">
@@ -753,8 +753,8 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
 								<input type="password" class="form-control" placeholder="Password" autofocus required>
 								<input type="submit" class="btn btn-lg btn-default w-100" value="Sign In" />
 							</form>
-							<p class="text-center"><a href="#login" data-toggle="tab">Back to Login</a></p>
-               		<p class="text-center"><a href="#select" data-toggle="tab">Select another Account</a></p>
+							<p class="text-center"><a href="#login" data-bs-toggle="tab">Back to Login</a></p>
+               		<p class="text-center"><a href="#select" data-bs-toggle="tab">Select another Account</a></p>
 						</div>
 						<div class="tab-pane" id="user2">
 							<img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
@@ -765,8 +765,8 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
 								<input type="password" class="form-control" placeholder="Password" autofocus required>
 								<input type="submit" class="btn btn-lg btn-default w-100" value="Sign In" />
 							</form>
-							<p class="text-center"><a href="#login" data-toggle="tab">Back to Login</a></p>
-               		<p class="text-center"><a href="#select" data-toggle="tab">Select another Account</a></p>
+							<p class="text-center"><a href="#login" data-bs-toggle="tab">Back to Login</a></p>
+               		<p class="text-center"><a href="#select" data-bs-toggle="tab">Select another Account</a></p>
 						</div>
 					</div>
             </div>
