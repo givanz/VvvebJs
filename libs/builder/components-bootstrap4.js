@@ -2338,7 +2338,7 @@ Vvveb.Components.extend("_base", "html/paragraph", {
 Vvveb.Components.extend("_base", "html/video", {
     nodes: ["video"],
     name: "Video",
-    html: '<video width="320" height="240" playsinline loop autoplay><source src="https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4"><video>',
+    html: '<video width="320" height="240" playsinline loop autoplay><source src="../../media/sample.webm"><video>',
     dragHtml: '<img  width="320" height="240" src="' + Vvveb.baseUrl + 'icons/video.svg">',
 	image: "icons/video.svg",
     properties: [{

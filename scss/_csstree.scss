@@ -144,10 +144,10 @@
 		li label
 		{
 			background: url(../libs/builder/icons/folder.svg) 24px 1px no-repeat;
-			background-size:24px 24px;
+			background-size:22px 22px;
 			cursor: pointer;
 			display: block;
-			padding-left: 56px;
+			padding-left: 52px;
 			margin:0px;
 			font-size:12px;
 			line-height:28px;
@@ -157,8 +157,8 @@
 		{
 			background: url(../libs/builder/icons/arrow-down.svg) 5px .1rem no-repeat;
 			background-size:12px 12px;
-			margin: -1.8em 0 0 0rem;
-			padding: 2rem 0 0 2,5rem;
+			margin: -2.5em 0 0 0rem;
+			padding: 2rem 0 0 2rem;
 			height: auto;
 
 			> li { display: block; margin: 0 0 0.5em;  /* 2px */}

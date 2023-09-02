@@ -345,7 +345,7 @@ body
 			.header
 			{
 				font-size: 11px;
-				font-weight: 600;
+				font-weight: 500;
 				height: 2rem;
 				margin: 0;
 				padding: 0;
@@ -361,6 +361,12 @@ body
 				a {
 				  color: var(--bs-link-color);
 				}
+			}
+			
+			.btn-add {
+				font-size:13px;
+				line-height:1.6;		
+				--bs-btn-border-color:transparent;
 			}
 			
 			.tree
@@ -455,6 +461,8 @@ body
 				&.btn-light {
 					font-size: 1.25rem;
 					padding: 0.25rem 0.5rem;
+					--bs-btn-active-bg: var(--bs-primary-bg-subtle);
+					--bs-btn-active-border-color: transparent;
 				}
 				
 				&.btn-primary {
@@ -1124,7 +1132,7 @@ body
 		right:-1px;
 		top:-25px;
 		background:var(--bs-primary);
-		color:var(--bs-body-bg);
+		color:var(--bs-light);
 		padding:0px 0px;
 		border-radius:3px 3px 0px 0px;
 	}
@@ -1346,7 +1354,7 @@ body
 				
 				i {
 					padding: 0.4rem 0rem;
-					font-size:1.4rem;
+					font-size:1.3rem;
 					border-radius: 3px;
 					display:block;
 					border:1px solid transparent;
@@ -1391,7 +1399,7 @@ body
 		padding:0.8rem 0 0.8rem;
 		text-align:center;
 		i {
-			font-size:1.6rem;
+			font-size:1.4rem;
 			line-height:1.2rem;
 		}
 	}
@@ -1685,7 +1693,7 @@ padding-top:1rem;
 	.header_check ~ label .header-arrow {
 		right:0.5rem;
 		top:0.7rem;
-		padding:0.3rem 0.5rem;
+			padding:0.1rem 0.5rem;
 		
 		&:hover {
 			background:rgba(18, 83, 205, 0.1);
