@@ -2484,28 +2484,42 @@ Vvveb.StyleManager = {
 
 
 	_getCssStyle: function(element, styleProp){
-		if (!element.length) return '';
-		
 		var value = "";
-		var el = element.get(0);
+		var el;
 
-		if (typeof(element) == "string") {
-			selector = element;
-		} else {
+		if (element.jquery) {
+			if ( !element.length) return '';
+			value = "";
+			el = element.get(0);
 			selector = this.getSelectorForElement(el);
+		} else if (element.nodeType) {
+			el = element;
+			selector = this.getSelectorForElement(el);
+		} else if (typeof(element) == "string") {
+			selector = element;
+			element = $(selector)[0] ?? false;
+			
+			if (!element) return '';
+		} else {
+			return '';
 		}
 
 		media = $("#canvas").hasClass("tablet") ? "tablet" : $("#canvas").hasClass("mobile") ? "mobile" : "desktop";
 
-		if (el.style && el.style.length > 0 && el.style[styleProp])//check inline
+		if (el.style && el.style.length > 0 && el.style[styleProp]) {//check inline
 			var value = el.style[styleProp];
-		else if (this.styles[media] !== undefined &&  this.styles[media][selector] !== undefined && this.styles[media][selector][styleProp] !== undefined) {	//check defined css
-			var value = this.styles[media][selector][styleProp];
 		}
-		else if (window.getComputedStyle) {
-			var value = document.defaultView.getDefaultComputedStyle ?
-				document.defaultView.getDefaultComputedStyle(el, null).getPropertyValue(styleProp) :
-				window.getComputedStyle(el, null).getPropertyValue(styleProp);
+		else if (this.styles[media] !== undefined &&  this.styles[media][selector] !== undefined && this.styles[media][selector][styleProp] !== undefined) {//check defined css
+			var value = this.styles[media][selector][styleProp];
+
+			if (styleProp == 'font-family') {
+				console.log(value);
+			}
+		} else if (window.getComputedStyle) {
+			var value = document.defaultView.getDefaultComputedStyle ? 
+						document.defaultView.getDefaultComputedStyle(el,null).getPropertyValue(styleProp) : 
+						window.getComputedStyle(el,null).getPropertyValue(styleProp);
+
 		}
 
 		return value;
@@ -3232,8 +3246,7 @@ Vvveb.FontsManager = {
 		for (i in this.activeFonts) {
 			let elementFont = this.activeFonts[i];
 			if (elementFont.element) {
-				//if (getComputedStyle(elementFont.element)['font-family'] != elementFont.fontFamily) {
-				if (Vvveb.StyleManager.getStyle(element,'font-family') != elementFont.fontFamily) {
+				if (Vvveb.StyleManager.getStyle(elementFont.element,'font-family').replaceAll('"','') != elementFont.fontFamily) {
 					this.removeFont(elementFont.provider, elementFont.fontFamily);
 				}
 			}
