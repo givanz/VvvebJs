@@ -562,6 +562,8 @@ var GridInput = $.extend({}, Input, {
 
 	setValue: function(value) {
 		$('select', this.element).val(value);
+		//fix selected attribute not working bug
+		$('select option[selected]', this.element).prop( 'selected', 'selected' );
 	},
 	
 	init: function(data) {

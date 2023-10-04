@@ -728,6 +728,7 @@ Vvveb.Components.add("html/gridcolumn", {
     name: "Grid Column",
     image: "icons/grid_row.svg",
     classesRegex: ["col-"],
+    classes: ["col"],
     html: '<div class="col-sm-4"><h3>col-sm-4</h3></div>',
     properties: [{
         name: "Column",
@@ -739,11 +740,12 @@ Vvveb.Components.add("html/gridcolumn", {
 		beforeInit: function(node) {
 			_class = $(node).attr("class");
 			
-			var reg = /col-([^-\$ ]*)?-?(\d+)/g; 
+			var reg = /col(-[^-\$ ]*)?-?(\d+)?/g; 
 			var match;
 
 			while ((match = reg.exec(_class)) != null) {
-				this.data["col" + ((match[1] != undefined)?"_" + match[1]:"")] = match[2];
+				let key = "col" + ((match[1] != undefined) ? "_" + match[1].replace('-','') : "");
+				this.data[key] = match[2] ?? '';
 			}
 		},
 		
@@ -775,15 +777,16 @@ Vvveb.Components.add("html/gridrow", {
 		var i = 0;
 		var j = 0;
 		
-		$(node).find('[class*="col-"]').each(function() {
+		$(node).find('[class*="col-"],.col').each(function() {
 			_class = $(this).attr("class");
 			
-			var reg = /col-([^-\$ ]*)?-?(\d+)/g; 
+			var reg = /col(-[^-\$ ]*)?-?(\d+)?/g; 
 			var match;
 			var data = {};
 
 			while ((match = reg.exec(_class)) != null) {
-				data["col" + ((match[1] != undefined)?"_" + match[1]:"")] = match[2];
+				let key = "col" + ((match[1] != undefined) ? "_" + match[1].replace('-','') : "");
+				data[key] = match[2] ?? '';
 			}
 			
 			i++;
@@ -854,7 +857,7 @@ Vvveb.Components.add("html/gridrow", {
         data: {text:"Add column", icon:"la la-plus"},
         onChange: function(node)
         {
-			 $(node).append('<div class="col-3">Col-3</div>');
+			 $(node).append('<div class="col-3"><h3>Col-3</h3></div>');
 			 
 			 //render component properties again to include the new column inputs
 			 Vvveb.Components.render("html/gridrow");
