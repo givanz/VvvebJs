@@ -19630,3 +19630,6 @@ label.form-check .form-check-input {
 
 video, audio {
   max-width: 100%; }
+
+.modal .modal-content {
+    height: 100%; }

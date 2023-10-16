@@ -609,8 +609,9 @@
 									
 									<a id="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
 									<a id="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
+									<a id="edit-code-btn" href="" title="Edit html code"><i class="icon-code-outline"></i></a>
 
-								<a id="save-reusable-btn" href="" title="Save as reusable" class="mx-2"><i class="icon-save-outline"></i></i></a>
+									<a id="save-reusable-btn" href="" title="Save as reusable" class="mx-2"><i class="icon-save-outline"></i></i></a>
 									<a id="clone-btn" href="" title="Clone element"><i class="icon-copy-outline"></i></a>
 									<a id="delete-btn" href="" title="Remove element"><i class="icon-trash-outline"></i></i></a>
 								</div>
@@ -1446,6 +1447,39 @@
 
 <!--// end templates -->
 
+<!-- code editor modal -->
+<div class="modal modal-full fade" id="codeEditorModal" tabindex="-1" aria-labelledby="codeEditorModal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+	  <input type="hidden" name="file" value="">  	
+	
+      <div class="modal-header">
+        <span class="modal-title"></span>
+		<div class="float-end">
+			<button type="button" class="btn btn-secondary btn-icon" data-bs-dismiss="modal"><i class="la la-times"></i>Close</button>
+			
+			<button class="btn btn-primary btn-icon save-btn" title="Save changes">
+				<span class="loading d-none">
+				<i class="la la-save"></i>
+				  <span class="spinner-border spinner-border-sm align-middle" role="status" aria-hidden="true">
+				  </span>
+				  <span>Saving </span> ... </span>
+
+				<span class="button-text">
+				  <i class="la la-save"></i> <span>Save changes</span>
+				</span>				
+			</button>
+		</div>
+      </div>
+	  
+      <div class="modal-body p-0">
+        <textarea class="form-control h-100"></textarea>
+      </div>
+	  
+
+    </div>
+  </div>
+</div>
 
 <!-- export html modal-->
 <div class="modal fade" id="textarea-modal" tabindex="-1" role="dialog" aria-labelledby="textarea-modal" aria-hidden="true">
@@ -1667,10 +1701,10 @@ Clone or copy https://github.com/tinymce/tinymce-dist to libs/tinymce-dist
 
 <!-- 
 CKEditor plugin
-Unzip the latest ckeditor release zip from https://github.com/ckeditor/ckeditor4/releases to libs/ckeditor 
+Unzip the latest ckeditor release zip from https://github.com/ckeditor/ckeditor4/releases to libs/ckeditor or use the CDN
 -->
 <!--
-<script src="libs/ckeditor/ckeditor.js"></script>
+<script src="libs/ckeditor/ckeditor.js"></script> <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 <script src="libs/builder/plugin-ckeditor.js"></script>	
 -->
 

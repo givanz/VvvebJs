@@ -1651,6 +1651,22 @@ Vvveb.Builder = {
 			return false;
 		});
 
+		$("#edit-code-btn").on("click", function(event) {
+			let selectedEl = Vvveb.Builder.selectedEl.get(0);
+			let value = selectedEl.innerHTML;
+			// uncomment to use outerHTML, not recommended
+			//let value = selectedEl.outerHTML;
+			Vvveb.ModalCodeEditor.show();
+			Vvveb.ModalCodeEditor.setValue(value);
+
+			$(window).one("vvveb.ModalCodeEditor.save",  function(event, value) {
+				selectedEl.innerHTML = value;
+				//selectedEl.outerHTML = value;
+			});
+			
+			return false;
+		});
+
 		$("#delete-btn").on("click", function(event) {
 			$("#select-box").hide();
 			
@@ -1999,6 +2015,53 @@ Vvveb.Builder = {
 	}
 
 };
+
+Vvveb.ModalCodeEditor = {
+	modal: false,
+	editor: false,
+	
+	init: function(modal = false, editor = false) {
+		if (modal) {
+			this.modal = modal;
+		} else {
+			this.modal = $('#codeEditorModal');
+		}
+		if (editor) {
+			this.editor = editor;
+		} else {
+			this.editor = $('textarea', this.modal);
+		}
+		
+		let self = this;
+
+		$('.save-btn', this.modal).on("click",  function(event) {
+			$(window).triggerHandler("vvveb.ModalCodeEditor.save", self.getValue());
+			self.hide();
+		});
+	},
+	
+	show: function(value) {
+		if (!this.modal) {
+			this.init();
+		}
+		this.modal.modal('show');
+	},
+
+	hide: function(value) {
+		this.modal.modal('hide');
+	},
+	
+	getValue: function() {
+		return this.editor.val();;
+	},
+	
+	setValue: function(value) {
+		if (!this.modal) {
+			this.init();
+		}
+		this.editor.val(value);
+	},
+}
 
 Vvveb.CodeEditor = {
 	

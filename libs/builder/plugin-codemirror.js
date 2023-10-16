@@ -43,6 +43,10 @@ Vvveb.CodeEditor = {
 			var scrollInfo = this.codemirror.getScrollInfo();
 			this.codemirror.setValue(Vvveb.Builder.getHtml());
 			this.codemirror.scrollTo(scrollInfo.left, scrollInfo.top);
+			let self = this;
+			setTimeout(function() {
+				self.codemirror.refresh();
+			}, 300);
 		}
 	},
 
@@ -65,3 +69,37 @@ Vvveb.CodeEditor = {
 		this.destroy();
 	}
 }
+
+
+// override modal code editor to use code mirror
+Vvveb.ModalCodeEditor.init = function (modal = false, editor = false) {
+	this.modal  = $('#codeEditorModal');
+	this.editor = CodeMirror.fromTextArea(document.querySelector("#codeEditorModal textarea"), {
+		mode: 'text/html',
+		lineNumbers: true,
+		autofocus: true,
+		lineWrapping: true,
+		//viewportMargin:Infinity,
+		theme: 'material'
+	});
+	
+	let self = this;
+	$('.save-btn', this.modal).on("click",  function(event) {
+		$(window).triggerHandler("vvveb.ModalCodeEditor.save", self.getValue());
+		self.hide();
+	});
+}
+
+Vvveb.ModalCodeEditor.setValue = function (value) {
+	var scrollInfo = this.editor.getScrollInfo();
+	this.editor.setValue(value);
+	this.editor.scrollTo(scrollInfo.left, scrollInfo.top);
+	let self = this;
+	setTimeout(function() {
+		self.editor.refresh();
+	}, 300);
+};
+
+Vvveb.ModalCodeEditor.getValue = function (value) {
+	return this.editor.getValue();
+};
