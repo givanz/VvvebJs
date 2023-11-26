@@ -17,7 +17,7 @@
 
 ## [Live Demo](https://www.vvveb.com/vvvebjs/editor.html)
 
-For a full featured open source CMS using VvvebJs check [Vvveb CMS](https://www.vvveb.com)
+For a full featured Open Source CMS using VvvebJs page builder check [Vvveb CMS](https://github.com/givanz/Vvveb)
 
 Using [Vvveb landing page template](https://github.com/givanz/landing) for demo page and Bootstrap 5 sections and blocks.
 
@@ -52,33 +52,112 @@ By default the editor comes with Bootstrap 5 and Widgets components and can be e
 
 ## Install
 
+* Clone the repository 
+```bash
+#git 2.13+ 
+git clone --recurse-submodules https://github.com/givanz/VvvebJs
+
+# older git versions 
+git clone --recursive https://github.com/givanz/VvvebJs
+```
+
+* Pull changes 
+```bash
+git pull --recurse-submodules
+```
+
+## Usage
+
 Clone the repository or download a release then open `editor.html`
 
-Because of browser iframe security you need to use a webserver such as xampp and open `http://localhost/editor.html`
+Because of browser iframe security you need to use a webserver such as apache/xampp and open `http://localhost/editor.html`
 
 To use the image upload or page save feature you need to have php installed.
 
-#### Scss
 
-To compile scss to css first install gulp 
+## Save page
+
+Save page function needs either php or node
+
+### PHP
+
+If you use xampp or a shared hosting account php should work without any change.
+
+Saving is done using [save.php](save.php)
+
+### Node
+
+For node go to VvvebJs folder and run
+
+```bash
+npm install express
+node save.js
+```
+
+Open http://localhost:8080/editor.html
+
+Saving is done using [save.js](save.js)
+
+### Docker
+
+From VvvebJs folder run
+
+```bash
+docker-compose up
+```
+
+Open http://localhost:8080/editor.php
+
+## [Landing template](https://github.com/givanz/landing)
+
+To make changes to template files or sections run the following commands from `demo/landing` folder
+
+### Install gulp
 
 ```bash
 npm i
 ```
 
-Then you can run 
+### Generate html files
+
+Template html partials are located in `demo/landing/src` folder.
 
 ```bash
 npm run gulp
 ```
 
-or use watch to compile on file change.
+### Watch for changes for development
 
 ```bash
 npm run gulp watch
 ```
 
+### Generate sections list for page builder
+
+Sections html files are located in `demo/landing/src/sections` folder grouped in folders with the section group name.
+
+```bash
+npm run gulp sections
+```
+
+### Generate blocks list
+
+Blocks html files are located in `demo/landing/src/blocks` folder grouped in folders with the blocks group name.
+
+```bash
+npm run gulp blocks
+```
+
+### Generate screenshots for sections
+
+```bash
+npm run gulp screenshots
+```
+
 ## Usage
+
+### Initialize example
+
 
 ```js
 <!-- jquery-->
@@ -134,38 +213,35 @@ $(function() {
 <script>
 ```
 
-For editor html and components/input javascript templates edit `editor.html`
+For editor html and components/input javascript templates edit [editor.html](editor.html)
 
-For css changes edit `scss/editor.scss` and `scss/_builder.scss`
+For css changes edit [scss/editor.scss](scss/editor.scss) and [scss/_builder.scss](scss/_builder.scss)
+
+
+### Scss
+
+To compile scss to css first install gulp 
+
+```bash
+npm i
+```
+
+Then you can run 
+
+```bash
+npm run gulp
+```
+
+or use watch to compile on file change.
+
+```bash
+npm run gulp watch
+```
+
 
 ## Documentation
 
 For documentation check the [wiki](https://github.com/givanz/VvvebJs/wiki)
-
-## Save page
-
-Save page function needs either php or node
-
-### PHP
-
-If you use xampp or a shared hosting account php should work without any change.
-
-Saving is done using [save.php](save.php)
-
-### Node
-
-For node go to VvvebJs folder and run
-
-```bash
-npm install express
-node save.js
-```
-
-Open http://localhost:8080/editor.html
-
-Saving is done using [save.js](save.js)
-
-## Usage
 
 ## Support
 

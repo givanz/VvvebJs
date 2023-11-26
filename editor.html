@@ -1673,7 +1673,7 @@ Vvveb.themeBaseUrl = 'demo/landing/';
 <script src="libs/builder/components-widgets.js"></script>	
 
 <!-- sections-->
-<!-- <script src="demo/landing/sections/sections.js"></script> -->
+<script src="demo/landing/sections/sections.js"></script>
 <script src="libs/builder/sections-bootstrap4.js"></script>
 
 <!-- blocks-->
@@ -1722,35 +1722,432 @@ let renameUrl = 'save.php?action=rename';
 let deleteUrl = 'save.php?action=delete';	
 let saveReusableUrl = 'save.php?action=saveReusable';	
 
-let pages = 
-	[
-		{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
-		{name:"landing-page", title:"Landing page",  url: "demo/landing/index.html", file: "demo/landing/index.html", assets: ['demo/landing/css/style.css']},
-		{name:"album", title:"Album",  url: "demo/album/index.html", file: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
-		{name:"blog", title:"Blog",  url: "demo/blog/index.html", file: "demo/blog/index.html", folder:"content", assets: ['demo/blog/blog.css']},
-		{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html",  file: "demo/carousel/index.html", folder:"content", assets: ['demo/carousel/carousel.css']},
-		{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", file: "demo/offcanvas/index.html", folder:"content", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
-		{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", file: "demo/pricing/index.html", folder:"ecommerce", assets: ['demo/pricing/pricing.css']},
-		{name:"product", title:"Product",  url: "demo/product/index.html", file: "demo/product/index.html", folder:"ecommerce", assets: ['demo/product/product.css']},
-		//uncomment php code below and rename file to .php extension to load saved html files in the editor or use editor.php
-		/*
-		<?php 
-		   $htmlFiles = glob('{my-pages/*.html,demo/*\/*.html, demo/*.html}',  GLOB_BRACE);
-		   foreach ($htmlFiles as $file) { 
-			   if (in_array($file, array('new-page-blank-template.html', 'editor.html'))) continue;//skip template files
-			   $pathInfo = pathinfo($file);
-			   $filename = $pathInfo['filename'];
-			   $folder = preg_replace('@/.+?$@', '', $pathInfo['dirname']);
-			   $subfolder = preg_replace('@^.+?/@', '', $pathInfo['dirname']);
-			   if ($filename == 'index' && $subfolder) {
-				   $filename = $subfolder;
-			   }
-			   $url = $pathInfo['dirname'] . '/' . $pathInfo['basename'];
-		?>
-		{name:"<?php echo ucfirst($filename);?>", file:"<?php echo ucfirst($filename);?>", title:"<?php echo ucfirst($filename);?>",  url: "<?php echo $url;?>", folder:"<?php echo $folder?>"},
-		<?php } ?>
-		*/
-	];
+let pages = {
+	//uncomment php code below and rename file to .php extension to load saved html files in the editor or use editor.php
+	/*
+	<?php 
+	   $htmlFiles = glob('{my-pages/*.html,demo/*\/*.html, demo/*.html}',  GLOB_BRACE);
+	   foreach ($htmlFiles as $file) { 
+		   if (in_array($file, array('new-page-blank-template.html', 'editor.html'))) continue;//skip template files
+		   $pathInfo = pathinfo($file);
+		   $filename = $pathInfo['filename'];
+		   $folder = preg_replace('@/.+?$@', '', $pathInfo['dirname']);
+		   $subfolder = preg_replace('@^.+?/@', '', $pathInfo['dirname']);
+		   if ($filename == 'index' && $subfolder) {
+			   $filename = $subfolder;
+		   }
+		   $url = $pathInfo['dirname'] . '/' . $pathInfo['basename'];
+	?>
+	"<?php echo ucfirst($filename);?>":{name:"<?php echo ucfirst($filename);?>", file:"<?php echo ucfirst($filename);?>", title:"<?php echo ucfirst($filename);?>",  url: "<?php echo $url;?>", folder:"<?php echo $folder?>"},
+	<?php } ?>
+	*/
+  "index": {
+    "name": "index",
+    "filename": "index.html",
+    "file": "index.html",
+    "url": "demo/landing/index.html",
+    "title": "Home page",
+    "folder": null,
+    "description": "Website homepage"
+  },
+  "contact": {
+    "name": "contact",
+    "filename": "contact.html",
+    "file": "contact.html",
+    "url": "demo/landing/contact.html",
+    "title": "Contact us page",
+    "folder": null,
+    "description": "Contact us page"
+  },
+  "blank": {
+    "name": "blank",
+    "filename": "blank.html",
+    "file": "blank.html",
+    "url": "demo/landing/blank.html",
+    "title": "Blank page",
+    "folder": null,
+    "description": "Template page used for new pages"
+  },
+  "error404": {
+    "name": "error404",
+    "filename": "error404.html",
+    "file": "error404.html",
+    "url": "demo/landing/error404.html",
+    "title": "Page not found",
+    "folder": null,
+    "description": "Shows when a page is not available"
+  },
+  "error500": {
+    "name": "error500",
+    "filename": "error500.html",
+    "file": "error500.html",
+    "url": "demo/landing/error500.html",
+    "title": "Server error",
+    "folder": null,
+    "description": "Site error display page"
+  },
+  "index-blog": {
+    "name": "index-blog",
+    "filename": "index-blog.html",
+    "file": "index-blog.html",
+    "url": "demo/landing/index-blog.html",
+    "title": "Index blog",
+    "folder": null,
+    "description": ""
+  },
+  "index-landing": {
+    "name": "index-landing",
+    "filename": "index-landing.html",
+    "file": "index-landing.html",
+    "url": "demo/landing/index-landing.html",
+    "title": "Index landing",
+    "folder": null,
+    "description": ""
+  },
+  "index.coming-soon": {
+    "name": "index.coming-soon",
+    "filename": "index.coming-soon.html",
+    "file": "index.coming-soon.html",
+    "url": "demo/landing/index.coming-soon.html",
+    "title": "Coming soon",
+    "folder": null,
+    "description": "Coming soon message page"
+  },
+  "index.maintenance": {
+    "name": "index.maintenance",
+    "filename": "index.maintenance.html",
+    "file": "index.maintenance.html",
+    "url": "demo/landing/index.maintenance.html",
+    "title": "Under maintenance",
+    "folder": null,
+    "description": "Website under maintenance message page"
+  },
+  "email-new": {
+    "name": "email-new",
+    "filename": "new.html",
+    "file": "email/order/new.html",
+    "url": "demo/landing/email/order/new.html",
+    "title": "New",
+    "folder": "email",
+    "description": ""
+  },
+  "email-new.txt": {
+    "name": "email-new.txt",
+    "filename": "new.txt.html",
+    "file": "email/order/new.txt.html",
+    "url": "demo/landing/email/order/new.txt.html",
+    "title": "New txt",
+    "folder": "email",
+    "description": ""
+  },
+  "email-reset": {
+    "name": "email-reset",
+    "filename": "reset.html",
+    "file": "email/user/reset.html",
+    "url": "demo/landing/email/user/reset.html",
+    "title": "Reset",
+    "folder": "email",
+    "description": ""
+  },
+  "email-reset.txt": {
+    "name": "email-reset.txt",
+    "filename": "reset.txt.html",
+    "file": "email/user/reset.txt.html",
+    "url": "demo/landing/email/user/reset.txt.html",
+    "title": "Reset txt",
+    "folder": "email",
+    "description": ""
+  },
+  "email-signup": {
+    "name": "email-signup",
+    "filename": "signup.html",
+    "file": "email/user/signup.html",
+    "url": "demo/landing/email/user/signup.html",
+    "title": "Signup",
+    "folder": "email",
+    "description": ""
+  },
+  "email-signup.txt": {
+    "name": "email-signup.txt",
+    "filename": "signup.txt.html",
+    "file": "email/user/signup.txt.html",
+    "url": "demo/landing/email/user/signup.txt.html",
+    "title": "Signup txt",
+    "folder": "email",
+    "description": ""
+  },
+  "user-edit": {
+    "name": "user-edit",
+    "filename": "edit.html",
+    "file": "user/edit.html",
+    "url": "demo/landing/user/edit.html",
+    "title": "Edit",
+    "folder": "user",
+    "description": ""
+  },
+  "user-reset": {
+    "name": "user-reset",
+    "filename": "reset.html",
+    "file": "user/reset.html",
+    "url": "demo/landing/user/reset.html",
+    "title": "Reset",
+    "folder": "user",
+    "description": ""
+  },
+  "cart-cart": {
+    "name": "cart-cart",
+    "filename": "cart.html",
+    "file": "cart/cart.html",
+    "url": "demo/landing/cart/cart.html",
+    "title": "Cart",
+    "folder": "cart",
+    "description": ""
+  },
+  "checkout-checkout": {
+    "name": "checkout-checkout",
+    "filename": "checkout.html",
+    "file": "checkout/checkout.html",
+    "url": "demo/landing/checkout/checkout.html",
+    "title": "Checkout",
+    "folder": "checkout",
+    "description": ""
+  },
+  "checkout-confirm": {
+    "name": "checkout-confirm",
+    "filename": "confirm.html",
+    "file": "checkout/confirm.html",
+    "url": "demo/landing/checkout/confirm.html",
+    "title": "Confirm",
+    "folder": "checkout",
+    "description": ""
+  },
+  "checkout-order": {
+    "name": "checkout-order",
+    "filename": "order.html",
+    "file": "checkout/order.html",
+    "url": "demo/landing/checkout/order.html",
+    "title": "Order",
+    "folder": "checkout",
+    "description": ""
+  },
+  "content-archive": {
+    "name": "content-archive",
+    "filename": "archive.html",
+    "file": "content/archive.html",
+    "url": "demo/landing/content/archive.html",
+    "title": "Archive",
+    "folder": "content",
+    "description": ""
+  },
+  "content-category": {
+    "name": "content-category",
+    "filename": "category.html",
+    "file": "content/category.html",
+    "url": "demo/landing/content/category.html",
+    "title": "Category",
+    "folder": "content",
+    "description": ""
+  },
+  "content-index": {
+    "name": "content-index",
+    "filename": "index.html",
+    "file": "content/index.html",
+    "url": "demo/landing/content/index.html",
+    "title": "Blog homepage",
+    "folder": "content",
+    "description": "Blog page with latest posts"
+  },
+  "content-page": {
+    "name": "content-page",
+    "filename": "page.html",
+    "file": "content/page.html",
+    "url": "demo/landing/content/page.html",
+    "title": "Page",
+    "folder": "content",
+    "description": ""
+  },
+  "content-post-image-header": {
+    "name": "content-post-image-header",
+    "filename": "post-image-header.html",
+    "file": "content/post-image-header.html",
+    "url": "demo/landing/content/post-image-header.html",
+    "title": "Post image header",
+    "folder": "content",
+    "description": ""
+  },
+  "content-post-image-hero": {
+    "name": "content-post-image-hero",
+    "filename": "post-image-hero.html",
+    "file": "content/post-image-hero.html",
+    "url": "demo/landing/content/post-image-hero.html",
+    "title": "Post image hero",
+    "folder": "content",
+    "description": ""
+  },
+  "content-post": {
+    "name": "content-post",
+    "filename": "post.html",
+    "file": "content/post.html",
+    "url": "demo/landing/content/post.html",
+    "title": "Blog post",
+    "folder": "content",
+    "description": "Blog post",
+    "editor": {
+      "template": "post"
+    }
+  },
+  "content-tag": {
+    "name": "content-tag",
+    "filename": "tag.html",
+    "file": "content/tag.html",
+    "url": "demo/landing/content/tag.html",
+    "title": "Tag",
+    "folder": "content",
+    "description": ""
+  },
+  "content-user": {
+    "name": "content-user",
+    "filename": "user.html",
+    "file": "content/user.html",
+    "url": "demo/landing/content/user.html",
+    "title": "User",
+    "folder": "content",
+    "description": ""
+  },
+  "product-category": {
+    "name": "product-category",
+    "filename": "category.html",
+    "file": "product/category.html",
+    "url": "demo/landing/product/category.html",
+    "title": "Category",
+    "folder": "product",
+    "description": ""
+  },
+  "product-index": {
+    "name": "product-index",
+    "filename": "index.html",
+    "file": "product/index.html",
+    "url": "demo/landing/product/index.html",
+    "title": "Shop page",
+    "folder": "product",
+    "description": "Shop homepage"
+  },
+  "product-manufacturer": {
+    "name": "product-manufacturer",
+    "filename": "manufacturer.html",
+    "file": "product/manufacturer.html",
+    "url": "demo/landing/product/manufacturer.html",
+    "title": "Manufacturer",
+    "folder": "product",
+    "description": ""
+  },
+  "product-product": {
+    "name": "product-product",
+    "filename": "product.html",
+    "file": "product/product.html",
+    "url": "demo/landing/product/product.html",
+    "title": "Product",
+    "folder": "product",
+    "description": ""
+  },
+  "product-vendor": {
+    "name": "product-vendor",
+    "filename": "vendor.html",
+    "file": "product/vendor.html",
+    "url": "demo/landing/product/vendor.html",
+    "title": "Vendor",
+    "folder": "product",
+    "description": ""
+  },
+  "search-index": {
+    "name": "search-index",
+    "filename": "index.html",
+    "file": "search/index.html",
+    "url": "demo/landing/search/index.html",
+    "title": "Search page",
+    "folder": "search",
+    "description": "Search page"
+  },
+  "user-address": {
+    "name": "user-address",
+    "filename": "address.html",
+    "file": "user/address.html",
+    "url": "demo/landing/user/address.html",
+    "title": "Address",
+    "folder": "user",
+    "description": ""
+  },
+  "user-comments": {
+    "name": "user-comments",
+    "filename": "comments.html",
+    "file": "user/comments.html",
+    "url": "demo/landing/user/comments.html",
+    "title": "Comments",
+    "folder": "user",
+    "description": ""
+  },
+  "user-downloads": {
+    "name": "user-downloads",
+    "filename": "downloads.html",
+    "file": "user/downloads.html",
+    "url": "demo/landing/user/downloads.html",
+    "title": "Downloads",
+    "folder": "user",
+    "description": ""
+  },
+  "user-index": {
+    "name": "user-index",
+    "filename": "index.html",
+    "file": "user/index.html",
+    "url": "demo/landing/user/index.html",
+    "title": "Dashboard",
+    "folder": "user",
+    "description": "User dashboard"
+  },
+  "user-login": {
+    "name": "user-login",
+    "filename": "login.html",
+    "file": "user/login.html",
+    "url": "demo/landing/user/login.html",
+    "title": "Login",
+    "folder": "user",
+    "description": ""
+  },
+  "user-orders": {
+    "name": "user-orders",
+    "filename": "orders.html",
+    "file": "user/orders.html",
+    "url": "demo/landing/user/orders.html",
+    "title": "Orders",
+    "folder": "user",
+    "description": ""
+  },
+  "user-profile": {
+    "name": "user-profile",
+    "filename": "profile.html",
+    "file": "user/profile.html",
+    "url": "demo/landing/user/profile.html",
+    "title": "Profile",
+    "folder": "user",
+    "description": ""
+  },
+  "user-signup": {
+    "name": "user-signup",
+    "filename": "signup.html",
+    "file": "user/signup.html",
+    "url": "demo/landing/user/signup.html",
+    "title": "Signup",
+    "folder": "user",
+    "description": ""
+  },
+ "narrow-jumbotron":{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
+ "album":{name:"album", title:"Album",  url: "demo/album/index.html", file: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
+ "blog":{name:"blog", title:"Blog",  url: "demo/blog/index.html", file: "demo/blog/index.html", folder:"content", assets: ['demo/blog/blog.css']},
+ "carousel":{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html",  file: "demo/carousel/index.html", folder:"content", assets: ['demo/carousel/carousel.css']},
+ "offcanvas":{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", file: "demo/offcanvas/index.html", folder:"content", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
+ "pricing":{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", file: "demo/pricing/index.html", folder:"ecommerce", assets: ['demo/pricing/pricing.css']},
+ "product":{name:"product", title:"Product",  url: "demo/product/index.html", file: "demo/product/index.html", folder:"ecommerce", assets: ['demo/product/product.css']}  
+};	
 	
 $(function() {
 
