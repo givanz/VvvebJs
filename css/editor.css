@@ -45,37 +45,40 @@ i.la, i.header-arrow {
   font-family: Line Awesome Brands;
   font-style: normal;
   font-weight: normal;
-  font-display: auto;
+  font-display: swap;
   src: url("../fonts/line-awesome/la-brands-400.eot");
   src: url("../fonts/line-awesome/la-brands-400.eot?#iefix") format("embedded-opentype"), url("../fonts/line-awesome/la-brands-400.woff2") format("woff2"), url("../fonts/line-awesome/la-brands-400.woff") format("woff"), url("../fonts/line-awesome/la-brands-400.ttf") format("truetype"), url("../fonts/line-awesome/la-brands-400.svg#lineawesome") format("svg"); }
 
 .lab {
-  font-family: Line Awesome Brands;
-  font-weight: 400; }
+  font-family: Line Awesome Brands, monospace;
+  font-weight: 400;
+  line-height: var(--bs-body-line-height); }
 
 @font-face {
   font-family: Line Awesome Free;
   font-style: normal;
   font-weight: 400;
-  font-display: auto;
+  font-display: swap;
   src: url("../fonts/line-awesome/la-regular-400.eot");
   src: url("../fonts/line-awesome/la-regular-400.eot?#iefix") format("embedded-opentype"), url("../fonts/line-awesome/la-regular-400.woff2") format("woff2"), url("../fonts/line-awesome/la-regular-400.woff") format("woff"), url("../fonts/line-awesome/la-regular-400.ttf") format("truetype"), url("../fonts/line-awesome/la-regular-400.svg#lineawesome") format("svg"); }
 
 .la, .header-arrow {
-  font-family: Line Awesome Free;
-  font-weight: 400; }
+  font-family: Line Awesome Free, monospace;
+  font-weight: 400;
+  line-height: var(--bs-body-line-height); }
 
 @font-face {
   font-family: Line Awesome Free;
   font-style: normal;
-  font-weight: 900;
-  font-display: auto;
+  font-weight: 410;
+  font-display: swap;
   src: url("../fonts/line-awesome/la-solid-900.eot");
   src: url("../fonts/line-awesome/la-solid-900.eot?#iefix") format("embedded-opentype"), url("../fonts/line-awesome/la-solid-900.woff2") format("woff2"), url("../fonts/line-awesome/la-solid-900.woff") format("woff"), url("../fonts/line-awesome/la-solid-900.ttf") format("truetype"), url("../fonts/line-awesome/la-solid-900.svg#lineawesome") format("svg"); }
 
-.la, .header-arrow {
-  font-family: Line Awesome Free;
-  font-weight: 900; }
+.la, .header-arrow, .la, .header-arrow {
+  font-family: Line Awesome Free, monospace;
+  font-weight: 410;
+  line-height: var(--bs-body-line-height); }
 
 .la.la-lg, .la-lg.header-arrow {
   font-size: 1.33333em;
@@ -140,7 +143,7 @@ i.la, i.header-arrow {
     left: -calc(20em / 14)calc(4em / 14); }
 
 .la-border {
-  border: solid 0.08em #eee;
+  border: solid 0.08em var(--bs-border-color);
   border-radius: .1em;
   padding: .2em .25em .15em; }
 
@@ -10806,6 +10809,7 @@ textarea.form-control-lg {
 .btn {
   --bs-btn-padding-x: 0.5rem;
   --bs-btn-padding-y: 0.4rem;
+  --bs-btn-font-family: ;
   --bs-btn-font-size: 1rem;
   --bs-btn-font-weight: 400;
   --bs-btn-line-height: 1.5;
@@ -11447,6 +11451,7 @@ textarea.form-control-lg {
   --bs-dropdown-color: #dee2e6;
   --bs-dropdown-bg: #343a40;
   --bs-dropdown-border-color: var(--bs-border-color-translucent);
+  --bs-dropdown-box-shadow: ;
   --bs-dropdown-link-color: #dee2e6;
   --bs-dropdown-link-hover-color: #fff;
   --bs-dropdown-divider-bg: var(--bs-border-color-translucent);
@@ -11542,6 +11547,7 @@ textarea.form-control-lg {
 .nav {
   --bs-nav-link-padding-x: 1rem;
   --bs-nav-link-padding-y: 0.5rem;
+  --bs-nav-link-font-weight: ;
   --bs-nav-link-color: var(--bs-link-color);
   --bs-nav-link-hover-color: var(--bs-link-hover-color);
   --bs-nav-link-disabled-color: var(--bs-secondary-color);
@@ -11696,6 +11702,7 @@ textarea.form-control-lg {
 .navbar-nav {
   --bs-nav-link-padding-x: 0;
   --bs-nav-link-padding-y: 0.5rem;
+  --bs-nav-link-font-weight: ;
   --bs-nav-link-color: var(--bs-navbar-color);
   --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
   --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
@@ -11995,13 +12002,19 @@ textarea.form-control-lg {
   --bs-card-spacer-y: 1rem;
   --bs-card-spacer-x: 1rem;
   --bs-card-title-spacer-y: 0.5rem;
+  --bs-card-title-color: ;
+  --bs-card-subtitle-color: ;
   --bs-card-border-width: var(--bs-border-width);
   --bs-card-border-color: var(--bs-border-color-translucent);
   --bs-card-border-radius: var(--bs-border-radius);
+  --bs-card-box-shadow: ;
   --bs-card-inner-border-radius: calc(var(--bs-border-radius) - (var(--bs-border-width)));
   --bs-card-cap-padding-y: 0.5rem;
   --bs-card-cap-padding-x: 1rem;
   --bs-card-cap-bg: rgba(var(--bs-body-color-rgb), 0.03);
+  --bs-card-cap-color: ;
+  --bs-card-height: ;
+  --bs-card-color: ;
   --bs-card-bg: var(--bs-body-bg);
   --bs-card-img-overlay-padding: 1rem;
   --bs-card-group-margin: 0.75rem;
@@ -12259,6 +12272,8 @@ textarea.form-control-lg {
   --bs-breadcrumb-padding-x: 0;
   --bs-breadcrumb-padding-y: 0;
   --bs-breadcrumb-margin-bottom: 1rem;
+  --bs-breadcrumb-bg: ;
+  --bs-breadcrumb-border-radius: ;
   --bs-breadcrumb-divider-color: var(--bs-secondary-color);
   --bs-breadcrumb-item-padding-x: 0.5rem;
   --bs-breadcrumb-item-active-color: var(--bs-secondary-color);
@@ -12849,6 +12864,7 @@ textarea.form-control-lg {
   --bs-toast-spacing: 1.5rem;
   --bs-toast-max-width: 350px;
   --bs-toast-font-size: 0.875rem;
+  --bs-toast-color: ;
   --bs-toast-bg: rgba(var(--bs-body-bg-rgb), 0.85);
   --bs-toast-border-width: var(--bs-border-width);
   --bs-toast-border-color: var(--bs-border-color-translucent);
@@ -12905,6 +12921,7 @@ textarea.form-control-lg {
   --bs-modal-width: 500px;
   --bs-modal-padding: 1rem;
   --bs-modal-margin: 0.5rem;
+  --bs-modal-color: ;
   --bs-modal-bg: var(--bs-body-bg);
   --bs-modal-border-color: var(--bs-border-color-translucent);
   --bs-modal-border-width: var(--bs-border-width);
@@ -12918,6 +12935,7 @@ textarea.form-control-lg {
   --bs-modal-header-border-width: var(--bs-border-width);
   --bs-modal-title-line-height: 1.5;
   --bs-modal-footer-gap: 0.5rem;
+  --bs-modal-footer-bg: ;
   --bs-modal-footer-border-color: var(--bs-border-color);
   --bs-modal-footer-border-width: var(--bs-border-width);
   position: fixed;
@@ -13145,6 +13163,7 @@ textarea.form-control-lg {
   --bs-tooltip-max-width: 200px;
   --bs-tooltip-padding-x: 0.5rem;
   --bs-tooltip-padding-y: 0.25rem;
+  --bs-tooltip-margin: ;
   --bs-tooltip-font-size: 0.875rem;
   --bs-tooltip-color: var(--bs-body-bg);
   --bs-tooltip-bg: var(--bs-emphasis-color);
@@ -18271,7 +18290,7 @@ body {
         padding: 0.1rem 0.2rem;
         text-align: center;
         line-height: 12px; }
-    #vvveb-builder .component-properties .mb-3 .input [type="color"] {
+    #vvveb-builder .component-properties .mb-3 .input [type="color"], #vvveb-builder .component-properties .mb-3 .input .form-check-input {
       float: right; }
     #vvveb-builder .component-properties .mb-3 .custom-control {
       min-height: 1.1rem; }
@@ -19533,6 +19552,9 @@ body > section, body > footer, body > header {
     body > section .separator.top, body > footer .separator.top, body > header .separator.top {
       top: 0px; }
 
+.modal .modal-content {
+  height: 100%; }
+
 .gallery {
   column-count: 4;
   column-gap: 20px; }
@@ -19630,6 +19652,3 @@ label.form-check .form-check-input {
 
 video, audio {
   max-width: 100%; }
-
-.modal .modal-content {
-    height: 100%; }

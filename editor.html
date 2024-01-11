@@ -1057,27 +1057,49 @@
 
 <script id="vvveb-input-listinput" type="text/html">
 
-	<div class="row">
+	<div class="sections-container">
 
 		{% for ( var i = 0; i < options.length; i++ ) { %}
-		<div class="col-6">
-			<div class="input-group">
-				<input name="{%=key%}_{%=i%}" type="text" class="form-control" value="{%=options[i].text%}"/>
-				<div class="input-group-append">
-					<button class="input-group-text btn btn-sm btn-danger">
-						<i class="la la-trash la-lg"></i>
-					</button>
+		<div class="section-item" draggable="true">
+			<div class="controls">
+				<div class="handle"></div>
+				<div class="info">
+					<div class="name">{%=options[i].name%}
+						<div class="type">{%=options[i].type%}</div>
 				</div>
 			  </div>
-			  <br/>
+				<div class="buttons">
+					<a class="delete-btn" href="" title="Remove section"><i class="icon-trash-outline text-danger"></i></a>
+					<!-- 
+					<a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
+					<a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
+					<a class="properties-btn" href="" title="Properties"><i class="icon-settings-outline"></i></a>
+					-->
 		</div>
+			</div>
+
+
+			<input class="header_check" type="checkbox" id="section-components-{%=options[i].suffix%}">
+
+			<label for="section-components-{%=options[i].suffix%}"> 
+				<div class="header-arrow"></div>
+			</label>
+			
+			<div class="tree">
+				{%=options[i].name%}
+			</div>
+		</div>
+		
+
+
+
 		{% } %}
 
 
 		{% if (typeof hide_remove === 'undefined') { %}
-		<div class="col-12">
+		<div class="mt-3">
 		
-			<button class="btn btn-sm btn-outline-primary">
+			<button class="btn btn-sm btn-outline-primary btn-new">
 				<i class="la la-plus la-lg"></i> Add new
 			</button>
 			
@@ -1094,7 +1116,7 @@
 		<div class="col-6">
 		
 			<label>Extra small</label>
-			<select class="form-select" name="col">
+			<select class="form-select" name="col" autocomplete="off">
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
@@ -1107,7 +1129,7 @@
 		
 		<div class="col-6">
 			<label>Small</label>
-			<select class="form-select" name="col-sm">
+			<select class="form-select" name="col-sm" autocomplete="off">
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
@@ -1119,7 +1141,7 @@
 		
 		<div class="col-6">
 			<label>Medium</label>
-			<select class="form-select" name="col-md">
+			<select class="form-select" name="col-md" autocomplete="off">
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
@@ -1131,7 +1153,7 @@
 		
 		<div class="col-6">
 			<label>Large</label>
-			<select class="form-select" name="col-lg">
+			<select class="form-select" name="col-lg" autocomplete="off">
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
@@ -1144,11 +1166,11 @@
 		
 		<div class="col-6">
 			<label>Extra large </label>
-			<select class="form-select" name="col-xl">
+			<select class="form-select" name="col-xl" autocomplete="off">
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
-				<option value="{%=i%}" {% if ((typeof col_lg !== 'undefined') && col_lg == i) { %} selected {% } %}>{%=i%}</option>
+				<option value="{%=i%}" {% if ((typeof col_xl !== 'undefined') && col_lg == i) { %} selected {% } %}>{%=i%}</option>
 				{% } %}
 				
 			</select>
@@ -1156,11 +1178,11 @@
 		
 		<div class="col-6">
 			<label>Extra extra large</label>
-			<select class="form-select" name="col-xxl">
+			<select class="form-select" name="col-xxl" autocomplete="off">
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
-				<option value="{%=i%}" {% if ((typeof col_lg !== 'undefined') && col_lg == i) { %} selected {% } %}>{%=i%}</option>
+				<option value="{%=i%}" {% if ((typeof col_xxl !== 'undefined') && col_lg == i) { %} selected {% } %}>{%=i%}</option>
 				{% } %}
 				
 			</select>
@@ -1292,7 +1314,6 @@
 			  {% if (typeof max !== 'undefined' && max != false) { %}max="{%=max%}"{% } %} 
 			  {% if (typeof step !== 'undefined' && step != false) { %}step="{%=step%}"{% } %} 
 		class="form-control"/>
-		 <div class="input-group-append">
 		<select class="form-select small-arrow" name="unit">
 			<option value="em">em</option>
 			<option value="rem">rem</option>
@@ -1307,8 +1328,8 @@
 			<option value="in">in</option>
 			<option value="pt">pt</option>
 			<option value="auto">auto</option>
+			<option value="">-</option>
 		</select>
-		</div>
 	</div>
 	
 </script>
@@ -1671,6 +1692,9 @@ Vvveb.themeBaseUrl = 'demo/landing/';
 <script src="libs/builder/section.js"></script>	
 <script src="libs/builder/components-bootstrap5.js"></script>	
 <script src="libs/builder/components-widgets.js"></script>	
+<script src="libs/builder/oembed.js"></script>
+<script src="libs/builder/components-embeds.js"></script>
+
 
 <!-- sections-->
 <script src="demo/landing/sections/sections.js"></script>
@@ -1712,6 +1736,7 @@ Unzip the latest ckeditor release zip from https://github.com/ckeditor/ckeditor4
 <script src="libs/jszip/jszip.min.js"></script>
 <script src="libs/jszip/filesaver.min.js"></script>
 <script src="libs/builder/plugin-jszip.js"></script>
+<script src="libs/builder/plugin-ai-assistant.js"></script>
 
 
 <!-- autocomplete plugin used by autocomplete input-->
@@ -1721,6 +1746,8 @@ Unzip the latest ckeditor release zip from https://github.com/ckeditor/ckeditor4
 let renameUrl = 'save.php?action=rename';
 let deleteUrl = 'save.php?action=delete';	
 let saveReusableUrl = 'save.php?action=saveReusable';	
+let oEmbedProxyUrl = 'save.php?action=oembedProxy';
+let chatgptOptions = {"key":"","model":"text-davinci-003","temperature":0,"max_tokens":70};
 
 let pages = {
 	//uncomment php code below and rename file to .php extension to load saved html files in the editor or use editor.php

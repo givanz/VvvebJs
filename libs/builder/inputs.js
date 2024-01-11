@@ -26,7 +26,7 @@ var Input = {
 		
 		if (event.data && event.data.element)
 		{
-			event.data.element.trigger('propertyChange', [this.value, this]);
+			event.data.element.trigger('propertyChange', [this.value, this, event]);
 		}
 	},
 
@@ -332,13 +332,15 @@ var CssUnitInput = $.extend({}, Input, {
 	},
 	
 	setValue: function(value) {
-		this.number = parseFloat(value);
-		this.unit = value.replace(this.number, '').trim();
-		
-		if (this.unit == "auto") $(this.element).addClass("auto");
+		if (value) {
+			this.number = parseFloat(value);
+			this.unit = value.replace(this.number, '').trim();
+			
+			if (this.unit == "auto") $(this.element).addClass("auto");
 
-		$('input', this.element).val(this.number);
-		$('select', this.element).val(this.unit);
+			$('input', this.element).val(this.number);
+			$('select', this.element).val(this.unit);
+		}
 	},
 	
 	init: function(data) {
@@ -632,14 +634,76 @@ var ListInput = $.extend({}, Input, {
 	
     events: [
         ["change", "onChange", "select"],
+        ["click", "remove", ".delete-btn"],
+        ["click", "add", ".btn-new"],
+        ["click", "select", ".section-item"],
 	 ],
 	
 
-	setValue: function(value) {
-		$('select', this.element).val(value);
+	remove: function(event, node) {
+		let sectionItem = $(this).parents(".section-item");
+		let index = sectionItem.index();
+		let data = event.data.input.data;
+		
+		if (data.removeElement) {
+			$(data.container + " " + data.selector + ":eq(" + index + ")", event.data.input.node).remove();
+		}
+		sectionItem.remove();
+		
+		event.action = "remove";
+		event.index = index;
+		event.data.input.onChange(event, node);
+		return false;
 	},
+
+	add: function(event, node) {
+		let newElement = event.data.input.data.newElement ?? false;
+		if (newElement) {
+			$(event.data.input.data.container, event.data.input.node).append(newElement);
+		}
+		
+		event.action = "add";
+		event.data.input.onChange(event, node);
+		return false;
+	},	
 	
-	init: function(data) {
+	select: function(event, node) {
+		let sectionItem = $(this);
+		let index = sectionItem.index();
+		
+		event.action = "select";
+		event.index = index;
+		event.data.input.onChange(event, node);
+		return false;
+	},
+
+	setValue: function(value) {
+	},
+
+	init: function(data, node) {
+		this.component = data.component;
+		this.selector = data.selector;
+		this.node = node;
+
+		let elements = $(data.container + " " + this.selector, this.node);
+		let options = [];
+		
+		elements.each(function (i, e) {
+			let element = e;
+			if (data.nameElement) {
+				element = element.querySelector(data.nameElement);
+			}
+			let name = (data.name = "text" ? element.textContent : element.id);
+			options.push({
+				name: name,
+				type: (data.prefix ?? "") + (i + 1) + (data.suffix ?? ""),
+			});
+		});
+
+		data.options = options;
+		data.elements = elements;
+		this.data = data;
+
 		return this.render("listinput", data);
 	},
 	
