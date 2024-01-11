@@ -724,7 +724,7 @@ Vvveb.Components.extend("_base", "html/tablebody", {
     html: "<tbody><tr><td>Cell 1</td><td>Cell 2</td><td>Cell 3</td></tr></tbody>"
 });
 
-Vvveb.Components.add("html/gridcolumn", {
+Vvveb.Components.extend("_base", "html/gridcolumn", {
     name: "Grid Column",
     image: "icons/grid_row.svg",
     classesRegex: ["col-"],
@@ -762,7 +762,8 @@ Vvveb.Components.add("html/gridcolumn", {
 		},				
 	}]
 });
-Vvveb.Components.add("html/gridrow", {
+
+Vvveb.Components.extend("_base", "html/gridrow", {
     name: "Grid Row",
     image: "icons/grid_row.svg",
     classes: ["row"],

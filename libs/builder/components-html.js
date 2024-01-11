@@ -1356,12 +1356,12 @@ Vvveb.Components.extend("_base", "html/iframe", {
         key: "width",
         htmlAttr: "width",
         child:"iframe",
-        inputtype: TextInput
+        inputtype: CssUnitInput
     }, {
         name: "Height",
         key: "height",
         htmlAttr: "height",
         child:"iframe",
-        inputtype: TextInput
+        inputtype: CssUnitInput
 	}]	
 });

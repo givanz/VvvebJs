@@ -139,8 +139,9 @@ Vvveb.Components.extend("_base", "_base", {
 						this.click();
 					});
 					
-					setTimeout(function () { $("[name=id]").trigger("focus") }, 700);;
+					setTimeout(function () { $("[name=id]").trigger("focus") }, 700);
 					
+					return false;
 				});
 				
 				$(".linked-elements-hover", inputElement).
