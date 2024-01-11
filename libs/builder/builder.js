@@ -343,7 +343,7 @@ Vvveb.Components = {
 		var element;
 		
 		var fn = function(component, property) {
-			return property.input.on('propertyChange', function (event, value, input) {
+			return property.input.on('propertyChange', function (event, value, input, origEvent) {
 					
 					var element = selectedElement = Vvveb.Builder.selectedEl;
 					
@@ -351,7 +351,7 @@ Vvveb.Components = {
 					if (property.parent) element = element.parent(property.parent);
 					
 					if (property.onChange) {
-						let ret = property.onChange(element, value, input, component);
+						let ret = property.onChange(element, value, input, component, origEvent);
 						//if on change returns an object then is returning the dom node otherwise is returning the new value
 						if (typeof ret == "object")  {
 							element = ret;
@@ -438,7 +438,7 @@ Vvveb.Components = {
 
 			if (typeof property.group  === 'undefined') property.group = null;
 
-			property.input = property.inputtype.init(property.data);
+			property.input = property.inputtype.init(property.data, element);
 			
 			let value;
 			if (property.init)
@@ -1978,9 +1978,9 @@ Vvveb.Builder = {
 				bg = "bg-danger";
 			}
 			
-			displayToast(bg, data.message ?? data);			
+			displayToast(bg, "Save", data.message ?? data);			
 		}).fail(function (data) {
-			displayToast("bg-danger", "Error saving!");
+			displayToast("bg-danger", "Error", "Error saving!");
 			alert(data.responseText);
 		});		
 	},
@@ -2109,11 +2109,11 @@ Vvveb.CodeEditor = {
 }
 
 
-function displayToast(bg, message) {
-	$("#top-toast .toast-body").html(message);
-	$("#top-toast .toast-header").removeClass(["bg-danger", "bg-success"]).addClass(bg);
-	$("#top-toast .toast").addClass("show");
-	delay(() => $("#top-toast .toast").removeClass("show"), 5000);
+function displayToast(bg, title, message, id = "top-toast") {
+	$("#" + id + " .toast-body .message").html(message);
+	$("#" + id + " .toast-header").removeClass(["bg-danger", "bg-success"]).addClass(bg).text(title);
+	$("#" + id + " .toast").addClass("show");
+	delay(() => $("#" + id + " .toast").removeClass("show"), 5000);
 }			
 
 Vvveb.Gui = {
@@ -2196,9 +2196,10 @@ Vvveb.Gui = {
 			} else {
 				bg = "bg-danger";
 			}
-			displayToast(bg, data.message ?? data);
+			
+			displayToast(bg, "Save", data.message ?? data);
 		}, saveUrl).fail(function (data, text, errorThrown) {
-			displayToast("bg-danger", "Error saving!");
+			displayToast("bg-danger", "Error", "Error saving!");
 		}, saveUrl).always(function (data) {
 			$(".loading", btn).toggleClass("d-none");
 			$(".button-text", btn).toggleClass("d-none");
@@ -2984,7 +2985,7 @@ Vvveb.FileManager = {
 		$(this.tree).on("click", "a", function (e) {
 			e.preventDefault();
 			return false;
-		});
+		});	
 		
 		$(this.tree).on("click", ".delete", function (e) {
 			let element = $(e.target).closest("li");
@@ -3015,7 +3016,7 @@ Vvveb.FileManager = {
 		
 		$(this.tree).on("click", "li[data-component] label ", function (e) {
 			node = $(e.currentTarget.parentNode).data("node");
-			
+
 			delay(
 				() => Vvveb.Builder.frameHtml.animate({
 					scrollTop: $(node).offset().top - ($(node).height() / 2)
@@ -3024,7 +3025,7 @@ Vvveb.FileManager = {
 			
 
 			node.click();
-			
+
 		}).on("mouseenter", "li[data-component] label", function (e) {
 
 			node = $(e.currentTarget.parentNode).data("node");
@@ -3043,25 +3044,35 @@ Vvveb.FileManager = {
 	deletePage: function(element, e) {
 		let page = element[0].dataset;
 		if (confirm(`Are you sure you want to delete "${page.file}"template?`)) {
-			$.ajax({
-				type: "POST",
-				url: deleteUrl,//set your server side save script url
-				data: {file:page.file},
-				success: function (data, text) {
-					let bg = "bg-success";
-					if (data.success) {		
-						$("#top-panel .save-btn").attr("disabled", "true");
-					} else {
-						//bg = "bg-danger";
-					}
 
-					displayToast(bg, data.message ?? data);
-				},
-				error: function (data) {
-					displayToast("bg-danger", data.responseText);
-				}
-			});
-			element.remove();
+			//allow event to change page or cancel by setting page to false
+			let result;
+			if (result = $(window).triggerHandler("vvveb.FileManager.deletePage", page))
+			if (result != undefined) {
+				page = result;
+			}
+			
+			if (page) {
+				$.ajax({
+					type: "POST",
+					url: deleteUrl,//set your server side save script url
+					data: {file:page.file},
+					success: function (data, text) {
+						let bg = "bg-success";
+						if (data.success) {		
+							$("#top-panel .save-btn").attr("disabled", "true");
+						} else {
+							bg = "bg-danger";
+						}
+
+						displayToast(bg, "Delete", data.message ?? data);
+					},
+					error: function (data) {
+						displayToast("bg-danger", "Error", data.responseText);
+					}
+				});
+				element.remove();
+			}
 		}
 	},	
 	
@@ -3070,48 +3081,66 @@ Vvveb.FileManager = {
 		let newfile = prompt(`Enter new file name for "${page.file}"`, page.file);
 		let _self = this;
 		if (newfile) {
-			$.ajax({
-				type: "POST",
-				url: renameUrl,//set your server side save script url
-				data: {file:page.file, newfile:newfile, duplicate},
-				success: function (data, text) {
-					let bg = "bg-success";
-					if (data.success) {		
-						$("#top-panel .save-btn").attr("disabled", "true");
-					} else {
-						//bg = "bg-danger";
-					}
 
-					displayToast(bg, data.message ?? data);
-					let baseName = newfile.replace('.html', '');
-					let newName = friendlyName(newfile.replace(/.*[\/\\]+/, '')).replace('.html', '');
-
-					if (duplicate) {
-						let data = _self.pages[page.page];
-						data["file"] = newfile;
-						data["title"] = newName;
-						Vvveb.FileManager.addPage(baseName, data);
-					} else {
-					_self.pages[page.page]["file"] = newfile;
-						_self.pages[page.page]["title"] = newName;
-						$("> label span", element).html(newName);
-					page.url = page.url.replace(page.file, newfile);
-					page.file = newfile;
-					_self.pages[page.page]["url"] = page.url;
-					_self.pages[page.page]["file"] = page.file;
-					}
-					
-				},
-				error: function (data) {
-					displayToast("bg-danger", data.responseText);
-				}
-			});
-
+			//allow event to change page or newfile or cancel by setting page to false
+			let result;
+			if (result = $(window).triggerHandler("vvveb.FileManager.renamePage", [page, newfile])) {
+				[page, newfile] = result;
+			}
 			
+			if (page) {
+				$.ajax({
+					type: "POST",
+					url: renameUrl,//set your server side save script url
+					data: {file:page.file, newfile:newfile, duplicate},
+					success: function (data) {
+						let bg = "bg-success";
+						if (data.success) {		
+							$("#top-panel .save-btn").attr("disabled", "true");
+						} else {
+							bg = "bg-danger";
+						}
+
+						displayToast(bg, "Rename", data.message ?? data);
+						let baseName = newfile.replace('.html', '');
+						let newName = friendlyName(newfile.replace(/.*[\/\\]+/, '')).replace('.html', '');
+						
+						if (duplicate) {
+							let data = _self.pages[page.page];
+							data["file"] = newfile;
+							data["title"] = newName;
+							Vvveb.FileManager.addPage(baseName, data);
+						} else {
+							_self.pages[page.page]["file"] = newfile;
+							_self.pages[page.page]["title"] = newName;
+							$("> label span", element).html(newName);
+							page.url = page.url.replace(page.file, newfile);
+							page.file = newfile;
+							_self.pages[page.page]["url"] = page.url;
+							_self.pages[page.page]["file"] = page.file;
+						}
+						
+					},
+					error: function (data) {
+						displayToast("bg-danger", "Error", data.responseText);
+					}
+				});
+			}
 		}
 	},
 	
 	addPage: function(name, data) {
+
+		//allow event to change name or cancel by setting name to false
+		let result;
+		if (result = $(window).triggerHandler("vvveb.FileManager.addPage", [name, data])) {
+			[name, data]  = result;
+		}
+		
+		if (!name) {
+			return false;
+		}
+		
 		this.pages[name] = data;
 		data['name'] = name;
 
@@ -3154,17 +3183,17 @@ Vvveb.FileManager = {
 	
 	getCurrentUrl: function() {
 		if (this.currentPage) {
-		return this.pages[this.currentPage]['url'];
+			return this.pages[this.currentPage]['url'];
 		}
 	},	
-
+    
 	getCurrentPage: function() {
 		return this.currentPage;
 	},	
     
-   	getPageData: function(key) {
+    getPageData: function(key) {
 		if (this.currentPage) {
-		return this.pages[this.currentPage][key];
+			return this.pages[this.currentPage][key];
 		}
 	},	
     
@@ -3191,17 +3220,25 @@ Vvveb.FileManager = {
 		page.addClass("active");
 		//open parent folder if closed
 		$("> input[type=checkbox]", $(page).parents("[data-folder]")).prop("checked", true);
-
+		
 		this.currentPage = name;
 		var url = this.pages[name]['url'];
 		$(".btn-preview-url").attr("href", url);
+
+		//allow event to change page or url or cancel by setting url to false
+		let result;
+		if (result = $(window).triggerHandler("vvveb.FileManager.loadPage", [name, url, this.pages[name]])) {
+			[name, url, this.pages[name]] = result;
+		}
 		
-		Vvveb.Builder.loadUrl(url + (disableCache ? (url.indexOf('?') > -1 ? '&r=':'?r=') + Math.random():''), 
-			function () { 
-				if (loadComponents) { Vvveb.FileManager.loadComponents(allowedComponents); }
-				Vvveb.SectionList.loadSections(allowedComponents); 
-				Vvveb.StyleManager.init(); 
-			});
+		if (url) {
+			Vvveb.Builder.loadUrl(url + (disableCache ? (url.indexOf('?') > -1 ? '&r=':'?r=') + Math.random():''), 
+				function () { 
+					if (loadComponents) { Vvveb.FileManager.loadComponents(allowedComponents); }
+					Vvveb.SectionList.loadSections(allowedComponents); 
+					Vvveb.StyleManager.init(); 
+				});
+		}
 	},
 
 	scrollBottom: function() {
@@ -3227,13 +3264,18 @@ Vvveb.Breadcrumb = {
 					}, 500),
 				 100);
 			}
+			
+			$(window).triggerHandler("vvveb.Breadcrumb.click", node);
+			
 			e.preventDefault();
 		}).on("mouseenter", ".breadcrumb-item", function (e) {
 			let node = $($(this).data("node"));
 			node.get(0).dispatchEvent(new MouseEvent("mousemove", {
 				bubbles: true,
 				cancelable: true,
-			}))
+			}));
+			
+			$(window).triggerHandler("vvveb.Breadcrumb.hover", node);
 			//node.css("outline","1px dashed blue");
 			/*
 			delay(
