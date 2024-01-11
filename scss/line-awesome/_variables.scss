@@ -1,7 +1,7 @@
 $la-font-path: "../fonts" !default;
 $la-font-size-base: 14px !default;
 $la-line-height-base: 1 !default;
-$la-border-color: #eee !default;
+$la-border-color: var(--bs-border-color) !default;
 $la-inverse: #fff !default;
 $la-version: 1.3.0 !default;
 $la-li-width: calc(20em / 14) !default;

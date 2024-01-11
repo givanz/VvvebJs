@@ -2,7 +2,7 @@
 // -------------------------
 
 .#{$la-css-prefix}-border {
-    border: solid 0.08em #eee;
+    border: solid 0.08em var(--bs-border-color);
     border-radius: .1em;
     padding: .2em .25em .15em;
 }

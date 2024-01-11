@@ -104,6 +104,10 @@ if ($action) {
 				showError("Missing reusable element data!\n");
 			}
 		break;
+		case 'oembedProxy':
+			header('Content-Type: application/json');
+			echo file_get_contents($_GET['url']);
+		break;
 		default:
 			showError("Invalid action '$action'!");
 	}

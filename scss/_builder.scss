@@ -112,7 +112,7 @@ $font-size-base: 16px;
 		box-shadow:0px 1px 4px 0px rgba(var(--bs-body-color-rgb), 0.05);
 		-webkit-box-shadow:0px 1px 4px 0px rgba(var(--bs-body-color-rgb), 0.05);
 		
-		a {
+		a, span {
 			min-height: 20px;
 			white-space: break-spaces;
 			//line-height: 12px;
@@ -862,7 +862,7 @@ body
 					}
 				}
 				
-				[type="color"] {
+				[type="color"], .form-check-input {
 					float:right;
 				}
 			}
