@@ -82,7 +82,7 @@ i.la, i.header-arrow {
 
 .la.la-lg, .la-lg.header-arrow {
   font-size: 1.33333em;
-  line-height: 0.75em;
+  line-height: 1.2em;
   vertical-align: -.0667em; }
 
 .la-xs {
@@ -18682,7 +18682,7 @@ li[data-type] {
   box-shadow: 0px 1px 4px 0px rgba(var(--bs-body-color-rgb), 0.05);
   -webkit-box-shadow: 0px 1px 4px 0px rgba(var(--bs-body-color-rgb), 0.05);
   /*border-width:1px;*/ }
-  li[data-type] a {
+  li[data-type] a, li[data-type] span {
     min-height: 20px;
     white-space: break-spaces;
     padding: 0 3px; }
@@ -18957,8 +18957,9 @@ li[data-type] {
   cursor: grab;
   box-shadow: 0px 1px 4px 0px rgba(var(--bs-body-color-rgb), 0.05);
   -webkit-box-shadow: 0px 1px 4px 0px rgba(var(--bs-body-color-rgb), 0.05); }
-  .components .drag-elements-sidepane li[data-type] a,
-  #add-section-box li[data-type] a {
+  .components .drag-elements-sidepane li[data-type] a, .components .drag-elements-sidepane li[data-type] span,
+  #add-section-box li[data-type] a,
+  #add-section-box li[data-type] span {
     min-height: 20px;
     white-space: break-spaces;
     padding: 0 3px; }

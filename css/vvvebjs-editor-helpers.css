@@ -69,6 +69,21 @@ Prevents iframe mouse events that prevents clicking on the component
   [contenteditable="true"]:focus-visible {
     outline: none; }
 
+.is-dragged {
+  pointer-events: none;
+  opacity: 0.15;
+  position: relative;
+  /*
+	&:after {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		background: rgba(255,255,0,0.1);
+		content: " ";
+		top: 0;
+	}*/ }
+
 .vvveb-hidden {
   display: none !important; }
 
