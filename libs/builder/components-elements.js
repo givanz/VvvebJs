@@ -24,6 +24,7 @@ Vvveb.ComponentsGroup['Elements'] = [
 "elements/tabs",
 "elements/accordion",
 "elements/flip-box",
+"elements/social-icons",
 "elements/svg-icon",
 "elements/figure",
 "elements/section", 
@@ -342,8 +343,8 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
         //sort: base_sort++,
         col:4,
         inline:true,
-		section: style_section,
-		htmlAttr: "color",
+        section: style_section,
+        htmlAttr: "stroke",
         inputtype: ColorInput,
   	}]
 });   
@@ -831,6 +832,100 @@ Vvveb.Components.add("elements/flip-box", {
 		},
 	]
 });   
+
+Vvveb.Components.add("elements/social-icons", {
+    classes: ["social-icons"],
+    name: "Social icons",
+    image: "icons/social-icons.svg",
+    html: `<ul class="social-icons list-unstyled">
+				<li>
+					<a href="https://facebook.com">
+						<i class="lab la-facebook-f la-2x"></i> <span>Facebook</span>
+					</a>
+				</li>
+				<li>
+					<a href="https://linkedin.com">
+						<i class="lab la-linkedin-in la-2x"></i> <span>Linkedin</span>
+					</a>
+				</li>		
+				<li>
+					<a href="https://twitter.com">
+						<i class="lab la-twitter la-2x"></i> <span>Twitter</span>
+					</a>
+				</li>					
+				<li>
+					<a href="https://instagram.com">
+						<i class="lab la-instagram la-2x"></i> <span>Instagram</span>
+					</a>
+				</li>				
+				<li>
+					<a href="https://github.com">
+						<i class="lab la-github la-2x"></i> <span>Github</span>
+					</a>
+				</li>
+			</ul>`,
+		properties: [{
+			//name: "List",
+			key: "list",
+			//component: "elements/tab",
+			inline:false,
+			inputtype: ListInput,
+			data: {
+				selector:"> li",
+				container:"",
+				prefix:"Item ",
+				name: "text",
+				nameElement: "span",
+				removeElement: true,
+				//"newElement": ``
+			},
+			onChange: function(node, value, input, component, event) {
+				let element = node[0];
+
+				if (event.action) {
+					if (event.action == "add") {
+						node.append(`<li>
+							<a href="https://twitter.com">
+								<i class="lab la-twitter la-2x"></i> <span>Twitter</span>
+							</a>
+						</li>`);
+						
+						//temporary solution to better update list
+						Vvveb.Components.render("elements/social-icons");
+					}
+					if (event.action == "remove") {
+						//$("> li:eq(" + event.index + ")", node).remove();
+					} else if (event.action == "select") {
+						let el = $("> li:eq(" + event.index + ")", node);
+						//el[0].click();
+						//Vvveb.Builder.iframe.contentWindow.bootstrap.Collapse.getOrCreateInstance(el[0]).toggle();
+					}
+				}
+				
+				return node;
+			},
+		}, {
+			name: "Inline",
+			key: "list-inline",
+			htmlAttr: "class",
+			validValues: ["list-inline"],
+			inputtype: ToggleInput,
+			data: {
+				on: "list-inline",
+				off: ""
+			}
+		}, {
+			name: "Unstyled",
+			key: "list-unstyled",
+			htmlAttr: "class",
+			validValues: ["list-unstyled"],
+			inputtype: ToggleInput,
+			data: {
+				on: "list-unstyled",
+				off: ""
+			}
+		}]
+}); 
 
 function carouselAfterDrop(node) {
 	//check if swiper js is included and if not add it when drag starts to allow the script to load
