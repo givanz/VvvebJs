@@ -1171,6 +1171,8 @@ Vvveb.Builder = {
 			$(node).parent().before(node);
 		}
 
+		Vvveb.Builder.selectNode(node);
+
 		newParent = node.parentNode;
 		newNextSibling = node.nextSibling;
 		
@@ -1200,6 +1202,8 @@ Vvveb.Builder = {
 			{
 				$(node).parent().after(node);
 			}
+			
+			Vvveb.Builder.selectNode(node);
 			
 			newParent = node.parentNode;
 			newNextSibling = node.nextSibling;
@@ -1292,9 +1296,9 @@ Vvveb.Builder = {
 				self.highlightEl = target = $(event.target);
 				var offset = target.offset();
 				var height = target.outerHeight();
-				var halfHeight = Math.max(height / 2, 50);
+				var halfHeight = Math.max(height / 2, 5);
 				var width = target.outerWidth();
-				var halfWidth = Math.max(width / 2, 50);
+				var halfWidth = Math.max(width / 2, 5);
 				var prepend = true;
 				
 				var x = event.originalEvent.x;
@@ -1370,16 +1374,40 @@ Vvveb.Builder = {
 				if (self.isDragging)
 				{
 					var parent = self.highlightEl;
+					let parentTagName = parent[0].tagName.toLowerCase();
+					
+					let noChildren = {
+						input: true,
+						textarea: true,
+						img: true,
+						iframe: true,
+						embed: true,
+						col: true,
+						area: true,
+						hr: true,
+						br: true,
+						wbr: true
+					};
 
 					try {
-							if ((offset.top  < (y - halfHeight)) || (offset.left  < (x - halfWidth)))
+							if ((offset.top  < (event.originalEvent.pageY - halfHeight)) || (offset.left  < (x - halfWidth)))
 							{
+								if (noChildren[parentTagName]) { 
+									self.dragElement.insertAfter(parent);
+								} else {
 								self.dragElement.appendTo(parent);
+								}
+
 								prepend = true;
 							} else
 							{
-								prepend = false;
+								if (noChildren[parentTagName]) { 
+									self.dragElement.insertBefore(parent);
+								} else {
 								self.dragElement.prependTo(parent);
+								}
+
+								prepend = false;
 							};
 							
 							if (self.designerMode)
@@ -1569,10 +1597,16 @@ Vvveb.Builder = {
 			self.isDragging = true;
 			$("#section-actions, #highlight-name, #select-box").hide();
 			
-			self.selectedEl.addClass("is-dragged");
-			node = self.selectedEl.get(0);
 			
-			self.dragElement = $(Vvveb.dragHtml);
+			if (self.designerMode) {
+				self.dragElement = self.selectedEl;
+			} else {
+				self.selectedEl.css("position", "" ).css("top", "" ).css("left", "" );
+				self.selectedEl.addClass("is-dragged");
+				self.dragElement = $(Vvveb.dragHtml);
+			}
+
+			node = self.selectedEl.get(0);			
 
 			self.dragMoveMutation = {type: 'move', 
 								target: node,
@@ -2338,7 +2372,7 @@ Vvveb.Gui = {
 	
 	setDesignerMode : function () {
 		//aria-pressed attribute is updated after action is called and we check for false instead of true
-		var designerMode = this.attributes["aria-pressed"].value != "true";
+		var designerMode = this.attributes["aria-pressed"].value == "true";
 		Vvveb.Builder.setDesignerMode(designerMode);
 	},
 //layout
@@ -2505,11 +2539,20 @@ Vvveb.StyleManager = {
 		return selector.reverse().join(" > ");
 	},
 
-	setStyle: function (element, styleProp, value) {
+	setStyle: function(element, styleProp, value) {
 		if (typeof(element) == "string") {
 			selector = element;
 		} else {
-			selector = this.getSelectorForElement(element.get(0));
+			let node = element.get(0);
+
+			//if propert is set with inline style attribute then override it and don't save to css
+			//inline text editor sets properties like font-size inline that can't be later overriten from css
+			if (node.style && node.style[styleProp]) {
+				node.style[styleProp] = value;
+				return element;
+			}
+
+			selector = this.getSelectorForElement(node);	
 		}
 		
 		media = $("#canvas").hasClass("tablet") ? "tablet" : $("#canvas").hasClass("mobile") ? "mobile" : "desktop";
