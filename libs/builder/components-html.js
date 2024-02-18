@@ -231,7 +231,7 @@ Vvveb.Components.extend("_base", "html/hr", {
     image: "icons/hr.svg",
     nodes: ["hr"],
     name: "Horizontal Rule",
-    html: "<hr>",
+    html: '<hr class="border-primary border-4 opacity-25">',
 	properties:[{
         name: "Type",
         key: "border-color",

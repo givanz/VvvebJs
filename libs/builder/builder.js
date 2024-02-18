@@ -3306,7 +3306,6 @@ Vvveb.FileManager = {
 		$("> input[type=checkbox]", $(page).parents("[data-folder]")).prop("checked", true);
 		
 		this.currentPage = name;
-		var url = this.pages[name]['url'];
 		$(".btn-preview-url").attr("href", url);
 
 		//allow event to change page or url or cancel by setting url to false
