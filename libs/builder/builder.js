@@ -77,7 +77,7 @@ Vvveb.preservePropertySections = true;
 //icon = use component icon when dragging | html = use component html to create draggable element
 Vvveb.dragIcon = 'icon';
 //if empty the html of the component is used to view dropping in real time but for large elements it can jump around for this you can set a html placeholder with this option
-Vvveb.dragElementStyle = "background:limegreen;;width:100%;height:3px;border:1px solid limegreen;box-shadow:0px 0px 2px 1px rgba(0,0,0,0.14);overflow:hidden;";
+Vvveb.dragElementStyle = "background:limegreen;width:100%;height:3px;border:1px solid limegreen;box-shadow:0px 0px 2px 1px rgba(0,0,0,0.14);overflow:hidden;";
 Vvveb.dragHtml = '<div style="' + Vvveb.dragElementStyle + '"></div>';
 
 Vvveb.baseUrl =  document.currentScript?document.currentScript.src.replace(/[^\/]*?\.js$/,''):'';
@@ -1380,6 +1380,7 @@ Vvveb.Builder = {
 						input: true,
 						textarea: true,
 						img: true,
+						svg: true,
 						iframe: true,
 						embed: true,
 						col: true,
@@ -2358,8 +2359,19 @@ Vvveb.Gui = {
 
 			e.preventDefault();
 
-			return Vvveb.Builder.saveAjax(data, function (data) {
+			return Vvveb.Builder.saveAjax(data, function (savedData) {
 					data.title = data.name;
+
+					if (typeof savedData === 'object' && savedData !== null) {
+						Object.assign(data, savedData);
+						/*
+						data.name = savedData.name ?? data.name;
+						data.url = savedData.url ?? data.url;
+						data.file = savedData.file ?? data.file;
+						data.title = savedData.title ?? data.title;
+						*/
+					}
+					
 					Vvveb.FileManager.addPage(data.name, data);
 
 					Vvveb.FileManager.loadPage(data.name);
@@ -2478,7 +2490,7 @@ Vvveb.StyleManager = {
 				styles = (media === "desktop") ? style.cssRules[j].style : style.cssRules[j].cssRules[0].style;
 
 				if (media) {
-					this.styles[media] = {};
+					this.styles[media] = this.styles[media] ?? {};
 					if (selector) {
 						this.styles[media][selector] = {};
 
@@ -3279,6 +3291,12 @@ Vvveb.FileManager = {
 	},
 	
 	loadPage: function(name, allowedComponents = false, disableCache = true, loadComponents = false) {
+		let url = this.pages[name]['url'] ?? "";
+		
+		if (!url) {
+			return;
+		}
+		
 		let page = $("[data-page='" + name + "']", this.tree);
 		//remove active from current active page
 		$("[data-page]", this.tree).removeClass("active");
