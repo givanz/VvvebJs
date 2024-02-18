@@ -190,7 +190,7 @@
 										  </li>
 										  <li class="nav-item style-tab">
 											<a class="nav-link" data-bs-toggle="tab" href="#sections-list" role="tab" aria-controls="sections" aria-selected="true">
-												 <i class="icon-document-text-outline"></i></i> <div><span>Page Sections</span></div></a>
+												 <i class="icon-document-text-outline"></i><div><span>Page Sections</span></div></a>
 										  </li>
 										</ul>
 								
@@ -531,9 +531,9 @@
 										</a>
 										
 										<div class="dropdown">
-										  <a class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<span class="hint" aria-label="Text align"><i class="la la-align-left"></i></span>
-										  </a>
+										  </button>
 
 										  <div id="justify-btn" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 											<a class="dropdown-item" href="#" data-value="Left"><i class="la la-lg la-align-left"></i> Align Left</a>
@@ -646,10 +646,10 @@
 									<div class="header">							
 										<ul class="nav nav-tabs" id="box-elements-tabs" role="tablist">
 										  <li class="nav-item component-tab">
-											<a class="nav-link active" id="box-components-tab" data-bs-toggle="tab" href="#box-components" role="tab" aria-controls="components" aria-selected="true"><i class="la la-lg la-cube"></i> <div><small>Components</small></div></a>
+											<a class="nav-link px-3 active" id="box-components-tab" data-bs-toggle="tab" href="#box-components" role="tab" aria-controls="components" aria-selected="true"><i class="icon-cube-outline"></i><small>Components</small></a>
 										  </li>
 										  <li class="nav-item sections-tab">
-											<a class="nav-link" id="box-sections-tab" data-bs-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="la la-lg la-image"></i> <div><small>Blocks</small></div></a>
+											<a class="nav-link px-3" id="box-sections-tab" data-bs-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="icon-copy-outline"></i><small>Blocks</small></a>
 										  </li>
                           <!--
 										  <li class="nav-item component-properties-tab" style="display:none">
@@ -660,18 +660,18 @@
 										
 										<div class="section-box-actions">
 
-							<div id="close-section-btn" class="btn btn-light btn-sm float-end mt-1"><i class="la la-times la-lg"></i></div>
+							<div id="close-section-btn" class="btn btn-outline-secondary btn-sm border-0 float-end"><i class="la la-times la-lg"></i></div>
 										
-							<div class="mt-2 me-3 float-end">
+							<div class="mt-1 me-4 float-end">
 											
-								<div class="form-check d-inline-block me-1">
+								<div class="form-check d-inline-block small me-1">
 												  <input type="radio" id="add-section-insert-mode-after" value="after" checked="checked" name="add-section-insert-mode" class="form-check-input">
-								  <label class="form-check-label small" for="add-section-insert-mode-after">After</label>
+								  <label class="form-check-label" for="add-section-insert-mode-after">After</label>
 												</div>
 												
-								<div class="form-check d-inline-block">
+								<div class="form-check d-inline-block small">
 												  <input type="radio" id="add-section-insert-mode-inside" value="inside" name="add-section-insert-mode" class="form-check-input">
-								  <label class="form-check-label small" for="add-section-insert-mode-inside">Inside</label>
+								  <label class="form-check-label" for="add-section-insert-mode-inside">Inside</label>
 												</div>
 										
 											</div>
@@ -1749,7 +1749,7 @@ let saveReusableUrl = 'save.php?action=saveReusable';
 let oEmbedProxyUrl = 'save.php?action=oembedProxy';
 let chatgptOptions = {"key":"","model":"gpt-3.5-turbo-instruct","temperature":0,"max_tokens":300};
 
-let pages = {
+let defaultPages = {
 	//uncomment php code below and rename file to .php extension to load saved html files in the editor or use editor.php
 	/*
 	<?php 
@@ -2178,6 +2178,8 @@ let pages = {
 	
 $(function() {
 
+	let pages = defaultPages;
+	
 	let firstPage = Object.keys(pages)[0];
 	Vvveb.Builder.init(pages[firstPage]["url"], function() {
 		//load code after page is loaded here

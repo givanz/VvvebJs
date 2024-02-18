@@ -4484,7 +4484,7 @@ i[class^='icon-'] {
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
-  line-height: 1;
+  line-height: 1.5;
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
@@ -17831,7 +17831,7 @@ https://github.com/givanz/VvvebJs
         top: -1px;
         right: 5px; }
         .tree > ol li.file .file-actions .btn {
-          padding: 0.25rem 0.3rem;
+          padding: 0.1rem 0.3rem;
           font-size: 0.875rem;
           line-height: 1;
           border-radius: 4px;
@@ -17868,17 +17868,17 @@ https://github.com/givanz/VvvebJs
       font-size: 12px;
       line-height: 28px; }
     .tree > ol li input:checked + ol {
-      background: url(../libs/builder/icons/arrow-down.svg) 5px 0.1rem no-repeat;
+      background: url(../libs/builder/icons/arrow-down.svg) 5px 0.6rem no-repeat;
       background-size: 12px 12px;
       margin: -2.5em 0 0 0rem;
-      padding: 2rem 0 0 2rem;
+      padding: 2rem 0 0 2.5rem;
       height: auto; }
       .tree > ol li input:checked + ol > li {
         display: block;
-        margin: 0 0 0.5em;
+        margin: 0 0 0.2em;
         /* 2px */ }
       .tree > ol li input:checked + ol > li:last-child {
-        margin: 0 0 0.7em;
+        margin: 0 0 0.3em;
         /* 1px */ }
 
 body {
@@ -18092,12 +18092,12 @@ body {
       line-height: 1.2rem; }
       #vvveb-builder .drag-elements .nav-item .nav-link div {
         margin-top: .2rem; }
-      #vvveb-builder .drag-elements .nav-item .nav-link i.la-lg {
-        font-size: 1.4rem;
-        margin: 0.2rem 0; }
+      #vvveb-builder .drag-elements .nav-item .nav-link i {
+        font-size: 21px;
+        vertical-align: bottom; }
       #vvveb-builder .drag-elements .nav-item .nav-link small, #vvveb-builder .drag-elements .nav-item .nav-link .small {
         font-size: 0.8rem;
-        display: none; }
+        padding: 0 0.5rem; }
       #vvveb-builder .drag-elements .nav-item .nav-link.active, #vvveb-builder .drag-elements .nav-item .nav-link:hover {
         color: var(--bs-link-color); }
     #vvveb-builder .drag-elements#add-section-box .nav-item:first-child .nav-link {
@@ -18152,7 +18152,7 @@ body {
     #vvveb-builder #add-section-box .header > div.section-box-actions {
       position: absolute;
       top: 0.5rem;
-      right: 1rem; }
+      right: 0.5rem; }
     #vvveb-builder #add-section-box .components-list, #vvveb-builder #add-section-box .blocks-list, #vvveb-builder #add-section-box .component-properties, #vvveb-builder #add-section-box .sections-list {
       width: auto;
       height: auto;
@@ -18576,8 +18576,9 @@ body {
     background: var(--bs-body-bg);
     top: 100px;
     left: 100px;
-    box-shadow: 0 8px 24px rgba(var(--bs-body-color-rgb), 0.07);
+    box-shadow: 0px 5px 50px 15px rgba(var(--bs-body-color-rgb), 0.08);
     border: 1px solid var(--bs-border-color);
+    border-radius: 4px;
     min-width: 500px;
     max-width: 700px;
     pointer-events: auto;
