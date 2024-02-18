@@ -220,7 +220,7 @@ class OpenVerseDisplay extends OpenVerse {
 	
 	toggleBtn() {
 		return `                       
-			<button class="btn btn-outline-secondary btn-sm btn-icon me-3 float-end" id="openverse-toggle"
+			<button class="btn btn-outline-secondary btn-sm btn-icon me-3 float-end border-secondary-subtle" id="openverse-toggle"
 			   data-bs-toggle="collapse" 
 			   data-bs-target="#openverse-form" 
 			   aria-expanded="false" 

@@ -40,7 +40,7 @@ class MediaModal {
 									<input type="search" id="media-search-input" placeholder="Find a file.." />
 								</div>
 								
-								<button class="btn btn-outline-secondary btn-sm btn-icon me-5 float-end" 
+								<button class="btn btn-outline-secondary btn-sm btn-icon me-5 float-end border-secondary-subtle" 
 								   data-bs-toggle="collapse" 
 								   data-bs-target=".upload-collapse" 
 								   aria-expanded="false" 
@@ -316,6 +316,7 @@ class MediaModal {
 
 			var index = _this.breadcrumbs.find('a').index($(this)),
 				nextDir = _this.breadcrumbsUrls[index];
+				nextDir = this.attributes.href.value;
 
 			_this.breadcrumbsUrls.length = Number(index);
 

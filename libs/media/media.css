@@ -66,7 +66,7 @@
 }
 
 
-.filemanager .upload-collapse {
+.filemanager .upload {
     margin:3rem;
     padding:0rem;
     padding:1rem;
@@ -75,17 +75,17 @@
     min-height:200px;
 }
 
-.filemanager .upload-collapse h3 {
+.filemanager .upload h3 {
     padding:1rem 4rem;
 }
 
-.filemanager .upload-collapse button#upload-close {
+.filemanager .upload button#upload-close {
 	position:absolute;
 	right:1rem;
 	z-index:1000
 }
 
-.filemanager .upload-collapse input[type=file] {
+.filemanager .upload input[type=file] {
     position:absolute;
     z-index:100;
     top:0;
@@ -97,13 +97,13 @@
     font-size:1rem;
 }
 
-.filemanager .upload-collapse input[type=file]::-webkit-file-upload-button
+.filemanager .upload input[type=file]::-webkit-file-upload-button
 /*,.filemanager .upload input[type=file]::file-selector-button */
 {
   visibility: hidden;
 }
 
-.filemanager .upload-collapse input[type=file]::before {
+.filemanager .upload input[type=file]::before {
   content: 'Choose files';
   color: white;
   display: inline-block;
@@ -115,18 +115,18 @@
   white-space: nowrap;
   -webkit-user-select: none;
   cursor: pointer;
-  //text-shadow: 1px 1px #fff;
+  //text-shadow: 1px 1px var(--bs-body-bg);
   font-size: 1rem;
   font-weight:500;
   box-shadow:1px 1px 2px 1px rgba(0, 0, 0, 0.07), -1px 1px 2px 0px rgba(255, 255, 255, 0.15) inset;
 }
-.filemanager .upload-collapse input[type=file]:hover::before {
+.filemanager .upload input[type=file]:hover::before {
   border-color: black;
 }
-.filemanager .upload-collapse input[type=file]:active {
+.filemanager .upload input[type=file]:active {
   outline: 0;
 }
-.filemanager .upload-collapse input[type=file]:active::before {
+.filemanager .upload input[type=file]:active::before {
   background: -webkit-linear-gradient(top, #0a58ca, #0d6efd); 
 }
 
@@ -138,7 +138,7 @@
 	width: 14px;
 	height: 14px;
 	border-radius: 50%;
-	border: 2px solid #333;
+	border: 2px solid var(--bs-border-color);
 	right: 10px;
 }
 
@@ -146,7 +146,7 @@
 	content: '';
 	width: 3px;
 	height: 10px;
-	background-color: #333;
+	background-color: var(--bs-border-color);
 	border-radius: 2px;
 	position: absolute;
 	top: 18px;
@@ -278,11 +278,13 @@
 
 .filemanager .nothingfound {
 	background-color: #373743;
+	background-color: var(--bs-light-border-subtle);
 	width: 23em;
 	height: 21em;
 	margin: 0 auto;
 	display: none;
-	font-family: Arial;
+	border-radius:20px;
+	text-align:center;
 	-webkit-animation: showSlowlyElement 700ms; /* Chrome, Safari, Opera */
 	animation: showSlowlyElement 700ms; /* Standard syntax */
 }
@@ -298,17 +300,19 @@
 	line-height: 11.4em;
 }
 .filemanager .nothingfound .nofiles:after {
-	content: '×';
-	position: absolute;
-	color: #ffffff;
-	font-size: 14em;
-	margin-right: 0.092em;
-	right: 0;
+    content: 'x';
+    position: absolute;
+    color: var(--bs-body-bg);
+    font-size: 12em;
+    margin-right: 2rem;
+    line-height: 0.76;
+    font-weight: 600;
+    right: 0;
 }
 
 .filemanager .nothingfound span {
-	margin: 0 auto auto 6.8em;
-	color: #ffffff;
+	margin: 0 auto auto;
+	//color: var(--bs-body-bg);
 	font-size: 16px;
 	font-weight: 500;
 	line-height: 20px;
@@ -368,6 +372,10 @@
 	border-bottom:1px solid var(--bs-border-color);
 }
 
+.files .preview img {
+	max-width:100%;
+}
+
 .files .preview-link:hover + .preview, 
 .files .preview-link:focus + .preview, 
 .files .preview-link + .preview:hover {
@@ -395,7 +403,7 @@
 .icon.folder:before {
 	content: '';
 	float: left;
-	background-color: rgba(108, 108, 256, 0.7);
+	background-color: rgba(var(--bs-primary-rgb), 0.5);
 
 	width: 1.5em;
 	height: 0.45em;
@@ -406,14 +414,14 @@
 	border-top-left-radius: 0.1em;
 	border-top-right-radius: 0.1em;
 
-	box-shadow: 1.25em 0.25em 0 0em rgba(108, 108, 256, 0.8);
+	box-shadow: 1.25em 0.25em 0 0em rgba(var(--bs-primary-rgb), 0.6);
 }
 .icon.folder:after {
 	content: '';
 	float: left;
 	clear: left;
 
-	background-color: rgba(108, 108, 256, 1);
+	background-color: rgba(var(--bs-primary-rgb), 1);
 	width: 3em;
 	height: 2.25em;
 
@@ -424,7 +432,7 @@
 }
 .icon.folder.full:after {
 	height: 2.15em;
-	box-shadow: 0 -0.12em 0 0 #ffffff;
+	box-shadow: 0 -0.12em 0 0 var(--bs-body-bg);
 }
 
 .icon.file {
@@ -433,7 +441,7 @@
 	line-height: 3em;
 	text-align: center;
 	border-radius: 0.25em;
-	color: #FFF;
+	color: var(--bs-body-bg);
 	display: inline-block;
 	margin: 15px 20px 0px 5px;
 	position: relative;
@@ -568,4 +576,64 @@
 .icon.file.f-saas:after,
 .icon.file.f-scss:after {
 	border-bottom-color: #30837c;
+}
+
+.upload-collapse {
+     margin: 0 1rem 2rem;
+     padding: 0rem;
+     border: 1px dashed var(--bs-border-color);
+     border-radius: 4px;
+     background: var(--bs-light-bg-subtle);
+     position: relative;
+     min-height: 180px;
+}
+ .upload-collapse h3, .upload-collapse .h3 {
+     padding: 2rem 4rem;
+}
+ .upload-collapse button#upload-close {
+     position: absolute;
+     right: 1rem;
+     top: 1rem;
+     z-index: 1000;
+}
+ .upload-collapse input[type=file] {
+     position: absolute;
+     z-index: 100;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     padding: 6rem 4rem 4rem;
+     display: block !important;
+     font-size: 1rem;
+}
+ .upload-collapse input[type=file]::-webkit-file-upload-button {
+     visibility: hidden;
+}
+ .upload-collapse input[type=file]::before {
+     content: 'Choose files';
+     color: white;
+     display: inline-block;
+     background: gradient(top, rgba(var(--bs-link-color-rgb), 0.85), var(--bs-link-color));
+     background: -webkit-linear-gradient(top, rgba(var(--bs-link-color-rgb), 0.85), var(--bs-link-color));
+     border: 1px solid var(--bs-link-color-rgb);
+     border-radius: 3px;
+     padding: 0.7rem 1.4rem;
+     outline: none;
+     white-space: nowrap;
+     -webkit-user-select: none;
+     cursor: pointer;
+     font-size: 1rem;
+     font-weight: 500;
+     box-shadow: 1px 1px 2px 1px rgba(var(--bs-body-color-rgb), 0.07), -1px 1px 2px 0px rgba(var(--bs-body-bg-rgb), 0.15) inset;
+}
+ .upload-collapse input[type=file]:hover::before {
+     border-color: rgba(var(--bs-link-color-rgb), 0.7);
+}
+ .upload-collapse input[type=file]:active {
+     outline: 0;
+}
+ .upload-collapse input[type=file]:active::before {
+     background: gradient(top, var(--bs-link-color), rgba(var(--bs-link-color-rgb), 0.85));
+     background: -webkit-linear-gradient(top, var(--bs-link-color), rgba(var(--bs-link-color-rgb), 0.85));
 }
