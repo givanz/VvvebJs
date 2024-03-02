@@ -22,7 +22,7 @@ This script is used by image upload input to save the image on the server and re
 */ 
 
 $uploadDenyExtensions  = ['php'];
-$uploadAllowExtensions = ['ico','jpg','jpeg','png','gif','webp'];
+$uploadAllowExtensions = ['ico','jpg','jpeg','png','gif','webp','svg'];
 
 function showError($error) {
 	header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
@@ -31,20 +31,27 @@ function showError($error) {
 
 function sanitizeFileName($file)
 {
+	$disallow = ['.htaccess', 'passwd'];
+	$file = str_replace($disallow, '', $file);
+	
 	//sanitize, remove double dot .. and remove get parameters if any
 	$file = preg_replace('@\?.*$@' , '', preg_replace('@\.{2,}@' , '', preg_replace('@[^\/\\a-zA-Z0-9\-\._]@', '', $file)));
+	
 	return $file;
 }
 
-
-define('UPLOAD_FOLDER', __DIR__ . '/');
+define('UPLOAD_FOLDER', __DIR__ . DIRECTORY_SEPARATOR);
 if (isset($_POST['mediaPath'])) {
-	define('UPLOAD_PATH', sanitizeFileName($_POST['mediaPath']) .'/');
+	define('UPLOAD_PATH', sanitizeFileName($_POST['mediaPath']) . DIRECTORY_SEPARATOR);
 } else {
-	define('UPLOAD_PATH', '/');
+	define('UPLOAD_PATH', DIRECTORY_SEPARATOR);
 }
 
-$fileName  = $_FILES['file']['name'];
+$fileName  = sanitizeFileName($_FILES['file']['name']);
+if (!$fileName) {
+	showError('Invalid filename!');
+}
+
 $extension = strtolower(substr($fileName, strrpos($fileName, '.') + 1));
 
 //check if extension is on deny list
@@ -52,15 +59,13 @@ if (in_array($extension, $uploadDenyExtensions)) {
 	showError("File type $extension not allowed!");
 }
 
-/*
 //comment deny code above and uncomment this code to change to a more restrictive allowed list
 // check if extension is on allow list
 if (!in_array($extension, $uploadAllowExtensions)) {
 	showError("File type $extension not allowed!");
 }
-*/
 
-$destination = UPLOAD_FOLDER . UPLOAD_PATH . '/' . $fileName;
+$destination = UPLOAD_FOLDER . UPLOAD_PATH . DIRECTORY_SEPARATOR . $fileName;
 move_uploaded_file($_FILES['file']['tmp_name'], $destination);
 
 if (isset($_POST['onlyFilename'])) {
