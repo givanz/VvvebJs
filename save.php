@@ -89,7 +89,7 @@ if (isset($_POST['file'])) {
 }
 
 if (isset($_GET['action'])) {
-	$action = $_GET['action'];
+	$action = htmlspecialchars(strip_tags($_GET['action']));
 }
 
 if ($action) {
