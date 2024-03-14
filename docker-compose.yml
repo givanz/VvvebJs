@@ -1,6 +1,6 @@
 # sudo apt install docker-compose
 # sudo docker-compose up -d
-version: '3'
+version: '3.8'
 services:
   php:
     build:
