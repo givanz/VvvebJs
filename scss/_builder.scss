@@ -459,10 +459,18 @@ body
 			.btn {
 				
 				&.btn-light {
-					font-size: 1.25rem;
 					padding: 0.25rem 0.5rem;
 					--bs-btn-active-bg: var(--bs-primary-bg-subtle);
+					--bs-btn-hover-bg: var(--bs-primary-bg-subtle);
 					--bs-btn-active-border-color: transparent;
+					--bs-btn-hover-color: var(--bs-body-bg); 
+					--bs-btn-bg:transparent;
+					border-color:transparent;
+					color: var(--bs-body-color);
+					
+					i {
+						font-size: 1.25rem;
+					}
 				}
 				
 				&.btn-primary {
@@ -470,7 +478,7 @@ body
 					margin-top: 0.2rem;
 					
 					i {
-						font-size:21px;
+						font-size:18px;
 						line-height:21px;
 					}
 				}
@@ -570,7 +578,7 @@ body
 				border-radius:0px;
 				min-width:4.5rem;
 				color:var(--bs-body-color);
-				line-height:1.2rem;
+				line-height:1.4;
 				//font-size:0.9rem;
 
 				div {
@@ -585,7 +593,6 @@ body
 				small
 				{
 					font-size:0.8rem;
-					padding:0 0.5rem;
 					//display:none;
 				}
 				
@@ -681,7 +688,7 @@ body
 	.components-list, .blocks-list, .component-properties, .sections-list
 	{
 		list-style:none;
-		background: rgba(var(--bs-secondary-color-rgb), 0.03);
+		background: rgba(var(--bs-secondary-color-rgb), 0.025);
 		//scrollbar on hover
 	}
 	
@@ -1354,8 +1361,8 @@ body
 				padding:0.3rem 0.2rem 0.4rem;
 				
 				i {
-					padding: 0.4rem 0rem;
-					font-size:1.3rem;
+					padding: 0.3rem 0rem;
+					font-size:1.2rem;
 					border-radius: 3px;
 					display:block;
 					border:1px solid transparent;
@@ -1397,11 +1404,11 @@ body
 	.nav-tabs .nav-link
 	{
 		padding:0.8rem 0 0.5rem;
-		padding:0.8rem 0 0.8rem;
+		padding:0.5rem 0 0.5rem;
 		text-align:center;
 		i {
 			font-size:1.4rem;
-			line-height:1.2rem;
+			line-height:1;
 		}
 	}
 
@@ -2451,12 +2458,85 @@ img.preview {
     min-height: 1rem;
 }
 
+#tree-list {
+    position: absolute;
+    top: 10%;
+    left: 80%;
+	left:calc(100% - 300px);
+    //border: 1px solid var(--bs-border-color);
+	border-radius:2px;
+    z-index: 100;
+    width: 250px;
+    min-width: 250px;
+    min-height: 250px;
+    height: 500px;
+    resize: both;
+	overflow: hidden;
+    box-shadow: 0px 1px 5px 0px rgba(var(--bs-body-color-rgb), 0.15);
+    background: var(--bs-body-bg);
+	
+	.header {
+		height:30px;
+		font-size: 12px;
+		padding: 0.4rem 1rem;
+		color: rgba(var(--bs-body-color-rgb), 0.7);
+		background: rgba(var(--bs-primary-rgb), 0.15);	
+		cursor:grabbing;
+		
+		&:before {
+			content: "....";
+			opacity:0.5;
+			width: 15px;
+			top: 0;
+			font-size: 28px;
+			word-wrap: break-word;
+			line-height: 7px;
+			vertical-align: middle;
+			display: inline-block;
+			margin-right: 10px;
+			margin-top: -1rem;
+		}
+	}
+	
+	.tree {
+	    padding: 1rem;
+		overflow: auto;
+		width: 100%;
+		height: 100%;
+		height: calc(100% - 30px);
+		
+		label {
+			
+			&.active {
+				border: 1px solid rgba(var(--bs-primary-rgb), 0.15);
+				background-color: rgba(var(--bs-primary-rgb), 0.05);			
+			}			
+		}
+		
+		> ol li input {
+			height: 2.4em;
+			width: 4em;			
+		}
+		
+		> ol li input:checked + ol {
+			padding:2rem 0 0 1.5rem;
+		}
+		
+		> ol li.file > label {
+			margin-left:18px;
+		}
+	}
+}
 
 /* theme specific styes needed by section component */
 body {
 	> section, > footer, > header { 
 		position:relative;
 		//padding:5rem 0;
+		
+		&.bg-alternate:nth-child(even) {
+			//background-color:rgba(var(--bs-body-color-rgb), 0.05);
+		}
 		
 		.background-container, .overlay {
 			position:absolute;
@@ -2470,15 +2550,43 @@ body {
 			&::before {
 			}
 			
+			img, video {
+				width:auto;
+				height:auto;
+				max-width: initial;
+				min-height: 100%;
+				min-width: 100%;
+
+			
+				//center hero image on mobile
+				/*
+				@include media-breakpoint-down(md) { 
+					margin: 0 0 0 -25%;
+				}
+				
+				@include media-breakpoint-down(sm) {
+					margin: 0 0 0 -50%;	
+				}
+				*/
+			}
+			
 			img {
-				width:100%;
+			  position: absolute;
+			  left: 50%;
+			  top: 50%;
+			  height: 100%;
+			  width: auto;
+			  -webkit-transform: translate(-50%,-50%);
+				  -ms-transform: translate(-50%,-50%);
+					  transform: translate(-50%,-50%);
 			}
 		}
 
 		.overlay {
 			z-index:-1;
-			background: #000;
-			opacity: 0.6;
+			//background: var(--bs-body-color);
+			background: var(--bs-black);
+			opacity: 0.7;
 		}
 
 		.separator {
@@ -2515,7 +2623,7 @@ body {
 				bottom: 0;
 				top: 0;
 				content: "";
-				background: rgba(0,0,0, 0.4);
+				background: rgba(var(--bs-body-color-rgb), 0.4);
 			}
 		}*/
 	}

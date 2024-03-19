@@ -860,7 +860,8 @@ Vvveb.Components.extend("_base", "_base", {
 
 		onChange: function(node, value) {
 			
-			$(node).css('background-image', 'url(' + value + ')');
+			Vvveb.StyleManager.setStyle($(node), "background-image", 'url(' + value + ')');
+			//$(node).css('background-image', 'url(' + value + ')');
 			
 			return node;
 		}        

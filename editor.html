@@ -45,7 +45,7 @@
 										
 					
 					<div class="btn-group me-3" role="group">
-					  <button class="btn btn-light" title="Designer Mode (Free component dragging)" id="designer-mode-btn" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="setDesignerMode">
+					  <button class="btn btn-light" title="Designer Mode (Free dragging)" id="designer-mode-btn" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="setDesignerMode">
 						  <i class="la la-hand-rock"></i>
 					  </button>
 
@@ -55,6 +55,10 @@
 
 					  <button class="btn btn-light" title="Fullscreen (F11)" id="fullscreen-btn" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="fullscreen">
 						  <i class="icon-expand-outline"></i>
+					  </button>
+
+					  <button class="btn btn-light active" title="Toggle navigator" id="toggle-tree-list" data-bs-toggle="button" data-vvveb-action="toggleTreeList" aria-pressed="true">
+						  <i class="icon-layers-outline"></i>
 					  </button>
 
 					  <button class="btn btn-light" title="Download" id="download-btn" data-vvveb-action="download" data-v-download="index.html">
@@ -183,7 +187,7 @@
 							  <div class="tab-pane show active sections" id="sections" role="tabpanel" aria-labelledby="sections-tab">
 								  
 
-										<ul class="nav nav-tabs nav-fill sections-tabs" id="properties-tabs" role="tablist">
+										<ul class="nav nav-tabs nav-fill sections-tabs" id="sections-tabs" role="tablist">
 										  <li class="nav-item content-tab">
 											<a class="nav-link active" data-bs-toggle="tab" href="#sections-new-tab" role="tab" aria-controls="components" aria-selected="false">
 												<i class="icon-albums-outline"></i> <div><span>Sections</span></div></a>
@@ -380,7 +384,7 @@
 													  </li>
 													</ul>
 											
-													<div class="tab-content">
+													<div class="tab-content" data-offset="20">
 														 <div class="tab-pane show active" id="content-left-panel-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
 															<div class="alert alert-dismissible fade show alert-light m-3" role="alert" style="">		  
 																<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>		  
@@ -402,7 +406,7 @@
 								<div class="tab-pane" id="configuration" role="tabpanel" aria-labelledby="configuration-tab">
 									
 									<div class="drag-elements-sidepane sidepane">
-									<div>
+									<div data-offset="80">
 										<div class="component-properties">
 											<!-- color palette -->
 											<!--
@@ -976,7 +980,6 @@
 	<div class="input-html-list-select">
 		
 		<div class="current-element">
-		
 		</div>
 		
 		<div class="popup">
@@ -1001,7 +1004,6 @@
 			
 			<div class="elements">
 					{%=elements%}
-				</div>
 			</div>
 		</div>
 	</div>
@@ -1038,7 +1040,6 @@
 			
 			<div class="elements">
 					{%=elements%}
-				</div>
 			</div>
 		</div>
 	</div>
@@ -1170,7 +1171,7 @@
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
-				<option value="{%=i%}" {% if ((typeof col_xl !== 'undefined') && col_lg == i) { %} selected {% } %}>{%=i%}</option>
+				<option value="{%=i%}" {% if ((typeof col_xl !== 'undefined') && col_xl == i) { %} selected {% } %}>{%=i%}</option>
 				{% } %}
 				
 			</select>
@@ -1182,7 +1183,7 @@
 				
 				<option value="">None</option>
 				{% for ( var i = 1; i <= 12; i++ ) { %}
-				<option value="{%=i%}" {% if ((typeof col_xxl !== 'undefined') && col_lg == i) { %} selected {% } %}>{%=i%}</option>
+				<option value="{%=i%}" {% if ((typeof col_xxl !== 'undefined') && col_xxl == i) { %} selected {% } %}>{%=i%}</option>
 				{% } %}
 				
 			</select>
@@ -1367,11 +1368,12 @@
 </script>
 
 <script id="vvveb-input-sectioninput" type="text/html">
-
-		<label class="header" data-header="{%=key%}" for="header_{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}><span>{%=header%}</span> <div class="header-arrow"></div></label> 
-		<input class="header_check" type="checkbox" {% if (typeof expanded !== 'undefined' && expanded == false) { %} {% } else { %}checked="true"{% } %} id="header_{%=key%}"> 
+	<div>
+		{% var namespace = '-' + Math.floor(Math.random() * 1000); %}
+		<label class="header" data-header="{%=key%}" for="header_{%=key%}{%=namespace%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}><span>{%=header%}</span> <div class="header-arrow"></div></label> 
+		<input class="header_check" type="checkbox" {% if (typeof expanded !== 'undefined' && expanded == false) { %} {% } else { %}checked="true"{% } %} id="header_{%=key%}{%=namespace%}"> 
 		<div class="section row" data-section="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}></div>		
-	
+	</div>
 </script>
 
 
@@ -1450,7 +1452,8 @@
 		</label>
 		
 		<div class="tree">
-			<ol >
+			<ol>
+				<!--
 				<li data-component="Products" class="file">							
 					<label for="idNaN" style="background-image:url(/js/vvvebjs/icons/products.svg)"><span>Products</span></label>							
 					<input type="checkbox" id="idNaN">
@@ -1459,6 +1462,7 @@
 					<label for="idNaN" style="background-image:url(/js/vvvebjs/icons/posts.svg)"><span>Posts</span></label>							
 					<input type="checkbox" id="idNaN">
 				</li>
+				-->
 			</ol>
 		</div>
 	</div>
@@ -1467,6 +1471,25 @@
 
 
 <!--// end templates -->
+
+
+        <div id="tree-list">
+          <div class="header">Navigator</div>
+          <div class="tree">
+            <ol>
+              <!--
+			<li data-component="Products" class="file">							
+				<label for="idNaN" style="background-image:url(/js/vvvebjs/icons/products.svg)"><span>Products</span></label>							
+				<input type="checkbox" id="idNaN">
+			</li>
+			<li data-component="Posts" class="file">							
+				<label for="idNaN" style="background-image:url(/js/vvvebjs/icons/posts.svg)"><span>Posts</span></label>							
+				<input type="checkbox" id="idNaN">
+			</li>
+			-->
+            </ol>
+          </div>
+        </div>
 
 <!-- code editor modal -->
 <div class="modal modal-full fade" id="codeEditorModal" tabindex="-1" aria-labelledby="codeEditorModal" role="dialog" aria-hidden="true">
@@ -2188,10 +2211,12 @@ $(function() {
 	Vvveb.Gui.init();
 	Vvveb.FileManager.init();
 	Vvveb.SectionList.init();
+	Vvveb.TreeList.init();
 	Vvveb.Breadcrumb.init();
 	
 	Vvveb.FileManager.addPages(pages);
 	Vvveb.FileManager.loadPage(pages[firstPage]["name"]);
+	Vvveb.Gui.toggleRightColumn(false);
 	Vvveb.Breadcrumb.init();
 
 	//if url has #no-right-panel set one panel demo

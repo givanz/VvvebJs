@@ -940,12 +940,17 @@ function carouselAfterDrop(node) {
 		function initSwiper(onlyNew = false) {
 			var list = document.querySelectorAll('.swiper' + (onlyNew ? ":not(.swiper-initialized)" : "") );
 			list.forEach(el => {
-				//el.dataset
-				let params = {};
+				let params = {      
+					navigation: {
+						nextEl: ".swiper-button-next",
+						prevEl: ".swiper-button-prev",
+					},      
+					pagination: {
+						el: ".swiper-pagination",
+				  },
+				};
 				for (i in el.dataset) {
 					let param = el.dataset[i];
-					console.log(i);
-					console.log(param);
 					if (param[0] = '{') {
 						param = JSON.parse(param);
 					}
