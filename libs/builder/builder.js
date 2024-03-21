@@ -323,8 +323,8 @@ Vvveb.Components = {
 			var sectionName = this.dataset.section;
 			componentsPanelSections[sectionName] = $(this);
 			$('.section[data-section!="default"]', this).remove();
-			$('label[for!="header_default"]', this).remove();
-			$('input[id!="header_default"]', this).remove();
+			$('label[data-header!="default"] + input', this).remove();
+			$('label[data-header!="default"]', this).remove();
 		});
 		
 		var section = componentsPanelSections[defaultSection].find('.section[data-section="default"]');
@@ -1454,7 +1454,7 @@ Vvveb.Builder = {
 							return true;
 						}
 					}
-
+					
 					$("#highlight-box").css(
 						{"top": offset.top - self.frameDoc.scrollTop() , 
 						 "left": offset.left - self.frameDoc.scrollLeft() , 
