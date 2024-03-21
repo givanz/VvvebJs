@@ -19022,9 +19022,8 @@ li.header > input.header_check:checked + ol {
   height: auto; }
 
 div.section, .header > ol {
-  height: 0;
+  height: auto;
   overflow: hidden;
-  opacity: 0;
   transition: height,opacity 0.5s; }
 
 #right-panel label.header .header-arrow {
