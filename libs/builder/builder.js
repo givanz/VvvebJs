@@ -1796,6 +1796,9 @@ Vvveb.Builder = {
 			Vvveb.TreeList.loadComponents();
 			Vvveb.TreeList.selectComponent(node);
 			
+			// Generate/Regenerate Id for element
+			node.id = node.id ? node.id + "_" + Math.floor(Math.random() * 90000) : node.tagName + "_" + Math.floor(Math.random() * 90000);
+			
 			Vvveb.Undo.addMutation({type: 'childList', 
 									target: node.parentNode, 
 									addedNodes: [node], 
