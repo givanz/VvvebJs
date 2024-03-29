@@ -15,9 +15,6 @@ limitations under the License.
 
 https://github.com/givanz/VvvebJs
 */
-html {
-  font-size: 14px; }
-
 body {
   font-family: "Helvetica Neue", Helvetica, -apple-system, Arial, "Lucida Grande", system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
 
@@ -17868,6 +17865,10 @@ https://github.com/givanz/VvvebJs
         margin: 0 0 0.3em;
         /* 1px */ }
 
+[data-bs-theme="dark"] .tree > ol li label {
+  filter: invert(93%) hue-rotate(180deg);
+  color: var(--bs-dark); }
+
 body {
   --builder-filemanager-height: 250px;
   --builder-canvas-margin: 0px;
@@ -18038,6 +18039,8 @@ body {
     #vvveb-builder #top-panel .btn-group.responsive-btns .btn.btn-light {
       font-size: 1.6rem;
       padding: 0rem 0.5rem; }
+    html[data-bs-theme="dark"] #vvveb-builder #top-panel img {
+      filter: invert(93%) hue-rotate(180deg); }
   #vvveb-builder #bottom-panel {
     width: auto;
     height: 35px;
@@ -18373,7 +18376,7 @@ body {
     border-style: dashed;
     /*border-width:1px;*/
     border: 1px solid rgba(var(--bs-body-color-rgb), 0.2);
-    box-shadow: 1px 1px 3px 0px rgba(var(--bs-body-color-rgb), 0.1) inset;
+    box-shadow: 1px 1px 3px 0px rgba(var(--bs-body-color-rgb), 0.1) inset, 0px 0px 2px 1px rgba(var(--bs-body-bg-rgb), 0.8) inset;
     background: transparent;
     border-radius: 0 0 3px 3px; }
   #vvveb-builder #select-box {
@@ -18483,6 +18486,8 @@ body {
         border-right: none; }
       #vvveb-builder #wysiwyg-editor.default-editor a:hover {
         background: var(--bs-border-color); }
+      #vvveb-builder #wysiwyg-editor.default-editor a i {
+        font-size: 16px; }
     #vvveb-builder #wysiwyg-editor.default-editor div.separator {
       display: inline-block;
       background: var(--bs-border-color);
@@ -18500,29 +18505,40 @@ body {
       pointer-events: all;
       line-height: 2.2rem;
       height: 34px;
+      font-size: 14px;
       padding: 0;
       box-shadow: none; }
-      #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown[type="color"], #vvveb-builder #wysiwyg-editor.default-editor > select[type="color"], #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"] {
-        padding: 4px;
-        height: 30px;
-        width: 32px;
-        box-shadow: none;
-        border: 1px dashed var(--bs-border-color);
-        margin: 0;
-        margin: 3px;
-        border-radius: 3px; }
-        #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown[type="color"].form-control-color::-moz-color-swatch, #vvveb-builder #wysiwyg-editor.default-editor > select[type="color"].form-control-color::-moz-color-swatch, #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"].form-control-color::-moz-color-swatch {
-          border-radius: 3px;
-          box-shadow: 1px 1px 5px 0px rgba(var(--bs-body-color-rgb), 0.25);
-          border: none; }
-        #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown[type="color"].form-control-color::-webkit-color-swatch, #vvveb-builder #wysiwyg-editor.default-editor > select[type="color"].form-control-color::-webkit-color-swatch, #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"].form-control-color::-webkit-color-swatch {
-          padding: 0;
-          border-radius: 3px;
-          box-shadow: 1px 1px 5px 0px rgba(var(--bs-body-color-rgb), 0.25);
-          border: none; }
-    #vvveb-builder #wysiwyg-editor.default-editor select {
-      padding: 0rem 1.8rem 0 1rem;
-      margin-top: 2px; }
+    #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"] {
+      padding: 4px;
+      height: 30px;
+      width: 32px;
+      box-shadow: none;
+      border: 1px dashed var(--bs-border-color);
+      margin: 0;
+      margin: 3px;
+      border-radius: 3px; }
+      #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"].form-control-color::-moz-color-swatch {
+        border-radius: 3px;
+        box-shadow: 1px 1px 5px 0px rgba(var(--bs-body-color-rgb), 0.25);
+        border: none; }
+      #vvveb-builder #wysiwyg-editor.default-editor > input[type="color"].form-control-color::-webkit-color-swatch {
+        padding: 0;
+        border-radius: 3px;
+        box-shadow: 1px 1px 5px 0px rgba(var(--bs-body-color-rgb), 0.25);
+        border: none; }
+    #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown button {
+      padding: 5px 8px;
+      margin: 0;
+      font-size: 18px;
+      vertical-align: middle;
+      color: var(--bs-body-color); }
+    #vvveb-builder #wysiwyg-editor.default-editor > div.dropdown .dropdown-toggle::after {
+      font-size: 50%;
+      vertical-align: unset; }
+    #vvveb-builder #wysiwyg-editor.default-editor > select {
+      padding: 0rem 2.5rem 0 1rem;
+      margin-top: 2px;
+      background-size: 12px 10px; }
     #vvveb-builder #wysiwyg-editor.default-editor div.dropdown a:after {
       vertical-align: middle !important;
       font-size: 14px;
@@ -19106,7 +19122,8 @@ input[type="number"] {
   -webkit-appearance: textfield;
   appearance: textfield;
   padding-right: 0.5rem;
-  padding-left: 0.5rem; }
+  padding-left: 0.5rem;
+  font-size: 12px; }
 
 input[type="number"]:hover,
 input[type="number"]:focus {
@@ -19449,7 +19466,7 @@ img.preview {
     left: calc(50% - 6px);
     content: '';
     z-index: 1000001;
-    transform: translateY(-8px);
+    transform: translateY(-18px);
     visibility: hidden;
     opacity: 0;
     z-index: 1000000;
@@ -19515,24 +19532,27 @@ img.preview {
   box-shadow: 0px 1px 5px 0px rgba(var(--bs-body-color-rgb), 0.15);
   background: var(--bs-body-bg); }
   #tree-list .header {
+    display: flex;
+    justify-content: space-between;
     height: 30px;
     font-size: 12px;
-    padding: 0.4rem 1rem;
     color: rgba(var(--bs-body-color-rgb), 0.7);
     background: rgba(var(--bs-primary-rgb), 0.15);
     cursor: grabbing; }
-    #tree-list .header:before {
-      content: "....";
-      opacity: 0.5;
-      width: 15px;
-      top: 0;
-      font-size: 28px;
-      word-wrap: break-word;
-      line-height: 7px;
-      vertical-align: middle;
-      display: inline-block;
-      margin-right: 10px;
-      margin-top: -1rem; }
+    #tree-list .header > div {
+      padding: 0.4rem 1rem; }
+      #tree-list .header > div:before {
+        content: "....";
+        opacity: 0.5;
+        width: 15px;
+        top: 0;
+        font-size: 28px;
+        word-wrap: break-word;
+        line-height: 7px;
+        vertical-align: middle;
+        display: inline-block;
+        margin-right: 10px;
+        margin-top: -1rem; }
   #tree-list .tree {
     padding: 1rem;
     overflow: auto;

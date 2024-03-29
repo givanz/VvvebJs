@@ -1402,7 +1402,7 @@ Vvveb.Builder = {
 								if (noChildren[parentTagName]) { 
 									self.dragElement.insertAfter(parent);
 								} else {
-								self.dragElement.appendTo(parent);
+									self.dragElement.appendTo(parent);
 								}
 
 								prepend = true;
@@ -2448,7 +2448,11 @@ Vvveb.Gui = {
 	},
 
 	toggleTreeList: function () {
-		$("#tree-list").toggle();
+		let treeList = document.getElementById("tree-list");
+		treeList.classList.toggle("d-none");
+		if (!treeList.offsetParent) {
+			document.getElementById("toggle-tree-list").classList.remove("active");
+		}		
 	},
 
 	darkMode: function () {

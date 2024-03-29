@@ -121,10 +121,10 @@ section:hover .container div > .row > .col, section:hover .container > .row > [c
 section:hover .container > .row > .col, section:hover .container-fluid div > .row > [class*="col-"],
 section:hover .container-fluid div > .row > .col, section:hover .container-fluid > .row > [class*="col-"],
 section:hover .container-fluid > .row > .col {
-  outline: 1px dashed lime;
+  outline: 1px dashed rgba(var(--bs-success-rgb), 0.35);
   outline-offset: -2px; }
 
 .row:hover > [class*="col-"],
 .row:hover > .col {
-  outline: 1px dashed lime;
+  outline: 1px dashed rgba(var(--bs-success-rgb), 0.35);
   outline-offset: -2px; }

@@ -166,3 +166,11 @@
 		}
 	}
 }
+
+//dark mode support for svg images 
+[data-bs-theme="dark"] {
+	.tree > ol li label {
+		filter:invert(93%) hue-rotate(180deg);
+		color: var(--bs-dark);
+	}
+}

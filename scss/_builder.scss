@@ -500,6 +500,10 @@ body
 			}
 		}
 		
+		html[data-bs-theme="dark"] & img {
+			//filter: brightness(3);
+			filter: invert(93%) hue-rotate(180deg);
+		}
 	}
 	
 	#bottom-panel {
@@ -1035,7 +1039,7 @@ body
 		border-style:dashed;
 		/*border-width:1px;*/
 		border: 1px solid rgba(var(--bs-body-color-rgb),0.2);
-		box-shadow: 1px 1px 3px 0px rgba(var(--bs-body-color-rgb), 0.1) inset;
+		box-shadow: 1px 1px 3px 0px rgba(var(--bs-body-color-rgb), 0.1) inset, 0px 0px 2px 1px rgba(var(--bs-body-bg-rgb), 0.8) inset;
 		background:transparent;
 		border-radius:0 0 3px 3px;
 	}
@@ -1196,6 +1200,9 @@ body
 				background:var(--bs-border-color);
 				}
 				
+			i {
+				font-size:16px;
+			}
 			}
 			
 			div.separator {
@@ -1219,6 +1226,7 @@ body
 			//border-right:1px solid var(--bs-border-color);
 				line-height:2.2rem;
 				height:34px;
+			font-size:14px;
 				padding:0;
 				box-shadow:none;
 				//background-position: right 0.5rem center;
@@ -1226,7 +1234,9 @@ body
 				&:last-child {
 					//border-right:none;
 				}
+		}
 				
+		> input {
 				&[type="color"] {
 					padding: 4px;
 					height:30px;
@@ -1237,7 +1247,7 @@ body
 					margin:3px;
 					border-radius:3px;
 					
-					  &.form-control-color::-moz-color-swatch{
+					  &.form-control-color::-moz-color-swatch {
 							//width: 22px;
 							//height: 22px;
 							border-radius: 3px;
@@ -1254,12 +1264,27 @@ body
 							border: none;
 						}				  
 				}
+		}
 
+		> div.dropdown {
+			button {
+				padding: 5px 8px;
+				margin: 0;
+				font-size: 18px;
+				vertical-align: middle;
+				color: var(--bs-body-color);
 			}
 			
-			select {
-				padding:0rem 1.8rem 0 1rem;
+			.dropdown-toggle::after {
+				font-size: 50%;
+				vertical-align: unset;
+			}
+		}
+			
+		> select {
+			padding:0rem 2.5rem 0 1rem;
 				margin-top:2px;
+			background-size:12px 10px;
 			}
 			
 			div.dropdown{ 
@@ -1956,6 +1981,7 @@ input[type="number"] {
     appearance: textfield;
 	padding-right: 0.5rem;
 	padding-left: 0.5rem;
+	font-size: 12px;
 }
 input[type="number"]:hover,
 input[type="number"]:focus {
@@ -2386,7 +2412,7 @@ img.preview {
 		content: '';
 		
 		z-index: 1000001;
-		transform: translateY(-8px);
+		transform: translateY(-18px);
 		visibility: hidden;
 		opacity: 0;
 		z-index: 1000000;
@@ -2476,25 +2502,30 @@ img.preview {
     background: var(--bs-body-bg);
 	
 	.header {
+		display:flex;
+		justify-content: space-between;
 		height:30px;
 		font-size: 12px;
-		padding: 0.4rem 1rem;
 		color: rgba(var(--bs-body-color-rgb), 0.7);
 		background: rgba(var(--bs-primary-rgb), 0.15);	
 		cursor:grabbing;
 		
-		&:before {
-			content: "....";
-			opacity:0.5;
-			width: 15px;
-			top: 0;
-			font-size: 28px;
-			word-wrap: break-word;
-			line-height: 7px;
-			vertical-align: middle;
-			display: inline-block;
-			margin-right: 10px;
-			margin-top: -1rem;
+		> div {
+			padding: 0.4rem 1rem;
+		
+			&:before {
+				content: "....";
+				opacity:0.5;
+				width: 15px;
+				top: 0;
+				font-size: 28px;
+				word-wrap: break-word;
+				line-height: 7px;
+				vertical-align: middle;
+				display: inline-block;
+				margin-right: 10px;
+				margin-top: -1rem;
+			}
 		}
 	}
 	

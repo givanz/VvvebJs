@@ -132,7 +132,7 @@ Prevents iframe mouse events that prevents clicking on the component
 
 	> [class*="col-"], 
 	> .col {
-		outline:1px dashed lime;
+		outline:1px dashed rgba(var(--bs-success-rgb), 0.35);
 		outline-offset: -2px;
 	}	
 }

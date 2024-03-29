@@ -726,7 +726,7 @@ Vvveb.Components.extend("_base", "html/tablebody", {
 
 Vvveb.Components.extend("_base", "html/gridcolumn", {
     name: "Grid Column",
-    image: "icons/grid_row.svg",
+    image: "icons/grid_column.svg",
     classesRegex: ["col-"],
     classes: ["col"],
     html: '<div class="col-sm-4"><h3>col-sm-4</h3></div>',
@@ -834,14 +834,181 @@ Vvveb.Components.extend("_base", "html/gridrow", {
 			return item.key.indexOf("column") === -1;
 		});
 		
-		//add remaining properties to generated column properties
-		properties.push(this.properties[0]);
+		//add remaining properties to generated column properties, put first 2 align properties first
+		this.properties = this.properties.slice(0,4).concat(properties, this.properties.slice(4));
 		
-		this.properties = properties;
 		return node;
 	},
     
     properties: [{
+        name: "Direction",
+        key: "direction",
+        htmlAttr: "class",
+        inline:false,
+        validValues: ["", "flex-row", "flex-row-reverse", "flex-column", "flex-column-reverse"],
+        inputtype: RadioButtonInput,
+        data: {
+			extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+                value: "",
+                icon:"la la-times",
+                //text: "None",
+                title: "Default",
+                checked:true,
+            }, {
+                value: "flex-row",
+                //text: "Left",
+                title: "Row - horizontal",
+                icon:"la la-arrow-right",
+                checked:false,
+            }, {
+                value: "flex-column",
+                //text: "Center",
+                title: "Column - vertical",
+                icon:"la la-arrow-down",
+                checked:false,
+            }, {
+                value: "flex-row-reverse",
+                //text: "Right",
+                title: "Row - reversed",
+                icon:"la la-arrow-left",
+                checked:false,
+            }, {
+                value: "flex-column-reverse",
+                //text: "Center",
+                title: "Column - reversed",
+                icon:"la la-arrow-up",
+                checked:false,
+            }],
+        },
+	},{       
+        name: "Vertical align",
+        key: "vertical-align",
+        htmlAttr: "class",
+        inline:false,
+        validValues: ["", "align-items-start", "align-items-center", "align-items-end", "align-items-baseline", "align-items-stretch"],
+        inputtype: RadioButtonInput,
+        data: {
+            extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+                value: "",
+                icon:"la la-times",
+                //text: "None",
+                title: "None",
+                checked:true,
+            }, {
+                value: "align-items-start",
+                //text: "Left",
+                title: "Start",
+                icon:"la la-align-left",
+                checked:false,
+            }, {
+                value: "align-items-center",
+                //text: "Center",
+                title: "Center",
+                icon:"la la-align-center",
+                checked:false,
+            }, {
+                value: "align-items-end",
+                //text: "Right",
+                title: "End",
+                icon:"la la-align-right",
+                checked:false,
+            }, {
+                value: "align-items-baseline",
+                title: "Baseline",
+                icon:"la la-indent",
+                checked:false,
+            }, {
+                value: "align-items-stretch",
+                title: "Stretch",
+                icon:"la la-align-justify",
+                checked:false,
+            }],
+        },
+	},{
+        name: "Horizontal align",
+        key: "horizontal-align",
+        htmlAttr: "class",
+        inline:false,
+        validValues: ["", "justify-content-start", "justify-content-center", "justify-content-end", "justify-content-around", "justify-content-between", "justify-content-evenly"],
+        inputtype: RadioButtonInput,
+        data: {
+			extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+                value: "",
+                icon:"la la-times",
+                //text: "None",
+                title: "None",
+                checked:true,
+            }, {
+                value: "justify-content-start",
+                //text: "Left",
+                title: "Start",
+                icon:"la la-align-left",
+                checked:false,
+            }, {
+                value: "justify-content-center",
+                //text: "Center",
+                title: "Center",
+                icon:"la la-align-center",
+                checked:false,
+            }, {
+                value: "justify-content-end",
+                //text: "Right",
+                title: "End",
+                icon:"la la-align-right",
+                checked:false
+			}, {
+                value: "justify-content-around",
+                //text: "Left",
+                title: "Around",
+                icon:"la la-indent",
+                checked:false,
+            }, {
+                value: "justify-content-between",
+                //text: "Center",
+                title: "Between",
+                icon:"la la-outdent",
+                checked:false,
+            }, {
+                value: "justify-content-evenly",
+                //text: "Right",
+                title: "Evenly",
+                icon:"la la-align-justify",
+                checked:false,
+            }],
+        },
+	},{       
+        name: "Wrap",
+        key: "wrap",
+        htmlAttr: "class",
+        inline:false,
+        validValues: ["", "flex-wrap", "flex-nowrap"],
+        inputtype: RadioButtonInput,
+        data: {
+            extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+                value: "",
+                icon:"la la-times",
+                //text: "None",
+                title: "None",
+                checked:true,
+	}, {
+                value: "flex-wrap",
+                //text: "Left",
+                title: "Wrap",
+                icon:"la la-undo",
+                checked:false,
+            }, {
+                value: "flex-nowrap",
+                //text: "Center",
+                title: "No wrap",
+                icon:"la la-arrow-right",
+                checked:false,
+            }],
+        },
+	},{
         name: "Column",
         key: "column1",
         inputtype: GridInput
