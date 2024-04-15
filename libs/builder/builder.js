@@ -3098,8 +3098,10 @@ Vvveb.TreeList = {
 		document.addEventListener('mousemove', function(event) {
 			if (isDown) {
 				event.preventDefault();
-				div.style.left = (event.clientX + offset[0]) + 'px';
-				div.style.top  = (event.clientY + offset[1]) + 'px';
+				let left = Math.max(event.clientX + offset[0], 0);
+				let top = Math.max(event.clientY + offset[1], 0);
+				if (left >= 0 && (left < (window.innerWidth - div.clientWidth))) div.style.left = left + "px";
+				if (top >= 0 && (top < (window.innerHeight - div.clientHeight))) div.style.top  = top + "px";
 			}
 		}, true);
 		
@@ -3112,6 +3114,9 @@ Vvveb.TreeList = {
 				//node.click();
 				Vvveb.Builder.selectNode(node);
 				Vvveb.Builder.loadNodeComponent(node);
+				
+				document.querySelector(self.selector + " .active")?.classList.remove("active");	
+				element.querySelector("label").classList.add("active");
 			}
 		}).on("dblclick", "> div", function (e) {
 			node = $(e.currentTarget).data("node");
