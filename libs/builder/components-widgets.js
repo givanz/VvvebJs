@@ -34,10 +34,9 @@ Vvveb.Components.extend("_base", "widgets/googlemaps", {
     t: 'q', //map type q = roadmap, w = satellite
     key: '',
     
-	init: function (node)
-	{
-		let iframe = jQuery('iframe', node);
-		let url = new URL(iframe.attr("src"));
+	init: function (node) {
+		let iframe = node.querySelector('iframe');
+		let url = new URL(iframe.getAttribute("src"));
 		let params = new URLSearchParams(url.search);
 		
 		this.z = params.get("z");
@@ -45,20 +44,20 @@ Vvveb.Components.extend("_base", "widgets/googlemaps", {
 		this.t = params.get("t");
 		this.key = params.get("key");
 
-		$(".component-properties input[name=z]").val(this.z);
-		$(".component-properties input[name=q]").val(this.q);
-		$(".component-properties select[name=t]").val(this.t);
-		$(".component-properties input[name=key]").val(this.key);
+		document.querySelector(".component-properties input[name=z]").value = this.z;
+		document.querySelector(".component-properties input[name=q]").value = this.q;
+		document.querySelector(".component-properties select[name=t]").value = this.t;
+		document.querySelector(".component-properties input[name=key]").value = this.key;
 	},
 	    
     onChange: function (node, property, value) {
-		map_iframe = jQuery('iframe', node);
+		map_iframe = node.querySelector('iframe');
 		
 		this[property.key] = value;
 		
 		mapurl = 'https://maps.google.com/maps?q=' + this.q + '&z=' + this.z + '&t=' + this.t + '&output=embed';
 		
-		map_iframe.attr("src",mapurl);
+		map_iframe.setAttribute("src",mapurl);
 		
 		return node;
 	},
@@ -67,7 +66,7 @@ Vvveb.Components.extend("_base", "widgets/googlemaps", {
         name: "Address",
         key: "q",
         inputtype: TextInput
-    }, {
+    },{
         name: "Map type",
         key: "t",
         inputtype: SelectInput,
@@ -75,12 +74,12 @@ Vvveb.Components.extend("_base", "widgets/googlemaps", {
 			options: [{
                 value: "q",
                 text: "Roadmap"
-            }, {
+            },{
                 value: "w",
                 text: "Satellite"
             }]
        },
-    }, {
+    },{
         name: "Zoom",
         key: "z",
         inputtype: RangeInput,
@@ -89,7 +88,7 @@ Vvveb.Components.extend("_base", "widgets/googlemaps", {
 			min:1,
 			step:1
 		}
-    }, {
+    },{
         name: "Key",
         key: "key",
         inputtype: TextInput
@@ -110,27 +109,26 @@ Vvveb.Components.extend("_base", "widgets/openstreetmap", {
     bbox:'',//location
     layer: 'mapnik', //map type
     
-	init: function (node)
-	{
-		let iframe = jQuery('iframe', node);
-		let url = new URL(iframe.attr("src"));
+	init: function (node) {
+		let iframe = node.querySelector('iframe');
+		let url = new URL(iframe.getAttribute("src"));
 		let params = new URLSearchParams(url.search);
 		
 		this.bbox = params.get("bbox");
 		this.layer = params.get("layer");
 
-		$(".component-properties input[name=bbox]").val(this.bbox);
-		$(".component-properties input[name=layer]").val(this.layer);
+		document.querySelector(".component-properties input[name=bbox]").value = this.bbox;
+		document.querySelector(".component-properties input[name=layer]").value = this.layer;
 	},
 	    
     onChange: function (node, property, value) {
-		map_iframe = jQuery('iframe', node);
+		map_iframe = node.querySelector('iframe');
 		
 		this[property.key] = value;
 		
 		mapurl = 'https://www.openstreetmap.org/export/embed.html?bbox=' + this.bbox + '&layer=' + this.layer;
 		
-		map_iframe.attr("src",mapurl);
+		map_iframe.setAttribute("src",mapurl);
 		
 		return node;
 	},
@@ -139,7 +137,7 @@ Vvveb.Components.extend("_base", "widgets/openstreetmap", {
         name: "Map",
         key: "bbox",
         inputtype: TextInput
-/*    }, {
+/*    },{
         name: "Layer",
         key: "layer",
         inputtype: SelectInput,
@@ -147,13 +145,13 @@ Vvveb.Components.extend("_base", "widgets/openstreetmap", {
 			options: [{
                 value: "",
                 text: "Default"
-            }, {
+            },{
                 value: "Y",
                 text: "CyclOSM"
-            }, {
+            },{
                 value: "C",
                 text: "Cycle Map"
-            }, {
+            },{
                 value: "T",
                 text: "Transport Map"
             }]
@@ -183,21 +181,18 @@ Vvveb.Components.extend("_base", "widgets/embed-video", {
 	youtubeRegex:/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]+)/i,
 	vimeoRegex : /(?:vimeo\.com(?:[^\d]+))(\d+)/i,
 
-	init: function (node)
-	{
-		iframe = jQuery('iframe', node);
-		video = jQuery('video', node);
+	init: function (node) {
+		iframe = node.querySelector('iframe');
+		video = node.querySelector('video');
 		
-		$(".component-properties [data-key=url]").hide();
-		$(".component-properties [data-key=poster]").hide();
+		document.querySelector(".component-properties [data-key=url]").style.display = "none";
+		document.querySelector(".component-properties [data-key=poster]").style.display = "none";
 		
 		//check if html5
-		if (video.length) 
-		{
+		if (video.length) {
 			this.url = video.src;
-		} else if (iframe.length) //vimeo or youtube
-		{
-			let src = iframe.attr("src");
+		} else if (iframe.length) {//vimeo or youtube
+			let src = iframe.getAttribute("src");
 			let match;
 
 			if (src && src.indexOf("youtube") && (match = src.match(this.youtubeRegex))) {//youtube
@@ -211,43 +206,42 @@ Vvveb.Components.extend("_base", "widgets/embed-video", {
 			}
 		}
 		
-		$(".component-properties input[name=video_id]").val(this.video_id);
-		$(".component-properties input[name=url]").val(this.url);
-		$(".component-properties select[name=t]").val(this.t);
+		document.querySelector(".component-properties input[name=video_id]").value = this.video_id;
+		document.querySelector(".component-properties input[name=url]").value = this.url;
+		document.querySelector(".component-properties select[name=t]").value = this.t;
 	},
 	
-	onChange: function (node, property, value)
-	{
+	onChange: function (node, property, value) {
 		this[property.key] = value;
 		//if (property.key == "t")
 		{
-			switch (this.t)
-			{
+			switch (this.t) {
 				case 'y':
-					$(".component-properties [data-key=video_id]").show();
-					$(".component-properties [data-key=url]").hide();
-					$(".component-properties [data-key=poster]").hide();
-					newnode = $(`<iframe width="100%" height="100%" allowfullscreen="true" frameborder="0" allow="autoplay" 
+					document.querySelector(".component-properties [data-key=video_id]").style.display = "";
+					document.querySelector(".component-properties [data-key=url]").style.display = "none";
+					document.querySelector(".component-properties [data-key=poster]").style.display = "none";
+				
+					newnode = generateElements(`<iframe width="100%" height="100%" allowfullscreen="true" frameborder="0" allow="autoplay" 
 										src="https://www.youtube.com/embed/${this.video_id}?autoplay=${this.autoplay}&controls=${this.controls}&loop=${this.loop}&playsinline=${this.playsinline}&muted=${this.muted}">
-								</iframe>`);
+								</iframe>`)[0];
 				break;
 				case 'v':
-					$(".component-properties [data-key=video_id]").show();
-					$(".component-properties [data-key=url]").hide();
-					$(".component-properties [data-key=poster]").hide();
-					newnode = $(`<iframe width="100%" height="100%" allowfullscreen="true" frameborder="0" allow="autoplay" 
+					document.querySelector(".component-properties [data-key=video_id]").style.display = "";
+					document.querySelector(".component-properties [data-key=url]").style.display = "none";
+					document.querySelector(".component-properties [data-key=poster]").style.display = "none";
+					newnode = generateElements(`<iframe width="100%" height="100%" allowfullscreen="true" frameborder="0" allow="autoplay" 
 										src="https://player.vimeo.com/video/${this.video_id}?autoplay=${this.autoplay}&controls=${this.controls}&loop=${this.loop}&playsinline=${this.playsinline}&muted=${this.muted}">
-								</iframe>`);
+								</iframe>`)[0];
 				break;
 				case 'h':
-					$(".component-properties [data-key=video_id]").hide();
-					$(".component-properties [data-key=url]").show();
-					$(".component-properties [data-key=poster]").show();
-					newnode = $('<video poster="' + this.poster + '" src="' + this.url + '" ' + (this.autoplay?' autoplay ':'') + (this.controls?' controls ':'') + (this.loop?' loop ':'') + (this.playsinline?' playsinline ':'') + (this.muted?' muted ':'') + ' style="height: 100%; width: 100%;"></video>');
+					document.querySelector(".component-properties [data-key=video_id]").style.display = "none";
+					document.querySelector(".component-properties [data-key=url]").style.display = "";
+					document.querySelector(".component-properties [data-key=poster]").style.display = "";
+					newnode = generateElements('<video poster="' + this.poster + '" src="' + this.url + '" ' + (this.autoplay?' autoplay ':'') + (this.controls?' controls ':'') + (this.loop?' loop ':'') + (this.playsinline?' playsinline ':'') + (this.muted?' muted ':'') + ' style="height: 100%; width: 100%;"></video>')[0];
 				break;
 			}
 			
-			$("> iframe, > video", node).replaceWith(newnode);
+			node.querySelector("> iframe, > video").replaceWith(newnode);
 			return node;
 		}
 		
@@ -262,7 +256,7 @@ Vvveb.Components.extend("_base", "widgets/embed-video", {
 			options: [{
                 text: "Youtube",
                 value: "y"
-            }, {
+            },{
                 text: "Vimeo",
                 value: "v"
             },{
@@ -282,8 +276,8 @@ Vvveb.Components.extend("_base", "widgets/embed-video", {
 			let t = false;
 
 			if (((id = value.match(youtube)) && (t = "y")) || ((id = value.match(vimeo)) && (t = "v"))) {
-				$(".component-properties select[name=t]").val(t);
-				$(".component-properties select[name=video_id]").val(id[1]);
+				document.querySelector(".component-properties select[name=t]").value = t;
+				document.querySelector(".component-properties select[name=video_id]").value = id[1];
 
 				component.t = t;
 				component.video_id = id[1];
@@ -298,7 +292,7 @@ Vvveb.Components.extend("_base", "widgets/embed-video", {
         key: "poster",
         htmlAttr: "poster",
         inputtype: ImageInput
-    }, {
+    },{
         name: "Url",
         key: "url",
         inputtype: TextInput
@@ -309,7 +303,7 @@ Vvveb.Components.extend("_base", "widgets/embed-video", {
         inline:false,
         col:6,
         inputtype: CssUnitInput
-    }, {
+    },{
         name: "Height",
         key: "height",
         htmlAttr: "style",
@@ -376,7 +370,7 @@ Vvveb.Components.extend("_base", "widgets/facebookcomments", {
     image: "icons/facebook.svg",
     dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/facebook.svg">',
     html: '<div  data-component-facebookcomments><script>(function(d, s, id) {\
-			  var js, fjs = d.getElementsByTagName(s)[0];\
+			  let js, fjs = d.getElementsByTagName(s)[0];\
 			  if (d.getElementById(id)) return;\
 			  js = d.createElement(s); js.id = id;\
 			  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=";\
@@ -452,10 +446,9 @@ Vvveb.Components.extend("_base", "widgets/twitter", {
     twitterRegex : /(?:twitter\.com(?:[^\d]+))(\d+)/i,
 
     tweet:'',//location
-	init: function (node)
-	{
-		let iframe = jQuery('iframe', node);
-		let src = iframe.attr("src");
+	init: function (node) {
+		let iframe = node.querySelector('iframe');
+		let src = iframe.getAttribute("src");
 		let url = new URL(src);
 		let params = new URLSearchParams(url.search);
 		
@@ -468,18 +461,18 @@ Vvveb.Components.extend("_base", "widgets/twitter", {
 			
 		}
 
-		$(".component-properties input[name=tweet]").val(this.tweet);
+		document.querySelector(".component-properties input[name=tweet]").value = this.tweet;
 	},
 	    
     onChange: function (node, property, value) {
-		tweet_iframe = jQuery('iframe', node);
+		tweet_iframe = node.querySelector('iframe');
 
 		if (property.key == "tweet") {
 			this[property.key] = value;
 			
 			tweeturl = 'https://platform.twitter.com/embed/Tweet.html?embedId=twitter-widget-0&frame=false&hideCard=false&hideThread=false&id=' + this.tweet;
 			
-			tweet_iframe.attr("src",tweeturl);
+			tweet_iframe.setAttribute("src",tweeturl);
 		}
 		
 		return node;
@@ -495,7 +488,7 @@ Vvveb.Components.extend("_base", "widgets/twitter", {
 			let id = false;
 
 			if (id = value.match(twitterRegex)) {
-				$(".component-properties input[name=tweet]").val(id[1]);
+				document.querySelector(".component-properties input[name=tweet]").value = id[1];
 
 				component.tweet = id[1];
 				return id[1];
@@ -617,12 +610,12 @@ Vvveb.Components.extend("_base", "widgets/facebookpage", {
 	}],
    onChange: function(node, input, value, component) {
 	   
-	   var newElement = $(this.html);
-	   newElement.find(".fb-page").attr(input.htmlAttr, value);
+	   let newElement = generateElements(this.html)[0];
+	   newElement.find(".fb-page").setAttribute(input.htmlAttr, value);
 
-	   $("[data-fbcssmodules]", Vvveb.Builder.frameHead).remove();
-	   $("[data-fbcssmodules]", Vvveb.Builder.frameBody).remove();
-	   $("script[src^='https://connect.facebook.net']", Vvveb.Builder.frameHead).remove();
+	   frameHead.querySelector("[data-fbcssmodules]").remove();
+	   frameBody.querySelector("[data-fbcssmodules]").remove();
+	   frameHead.querySelector("script[src^='https://connect.facebook.net']").remove();
 
 
 	   node.parent().html(newElement.html());
@@ -643,7 +636,7 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
 					"data": [12, 19, 3, 5, 2, 3],\
 					"fill": false,\
 					"borderColor":"rgba(255, 99, 132, 0.2)"\
-				}, {\
+				},{\
 					"fill": false,\
 					"data": [3, 15, 7, 4, 19, 12],\
 					"borderColor": "rgba(54, 162, 235, 0.2)"\
@@ -663,7 +656,7 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
 					data: [12, 19, 3, 5, 2, 3],
 					fill: false,
 					borderColor:'rgba(255, 99, 132, 0.2)',
-				}, {
+				},{
 					fill: false,
 					data: [3, 15, 7, 4, 19, 12],
 					borderColor: 'rgba(54, 162, 235, 0.2)',
@@ -671,15 +664,13 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
 			},*/
 	},		
 
-	dragStart: function (node)
-	{
+	dragStart: function (node) {
 		//check if chartjs is included and if not add it when drag starts to allow the script to load
 		body = Vvveb.Builder.frameBody;
 		
-		if ($("#chartjs-script", body).length == 0)
-		{
-			$(body).append('<script id="chartjs-script" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>');
-			$(body).append('<script>\
+		if (document.getElementById("#chartjs-script")) {
+			body.append(generateElements('<script id="chartjs-script" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>')[0]);
+			body.append(generateElements('<script>\
 				$(document).ready(function() {\
 					$(".chartjs").each(function () {\
 						ctx = $("canvas", this).get(0).getContext("2d");\
@@ -687,15 +678,14 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
 						chartjs = new Chart(ctx, config);\
 					});\
 				\});\
-			  </script>');
+			  </script>')[0]);
 		}
 		
 		return node;
 	},
 	
 
-	drawChart: function ()
-	{
+	drawChart: function () {
 		if (this.chartjs != null) this.chartjs.destroy();
 		this.node.dataset.chart = JSON.stringify(this.config);
 		
@@ -703,10 +693,9 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
 		this.chartjs = new Chart(this.ctx, config);
 	},
 	
-	init: function (node)
-	{
+	init: function (node) {
 		this.node = node;
-		this.ctx = $("canvas", node).get(0).getContext("2d");
+		this.ctx = node.querySelector("canvas").getContext("2d");
 		this.config = JSON.parse(node.dataset.chart);
 		this.drawChart();
 
@@ -714,13 +703,11 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
 	},
   
   
-	beforeInit: function (node)
-	{
+	beforeInit: function (node) {
 		return node;
 	},
     
-    properties: [
-	{
+    properties: [{
         name: "Type",
         key: "type",
         inputtype: SelectInput,
@@ -728,22 +715,22 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
 			options: [{
                 text: "Line",
                 value: "line"
-            }, {
+            },{
                 text: "Bar",
                 value: "bar"
-            }, {
+            },{
                 text: "Pie",
                 value: "pie"
-            }, {
+            },{
                 text: "Doughnut",
                 value: "doughnut"
-            }, {
+            },{
                 text: "Polar Area",
                 value: "polarArea"
-            }, {
+            },{
                 text: "Bubble",
                 value: "bubble"
-            }, {
+            },{
                 text: "Scatter",
                 value: "scatter"
             },{

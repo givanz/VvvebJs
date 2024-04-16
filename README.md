@@ -5,7 +5,7 @@
   <br><br>
   <strong>Drag and drop website builder javascript library.</strong>
   <br>
-  <span>Built with jQuery and Bootstrap 5.</span>
+  <span>Built with Vanilla Js with no dependencies and Bootstrap 5</span>
 </p>
 <p align="center">
   <a href="https://www.vvveb.com">Website</a> |
@@ -160,10 +160,6 @@ npm run gulp screenshots
 
 
 ```js
-<!-- jquery-->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.hotkeys.js"></script>
-
 <!-- bootstrap-->
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -189,27 +185,22 @@ let pages = [
   {name:"landing-page", title:"Landing page", url: "demo/landing/index.html", file: "demo/landing/index.html"},
 ];
 	
-$(function() {
 
-	let firstPage = Object.keys(pages)[0];
-	Vvveb.Builder.init(pages[firstPage]["url"], function() {
-		//load code after page is loaded here
-	});
-
-	Vvveb.Gui.init();
-	Vvveb.FileManager.init();
-	Vvveb.SectionList.init();
-	Vvveb.Breadcrumb.init();
-	
-	Vvveb.FileManager.addPages(pages);
-	Vvveb.FileManager.loadPage(pages[firstPage]["name"]);
-	Vvveb.Breadcrumb.init();
-
-	//if url has #no-right-panel set one panel demo
-	if (window.location.hash.indexOf("no-right-panel") != -1) {
-		Vvveb.Gui.toggleRightColumn();
-	}
+let firstPage = Object.keys(pages)[0];
+Vvveb.Builder.init(pages[firstPage]["url"], function() {
+	//load code after page is loaded here
 });
+
+Vvveb.Gui.init();
+Vvveb.FileManager.init();
+Vvveb.SectionList.init();
+Vvveb.Breadcrumb.init();
+
+Vvveb.FileManager.addPages(pages);
+Vvveb.FileManager.loadPage(pages[firstPage]["name"]);
+Vvveb.Gui.toggleRightColumn(false);
+Vvveb.Breadcrumb.init();
+
 <script>
 ```
 

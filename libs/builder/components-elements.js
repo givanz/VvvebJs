@@ -19,17 +19,33 @@ https://github.com/givanz/Vvvebjs
 Vvveb.ComponentsGroup['Elements'] = [
 /*sections */
 "elements/font-icon",
-"elements/carousel",
+"elements/carousel", 
 "elements/gallery",
+"elements/slider",
 "elements/tabs",
 "elements/accordion",
 "elements/flip-box",
-"elements/social-icons",
+"elements/counter",
 "elements/svg-icon",
 "elements/figure",
-"elements/section", 
-"elements/footer", 
-"elements/header", 
+//"elements/testimonial",
+"elements/social-icons",
+//"elements/icon-list",
+//"elements/divider",
+//"elements/separator",
+//"elements/image-box",
+//"elements/icon-box",
+//"elements/animated-headline",
+//"elements/price-table",
+//"elements/price-list",
+//"elements/reviews",
+"elements/code",
+"elements/image-compare",
+//"elements/back-to-top",
+//"elements/blob",
+//"elements/image-shape",
+//"elements/image-shape",
+//"elements/rating",
 ];
 
 Vvveb.Components.extend("_base","elements/figure", {
@@ -42,9 +58,8 @@ Vvveb.Components.extend("_base","elements/figure", {
 		  <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
 		  <div class="border"></div>
 		</figure>`,
-
-	stylesheets:[
-		{
+		
+	stylesheets:[{
 			//the css is added in head when the element is added to page
 			'src': Vvveb.baseUrl + 'css/figure.css',
 			//the css is removed on save if none of the figure elements are present in the page
@@ -67,25 +82,25 @@ Vvveb.Components.extend("_base","elements/figure", {
         child:"img",
         htmlAttr: "src",
         inputtype: ImageInput
-    }, {
+    },{
         name: "Width",
         key: "width",
         child:"img",
         htmlAttr: "width",
         inputtype: CssUnitInput
-    }, {
+    },{
         name: "Height",
         key: "height",
         child:"img",
         htmlAttr: "height",
         inputtype: CssUnitInput
-    }, {
+    },{
         name: "Alt",
         key: "alt",
         child:"img",
         htmlAttr: "alt",
         inputtype: TextInput
-    }, {
+    },{
         name: "Caption",
         key: "caption",
         child:"figcaption",
@@ -109,14 +124,15 @@ Vvveb.Components.extend("_base","elements/font-icon", {
 		inline:true,
 		inputtype: HtmlListSelectInput,
 		onChange:function(element, value, input, component) {
-			
-			element.removeClass(["la", "lab", "lar"]);
-			element.removeClass(function (index, className) {
-				return (className.match (/(^|\s)la-(?!lg|2x)\S+/g) || []).join(' ');
+			element.classList.remove("la", "lab", "lar");
+			let className = element.getAttribute('class');
+			element.classList.forEach((value, key, listObj) => {
+				if (value.startsWith("la-") && value != "la-lg") {
+					element.classList.remove(value);
+				}
 			});
-			
-			element.addClass(input.firstChild.className);
 
+			element.classList.add(...input.className.split(" "));
 			return element;
 		},
 		data: {
@@ -129,7 +145,7 @@ Vvveb.Components.extend("_base","elements/font-icon", {
                 text: "Line-awesome"
             }]
 		},
-	}, {
+	},{
         name: "Size",
         key: "type",
         htmlAttr: "class",
@@ -139,10 +155,10 @@ Vvveb.Components.extend("_base","elements/font-icon", {
             options: [{
                 value: "",
                 text: "Normal"
-            }, {
+            },{
                 value: "la-lg",
                 text: "Large"
-            }, {
+            },{
                 value: "la-2x",
                 text: "2x"
             }]
@@ -158,7 +174,7 @@ V.Resources.Icons =
 {
 	value: `envelope.svg`,
 	text: "Sections"
-}, {
+},{
 	value: `star.svg`,
 	text: "Flipbox"
 }];*/
@@ -176,113 +192,115 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
 		inline:true,
 		inputtype: HtmlListSelectInput,
 		onChange:function(element, value, input, component) {
-			var newElement = $(value);
-			let attributes = element.prop("attributes");
+			let newElement = generateElements(value)[0];
+			let attributes = element.attributes;
 			
 			//keep old svg size and colors
-			$.each(attributes, function() {
-				if (this.name == "viewBox") return;
-                newElement.attr(this.name, this.value);
-            });
-            
+			for (let i = 0; i < attributes.length; i++) {
+				let attr = attributes[i];
+				if (attr.name && attr.name != "viewBox") {
+					newElement.setAttribute(attr.name, attr.value);
+				}
+			}
+			
 			element.replaceWith(newElement);
 			return newElement;
 		},
-		data: {
-			url: Vvveb.baseUrl + "../../resources/svg/icons/{value}/index.html",
-			clickElement:"li",
-			insertElement:"svg",
-			elements: 'Loading ...',
-			options: [{
-                value: "eva-icons",
-                text: "Eva icons"
-            }, {
-                value: "ionicons",
-                text: "IonIcons"
-            }, {
-                value: "linea",
-                text: "Linea"
-            }, {
-                value: "remix-icon",
-                text: "RemixIcon"
-            }, {
-                value: "unicons",
-                text: "Unicons"
-            }, {
-                value: "clarity-icons",
-                text: "Clarity icons"
-            }, {
-                value: "jam-icons",
-                text: "Jam icons"
-            }, {
-                value: "ant-design-icons",
-                text: "Ant design icons"
-            }, {
-                value: "themify",
-                text: "Themify"
-            }, {
-                value: "css.gg",
-                text: "Css.gg"
-            }, {
-                value: "olicons",
-                text: "Olicons"
-            }, {
-		value: "open-iconic",
-		text: "Open iconic"
-            }, {
-                value: "boxicons",
-                text: "Box icons"
-            }, {
-                value: "elegant-font",
-                text: "Elegant font"
-            }, {
-                value: "dripicons",
-                text: "Dripicons"
-            }, {
-                value: "feather",
-                text: "Feather"
-            }, {
-                value: "coreui-icons",
-                text: "Coreui icons"
-            }, {
-                value: "heroicons",
-                text: "Heroicons"
-            }, {
-                value: "iconoir",
-                text: "Iconoir"
-            }, {
-                value: "iconsax",
-                text: "Iconsax"
-            }, {
-                value: "ikonate",
-                text: "Ikonate"
-            }, {
-                value: "tabler-icons",
-                text: "Tabler icons"
-            }, {
-                value: "octicons",
-                text: "Octicons"
-            }, {
-                value: "system-uicons",
-                text: "System-uicons"
-            }, {
-                value: "font-awesome",
-                text: "FontAwesome"
-            }, {
-                value: "pe-icon-7-stroke",
-                text: "Pixeden icon 7 stroke"
-            }, {
-                value: "77_essential_icons",
-                text: "77 essential icons"
-            }, {
-                value: "150-outlined-icons",
-                text: "150 outlined icons"
-            }, {
-                value: "material-design",
-                text: "Material Design"
-            }]
-		},
-	}, {
+                data: {
+				url: Vvveb.baseUrl + "../../resources/svg/icons/{value}/index.html",
+				clickElement:"li",
+				insertElement:"svg",
+				elements: 'Loading ...',
+				options: [{
+					value: "eva-icons",
+					text: "Eva icons"
+				},{
+					value: "ionicons",
+					text: "IonIcons"
+				},{
+					value: "linea",
+					text: "Linea"
+				},{
+					value: "remix-icon",
+					text: "RemixIcon"
+				},{
+					value: "unicons",
+					text: "Unicons"
+				},{
+					value: "clarity-icons",
+					text: "Clarity icons"
+				},{
+					value: "jam-icons",
+					text: "Jam icons"
+				},{
+					value: "ant-design-icons",
+					text: "Ant design icons"
+				},{
+					value: "themify",
+					text: "Themify"
+				},{
+					value: "css.gg",
+					text: "Css.gg"
+				},{
+					value: "olicons",
+					text: "Olicons"
+				},{
+					value: "open-iconic",
+					text: "Open iconic"
+				},{
+					value: "boxicons",
+					text: "Box icons"
+				},{
+					value: "elegant-font",
+					text: "Elegant font"
+				},{
+					value: "dripicons",
+					text: "Dripicons"
+				},{
+					value: "feather",
+					text: "Feather"
+				},{
+					value: "coreui-icons",
+					text: "Coreui icons"
+				},{
+					value: "heroicons",
+					text: "Heroicons"
+				},{
+					value: "iconoir",
+					text: "Iconoir"
+				},{
+					value: "iconsax",
+					text: "Iconsax"
+				},{
+					value: "ikonate",
+					text: "Ikonate"
+				},{
+					value: "tabler-icons",
+					text: "Tabler icons"
+				},{
+					value: "octicons",
+					text: "Octicons"
+				},{
+					value: "system-uicons",
+					text: "System-uicons"
+				},{
+					value: "font-awesome",
+					text: "FontAwesome"
+				},{
+					value: "pe-icon-7-stroke",
+					text: "Pixeden icon 7 stroke"
+				},{
+					value: "77_essential_icons",
+					text: "77 essential icons"
+				},{
+					value: "150-outlined-icons",
+					text: "150 outlined icons"
+				},{
+					value: "material-design",
+					text: "Material Design"
+				}]
+            },
+	   },{
 		name: "Width",
 		key: "width",
 		htmlAttr: "width",
@@ -292,7 +310,7 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
 			min:6,
 			step:1
 		}
-   }, {
+   },{
 		name: "Height",
 		key: "height",
 		htmlAttr: "height",
@@ -302,7 +320,7 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
 			min:6,
 			step:1
 		}			
-   }, {
+   },{
 		name: "Stroke width",
 		key: "stroke-width",
 		htmlAttr: "stroke-width",
@@ -319,14 +337,14 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
 		//sort: base_sort++,
 		section: style_section,
 		data: {header:"Svg colors"},
-	}, {
+	},{
         name: "Fill Color",
         key: "fill",
         //sort: base_sort++,
         col:4,
         inline:true,
-		section: style_section,
-		htmlAttr: "fill",
+        section: style_section,
+        htmlAttr: "fill",
         inputtype: ColorInput,
    },{
         name: "Color",
@@ -334,8 +352,8 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
         //sort: base_sort++,
         col:4,
         inline:true,
-		section: style_section,
-		htmlAttr: "color",
+        section: style_section,
+        htmlAttr: "color",
         inputtype: ColorInput,
    },{
         name: "Stroke",
@@ -382,7 +400,7 @@ Vvveb.Components.add("elements/svg-element", {
 		section: style_section,
 		htmlAttr: "color",
         inputtype: ColorInput,
-  	}, {
+  	},{
   		name: "Stroke width",
 		key: "stroke-width",
 		htmlAttr: "stroke-width",
@@ -404,37 +422,37 @@ Vvveb.Components.add("elements/gallery", {
 			<div class="gallery masonry has-shadow" data-component-gallery>
 				<div class="item">
 					<a>
-						<img src="/media/7.jpg">
+						<img src="../../media/posts/1.jpg">
 					</a>
 				</div>
 				<div class="item">
 					<a>
-						<img src="/media/2.jpg">
+						<img src="../../media/posts/2.jpg">
 					</a>
 				</div>
 				<div class="item">
 					<a>
-						<img src="/media/15.jpg">
+						<img src="../../media/posts/3.jpg">
 					</a>
 				</div>
 				<div class="item">
 					<a>
-						<img src="/media/4.jpg">
+						<img src="../../media/posts/4.jpg">
 					</a>
 				</div>
 				<div class="item">
 					<a>
-						<img src="/media/5.jpg">
+						<img src="../../media/posts/5.jpg">
 					</a>
 				</div>
 				<div class="item">
 					<a>
-						<img src="/media/6.jpg">
+						<img src="../../media/posts/6.jpg">
 					</a>
 				</div>
 				<div class="item">
 					<a>
-						<img src="/media/7.jpg">
+						<img src="../../media/posts/7.jpg">
 					</a>
 				</div>
 			</div>
@@ -450,21 +468,21 @@ Vvveb.Components.add("elements/gallery", {
 				off: "flex"
 			},
 			setGroup: group => {
-				$('.mb-3[data-group]').attr('style','display:none !important');
-				$('.mb-3[data-group="'+ group + '"]').attr('style','');
+				document.querySelectorAll(".mb-3[data-group]").forEach(el => el.style.display = "none");
+				document.querySelector('.mb-3[data-group="'+ group + '"]').style.display = "";
 			}, 		
 			onChange : function(node, value, input)  {
 				this.setGroup(value);
 				return node;
 			}, 
 			init: function (node) {
-				if ($(node).hasClass("masonry")) {
+				if (node.classList.contains("masonry")) {
 					return "masonry";
 				} else {
 					return "flex";
 				}
 			},   			
-		}, {
+		},{
 			name: "Image shadow",
 			key: "shadow",
 			htmlAttr: "class",
@@ -474,7 +492,7 @@ Vvveb.Components.add("elements/gallery", {
 				on: "has-shadow",
 				off: ""
 			},
-		}, {
+		},{
 			name: "Horizontal gap",
 			key: "column-gap",
 			htmlAttr: "style",
@@ -484,7 +502,7 @@ Vvveb.Components.add("elements/gallery", {
 				min:0,
 				step:1
 			}
-	   }, {
+	   },{
 			name: "Vertical gap",
 			key: "margin-bottom",
 			htmlAttr: "style",
@@ -495,7 +513,7 @@ Vvveb.Components.add("elements/gallery", {
 				min:0,
 				step:1
 			}
-	   }, {
+	   },{
 			name: "Images per row masonry",
 			key: "column-count",
 			group:"masonry",
@@ -506,7 +524,7 @@ Vvveb.Components.add("elements/gallery", {
 				min:1,
 				step:1
 			}
-		}, {
+		},{
 			name: "Images per row flex",
 			group:"flex",
 			key: "flex-basis",
@@ -526,13 +544,13 @@ Vvveb.Components.add("elements/gallery", {
 				
 				return value;
 			}  			
-	   }, {
+	   },{
 			name: "",
 			key: "addChild",
 			inputtype: ButtonInput,
 			data: {text:"Add image", icon:"la la-plus"},
 			onChange: function(node) {
-				 $(node).append('<div class="item"><a><img src="/media/15.jpg"></a></div>');
+				 node.append(generateElements('<div class="item"><a><img src="../../media/posts/1.jpg"></a></div>')[0]);
 				 
 				 //render component properties again to include the new image
 				 //Vvveb.Components.render("ellements/gallery");
@@ -541,20 +559,57 @@ Vvveb.Components.add("elements/gallery", {
 			}
 	}],
     init(node)	{
-		
-		$('.mb-3[data-group]').attr('style','display:none !important');
+
+		document.querySelectorAll(".mb-3[data-group]").forEach(el => el.style.display = "none");
 		
 		let source = "flex";
-		if ($(node).hasClass("masonry")) {
+		if (node.classList.contains("masonry")) {
 			source = "masonry";
 		} else {
 			source = "flex";
 		}
-
-		$('.mb-3[data-group="'+ source + '"]').attr('style','');
+		
+		document.querySelector('.mb-3[data-group="'+ source + '"]').style.display = "";
 	}	
-});
+});  
 
+//Tabs
+Vvveb.Components.add("elements/tab", {
+	//attributes: ["data-component-tabs"],
+	classes: ["tab-pane"],
+    name: "Tab",
+    image: "icons/tabs.svg",
+    html: ``,
+    properties: [{
+			name: "Id",
+			key: "id",
+			htmlAttr: "id",
+			inline:false,
+			col:6,
+			inputtype: TextInput
+		},{
+			name: "Class",
+			key: "class",
+			htmlAttr: "class",
+			inline:false,
+			col:6,
+			inputtype: TextInput
+			
+		} , {
+        name: "Active",
+        key: "active",
+        htmlAttr: "class",
+        validValues: ["", "active"],
+        inputtype: ToggleInput,
+        inline:true,
+        col:6,
+        data: {
+            on: "active",
+            off: ""
+        }
+    }]
+}); 
+	
 Vvveb.Components.add("elements/tabs", {
     attributes: ["data-component-tabs"],
     name: "Tabs",
@@ -581,7 +636,7 @@ Vvveb.Components.add("elements/tabs", {
 	</div>`,
 	afterDrop: function(node) {
 		//set unique accordion id
-		node[0].outerHTML = node[0].outerHTML.replaceAll('parentId', Math.ceil(Math.random() * 1000));
+		node.outerHTML = node.outerHTML.replaceAll('parentId', Math.ceil(Math.random() * 1000));
 		return node;
 	},	
     properties: [{
@@ -604,31 +659,30 @@ Vvveb.Components.add("elements/tabs", {
 				//"newElement": ``
 			},
 			onChange: function(node, value, input, component, event) {
-				let element = node[0];
+				let element = node;
 				let tabsId = element.id.replace('tabs-','');
 				
-				let nav = $("> nav .nav-tabs", node);
-				let content = $("> .tab-content", node);
+				let nav = node.querySelector("> nav .nav-tabs");
+				let content = node.querySelector("> .tab-content");
 
 				if (event.action) {
 					if (event.action == "add") {
 						let random = Math.floor(Math.random() * 100) + 1;
-						let index = nav[0].childElementCount + 1;
+						let index = nav.childElementCount + 1;
 						
-						nav.append(`<button class="nav-link" id="nav-tab-${tabsId}-${index}-${random}" data-bs-toggle="tab" data-bs-target="#tab-${tabsId}-${index}-${random}" type="button" role="tab" aria-controls="tab-${index}-${random}" aria-selected="false">Tab ${index}</button>`);
+						nav.append(generateElements(`<button class="nav-link" id="nav-tab-${tabsId}-${index}-${random}" data-bs-toggle="tab" data-bs-target="#tab-${tabsId}-${index}-${random}" type="button" role="tab" aria-controls="tab-${index}-${random}" aria-selected="false">Tab ${index}</button>`)[0]);
 						
-						content.append(`<div class="tab-pane p-4" id="tab-${tabsId}-${index}-${random}" role="tabpanel" aria-labelledby="tab-${tabsId}-${index}-${random}" tabindex="0"><p>Quisque sagittis non ex eget vestibulum</p></div>`);
+						content.append(generateElements(`<div class="tab-pane p-4" id="tab-${tabsId}-${index}-${random}" role="tabpanel" aria-labelledby="tab-${tabsId}-${index}-${random}" tabindex="0"><p>Quisque sagittis non ex eget vestibulum</p></div>`)[0]);
 						
 						//temporary solution to better update list
 						Vvveb.Components.render("elements/tabs");
 					}
 					if (event.action == "remove") {
-						$("> button:eq(" + event.index + ")", nav).remove();
-						$("> .tab-pane:eq(" + event.index + ")", content).remove();
+						nav.querySelector("> button:nth-child(" + event.index + ")").remove();
+						content.querySelector("> .tab-pane:nth-child(" + event.index + ")").remove();
 					} else if (event.action == "select") {
-						let tab = $("> button:eq(" + event.index + ")", nav);
-						//tab[0].click();
-						Vvveb.Builder.iframe.contentWindow.bootstrap.Tab.getOrCreateInstance(tab[0]).show();
+						let tab = nav.querySelector("> button:nth-child((" + event.index + ")");
+						Vvveb.Builder.iframe.contentWindow.bootstrap.Tab.getOrCreateInstance(tab).show();
 					}
 				}
 				
@@ -684,7 +738,7 @@ Vvveb.Components.add("elements/accordion", {
 		</div>`,
 	afterDrop: function(node) {
 		//set unique accordion id
-		node[0].outerHTML = node[0].outerHTML.replaceAll('parentId', Math.ceil(Math.random() * 1000));
+		node.outerHTML = node.outerHTML.replaceAll('parentId', Math.ceil(Math.random() * 1000));
 		return node;
 	},
     properties: [{
@@ -703,7 +757,7 @@ Vvveb.Components.add("elements/accordion", {
 				//"newElement": ``
 			},
 			onChange: function(node, value, input, component, event) {
-				let element = node[0];
+				let element = node;
 				let accordionId = element.id.replace('accordion-','');
 				
 				if (event.action) {
@@ -711,7 +765,7 @@ Vvveb.Components.add("elements/accordion", {
 						let random = Math.floor(Math.random() * 100) + 1;
 						let index = element.childElementCount + 1;
 						
-						node.append(`<div class="accordion-item">
+						node.append(generateElements(`<div class="accordion-item">
 							<h2 class="accordion-header" id="heading-${index}-${random}">
 							  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-${index}-${random}" aria-expanded="false" aria-controls="collapseTwo">Accordion Item #${index}</button>
 							</h2>
@@ -720,20 +774,20 @@ Vvveb.Components.add("elements/accordion", {
 								<p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin</p>
 							  </div>
 							</div>
-						  </div>`);
+						  </div>`)[0]);
 						
 						//temporary solution to better update list
 						Vvveb.Components.render("elements/accordion");
 					}
 					if (event.action == "remove") {
-						$("> .accordion-item:eq(" + event.index + ")", node).remove();
+						node.querySelector("> .accordion-item:nth-child(" + event.index + ")").remove();
 					} else if (event.action == "select") {
-						let btn = $("> .accordion-item:eq(" + event.index + ") .accordion-button", node);
-						let el = $("> .accordion-item:eq(" + event.index + ") .collapse", node);
-						$(".accordion-button", node).addClass("collapsed");
-						$(".collapse", node).removeClass("show");
-						btn.removeClass("collapsed");
-						el.addClass("show");
+						let btn = node.querySelector("> .accordion-item:nth-child(" + event.index + ") .accordion-button", node);
+						let el = node.querySelector("> .accordion-item:nth-child(" + event.index + ") .collapse", node);
+						node.querySelector(".accordion-button", node).classList.add("collapsed");
+						node.querySelector(".collapse", node).classList.remove("show");
+						btn.classList.remove("collapsed");
+						el.classList.add("show");
 						//el[0].click();
 						//Vvveb.Builder.iframe.contentWindow.bootstrap.Collapse.getOrCreateInstance(el[0]).toggle();
 					}
@@ -741,7 +795,7 @@ Vvveb.Components.add("elements/accordion", {
 				
 				return node;
 			},
-		}, {
+		},{
 			name: "Flush",
 			key: "flush",
 			htmlAttr: "class",
@@ -763,7 +817,7 @@ Vvveb.Components.add("elements/flip-box", {
 		  <div class="flip-box-inner">
 			<div class="flip-box-front">
 				  <div class="card">
-				  <img src="../../media/1.jpg" class="card-img-top" alt="Post">
+				  <img src="../../media/posts/1.jpg" class="card-img-top" alt="Post">
 				  <div class="card-body">
 					<h5 class="card-title">Card title</h5>
 					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -775,7 +829,7 @@ Vvveb.Components.add("elements/flip-box", {
 			<div class="flip-box-back">
 				<div class="d-flex align-items-center flex-column">
 				  <div class="flex-shrink-0">
-					<img src="../../media/2.jpg" alt="Post">
+					<img src="../../media/posts/2.jpg" alt="Post">
 				  </div>
 				  <div class="flex-grow-1 ms-3">
 					<p>
@@ -793,7 +847,7 @@ Vvveb.Components.add("elements/flip-box", {
 			key: "width",
 			htmlAttr: "style",
 			inputtype: CssUnitInput
-		}, {
+		},{
 			name: "Height",
 			key: "height",
 			htmlAttr: "style",
@@ -830,6 +884,29 @@ Vvveb.Components.add("elements/flip-box", {
 				off: ""
 			}
 		},
+	]
+});   
+
+Vvveb.Components.add("elements/counter", {
+    nodes: [".counter"],
+    name: "Counter",
+    image: "icons/stopwatch.svg",
+    html: `<i class="font-icon la la-star"></i>`,
+    properties: [
+	]
+});   
+
+Vvveb.Components.add("elements/testimonial", {
+    nodes: [".counter"],
+    name: "Testimonial",
+    image: "icons/testimonial.svg",
+    html: `<blockquote cite="https://en.wikipedia.org/wiki/Marcus_Aurelius">
+				<p>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil.</p>
+				<cite class="small">
+					<a href="https://en.wikipedia.org/wiki/Marcus_Aurelius" class="text-decoration-none" target="blank">Marcus Aurelius</a>
+				</cite>	
+			</blockquote>`,
+    properties: [
 	]
 });   
 
@@ -880,23 +957,23 @@ Vvveb.Components.add("elements/social-icons", {
 				//"newElement": ``
 			},
 			onChange: function(node, value, input, component, event) {
-				let element = node[0];
+				let element = node;
 
 				if (event.action) {
 					if (event.action == "add") {
-						node.append(`<li>
+						node.append(generateElements(`<li>
 							<a href="https://twitter.com">
 								<i class="lab la-twitter la-2x"></i> <span>Twitter</span>
 							</a>
-						</li>`);
+						</li>`)[0]);
 						
 						//temporary solution to better update list
 						Vvveb.Components.render("elements/social-icons");
 					}
 					if (event.action == "remove") {
-						//$("> li:eq(" + event.index + ")", node).remove();
+						node.querySelector(":scope > li:nth-child(" + event.index + ")").remove();
 					} else if (event.action == "select") {
-						let el = $("> li:eq(" + event.index + ")", node);
+						let el = node.querySelector(":scope > li:nth-child(" + event.index + ")");
 						//el[0].click();
 						//Vvveb.Builder.iframe.contentWindow.bootstrap.Collapse.getOrCreateInstance(el[0]).toggle();
 					}
@@ -904,7 +981,7 @@ Vvveb.Components.add("elements/social-icons", {
 				
 				return node;
 			},
-		}, {
+		},{
 			name: "Inline",
 			key: "list-inline",
 			htmlAttr: "class",
@@ -914,7 +991,7 @@ Vvveb.Components.add("elements/social-icons", {
 				on: "list-inline",
 				off: ""
 			}
-		}, {
+		},{
 			name: "Unstyled",
 			key: "list-unstyled",
 			htmlAttr: "class",
@@ -930,15 +1007,23 @@ Vvveb.Components.add("elements/social-icons", {
 function carouselAfterDrop(node) {
 	//check if swiper js is included and if not add it when drag starts to allow the script to load
 	body = Vvveb.Builder.frameBody;
-	
-	if ($("#swiper-js", body).length == 0)
-	{
-		let swiperScript = `<script id="swiper-js" src="../../libs/swiper/swiper-bundle.min.js"></script> 
-		<link id="swiper-css" href="../../libs/swiper/swiper-bundle.min.css" rel="stylesheet">
-		<script>
-		var swiper = [];
+
+	if (!body.querySelector("#swiper-js")) {
+		let link = document.createElement('link');
+		let lib = document.createElement('script');
+		let code = document.createElement('script');
+		link.href = '../../libs/swiper/swiper-bundle.min.css';
+		link.id = 'swiper-css';
+		link.rel = 'stylesheet';
+		lib.id = 'swiper-js';
+		lib.type = 'text/javascript';
+		lib.src = '../../libs/swiper/swiper-bundle.min.js';
+		code.type = 'text/javascript';
+		code.text = `
+		let swiper = [];
 		function initSwiper(onlyNew = false) {
-			var list = document.querySelectorAll('.swiper' + (onlyNew ? ":not(.swiper-initialized)" : "") );
+			if (typeof Swiper == "undefined") return;
+			let list = document.querySelectorAll('.swiper' + (onlyNew ? ":not(.swiper-initialized)" : "") );
 			list.forEach(el => {
 				let params = {      
 					navigation: {
@@ -959,13 +1044,21 @@ function carouselAfterDrop(node) {
 				swiper.push(new Swiper(el, params))
 				//swiper.push(new Swiper(el, { ...{autoplay:{delay: 500}}, ...el.dataset}))		
 			});
-		}	
-		$(document).ready(function() {
+		}
+
+		if (document.readyState !== 'loading') {
 			initSwiper();
-		  });
-		</script>`;				
-				
-		$(body).append(swiperScript);
+		  } else {
+			document.addEventListener('DOMContentLoaded', initSwiper);
+		  }`;			
+		
+		body.appendChild(link);
+		body.appendChild(lib);
+		body.appendChild(code);
+		
+		lib.addEventListener('load', function() {		
+			Vvveb.Builder.iframe.contentWindow.initSwiper();
+		});
 	} else {
 		Vvveb.Builder.iframe.contentWindow.initSwiper(true);
 	}
@@ -980,10 +1073,10 @@ Vvveb.Components.add("elements/carousel", {
     html: `
 	  <div class="swiper" data-slides-per-view="3" data-draggable="true">
 		<div class="swiper-wrapper">
-		  <div class="swiper-slide"><img src="/media/1.jpg" class="img-fluid"><p>Slide 1</p></div>
+		  <div class="swiper-slide"><img src="/media/4.jpg" class="img-fluid"><p>Slide 1</p></div>
 		  <div class="swiper-slide"><img src="/media/2.jpg" class="img-fluid"><p>Slide 2</p></div>
-		  <div class="swiper-slide"><img src="/media/3.jpg" class="img-fluid"><p>Slide 3</p></div>
-		  <div class="swiper-slide"><img src="/media/4.jpg" class="img-fluid"><p>Slide 4</p></div>
+		  <div class="swiper-slide"><img src="/media/5.jpg" class="img-fluid"><p>Slide 3</p></div>
+		  <div class="swiper-slide"><img src="/media/7.jpg" class="img-fluid"><p>Slide 4</p></div>
 		</div>
 		<div class="swiper-pagination"></div>
 
@@ -998,7 +1091,7 @@ Vvveb.Components.add("elements/carousel", {
 	afterDrop: carouselAfterDrop,
 	
     onChange: function (node, property, value) {
-		let element = node[0];
+		let element = node;
 		if (property.key == "autoplay" && value == true) {
 			value = {"waitForTransition":true,"enabled":value,"delay":element.dataset.delay};
 		}
@@ -1009,8 +1102,7 @@ Vvveb.Components.add("elements/carousel", {
 		return node;
 	},
 
-    properties: [
-	{
+    properties: [{
 		name: "Slides",
         key: "slidesPerView",
         inputtype: ListInput,
@@ -1021,10 +1113,10 @@ Vvveb.Components.add("elements/carousel", {
 			container:".swiper-wrapper",
 			prefix:"Slide ",
 			removeElement: false,//handle manually with removeSlide
-			//"newElement": `<div class="swiper-slide"><img src="/media/1.jpg" class="img-fluid"><p>Slide 1</p></div>`
+			//"newElement": `<div class="swiper-slide"><img src="../../media/posts/1.jpg" class="img-fluid"><p>Slide 1</p></div>`
 		},
         onChange: function(node, value, input, component, event) {
-			let element = node[0];
+			let element = node;
 			let dataset = {};
 			for (i in element.dataset) {
 				dataset[i] = element.dataset[i];
@@ -1034,7 +1126,7 @@ Vvveb.Components.add("elements/carousel", {
 				if (event.action == "add") {
 					let random = Math.floor(Math.random() * 6) + 1;
 					let index = element.swiper.slides.length + 1;
-					element.swiper.appendSlide(`<div class="swiper-slide"><img src="/media/${random}.jpg" class="img-fluid"><p>Slide ${index}</p></div>`);
+					element.swiper.appendSlide(generateElements(`<div class="swiper-slide"><img src="../../media/posts/${random}.jpg" class="img-fluid"><p>Slide ${index}</p></div>`)[0]);
 					element.swiper.slideTo(index);
 					//temporary solution to better update list
 					Vvveb.Components.render("elements/carousel");
@@ -1056,26 +1148,23 @@ Vvveb.Components.add("elements/carousel", {
 			
 			return node;
 		},
-	},	{
+	},{
 		name: "Slides per view",
         key: "slidesPerView",
         inputtype: NumberInput,
 		htmlAttr:"data-slides-per-view",
-	},
-	{
+	},{
 		name: "Space between",
         key: "spaceBetween",
         inputtype: NumberInput,
 		htmlAttr:"data-space-between",
-	},	
-	{
+	},{
 		name: "Speed",
         key: "speed",
         inputtype: NumberInput,
 		htmlAttr:"data-speed",
 		data: {step:100},
-	},	
-	{
+	},{
 		name: "Delay",
         key: "delay",
         inputtype: NumberInput,
@@ -1100,7 +1189,7 @@ Vvveb.Components.add("elements/carousel", {
 		inputtype: CheckboxInput,
 		inline:true,
         col:4
-	}, {
+	},{
 		name: "Auto height",
         key: "autoHeight",
 		htmlAttr:"data-auto-height",
@@ -1151,8 +1240,7 @@ Vvveb.Components.add("elements/carousel", {
 		inputtype: CheckboxInput,
 		inline:true,
         col:4
-	},/*
-	{
+	},/*{
         name: "direction",
         key: "direction",
 		htmlAttr:"data-direction",
@@ -1167,7 +1255,7 @@ Vvveb.Components.add("elements/carousel", {
                 icon:"la la-arrow-down",
                 title: "Horizontal",
                 checked:true,
-            }, {
+            },{
                 value: "vertical",
                 title: "Vertical",
                 icon:"la la-arrow-right",
@@ -1184,10 +1272,10 @@ Vvveb.Components.add("elements/slider", {
      html: `
 	  <div class="swiper" data-slides-per-view="1" data-draggable="true" data-navigation='{"nextEl": ".swiper-button-next","prevEl": ".swiper-button-prev"}'>
 		<div class="swiper-wrapper">
-		  <div class="swiper-slide"><img src="/media/1.jpg" class="img-fluid"><p>Slider 1</p></div>
-		  <div class="swiper-slide"><img src="/media/2.jpg" class="img-fluid"><p>Slider 2</p></div>
-		  <div class="swiper-slide"><img src="/media/3.jpg" class="img-fluid"><p>Slider 3</p></div>
-		  <div class="swiper-slide"><img src="/media/4.jpg" class="img-fluid"><p>Slider 4</p></div>
+		  <div class="swiper-slide"><img src="/media/posts/1.jpg" class="img-fluid"><p>Slider 1</p></div>
+		  <div class="swiper-slide"><img src="/media/posts/2.jpg" class="img-fluid"><p>Slider 2</p></div>
+		  <div class="swiper-slide"><img src="/media/posts/3.jpg" class="img-fluid"><p>Slider 3</p></div>
+		  <div class="swiper-slide"><img src="/media/posts/4.jpg" class="img-fluid"><p>Slider 4</p></div>
 		</div>
 		<div class="swiper-pagination"></div>
 
@@ -1198,4 +1286,130 @@ Vvveb.Components.add("elements/slider", {
 	  </div>	
 	`,
 	afterDrop: carouselAfterDrop,
+}); 	
+
+
+Vvveb.Components.add("elements/icon-list", {
+    nodes: [".counter"],
+    name: "Icon list",
+    image: "icons/icon-list.svg",
+    html: `<i class="font-icon la la-star"></i>`,
+    properties: [
+	]
+});   
+
+Vvveb.Components.add("elements/divider", {
+    nodes: [".counter"],
+    name: "Divider",
+    image: "icons/stopwatch.svg",
+    html: `<i class="font-icon la la-star"></i>`,
+    properties: [
+	]
+});   
+
+Vvveb.Components.add("elements/separator", {
+    nodes: [".counter"],
+    name: "Separator",
+    image: "icons/separator.svg",
+    html: `<i class="font-icon la la-star"></i>`,
+    properties: [
+	]
+});   
+
+Vvveb.Components.add("elements/Image box", {
+    nodes: [".counter"],
+    name: "Image Box",
+    image: "icons/stopwatch.svg",
+    html: `<i class="font-icon la la-star"></i>`,
+    properties: [
+	]
+});   
+
+Vvveb.Components.add("elements/Icon box", {
+    nodes: [".counter"],
+    name: "Image Box",
+    image: "icons/stopwatch.svg",
+    html: `<i class="font-icon la la-star"></i>`,
+    properties: [
+	]
+});   
+
+Vvveb.Components.add("elements/animated-headline", {
+    nodes: [".counter"],
+    name: "Animated headline",
+    image: "icons/dots_three.svg",
+    html: `<i class="font-icon la la-star"></i>`,
+    properties: [
+	]
+});   
+
+Vvveb.Components.add("elements/price-table", {
+    nodes: [".counter"],
+    name: "Price table",
+    image: "icons/price-table.svg",
+    html: `<i class="font-icon la la-star"></i>`,
+    properties: [
+	]
+});   
+
+Vvveb.Components.add("elements/price-list", {
+    nodes: [".counter"],
+    name: "Price list",
+    image: "icons/stopwatch.svg",
+    html: `<i class="font-icon la la-star"></i>`,
+    properties: [
+	]
+});   
+
+Vvveb.Components.add("elements/reviews", {
+    nodes: [".counter"],
+    name: "Reviews",
+    image: "icons/reviews.svg",
+    html: `<i class="font-icon la la-star"></i>`,
+    properties: [
+	]
+});   
+
+Vvveb.Components.add("elements/code", {
+    nodes: ["code"],
+    name: "Code",
+    image: "icons/code.svg",
+    html: `<code>print "Hello world!"</code>`,
+	properties: [{
+		name: "Text",
+		key: "text",
+		inline:false,
+		htmlAttr: "innerHTML",
+		inputtype: TextareaInput,
+		data:{
+			rows:20,
+		}
+	}]
 }); 
+  
+Vvveb.Components.add("elements/image-compare", {
+    nodes: [".counter"],
+    name: "Image Compare",
+    image: "icons/image-compare.svg",
+    html: `<div class="c-compare" style="--value:50%;">
+	  <img class="c-compare__left" src="img/color.jpg" alt="" />
+	  <img class="c-compare__right" src="img/bw.jpg" alt="" />
+	</div>`,
+    properties: [
+	]
+});   
+
+Vvveb.Components.add("elements/rating", {
+    nodes: [".rating"],
+    name: "Rating stars",
+    image: "icons/rating.svg",
+    html: `<div class="rating">
+                <i class="la la-star text-warning"></i>
+                <i class="la la-star text-warning"></i>
+                <i class="la la-star text-warning"></i>
+                <i class="la la-star text-warning"></i>
+                <i class="la la-star text-secondary"></i>
+            </div>`,
+    properties: [
+	]
+});

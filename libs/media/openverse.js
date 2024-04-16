@@ -1,7 +1,5 @@
 class OpenVerse {
 	
-	//page_count
-	
 	constructor ()
 	{
 		//register your key at https://api.openverse.engineering/v1/ and replace client_id, client_secret and name bellow
@@ -37,16 +35,26 @@ class OpenVerse {
 	authenticate() {
 		let url = "https://api.openverse.engineering/v1/auth_tokens/token/";
 		let self = this;
-		
-			$.ajax({
-				url: url,
-				type: 'POST',
-				dataType: "json",
-				data:this.key
-			}).done(function(data) {
-				this.accessToken = data;
-				console.log('OpenVerse Authentication:' , data);
-			});		
+
+		fetch(url, {
+			method: "POST",  
+			headers: {
+			  "Content-Type": "application/json",
+			},
+   			body: this.key
+		})
+		.then((response) => {
+			if (!response.ok) { throw new Error(response) }
+			return response.text()
+		})
+		.then((data) => {
+			this.accessToken = data;
+			console.log('OpenVerse Authentication:' , data);				
+		})
+		.catch(error => {
+			console.log(error.statusText);
+			displayToast("bg-danger", "Error", "Openverse authentication failed!");
+		});	
 	}
 	
 	
@@ -56,23 +64,25 @@ class OpenVerse {
 	
 	getResults(callback) {
 		this.currentUrl = this.baseUrl + this.filtersParameters;
-		
-		$.ajax({
-				url: this.currentUrl,
-				type: 'GET',
-				dataType: "json",
-				headers: {
-					'Authorization': 'Bearer ' + this.accessToken.access_token,
-				}
-			}).done(function(data) {
-					callback(data);
-			});		
 
-			/*
-			jQuery.getJSON(this.currentUrl, function( data ) {
-				callback(data);
-			});		
-			*/
+		fetch(this.currentUrl, {
+			method: "GET",  
+			headers: {
+			  "Content-Type": "application/json",
+			  'Authorization': 'Bearer ' + this.accessToken.access_token,
+			},
+		})
+		.then((response) => {
+			if (!response.ok) { throw new Error(response) }
+			return response.text()
+		})
+		.then((data) => {
+			callback(data);
+		})
+		.catch(error => {
+			console.log(error.statusText);
+			displayToast("bg-danger", "Error", "Openverse error!");
+		});
 	}
 }
 
@@ -103,22 +113,23 @@ class OpenVerseDisplay extends OpenVerse {
 	}
 	
 	showLoading() {
-		$("#openverse-results").html(`
+		document.getElementById("openverse-results").innerHTML = generateElements(`
 		<div class="spinner-border" style="width: 5rem; height: 5rem;margin: 5rem auto; display:block" role="status">
 		  <span class="visually-hidden">Loading...</span>
-		</div>`);
+		</div>`)[0];
 	}
 	
 	setFilters() {
-		this.filtersParameters = $("#openverse-form").serialize();
+		this.filtersParameters = document.querySelector("#openverse-form").serialize();
 		//this.setFiltersParams(filters);
 	}
 
 	displayResults(data) {
 		  var items = [];
 		  
-		  $.each( data['results'], function( key, val ) {
-
+		  data['results'].forEach( key =>{
+		  let value = data['results'][key];
+		  
 		  let item = 
 			`<li class="files">									
 			  <label class="form-check">									 
@@ -153,7 +164,7 @@ class OpenVerseDisplay extends OpenVerse {
 			items.push( item );
 		  });
 		 
-		$("#openverse-results").html(items.join( "" ));
+		document.getElementById("openverse-results").innerHTML = items.join( "" );
 		 //pagination
 		const maxpages = 15;		  
 		let pages =  data['page_count'];
@@ -201,12 +212,12 @@ class OpenVerseDisplay extends OpenVerse {
 		  
 		  pagination += `<div class="p-2"> total pages ${data['page_count']}</div>`;
 		
-		  $("#openverse-pagination").html(pagination);
+		  document.getElementById("openverse-results").innerHTML = pagination;
 	}
 	
 	page(pageNo) {
 		this.pageNo = pageNo;
-		this.filtersParameters = $("#openverse-form").serialize() + "&page=" + pageNo;
+		this.filtersParameters = (new FormData("openverse-form").toString()) + "&page=" + pageNo;
 		this.showLoading();
 		this.getResults(this.displayResults);
 	}
@@ -288,32 +299,31 @@ class OpenVerseDisplay extends OpenVerse {
 		let self = this ;
 		this.authenticate();
 		
-		$("#MediaModal .top-panel").append(self.topPanel());
-		$("#MediaModal .display-panel").append(self.displayPanel());
-		$("#MediaModal .top-right .align-right").append(self.toggleBtn());
-		$("#MediaModal .modal-footer .align-left").append(self.paginationContainer());
-		$("#openverse-filters").prepend(self.getFiltersHtml());
-		$("#openverse-search-btn").click(function (e) { self.search();e.preventDefault(); } );
+		document.querySelector("#MediaModal .top-panel").append(self.topPanel());
+		document.querySelector("#MediaModal .display-panel").append(self.displayPanel());
+		document.querySelector("#MediaModal .top-right .align-right").append(self.toggleBtn());
+		document.querySelector("#MediaModal .modal-footer .align-left").append(self.paginationContainer());
+		document.querySelector("#openverse-filters").prepend(self.getFiltersHtml());
+		document.querySelector("#openverse-search-btn").click(function (e) { self.search();e.preventDefault(); } );
 		
 		//if openverse enabled hide media images
-		$("#openverse-form").on("show.bs.collapse", function (e){ 
+		document.querySelector("#openverse-form").on("show.bs.collapse", function (e){ 
 			if (e.target.id == "openverse-form") { 
-				$("#MediaModal #openverse-results").show(); 
-				$("#MediaModal #openverse-pagination").show(); 
-				$("#MediaModal #media-files").hide();
+				document.querySelector("#MediaModal #openverse-results").show(); 
+				document.querySelector("#MediaModal #openverse-pagination").show(); 
+				document.querySelector("#MediaModal #media-files").hide();
 			} 
 		});
-		$("#openverse-form").on("hide.bs.collapse", function (e){
+		document.querySelector("#openverse-form").on("hide.bs.collapse", function (e){
 			if (e.target.id == "openverse-form") { 
-				$("#MediaModal #openverse-results").hide(); 
-				$("#MediaModal #openverse-pagination").hide(); 
-				$("#MediaModal #media-files").show(); 
+				document.querySelector("#MediaModal #openverse-results").hide(); 
+				document.querySelector("#MediaModal #openverse-pagination").hide(); 
+				document.querySelector("#MediaModal #media-files").show(); 
 			}
 		});
 	}
 }
 
 let openverse = new OpenVerseDisplay();
-$(window).on( "mediaModal:init", function( event, myName ) { 
-	openverse.init();
-});
+
+window.addEventListener("mediaModal:init", () => openverse.init());

@@ -36,13 +36,12 @@ Vvveb.Components.extend("_base", "html/container", {
             options: [{
                 value: "container",
                 text: "Default"
-            }, {
+            },{
                 value: "container-fluid",
                 text: "Fluid"
             }]
         }
-    },
-	{
+    },{
         name: "Background",
         key: "background",
 		htmlAttr: "class",
@@ -51,14 +50,12 @@ Vvveb.Components.extend("_base", "html/container", {
         data: {
             options: bgcolorSelectOptions
         }
-    },
-	{
+    },{
         name: "Background Color",
         key: "background-color",
 		htmlAttr: "style",
         inputtype: ColorInput,
-    },
-	{
+    },{
         name: "Text Color",
         key: "color",
 		htmlAttr: "style",
@@ -82,54 +79,54 @@ Vvveb.Components.extend("html/link", "html/btn", {
             options: [{
                 value: "btn-default",
                 text: "Default"
-            }, {
+            },{
                 value: "btn-primary",
                 text: "Primary"
-            }, {
+            },{
                 value: "btn btn-info",
                 text: "Info"
-            }, {
+            },{
                 value: "btn-success",
                 text: "Success"
-            }, {
+            },{
                 value: "btn-warning",
                 text: "Warning"
-            }, {
+            },{
                 value: "btn-info",
                 text: "Info"
-            }, {
+            },{
                 value: "btn-light",
                 text: "Light"
-            }, {
+            },{
                 value: "btn-dark",
                 text: "Dark"
-            }, {
+            },{
                 value: "btn-outline-primary",
                 text: "Primary outline"
-            }, {
+            },{
                 value: "btn btn-outline-info",
                 text: "Info outline"
-            }, {
+            },{
                 value: "btn-outline-success",
                 text: "Success outline"
-            }, {
+            },{
                 value: "btn-outline-warning",
                 text: "Warning outline"
-            }, {
+            },{
                 value: "btn-outline-info",
                 text: "Info outline"
-            }, {
+            },{
                 value: "btn-outline-light",
                 text: "Light outline"
-            }, {
+            },{
                 value: "btn-outline-dark",
                 text: "Dark outline"
-            }, {
+            },{
                 value: "btn-link",
                 text: "Link"
             }]
         }
-    }, {
+    },{
         name: "Size",
         key: "size",
         htmlAttr: "class",
@@ -139,10 +136,10 @@ Vvveb.Components.extend("html/link", "html/btn", {
             options: [{
                 value: "",
                 text: "Default"
-            }, {
+            },{
                 value: "btn-lg",
                 text: "Large"
-            }, {
+            },{
                 value: "btn-sm",
                 text: "Small"
             }]
@@ -189,15 +186,15 @@ Vvveb.Components.extend("_base", "html/buttongroup", {
             options: [{
                 value: "",
                 text: "Default"
-            }, {
+            },{
                 value: "btn-group-lg",
                 text: "Large"
-            }, {
+            },{
                 value: "btn-group-sm",
                 text: "Small"
             }]
         }
-    }, {
+    },{
 	    name: "Alignment",
         key: "alignment",
         htmlAttr: "class",
@@ -207,10 +204,10 @@ Vvveb.Components.extend("_base", "html/buttongroup", {
             options: [{
                 value: "",
                 text: "Default"
-            }, {
+            },{
                 value: "btn-group",
                 text: "Horizontal"
-            }, {
+            },{
                 value: "btn-group-vertical",
                 text: "Vertical"
             }]
@@ -258,25 +255,25 @@ Vvveb.Components.extend("_base","html/alert", {
             options: [{
                 value: "alert-primary",
                 text: "Default"
-            }, {
+            },{
                 value: "alert-secondary",
                 text: "Secondary"
-            }, {
+            },{
                 value: "alert-success",
                 text: "Success"
-            }, {
+            },{
                 value: "alert-danger",
                 text: "Danger"
-            }, {
+            },{
                 value: "alert-warning",
                 text: "Warning"
-            }, {
+            },{
                 value: "alert-info",
                 text: "Info"
-            }, {
+            },{
                 value: "alert-light",
                 text: "Light"
-            }, {
+            },{
                 value: "alert-dark",
                 text: "Dark"
             }]
@@ -298,28 +295,28 @@ Vvveb.Components.extend("_base", "html/badge", {
             options: [{
                 value: "",
                 text: "Default"
-            }, {
+            },{
                 value: "bg-primary",
                 text: "Primary"
-            }, {
+            },{
                 value: "bg-secondary",
                 text: "Secondary"
-            }, {
+            },{
                 value: "bg-success",
                 text: "Success"
-            }, {
+            },{
                 value: "bg-warning",
                 text: "Warning"
-            }, {
+            },{
                 value: "bg-danger",
                 text: "Danger"
-            }, {
+            },{
                 value: "bg-info",
                 text: "Info"
-            }, {
+            },{
                 value: "bg-body-secondary",
                 text: "Light"
-            }, {
+            },{
                 value: "bg-dark",
                 text: "Dark"
             }]
@@ -392,28 +389,28 @@ Vvveb.Components.extend("_base", "html/listitem", {
             options: [{
                 value: "",
                 text: "Default"
-            }, {
+            },{
                 value: "list-group-item-primary",
                 text: "Primary"
-            }, {
+            },{
                 value: "list-group-item-secondary",
                 text: "Secondary"
-            }, {
+            },{
                 value: "list-group-item-success",
                 text: "Success"
-            }, {
+            },{
                 value: "list-group-item-warning",
                 text: "Warning"
-            }, {
+            },{
                 value: "list-group-item-danger",
                 text: "Danger"
-            }, {
+            },{
                 value: "list-group-item-info",
                 text: "Info"
-            }, {
+            },{
                 value: "list-group-item-light",
                 text: "Light"
-            }, {
+            },{
                 value: "list-group-item-dark",
                 text: "Dark"
             }]
@@ -502,10 +499,10 @@ Vvveb.Components.extend("_base", "html/pagination", {
             options: [{
                 value: "",
                 text: "Default"
-            }, {
+            },{
                 value: "pagination-lg",
                 text: "Large"
-            }, {
+            },{
                 value: "pagination-sm",
                 text: "Small"
             }]
@@ -520,10 +517,10 @@ Vvveb.Components.extend("_base", "html/pagination", {
             options: [{
                 value: "",
                 text: "Default"
-            }, {
+            },{
                 value: "justify-content-center",
                 text: "Center"
-            }, {
+            },{
                 value: "justify-content-end",
                 text: "Right"
             }]
@@ -540,7 +537,7 @@ Vvveb.Components.extend("_base", "html/pageitem", {
         htmlAttr: "href",
         child:".page-link",
         inputtype: LinkInput
-    }, {
+    },{
         name: "Active",
         key: "active",
         htmlAttr: "class",
@@ -550,7 +547,7 @@ Vvveb.Components.extend("_base", "html/pageitem", {
             on: "active",
             off: ""
         }
-    }, {
+    },{
         name: "Disabled",
         key: "disabled",
         htmlAttr: "class",
@@ -588,16 +585,16 @@ Vvveb.Components.extend("_base", "html/progress", {
             options: [{
                 value: "",
                 text: "None"
-            }, {
+            },{
                 value: "w-25",
                 text: "25%"
-            }, {
+            },{
                 value: "w-50",
                 text: "50%"
-            }, {
+            },{
                 value: "w-75",
                 text: "75%"
-            }, {
+            },{
                 value: "w-100",
                 text: "100%"
             }]
@@ -613,7 +610,7 @@ Vvveb.Components.extend("_base", "html/progress", {
         data: {
             options: bgcolorSelectOptions
         }
-    }, {
+    },{
         name: "Striped",
         key: "striped",
         child:".progress-bar",
@@ -624,7 +621,7 @@ Vvveb.Components.extend("_base", "html/progress", {
             on: "progress-bar-striped",
             off: "",
         }
-    }, {
+    },{
         name: "Animated",
         key: "animated",
         child:".progress-bar",
@@ -677,10 +674,10 @@ Vvveb.Components.extend("_base", "html/navbar", {
             options: [{
                 value: "",
                 text: "Default"
-            }, {
+            },{
                 value: "navbar-light",
                 text: "Light"
-            }, {
+            },{
                 value: "navbar-dark",
                 text: "Dark"
             }]
@@ -694,7 +691,7 @@ Vvveb.Components.extend("_base", "html/navbar", {
         data: {
             options: bgcolorSelectOptions
         }
-    }, {
+    },{
         name: "Placement",
         key: "placement",
         htmlAttr: "class",
@@ -704,13 +701,13 @@ Vvveb.Components.extend("_base", "html/navbar", {
             options: [{
                 value: "",
                 text: "Default"
-            }, {
+            },{
                 value: "fixed-top",
                 text: "Fixed Top"
-            }, {
+            },{
                 value: "fixed-bottom",
                 text: "Fixed Bottom"
-            }, {
+            },{
                 value: "sticky-top",
                 text: "Sticky top"
             }]
@@ -738,10 +735,10 @@ Vvveb.Components.extend("_base", "html/gridcolumn", {
         data: {hide_remove:true},
 
 		beforeInit: function(node) {
-			_class = $(node).attr("class");
+			_class = node.getAttribute("class");
 			
-			var reg = /col(-[^-\$ ]*)?-?(\d+)?/g; 
-			var match;
+			let reg = /col(-[^-\$ ]*)?-?(\d+)?/g; 
+			let match;
 
 			while ((match = reg.exec(_class)) != null) {
 				let key = "col" + ((match[1] != undefined) ? "_" + match[1].replace('-','') : "");
@@ -750,13 +747,13 @@ Vvveb.Components.extend("_base", "html/gridcolumn", {
 		},
 		
 		onChange: function(node, value, input) {
-			var _class = node.attr("class");
+			let _class = node.getAttribute("class");
 			
 			//remove previous breakpoint column size
 			_class = _class.replace(new RegExp(input.name + '-\\d+?'), '');
 			//add new column size
 			if (value) _class +=  ' ' + input.name + '-' + value;
-			node.attr("class", _class);
+			node.setAttribute("class", _class);
 			
 			return node;
 		},				
@@ -772,18 +769,17 @@ Vvveb.Components.extend("_base", "html/gridrow", {
 		name: "html/gridcolumn",
 		classesRegex: ["col-"],
 	}],
-	beforeInit: function (node)
-	{
+	beforeInit: function (node) {
 		properties = [];
-		var i = 0;
-		var j = 0;
+		let i = 0;
+		let j = 0;
 		
-		$(node).find('[class*="col-"],.col').each(function() {
-			_class = $(this).attr("class");
+		node.querySelectorAll('[class*="col-"],.col').forEach(el => {
+			_class = el.getAttribute("class");
 			
-			var reg = /col(-[^-\$ ]*)?-?(\d+)?/g; 
-			var match;
-			var data = {};
+			let reg = /col(-[^-\$ ]*)?-?(\d+)?/g; 
+			let match;
+			let data = {};
 
 			while ((match = reg.exec(_class)) != null) {
 				let key = "col" + ((match[1] != undefined) ? "_" + match[1].replace('-','') : "");
@@ -795,32 +791,30 @@ Vvveb.Components.extend("_base", "html/gridrow", {
 				name: "Column " + i,
 				key: "column" + i,
 				//index: i - 1,
-				columnNode: this,
+				columnNode: el,
 				col:12,
 				inline:false,
 				inputtype: GridInput,
 				data: data,
 				onChange: function(node, value, input) {
 
-					//column = $('[class*="col-"]:eq(' + this.index + ')', node);
-					var column = $(this.columnNode);
+					let column = this.columnNode;
 					
 					//if remove button is clicked remove column and render row properties
-					if (input.nodeName == 'BUTTON')
-					{
+					if (input.nodeName == 'BUTTON') {
 						column.remove();
 						Vvveb.Components.render("html/gridrow");
 						return node;
 					}
 
 					//if select input then change column class
-					_class = column.attr("class");
+					_class = column.getAttribute("class");
 					
 					//remove previous breakpoint column size
 					_class = _class.replace(new RegExp(input.name + '-\\d+?'), '');
 					//add new column size
 					if (value) _class +=  ' ' + input.name + '-' + value;
-					column.attr("class", _class);
+					column.setAttribute("class", _class);
 					
 					//console.log(this, node, value, input, input.name);
 					
@@ -833,10 +827,10 @@ Vvveb.Components.extend("_base", "html/gridrow", {
 		this.properties = this.properties.filter(function(item) {
 			return item.key.indexOf("column") === -1;
 		});
-		
+
 		//add remaining properties to generated column properties, put first 2 align properties first
 		this.properties = this.properties.slice(0,4).concat(properties, this.properties.slice(4));
-		
+
 		return node;
 	},
     
@@ -855,25 +849,25 @@ Vvveb.Components.extend("_base", "html/gridrow", {
                 //text: "None",
                 title: "Default",
                 checked:true,
-            }, {
+            },{
                 value: "flex-row",
                 //text: "Left",
                 title: "Row - horizontal",
                 icon:"la la-arrow-right",
                 checked:false,
-            }, {
+            },{
                 value: "flex-column",
                 //text: "Center",
                 title: "Column - vertical",
                 icon:"la la-arrow-down",
                 checked:false,
-            }, {
+            },{
                 value: "flex-row-reverse",
                 //text: "Right",
                 title: "Row - reversed",
                 icon:"la la-arrow-left",
                 checked:false,
-            }, {
+            },{
                 value: "flex-column-reverse",
                 //text: "Center",
                 title: "Column - reversed",
@@ -882,7 +876,7 @@ Vvveb.Components.extend("_base", "html/gridrow", {
             }],
         },
 	},{       
-        name: "Vertical align",
+		name: "Vertical align",
         key: "vertical-align",
         htmlAttr: "class",
         inline:false,
@@ -896,30 +890,30 @@ Vvveb.Components.extend("_base", "html/gridrow", {
                 //text: "None",
                 title: "None",
                 checked:true,
-            }, {
+            },{
                 value: "align-items-start",
                 //text: "Left",
                 title: "Start",
                 icon:"la la-align-left",
                 checked:false,
-            }, {
+            },{
                 value: "align-items-center",
                 //text: "Center",
                 title: "Center",
                 icon:"la la-align-center",
                 checked:false,
-            }, {
+            },{
                 value: "align-items-end",
                 //text: "Right",
                 title: "End",
                 icon:"la la-align-right",
                 checked:false,
-            }, {
+            },{
                 value: "align-items-baseline",
                 title: "Baseline",
                 icon:"la la-indent",
                 checked:false,
-            }, {
+            },{
                 value: "align-items-stretch",
                 title: "Stretch",
                 icon:"la la-align-justify",
@@ -941,37 +935,37 @@ Vvveb.Components.extend("_base", "html/gridrow", {
                 //text: "None",
                 title: "None",
                 checked:true,
-            }, {
+            },{
                 value: "justify-content-start",
                 //text: "Left",
                 title: "Start",
                 icon:"la la-align-left",
                 checked:false,
-            }, {
+            },{
                 value: "justify-content-center",
                 //text: "Center",
                 title: "Center",
                 icon:"la la-align-center",
                 checked:false,
-            }, {
+            },{
                 value: "justify-content-end",
                 //text: "Right",
                 title: "End",
                 icon:"la la-align-right",
                 checked:false
-			}, {
+			},{
                 value: "justify-content-around",
                 //text: "Left",
                 title: "Around",
                 icon:"la la-indent",
                 checked:false,
-            }, {
+            },{
                 value: "justify-content-between",
                 //text: "Center",
                 title: "Between",
                 icon:"la la-outdent",
                 checked:false,
-            }, {
+            },{
                 value: "justify-content-evenly",
                 //text: "Right",
                 title: "Evenly",
@@ -994,13 +988,13 @@ Vvveb.Components.extend("_base", "html/gridrow", {
                 //text: "None",
                 title: "None",
                 checked:true,
-	}, {
+            },{
                 value: "flex-wrap",
                 //text: "Left",
                 title: "Wrap",
                 icon:"la la-undo",
                 checked:false,
-            }, {
+            },{
                 value: "flex-nowrap",
                 //text: "Center",
                 title: "No wrap",
@@ -1012,20 +1006,20 @@ Vvveb.Components.extend("_base", "html/gridrow", {
         name: "Column",
         key: "column1",
         inputtype: GridInput
-	}, {
+	},{
         name: "Column",
         key: "column1",
         inline:true,
         col:12,
         inputtype: GridInput
-	}, {
+	},{
         name: "",
         key: "addChild",
         inputtype: ButtonInput,
         data: {text:"Add column", icon:"la la-plus"},
         onChange: function(node)
         {
-			 $(node).append('<div class="col-3"><h3>Col-3</h3></div>');
+			 node.append(generateElements('<div class="col-3"><h3>Col-3</h3></div>')[0]);
 			 
 			 //render component properties again to include the new column inputs
 			 Vvveb.Components.render("html/gridrow");

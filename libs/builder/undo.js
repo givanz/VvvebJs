@@ -65,7 +65,8 @@ Vvveb.Undo = {
 			this.undoIndex++;
 		*/
 		this.mutations.splice(++this.undoIndex, this.mutations.length - this.undoIndex, mutation);
-		Vvveb.Builder.frameBody.trigger("vvveb.undo.add", mutation);
+		const event = new CustomEvent("vvveb.undo.add", {detail: mutation});
+		Vvveb.Builder.frameBody.dispatchEvent(event);
 	 },
 
 	restore : function(mutation, undo) {	
@@ -73,50 +74,40 @@ Vvveb.Undo = {
 		switch (mutation.type) {
 			case 'childList':
 			
-				if (undo == true)
-				{
+				if (undo == true) {
 					addedNodes = mutation.removedNodes;
 					removedNodes = mutation.addedNodes;
-				} else //redo
-				{
+				} else { //redo 
 					addedNodes = mutation.addedNodes;
 					removedNodes = mutation.removedNodes;
 				}
 				
-				if (addedNodes) for(i in addedNodes)
-				{
+				if (addedNodes) for(i in addedNodes) {
 					node = addedNodes[i];
-					if (mutation.nextSibling)
-					{ 
+					if (mutation.nextSibling) { 
 						mutation.nextSibling.parentNode.insertBefore(node, mutation.nextSibling);
-					} else
-					{
+					} else {
 						mutation.target.append(node);
 					}
 				}
 
-				if (removedNodes) for(i in removedNodes)
-				{
+				if (removedNodes) for(i in removedNodes) {
 					node = removedNodes[i];
 					node.parentNode.removeChild(node);
 				}
 			break;					
 			case 'move':
-				if (undo == true)
-				{
+				if (undo == true) {
 					parent = mutation.oldParent;
 					sibling = mutation.oldNextSibling;
-				} else //redo
-				{
+				} else { //redo
 					parent = mutation.newParent;
 					sibling = mutation.newNextSibling;
 				}
 			  
-				if (sibling)
-				{
+				if (sibling) {
 					sibling.parentNode.insertBefore(mutation.target, sibling);
-				} else
-				{
+				} else {
 					parent.append(node);
 				}
 			break;
@@ -124,7 +115,7 @@ Vvveb.Undo = {
 			  mutation.target.innerHTML = undo ? mutation.oldValue : mutation.newValue;
 			  break;
 			case 'style':
-			  $("#vvvebjs-styles", window.FrameDocument).html( undo ? mutation.oldValue : mutation.newValue );
+			  window.FrameDocument.getElementById("vvvebjs-styles").textContent = ( undo ? mutation.oldValue : mutation.newValue );
 			  break;
 			case 'attributes':
 			  value = undo ? mutation.oldValue : mutation.newValue;
@@ -137,7 +128,8 @@ Vvveb.Undo = {
 			break;
 		}
 		
-		Vvveb.Builder.frameBody.trigger("vvveb.undo.restore", mutation);
+		const event = new CustomEvent("vvveb.undo.restore", {detail: mutation});
+		Vvveb.Builder.frameBody.dispatchEvent(event);
 	 },
 	 
 	undo : function() {	

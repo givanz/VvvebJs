@@ -27,17 +27,17 @@ function () {
     let html = Vvveb.Builder.frameHtml;
 
     //stylesheets
-    $("link[href$='.css']", html).each(function(i, e) {
+    html.querySelectorAll("link[href$='.css']", html).forEach(function(e, i) {
         addUrl(e.href, e.getAttribute("href"), false);
     });
 
     //javascripts
-    $("script[src$='.js']", html).each(function(i, e) {
+     html.querySelectorAll("script[src$='.js']", html).forEach(function(e, i) {
         addUrl(e.src, e.getAttribute("src"), false);
     });
     
     //images
-    $("img[src]", html).each(function(i, e) {
+     html.querySelectorAll("img[src]", html).forEach(function(e, i) {
         addUrl(e.src, e.getAttribute("src"), true);
     });
 
@@ -88,19 +88,6 @@ function () {
 		 } catch (error) {
 			  console.error(error);
 		 }
-        /*  
-        $.ajax({
-          url: url,
-          type: 'GET',
-         
-          success: function (data) {
-            resolve({url, href, filename, binary, data});
-          },
-          error: function (error) {
-            reject(error)
-          },
-        });
-        */ 
      }));
     }
     

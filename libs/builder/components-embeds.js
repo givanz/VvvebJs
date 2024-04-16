@@ -47,24 +47,24 @@ Vvveb.Components.extend("_base", "embeds/embed", {
 			
 			getOembed(value).then(response => {
 				  element.innerHTML = response.html;
-				  let containerW = node.width();
-				  let iframe = $("iframe", element);
-				  let ratio = containerW / iframe.width();
+				  let containerW = node.offsetWidth;
+				  let iframe = element.querySelector("iframe");
+				  let ratio = containerW / iframe.offsetWidth;
 				  
-				  iframe.attr("width",(i, width) => width * ratio);
-				  iframe.attr("height", (i, height) => height * ratio);
+				  iframe.setAttribute("width", (width * ratio));
+				  iframe.setAttribute("height", (height * ratio));
 				  
 			}).catch(error => console.log(error));
 
 			return node;
 		},	
-    }, {
+    },{
         name: "Width",
         key: "width",
         child:"iframe",
         htmlAttr: "width",
         inputtype: CssUnitInput
-    }, {
+    },{
         name: "Height",
         key: "height",
         child:"iframe",
@@ -75,7 +75,7 @@ Vvveb.Components.extend("_base", "embeds/embed", {
 
 for (const provider of ["youtube", "vimeo", "dailymotion", "flickr", "smugmug", "scribd", "twitter", "soundcloud", "slideshare", "spotify", "imgur", "issuu", "mixcloud", "ted", "animoto", "tumblr", "kickstarter", "reverbnation", "reddit", "speakerdeck", "screencast", "amazon", "someecards", "tiktok","pinterest", "wolfram", "anghami"])  {
 	Vvveb.Components.add("embeds/" + provider, {
-		name: ucFirst(provider),
+		name: provider,
 		image: "icons/code.svg",
 		html: `<div data-component-oembed data-url="">
 				<div class="alert alert-light  m-5" role="alert">

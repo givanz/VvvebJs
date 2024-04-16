@@ -7,8 +7,7 @@ Vvveb.CodeEditor = {
 	
 	init: function(doc) {
 
-		if (this.codemirror == false)		
-		{
+		if (this.codemirror == false) {
 			this.codemirror = CodeMirror.fromTextArea(document.querySelector("#vvveb-code-editor textarea"), {
 				mode: 'text/html',
 				lineNumbers: true,
@@ -27,9 +26,11 @@ Vvveb.CodeEditor = {
 		
 		
 		//load code on document changes
-		Vvveb.Builder.frameBody.on("vvveb.undo.add vvveb.undo.restore", function (e) { Vvveb.CodeEditor.setValue(e);});
+		Vvveb.Builder.frameBody.addEventListener("vvveb.undo.add", () => Vvveb.CodeEditor.setValue());
+		Vvveb.Builder.frameBody.addEventListener("vvveb.undo.restore", () => Vvveb.CodeEditor.setValue());
+		
 		//load code when a new url is loaded
-		Vvveb.Builder.documentFrame.on("load", function (e) { Vvveb.CodeEditor.setValue();});
+		Vvveb.Builder.documentFrame.addEventListener("load", () => Vvveb.CodeEditor.setValue());
 
 		this.isActive = true;
 		this.setValue();
@@ -38,9 +39,8 @@ Vvveb.CodeEditor = {
 	},
 
 	setValue: function(value) {
-		if (this.isActive == true)
-		{
-			var scrollInfo = this.codemirror.getScrollInfo();
+		if (this.isActive == true) {
+			let scrollInfo = this.codemirror.getScrollInfo();
 			this.codemirror.setValue(Vvveb.Builder.getHtml());
 			this.codemirror.scrollTo(scrollInfo.left, scrollInfo.top);
 			let self = this;
@@ -60,8 +60,7 @@ Vvveb.CodeEditor = {
 	},
 
 	toggle: function() {
-		if (this.isActive != true)
-		{
+		if (this.isActive != true) {
 			this.isActive = true;
 			return this.init();
 		}
@@ -73,7 +72,7 @@ Vvveb.CodeEditor = {
 
 // override modal code editor to use code mirror
 Vvveb.ModalCodeEditor.init = function (modal = false, editor = false) {
-	this.modal  = $('#codeEditorModal');
+	this.modal  = document.getElementById("codeEditorModal");
 	this.editor = CodeMirror.fromTextArea(document.querySelector("#codeEditorModal textarea"), {
 		mode: 'text/html',
 		lineNumbers: true,
@@ -84,14 +83,15 @@ Vvveb.ModalCodeEditor.init = function (modal = false, editor = false) {
 	});
 	
 	let self = this;
-	$('.save-btn', this.modal).on("click",  function(event) {
-		$(window).triggerHandler("vvveb.ModalCodeEditor.save", self.getValue());
+	this.modal.querySelector('.save-btn').addEventListener("click",  function(event) {
+		window.dispatchEvent(new CustomEvent("vvveb.ModalCodeEditor.save", {detail: self.getValue()}));
 		self.hide();
+		return false;
 	});
 }
 
 Vvveb.ModalCodeEditor.setValue = function (value) {
-	var scrollInfo = this.editor.getScrollInfo();
+	let scrollInfo = this.editor.getScrollInfo();
 	this.editor.setValue(value);
 	this.editor.scrollTo(scrollInfo.left, scrollInfo.top);
 	let self = this;

@@ -165,7 +165,7 @@
 							  <!-- li class="nav-item sections-tab">
 								<a class="nav-link" id="sections-tab" data-bs-toggle="tab" href="#sections" role="tab" aria-controls="sections" aria-selected="false" title="Sections"><img src="../../../js/vvvebjs/icons/list_group.svg" width="24" height="23"> <div><small>Sections</small></div></a>
 							  </li -->
-							  <li class="nav-item component-properties-tab" style="display:none">
+							  <li class="nav-item component-properties-tab d-none">
 								<a class="nav-link" id="properties-tab" data-bs-toggle="tab" href="#properties" role="tab" aria-controls="properties" aria-selected="false" title="Properties">
 									<i class="icon-settings-outline"></i>
 									<!-- img src="../../../js/vvvebjs/icons/filters.svg" height="23"--> 
@@ -666,7 +666,7 @@
 
 							<div id="close-section-btn" class="btn btn-outline-secondary btn-sm border-0 float-end"><i class="la la-times la-lg"></i></div>
 										
-							<div class="mt-1 me-4 float-end">
+							<div class="me-4 float-end">
 											
 								<div class="form-check d-inline-block small me-1">
 												  <input type="radio" id="add-section-insert-mode-after" value="after" checked="checked" name="add-section-insert-mode" class="form-check-input">
@@ -821,7 +821,7 @@
 								</div>
 							
 							
-								  <button id="code-editor-btn" data-view="mobile" class="btn btn-sm btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
+								  <button id="code-editor-btn" class="btn btn-sm btn-light btn-sm"  title="Code editor" data-vvveb-action="toggleEditor">
 									  <i class="la la-code"></i> Code editor
 								  </button>
 								 
@@ -1476,7 +1476,7 @@
         <div id="tree-list">
           <div class="header">
             <div>Navigator</div>
-            <button class="btn btn-sm btn-outline-light border-0 text-body" data-vvveb-action="toggleTreeList" aria-pressed="true">
+            <button class="btn btn-sm" data-vvveb-action="toggleTreeList" aria-pressed="true">
               <i class="icon-close"></i>
             </button>
           </div>
@@ -1671,16 +1671,14 @@
 				  <div>Template backup was saved!</div>
 				  <div>Template was saved!</div>
 			  </div>
+			  <!--
 			  <div><a class="btn btn-success  btn-icon btn-sm w-100 mt-2" href="">View page</a></div>
+			  -->
 			</div>
 		</div>
 	</div>
 </div>
 	
-<!-- jquery-->
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.hotkeys.js"></script>
-
 <!-- bootstrap-->
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -1700,7 +1698,9 @@ window.mediaPath = '../../media';
 Vvveb.themeBaseUrl = 'demo/landing/';
 </script>
 <script src="libs/media/media.js"></script>	
+<!--
 <script src="libs/media/openverse.js"></script>
+-->
 <script src="libs/builder/plugin-media.js"></script>	
 
 <!-- bootstrap colorpicker //uncomment bellow scripts to enable -->
@@ -1714,8 +1714,8 @@ Vvveb.themeBaseUrl = 'demo/landing/';
 <!-- script src="libs/builder/components-server.js"></script -->	
 <script src="libs/builder/plugin-google-fonts.js"></script>	
 <script src="libs/builder/components-common.js"></script>	
-<script src="libs/builder/components-html.js"></script>	
 <script src="libs/builder/plugin-aos.js"></script>
+<script src="libs/builder/components-html.js"></script>	
 <script src="libs/builder/components-elements.js"></script>	
 <script src="libs/builder/section.js"></script>	
 <script src="libs/builder/components-bootstrap5.js"></script>	
@@ -1768,8 +1768,9 @@ Unzip the latest ckeditor release zip from https://github.com/ckeditor/ckeditor4
 
 
 <!-- autocomplete plugin used by autocomplete input-->
+<!--
 <script src="libs/autocomplete/jquery.autocomplete.js"></script>	
-
+-->
 <script>
 let renameUrl = 'save.php?action=rename';
 let deleteUrl = 'save.php?action=delete';	
@@ -1797,438 +1798,431 @@ let defaultPages = {
 	<?php } ?>
 	*/
   "index": {
-    "name": "index",
-    "filename": "index.html",
-    "file": "demo/landing/index.html",
-    "url": "demo/landing/index.html",
-    "title": "Home page",
-    "folder": null,
-    "description": "Website homepage"
+    name: "index",
+    filename: "index.html",
+    file: "demo/landing/index.html",
+    url: "demo/landing/index.html",
+    title: "Home page",
+    folder: null,
+    description: "Website homepage"
   },
   "contact": {
-    "name": "contact",
-    "filename": "contact.html",
-    "file": "demo/landing/contact.html",
-    "url": "demo/landing/contact.html",
-    "title": "Contact us page",
-    "folder": null,
-    "description": "Contact us page"
+    name: "contact",
+    filename: "contact.html",
+    file: "demo/landing/contact.html",
+    url: "demo/landing/contact.html",
+    title: "Contact us page",
+    folder: null,
+    description: "Contact us page"
   },
   "blank": {
-    "name": "blank",
-    "filename": "blank.html",
-    "file": "demo/landing/blank.html",
-    "url": "demo/landing/blank.html",
-    "title": "Blank page",
-    "folder": null,
-    "description": "Template page used for new pages"
+    name: "blank",
+    filename: "blank.html",
+    file: "demo/landing/blank.html",
+    url: "demo/landing/blank.html",
+    title: "Blank page",
+    folder: null,
+    description: "Template page used for new pages"
   },
   "error404": {
-    "name": "error404",
-    "filename": "error404.html",
-    "file": "demo/landing/error404.html",
-    "url": "demo/landing/error404.html",
-    "title": "Page not found",
-    "folder": null,
-    "description": "Shows when a page is not available"
+    name: "error404",
+    filename: "error404.html",
+    file: "demo/landing/error404.html",
+    url: "demo/landing/error404.html",
+    title: "Page not found",
+    folder: null,
+    description: "Shows when a page is not available"
   },
   "error500": {
-    "name": "error500",
-    "filename": "error500.html",
-    "file": "demo/landing/error500.html",
-    "url": "demo/landing/error500.html",
-    "title": "Server error",
-    "folder": null,
-    "description": "Site error display page"
+    name: "error500",
+    filename: "error500.html",
+    file: "demo/landing/error500.html",
+    url: "demo/landing/error500.html",
+    title: "Server error",
+    folder: null,
+    description: "Site error display page"
   },
   "index-blog": {
-    "name": "index-blog",
-    "filename": "index-blog.html",
-    "file": "demo/landing/index-blog.html",
-    "url": "demo/landing/index-blog.html",
-    "title": "Index blog",
-    "folder": null,
-    "description": ""
+    name: "index-blog",
+    filename: "index-blog.html",
+    file: "demo/landing/index-blog.html",
+    url: "demo/landing/index-blog.html",
+    title: "Index blog",
+    folder: null,
+    description: ""
   },
   "index-landing": {
-    "name": "index-landing",
-    "filename": "index-landing.html",
-    "file": "demo/landing/index-landing.html",
-    "url": "demo/landing/index-landing.html",
-    "title": "Index landing",
-    "folder": null,
-    "description": ""
+    name: "index-landing",
+    filename: "index-landing.html",
+    file: "demo/landing/index-landing.html",
+    url: "demo/landing/index-landing.html",
+    title: "Index landing",
+    folder: null,
+    description: ""
   },
   "index.coming-soon": {
-    "name": "index.coming-soon",
-    "filename": "index.coming-soon.html",
-    "file": "demo/landing/index.coming-soon.html",
-    "url": "demo/landing/index.coming-soon.html",
-    "title": "Coming soon",
-    "folder": null,
-    "description": "Coming soon message page"
+    name: "index.coming-soon",
+    filename: "index.coming-soon.html",
+    file: "demo/landing/index.coming-soon.html",
+    url: "demo/landing/index.coming-soon.html",
+    title: "Coming soon",
+    folder: null,
+    description: "Coming soon message page"
   },
   "index.maintenance": {
-    "name": "index.maintenance",
-    "filename": "index.maintenance.html",
-    "file": "demo/landing/index.maintenance.html",
-    "url": "demo/landing/index.maintenance.html",
-    "title": "Under maintenance",
-    "folder": null,
-    "description": "Website under maintenance message page"
+    name: "index.maintenance",
+    filename: "index.maintenance.html",
+    file: "demo/landing/index.maintenance.html",
+    url: "demo/landing/index.maintenance.html",
+    title: "Under maintenance",
+    folder: null,
+    description: "Website under maintenance message page"
   },
   "email-new": {
-    "name": "email-new",
-    "filename": "new.html",
-    "file": "demo/landing/email/order/new.html",
-    "url": "demo/landing/email/order/new.html",
-    "title": "New",
-    "folder": "email",
-    "description": ""
+    name: "email-new",
+    filename: "new.html",
+    file: "demo/landing/email/order/new.html",
+    url: "demo/landing/email/order/new.html",
+    title: "New",
+    folder: "email",
+    description: ""
   },
   "email-new.txt": {
-    "name": "email-new.txt",
-    "filename": "new.txt.html",
-    "file": "demo/landing/email/order/new.txt.html",
-    "url": "demo/landing/email/order/new.txt.html",
-    "title": "New txt",
-    "folder": "email",
-    "description": ""
+    name: "email-new.txt",
+    filename: "new.txt.html",
+    file: "demo/landing/email/order/new.txt.html",
+    url: "demo/landing/email/order/new.txt.html",
+    title: "New txt",
+    folder: "email",
+    description: ""
   },
   "email-reset": {
-    "name": "email-reset",
-    "filename": "reset.html",
-    "file": "demo/landing/email/user/reset.html",
-    "url": "demo/landing/email/user/reset.html",
-    "title": "Reset",
-    "folder": "email",
-    "description": ""
+    name: "email-reset",
+    filename: "reset.html",
+    file: "demo/landing/email/user/reset.html",
+    url: "demo/landing/email/user/reset.html",
+    title: "Reset",
+    folder: "email",
+    description: ""
   },
   "email-reset.txt": {
-    "name": "email-reset.txt",
-    "filename": "reset.txt.html",
-    "file": "demo/landing/email/user/reset.txt.html",
-    "url": "demo/landing/email/user/reset.txt.html",
-    "title": "Reset txt",
-    "folder": "email",
-    "description": ""
+    name: "email-reset.txt",
+    filename: "reset.txt.html",
+    file: "demo/landing/email/user/reset.txt.html",
+    url: "demo/landing/email/user/reset.txt.html",
+    title: "Reset txt",
+    folder: "email",
+    description: ""
   },
   "email-signup": {
-    "name": "email-signup",
-    "filename": "signup.html",
-    "file": "demo/landing/email/user/signup.html",
-    "url": "demo/landing/email/user/signup.html",
-    "title": "Signup",
-    "folder": "email",
-    "description": ""
+    name: "email-signup",
+    filename: "signup.html",
+    file: "demo/landing/email/user/signup.html",
+    url: "demo/landing/email/user/signup.html",
+    title: "Signup",
+    folder: "email",
+    description: ""
   },
   "email-signup.txt": {
-    "name": "email-signup.txt",
-    "filename": "signup.txt.html",
-    "file": "demo/landing/email/user/signup.txt.html",
-    "url": "demo/landing/email/user/signup.txt.html",
-    "title": "Signup txt",
-    "folder": "email",
-    "description": ""
+    name: "email-signup.txt",
+    filename: "signup.txt.html",
+    file: "demo/landing/email/user/signup.txt.html",
+    url: "demo/landing/email/user/signup.txt.html",
+    title: "Signup txt",
+    folder: "email",
+    description: ""
   },
   "user-edit": {
-    "name": "user-edit",
-    "filename": "edit.html",
-    "file": "demo/landing/user/edit.html",
-    "url": "demo/landing/user/edit.html",
-    "title": "Edit",
-    "folder": "user",
-    "description": ""
+    name: "user-edit",
+    filename: "edit.html",
+    file: "demo/landing/user/edit.html",
+    url: "demo/landing/user/edit.html",
+    title: "Edit",
+    folder: "user",
+    description: ""
   },
   "user-reset": {
-    "name": "user-reset",
-    "filename": "reset.html",
-    "file": "demo/landing/user/reset.html",
-    "url": "demo/landing/user/reset.html",
-    "title": "Reset",
-    "folder": "user",
-    "description": ""
+    name: "user-reset",
+    filename: "reset.html",
+    file: "demo/landing/user/reset.html",
+    url: "demo/landing/user/reset.html",
+    title: "Reset",
+    folder: "user",
+    description: ""
   },
   "cart-cart": {
-    "name": "cart-cart",
-    "filename": "cart.html",
-    "file": "demo/landing/cart/cart.html",
-    "url": "demo/landing/cart/cart.html",
-    "title": "Cart",
-    "folder": "cart",
-    "description": ""
+    name: "cart-cart",
+    filename: "cart.html",
+    file: "demo/landing/cart/cart.html",
+    url: "demo/landing/cart/cart.html",
+    title: "Cart",
+    folder: "cart",
+    description: ""
   },
   "checkout-checkout": {
-    "name": "checkout-checkout",
-    "filename": "checkout.html",
-    "file": "demo/landing/checkout/checkout.html",
-    "url": "demo/landing/checkout/checkout.html",
-    "title": "Checkout",
-    "folder": "checkout",
-    "description": ""
+    name: "checkout-checkout",
+    filename: "checkout.html",
+    file: "demo/landing/checkout/checkout.html",
+    url: "demo/landing/checkout/checkout.html",
+    title: "Checkout",
+    folder: "checkout",
+    description: ""
   },
   "checkout-confirm": {
-    "name": "checkout-confirm",
-    "filename": "confirm.html",
-    "file": "demo/landing/checkout/confirm.html",
-    "url": "demo/landing/checkout/confirm.html",
-    "title": "Confirm",
-    "folder": "checkout",
-    "description": ""
+    name: "checkout-confirm",
+    filename: "confirm.html",
+    file: "demo/landing/checkout/confirm.html",
+    url: "demo/landing/checkout/confirm.html",
+    title: "Confirm",
+    folder: "checkout",
+    description: ""
   },
   "checkout-order": {
-    "name": "checkout-order",
-    "filename": "order.html",
-    "file": "demo/landing/checkout/order.html",
-    "url": "demo/landing/checkout/order.html",
-    "title": "Order",
-    "folder": "checkout",
-    "description": ""
+    name: "checkout-order",
+    filename: "order.html",
+    file: "demo/landing/checkout/order.html",
+    url: "demo/landing/checkout/order.html",
+    title: "Order",
+    folder: "checkout",
+    description: ""
   },
   "content-archive": {
-    "name": "content-archive",
-    "filename": "archive.html",
-    "file": "demo/landing/content/archive.html",
-    "url": "demo/landing/content/archive.html",
-    "title": "Archive",
-    "folder": "content",
-    "description": ""
+    name: "content-archive",
+    filename: "archive.html",
+    file: "demo/landing/content/archive.html",
+    url: "demo/landing/content/archive.html",
+    title: "Archive",
+    folder: "content",
+    description: ""
   },
   "content-category": {
-    "name": "content-category",
-    "filename": "category.html",
-    "file": "demo/landing/content/category.html",
-    "url": "demo/landing/content/category.html",
-    "title": "Category",
-    "folder": "content",
-    "description": ""
+    name: "content-category",
+    filename: "category.html",
+    file: "demo/landing/content/category.html",
+    url: "demo/landing/content/category.html",
+    title: "Category",
+    folder: "content",
+    description: ""
   },
   "content-index": {
-    "name": "content-index",
-    "filename": "index.html",
-    "file": "demo/landing/content/index.html",
-    "url": "demo/landing/content/index.html",
-    "title": "Blog homepage",
-    "folder": "content",
-    "description": "Blog page with latest posts"
+    name: "content-index",
+    filename: "index.html",
+    file: "demo/landing/content/index.html",
+    url: "demo/landing/content/index.html",
+    title: "Blog homepage",
+    folder: "content",
+    description: "Blog page with latest posts"
   },
   "content-page": {
-    "name": "content-page",
-    "filename": "page.html",
-    "file": "demo/landing/content/page.html",
-    "url": "demo/landing/content/page.html",
-    "title": "Page",
-    "folder": "content",
-    "description": ""
+    name: "content-page",
+    filename: "page.html",
+    file: "demo/landing/content/page.html",
+    url: "demo/landing/content/page.html",
+    title: "Page",
+    folder: "content",
+    description: ""
   },
   "content-post-image-header": {
-    "name": "content-post-image-header",
-    "filename": "post-image-header.html",
-    "file": "demo/landing/content/post-image-header.html",
-    "url": "demo/landing/content/post-image-header.html",
-    "title": "Post image header",
-    "folder": "content",
-    "description": ""
+    name: "content-post-image-header",
+    filename: "post-image-header.html",
+    file: "demo/landing/content/post-image-header.html",
+    url: "demo/landing/content/post-image-header.html",
+    title: "Post image header",
+    folder: "content",
+    description: ""
   },
   "content-post-image-hero": {
-    "name": "content-post-image-hero",
-    "filename": "post-image-hero.html",
-    "file": "demo/landing/content/post-image-hero.html",
-    "url": "demo/landing/content/post-image-hero.html",
-    "title": "Post image hero",
-    "folder": "content",
-    "description": ""
+    name: "content-post-image-hero",
+    filename: "post-image-hero.html",
+    file: "demo/landing/content/post-image-hero.html",
+    url: "demo/landing/content/post-image-hero.html",
+    title: "Post image hero",
+    folder: "content",
+    description: ""
   },
   "content-post": {
-    "name": "content-post",
-    "filename": "post.html",
-    "file": "demo/landing/content/post.html",
-    "url": "demo/landing/content/post.html",
-    "title": "Blog post",
-    "folder": "content",
-    "description": "Blog post",
+    name: "content-post",
+    filename: "post.html",
+    file: "demo/landing/content/post.html",
+    url: "demo/landing/content/post.html",
+    title: "Blog post",
+    folder: "content",
+    description: "Blog post",
     "editor": {
       "template": "post"
     }
   },
   "content-tag": {
-    "name": "content-tag",
-    "filename": "tag.html",
-    "file": "demo/landing/content/tag.html",
-    "url": "demo/landing/content/tag.html",
-    "title": "Tag",
-    "folder": "content",
-    "description": ""
+    name: "content-tag",
+    filename: "tag.html",
+    file: "demo/landing/content/tag.html",
+    url: "demo/landing/content/tag.html",
+    title: "Tag",
+    folder: "content",
+    description: ""
   },
   "content-user": {
-    "name": "content-user",
-    "filename": "user.html",
-    "file": "demo/landing/content/user.html",
-    "url": "demo/landing/content/user.html",
-    "title": "User",
-    "folder": "content",
-    "description": ""
+    name: "content-user",
+    filename: "user.html",
+    file: "demo/landing/content/user.html",
+    url: "demo/landing/content/user.html",
+    title: "User",
+    folder: "content",
+    description: ""
   },
   "product-category": {
-    "name": "product-category",
-    "filename": "category.html",
-    "file": "demo/landing/product/category.html",
-    "url": "demo/landing/product/category.html",
-    "title": "Category",
-    "folder": "product",
-    "description": ""
+    name: "product-category",
+    filename: "category.html",
+    file: "demo/landing/product/category.html",
+    url: "demo/landing/product/category.html",
+    title: "Category",
+    folder: "product",
+    description: ""
   },
   "product-index": {
-    "name": "product-index",
-    "filename": "index.html",
-    "file": "demo/landing/product/index.html",
-    "url": "demo/landing/product/index.html",
-    "title": "Shop page",
-    "folder": "product",
-    "description": "Shop homepage"
+    name: "product-index",
+    filename: "index.html",
+    file: "demo/landing/product/index.html",
+    url: "demo/landing/product/index.html",
+    title: "Shop page",
+    folder: "product",
+    description: "Shop homepage"
   },
   "product-manufacturer": {
-    "name": "product-manufacturer",
-    "filename": "manufacturer.html",
-    "file": "demo/landing/product/manufacturer.html",
-    "url": "demo/landing/product/manufacturer.html",
-    "title": "Manufacturer",
-    "folder": "product",
-    "description": ""
+    name: "product-manufacturer",
+    filename: "manufacturer.html",
+    file: "demo/landing/product/manufacturer.html",
+    url: "demo/landing/product/manufacturer.html",
+    title: "Manufacturer",
+    folder: "product",
+    description: ""
   },
   "product-product": {
-    "name": "product-product",
-    "filename": "product.html",
-    "file": "demo/landing/product/product.html",
-    "url": "demo/landing/product/product.html",
-    "title": "Product",
-    "folder": "product",
-    "description": ""
+    name: "product-product",
+    filename: "product.html",
+    file: "demo/landing/product/product.html",
+    url: "demo/landing/product/product.html",
+    title: "Product",
+    folder: "product",
+    description: ""
   },
   "product-vendor": {
-    "name": "product-vendor",
-    "filename": "vendor.html",
-    "file": "demo/landing/product/vendor.html",
-    "url": "demo/landing/product/vendor.html",
-    "title": "Vendor",
-    "folder": "product",
-    "description": ""
+    name: "product-vendor",
+    filename: "vendor.html",
+    file: "demo/landing/product/vendor.html",
+    url: "demo/landing/product/vendor.html",
+    title: "Vendor",
+    folder: "product",
+    description: ""
   },
   "search-index": {
-    "name": "search-index",
-    "filename": "index.html",
-    "file": "demo/landing/search/index.html",
-    "url": "demo/landing/search/index.html",
-    "title": "Search page",
-    "folder": "search",
-    "description": "Search page"
+    name: "search-index",
+    filename: "index.html",
+    file: "demo/landing/search/index.html",
+    url: "demo/landing/search/index.html",
+    title: "Search page",
+    folder: "search",
+    description: "Search page"
   },
   "user-address": {
-    "name": "user-address",
-    "filename": "address.html",
-    "file": "demo/landing/user/address.html",
-    "url": "demo/landing/user/address.html",
-    "title": "Address",
-    "folder": "user",
-    "description": ""
+    name: "user-address",
+    filename: "address.html",
+    file: "demo/landing/user/address.html",
+    url: "demo/landing/user/address.html",
+    title: "Address",
+    folder: "user",
+    description: ""
   },
   "user-comments": {
-    "name": "user-comments",
-    "filename": "comments.html",
-    "file": "demo/landing/user/comments.html",
-    "url": "demo/landing/user/comments.html",
-    "title": "Comments",
-    "folder": "user",
-    "description": ""
+    name: "user-comments",
+    filename: "comments.html",
+    file: "demo/landing/user/comments.html",
+    url: "demo/landing/user/comments.html",
+    title: "Comments",
+    folder: "user",
+    description: ""
   },
   "user-downloads": {
-    "name": "user-downloads",
-    "filename": "downloads.html",
-    "file": "demo/landing/user/downloads.html",
-    "url": "demo/landing/user/downloads.html",
-    "title": "Downloads",
-    "folder": "user",
-    "description": ""
+    name: "user-downloads",
+    filename: "downloads.html",
+    file: "demo/landing/user/downloads.html",
+    url: "demo/landing/user/downloads.html",
+    title: "Downloads",
+    folder: "user",
+    description: ""
   },
   "user-index": {
-    "name": "user-index",
-    "filename": "index.html",
-    "file": "demo/landing/user/index.html",
-    "url": "demo/landing/user/index.html",
-    "title": "Dashboard",
-    "folder": "user",
-    "description": "User dashboard"
+    name: "user-index",
+    filename: "index.html",
+    file: "demo/landing/user/index.html",
+    url: "demo/landing/user/index.html",
+    title: "Dashboard",
+    folder: "user",
+    description: "User dashboard"
   },
   "user-login": {
-    "name": "user-login",
-    "filename": "login.html",
-    "file": "demo/landing/user/login.html",
-    "url": "demo/landing/user/login.html",
-    "title": "Login",
-    "folder": "user",
-    "description": ""
+    name: "user-login",
+    filename: "login.html",
+    file: "demo/landing/user/login.html",
+    url: "demo/landing/user/login.html",
+    title: "Login",
+    folder: "user",
+    description: ""
   },
   "user-orders": {
-    "name": "user-orders",
-    "filename": "orders.html",
-    "file": "demo/landing/user/orders.html",
-    "url": "demo/landing/user/orders.html",
-    "title": "Orders",
-    "folder": "user",
-    "description": ""
+    name: "user-orders",
+    filename: "orders.html",
+    file: "demo/landing/user/orders.html",
+    url: "demo/landing/user/orders.html",
+    title: "Orders",
+    folder: "user",
+    description: ""
   },
   "user-profile": {
-    "name": "user-profile",
-    "filename": "profile.html",
-    "file": "demo/landing/user/profile.html",
-    "url": "demo/landing/user/profile.html",
-    "title": "Profile",
-    "folder": "user",
-    "description": ""
+    name: "user-profile",
+    filename: "profile.html",
+    file: "demo/landing/user/profile.html",
+    url: "demo/landing/user/profile.html",
+    title: "Profile",
+    folder: "user",
+    description: ""
   },
   "user-signup": {
-    "name": "user-signup",
-    "filename": "signup.html",
-    "file": "demo/landing/user/signup.html",
-    "url": "demo/landing/user/signup.html",
-    "title": "Signup",
-    "folder": "user",
-    "description": ""
+    name: "user-signup",
+    filename: "signup.html",
+    file: "demo/landing/user/signup.html",
+    url: "demo/landing/user/signup.html",
+    title: "Signup",
+    folder: "user",
+    description: ""
   },
- "narrow-jumbotron":{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html", assets: ['demo/narrow-jumbotron/narrow-jumbotron.css']},
- "album":{name:"album", title:"Album",  url: "demo/album/index.html", file: "demo/album/index.html", folder:"content", assets: ['demo/album/album.css']},
- "blog":{name:"blog", title:"Blog",  url: "demo/blog/index.html", file: "demo/blog/index.html", folder:"content", assets: ['demo/blog/blog.css']},
- "carousel":{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html",  file: "demo/carousel/index.html", folder:"content", assets: ['demo/carousel/carousel.css']},
- "offcanvas":{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", file: "demo/offcanvas/index.html", folder:"content", assets: ['demo/offcanvas/offcanvas.css','demo/offcanvas/offcanvas.js']},
- "pricing":{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", file: "demo/pricing/index.html", folder:"ecommerce", assets: ['demo/pricing/pricing.css']},
- "product":{name:"product", title:"Product",  url: "demo/product/index.html", file: "demo/product/index.html", folder:"ecommerce", assets: ['demo/product/product.css']}  
+ "narrow-jumbotron":{name:"narrow-jumbotron", title:"Jumbotron",  url: "demo/narrow-jumbotron/index.html", file: "demo/narrow-jumbotron/index.html"},
+ "album":{name:"album", title:"Album",  url: "demo/album/index.html", file: "demo/album/index.html", folder:"content"},
+ "blog":{name:"blog", title:"Blog",  url: "demo/blog/index.html", file: "demo/blog/index.html", folder:"content"},
+ "carousel":{name:"carousel", title:"Carousel",  url: "demo/carousel/index.html",  file: "demo/carousel/index.html", folder:"content"},
+ "offcanvas":{name:"offcanvas", title:"Offcanvas",  url: "demo/offcanvas/index.html", file: "demo/offcanvas/index.html", folder:"content"},
+ "pricing":{name:"pricing", title:"Pricing",  url: "demo/pricing/index.html", file: "demo/pricing/index.html", folder:"ecommerce"},
+ "product":{name:"product", title:"Product",  url: "demo/product/index.html", file: "demo/product/index.html", folder:"ecommerce"}  
 };	
 	
-$(function() {
 
-	let pages = defaultPages;
-	
-	let firstPage = Object.keys(pages)[0];
-	Vvveb.Builder.init(pages[firstPage]["url"], function() {
-		//load code after page is loaded here
-	});
+let pages = defaultPages;
 
-	Vvveb.Gui.init();
-	Vvveb.FileManager.init();
-	Vvveb.SectionList.init();
-	Vvveb.TreeList.init();
-	Vvveb.Breadcrumb.init();
-	
-	Vvveb.FileManager.addPages(pages);
-	Vvveb.FileManager.loadPage(pages[firstPage]["name"]);
-	Vvveb.Gui.toggleRightColumn(false);
-	Vvveb.Breadcrumb.init();
-
-	//if url has #no-right-panel set one panel demo
-	if (window.location.hash.indexOf("no-right-panel") != -1) {
-		Vvveb.Gui.toggleRightColumn();
-	}
+let firstPage = Object.keys(pages)[0];
+Vvveb.Builder.init(pages[firstPage]["url"], function() {
+	//load code after page is loaded here
 });
+
+Vvveb.Gui.init();
+Vvveb.FileManager.init();
+Vvveb.SectionList.init();
+Vvveb.TreeList.init();
+Vvveb.Breadcrumb.init();
+
+Vvveb.FileManager.addPages(pages);
+Vvveb.FileManager.loadPage(pages[firstPage]["name"]);
+Vvveb.Gui.toggleRightColumn(false);
+Vvveb.Breadcrumb.init();
 </script>
 </body>
 </html>
