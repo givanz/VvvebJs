@@ -212,7 +212,7 @@ class OpenVerseDisplay extends OpenVerse {
 		  
 		  pagination += `<div class="p-2"> total pages ${data['page_count']}</div>`;
 		
-		  document.getElementById("openverse-results").innerHTML = pagination;
+		  document.getElementById("openverse-results").innerHTML = generateElements('<div>' + pagination + '</div>')[0];
 	}
 	
 	page(pageNo) {
@@ -230,7 +230,7 @@ class OpenVerseDisplay extends OpenVerse {
 	}
 	
 	toggleBtn() {
-		return `                       
+		return generateElements(`                       
 			<button class="btn btn-outline-secondary btn-sm btn-icon me-3 float-end border-secondary-subtle" id="openverse-toggle"
 			   data-bs-toggle="collapse" 
 			   data-bs-target="#openverse-form" 
@@ -239,20 +239,20 @@ class OpenVerseDisplay extends OpenVerse {
 			   <i class="la la-search-plus la-lg"></i>
 				OpenVerse Search
 			</button>
-           `;
+           `)[0];
 	}
 	
 	displayPanel() {
-		return `<ul class="data" id="openverse-results"></ul>`;
+		return generateElements(`<ul class="data" id="openverse-results"></ul>`)[0];
 	}
 	
 	paginationContainer() {
-		return `<div class="pagination" id="openverse-pagination">
-		</div>`;
+		return generateElements(`<div class="pagination" id="openverse-pagination">
+		</div>`)[0];
 	}
 		
 	topPanel() {
-		return `
+		return generateElements(`
 			<form id="openverse-form" class="collapse p-4">
 				<div class="input-group">
 					<input id="openverse" name="q" class="form-control w-50">
@@ -292,7 +292,7 @@ class OpenVerseDisplay extends OpenVerse {
 					<button type="button" name="page" value="1" class="btn btn-primary me-1">1</button>
 					<button type="button" name="page" value="2" class="btn btn-secondary me-1">2</button>
 				</div -->
-			</form>`;
+			</form>`)[0];;
 	}
 	
 	init() {

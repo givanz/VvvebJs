@@ -1,4 +1,4 @@
-FROM php:8.2.11-apache
+FROM php:8.3-apache
 
 ARG UNAME=www-data
 ARG UGROUP=www-data

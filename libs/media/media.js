@@ -166,11 +166,11 @@ class MediaModal {
 			document.querySelector(".filemanager").addEventListener("click", function (e) {
 				let element = e.target.closest(".btn-delete");
 				if (element) {
-					 self.deleteFile();
+					 self.deleteFile(element);
 				} else {
 					element = e.target.closest(".btn-rename");
 					if (element) {
-						 self.renameFile();
+						 self.renameFile(element);
 					}
 				}
 			});
@@ -523,11 +523,7 @@ _
 							size:1
 						},true);
 						
-						 $([document.documentElement, document.body]).animate({
-							scrollTop:fileElement.offset().top
-						}, 1000, function () {
-							fileElement.fadeOut().fadeIn('slow');
-						});
+						fileElement.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
 						
 						Vvveb.MediaModal.hideUploadLoading();				
 					})
@@ -539,16 +535,18 @@ _
 			}
 		}	
 	
-		deleteFile(e) {
-			let parent = this.parents("li");
-			let file = ('input[type ="hidden"]', parent).value;
+		deleteFile(el) {
+			let parent = el.closest("li");
+			let file = parent.querySelector('input[type ="hidden"]').value;
 			if (confirm(`Are you sure you want to delete "${file}"template?`)) {
-				$.ajax({
-					method:"POST",
-					url: deleteUrl,//set your server side save script url
-					data: {file},
-				}).done(function(data) {
-
+				
+			fetch(deleteUrl, {method: "POST",  body: {file}})
+				.then((response) => {
+					console.log(response);
+					if (!response.ok) { throw new Error(response) }
+					return response.text()
+				})
+				.then((data) => {
 					let bg = "bg-success";
 					if (data.success) {		
 					} else {
@@ -558,29 +556,30 @@ _
 					document.querySelectorAll("#top-toast .toast-body").html(data)
 					document.querySelectorAll("#top-toast .toast-header").classList.remove(["bg-danger", "bg-success"]).classList.add(bg);
 					document.querySelectorAll("#top-toast .toast").classList.add("show");
-					delay(() => document.querySelectorAll("#top-toast .toast").classList.remove("show"), 5000)
-				}).fail(function (data) {
-					alert(data.responseText);
-					displayToast("bg-danger", data.responseText);						
-				}).always(function (data) {
-				});					
-
-				parent.remove();
+					delay(() => document.querySelectorAll("#top-toast .toast").classList.remove("show"), 5000);		
+				
+					parent.remove();	
+				})
+				.catch(error => {
+					console.log(error);
+					displayToast("bg-danger", "Error", "Error deleting file!");
+				});	
 			}
 		}
 
-		renameFile(e) {
-			let parent = this.parents("li");
-			let file = ('input[type ="hidden"]', parent).value;
+		renameFile(el) {
+			let parent = el.closest("li");
+			let file = parent.querySelector('input[type ="hidden"]').value;
 			let newfile = prompt(`Enter new file name for "${file}"`, file);
 
 			if (newfile) {
-				$.ajax({
-					method:"POST",
-					url: renameUrl,//set your server side save script url
-					data: {file, newfile},
-				}).done(function(data) {
-
+				fetch(renameUrl, {method: "POST",  body: {file, newfile}})
+				.then((response) => {
+					console.log(response);
+					if (!response.ok) { throw new Error(response) }
+					return response.text()
+				})
+				.then((data) => {
 					let bg = "bg-success";
 					if (data.success) {		
 					} else {
@@ -590,12 +589,12 @@ _
 					document.querySelectorAll("#top-toast .toast-body").html(data)
 					document.querySelectorAll("#top-toast .toast-header").classList.remove(["bg-danger", "bg-success"]).classList.add(bg);
 					document.querySelectorAll("#top-toast .toast").classList.add("show");
-					delay(() => document.querySelectorAll("#top-toast .toast").classList.remove("show"), 5000)
-				}).fail(function (data) {
-					alert(data.responseText);
-					displayToast("bg-danger", data.responseText);						
-				}).always(function (data) {
-				});		
+					delay(() => document.querySelectorAll("#top-toast .toast").classList.remove("show"), 5000);
+				})
+				.catch(error => {
+					console.log(error);
+					displayToast("bg-danger", "Error", "Error renaming file!");
+				});	
 			}
 		}
 		

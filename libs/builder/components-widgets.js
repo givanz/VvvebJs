@@ -16,7 +16,7 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-Vvveb.ComponentsGroup['Widgets'] = ["widgets/googlemaps", "widgets/embed-video", "widgets/chartjs",/* "widgets/facebookpage", */"widgets/paypal", /*"widgets/instagram",*/ "widgets/twitter", "widgets/openstreetmap"/*, "widgets/facebookcomments"*/];
+Vvveb.ComponentsGroup['Widgets'] = ["widgets/googlemaps", "widgets/embed-video", "widgets/chartjs", "widgets/lottie",/* "widgets/facebookpage", */"widgets/paypal", /*"widgets/instagram",*/ "widgets/twitter", "widgets/openstreetmap"/*, "widgets/facebookcomments"*/];
 
 Vvveb.Components.extend("_base", "widgets/googlemaps", {
     name: "Google Maps",
@@ -748,4 +748,92 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
 		   return node;
 		}
 	 }]
+});
+
+function lottieAfterDrop(node) {
+	//check if lottie js is included and if not add it when drag starts to allow the script to load
+	body = Vvveb.Builder.frameBody;
+
+	if (!body.querySelector("#lottie-js")) {
+		let lib = document.createElement('script');
+		let code = document.createElement('script');
+		lib.id = 'lottie-js';
+		lib.type = 'text/javascript';
+		lib.src = 'https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js';
+		code.type = 'text/javascript';
+		code.text = `
+		let lottie = [];
+		function initLottie(onlyNew = false) {
+			if (typeof bodymovin == "undefined") return;
+			
+			
+			let list = document.querySelectorAll('.lottie' + (onlyNew ? ":not(.lottie-initialized)" : "") );
+			list.forEach(el => {
+				el.replaceChildren();
+				let animItem = bodymovin.loadAnimation({
+				  wrapper: el,
+				  animType: 'svg',
+				  loop: (el.dataset.loop  == "true" ? true : false),
+				  autoplay: (el.dataset.autoplay == "true" ? true : false),
+				  path: el.dataset.path
+				});
+				
+			});
+		}
+
+		if (document.readyState !== 'loading') {
+			initLottie();
+		  } else {
+			document.addEventListener('DOMContentLoaded', initLottie);
+		  }`;			
+		
+		body.appendChild(lib);
+		body.appendChild(code);
+		
+		lib.addEventListener('load', function() {		
+			Vvveb.Builder.iframe.contentWindow.initLottie();
+		});
+	} else {
+		Vvveb.Builder.iframe.contentWindow.initLottie(true);
+	}
+	
+	return node;
+};
+
+Vvveb.Components.add("widgets/lottie", {
+    name: "Lottie",
+    image: "icons/lottie.svg",
+    attributes: ["data-component-lottie"],
+    html: `
+	  <div class="lottie" data-component-lottie data-path="https://labs.nearpod.com/bodymovin/demo/markus/isometric/markus2.json" data-loop="true" data-autoplay="true">
+	  </div>	
+	`,
+	afterDrop: lottieAfterDrop,
+	
+    onChange: function (node, property, value) {
+		Vvveb.Builder.iframe.contentWindow.initLottie();
+		Vvveb.Builder.selectNode(node);
+		return node;
+	},	
+	
+    properties: [{
+		name: "Path",
+        key: "path",
+        //inputtype: ImageInput,
+        inputtype: TextInput,
+		htmlAttr:"data-path",
+	},{
+		name: "Autoplay",
+        key: "autoplay",
+		htmlAttr:"data-autoplay",
+		inputtype: CheckboxInput,
+		inline:true,
+        col:4
+	},{	name: "Loop",
+        key: "loop",
+		htmlAttr:"data-loop",
+		inputtype: CheckboxInput,
+		inline:true,
+        col:4
+	}]
 });

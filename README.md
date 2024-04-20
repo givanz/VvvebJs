@@ -3,9 +3,9 @@
 <p align="center">
   <img src="https://www.vvveb.com/admin/themes/default/img/biglogo.png" alt="Vvveb">
   <br><br>
-  <strong>Drag and drop website builder javascript library.</strong>
+  <strong>Drag and drop page builder javascript library.</strong>
   <br>
-  <span>Built with Vanilla Js with no dependencies and Bootstrap 5</span>
+  <span>Built with Vanilla Js with no dependencies or build tools and Bootstrap 5</span>
 </p>
 <p align="center">
   <a href="https://www.vvveb.com">Website</a> |
@@ -75,13 +75,33 @@ Because of browser iframe security you need to use a webserver such as apache/xa
 To use the image upload or page save feature you need to have php installed.
 
 
+## Docker
+
+### Local development
+
+From VvvebJs folder run
+
+```bash
+docker-compose up
+```
+
+### Image 
+
+Or run image 
+
+```bash
+docker run -p 8080:80 vvveb/vvvebjs
+```
+
+Open http://localhost:8080/editor.php or http://localhost:8080/editor.html
+
 ## Save page
 
 Save page function needs either php or node
 
 ### PHP
 
-If you use xampp or a shared hosting account php should work without any change.
+If you use docker, xampp or a shared hosting account php should work without any change.
 
 Saving is done using [save.php](save.php)
 
@@ -98,15 +118,6 @@ Open http://localhost:8080/editor.html
 
 Saving is done using [save.js](save.js)
 
-### Docker
-
-From VvvebJs folder run
-
-```bash
-docker-compose up
-```
-
-Open http://localhost:8080/editor.php
 
 ## [Landing template](https://github.com/givanz/landing)
 

@@ -3412,7 +3412,7 @@ Vvveb.FileManager = {
 
 			//allow event to change page or cancel by setting page to false
 			window.dispatchEvent(new CustomEvent("vvveb.FileManager.deletePage", {
-				detail: page,
+				detail: page
 			}));
 			
 			if (page) {
@@ -3450,7 +3450,7 @@ Vvveb.FileManager = {
 
 			//allow event to change page or newfile or cancel by setting page to false
 			window.dispatchEvent(new CustomEvent("vvveb.FileManager.renamePage", {
-				detail: page,
+				detail: {page, newfile}
 			}));
 			
 			if (page) {

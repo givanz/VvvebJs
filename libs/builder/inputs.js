@@ -26,7 +26,6 @@ let Input = {
 		if (event && event.target) {
 			const e = new CustomEvent('propertyChange', { detail: {value : input.value ?? this.value, input: this, origEvent:event} });
 			event.currentTarget.dispatchEvent(e);
-			//event.data.element.trigger('propertyChange', [this.value, this, event]);
 		}
 	},
 
@@ -55,7 +54,6 @@ let Input = {
 			fun = this[ this.events[i][1] ];
 			el = this.events[i][2];
 		
-			//this.element[0].querySelector(el).addEventListener(ev, function (ev, el, fun, target, event) {
 			this.element[0].addEventListener(ev, function (ev, el, fun, target, event) {
 			  if (event.target.closest(el)) {
 				  //target, event, element, input
@@ -71,7 +69,7 @@ let Input = {
 let TextInput = { ...Input, ...{
 
     events: [
-	//event, listener, child element
+        //event, listener, child element
         ["focusout", "onChange", "input"],
 	 ],
 	
@@ -751,7 +749,7 @@ let ListInput = { ...Input, ...{
 	},	
 	
 	select: function(event, node, input) {
-		let index = [...this.parentNode.children].indexOf(el);//sectionItem.index();
+		let index = [...this.parentNode.children].indexOf(el);
 		
 		event.action = "select";
 		event.index = index;
@@ -821,7 +819,6 @@ let AutocompleteList = { ...Input, ...{
 
 	onAutocompleteChange: function(event, node, input) {
 		input.value = event.detail;
-		//return input.onChange(event, node, input);
 		return input.onChange.call(this, event, node, input);
 	},
 
@@ -868,7 +865,6 @@ let TagsInput = { ...Input, ...{
 				
 			}
 		}
-		//$('input', this.element).data("tagsInput").setValue(value);
 	},
 
 	init: function(data) {
