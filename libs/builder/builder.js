@@ -1264,11 +1264,9 @@ Vvveb.Builder = {
 			node = Vvveb.Builder.selectedEl;
 		}
 
-		clone = node.clone();
+		clone = node.cloneNode(true);
 		
 		node.after(clone);
-		
-		node = clone.click();
 		
 		element = clone;
 		
