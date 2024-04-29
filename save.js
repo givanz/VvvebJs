@@ -3,10 +3,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const fs = require('fs');
  
-app.use(express.json());
+//app.use(express.json({ limit: "200mb" }));
 app.use(express.static("./"));
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
+  limit: "200mb"
 }));
  
 app.post('/save.php', (req, res) => {
