@@ -1268,6 +1268,8 @@ Vvveb.Builder = {
 		
 		node.after(clone);
 		
+		node.click();
+		
 		element = clone;
 		
 		Vvveb.Undo.addMutation({type: 'childList', 
@@ -1961,7 +1963,7 @@ Vvveb.Builder = {
 		document.addEventListener('mouseup', function(event) {
 			if (self.iconDrag && self.isDragging == true) {
 				self.isDragging = false;
-				document.getElementById("component-clone").remove();
+				document.getElementById("component-clone")?.remove();
 				document.querySelectorAll("#section-actions, #highlight-name, #select-box").forEach(el => el.style.display = "");
 				self.iconDrag.remove();
 				if(self.dragElement){
@@ -2115,7 +2117,7 @@ Vvveb.Builder = {
 		
 		let data = {type, name, html:element.outerHTML};
 		
-		fetch(saveReusableUrl, {method: "POST",  body: nestedFormData(data)})
+		fetch(saveReusableUrl, {method: "POST",  body: new URLSearchParams(data)})
 		.then((response) => {
 			if (!response.ok) { throw new Error(response) }
 			return response.text()
@@ -2123,7 +2125,7 @@ Vvveb.Builder = {
 		.then((data) => {
 			if (callback) callback(data);
 			let bg = "bg-success";
-			if (data.success || text == "success") {		
+			if (true || data.success || text == "success") {		
 			} else {
 				bg = "bg-danger";
 			}
@@ -2291,7 +2293,7 @@ Vvveb.CodeEditor = {
 function displayToast(bg, title, message, id = "top-toast") {
 	document.querySelector("#" + id + " .toast-body .message").innerHTML = message;
 	let header = document.querySelector("#" + id + " .toast-header");
-	header.classList.remove(["bg-danger", "bg-success"])
+	header.classList.remove("bg-danger", "bg-success")
 	header.classList.add(bg);
 	header.querySelector("strong").innerHTML = title;
 	document.querySelector("#" + id + " .toast").classList.add("show");
@@ -3718,6 +3720,22 @@ Vvveb.FontsManager = {
 };
 
 
+Vvveb.ColorPalette = {
+	colors: {},
+	
+	getAll: function() {
+		return this.colors;
+	},
+	
+	add: function(name, color) {
+		this.colors[name] = color;
+	},
+	
+	remove: function(color) {
+		delete this.colors[name];
+	},
+}
+
 function friendlyName(name) {
 	name = name.replaceAll("--bs-","").replaceAll("-", " ").trim();  
 	return name = name[0].toUpperCase() + name.slice(1);
@@ -3817,6 +3835,18 @@ Vvveb.ColorPaletteManager = {
 
 	init: function(document) {
 		Vvveb.Components.render("config/bootstrap", "#configuration .component-properties");
+		
+		//apply current theme color palette
+		//let colors = Vvveb.ColorPaletteManager.getType("color");
+		let colors = this.cssVars.color;
+		for (const name in colors) {
+			let color = colors[name].value;
+
+			if (color[0] == "#" && color.length == 7) {//add only valid hex color values 7 char long
+				//add color as name to keep values unique
+				Vvveb.ColorPalette.add(color, color);
+			}
+		}
 	},
 	
 };

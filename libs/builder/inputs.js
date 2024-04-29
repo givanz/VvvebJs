@@ -428,6 +428,11 @@ let ColorInput = { ...Input, ...{
 	},
 	
 	init: function(data) {
+		//if no palette provided use default
+		if (!data.palette) {
+			data.palette = Vvveb.ColorPalette.getAll();
+		}
+		
 		return this.render("colorinput", data);
 	},
   }

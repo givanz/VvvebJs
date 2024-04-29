@@ -1272,7 +1272,13 @@
 <script id="vvveb-input-colorinput" type="text/html">
 	
 	<div>
-		<input name="{%=key%}" type="color" {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %}  pattern="#[a-f0-9]{6}" class="form-control form-control-color"/>
+		<input name="{%=key%}" {%  if (typeof palette !== 'undefined') { %} list="{%=key%}-color-palette" {% } %} type="color" {% if (typeof value !== 'undefined' && value != false) { %} value="{%=value%}" {% } %}  pattern="#[a-f0-9]{6}" class="form-control form-control-color"/>
+		{%  if (typeof palette !== 'undefined') { %}
+		<datalist id="{%=key%}-color-palette">
+			{% for (const color in palette) { %}
+				<option value="{%=color%}">{%=palette[color]%}</option>
+			{% } %}		
+		{% } %}
 	</div>
 	
 </script>
