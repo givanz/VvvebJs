@@ -1283,6 +1283,8 @@ Vvveb.Builder = {
 	selectNode:  function(node) {
 		let self = this;
 		let SelectBox = document.getElementById("select-box");
+		let SelectActions = document.getElementById("select-actions");
+		let elementType = this._getElementType(node);
 		
 		if (!node) {
 			SelectBox.style.display = "none";
@@ -1292,9 +1294,15 @@ Vvveb.Builder = {
 		if (self.texteditEl && (self.selectedEl != node)) {
 			Vvveb.WysiwygEditor.destroy(self.texteditEl);
 			self.selectPadding = 0;
-			document.getElementById("select-box").classList.remove("text-edit");
-			document.getElementById("select-actions").style.display = "";
+			SelectBox.classList.remove("text-edit");
+			SelectActions.style.display = "";
 			self.texteditEl = null;
+		}
+
+		if (elementType[1] == "BODY") {
+			SelectActions.style.display = "none";
+		} else {
+			SelectActions.style.display = "";
 		}
 
 		let target = node;
@@ -1316,7 +1324,6 @@ Vvveb.Builder = {
 			return false;
 		}
 			 
-		let elementType = this._getElementType(node);
 		document.querySelector("#highlight-name .type").innerHTML = elementType[0];
 		document.querySelector("#highlight-name .name").innerHTML = elementType[1];
 		
@@ -2027,6 +2034,7 @@ Vvveb.Builder = {
 		
 		doc.querySelectorAll("[contenteditable]").forEach(e => e.removeAttribute("contenteditable"));
 		doc.querySelectorAll("[spellcheckker]").forEach(e => e.removeAttribute("spellcheckker"));
+		doc.querySelectorAll('script[src^="chrome-extension://"]').forEach(e => e.remove());
 		
 		// scroll page to top to avoid saving the page in a different state
 		// like saving with sticky classes set for navbar etc
@@ -2166,7 +2174,7 @@ Vvveb.Builder = {
 		if (!data["startTemplateUrl"]) {
 			data["html"] = this.getHtml();
 		}
-		
+
 		//data['elements'] = new URLSearchParams(data['elements']);
 
 		return fetch(saveUrl, {
@@ -2399,7 +2407,7 @@ Vvveb.Gui = {
 	viewport : function () {
 		document.getElementById("canvas").setAttribute("class", this.dataset.view);
 		document.getElementById("iframe1").removeAttribute("style");
-		document.querySelector(".responsive-btns .active").classList.remove("active");
+		document.querySelectorAll(".responsive-btns .active").forEach(e => e.classList.remove("active"));
 		if (this.dataset.view) this.classList.add("active");
 	},
 	
@@ -2464,7 +2472,7 @@ Vvveb.Gui = {
 		let submitForm = function(e) {
 
 			let data = {};
-			this.querySelectorAll("input[type=text],input[type=radio]:checked, select").forEach( (el, i) => {
+			this.querySelectorAll("input[type=text],input[type=checkbox]:checked,input[type=radio]:checked, select").forEach( (el, i) => {
 				if (el.offsetParent) data[el.name] = el.value;
 			});			
 			
@@ -2494,7 +2502,7 @@ Vvveb.Gui = {
 					Vvveb.FileManager.loadPage(data.name);
 					Vvveb.FileManager.scrollToPage(page);
 					bsModal.hide();
-			}, this.action);
+			});
 		};
 		
 		form.removeEventListener("submit", submitForm);
@@ -2924,7 +2932,7 @@ Vvveb.SectionList = {
 		document.querySelector(this.selector).addEventListener("click", function (e) {
 			let element = e.target.closest(":scope > div .controls");
 			if (element) {
-				let node = e.currentTarget.parentNode._node;
+				let node = element.parentNode._node;
 				if (node) {
 					node.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
 					//node.click();
@@ -2937,7 +2945,7 @@ Vvveb.SectionList = {
 		document.querySelector(this.selector).addEventListener("dblclick", function (e) {
 			let element = e.target.closest(":scope > div");
 			if (element) {
-				node = e.currentTarget._node;
+				node = element._node;
 				node.click();
 			}
 		});
@@ -2946,7 +2954,7 @@ Vvveb.SectionList = {
 		document.querySelector(this.selector).addEventListener("click", function (e) {
 			let element = e.target.closest("li[data-component] label");
 			if (element) {
-				let node = e.currentTarget.parentNode._node;
+				let node = element.parentNode._node;
 				if (node) {
 					node.scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
 					node.click();
@@ -2957,7 +2965,7 @@ Vvveb.SectionList = {
 		document.querySelector(this.selector).addEventListener("mouseenter", function (e) {
 			let element = e.target.closest("li[data-component] label");
 			if (element) {
-				node = document.querySelector(e.currentTarget.parentNode._node);
+				node = document.querySelector(element.parentNode._node);
 				node.css("outline","1px dashed blue");
 			}
 		});
@@ -2965,7 +2973,7 @@ Vvveb.SectionList = {
 		document.querySelector(this.selector).addEventListener("mouseleave", function (e){
 			let element = e.target.closest("li[data-component] label");
 			if (element) {
-				node = document.querySelector(e.currentTarget.parentNode._node);
+				node = document.querySelector(element.parentNode._node);
 				node.css("outline","");
 				if (node.getAttribute("style") == "") node.removeAttribute("style");
 			}
@@ -2978,7 +2986,7 @@ Vvveb.SectionList = {
 		document.querySelector(this.selector).addEventListener("click", function (e) {
 			let element = e.target.closest(".delete-btn");
 			if (element) {
-				let section = e.currentTarget.closest(".section-item");
+				let section = element.closest(".section-item");
 				let node = section._node;
 				node.remove();
 				section.remove();
@@ -2987,24 +2995,28 @@ Vvveb.SectionList = {
 				e.preventDefault();
 			}
 		});
-		
-		document.querySelector(".sections-list").addEventListener("mouseenter", function (e) {
-			let element = e.target.closest("li[data-section]");
+
+		let sectionIn;
+		let img = document.querySelector(".block-preview img");
+		document.querySelector(".sections-list").addEventListener("mouseover", function (e) {
+			let element = e.target.closest("li[data-type]");
 			if (element) {
-				let src = document.querySelector("img", this).getAttribute("src");
-				document.querySelector(".block-preview img").setAttribute("src", src ).style.display = "";
+				if (sectionIn != element) {
+					let src = element.querySelector("img").getAttribute("src");
+					sectionIn = element;
+					img.setAttribute("src", src);
+					img.style.display = "";
+				}
+			} else {
+				sectionIn = element;
+				img.setAttribute("src", "");
+				img.style.display = "none";
 			}
 		})
 		
-		document.querySelector(".sections-list").addEventListener("mouseleave", function (e) {
-			let element = e.target.closest("li[data-section]");
-			if (element) {
-				document.querySelector(".block-preview img").setAttribute("src", "").style.display = "none";
-			}
-		});
 		/*
 		document.querySelector(this.selector).addEventListener("click", ".up-btn", function (e) {
-			let section = e.currentTarget.closest(".section-item");
+			let section = e.target.closest(".section-item");
 			let node = section._node;
 			Vvveb.Builder.moveNodeUp(node);
 			Vvveb.Builder.moveNodeUp(section);
@@ -3014,7 +3026,7 @@ Vvveb.SectionList = {
 
 
 		document.querySelector(this.selector).addEventListener("click", ".down-btn", function (e) {
-			let section = e.currentTarget.closest(".section-item");
+			let section = e.target.closest(".section-item");
 			let node = section._node;
 			Vvveb.Builder.moveNodeDown(node);
 			Vvveb.Builder.moveNodeDown(section);
@@ -3264,7 +3276,19 @@ Vvveb.TreeList = {
 				document.querySelector(self.selector + " .active")?.classList.remove("active");	
 				element.querySelector("label").classList.add("active");
 			}
-		});
+		})
+		
+		document.querySelector(this.selector).addEventListener("mousemove", function (e) {
+			let element = e.target.closest("li[data-component]");
+			if (element) {
+				node = element._treeNode;
+				
+				node.dispatchEvent(new MouseEvent("mousemove", {
+					bubbles: true,
+					cancelable: true,
+				}));
+			}
+		})
 	},
 	
 	selectComponent: function(node) {
