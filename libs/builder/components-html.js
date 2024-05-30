@@ -211,7 +211,7 @@ Vvveb.Components.extend("_base", "html/image", {
 			return node;
 		}, 
 		init: function (node) {
-			let value = node.parentNode.tagName.toLowerCase() == "a"
+			let value = node.parentNode.tagName.toLowerCase() == "a";
 			this.setGroup(value);
 			return value;
 		}
@@ -1011,6 +1011,7 @@ Vvveb.Components.extend("_base", "html/form", {
 
 Vvveb.Components.extend("_base", "html/tablerow", {
     nodes: ["tr"],
+    image: "icons/table.svg",
     name: "Table Row",
     html: "<tr><td>Cell 1</td><td>Cell 2</td><td>Cell 3</td></tr>",
     properties: [{
@@ -1041,18 +1042,35 @@ Vvveb.Components.extend("_base", "html/tablerow", {
 });
 Vvveb.Components.extend("_base", "html/tablecell", {
     nodes: ["td"],
+    image: "icons/table.svg",
     name: "Table Cell",
     html: "<td>Cell</td>"
 });
 
 Vvveb.Components.extend("_base", "html/tableheadercell", {
     nodes: ["th"],
+    image: "icons/table.svg",
     name: "Table Header Cell",
     html: "<th>Head</th>"
 });
 
+Vvveb.Components.extend("_base", "html/tablebody", {
+    nodes: ["tbody"],
+    image: "icons/table.svg",
+    name: "Table Body",
+    html: "<tbody>Table body</tbody>"
+});
+
+Vvveb.Components.extend("_base", "html/tablefooter", {
+    nodes: ["tfooter"],
+    image: "icons/table.svg",
+    name: "Table Footer",
+    html: "<tfooter>Table footer</tfooter>"
+});
+
 Vvveb.Components.extend("_base", "html/tablehead", {
     nodes: ["thead"],
+    image: "icons/table.svg",
     name: "Table Head",
     html: "<thead><tr><th>Head 1</th><th>Head 2</th><th>Head 3</th></tr></thead>",
     properties: [{
