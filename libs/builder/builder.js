@@ -1284,6 +1284,7 @@ Vvveb.Builder = {
 		let self = this;
 		let SelectBox = document.getElementById("select-box");
 		let SelectActions = document.getElementById("select-actions");
+		let AddSectionBtn = document.getElementById("add-section-btn");
 		let elementType = this._getElementType(node);
 		
 		if (!node) {
@@ -1301,8 +1302,10 @@ Vvveb.Builder = {
 
 		if (elementType[1] == "BODY") {
 			SelectActions.style.display = "none";
+			AddSectionBtn.style.display = "none";
 		} else {
 			SelectActions.style.display = "";
+			AddSectionBtn.style.display = "";
 		}
 
 		let target = node;
