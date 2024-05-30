@@ -18,11 +18,8 @@ https://github.com/givanz/VvvebJs
 body {
   font-family: "Helvetica Neue", Helvetica, -apple-system, Arial, "Lucida Grande", system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
 
-#logo {
-  margin-left: 0.5rem;
-  margin-top: 0.15rem; }
-  html[data-bs-theme="dark"] #logo {
-    filter: brightness(3); }
+html[data-bs-theme="dark"] #logo {
+  filter: brightness(3); }
 
 i.la, i.header-arrow {
   font-style: normal; }
@@ -17781,7 +17778,7 @@ https://github.com/givanz/VvvebJs
     color: var(--bs-body-color); }
     .tree > ol li {
       position: relative;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.1rem;
       list-style: none;
       color: var(--bs-body-color);
       overflow: hidden; }
@@ -17790,19 +17787,19 @@ https://github.com/givanz/VvvebJs
     .tree > ol li.file {
       border: 1px solid transparent; }
       .tree > ol li.file:hover, .tree > ol li.file.active {
-        background-color: rgba(var(--bs-link-color), 0.07); }
+        color: var(--bs-link-hover-color); }
       .tree > ol li.file:hover {
-        background-color: rgba(var(--bs-link-color), 0.07); }
+        background-color: rgba(var(--bs-link-color-rgb), 0.05); }
         .tree > ol li.file:hover .file-actions {
           display: block; }
       .tree > ol li.file > label {
         background: url(../libs/builder/icons/file.svg);
         background-position: 8px 4px;
-        background-size: 21px 21px;
+        background-size: 19px 19px;
         background-repeat: no-repeat;
         cursor: pointer;
         display: block;
-        padding-left: 35px;
+        padding-left: 33px;
         margin: 0;
         font-size: 12px;
         line-height: 28px;
@@ -17812,10 +17809,10 @@ https://github.com/givanz/VvvebJs
       .tree > ol li.file .file-actions {
         display: none;
         position: absolute;
-        top: -1px;
-        right: 5px; }
+        top: 0px;
+        right: 0px; }
         .tree > ol li.file .file-actions .btn {
-          padding: 0.1rem 0.3rem;
+          padding: 0rem 0.2rem;
           font-size: 0.875rem;
           line-height: 1;
           border-radius: 4px;
@@ -17835,7 +17832,7 @@ https://github.com/givanz/VvvebJs
       .tree > ol li input + ol {
         background: url(../libs/builder/icons/arrow-right.svg) 5px 0.3rem no-repeat;
         background-size: 12px 12px;
-        margin: -1.9rem 0 0 0rem;
+        margin: -1.5rem 0 0 0rem;
         padding: 2rem 0 0 2rem;
         height: 0; }
         .tree > ol li input + ol > li {
@@ -17844,13 +17841,13 @@ https://github.com/givanz/VvvebJs
           padding-left: 1px; }
     .tree > ol li label {
       background: url(../libs/builder/icons/folder.svg) 24px 1px no-repeat;
-      background-size: 22px 22px;
+      background-size: 20px 20px;
       cursor: pointer;
       display: block;
-      padding-left: 52px;
+      padding-left: 50px;
       margin: 0px;
       font-size: 12px;
-      line-height: 28px; }
+      line-height: 24px; }
     .tree > ol li input:checked + ol {
       background: url(../libs/builder/icons/arrow-down.svg) 5px 0.6rem no-repeat;
       background-size: 12px 12px;
@@ -17859,11 +17856,14 @@ https://github.com/givanz/VvvebJs
       height: auto; }
       .tree > ol li input:checked + ol > li {
         display: block;
-        margin: 0 0 0.2em;
+        margin: 0 0 0.1em;
         /* 2px */ }
       .tree > ol li input:checked + ol > li:last-child {
         margin: 0 0 0.3em;
         /* 1px */ }
+
+[data-bs-theme="dark"] .tree > ol li.active label {
+  color: var(--bs-primary); }
 
 [data-bs-theme="dark"] .tree > ol li label {
   filter: invert(93%) hue-rotate(180deg);
@@ -17872,7 +17872,7 @@ https://github.com/givanz/VvvebJs
 body {
   --builder-filemanager-height: 250px;
   --builder-canvas-margin: 0px;
-  --builder-header-top-height:50px;
+  --builder-header-top-height:35px;
   --builder-bottom-panel-height:35px;
   --drag-items-tabs-height:40px;
   scrollbar-color: rgba(var(--bs-body-color-rgb), 0.1) var(--bs-body-bg);
@@ -17934,7 +17934,7 @@ body {
     background-color: var(--bs-body-bg);
     height: 100%;
     position: fixed;
-    top: 50px;
+    top: 35px;
     z-index: 10; }
   #vvveb-builder #left-panel {
     float: left;
@@ -17978,9 +17978,9 @@ body {
         line-height: 1.6;
         --bs-btn-border-color:transparent; }
       #vvveb-builder #left-panel #filemanager .tree {
-        height: 200px;
-        height: calc( var(--builder-filemanager-height) - 50px);
-        padding: 0.5rem;
+        height: 215px;
+        height: calc( var(--builder-filemanager-height) - 35px);
+        padding: 0.3rem 0.5rem;
         overflow: hidden;
         resize: vertical; }
         #vvveb-builder #left-panel #filemanager .tree:hover {
@@ -18011,33 +18011,36 @@ body {
     #vvveb-builder #right-panel .nav-link.active {
       border-top: 1px solid rgba(var(--bs-link-color-rgb), 0.7); }
   #vvveb-builder #top-panel {
-    height: 50px;
-    padding: 0.2rem 0;
+    height: 35px;
+    padding: 0;
     border-bottom: 1px solid var(--bs-border-color);
     text-align: center;
     background-color: rgba(var(--bs-secondary-color-rgb), 0.03);
     overflow: hidden;
     width: 100%; }
     #vvveb-builder #top-panel .btn-group .btn.btn-light {
-      padding: 0.25rem 0.5rem;
-      --bs-btn-active-bg: var(--bs-primary-bg-subtle);
+      padding: 0.1rem 0.5rem;
+      --bs-btn-active-bg: rgba(var(--bs-primary-rgb), 0.1);
       --bs-btn-hover-bg: var(--bs-primary-bg-subtle);
       --bs-btn-active-border-color: transparent;
       --bs-btn-hover-color: var(--bs-body-bg);
       --bs-btn-bg:transparent;
       border-color: transparent;
-      color: var(--bs-body-color); }
+      color: var(--bs-secondary-color); }
       #vvveb-builder #top-panel .btn-group .btn.btn-light i {
-        font-size: 1.25rem; }
+        font-size: 1.2rem; }
     #vvveb-builder #top-panel .btn-group .btn.btn-primary {
-      margin-top: 0.2rem; }
+      padding: 0.2rem 0.8rem;
+      margin-top: 0.1rem;
+      margin-bottom: 0.1rem; }
       #vvveb-builder #top-panel .btn-group .btn.btn-primary i {
-        font-size: 18px;
+        font-size: 1rem;
         line-height: 21px; }
     #vvveb-builder #top-panel .btn-group .btn span {
       font-size: 14px; }
     #vvveb-builder #top-panel .btn-group.responsive-btns .btn.btn-light {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
+      line-height: 1.3;
       padding: 0rem 0.5rem; }
     html[data-bs-theme="dark"] #vvveb-builder #top-panel img {
       filter: invert(93%) hue-rotate(180deg); }
@@ -18084,17 +18087,15 @@ body {
       border-top-color: var(--bs-body-bg);
       border-radius: 0px;
       min-width: 4.5rem;
-      color: var(--bs-body-color);
+      --bs-nav-link-color:var(--bs-secondary-color);
       line-height: 1.4; }
       #vvveb-builder .drag-elements .nav-item .nav-link div {
         margin-top: .2rem; }
       #vvveb-builder .drag-elements .nav-item .nav-link i {
-        font-size: 21px;
+        font-size: 1.2rem;
         vertical-align: bottom; }
       #vvveb-builder .drag-elements .nav-item .nav-link small, #vvveb-builder .drag-elements .nav-item .nav-link .small {
         font-size: 0.8rem; }
-      #vvveb-builder .drag-elements .nav-item .nav-link.active, #vvveb-builder .drag-elements .nav-item .nav-link:hover {
-        color: var(--bs-link-color); }
     #vvveb-builder .drag-elements#add-section-box .nav-item:first-child .nav-link {
       border-left: none; }
   #vvveb-builder .search {
@@ -18140,7 +18141,7 @@ body {
       right: 56px; }
   #vvveb-builder .components-list, #vvveb-builder .blocks-list, #vvveb-builder .component-properties, #vvveb-builder .sections-list {
     list-style: none;
-    background: rgba(var(--bs-secondary-color-rgb), 0.025); }
+    background: rgba(var(--bs-secondary-color-rgb), 0.015); }
   #vvveb-builder #add-section-box {
     animation: popup-animation 0.1s cubic-bezier(0, 0, 0.2, 1) 0s;
     animation-fill-mode: forwards; }
@@ -18171,7 +18172,7 @@ body {
     #vvveb-builder #add-section-box .blocks-list ol, #vvveb-builder #add-section-box .sections-list ol {
       list-style: none; }
       #vvveb-builder #add-section-box .blocks-list ol li, #vvveb-builder #add-section-box .sections-list ol li {
-        width: 92%;
+        width: 95%;
         height: auto;
         min-height: 100px;
         position: relative;
@@ -18244,7 +18245,7 @@ body {
   #vvveb-builder .component-properties {
     background: var(--bs-body-bg);
     height: 95%;
-    height: calc(100% - 50px);
+    height: calc(100% - 35px);
     /*
 		.form-control, .form-select
 		{
@@ -18284,7 +18285,8 @@ body {
         width: 5em;
         padding: 0.1rem 0.2rem;
         text-align: center;
-        line-height: 12px; }
+        line-height: 12px;
+        font-size: 12px; }
     #vvveb-builder .component-properties .mb-3 .input [type="color"], #vvveb-builder .component-properties .mb-3 .input .form-check-input {
       float: right; }
     #vvveb-builder .component-properties .mb-3 .custom-control {
@@ -18304,8 +18306,8 @@ body {
     width: 100%;
     height: 100%;
     width: calc( 100vw - 600px);
-    height: calc( 100vh - 85px);
-    top: 50px;
+    height: calc( 100vh - 70px);
+    top: 35px;
     width: calc( 100vw - (var(--builder-left-panel-width) + var(--builder-right-panel-width) + var(--builder-canvas-margin)));
     height: calc( 100vh - (var(--builder-header-top-height) + var(--builder-bottom-panel-height)));
     top: var(--builder-header-top-height);
@@ -18632,17 +18634,18 @@ body {
         color: var(--bs-link-color);
         box-shadow: none; }
         #vvveb-builder #elements-tabs a.active i {
-          background: rgba(var(--bs-link-color-rgb), 0.05);
+          background: rgba(var(--bs-link-color-rgb), 0.03);
           border: 1px solid rgba(var(--bs-link-color-rgb), 0.2);
-          color: var(--bs-link-color); }
+          color: var(--bs-link-hover-color); }
   #vvveb-builder .nav-tabs .nav-item:first-child .nav-link {
     border-left: none; }
   #vvveb-builder .nav-tabs .nav-link {
     padding: 0.8rem 0 0.5rem;
     padding: 0.5rem 0 0.5rem;
-    text-align: center; }
+    text-align: center;
+    --bs-nav-link-color:var(--bs-secondary-color); }
     #vvveb-builder .nav-tabs .nav-link i {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       line-height: 1; }
   #vvveb-builder .nav-tabs .nav-link.active,
   #vvveb-builder .nav-tabs .nav-item.show .nav-link {
@@ -18673,6 +18676,7 @@ li[data-type] {
   background-repeat: no-repeat;
   padding-top: 60px;
   padding-bottom: 7px;
+  padding: 60px 5px 7px 5px;
   border-style: solid;
   border-width: 1px;
   border-radius: 3px;
@@ -18696,8 +18700,8 @@ li[data-type] {
     white-space: break-spaces;
     padding: 0 3px; }
   html[data-bs-theme="dark"] li[data-type][data-drag-type="component"] {
-    filter: invert(100%);
     border-color: var(--bs-gray-500);
+    filter: invert(93%) hue-rotate(180deg);
     background-color: transparent; }
     html[data-bs-theme="dark"] li[data-type][data-drag-type="component"] a {
       color: var(--bs-gray-900); }
@@ -18868,7 +18872,7 @@ li[data-type] {
   box-shadow: 0px 0px 1px 2px rgba(18, 83, 205, 0.05); }
 
 .blocks .drag-elements-sidepane li[data-type], .sections .drag-elements-sidepane li[data-type] {
-  width: 92%;
+  width: 95%;
   height: auto;
   min-height: 100px;
   position: relative;
@@ -18896,7 +18900,7 @@ li[data-type] {
   background-color: var(--bs-body-bg);
   cursor: grab;
   opacity: 1;
-  margin: 1rem; }
+  margin: 0.5rem; }
   .blocks .drag-elements-sidepane li[data-type] .name, .sections .drag-elements-sidepane li[data-type] .name {
     background: rgba(var(--bs-body-bg-rgb), 0.9);
     background: rgba(var(--bs-body-color-rgb), 0.7);
@@ -18949,6 +18953,7 @@ li[data-type] {
   background-repeat: no-repeat;
   padding-top: 60px;
   padding-bottom: 7px;
+  padding: 60px 5px 7px 5px;
   border-style: solid;
   border-width: 1px;
   border-radius: 3px;
@@ -18974,8 +18979,8 @@ li[data-type] {
     padding: 0 3px; }
   html[data-bs-theme="dark"] .components .drag-elements-sidepane li[data-type][data-drag-type="component"], html[data-bs-theme="dark"]
   #add-section-box li[data-type][data-drag-type="component"] {
-    filter: invert(100%);
     border-color: var(--bs-gray-500);
+    filter: invert(93%) hue-rotate(180deg);
     background-color: transparent; }
     html[data-bs-theme="dark"] .components .drag-elements-sidepane li[data-type][data-drag-type="component"] a, html[data-bs-theme="dark"]
     #add-section-box li[data-type][data-drag-type="component"] a {
@@ -18998,7 +19003,7 @@ li[data-type] {
   cursor: pointer;
   position: absolute;
   right: 15px;
-  top: 0; }
+  top: 0.5rem; }
 
 label.header {
   font-size: 11px;
@@ -19011,7 +19016,7 @@ label.header {
   text-align: left;
   padding: 0.3rem 0.8rem;
   border-top: 1px solid var(--bs-border-color);
-  color: var(--bs-link-color);
+  color: var(--bs-link-hover-color);
   cursor: pointer;
   position: relative; }
   label.header:first-child {
@@ -19122,8 +19127,7 @@ input[type="number"] {
   -webkit-appearance: textfield;
   appearance: textfield;
   padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  font-size: 12px; }
+  padding-left: 0.5rem; }
 
 input[type="number"]:hover,
 input[type="number"]:focus {

@@ -16,7 +16,7 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-$builder-header-top-height:50px !default;
+$builder-header-top-height:35px !default;
 $builder-bottom-panel-height:35px !default;
 $builder-border-color: var(--bs-border-color) !default;
 
@@ -90,6 +90,7 @@ $font-size-base: 16px;
 		background-repeat: no-repeat;
 		padding-top: 60px;
 		padding-bottom: 7px;
+		padding: 60px 5px 7px 5px;
 
 		//border-color:var(--bs-border-color-rgb);
 		border-style:solid;
@@ -121,8 +122,9 @@ $font-size-base: 16px;
 		
 		&[data-drag-type="component"] {
 			html[data-bs-theme="dark"] & {
-					filter: invert(100%);
+					//filter: invert(100%);
 					border-color:var(--bs-gray-500);
+					filter:invert(93%) hue-rotate(180deg);
 					background-color:transparent;
 					
 					a {
@@ -133,7 +135,7 @@ $font-size-base: 16px;
 }
 
 @mixin block-list-element() {
-		width: 92%;
+		width: 95%;
 		height:auto;
 		min-height:100px;
 		position:relative;
@@ -196,7 +198,7 @@ $font-size-base: 16px;
 			.name {
 				visibility:visible;
 			}
-		}		
+		}	
 		
 		
 		&[data-section="Reusable"] {
@@ -373,7 +375,7 @@ body
 			{
 				height:$builder-filemanager-height - $builder-header-top-height;
 				height:calc( var(--builder-filemanager-height) - #{$builder-header-top-height});
-				padding:0.5rem; 
+				padding:0.3rem 0.5rem; 
 				overflow: hidden;
 				
 				&:hover{
@@ -447,7 +449,7 @@ body
 	#top-panel
 	{
 		height:$builder-header-top-height;
-		padding:0.2rem 0;
+		padding:0;
 		border-bottom:1px solid var(--bs-border-color);
 		text-align:center;
 		background-color:rgba(var(--bs-secondary-color-rgb), 0.03);
@@ -459,26 +461,27 @@ body
 			.btn {
 				
 				&.btn-light {
-					padding: 0.25rem 0.5rem;
-					--bs-btn-active-bg: var(--bs-primary-bg-subtle);
+					padding: 0.1rem 0.5rem;
+					--bs-btn-active-bg: rgba(var(--bs-primary-rgb), 0.1);//var(--bs-primary-bg-subtle);
 					--bs-btn-hover-bg: var(--bs-primary-bg-subtle);
 					--bs-btn-active-border-color: transparent;
 					--bs-btn-hover-color: var(--bs-body-bg); 
 					--bs-btn-bg:transparent;
 					border-color:transparent;
-					color: var(--bs-body-color);
+					color: var(--bs-secondary-color);
 					
 					i {
-						font-size: 1.25rem;
+						font-size: 1.2rem;
 					}
 				}
 				
 				&.btn-primary {
-					//padding:0.3rem 1.2rem;
-					margin-top: 0.2rem;
+					padding:0.2rem 0.8rem;
+					margin-top: 0.1rem;
+					margin-bottom: 0.1rem;
 					
 					i {
-						font-size:18px;
+						font-size:1rem;
 						line-height:21px;
 					}
 				}
@@ -493,7 +496,8 @@ body
 				.btn
 				{
 					&.btn-light {
-						font-size: 1.6rem;
+						font-size: 1.4rem;
+						line-height: 1.3;
 						padding:0rem 0.5rem
 					}
 				}
@@ -581,7 +585,8 @@ body
 				border-top-color: var(--bs-body-bg);
 				border-radius:0px;
 				min-width:4.5rem;
-				color:var(--bs-body-color);
+				//color:var(--bs-body-color);
+				--bs-nav-link-color:var(--bs-secondary-color);
 				line-height:1.4;
 				//font-size:0.9rem;
 
@@ -590,7 +595,7 @@ body
 				}
 				
 				i {
-					font-size:21px;
+					font-size:1.2rem;
 					vertical-align:bottom;
 				}
 				
@@ -602,7 +607,7 @@ body
 				
 				&.active, &:hover
 				{
-					color:var(--bs-link-color);
+					//color:var(--bs-link-color);
 				}
 			}
 		}
@@ -692,7 +697,7 @@ body
 	.components-list, .blocks-list, .component-properties, .sections-list
 	{
 		list-style:none;
-		background: rgba(var(--bs-secondary-color-rgb), 0.025);
+		background: rgba(var(--bs-secondary-color-rgb), 0.015);
 		//scrollbar on hover
 	}
 	
@@ -870,6 +875,7 @@ body
 						padding: 0.1rem 0.2rem;
 						text-align: center;
 						line-height: 12px;					
+						font-size: 12px;					
 					}
 				}
 				
@@ -903,7 +909,7 @@ body
 	// canvas
 	#canvas
 	{
-	    margin-right: $builder-right-panel-width;
+	        margin-right: $builder-right-panel-width;
 		margin-left: $builder-left-panel-width;
 	   	margin-right: var(--builder-right-panel-width);
 		margin-left: var(--builder-left-panel-width);
@@ -1413,9 +1419,10 @@ body
 					//border:2px solid rgba(13, 110, 253, 0.1);
 					
 					i {
-						background: rgba(var(--bs-link-color-rgb), 0.05);
+						background: rgba(var(--bs-link-color-rgb), 0.03);
 						border:1px solid rgba(var(--bs-link-color-rgb), 0.2);
-						color: var(--bs-link-color);
+						//color: var(--bs-link-color);
+						color: var(--bs-link-hover-color);
 					}
 				}
 			}
@@ -1431,8 +1438,10 @@ body
 		padding:0.8rem 0 0.5rem;
 		padding:0.5rem 0 0.5rem;
 		text-align:center;
+		--bs-nav-link-color:var(--bs-secondary-color);
+		
 		i {
-			font-size:1.4rem;
+			font-size:1.2rem;
 			line-height:1;
 		}
 	}
@@ -1775,7 +1784,7 @@ padding-top:1rem;
 		li[data-type]
 		{
 			@include block-list-element(); 
-			margin:1rem;
+			margin:0.5rem;
 			
 			&:before {
 				content: " ";
@@ -1835,7 +1844,7 @@ padding-top:1rem;
 	cursor:pointer;
 	position:absolute;
 	right:15px;
-	top:0;
+	top:0.5rem;
 	
 	&.expanded
 	{
@@ -1856,7 +1865,8 @@ label.header
 	text-align: left;
 	padding:0.3rem 0.8rem;
 	border-top: 1px solid var(--bs-border-color);
-	color: var(--bs-link-color);
+	//color: var(--bs-link-color);
+	color: var(--bs-link-hover-color);
 	cursor:pointer;
 	position:relative;
 
@@ -1981,7 +1991,6 @@ input[type="number"] {
     appearance: textfield;
 	padding-right: 0.5rem;
 	padding-left: 0.5rem;
-	font-size: 12px;
 }
 input[type="number"]:hover,
 input[type="number"]:focus {
@@ -2353,7 +2362,7 @@ input[type="color"] {
 				}
 			}
 		}
-		}				  
+	}
 }
 
 #dragElement-clone {
@@ -2387,7 +2396,7 @@ input[type="color"] {
 		li {
 			cursor:pointer;
 		}
-    }
+	}
 }
 
 .tab-content > .active{

@@ -33,10 +33,7 @@ $custom-select-padding-y: .4rem;
 //$light: var(--bs-secondary-bg-subtle);
 //$blue:#495ffb;
 
-#logo
-{
-	margin-left: 0.5rem;
-	margin-top: 0.15rem;
+#logo {
 	
 	html[data-bs-theme="dark"] & {
 	    filter: brightness(3);
