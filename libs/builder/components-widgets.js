@@ -189,9 +189,9 @@ Vvveb.Components.extend("_base", "widgets/embed-video", {
 		document.querySelector(".component-properties [data-key=poster]").style.display = "none";
 		
 		//check if html5
-		if (video.length) {
+		if (video) {
 			this.url = video.src;
-		} else if (iframe.length) {//vimeo or youtube
+		} else if (iframe) {//vimeo or youtube
 			let src = iframe.getAttribute("src");
 			let match;
 
@@ -241,7 +241,7 @@ Vvveb.Components.extend("_base", "widgets/embed-video", {
 				break;
 			}
 			
-			node.querySelector("> iframe, > video").replaceWith(newnode);
+			node.querySelector(":scope > iframe,:scope  > video").replaceWith(newnode);
 			return node;
 		}
 		

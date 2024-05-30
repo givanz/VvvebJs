@@ -816,8 +816,6 @@ Vvveb.Components.extend("_base", "html/gridrow", {
 					if (value) _class +=  ' ' + input.name + '-' + value;
 					column.setAttribute("class", _class);
 					
-					//console.log(this, node, value, input, input.name);
-					
 					return node;
 				},	
 			});
