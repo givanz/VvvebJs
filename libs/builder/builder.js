@@ -2262,11 +2262,13 @@ Vvveb.CodeEditor = {
 	isActive: false,
 	oldValue: '',
 	doc:false,
+	textarea:false,
 	
 	init: function(doc) {
-		document.querySelector("#vvveb-code-editor textarea").val(Vvveb.Builder.getHtml());
+		this.textarea = document.querySelector("#vvveb-code-editor textarea");
+		this.textarea.value = Vvveb.Builder.getHtml();
 
-		document.querySelector("#vvveb-code-editor textarea").keyup(function ()  {
+		this.textarea.addEventListener("keyup", e => {
 			delay(() => Vvveb.Builder.setHtml(this.value), 1000);
 		});
 
@@ -2282,7 +2284,7 @@ Vvveb.CodeEditor = {
 
 	setValue: function(value) {
 		if (this.isActive) {
-			document.querySelector("#vvveb-code-editor textarea").val(Vvveb.Builder.getHtml());
+			this.textarea.value = Vvveb.Builder.getHtml();
 		}
 	},
 
@@ -2300,6 +2302,40 @@ Vvveb.CodeEditor = {
 	}
 }
 
+
+Vvveb.CssEditor = {
+	
+	isActive: false,
+	oldValue: '',
+	doc:false,
+	textarea:false,
+	
+	init: function(doc) {
+		this.textarea = document.getElementById("css-editor")
+		this.textarea.value = Vvveb.StyleManager.getCss();
+		let self = this;
+		
+		document.querySelectorAll('[href="#css-tab"],[href="#configuration"]').forEach( t => t.addEventListener("click", e => {
+			self.textarea.value = Vvveb.StyleManager.getCss();
+		}));
+		
+		this.textarea.addEventListener("keyup", e => {
+			delay(() => Vvveb.StyleManager.setCss(self.textarea.value), 1000);
+		});
+	},
+
+	getValue: function() {
+		return this.textarea.value;
+	},
+	
+	setValue: function(value) {
+		this.textarea.value = value;
+		Vvveb.StyleManager.setCss(value);
+	},
+
+	destroy: function() {
+	}
+}
 
 function displayToast(bg, title, message, id = "top-toast") {
 	document.querySelector("#" + id + " .toast-body .message").innerHTML = message;
@@ -2614,47 +2650,54 @@ Vvveb.StyleManager = {
 			for (let i = 0; i < doc.styleSheets.length; i++) {
 					_style = doc.styleSheets[i];
 					if (_style.ownerNode.id && _style.ownerNode.id == "vvvebjs-styles") {
-						style = _style;
+						style = _style.ownerNode;
 						break;
 					}
 			}
 			
 			//if style element does not exist create it			
 			if (!style) {
-				this.cssContainer = generateElements('<style id="vvvebjs-styles"></style>')[0];
-				doc.head.append(this.cssContainer);
-				return this.cssContainer;
+				style = generateElements('<style id="vvvebjs-styles"></style>')[0];
+				doc.head.append(style);
+				return this.cssContainer = style;
 			}
 			
-			//if style exist then load all css styles for editor
-			for (let j = 0; j < style.cssRules.length; j++) {
-				media = (typeof style.cssRules[j].media === "undefined") ? 
-					"desktop" : (style.cssRules[j].media[0] === "screen and (max-width: 1220px)") 
-					? "tablet" : (style.cssRules[j].media[0] === "screen and (max-width: 320px)") 
-					? "mobile" : "desktop";
-				
-				selector = (media === "desktop") ? style.cssRules[j].selectorText : style.cssRules[j].cssRules[0].selectorText;
-				styles = (media === "desktop") ? style.cssRules[j].style : style.cssRules[j].cssRules[0].style;
+			//if it exists
+			this.cssContainer = style;
+			this.loadCss();
 
-				if (media) {
-					this.styles[media] = this.styles[media] ?? {};
-					if (selector) {
-						this.styles[media][selector] = {};
+			return this.cssContainer; 
+		}
+	},	
+	
+	loadCss: function() {
+		let style = this.cssContainer.sheet;
+		//if style exist then load all css styles for editor
+		for (let j = 0; j < style.cssRules.length; j++) {
+			media = (typeof style.cssRules[j].media === "undefined") ? 
+				"desktop" : (style.cssRules[j].media[0] === "screen and (max-width: 1220px)") 
+				? "tablet" : (style.cssRules[j].media[0] === "screen and (max-width: 320px)") 
+				? "mobile" : "desktop";
+			
+			selector = (media === "desktop") ? style.cssRules[j].selectorText : style.cssRules[j].cssRules[0].selectorText;
+			styles = (media === "desktop") ? style.cssRules[j].style : style.cssRules[j].cssRules[0].style;
+
+			if (media) {
+				this.styles[media] = this.styles[media] ?? {};
+				if (selector) {
+					this.styles[media][selector] = {};
+				
+					for (let k = 0; k < styles.length; k++) {
+								
+						property = styles[k];
+						value = styles[property];
 					
-						for (let k = 0; k < styles.length; k++) {
-									
-							property = styles[k];
-							value = styles[property];
-						
-							this.styles[media][selector][property] = value;
-						}
+						this.styles[media][selector][property] = value;
 					}
 				}
 			}
-
-			return this.cssContainer = doc.getElementById("vvvebjs-styles"); 
-		}
-	},	
+		}		
+	},
 	
 	getSelectorForElement: function(element) {
 		if (!element) return '';
@@ -2669,6 +2712,13 @@ Vvveb.StyleManager = {
 						return "." + className;
 					}
 				}).join("");
+
+			//element (tag) selector
+			let tag = currentElement.tagName.toLowerCase();
+			//exclude top most element body unless the parent element is body
+			if (tag == "body" && selector.length > 1) {
+				break;
+			}
 			
 			//stop at a unique element (with id)
 			if (currentElement.id) {
@@ -2678,14 +2728,9 @@ Vvveb.StyleManager = {
 			} else if (classSelector) {
 				//class selector
 				elementSelector = classSelector;
-				
 			} else {
-				//element (tag) selector
-				let tag = currentElement.tagName.toLowerCase();
-				//exclude top most element body unless the parent element is body
-				if (tag != "body" || (tag == "body" && selector.length <= 1)) {
-					elementSelector = tag
-				}
+				//element selector
+				elementSelector = tag
 			}
 			
 			if (elementSelector) {
@@ -2735,6 +2780,15 @@ Vvveb.StyleManager = {
 		//return element.css(styleProp, value);
 	},
 	
+	setCss: function (css) {
+		this.cssContainer.innerHTML = css;
+		this.loadCss();
+	},
+
+	getCss: function (css) {
+		return this.cssContainer.innerHTML;
+	},
+	
 	generateCss: function (media) {
 		//let css = "";
 		//for (selector in this.styles[media]) {
@@ -2753,22 +2807,22 @@ Vvveb.StyleManager = {
 		let css = "";
 		for (media in this.styles) {
 			if (media === "tablet" || media === "mobile") {
-				css += `@media screen and (max-width: ${(media === 'tablet') ? this.tabletWidth : this.mobileWidth}){`
+				css += `@media screen and (max-width: ${(media === 'tablet') ? this.tabletWidth : this.mobileWidth}){\n`
 			}
 			for (selector in this.styles[media]) {
-				css += `${selector} {`;	
+				css += `${selector} {\n`;	
 				for (property in this.styles[media][selector]) {
 					value = this.styles[media][selector][property];
-					css += `${property}: ${value};`;
+					css += `\t${property}: ${value};\n`;
 				}
-				css += '}';
+				css += '}\n\n';
 			}
 			if (media === "tablet" || media === "mobile") {
-				css += `}`
+				css += `}\n\n`
 			}
 		}
 
-		this.cssContainer.innerHTML = css;
+		return this.cssContainer.innerHTML = css;
 	},
 	
 	

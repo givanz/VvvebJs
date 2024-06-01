@@ -103,3 +103,53 @@ Vvveb.ModalCodeEditor.setValue = function (value) {
 Vvveb.ModalCodeEditor.getValue = function (value) {
 	return this.editor.getValue();
 };
+
+
+Vvveb.CssEditor = {
+	
+	oldValue: '',
+	doc:false,
+	textarea:false,
+	editor:false,
+	
+	init: function(doc) {
+		this.textarea = document.getElementById("css-editor");
+		this.editor = CodeMirror.fromTextArea(this.textarea, {
+			mode: 'text/css',
+			lineNumbers: true,
+			autofocus: true,
+			lineWrapping: true,
+			//viewportMargin:Infinity,
+			theme: 'material'
+		});		
+		
+		let self = this;
+		
+		document.querySelectorAll('[href="#css-tab"],[href="#configuration"]').forEach( t => t.addEventListener("click", e => {
+			self.setValue(Vvveb.StyleManager.getCss());
+		}));
+		
+		this.editor.getDoc().on("change", function (e, v) { 
+			if (v.origin != "setValue")
+			delay(() => Vvveb.StyleManager.setCss(e.getValue()), 1000);
+		});
+	},
+
+	getValue: function() {
+		return this.editor.getValue();
+	},
+	
+	setValue: function(value) {
+		let scrollInfo = this.editor.getScrollInfo();
+		this.editor.setValue(value);
+		this.editor.scrollTo(scrollInfo.left, scrollInfo.top);
+		let self = this;
+		setTimeout(function() {
+			self.editor.refresh();
+		}, 300);
+		//Vvveb.StyleManager.setCss(value);
+	},
+
+	destroy: function(element) {
+	}
+}

@@ -173,8 +173,8 @@
 								</a>
 							  </li>
 							  <li class="nav-item component-configuration-tab">
-								<a class="nav-link" id="configuration-tab" data-bs-toggle="tab" href="#configuration" role="tab" aria-controls="configuration" aria-selected="false" title="Configuration">
-									<i class="la la-tools"></i>
+								<a class="nav-link" id="configuration-tab" data-bs-toggle="tab" href="#configuration" role="tab" aria-controls="configuration" aria-selected="false" title="Styles">
+									<i class="icon-color-wand-outline"></i>
 									<!-- img src="../../../js/vvvebjs/icons/filters.svg" height="23"--> 
 									<!-- div><small>Properties</small></div -->
 								</a>
@@ -403,50 +403,53 @@
 									</div>
 							  </div>
 							
-								<div class="tab-pane" id="configuration" role="tabpanel" aria-labelledby="configuration-tab">
-									
-									<div class="drag-elements-sidepane sidepane">
-									<div data-offset="80">
-										<div class="component-properties">
-											<!-- color palette -->
-											<!--
-											<label class="header" data-header="default" for="header_pallette"><span>Global styles</span>
-												<div class="header-arrow"></div>
-											</label> -->
-											<input class="header_check" type="checkbox" checked id="header_pallette">
-											<div class="tab-pane section px-0" data-section="content">
+							<div class="tab-pane" id="configuration" role="tabpanel" aria-labelledby="configuration-tab">
+								
+									<ul class="nav nav-tabs nav-fill sections-tabs" id="vars-tabs" role="tablist">
+									  <li class="nav-item vars-tab">
+										<a class="nav-link active" data-bs-toggle="tab" href="#vars-tab" role="tab" aria-controls="components" aria-selected="false">
+											<i class="icon-brush-outline"></i> <div><span>Variables</span></div></a>
+									  </li>
+									  <li class="nav-item css-tab">
+										<a class="nav-link" data-bs-toggle="tab" href="#css-tab" role="tab" aria-controls="css" aria-selected="true">
+											<i class="icon-code-slash-outline"></i> <div><span>Css</span></div></a>
+									  </li>
+									</ul>
+							
+									<div class="tab-content">
 
-												
-												<div class="mb-3  col-sm-6  inline " data-key="background-color">      <label class=" form-label" for="input-model">Background Color</label>      <div class=" input"><div>   <input name="background-color" type="color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">  </div></div>     </div>
-												
-												
-												
-												<div class="mb-3  col-sm-6  inline " data-key="background-color">      <label class=" form-label" for="input-model">Background Color</label>      <div class=" input"><div>   <input name="background-color" type="color" pattern="#[a-f0-9]{6}" class="form-control form-control-color">  </div></div>     </div>
-												
-												
-												
-												
+										 <div class="tab-pane show active" id="vars-tab" data-section="vars" role="tabpanel" aria-labelledby="vars-tab">
+								
+													<div class="drag-elements-sidepane sidepane">
+													<div data-offset="80">
+														<div class="component-properties">
+								<!-- color palette -->
+															<!--
+															<label class="header" data-header="default" for="header_pallette"><span>Global styles</span>
+									<div class="header-arrow"></div>
+															</label> -->
+															<input class="header_check" type="checkbox" checked id="header_pallette">
+															<div class="tab-pane section px-0" data-section="content">
+										
+															</div>
+									
+													</div>
+												</div>
 											</div>
-												
-												
-											<!-- typography -->	
-											<!-- 
-											<label class="header" data-header="element_header" for="header_element_typography"><span>Typography</span>
-												<div class="header-arrow"></div>
-											</label>
-											
-											<input class="header_check" type="checkbox" checked="true" id="header_element_typography">
-											<div class="section" data-section="element_header">
-											
-											</div> 
-											-->
-									
+										</div>
+										
+										 <div class="tab-pane" id="css-tab" data-section="css" role="tabpanel" aria-labelledby="css-tab">
+											<div class="drag-elements-sidepane sidepane">
+											<div data-offset="80">
+												<textarea id="css-editor" class="form-control" rows="24"></textarea>
+											</div>
+											</div>
+										 </div>
+										
 									</div>
-								</div>
-								</div>
-									
-									
-								</div><!-- end configuration tab -->
+								
+							
+							</div><!-- end configuration tab -->
 							
 							</div>
 						</div>							
@@ -1508,10 +1511,10 @@
     <div class="modal-content">
 	  <input type="hidden" name="file" value="">  	
 	
-      <div class="modal-header">
+      <div class="modal-header justify-content-between">
         <span class="modal-title"></span>
 		<div class="float-end">
-			<button type="button" class="btn btn-secondary btn-icon" data-bs-dismiss="modal"><i class="la la-times"></i>Close</button>
+			<button type="button" class="btn btn-light border btn-icon" data-bs-dismiss="modal"><i class="la la-times"></i>Close</button>
 			
 			<button class="btn btn-primary btn-icon save-btn" title="Save changes">
 				<span class="loading d-none">
@@ -1744,6 +1747,7 @@ Vvveb.themeBaseUrl = 'demo/landing/';
 <link href="libs/codemirror/theme/material.css" rel="stylesheet"/>
 <script src="libs/codemirror/lib/codemirror.js"></script>
 <script src="libs/codemirror/lib/xml.js"></script>
+<script src="libs/codemirror/lib/css.js"></script>
 <script src="libs/codemirror/lib/formatting.js"></script>
 <script src="libs/builder/plugin-codemirror.js"></script>	
 
@@ -2224,6 +2228,7 @@ Vvveb.FileManager.init();
 Vvveb.SectionList.init();
 Vvveb.TreeList.init();
 Vvveb.Breadcrumb.init();
+Vvveb.CssEditor.init();
 
 Vvveb.FileManager.addPages(pages);
 Vvveb.FileManager.loadPage(pages[firstPage]["name"]);
