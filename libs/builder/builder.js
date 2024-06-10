@@ -1279,16 +1279,17 @@ Vvveb.Builder = {
 	
 	
 	selectNode:  function(node) {
-		let self = this;
 		let SelectBox = document.getElementById("select-box");
-		let SelectActions = document.getElementById("select-actions");
-		let AddSectionBtn = document.getElementById("add-section-btn");
-		let elementType = this._getElementType(node);
 		
 		if (!node) {
 			SelectBox.style.display = "none";
 			return;
 		}
+
+		let self = this;
+		let SelectActions = document.getElementById("select-actions");
+		let AddSectionBtn = document.getElementById("add-section-btn");
+		let elementType = this._getElementType(node);
 		
 		if (self.texteditEl && (self.selectedEl != node)) {
 			Vvveb.WysiwygEditor.destroy(self.texteditEl);
