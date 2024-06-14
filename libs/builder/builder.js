@@ -1752,33 +1752,32 @@ Vvveb.Builder = {
 			return false;
 		});
 		
+		let codeEditorOldValue;
 		document.getElementById("edit-code-btn").addEventListener("click", function(event) {
-			let selectedEl = Vvveb.Builder.selectedEl;
-			let value = selectedEl.innerHTML;
-			// uncomment to use outerHTML, not recommended
-			//let value = selectedEl.outerHTML;
+			let value = Vvveb.Builder.selectedEl.innerHTML;
+
 			Vvveb.ModalCodeEditor.show();
 			Vvveb.ModalCodeEditor.setValue(value);
 			
-			let oldValue = value;
+			codeEditorOldValue = value;
 
-			let onSave = function(event) {
-				selectedEl.innerHTML = event.detail;
-				//selectedEl.outerHTML = value;
-				
-				node = selectedEl;
-				Vvveb.Undo.addMutation({type:'characterData', 
-										target: node, 
-										oldValue: oldValue, 
-										newValue: node.innerHTML});				
-			};
-			
-			window.removeEventListener("vvveb.ModalCodeEditor.save", onSave); 
-			window.addEventListener("vvveb.ModalCodeEditor.save", onSave); 
-			
 			event.preventDefault();
 			return false;
 		});
+
+		let onSave = function(event) {
+			Vvveb.Builder.selectedEl.innerHTML = event.detail;
+			
+			node = Vvveb.Builder.selectedEl;
+			Vvveb.Undo.addMutation({type:'characterData', 
+				target: node, 
+				oldValue: codeEditorOldValue, 
+				newValue: node.innerHTML});				
+				
+			Vvveb.Builder.selectNode(node);	
+		};
+		
+		window.addEventListener("vvveb.ModalCodeEditor.save", onSave); 
 		
 		document.getElementById("translate-code-btn")?.addEventListener("click", function(event) {
 			let selectedEl = Vvveb.Builder.selectedEl;
