@@ -748,7 +748,7 @@ Vvveb.Components.add("elements/accordion", {
 			inline:false,
 			inputtype: ListInput,
 			data: {
-				selector:"> .accordion-item",
+				selector:":scope > .accordion-item",
 				container:"",
 				prefix:"Item ",
 				name: "text",
@@ -780,14 +780,17 @@ Vvveb.Components.add("elements/accordion", {
 						Vvveb.Components.render("elements/accordion");
 					}
 					if (event.action == "remove") {
-						node.querySelector("> .accordion-item:nth-child(" + event.index + ")").remove();
+						node.querySelector(":scope > .accordion-item:nth-child(" + event.index + ")").remove();
 					} else if (event.action == "select") {
-						let btn = node.querySelector("> .accordion-item:nth-child(" + event.index + ") .accordion-button", node);
-						let el = node.querySelector("> .accordion-item:nth-child(" + event.index + ") .collapse", node);
-						node.querySelector(".accordion-button", node).classList.add("collapsed");
-						node.querySelector(".collapse", node).classList.remove("show");
+						let index = (event.index + 1);
+						let el = node.querySelector(":scope > .accordion-item:nth-child(" + index + ")");
+						let btn= el.querySelector(".accordion-button");
+						let collapse = el.querySelector(" .collapse");
+
+						node.querySelectorAll(":scope > .accordion-item .collapse").forEach(e => e.classList.remove("show"));
+						node.querySelectorAll(":scope > .accordion-item .accordion-button").forEach(btn => btn.classList.add("collapsed"));
+						collapse.classList.add("show");
 						btn.classList.remove("collapsed");
-						el.classList.add("show");
 						//el[0].click();
 						//Vvveb.Builder.iframe.contentWindow.bootstrap.Collapse.getOrCreateInstance(el[0]).toggle();
 					}
