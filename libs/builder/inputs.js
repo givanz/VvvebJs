@@ -726,19 +726,20 @@ let ListInput = { ...Input, ...{
 	 ],
 	
 
-	remove: function(event, node) {
+	remove: function(event, node, input) {
 		let sectionItem = this.closest(".section-item");
-		let index = sectionItem.index();
-		let data = event.data.input.data;
+		let index = [...sectionItem.parentNode.children].indexOf(sectionItem);//sectionItem.index();
+		let data = input.data;
 		
 		if (data.removeElement) {
-			event.data.input.node.querySelector(data.container + " " + data.selector + ":nth-child(" + index + ")").remove();
+			input.node.querySelector(data.container + " " + data.selector + ":nth-child(" + (index + 1) + ")").remove();
 		}
 		sectionItem.remove();
 		
 		event.action = "remove";
 		event.index = index;
-		event.data.input.onChange(event, node);
+		input.onChange(event, node, input, this);
+		event.preventDefault();
 		return false;
 	},
 
@@ -754,11 +755,14 @@ let ListInput = { ...Input, ...{
 	},	
 	
 	select: function(event, node, input) {
-		let index = [...this.parentNode.children].indexOf(el);
+		let sectionItem = this.closest(".section-item");
+		if (sectionItem.parentNode) {
+			let index = [...sectionItem.parentNode.children].indexOf(sectionItem);//sectionItem.index();
 		
 		event.action = "select";
 		event.index = index;
 		input.onChange(event, node, input, this);
+		}
 		return false;
 	},
 
