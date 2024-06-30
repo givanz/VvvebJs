@@ -56,27 +56,27 @@ const oEmbedProviders = [
     url: "https://www.scribd.com/services/oembed"
   },
   {
-    regex: /https?:\/\/(www\.)?twitter\.com\/\w{1,15}\/status(es)?\/.*/,
+    regex: /https?:\/\/(www\.)?x\.com\/\w{1,15}\/status(es)?\/.*/,
     url: "https://publish.twitter.com/oembed"
   },
   {
-    regex: /https?:\/\/(www\.)?twitter\.com\/\w{1,15}$/,
+    regex: /https?:\/\/(www\.)?x\.com\/\w{1,15}$/,
     url: "https://publish.twitter.com/oembed"
   },
   {
-    regex: /https?:\/\/(www\.)?twitter\.com\/\w{1,15}\/likes$/,
+    regex: /https?:\/\/(www\.)?x\.com\/\w{1,15}\/likes$/,
     url: "https://publish.twitter.com/oembed"
   },
   {
-    regex: /https?:\/\/(www\.)?twitter\.com\/\w{1,15}\/lists\/.*/,
+    regex: /https?:\/\/(www\.)?x\.com\/\w{1,15}\/lists\/.*/,
     url: "https://publish.twitter.com/oembed"
   },
   {
-    regex: /https?:\/\/(www\.)?twitter\.com\/\w{1,15}\/timelines\/.*/,
+    regex: /https?:\/\/(www\.)?x\.com\/\w{1,15}\/timelines\/.*/,
     url: "https://publish.twitter.com/oembed"
   },
   {
-    regex: /https?:\/\/(www\.)?twitter\.com\/i\/moments\/.*/,
+    regex: /https?:\/\/(www\.)?x\.com\/i\/moments\/.*/,
     url: "https://publish.twitter.com/oembed"
   },
   {
@@ -260,12 +260,13 @@ const urlTransforms = [
   }
 ];
 
-async function getOembed(url, maxwidth = 800, maxheight = 600) {
+async function getOembed(url, maxwidth = 800, maxheight = 600, silent = false) {
 	let oembedUrl;
 
 	for (const service of oEmbedProviders) {
 		if (service.regex.exec(url)) {
-		   oembedUrl = service.url + `?url=${url}&maxwidth=${maxwidth}&maxheight=${maxheight}&format=json`;
+		   let eurl = encodeURIComponent(url);
+		   oembedUrl = service.url + `?url=${eurl}&maxwidth=${maxwidth}&maxheight=${maxheight}&format=json`;
 		}
 	 }
 
@@ -289,8 +290,10 @@ async function getOembed(url, maxwidth = 800, maxheight = 600) {
 			 return {html: transform};
 		 }
 		 
-		 let message = 'Embed error: URL did not match any provider.';
-		 displayToast("bg-danger", "Error", message);
+		 if (!silent) {
+			 let message = 'Embed error: URL did not match any provider.';
+			 displayToast("bg-danger", "Error", message);
+		 }
 		 
 		 return;
 	 }

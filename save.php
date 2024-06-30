@@ -22,7 +22,11 @@ define('ALLOW_PHP', false);//check if saved html contains php tag and don't save
 define('ALLOWED_OEMBED_DOMAINS', [
 	'https://www.youtube.com/', 
 	'https://www.vimeo.com/', 
-	'https://www.twitter.com/'
+	'https://www.x.com/',
+	'https://x.com/',
+	'https://publish.twitter.com/',
+	'https://www.twitter.com/',
+	'https://www.reddit.com/',
 ]);//load urls only from allowed websites for oembed
 
 function sanitizeFileName($file, $allowedExtension = 'html') {
@@ -149,8 +153,15 @@ if ($action) {
 		case 'oembedProxy':
 			$url = $_GET['url'] ?? '';
 			if (validOembedUrl($url)) {
+				$options = array(
+				  'http'=>array(
+					'method'=>"GET",
+					'header'=> 'User-Agent: ' . $_SERVER['HTTP_USER_AGENT'] . "\r\n"
+				  )
+				);
+				$context = stream_context_create($options);
 				header('Content-Type: application/json');
-				echo file_get_contents($url);
+				echo file_get_contents($url, false, $context );
 			} else {
 				showError('Invalid url!');
 			}

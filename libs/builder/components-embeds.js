@@ -37,22 +37,27 @@ Vvveb.Components.extend("_base", "embeds/embed", {
 		htmlAttr: "data-url",
         inputtype: TextInput,
         onChange: function(node, value) {
-			let element = node[0];
-			
-			element.innerHTML = `<div class="alert alert-light d-flex justify-content-center">
+			node.innerHTML = `<div class="alert alert-light d-flex justify-content-center">
 				  <div class="spinner-border m-5" role="status">
 					<span class="visually-hidden">Loading...</span>
 				  </div>
 				</div>`;
 			
 			getOembed(value).then(response => {
-				  element.innerHTML = response.html;
+				  node.innerHTML = response.html;
 				  let containerW = node.offsetWidth;
-				  let iframe = element.querySelector("iframe");
-				  let ratio = containerW / iframe.offsetWidth;
-				  
-				  iframe.setAttribute("width", (width * ratio));
-				  iframe.setAttribute("height", (height * ratio));
+				  let iframe = node.querySelector("iframe");
+				  if (iframe) {
+					  let ratio = containerW / iframe.offsetWidth;
+					  iframe.setAttribute("width", (width * ratio));
+					  iframe.setAttribute("height", (height * ratio));
+				  }
+
+				  let arr = node.querySelectorAll('script').forEach(script => {
+						let newScript = Vvveb.Builder.frameDoc.createElement("script");
+						newScript.src = script.src;
+						script.replaceWith(newScript);
+				  });				  
 				  
 			}).catch(error => console.log(error));
 

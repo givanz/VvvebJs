@@ -57,7 +57,8 @@ body {
 Prevents iframe mouse events that prevents clicking on the component  
  */
 [data-component-lottie] > svg,
-[data-component-oembed] > iframe,
+[data-component-oembed] iframe,
+[data-component-oembed] > div,
 [data-component-video] > iframe,
 [data-component-maps] > iframe,
 [data-component-twitter] > iframe,
