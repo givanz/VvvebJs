@@ -842,7 +842,7 @@ Vvveb.Builder = {
 		
 		self.highlightEnabled = true;
 		
-		self.leftPanelWidth = document.getElementById("left-panel").width;
+		self.leftPanelWidth = document.getElementById("left-panel").clientWidth;
 		
 		self.adjustListsHeight();
 		
@@ -1437,7 +1437,7 @@ Vvveb.Builder = {
 					try {
 							if ((pos.top  < (y - halfHeight)) || (pos.left  < (x - halfWidth))) {
 								if (noChildren[parentTagName]) { 
-									self.dragElement.after(parent);
+									parent.after(self.dragElement);
 								} else {
 									if (parent == self.dragElement.parenNode) {
 										parent.appendChild(self.dragElement);
