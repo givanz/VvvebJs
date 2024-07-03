@@ -453,7 +453,7 @@ body
 		border-bottom:1px solid var(--bs-border-color);
 		text-align:center;
 		background-color:rgba(var(--bs-secondary-color-rgb), 0.03);
-		overflow:hidden;
+		//overflow:hidden;
 		width:100%;
 		
 		.btn-group
@@ -909,7 +909,7 @@ body
 	// canvas
 	#canvas
 	{
-	        margin-right: $builder-right-panel-width;
+        margin-right: $builder-right-panel-width;
 		margin-left: $builder-left-panel-width;
 	   	margin-right: var(--builder-right-panel-width);
 		margin-left: var(--builder-left-panel-width);
@@ -922,9 +922,15 @@ body
 		height: calc( 100vh - (var(--builder-header-top-height) + var(--builder-bottom-panel-height)));
 		top:var(--builder-header-top-height);
 		position:fixed;
-		transition:width 0.35s, left 0.35s;
+		background-color:var(--bs-secondary-bg);
+		//transition:width 1s ease 0s, left 1s ease 0s;
 		//border-top: 1px solid $builder-border-color;	
 	
+		#iframe-wrapper {
+			transition:transform 1s ease 0s,  width 1s ease 0s, width 1s ease 0s, left 1s ease 0s, height 1s ease 0s;
+			transform-origin: top center;			
+		}
+		
 		#iframe-wrapper, iframe, iframe  body
 		{
 			width:100%;
@@ -1061,6 +1067,7 @@ body
 		top:0px;
 		left:0px;
 		display:none;
+		
 		&.resizable {
 			.resize {
 				position: absolute;
@@ -2671,4 +2678,32 @@ body {
 
 .modal .modal-content {
     height: 100%;
+}
+
+.percent {
+  display: inline-block;
+  position: relative;
+}
+
+.percent input {
+  width:50px;
+  height:29px;
+  width: 60px;
+  margin-top: 2px;
+  font-size: 14px;
+  text-align:right;
+}
+
+.percent:hover::after,
+.percent:focus-within::after {
+  display:none;
+}
+
+.percent::after {
+  font-size:14px;
+  position: absolute;
+  top: 0.4rem;
+  right: 0.8em;
+  transition: all .05s ease-in-out;
+  content: '%';
 }

@@ -2633,6 +2633,18 @@ Vvveb.Gui = {
 		localStorage.setItem('theme', theme);
 		//document.cookie = 'theme=' + theme;
 	},
+	
+	zoomChange: function () {
+		let wrapper = document.getElementById("iframe-wrapper");
+		let scale = "";
+		let height = "";
+		if (this.value != "100") {
+			scale = "scale(" + this.value + "%)";
+			height = ((100 / this.value) * 100) + "%";
+		}
+		wrapper.style.transform = scale;
+		wrapper.style.height = height;
+	}	
 }
 
 Vvveb.StyleManager = {
