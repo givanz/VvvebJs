@@ -124,19 +124,20 @@ Vvveb.WysiwygEditor = {
 	edit: function(element) {
 		this.element = element;
 		this.isActive = true;
-		this.oldValue = element.html();
+		this.oldValue = element.innerHTML;
 		Vvveb.Builder.selectPadding = 0;
 		Vvveb.Builder.highlightEnabled = false;
 
-		tinyMceOptions.target = element.get(0);
+		tinyMceOptions.target = element;
 		this.editor = tinymce.init(tinyMceOptions);
 	},
 
 	destroy: function(element) {
 		tinymce.activeEditor.destroy();
 		Vvveb.Builder.highlightEnabled = true;
+		this.isActive  = false;
 		
-		node = this.element.get(0);
+		node = this.element;
 		Vvveb.Undo.addMutation({type:'characterData', 
 								target: node, 
 								oldValue: this.oldValue, 
