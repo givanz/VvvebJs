@@ -54,8 +54,8 @@ ImageInput = { ...ImageInput, ...{
 			Vvveb.MediaModal = new MediaModal(true);
 			Vvveb.MediaModal.mediaPath = window.mediaPath;
 		}
-		
-		Vvveb.MediaModal.open(this);        
+
+		Vvveb.MediaModal.open(this.closest("[data-target-input]"));
     },
     
 	init: function(data) {
