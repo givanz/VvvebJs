@@ -4,10 +4,13 @@
   /* Set height, width, borders, and global font properties here */
   font-family: monospace;
   height: 100%;
-  height: calc(100% - 35px);
   color: black;
   direction: ltr;
   font-size:14px;  
+}
+
+#vvveb-code-editor .CodeMirror {
+  height: calc(100% - 30px);
 }
 
 /* PADDING */

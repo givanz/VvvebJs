@@ -42,36 +42,7 @@ fetch(Vvveb.baseUrl + "../../resources/google-fonts.json")
 	return response.json()
 })
 .then((data) => {
-	//let json = JSON.parse(data);
-	googleFonts = data ;
-	//let fontSelect = $("#font-familly");
-	
-	let fontSelect = generateElements("<optgroup label='Google Fonts'></optgroup>")[0];
-	for (font in googleFonts) {
-		googlefontNames.push({"text":font, "value":font, "data-provider": "google"});
-		let option = new Option(font, font);
-		option.dataset.provider = "google";
-		//option.style.setProperty("font-family", font);
-		fontSelect.append(option);
-	}
-	document.getElementById("font-family").append(fontSelect);	
-
-	let list = Vvveb.Components.getProperty("_base", "font-family");
-	if (list) {
-		list.onChange = function (node,value, input, component) {
-		let option = input.options[input.selectedIndex];
-		Vvveb.FontsManager.addFont(option.dataset.provider, value, node);
-		return node;
-	};
-	
-	list.data.options.push({optgroup:"Google Fonts"});
-	list.data.options = list.data.options.concat(googlefontNames);
-
-	Vvveb.Components.updateProperty("_base", "font-family", {data:list.data});
-	
-	//update default font list
-	fontList = list.data.options;
-	}
+	Vvveb.FontsManager.addFontList("google", "Google Fonts", data);
 })
 .catch(error => {
 	console.log(error.statusText);

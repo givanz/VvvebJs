@@ -127,9 +127,10 @@
 							<div class="header">
 								<span class="text-secondary"><i class="la la-file la-lg"></i> Pages</span>
 
-									<div class="btn-group responsive-btns me-1 float-end" role="group">
+									<div class="btn-group responsive-btns float-end" role="group">
 									  <button class="btn btn-outline-primary btn-sm  btn-add" title="New file" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="">
-										   <span>New page</span> <i class="icon-add"></i>
+									<!-- <span>Add new</span> -->
+									<i class="icon-add"></i>
 									  </button>
 									  
 									  <!--  &ensp;
@@ -190,7 +191,7 @@
 							  <div class="tab-pane show active sections" id="sections" role="tabpanel" aria-labelledby="sections-tab">
 								  
 
-										<ul class="nav nav-tabs nav-fill sections-tabs" id="sections-tabs" role="tablist">
+										<ul class="nav nav-tabs nav-fill nav-underline  sections-tabs" id="sections-tabs" role="tablist">
 										  <li class="nav-item content-tab">
 											<a class="nav-link active" data-bs-toggle="tab" href="#sections-new-tab" role="tab" aria-controls="components" aria-selected="false">
 												<i class="icon-albums-outline"></i> <div><span>Sections</span></div></a>
@@ -300,7 +301,7 @@
 								<div class="tab-pane show" id="components-tabs" role="tabpanel" aria-labelledby="components-tab">
 								  
 								  
-										<ul class="nav nav-tabs nav-fill sections-tabs" role="tablist">
+										<ul class="nav nav-tabs nav-fill nav-underline  sections-tabs" role="tablist">
 										  <li class="nav-item components-tab">
 											<a class="nav-link active" data-bs-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="true">
 												<i class="icon-cube-outline"></i> <div><span>Components</span></div></a>
@@ -371,19 +372,19 @@
 									<div class="component-properties-sidepane">
 										<div>
 											<div class="component-properties">
-												<ul class="nav nav-tabs nav-fill" id="properties-tabs" role="tablist">
+												<ul class="nav nav-tabs nav-fill nav-underline" id="properties-tabs" role="tablist">
 													  <li class="nav-item content-tab">
 														<a class="nav-link content-tab active" data-bs-toggle="tab" href="#content-left-panel-tab" role="tab" aria-controls="components" aria-selected="true">
-															<i class="icon-albums-outline"></i> <div><span>Content</span></div>
+															<i class="icon-albums-outline"></i> <span>Content</span>
 														</a>
 													  </li>
 													  <li class="nav-item style-tab">
 														<a class="nav-link" data-bs-toggle="tab" href="#style-left-panel-tab" role="tab" aria-controls="style" aria-selected="false">
-															<i class="icon-color-fill-outline"></i> <div><span>Style</span></div></a>
+															<i class="icon-color-fill-outline"></i> <span>Style</span></a>
 													  </li>
 													  <li class="nav-item advanced-tab">
 														<a class="nav-link" data-bs-toggle="tab" href="#advanced-left-panel-tab" role="tab" aria-controls="advanced" aria-selected="false">
-															<i class="icon-settings-outline"></i> <div><span>Advanced</span></div></a>
+															<i class="icon-settings-outline"></i> <span>Advanced</span></a>
 													  </li>
 													</ul>
 											
@@ -418,7 +419,7 @@
 							
 							<div class="tab-pane" id="configuration" role="tabpanel" aria-labelledby="configuration-tab">
 								
-									<ul class="nav nav-tabs nav-fill sections-tabs" id="vars-tabs" role="tablist">
+									<ul class="nav nav-tabs nav-fill nav-underline sections-tabs" id="vars-tabs" role="tablist">
 									  <li class="nav-item vars-tab">
 										<a class="nav-link active" data-bs-toggle="tab" href="#vars-tab" role="tab" aria-controls="components" aria-selected="false">
 											<i class="icon-brush-outline"></i> <div><span>Variables</span></div></a>
@@ -632,9 +633,9 @@
 									<a id="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
 									<a id="edit-code-btn" href="" title="Edit html code"><i class="icon-code-outline"></i></a>
 
-									<a id="save-reusable-btn" href="" title="Save as reusable" class="mx-2"><i class="icon-save-outline"></i></i></a>
+									<a id="save-reusable-btn" href="" title="Save as reusable" class="mx-2"><i class="icon-save-outline"></i></a>
 									<a id="clone-btn" href="" title="Clone element"><i class="icon-copy-outline"></i></a>
-									<a id="delete-btn" href="" title="Remove element"><i class="icon-trash-outline"></i></i></a>
+									<a id="delete-btn" href="" title="Remove element"><i class="icon-trash-outline"></i></a>
 								</div>
 								
 								<div class="resize">
@@ -681,18 +682,18 @@
 										
 										<div class="section-box-actions">
 
-							<div id="close-section-btn" class="btn btn-outline-secondary btn-sm border-0 float-end"><i class="la la-times la-lg"></i></div>
+									<div id="close-section-btn" class="btn btn-outline-secondary btn-sm mt-1 border-0 float-end"><i class="la la-times la-lg"></i></div>
 										
-							<div class="me-4 float-end">
+										<div class="me-4 small mt-2 float-end">
 											
-								<div class="form-check d-inline-block small me-1">
+											<div class="form-check d-inline-block small me-1">
 												  <input type="radio" id="add-section-insert-mode-after" value="after" checked="checked" name="add-section-insert-mode" class="form-check-input">
-								  <label class="form-check-label" for="add-section-insert-mode-after">After</label>
+												 <label class="form-check-label" for="add-section-insert-mode-after">After</label>
 												</div>
 												
-								<div class="form-check d-inline-block small">
+												<div class="form-check d-inline-block small">
 												  <input type="radio" id="add-section-insert-mode-inside" value="inside" name="add-section-insert-mode" class="form-check-input">
-								  <label class="form-check-label" for="add-section-insert-mode-inside">Inside</label>
+													<label class="form-check-label" for="add-section-insert-mode-inside">Inside</label>
 												</div>
 										
 											</div>
@@ -714,7 +715,7 @@
 													  </button>
 												  </div>
 
-												<div>
+												<div class="overflow-y-auto mb-5">
 												  <div>
 													  
 													<ul class="components-list clearfix" data-type="addbox">
@@ -738,7 +739,7 @@
 													  </button>
 												  </div>
 
-												<div>
+												<div class="overflow-y-auto mb-5">
 												  <div>
 													  
 													<ul class="blocks-list clearfix"  data-type="addbox">
@@ -779,18 +780,18 @@
 				<div id="right-panel">
 					<div class="component-properties">
 						
-						<ul class="nav nav-tabs nav-fill" id="properties-tabs" role="tablist">
+						<ul class="nav nav-tabs nav-fill nav-underline" id="properties-tabs" role="tablist">
 							  <li class="nav-item content-tab">
 								<a class="nav-link active" data-bs-toggle="tab" href="#content-tab" role="tab" aria-controls="components" aria-selected="true">
-									 <i class="icon-albums-outline"></i> <div><span>Content</span></div></a>
+									 <i class="icon-albums-outline"></i> <span>Content</span></a>
 							  </li>
 							  <li class="nav-item style-tab">
 								<a class="nav-link" data-bs-toggle="tab" href="#style-tab" role="tab" aria-controls="blocks" aria-selected="false">
-									<i class="icon-color-fill-outline"></i></i> <div><span>Style</span></div></a>
+									<i class="icon-color-fill-outline"></i> <span>Style</span></a>
 							  </li>
 							  <li class="nav-item advanced-tab">
 								<a class="nav-link" data-bs-toggle="tab" href="#advanced-tab" role="tab" aria-controls="blocks" aria-selected="false">
-									<i class="icon-settings-outline"></i> <div><span>Advanced</span></div></a>
+									<i class="icon-settings-outline"></i> <span>Advanced</span></a>
 							  </li>
 							</ul>
 					
@@ -1281,7 +1282,7 @@
 	<div>
 		<img id="thumb-{%=key%}" class="img-thumbnail p-0" data-target-input="#input-{%=key%}" data-target-thumb="#thumb-{%=key%}" style="cursor:pointer" src="" width="225" height="225">
 		<input name="{%=key%}" type="text" class="form-control mt-1" id="input-{%=key%}"/>
-		<button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#input-{%=key%}" data-target-thumb="#thumb-{%=key%}"><i class="la la-image la-lg"></i><span>Set image</span></button>
+		<button name="button" class="btn btn-primary btn-sm btn-icon mt-2 px-2" data-target-input="#input-{%=key%}" data-target-thumb="#thumb-{%=key%}"><i class="la la-image la-lg"></i><span>Set image</span></button>
 	</div>
 	
 </script>
@@ -1450,7 +1451,7 @@
 	<div>
 		<div class="alert alert-dismissible fade show alert-{%=type%}" role="alert">		  
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>		  
-			<h6><b>{%=title%}</b></h6> 
+			<strong class="d-block mb-1">{%=title%}</strong> 
 			
 			{%=text%}
 		</div>
@@ -1615,8 +1616,8 @@
 		
     <div class="modal-content">
       <div class="modal-header">
-        <h6 class="modal-title text-primary fw-normal"><i class="la la-lg la-file"></i> New page</h6>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        <span class="modal-title text-primary fw-normal"><i class="la la-lg la-file"></i> New page</span>
+        <button type="button" class="btn-close p-0 me-1" data-bs-dismiss="modal" aria-label="Close">
           <!-- span aria-hidden="true"><small><i class="la la-times"></i></small></span -->
         </button>
       </div>
@@ -1681,8 +1682,8 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-secondary btn-lg" type="reset" data-bs-dismiss="modal"><i class="la la-times"></i> Cancel</button>
-		<button class="btn btn-primary btn-lg" type="submit"><i class="la la-check"></i> Create page</button>
+        <button class="btn btn-secondary btn-icon" type="reset" data-bs-dismiss="modal"><i class="la la-times"></i> Cancel</button>
+		<button class="btn btn-primary btn-icon" type="submit"><i class="la la-check"></i> Create page</button>
       </div>
     </div>
     

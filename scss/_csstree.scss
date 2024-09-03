@@ -91,14 +91,15 @@
 				display:none;
 				position:absolute;
 				top:0px;
-				right:0px;
+				right:2px;
 				
 				.btn {
 					padding:0rem 0.2rem;
+					margin-right:1px;
 					font-size:0.875rem;
 					line-height:1;
 					border-radius:4px;
-					--bs-btn-border-color: rgba(var(--bs-link-color-rgb), 0.15);
+					--bs-btn-border-color: rgba(var(--bs-link-color-rgb), 0.25);
 				}
 			}
 		}
