@@ -20,127 +20,151 @@ https://github.com/givanz/VvvebJs
 //use ckeditor instead that supports inline editing for iframe elements
 
 var tinyMceOptions = {
-  //selector: 'textarea',
-  target:false,
-  inline:false,//see comment above
-  toolbar_mode: 'floating',
-  toolbar_persist: true,
-  plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help quickbars emoticons',
-  //imagetools_cors_hosts: ['picsum.photos'],
-  menubar: false,//'file edit view insert format tools table help',
-  toolbar: [
-		'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect',
-		'alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist',
-		'forecolor backcolor removeformat | insertfile image media link anchor codesample  | fullscreen  preview save print| ltr rtl | code template |  charmap emoticons'],
-  toolbar_sticky: true,
-  autosave_ask_before_unload: true,
-  autosave_interval: '30s',
-  autosave_prefix: '{path}{query}-{id}-',
-  autosave_restore_when_empty: false,
-  autosave_retention: '2m',
-  image_advtab: true,
-  /*
-  link_list: [
-	{ title: 'My page 1', value: 'https://www.tiny.cloud' },
-	{ title: 'My page 2', value: 'http://www.moxiecode.com' }
-  ],
-  image_list: [
-	{ title: 'My page 1', value: 'https://www.tiny.cloud' },
-	{ title: 'My page 2', value: 'http://www.moxiecode.com' }
-  ],
-  image_class_list: [
-	{ title: 'None', value: '' },
-	{ title: 'Some class', value: 'class-name' }
-  ],
-  */
-  importcss_append: true,
-  file_picker_callback: function (callback, value, meta) {
-		if (!Vvveb.MediaModal) {
-			Vvveb.MediaModal = new MediaModal(true);
-			Vvveb.MediaModal.mediaPath = mediaPath;
-		}
-		Vvveb.MediaModal.open(null, callback);
-	return;
-	/* Provide file and text for the link dialog */
-	if (meta.filetype === 'file') {
-	  callback('https://www.google.com/logos/google.jpg', { text: 'My text' });
-	}
+    //selector: 'textarea',
+    target                        : false,
+    inline                        : false,//see comment above
+    toolbar_persist               : true,
+    plugins                       : 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help quickbars emoticons',
+    menubar                       : false,
+    toolbar                       : [
+        'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect',
+        'alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist',
+        'forecolor backcolor removeformat | insertfile image media link anchor codesample  | fullscreen  preview save print| ltr rtl | code |  charmap emoticons'],
+    toolbar_sticky                : true,
+    autosave_ask_before_unload    : true,
+    autosave_interval             : '30s',
+    autosave_prefix               : '{path}{query}-{id}-',
+    autosave_restore_when_empty   : false,
+    autosave_retention            : '2m',
+    importcss_append              : true,
+    file_picker_callback          : function(callback, value, meta) {
+        if (!Vvveb.MediaModal) {
+            Vvveb.MediaModal = new MediaModal(true);
+            Vvveb.MediaModal.mediaPath = mediaPath;
+        }
+        Vvveb.MediaModal.open(null, callback);
+    },
+    height                        : 600,
+    quickbars_insert_toolbar      : 'quickmedia quicklink quicktable',
+    quickbars_selection_toolbar   : 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+    //quickbars_image_toolbar: 'alignleft aligncenter alignright | rotateleft rotateright | imageoptions',
+    noneditable_noneditable_class : 'mceNonEditable',
+    toolbar_mode                  : 'sliding',
+    contextmenu                   : 'link image imagetools table',
+    skin                          : 'oxide',
+    content_css                   : '',
+    content_style                 : 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+    images_upload_url             : 'postAcceptor.php',
 
-	/* Provide image and alt text for the image dialog */
-	if (meta.filetype === 'image') {
-	  callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });
-	}
+    image_advtab          : true,
+    image_caption         : true,
+    paste_data_images     : true,
+    image_uploadtab       : true,
+    images_file_types     : 'jpeg,jpg,png,gif',
+    images_upload_handler : function(blobInfo, success, failure) {
+        var base64str = 'data:' + blobInfo.blob().type + ';base64,' + blobInfo.base64();
+        success(base64str);
+    },
+    file_picker_callback  : function(callback, value, meta) {
+        if (!Vvveb.MediaModal) {
+            Vvveb.MediaModal = new MediaModal(true);
+            Vvveb.MediaModal.mediaPath = mediaPath;
+        }
+        Vvveb.MediaModal.open(null, callback);
+    },
 
-	/* Provide alternative source and posted for the media dialog */
-	if (meta.filetype === 'media') {
-	  callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg' });
-	}
-  },
-  /*
-  templates: [
-	{ title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%"  border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
-	{ title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
-	{ title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
-  ],
-  template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
-  template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
-  */
-  height: 600,
-  image_caption: true,
-  quickbars_insert_toolbar: 'quickmedia quicklink quicktable',
-  quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
-  //quickbars_image_toolbar: 'alignleft aligncenter alignright | rotateleft rotateright | imageoptions',
-  noneditable_noneditable_class: 'mceNonEditable',
-  toolbar_mode: 'sliding',
-  contextmenu: 'link image imagetools table',
-  skin: 'oxide',
-  content_css: '',
-  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
-  images_upload_url: 'postAcceptor.php',
-
-  /* we override default upload handler to simulate successful upload*/
-  images_upload_handler: function (blobInfo, success, failure) {
-    setTimeout(function () {
-      /* no matter what you upload, we will turn it into TinyMCE logo :)*/
-      success('http://moxiecode.cachefly.net/tinymce/v9/images/logo.png');
-    }, 2000);
-  },
-
-
-	branding:false,
+    branding : false,
 };
 
 Vvveb.WysiwygEditor = {
-	
-	isActive: false,
-	oldValue: '',
-	doc:false,
-	editor:false,
-	
-	init: function(doc) {
-		this.doc = doc;
-	},
-	
-	edit: function(element) {
-		this.element = element;
-		this.isActive = true;
-		this.oldValue = element.innerHTML;
-		Vvveb.Builder.selectPadding = 0;
-		Vvveb.Builder.highlightEnabled = false;
 
-		tinyMceOptions.target = element;
-		this.editor = tinymce.init(tinyMceOptions);
-	},
+    isActive : false,
+    oldValue : '',
+    doc      : false,
+    editor   : false,
 
-	destroy: function(element) {
-		tinymce.activeEditor.destroy();
-		Vvveb.Builder.highlightEnabled = true;
-		this.isActive  = false;
-		
-		node = this.element;
-		Vvveb.Undo.addMutation({type:'characterData', 
-								target: node, 
-								oldValue: this.oldValue, 
-								newValue: node.innerHTML});
-	}
-}
+    init : function(doc) {
+        Vvveb.WysiwygEditor.doc = doc;
+    },
+
+    edit : function(element) {
+        Vvveb.WysiwygEditor.element = element;
+        Vvveb.WysiwygEditor.modalHtml = `
+            <div class="modal fade modal-full" id="TinyMceModal" tabindex="-1" role="dialog" 
+                 aria-labelledby="TinyMceModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document"
+                     style="max-height: 586px">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="TinyMceModalLabel">Editor</h5>
+                            <button type="button" class="btn btn-sm" id="btn-tiny-iconclose" aria-label="Close">
+                                <span aria-hidden="true"><i class="la la-times la-lg"></i></span>
+                            </button>
+                        </div>
+                        <div class="modal-body" style="padding: 0">
+                            <div id="TinyMceModal-editor">${element.outerHTML}</div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="align-right">
+                                <button type="button" class="btn btn-secondary" id="btn-tiny-buttonclose">Close</button>
+                                <button type="button" class="btn btn-primary save-btn">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        document.body.append(generateElements(Vvveb.WysiwygEditor.modalHtml)[0]);
+        let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('TinyMceModal'));
+        modal.show();
+
+        document.querySelector("#TinyMceModal .save-btn").addEventListener("click", Vvveb.WysiwygEditor.save);
+        document.querySelector("#btn-tiny-iconclose").addEventListener("click", Vvveb.WysiwygEditor.destroy);
+        document.querySelector("#btn-tiny-buttonclose").addEventListener("click", Vvveb.WysiwygEditor.destroy);
+
+        Vvveb.WysiwygEditor.isActive = true;
+        Vvveb.WysiwygEditor.oldValue = element.innerHTML;
+        Vvveb.Builder.selectPadding = 0;
+        Vvveb.Builder.highlightEnabled = false;
+
+        tinyMceOptions.target = document.getElementById('TinyMceModal-editor');
+        Vvveb.WysiwygEditor.editor = tinymce.init(tinyMceOptions);
+
+        setTimeout(function() {
+            document.getElementById("select-box").style.display = "none";
+        }, 500);
+    },
+
+    save : function() {
+        console.log(Vvveb.WysiwygEditor.element);
+        Vvveb.WysiwygEditor.element.outerHTML = tinymce.activeEditor.getContent();
+
+        Vvveb.Undo.addMutation({
+            type     : 'characterData',
+            target   : Vvveb.WysiwygEditor.element,
+            oldValue : Vvveb.WysiwygEditor.oldValue,
+            newValue : Vvveb.WysiwygEditor.element.innerHTML
+        });
+
+        Vvveb.WysiwygEditor.destroy();
+    },
+
+    destroy : function(element) {
+
+        if (tinymce.activeEditor) {
+            tinymce.activeEditor.destroy();
+        }
+
+        let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('TinyMceModal'));
+        modal.hide();
+
+        var TinyMceModal = document.getElementById('TinyMceModal');
+        TinyMceModal.parentElement.removeChild(TinyMceModal);
+        Vvveb.WysiwygEditor.isActive = false;
+
+        Vvveb.Builder.highlightEnabled = false;
+        // enable double click editor
+        Vvveb.Builder.texteditEl = null;
+    }
+};
+
