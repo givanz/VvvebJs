@@ -17809,6 +17809,7 @@ https://github.com/givanz/VvvebJs
       .tree > ol li.file .file-actions {
         display: none;
         position: absolute;
+        background-color: var(--bs-body-bg);
         top: 0px;
         right: 2px; }
         .tree > ol li.file .file-actions .btn {
@@ -17819,7 +17820,9 @@ https://github.com/givanz/VvvebJs
           border-radius: 4px;
           --bs-btn-border-color: rgba(var(--bs-link-color-rgb), 0.25); }
     .tree > ol li.page > label {
-      background-image: url(../libs/builder/icons/panel.svg); }
+      background-image: url(../libs/builder/icons/post.svg); }
+    .tree > ol li.url > label {
+      background-image: url(../../../js/vvvebjs/icons/panel.svg); }
     .tree > ol li input {
       position: absolute;
       left: 0;
@@ -18818,7 +18821,7 @@ li[data-type] {
 .sections-container {
   width: 100%;
   background: var(--bs-body-bg);
-  padding-top: 1rem; }
+  padding: 1rem; }
   .sections-container > div.section-item {
     box-shadow: 0px 0px 1px 0px var(--bs-primary);
     box-shadow: 0px 0px 1px 0px rgba(18, 83, 205, 0.7), 0px 0px 5px 0px rgba(18, 83, 205, 0.1);
@@ -18860,7 +18863,7 @@ li[data-type] {
       .sections-container > div.section-item .controls .info {
         margin-left: 0.2rem; }
         .sections-container > div.section-item .controls .info .name {
-          font-size: 13px; }
+          font-size: 12px; }
         .sections-container > div.section-item .controls .info .type {
           font-size: 12px; }
       .sections-container > div.section-item .controls .buttons {
@@ -19166,7 +19169,8 @@ div.section, .header > ol {
 
 .form-select {
   -webkit-appearance: none;
-  -moz-appearance: none; }
+  -moz-appearance: none;
+  box-shadow: rgba(var(--bs-body-color-rgb), 0.08) 0px 1px 2px 0px; }
 
 input[type="number"] {
   -moz-appearance: textfield;
@@ -19215,6 +19219,10 @@ input[type="number"]:focus {
 
 .form-control::placeholder {
   opacity: 0.7; }
+
+.form-control {
+  font-size: inherit;
+  box-shadow: rgba(var(--bs-body-color-rgb), 0.08) 0px 1px 2px 0px inset; }
 
 .btn-link:hover {
   text-decoration: none; }
@@ -19756,7 +19764,10 @@ body > section, body > footer, body > header {
 .btn-icon {
   font-weight: 500;
   text-transform: capitalize;
-  margin-bottom: 0px; }
+  margin-bottom: 0px;
+  box-shadow: 1px 1px 2px 1px rgba(var(--bs-body-color-rgb), 0.07), 1px 1px 2px 1px rgba(var(--bs-body-bg-rgb), 0.15) inset;
+  border: none;
+  position: relative; }
   .btn-icon i:first-child {
     display: inline-block;
     margin-right: 0.3rem;
@@ -19766,21 +19777,32 @@ body > section, body > footer, body > header {
     box-shadow: 0px 0px 1px 0px #3478f2;
     background-color: var(--bs-body-bg); }
     .btn-icon.btn-outline-primary:hover {
-      color: var(--bs-link-color-rgb);
+      color: var(--bs-link-color);
       background: #f8f9fa; }
     .btn-icon.btn-outline-primary i {
       background: transparent; }
   .btn-icon.btn-outline-secondary {
-    box-shadow: 0px 0px 2px 1px rgba(var(--bs-body-color-rgb), 0.07), -1px 1px 2px 0px rgba(var(--bs-body-bg-rgb), 0.15) inset;
-    box-shadow: 1px 1px 1px 0px rgba(var(--bs-body-color-rgb), 0.07); }
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(var(--bs-body-color-rgb), 0.12) 0px 1px 2px 0px, rgba(var(--bs-body-color-rgb), 0.08) 0px 0px 0px 1px; }
   .btn-icon.btn-secondary {
     box-shadow: -1px 1px 2px 1px rgba(var(--bs-body-color-rgb), 0.07), -1px 1px 2px 0px rgba(var(--bs-body-bg-rgb), 0.15) inset; }
     .btn-icon.btn-secondary i {
       background: transparent; }
   .btn-icon.btn-primary {
-    box-shadow: -1px 1px 2px 1px rgba(var(--bs-body-color-rgb), 0.07), -1px 1px 2px 0px rgba(var(--bs-body-bg-rgb), 0.15) inset; }
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(255, 255, 255, 0.2) 0px 0.75px 0px 0px inset, rgba(var(--bs-primary-rgb), 0.4) 0px 1px 2px 0px, rgba(var(--bs-primary-rgb), 0.8) 0px 0px 0px 1px; }
     .btn-icon.btn-primary i {
       /*background: rgba(var(--bs-body-bg-rgb), 0.1);*/ }
+  .btn-icon:after {
+    content: ".";
+    background-image: linear-gradient(rgba(var(--bs-body-bg-rgb), 1), rgba(var(--bs-body-bg-rgb), 0));
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.16; }
+  .btn-icon.btn-outline-secondary:after, .btn-icon.btn-outline-primary:after {
+    background-image: linear-gradient(rgba(var(--bs-body-color-rgb), 0), rgba(var(--bs-body-color-rgb), 1));
+    opacity: 0.03; }
 
 label.form-check .form-check-input {
   float: none;

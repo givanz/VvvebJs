@@ -19,8 +19,7 @@
 
 .filemanager .breadcrumbs {
 	color: var(--bs-primary-text);
-	margin-left:20px;
-	font-size: 1.2rem;
+	//font-size: 1.2rem;
 	//font-weight: 500;
 	line-height: 35px;
 }
@@ -31,12 +30,12 @@
 }
 
 .filemanager .breadcrumbs a:hover {
-	text-decoration: underline;
+	color: var(--bs-link-color);
 }
 
 .filemanager .breadcrumbs .arrow {
-	color: var(--bs-border-color);
-	font-size: 24px;
+	color: var(--bs-secondary-border-subtle);
+	//font-size: 24px;
 	font-weight: 500;
 	line-height: 20px;
 }
@@ -277,12 +276,11 @@
 }
 
 .filemanager .nothingfound {
-	background-color: #373743;
-	background-color: var(--bs-light-border-subtle);
+	/*background-color: rgba(var(--bs-primary-rgb), 0.1);*/
+	border:1px solid var(--bs-primary-bg-subtle);
 	width: 23em;
 	height: 21em;
 	margin: 0 auto;
-	display: none;
 	border-radius:20px;
 	text-align:center;
 	-webkit-animation: showSlowlyElement 700ms; /* Chrome, Safari, Opera */
@@ -291,14 +289,20 @@
 
 .filemanager .nothingfound .nofiles {
 	margin: 30px auto;
-	top: 3em;
 	border-radius: 50%;
 	position:relative;
-	background-color: #d72f6e;
+	background-color: var(--bs-primary-bg-subtle);
 	width: 11em;
 	height: 11em;
-	line-height: 11.4em;
+	line-height: 15em;
 }
+
+.filemanager .nothingfound .nofiles i { 
+    font-size: 7rem;
+    transform: rotate(270deg);
+    line-height: 1rem;
+}
+/*
 .filemanager .nothingfound .nofiles:after {
     content: 'x';
     position: absolute;
@@ -309,6 +313,7 @@
     font-weight: 600;
     right: 0;
 }
+*/
 
 .filemanager .nothingfound span {
 	margin: 0 auto auto;
@@ -403,7 +408,9 @@
 .icon.folder:before {
 	content: '';
 	float: left;
-	background-color: rgba(var(--bs-primary-rgb), 0.5);
+	//background-color: rgba(var(--bs-primary-rgb), 0.5);
+	background:linear-gradient(var(--bs-primary-bg-subtle), rgba(var(--bs-primary-rgb), 0.4));
+	background:linear-gradient(var(--bs-primary-border-subtle), rgba(var(--bs-primary-rgb), 0.6));
 
 	width: 1.5em;
 	height: 0.45em;
@@ -421,11 +428,13 @@
 	float: left;
 	clear: left;
 
-	background-color: rgba(var(--bs-primary-rgb), 1);
+	//background-color: rgba(var(--bs-primary-rgb), 1);
+	//background-color: var(--bs-primary-border-subtle);
+	background:linear-gradient(var(--bs-primary-border-subtle), rgba(var(--bs-primary-rgb), 0.6));
 	width: 3em;
 	height: 2.25em;
 
-	border-radius: 0.1em;
+	border-radius: 0.2em;
 }
 .icon.folder.full:before {
 	height: 0.55em;

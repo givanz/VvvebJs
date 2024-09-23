@@ -67,6 +67,9 @@ $font-size-base: 1rem;
 	text-transform:capitalize;
 	margin-bottom:0px;
 	//padding:0.4rem 2rem;
+	box-shadow:1px 1px 2px 1px rgba(var(--bs-body-color-rgb),0.07),1px 1px 2px 1px rgba(var(--bs-body-bg-rgb),0.15) inset;
+	border:none;	
+	position:relative;
 	
 	i:first-child
 	{
@@ -84,7 +87,7 @@ $font-size-base: 1rem;
 
 		&:hover
 		{
-			color:var(--bs-link-color-rgb);
+			color:var(--bs-link-color);
 			background:$gray-100;
 		}
 		
@@ -95,8 +98,9 @@ $font-size-base: 1rem;
 	}
 	
 	&.btn-outline-secondary {
-		box-shadow:0px 0px 2px 1px rgba(var(--bs-body-color-rgb), 0.07), -1px 1px 2px 0px rgba(var(--bs-body-bg-rgb), 0.15) inset;
-		box-shadow:1px 1px 1px 0px rgba(var(--bs-body-color-rgb), 0.07);
+		//box-shadow:0px 0px 3px 1px rgba(var(--bs-body-color-rgb), 0.1), -1px 1px 2px 0px rgba(var(--bs-body-bg-rgb), 0.15) inset;
+		box-shadow:rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(var(--bs-body-color-rgb), 0.12) 0px 1px 2px 0px, rgba(var(--bs-body-color-rgb), 0.08) 0px 0px 0px 1px;
+		//--bs-btn-bg:var(--bs-body-bg);
 	}
 	
 	&.btn-gray
@@ -117,8 +121,7 @@ $font-size-base: 1rem;
 	}
 
 	&.btn-primary {
-		box-shadow:-1px 1px 2px 1px rgba(var(--bs-body-color-rgb),0.07),-1px 1px 2px 0px rgba(var(--bs-body-bg-rgb),0.15) inset;
-
+		box-shadow:rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(255, 255, 255, 0.2) 0px 0.75px 0px 0px inset, rgba(var(--bs-primary-rgb), 0.4) 0px 1px 2px 0px, rgba(var(--bs-primary-rgb), 0.8) 0px 0px 0px 1px;
 		i {
 			/*background: rgba(var(--bs-body-bg-rgb), 0.1);*/
 		}
@@ -128,6 +131,21 @@ $font-size-base: 1rem;
 		i {
 			//padding: 0.5rem 0.5rem;
 		}
+	}
+	&:after {
+		content: ".";
+		background-image:linear-gradient(rgba(var(--bs-body-bg-rgb), 1), rgba(var(--bs-body-bg-rgb), 0));
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0.16;
+	}
+
+	&.btn-outline-secondary:after,&.btn-outline-primary:after {
+		background-image: linear-gradient(rgba(var(--bs-body-color-rgb), 0), rgba(var(--bs-body-color-rgb), 1));
+		opacity: 0.03;
 	}
 }
 

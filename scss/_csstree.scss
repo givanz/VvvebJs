@@ -68,7 +68,7 @@
 			
 			> label
 			{
-				background: url(../libs/builder/icons/file.svg);
+				background-image: url(../libs/builder/icons/file.svg);
 				background-position:8px 4px;
 				background-size:19px 19px;
 				background-repeat:no-repeat;
@@ -90,6 +90,7 @@
 			.file-actions {
 				display:none;
 				position:absolute;
+				background-color: var(--bs-body-bg);				
 				top:0px;
 				right:2px;
 				
@@ -116,7 +117,15 @@
 		{
 			> label
 			{
-				background-image: url(../libs/builder/icons/panel.svg);
+				background-image: url(../libs/builder/icons/post.svg);
+			}
+		}
+
+		li.url
+		{
+			> label
+			{
+				background-image: url(../../../js/vvvebjs/icons/panel.svg);
 			}
 		}
 

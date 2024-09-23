@@ -764,6 +764,16 @@ Vvveb.WysiwygEditor = {
 				e.preventDefault();
 				return false;
 		});
+
+		doc.addEventListener('keydown', event => {
+		  if (event.key === 'Enter') {
+			  let target = event.target.closest("[contenteditable]");
+			  if (target) {
+				doc.execCommand('insertLineBreak');
+				event.preventDefault();
+			  }
+		  }
+		})		
 	},
 	
 	undo: function(element) {
@@ -2531,8 +2541,10 @@ Vvveb.Gui = {
 			});
 		};
 		
-		form.removeEventListener("submit", submitForm);
-		form.addEventListener("submit", submitForm);
+		if (!form.dataset.init) {
+			form.addEventListener("submit", submitForm);
+			form.dataset.init = true;
+		}
 	},
 	
 	setDesignerMode : function () {

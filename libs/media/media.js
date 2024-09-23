@@ -18,10 +18,10 @@ class MediaModal {
 		  <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
 			<div class="modal-content">
 			  <div class="modal-header">
-				<h5 class="modal-title" id="MediaModalLabel">Media</h5>
+				<h5 class="modal-title fw-normal" id="MediaModalLabel">Media</h5>
                 
-				<button type="button" class="btn btn-sm" data-bs-dismiss="modal" aria-label="Close">
-				  <span aria-hidden="true"><i class="la la-times la-lg"></i></span>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+				  <!-- <span aria-hidden="true"><i class="la la-times la-lg"></i></span> -->
 				</button>
 			  </div>
 			  <div class="modal-body">
@@ -30,23 +30,23 @@ class MediaModal {
 
 						<div class="top-right d-flex justify-content-between">
                              
-                            <div class="align-left">          
+							<div class="">          
 								<div class="breadcrumbs"></div>
 							</div>
                                        
                                    
-                            <div class="align-right">                   
+							<div class="">                   
 								<div class="search">
 									<input type="search" id="media-search-input" placeholder="Find a file.." />
 								</div>
 								
-								<button class="btn btn-outline-secondary btn-sm btn-icon me-5 float-end border-secondary-subtle" 
+								<button class="btn btn-outline-secondary btn-sm btn-icon me-5 float-end" 
 								   data-bs-toggle="collapse" 
 								   data-bs-target=".upload-collapse" 
 								   aria-expanded="false" 
 								   >
-								   <i class="la la-cloud-upload-alt la-lg"></i>
-									Upload new file
+								   <i class="la la-upload la-lg"></i>
+									Upload file
 								</button>
 							</div>
 							
@@ -75,8 +75,16 @@ class MediaModal {
 							<ul class="data" id="media-files"></ul>
 						
 							<div class="nothingfound">
-								<div class="nofiles"></div>
-								<span>No files here.</span>
+								<div class="nofiles">
+									<i class="la la-folder-open"></i>
+								</div>
+								<div>No files here.</div>
+								<div class="mt-4">
+									<button class="btn btn-outline-secondary btn-sm btn-icon" data-bs-toggle="collapse" data-bs-target=".upload-collapse" aria-expanded="false">
+									<i class="la la-upload la-lg"></i>
+									Upload file 
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -89,8 +97,14 @@ class MediaModal {
 				</div>
 			  
 				<div class="align-right">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary save-btn">Add selected</button>
+					<button type="button" class="btn btn-secondary btn-icon me-1" data-bs-dismiss="modal">
+						<i class="la la-times"></i>
+						<span>Cancel</span>
+					</button>
+					<button type="button" class="btn btn-primary btn-icon save-btn">
+						<i class="la la-check"></i>
+						<span>Add selected</span>
+					</button>
 				</div>
 			  </div>
 			</div>
@@ -250,7 +264,7 @@ class MediaModal {
 			let _search = this;
 
 			_search.querySelectorAll('span').forEach(function (el,i) { el.style.display = "none";});
-			search.style.display = "";
+			search.style.display = "block";
 			search.focus();
 
 		});
@@ -542,7 +556,6 @@ _
 				
 			fetch(deleteUrl, {method: "POST",  body: {file}})
 				.then((response) => {
-					console.log(response);
 					if (!response.ok) { throw new Error(response) }
 					return response.text()
 				})

@@ -1695,7 +1695,7 @@ li[data-type]
 .sections-container {
 width:100%;
 	background:var(--bs-body-bg);
-padding-top:1rem;
+	padding:1rem;
 
 > div.section-item {
 
@@ -1752,7 +1752,7 @@ padding-top:1rem;
 		.info {
 			margin-left:0.2rem;
 			.name {
-				font-size: 13px;
+					font-size: 12px;
 			}
 			.type {
 				font-size: 12px;
@@ -2056,6 +2056,7 @@ div.section {
 .form-select {
     -webkit-appearance: none;
     -moz-appearance: none;
+    box-shadow:rgba(var(--bs-body-color-rgb), 0.08) 0px 1px 2px 0px;
 }
 
 
@@ -2131,9 +2132,10 @@ input[type="number"]:focus {
 	opacity:0.7;
 }
 
-.form-control, .form-select {
-	//box-shadow: 1px 1px 3px 0px rgba(var(--bs-body-color-rgb), 0.05) inset;
-	//background-color:rgba(var(--bs-secondary-color-rgb), 0.01);
+.form-control
+{
+	font-size:inherit;
+	box-shadow:rgba(var(--bs-body-color-rgb), 0.08) 0px 1px 2px 0px inset;
 }
 
 .btn-link:hover {
@@ -2590,7 +2592,7 @@ img.preview {
     min-height: 250px;
     height: 500px;
     resize: both;
-	overflow: hidden;
+    overflow: hidden;
     box-shadow: 0px 1px 5px 0px rgba(var(--bs-body-color-rgb), 0.15);
     background: var(--bs-body-bg);
 	
