@@ -732,7 +732,11 @@ let ListInput = { ...Input, ...{
 		let data = input.data;
 		
 		if (data.removeElement) {
-			input.node.querySelector(data.container + " " + data.selector + ":nth-child(" + (index + 1) + ")").remove();
+			let container = input.node;
+			if (data.container) {
+				container.querySelector(data.container);
+			}
+			container.querySelector(data.selector + ":nth-child(" + (index + 1) + ")").remove();
 		}
 		sectionItem.remove();
 		
@@ -746,7 +750,11 @@ let ListInput = { ...Input, ...{
 	add: function(event, node, input) {
 		let newElement = input.data.newElement ?? false;
 		if (newElement) {
-			event.data.input.node.querySelector(input.data.container).append(generateElements(newElement)[0]);
+			let container = input.node;
+			if (data.container) {
+				container.querySelector(data.container);
+			}			
+			container.append(generateElements(newElement)[0]);
 		}
 		
 		event.action = "add";
@@ -782,7 +790,7 @@ let ListInput = { ...Input, ...{
 			if (data.nameElement) {
 				element = element.querySelector(data.nameElement);
 			}
-			let name = (data.name = "text" ? element.textContent : element.id);
+			let name = (data.name = "text" ? element.textContent.substr(0, 15) : element.id);
 			options.push({
 				name: name,
 				type: (data.prefix ?? "") + (i + 1) + (data.suffix ?? ""),

@@ -59,10 +59,10 @@ function changeNodeName(node, newNodeName) {
 		newNode.setAttribute(attributes[i].nodeName, attributes[i].nodeValue);
 	}
 
-	for (e of node.childNodes) {
-		newNode.append(e);
+	while (node.hasChildNodes()) {
+		newNode.appendChild(node.removeChild(node.firstChild))
 	}
-	
+
 	node.replaceWith(newNode);
 	
 	return newNode;

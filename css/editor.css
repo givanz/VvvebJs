@@ -17793,7 +17793,7 @@ https://github.com/givanz/VvvebJs
         .tree > ol li.file:hover .file-actions {
           display: block; }
       .tree > ol li.file > label {
-        background: url(../libs/builder/icons/file.svg);
+        background-image: url(../libs/builder/icons/file.svg);
         background-position: 8px 4px;
         background-size: 19px 19px;
         background-repeat: no-repeat;
@@ -18867,7 +18867,7 @@ li[data-type] {
         .sections-container > div.section-item .controls .info .type {
           font-size: 12px; }
       .sections-container > div.section-item .controls .buttons {
-        margin-right: 2rem;
+        margin-right: 1.3rem;
         margin-top: 0.2rem; }
         .sections-container > div.section-item .controls .buttons a {
           padding: 0.3rem 0.5rem 0.3rem;

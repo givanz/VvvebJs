@@ -900,10 +900,65 @@ Vvveb.Components.extend("_base", "html/list", {
     name: "List",
 	image: "icons/list.svg",
 	html: `<ul>
-				<li>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil..</li>
-				<li>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil..</li>
-				<li>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil..</li>
+				<li>Begin with the possible; begin with one step.</li>
+				<li>Never think of results, just do!</li>
+				<li>Patience is the mother of will.</li>
+				<li>Man must use what he has, not hope for what is not.</li>
+				<li>Only super-efforts count.</li>
 			</ul>`,
+	properties: [{
+        name: "Type",
+        key: "type",
+        inputtype: SelectInput,
+        
+        onChange: function(node, value) {
+			return changeNodeName(node, value);
+		},	
+			
+        init: function(node) {
+            return node.nodeName.toLowerCase()
+        },
+        
+        data:{
+			options: [{
+                value: "ul",
+                text: "Unorderd"
+            }, {
+                value: "ol",
+                text: "Ordered"
+            }]
+       },
+    },{
+		name: "Items",
+        key: "items",
+        inputtype: ListInput,
+		htmlAttr:"data-slides-per-view",
+		inline:true,
+		data: {
+			selector:"li",
+			container:"",
+			prefix:"Item ",
+			removeElement: true,
+			"newElement": `<li>Do everything quickly and well.</li>`
+		},
+		onChange: function(node, value, input, component, event) {
+			let element = node;
+
+			if (event.action) {
+				if (event.action == "add") {
+					//node.append(generateElements(`<li>List item</li>`)[0]);
+					
+					//temporary solution to better update list
+					Vvveb.Components.render("html/list");
+				}
+				if (event.action == "remove") {
+				} else if (event.action == "select") {
+				}
+			}
+			
+			return node;
+		},
+	}]			
 });
 
 Vvveb.Components.extend("_base", "html/preformatted", {
