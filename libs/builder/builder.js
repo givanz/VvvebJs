@@ -830,7 +830,7 @@ Vvveb.Builder = {
 	init: function(url, callback) {
 
 		let self = this;
-		
+
 		self.loadControlGroups();
 		self.loadBlockGroups();
 		self.loadSectionGroups();
@@ -2347,9 +2347,22 @@ function displayToast(bg, title, message, id = "top-toast") {
 Vvveb.Gui = {
 	
 	init: function() {
+		let self = this;
+
 		document.querySelectorAll("[data-vvveb-action]").forEach(function (el,i) {
 			on = el.dataset.vvvebOn ?? "click";
 			el.addEventListener(on, Vvveb.Gui[el.dataset.vvvebAction]);
+		});
+
+		document.addEventListener('keydown', function(e) {
+			if (e.ctrlKey && e.key === 'z') {
+				e.preventDefault();
+				self.undo();
+			}
+			if (e.ctrlKey && e.key === 'y') {
+				e.preventDefault();
+				self.redo();
+			}
 		});
 	},
 	
