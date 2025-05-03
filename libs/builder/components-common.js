@@ -68,7 +68,7 @@ function changeNodeName(node, newNodeName) {
 	return newNode;
 }
 
-let base_sort = 100;//start sorting for base component from 100 to allow extended properties to be first
+let base_sort = 1000;//start sorting for base component from 100 to allow extended properties to be first
 let style_section = 'style';
 let advanced_section = 'advanced';
 
@@ -1108,8 +1108,8 @@ Vvveb.Components.add("config/bootstrap", {
 					defaultValue: value.value,
 					//index: i - 1,
 					columnNode: this,
-					col:(value.type == "font" || value.type == "dimensions") ? 12 : 4,
-					inline:true,
+					col:(value.type == "font" || value.type == "dimensions") ? 12 : 6,
+					inline:(value.type == "font" || value.type == "dimensions") ? false : true,
 					section: advanced_section,
 					inputtype: input,
 					data: data,
