@@ -4,7 +4,11 @@ function ucFirst(str) {
   return str[0].toUpperCase() + str.slice(1);
 }
 
-let mediaScanUrl = 'scan.php';
+if (typeof mediaScanUrl === "undefined") {
+	var mediaPath = "/media/";
+	var mediaScanUrl = "scan.php";
+	var uploadUrl = "upload.php";
+}
 
 class MediaModal {
 	constructor (modal = true)
@@ -117,29 +121,41 @@ class MediaModal {
 		this.filemanager = null;
 		this.breadcrumbs = null;
 		this.fileList = null;
-		this.mediaPath = "/public/media/";
+		this.mediaPath = mediaPath;
 		this.type = "single";
+		this.container = document.getElementById("MediaModal");
+	}
+	
+	getResponse(response) {
+		return this.response;
+	}
+
+	setResponse(response) {
+		this.response = response;
+		this.currentPath = '',
+		this.breadcrumbsUrls = [];
 	}
 	
 	addModalHtml() {
 		if (this.isModal) document.body.append(generateElements(this.modalHtml)[0]);
-		document.querySelector("#MediaModal .save-btn").addEventListener("click", () => this.save());
+		this.container = document.getElementById("MediaModal");
+		this.container.querySelector(".save-btn").addEventListener("click", () => this.save());
 	}
 	
 	showUploadLoading() {
-		document.querySelector("#MediaModal .upload-collapse .status").innerHTML = `
+		this.container.querySelector(".upload-collapse .status").innerHTML = `
 		<div class="spinner-border" style="width: 5rem; height: 5rem;margin: 5rem auto; display:block" role="status">
 		  <span class="visually-hidden">Loading...</span>
 		</div>`;
 	}
 
 	hideUploadLoading() {
-		document.querySelector("#MediaModal .upload-collapse .status").innerHTML = '';
+		this.container.querySelector(".upload-collapse .status").innerHTML = '';
 	}
 	
 	save() {
 		
-		let file = document.querySelector("#MediaModal .files input:checked").value ?? false;
+		let file = this.container.querySelector(".files input:checked").value ?? false;
 		let src = file;
 		
 		if (!file) return;
@@ -164,7 +180,7 @@ class MediaModal {
 			//$(this.targetInput).val(file).trigger("change");
 		}
 
-		let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('MediaModal'));
+		let modal = bootstrap.Modal.getOrCreateInstance(this.container);
 		if (this.isModal) modal.hide();
 	}
 	
@@ -176,8 +192,8 @@ class MediaModal {
 			this.initGallery();
 			this.isInit = true;
 
-			document.querySelector(".filemanager input[type=file]").addEventListener("change", this.onUpload);
-			document.querySelector(".filemanager").addEventListener("click", function (e) {
+			this.container.querySelector(".filemanager input[type=file]").addEventListener("change", this.onUpload);
+			this.container.querySelector(".filemanager").addEventListener("click", function (e) {
 				let element = e.target.closest(".btn-delete");
 				if (element) {
 					 self.deleteFile(element);
@@ -212,38 +228,41 @@ class MediaModal {
 		this.callback = callback;
 		this.init();
 
-		let modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('MediaModal'));
+		let modal = bootstrap.Modal.getOrCreateInstance(this.container);
 		if (this.isModal) modal.show();
 	}
 
 
 	initGallery() {
-		this.filemanager = document.querySelector('.filemanager'),
-		this.breadcrumbs = document.querySelector('.breadcrumbs'),
+		this.filemanager = this.container.querySelector('.filemanager'),
+		this.breadcrumbs = this.container.querySelector('.breadcrumbs'),
 		this.fileList = this.filemanager.querySelector('.data');
 		let _this = this;
 
 		// Start by fetching the file data from scan.php with an AJAX request
-		fetch(mediaScanUrl)
-		.then((response) => {
-			if (!response.ok) { throw new Error(response) }
-			return response.json();
-		})
-		.then((data) => {
-			 _this.response = [data],
-			 _this.currentPath = '',
-			 _this.breadcrumbsUrls = [];
+		if (!this.response.length) {//if response set by a plugin ignore fetch
+			fetch(mediaScanUrl)
+			.then((response) => {
+				if (!response.ok) { throw new Error(response) }
+				return response.json();
+			})
+			.then((data) => {
+				 _this.response = [data],
+				 _this.currentPath = '',
+				 _this.breadcrumbsUrls = [];
 
-			let folders = [],
-				files = [];
-				
-			window.dispatchEvent(new HashChangeEvent("hashchange"));
-		})
-		.catch(error => {
-			console.log(error.statusText);
-			displayToast("bg-danger", "Error", "Error loading media!");
-		});
-
+				let folders = [],
+					files = [];
+					
+				window.dispatchEvent(new HashChangeEvent("hashchange"));
+			})
+			.catch(error => {
+				console.log(error.statusText);
+				displayToast("bg-danger", "Error", "Error loading media!");
+			});
+		} else {
+			this.goto("");
+		}
 		// This event listener monitors changes on the URL. We use it to
 		// capture back/forward navigation in the browser.
 
@@ -430,9 +449,9 @@ class MediaModal {
 				// if there is no hash
 
 				else {
-					this.currentPath = this.response[0].path;
-					this.breadcrumbsUrls.push(this.response[0].path);
-					this.render(this.searchByPath(this.response[0].path));
+					this.currentPath = this.response[0]?.path ?? "";
+					this.breadcrumbsUrls.push(this.currentPath);
+					this.render(this.searchByPath(this.currentPath));
 				}
 			}
 		}
@@ -522,11 +541,14 @@ _
 					formData.append("mediaPath", Vvveb.MediaModal.mediaPath + Vvveb.MediaModal.currentPath);
 					formData.append("onlyFilename", true);
 		
-
-					fetch('upload.php', {method: "POST",  body: formData})
+					fetch(uploadUrl, {method: "POST",  body: formData})
 					.then((response) => {
-						console.log(response);
-						if (!response.ok) { throw new Error(response) }
+						if (!response.ok) {
+							return Promise.resolve(response.text()).then((responseInText) => {
+								return Promise.reject([response, responseInText]);
+							});
+						}
+  						//if (!response.ok) { throw new Error(response) }
 						return response.text()
 					})
 					.then((data) => {
@@ -541,10 +563,18 @@ _
 						
 						Vvveb.MediaModal.hideUploadLoading();				
 					})
-					.catch(error => {
-						console.log(error);
+					.catch((error) => {
+						let [response, responseInText] = error;
+						let message = responseInText ?? error.statusText ?? "Error uploading!";
 						Vvveb.MediaModal.hideUploadLoading();						
-						displayToast("bg-danger", "Error", "Error uploading!");
+						displayToast("bg-danger", "Error", message.substr(0, 200));
+						if (response.text && !response.bodyUsed) {
+							response.text().then( errorMessage => {
+								let message = errorMessage.substr(0, 200);
+								console.log(message);
+								displayToast("bg-danger", "Error", message);
+							});			
+						}			
 					});		
 			}
 		}	
@@ -554,10 +584,10 @@ _
 			let file = parent.querySelector('input[type ="hidden"]').value;
 			if (confirm(`Are you sure you want to delete "${file}"template?`)) {
 				
-			fetch(deleteUrl, {method: "POST",  body: {file}})
+			fetch(deleteUrl, {method: "POST",  body: new URLSearchParams({file})})
 				.then((response) => {
-					if (!response.ok) { throw new Error(response) }
-					return response.text()
+					if (!response.ok) {  return Promise.reject(response);  }
+					return response.text();
 				})
 				.then((data) => {
 					let bg = "bg-success";
@@ -565,17 +595,19 @@ _
 					} else {
 						//bg = "bg-danger";
 					}
-					
-					document.querySelectorAll("#top-toast .toast-body").html(data)
-					document.querySelectorAll("#top-toast .toast-header").classList.remove(["bg-danger", "bg-success"]).classList.add(bg);
-					document.querySelectorAll("#top-toast .toast").classList.add("show");
-					delay(() => document.querySelectorAll("#top-toast .toast").classList.remove("show"), 5000);		
+
+					displayToast(bg, "Delete", data.message ?? data);
 				
 					parent.remove();	
 				})
 				.catch(error => {
 					console.log(error);
-					displayToast("bg-danger", "Error", "Error deleting file!");
+					let message = error.statusText ?? "Error deleting file!";
+					displayToast("bg-danger", "Error", message);
+					error.text().then( errorMessage => {
+						let message = errorMessage.substr(0, 200);
+						displayToast("bg-danger", "Error", message);
+					})	
 				});	
 			}
 		}
@@ -599,10 +631,7 @@ _
 						//bg = "bg-danger";
 					}
 					
-					document.querySelectorAll("#top-toast .toast-body").html(data)
-					document.querySelectorAll("#top-toast .toast-header").classList.remove(["bg-danger", "bg-success"]).classList.add(bg);
-					document.querySelectorAll("#top-toast .toast").classList.add("show");
-					delay(() => document.querySelectorAll("#top-toast .toast").classList.remove("show"), 5000);
+					displayToast(bg, "Save", data.message ?? data);
 				})
 				.catch(error => {
 					console.log(error);
