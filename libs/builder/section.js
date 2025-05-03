@@ -1,17 +1,92 @@
+/*
+Copyright 2017 Ziadin Givan
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+https://github.com/givanz/VvvebJs
+*/
+
 let bgVideoTemplate = '<video playsinline loop muted autoplay src="../../media/sample.webm" poster="../../media/sample.webp"><video>';
 let bgImageTemplate = '<img src="../../media/4.jpg">';
 let defaultSeparatorSvg = '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 41" width="100%" height="300" fill="var(--bs-body-bg)" preserveAspectRatio="none"><defs><style>.cls-1{fill:inherit}</style></defs><title>rough-edges-bottom</title><path class="cls-1" d="M0,185l125-26,33,17,58-12s54,19,55,19,50-11,50-11l56,6,60-8,63,15v15H0Z" transform="translate(0 -159)"/></svg>';
+
+let section_sort = 1;
+
+let SectionContent = [{
+        name: "Title",
+        key: "title",
+        sort: section_sort++,
+        htmlAttr: "title",
+        inputtype: TextInput
+    },{
+        name: "Container width",
+        key: "container-width",
+        sort: section_sort++,
+		child:":scope > .container, :scope > .container-fluid",
+        htmlAttr: "class",
+        validValues: ["container", "container-fluid"],
+        inputtype: RadioButtonInput,
+        data: {
+            extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+				value: "container",
+				icon:"la la-box",
+				text: "Boxed",
+				title: "Boxed"
+			},{
+				value: "container-fluid",
+				icon:"la la-arrows-alt-h",
+				title: "Full",
+				text: "Full"
+            }]
+         }
+	},{
+        name: "Container height",
+        key: "container-height",
+        sort: section_sort++,
+        child:":scope > .container:first-child, :scope > .container-fluid:first-child",
+        htmlAttr: "class",
+        validValues: ["", "vh-100"],
+        inputtype: RadioButtonInput,
+        data: {
+				extraclass:"btn-group-sm btn-group-fullwidth",
+				options: [{
+				value: "container",
+				icon:"la la-expand",
+				text: "Auto",
+				title: "Auto",
+				checked:true,
+            },{
+				value: "vh-100",
+				icon:"la la-arrows-alt-v",
+				title: "Full",
+				text: "Full"
+            }]
+         }
+	}
+]; 	
 
 let SectionBackground = [{
         key: "section_background_header",
         inputtype: SectionInput,
         name:false,
-        sort: base_sort++,
-		//section: style_section,
+        sort: section_sort++,
+        //section: style_section,
         data: {header:"Background"},
    },{
         name: false,
         key: "section-bg",
+        sort: section_sort++,
         inputtype: RadioButtonInput,
         data: {
             inline: true,
@@ -108,6 +183,7 @@ let SectionBackground = [{
     },{
         name: "Image",
         key: "src",
+        sort: section_sort++,
         htmlAttr: "src",
 		child:":scope > .background-container > img",
 		group:"bg-image",
@@ -117,6 +193,7 @@ let SectionBackground = [{
         name: "Video",
         child: "source",
         key: "src",
+        sort: section_sort++,
         htmlAttr: "src",
 		child:":scope > .background-container > video",
 		group:"bg-video",
@@ -125,12 +202,26 @@ let SectionBackground = [{
    },{
         name: "Poster",
         key: "poster",
+        sort: section_sort++,
         htmlAttr: "poster",
 		child:":scope > .background-container > video",
 		group:"bg-video",
 		inline:true,
         inputtype: ImageInput
-     }   
+     }, {   
+        name: "Parallax",
+        key: "parallax",
+        sort: section_sort++,
+        child:":scope > .background-container",
+        htmlAttr: "class",
+        validValues: ["", "parallax"],
+        inputtype: ToggleInput,
+        data: {
+            className: "form-switch-lg",
+            on: 'parallax',
+            off: ''
+        },	 
+     },	 
 ];
 
 
@@ -138,13 +229,14 @@ let SectionOverlay = [{
         key: "section_overlay",
         inputtype: SectionInput,
         name:false,
-        sort: base_sort++,
-		//section: style_section,
+        sort: section_sort++,
+        //section: style_section,
         data: {header:"Overlay"},
 	},{
         //name: "Enable",
 		name: false,
         key: "overlay",
+        sort: section_sort++,
         inline: true,
         //validValues: ["", "active"],
         inputtype: ToggleInput,
@@ -188,6 +280,7 @@ let SectionOverlay = [{
     },{
         name: "Color",
         key: "background-color",
+        sort: section_sort++,
         htmlAttr: "style",
 		child:":scope > .overlay",
 		group:"overlay",
@@ -195,6 +288,7 @@ let SectionOverlay = [{
    },{
         name: "Opacity",
         key: "opacity",
+        sort: section_sort++,
 		htmlAttr: "style",
 		inline:false,
 		group:"overlay",
@@ -212,13 +306,14 @@ function sectionSeparatorProperties(name, title) {
         key: `section_${name}_separator`,
         inputtype: SectionInput,
         name:false,
-        sort: base_sort++,
-		//section: style_section,
+        sort: section_sort++,
+        //section: style_section,
         data: {header:`${title} Separator`},
 	},{
         //name: "Enable",
 		name: false,
         key: `${name}_separator`,
+        sort: section_sort++,
         inline: true,
         inputtype: ToggleInput,
         data: {
@@ -261,6 +356,7 @@ function sectionSeparatorProperties(name, title) {
     },{
 		name: "Icon",
 		key: "icon",
+		sort: section_sort++,
 		inline:true,
 		group:`${name}_separator`,
 		child:`.separator.${name} > svg`,
@@ -293,6 +389,7 @@ function sectionSeparatorProperties(name, title) {
 	},{
 		name: "Width",
 		key: "width",
+		sort: section_sort++,
 		htmlAttr: "width",
 		group:`${name}_separator`,
 		child:`.separator.${name} > svg`,
@@ -305,6 +402,7 @@ function sectionSeparatorProperties(name, title) {
    },{
 		name: "Height",
 		key: "height",
+		sort: section_sort++,
 		htmlAttr: "height",
 		group:`${name}_separator`,
 		child:`.separator.${name} > svg`,
@@ -317,6 +415,7 @@ function sectionSeparatorProperties(name, title) {
    },{
 		name: "Stroke width",
 		key: "stroke-width",
+		sort: section_sort++,
 		htmlAttr: "stroke-width",
 		group:`${name}_separator`,
 		child:`.separator.${name} > svg`,
@@ -331,16 +430,16 @@ function sectionSeparatorProperties(name, title) {
 		inputtype: SectionInput,
 		name:false,
 		group:`${name}_separator`,
-		//sort: base_sort++,
-		//section: style_section,
+		sort: section_sort++,
+        //section: style_section,
 		data: {header:"Svg colors"},
 	},*/ {
         name: "Fill Color",
         key: "fill",
-        //sort: base_sort++,
+        sort: section_sort++,
         col:4,
         inline:true,
-		//section: style_section,
+        //section: style_section,
 		group:`${name}_separator`,
 		child:`.separator.${name} > svg`,
 		htmlAttr: "fill",
@@ -348,21 +447,21 @@ function sectionSeparatorProperties(name, title) {
    },{
         name: "Color",
         key: "color",
-        //sort: base_sort++,
+        sort: section_sort++,
         col:4,
         inline:true,
-		//section: style_section,
-		group:`${name}_separator`,
-		child:`.separator.${name} > svg`,
-		htmlAttr: "color",
+        //section: style_section,
+	group:`${name}_separator`,
+	child:`.separator.${name} > svg`,
+	htmlAttr: "color",
         inputtype: ColorInput,
    },{
         name: "Stroke",
         key: "stroke",
-        //sort: base_sort++,
+        sort: section_sort++,
         col:4,
         inline:true,
-		//section: style_section,
+        //section: style_section,
 		group:`${name}_separator`,
 		child:`.separator.${name} > svg`,
 		htmlAttr: "color",
@@ -375,13 +474,14 @@ let SectionBottomSeparator = [{
         key: "section_bottom_separator",
         inputtype: SectionInput,
         name:false,
-        sort: base_sort++,
-		//section: style_section,
+        sort: section_sort++,
+        //section: style_section,
         data: {header:"Bottom Separator"},
 	},{
         //name: "Enable",
 		name: false,
         key: "top_bottom",
+        sort: section_sort++,
         inline: true,
         validValues: ["", "active"],
         inputtype: ToggleInput,
@@ -392,57 +492,10 @@ let SectionBottomSeparator = [{
         }
 	}, 
 ];
-
+	
 /* Section */
-let ComponentSectionContent = [{
-        name: "Title",
-        key: "title",
-        htmlAttr: "title",
-        inputtype: TextInput
-    },{
-        name: "Container width",
-        key: "container-width",
-		child:":scope > .container, :scope > .container-fluid",
-        htmlAttr: "class",
-        validValues: ["container", "container-fluid"],
-        inputtype: RadioButtonInput,
-        data: {
-            extraclass:"btn-group-sm btn-group-fullwidth",
-            options: [{
-		value: "container",
-		icon:"la la-box",
-		text: "Boxed",
-		title: "Boxed"
-			},{
-		value: "container-fluid",
-		icon:"la la-arrows-alt-h",
-		title: "Full",
-		text: "Full"
-            }]
-         }
-	},{
-        name: "Container height",
-        key: "container-height",
-        child:":scope > .container:first-child, :scope > .container-fluid:first-child",
-        htmlAttr: "class",
-        validValues: ["", "vh-100"],
-        inputtype: RadioButtonInput,
-        data: {
-            extraclass:"btn-group-sm btn-group-fullwidth",
-            options: [{
-		value: "container",
-		icon:"la la-expand",
-		text: "Auto",
-		title: "Auto",
-		checked:true,
-            },{
-		value: "vh-100",
-		icon:"la la-arrows-alt-v",
-		title: "Full",
-		text: "Full"
-            }]
-         }
-	}, 
+let ComponentSectionContent = [
+	...SectionContent,
 	...SectionBackground,
 	...SectionOverlay,
 	...sectionSeparatorProperties("top", "Top"),
@@ -454,26 +507,26 @@ let ComponentSectionStyle = [];/*[{
         key: "Section Style",
         inputtype: SectionInput,
         name:false,
-        section: style_section,
+        //section: style_section,
         data: {header:"Style"},
     },{
         name: "Text1 Style",
         key: "text1",
         htmlAttr: "innerHTML",
         inputtype: TextInput,
-        section: style_section,
+        //section: style_section,
     },{
         name: "Name1 Style",
         key: "name1",
         htmlAttr: "name",
         inputtype: TextInput,
-        section: style_section,
+        //section: style_section,
     },{
         name: "Type1 Style",
         key: "type1",
 		htmlAttr: "type",
         inputtype: SelectInput,
-        section: style_section,
+        //section: style_section,
         data: {
 		options: [{
 			value: "button",
@@ -493,7 +546,7 @@ let ComponentSectionStyle = [];/*[{
         inputtype: CheckboxInput,
 		inline:true,
         col:6,
-        section: style_section
+        //section: style_section
    	},{
         name: "Disabled1 Style",
         key: "disabled1",
@@ -501,7 +554,7 @@ let ComponentSectionStyle = [];/*[{
         inputtype: CheckboxInput,		
 		inline:true,
         col:6,
-        section: style_section,
+        //section: style_section,
 }];*/
 
 let ComponentSectionAdvanced = [];/* [{
@@ -598,7 +651,8 @@ function componentsInit(node) {
 		}
 }
 
-Vvveb.Components.add("elements/section", {
+//Vvveb.Components.add("elements/section", {
+Vvveb.Components.extend("_base", "elements/section", {
     nodes: ["section"],
     name: "Section",
     image: "icons/stream-solid.svg",
@@ -615,7 +669,8 @@ Vvveb.Components.add("elements/section", {
 	init: componentsInit	
 });  
 
-Vvveb.Components.add("elements/header", {
+//Vvveb.Components.add("elements/header", {
+Vvveb.Components.extend("_base", "elements/header", {
     nodes: ["header"],
     name: "Header",
     image: "icons/stream-solid.svg",
@@ -632,8 +687,8 @@ Vvveb.Components.add("elements/header", {
     init: componentsInit	
 });  
 
-
-Vvveb.Components.add("elements/footer", {
+//Vvveb.Components.add("elements/footer", {
+Vvveb.Components.extend("_base", "elements/footer", {
     nodes: ["footer"],
     name: "Footer",
     image: "icons/stream-solid.svg",
