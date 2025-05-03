@@ -32,13 +32,13 @@
 						  <img src="libs/builder/icons/right-column-layout.svg" width="18" height="18" alt="" role="presentation">
 					  </button>
 					</div>
-					
+
 					<div class="btn-group me-3" role="group">
 					  <button class="btn btn-light" title="Undo (Ctrl/Cmd + Z)" id="undo-btn" data-vvveb-action="undo" data-vvveb-shortcut="ctrl+z">
 						  <i class="la la-undo"></i>
 					  </button>
 
-            <button class="btn btn-light" title="Redo (Ctrl/Cmd + Shift + Z)" id="redo-btn" data-vvveb-action="redo" data-vvveb-shortcut="ctrl+shift+z">
+            <button class="btn btn-light" title="Redo (Ctrl/Cmd + Shift + Y)" id="redo-btn" data-vvveb-action="redo" data-vvveb-shortcut="ctrl+shift+z">
               <i class="la la-undo la-flip-horizontal"></i>
 					  </button>
 					</div>
@@ -57,7 +57,7 @@
 						  <i class="icon-expand-outline"></i>
 					  </button>
 
-					  <button class="btn btn-light active" title="Toggle navigator" id="toggle-tree-list" data-bs-toggle="button" data-vvveb-action="toggleTreeList" aria-pressed="true">
+					  <button class="btn btn-light active" title="Toggle navigator (Ctrl + Shift + N)" id="toggle-tree-list" data-bs-toggle="button" data-vvveb-action="toggleTreeList" aria-pressed="true">
 						  <i class="icon-layers-outline"></i>
 					  </button>
 
@@ -69,7 +69,7 @@
 					
 								
 					<div class="btn-group me-2 float-end" role="group">
-					  <button class="btn btn-primary btn-sm btn-icon save-btn" title="Export (Ctrl + E)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-url="save.php" data-v-vvveb-shortcut="ctrl+e">
+					  <button class="btn btn-primary btn-sm btn-icon save-btn" title="Save (Ctrl + S)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-url="save.php" data-v-vvveb-shortcut="ctrl+e">
 
 						<span class="loading d-none">
 						<i class="icon-save-outline"></i>
@@ -128,7 +128,7 @@
 								<span class="text-secondary"><i class="la la-file la-lg"></i> Pages</span>
 
 									<div class="btn-group responsive-btns float-end" role="group">
-									  <button class="btn btn-outline-primary btn-sm  btn-add" title="New file" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="">
+									  <button class="btn btn-outline-primary btn-sm btn-add" title="New page (Ctrl + Shift + P)" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="">
 									<!-- <span>Add new</span> -->
 									<i class="icon-add"></i>
 									  </button>
@@ -913,7 +913,7 @@
 
 <script id="vvveb-input-radiobuttoninput" type="text/html">
 	
-	<div class="btn-group {%if (extraclass) { %}{%=extraclass%}{% } %} clearfix" role="group">
+	<div class="btn-group btn-group-sm {%if (extraclass) { %}{%=extraclass%}{% } %} clearfix" role="group">
 		{% var namespace = 'rb-' + Math.floor(Math.random() * 100); %}
 		
 		{% for ( var i = 0; i < options.length; i++ ) { %}
@@ -938,8 +938,8 @@
 		type="checkbox" 
 		name="{%=key%}" 
 		value="{%=on%}" 
-		{%if (off) { %} data-value-off="{%=off%}" {% } %}
-		{%if (on) { %} data-value-on="{%=on%}" {% } %} 
+		{%if (off !== null) { %} data-value-off="{%=off%}" {% } %}
+		{%if (on !== null) { %} data-value-on="{%=on%}" {% } %} 
 		class="form-check-input" type="checkbox" role="switch"
 		id="{%=key%}">
         <label class="form-check-label"for="{%=key%}">
@@ -1292,7 +1292,7 @@
 	<div>
 		<video id="thumb-v{%=key%}" class="img-thumbnail p-0" data-target-input="#input-v{%=key%}" data-target-thumb="#thumb-v{%=key%}" style="cursor:pointer" src="" width="225" height="225" playsinline loop muted controls></video>
 		<input name="v{%=key%}" type="text" class="form-control mt-1" id="input-v{%=key%}"/>
-		<button name="button" class="btn btn-primary btn-sm btn-icon mt-2" data-target-input="#vinput-v{%=key%}" data-target-thumb="#thumb-v{%=key%}"><i class="la la-video la-lg"></i><span>Set video</span></button>
+		<button name="button" class="btn btn-primary btn-sm btn-icon mt-2 px-2" data-target-input="#vinput-v{%=key%}" data-target-thumb="#thumb-v{%=key%}"><i class="la la-video la-lg"></i><span>Set video</span></button>
 	</div>
 	
 </script>
@@ -1304,7 +1304,7 @@
 		{%  if (typeof palette !== 'undefined') { %}
 		<datalist id="{%=key%}-color-palette">
 			{% for (const color in palette) { %}
-				<option value="{%=color%}">{%=palette[color]%}</option>
+				<option>{%=palette[color]%}</option>
 			{% } %}		
 		{% } %}
 	</div>
@@ -1385,7 +1385,6 @@
 				<button href="#" class="delete btn btn-outline-danger" title="Delete"><i class="la la-trash"></i></button>
 				<a href="{%=url%}" target="_blank" class="view btn btn-outline-primary" title="View page"><i class="la la la-external-link-alt"></i></a>
 				<button href="#" class="rename btn btn-outline-primary" title="Rename"><i class="la la-pen"></i></button>
-				<button href="#" class="duplicate btn btn-outline-primary" title="Duplicate"><i class="icon-copy-outline"></i></button>
 			</div>
 		</label> <input type="checkbox" id="{%=name%}" />
 		<!-- <ol></ol> -->
@@ -1405,7 +1404,10 @@
 <script id="vvveb-input-sectioninput" type="text/html">
 	<div>
 		{% var namespace = '-' + Math.floor(Math.random() * 1000); %}
-		<label class="header" data-header="{%=key%}" for="header_{%=key%}{%=namespace%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}><span>{%=header%}</span> <div class="header-arrow"></div></label> 
+		<label class="header" data-header="{%=key%}" for="header_{%=key%}{%=namespace%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}>
+			<span>{%=header%}</span> 
+			<div class="header-arrow"></div>
+		</label> 
 		<input class="header_check" type="checkbox" {% if (typeof expanded !== 'undefined' && expanded == false) { %} {% } else { %}checked="true"{% } %} id="header_{%=key%}{%=namespace%}"> 
 		<div class="section row" data-section="{%=key%}" {% if (typeof group !== 'undefined' && group != null) { %}data-group="{%=group%}" {% } %}></div>		
 	</div>
