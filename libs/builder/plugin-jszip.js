@@ -113,10 +113,10 @@ function () {
 			}
         }
         
-        zip.file("index.html", html);
+        zip.file(Vvveb.FileManager.getCurrentFileName() ?? "index.html", html);
         zip.generateAsync({type:"blob"})
         .then(function(content) {
-            saveAs(content, Vvveb.FileManager.getCurrentPage());
+            saveAs(content, Vvveb.FileManager.getPageData("title") ?? Vvveb.FileManager.getCurrentPage());
         });
     }).catch((error) => {
         console.log(error)
