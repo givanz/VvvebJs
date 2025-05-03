@@ -635,8 +635,11 @@ Vvveb.Components.add("elements/tabs", {
 			</div>
 	</div>`,
 	afterDrop: function(node) {
-		//set unique accordion id
-		node.outerHTML = node.outerHTML.replaceAll('parentId', Math.ceil(Math.random() * 1000));
+		//set unique accordion parent id, this is a bootstrap accordion limitation
+		let parentId = Math.ceil(Math.random() * 1000);
+		node.id = 'tabs-' + parentId;
+		node.innerHTML = node.innerHTML.replaceAll('parentId', parentId);
+
 		return node;
 	},	
     properties: [{
@@ -652,7 +655,7 @@ Vvveb.Components.add("elements/tabs", {
 			inputtype: ListInput,
 			data: {
 				selector:"> .nav-link",
-				container:"> nav > .nav-tabs",
+				container:"nav > .nav-tabs",
 				prefix:"Tab ",
 				name: "text",
 				removeElement: false,//handle manually to delete pane also
@@ -662,8 +665,8 @@ Vvveb.Components.add("elements/tabs", {
 				let element = node;
 				let tabsId = element.id.replace('tabs-','');
 				
-				let nav = node.querySelector("> nav .nav-tabs");
-				let content = node.querySelector("> .tab-content");
+				let nav = node.querySelector("nav .nav-tabs");
+				let content = node.querySelector(".tab-content");
 
 				if (event.action) {
 					if (event.action == "add") {
@@ -672,16 +675,18 @@ Vvveb.Components.add("elements/tabs", {
 						
 						nav.append(generateElements(`<button class="nav-link" id="nav-tab-${tabsId}-${index}-${random}" data-bs-toggle="tab" data-bs-target="#tab-${tabsId}-${index}-${random}" type="button" role="tab" aria-controls="tab-${index}-${random}" aria-selected="false">Tab ${index}</button>`)[0]);
 						
-						content.append(generateElements(`<div class="tab-pane p-4" id="tab-${tabsId}-${index}-${random}" role="tabpanel" aria-labelledby="tab-${tabsId}-${index}-${random}" tabindex="0"><p>Quisque sagittis non ex eget vestibulum</p></div>`)[0]);
+						content.append(generateElements(`<div class="tab-pane p-4" id="tab-${tabsId}-${index}-${random}" role="tabpanel" aria-labelledby="tab-${tabsId}-${index}-${random}" tabindex="0"><p>Never think of results, just do!</p></div>`)[0]);
 						
 						//temporary solution to better update list
 						Vvveb.Components.render("elements/tabs");
 					}
+					
+					let index = event.index + 1;
 					if (event.action == "remove") {
-						nav.querySelector("> button:nth-child(" + event.index + ")").remove();
-						content.querySelector("> .tab-pane:nth-child(" + event.index + ")").remove();
+						nav.querySelector("button:nth-child(" + index + ")").remove();
+						content.querySelector(".tab-pane:nth-child(" + index + ")").remove();
 					} else if (event.action == "select") {
-						let tab = nav.querySelector("> button:nth-child((" + event.index + ")");
+						let tab = nav.querySelector("button:nth-child(" + index + ")");
 						Vvveb.Builder.iframe.contentWindow.bootstrap.Tab.getOrCreateInstance(tab).show();
 					}
 				}
@@ -738,7 +743,11 @@ Vvveb.Components.add("elements/accordion", {
 		</div>`,
 	afterDrop: function(node) {
 		//set unique accordion id
-		node.outerHTML = node.outerHTML.replaceAll('parentId', Math.ceil(Math.random() * 1000));
+		let parentId = Math.ceil(Math.random() * 1000);
+		//node.outerHTML = node.outerHTML.replaceAll('parentId', parentId);
+		node.id = 'accordion-' + parentId;
+		node.innerHTML = node.innerHTML.replaceAll('parentId', parentId);
+		
 		return node;
 	},
     properties: [{
@@ -771,7 +780,7 @@ Vvveb.Components.add("elements/accordion", {
 							</h2>
 							<div id="collapse-${index}-${random}" class="accordion-collapse collapse" aria-labelledby="heading-${index}-${random}" data-bs-parent="#accordion-${accordionId}">
 							  <div class="accordion-body">
-								<p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin</p>
+								<p>Begin with the possible; begin with one step.</p>
 							  </div>
 							</div>
 						  </div>`)[0]);
@@ -779,10 +788,11 @@ Vvveb.Components.add("elements/accordion", {
 						//temporary solution to better update list
 						Vvveb.Components.render("elements/accordion");
 					}
+					
+					let index = (event.index + 1);
 					if (event.action == "remove") {
-						node.querySelector(":scope > .accordion-item:nth-child(" + event.index + ")").remove();
+						node.querySelector(":scope > .accordion-item:nth-child(" + index + ")").remove();
 					} else if (event.action == "select") {
-						let index = (event.index + 1);
 						let el = node.querySelector(":scope > .accordion-item:nth-child(" + index + ")");
 						let btn= el.querySelector(".accordion-button");
 						let collapse = el.querySelector(" .collapse");
