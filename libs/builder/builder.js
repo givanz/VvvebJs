@@ -4198,3 +4198,59 @@ let fontList = [{
 	value: "'Brush Script MT', sans-serif",
 	text: 'Brush Script'
 }];
+
+
+/* 
+* LOCAL STORAGE EDITOR PREFERENCES 
+*/
+var vvvebBuilderID  	= document.getElementById('vvveb-builder');
+var EditorKeyPref   	= "andromede_editor";
+var EditorPreferences 	= JSON.parse(localStorage.getItem(EditorKeyPref)) || {};
+
+if(EditorPreferences.editorSideRight){
+	if(EditorPreferences.editorSideRight == 'none'){
+		document.body.style.setProperty('--builder-right-panel-width', '0px');
+		if (vvvebBuilderID) {
+			vvvebBuilderID.classList.add('no-right-panel');
+		}
+	}
+}
+
+if(EditorPreferences.editorSideLeft){
+	if(EditorPreferences.editorSideLeft == 'none'){
+		document.body.style.setProperty('--builder-left-panel-width', '0px');
+	}
+}
+
+$("#toggle-right-column-btn").on("click", function(event) {
+	if(EditorPreferences.editorSideRight == 'none'){
+		EditorPreferences.editorSideRight = "block";
+		var jsonData = JSON.stringify(EditorPreferences);
+		localStorage.setItem(EditorKeyPref, jsonData);
+	}else if(EditorPreferences.editorSideRight == 'block'){
+		EditorPreferences.editorSideRight = "none";
+		var jsonData = JSON.stringify(EditorPreferences);
+		localStorage.setItem(EditorKeyPref, jsonData);
+	}else{
+		EditorPreferences.editorSideRight = "none";
+		var jsonData = JSON.stringify(EditorPreferences);
+		localStorage.setItem(EditorKeyPref, jsonData);
+	}
+});
+
+$("#toggle-left-column-btn").on("click", function(event) {
+	if(EditorPreferences.editorSideLeft == 'none'){
+		EditorPreferences.editorSideLeft = "block";
+		var jsonData = JSON.stringify(EditorPreferences);
+		localStorage.setItem(EditorKeyPref, jsonData);
+	}else if(EditorPreferences.editorSideLeft == 'block'){
+		EditorPreferences.editorSideLeft = "none";
+		var jsonData = JSON.stringify(EditorPreferences);
+		localStorage.setItem(EditorKeyPref, jsonData);
+	}else{
+		EditorPreferences.editorSideLeft = "none";
+		var jsonData = JSON.stringify(EditorPreferences);
+		localStorage.setItem(EditorKeyPref, jsonData);
+	}
+});
+
