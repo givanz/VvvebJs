@@ -2529,6 +2529,23 @@ Vvveb.Gui = {
 		document.getElementById("iframe-layer").classList.toggle("d-none");
 		document.getElementById("vvveb-builder").classList.toggle("preview");
 	},
+
+	erase : function () {
+		if(confirm('Clean the current Canvas ?')){
+
+			// find all section and delete the current document sections
+			var sectionItems = document.querySelectorAll('.section-item');
+			sectionItems.forEach(function(sectionItem) {
+				var deleteButton = sectionItem.querySelector('.delete-btn');
+				if (deleteButton) {
+					deleteButton.click();
+				}
+			});
+
+			// reload all section after deleted canvas
+			Vvveb.SectionList.loadSections();
+		}
+	},
 	
 	fullscreen : function () {
 		launchFullScreen(document); // the whole page
