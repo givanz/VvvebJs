@@ -635,8 +635,19 @@ Vvveb.WysiwygEditor = {
 			} else {
 				element = document.createElement(tag);
 				range = selection.getRangeAt(0);
-				range.surroundContents(element);
-				range.selectNodeContents(element.childNodes[0], 0); 
+				
+				try {
+					range.surroundContents(element);
+					range.selectNodeContents(element.childNodes[0], 0); 
+
+				} catch (e) {
+					let content = range.extractContents();
+
+					element.appendChild(content);
+					range.insertNode(element);
+
+					range.selectNodeContents(element);
+				}				
 			}
 		}
 		
