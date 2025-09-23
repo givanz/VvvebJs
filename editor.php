@@ -10,8 +10,8 @@ foreach ($htmlFiles as $file) {
    if (in_array($file, array('new-page-blank-template.html', 'editor.html'))) continue;//skip template files
    $pathInfo = pathinfo($file);
    $filename = $pathInfo['filename'];
-   $folder = preg_replace('@/.+?$@', '', $pathInfo['dirname']);
-   $subfolder = preg_replace('@^.+?/@', '', $pathInfo['dirname']);
+   $folder = preg_replace('$file11', '', $pathInfo['dirname']);
+   $subfolder = preg_replace('$file11', '', $pathInfo['dirname']);
    if ($filename == 'index' && $subfolder) {
 	   $filename = $subfolder;
    }
