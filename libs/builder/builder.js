@@ -836,7 +836,7 @@ Vvveb.Builder = {
 	leftPanelWidth: 275,
 	ignoreClasses: ["clearfix", "masonry", "has-shadow"],
 	
-	init: function(url, callback) {
+	init: function(url, callback, targetElement) {
 
 		let self = this;
 		
@@ -847,6 +847,7 @@ Vvveb.Builder = {
 		self.selectedEl = null;
 		self.highlightEl = null;
 		self.initCallback = callback;
+		self.targetElement = targetElement;
 		
         self.documentFrame = document.querySelector("#iframe-wrapper > iframe");
         self.canvas = document.getElementById("canvas");
@@ -1105,7 +1106,8 @@ Vvveb.Builder = {
 		
 		self.frameDoc  = window.FrameDocument;
 		self.frameHtml = window.FrameDocument.querySelector("html");
-		self.frameBody = window.FrameDocument.querySelector("body");
+		if(self.targetElement)self.frameBody = window.FrameDocument.querySelector(self.targetElement);
+		else self.frameBody = window.FrameDocument.querySelector("body");
 		self.frameHead = window.FrameDocument.querySelector("head");
 		
 		//insert editor helpers like non editable areas
