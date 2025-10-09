@@ -2047,7 +2047,7 @@ Vvveb.Builder = {
 		return html;
 	},
 
-	getHtml: function(keepHelperAttributes = true) {
+	getHtml: function(keepHelperAttributes = true, targetElement = false) {
 		let doc = window.FrameDocument;
 		let hasDoctpe = (doc.doctype !== null);
 		let html = "";
@@ -2073,7 +2073,9 @@ Vvveb.Builder = {
           
          Vvveb.FontsManager.cleanUnusedFonts();
 
-         html += doc.documentElement.outerHTML;
+         if(targetElement)html = doc.querySelector(targetElement).outerHTML;
+         else html += doc.documentElement.outerHTML;
+		
          html = this.removeHelpers(html, keepHelperAttributes);
          
 		 window.dispatchEvent(new CustomEvent("vvveb.getHtml.after", {detail: doc}));
