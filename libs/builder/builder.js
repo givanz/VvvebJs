@@ -1583,7 +1583,7 @@ Vvveb.Builder = {
 
 		let highlightDbClick = function(event) {
 			
-			if (Vvveb.Builder.isPreview == false) {
+			if (Vvveb.Builder.isPreview == false && event.target.querySelector("[data-vvveb-disabled]")?.getAttribute("data-vvveb-disabled") != 'all') {
 				
 				if (!Vvveb.WysiwygEditor.isActive)  {
 					self.selectPadding = 10;
