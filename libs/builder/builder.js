@@ -2073,7 +2073,7 @@ Vvveb.Builder = {
           
          Vvveb.FontsManager.cleanUnusedFonts();
 
-         if(targetElement)html = doc.querySelector(targetElement).outerHTML;
+         if(doc.querySelector(targetElement))html = doc.querySelector(targetElement).outerHTML;
          else html += doc.documentElement.outerHTML;
 		
          html = this.removeHelpers(html, keepHelperAttributes);
