@@ -1106,7 +1106,7 @@ Vvveb.Builder = {
 		
 		self.frameDoc  = window.FrameDocument;
 		self.frameHtml = window.FrameDocument.querySelector("html");
-		if(self.targetElement)self.frameBody = window.FrameDocument.querySelector(self.targetElement);
+		if(window.FrameDocument.querySelector(self.targetElement))self.frameBody = window.FrameDocument.querySelector(self.targetElement);
 		else self.frameBody = window.FrameDocument.querySelector("body");
 		self.frameHead = window.FrameDocument.querySelector("head");
 		
