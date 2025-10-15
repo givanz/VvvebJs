@@ -1433,6 +1433,7 @@ Vvveb.Builder = {
 
 					if (self.dragType == "section") {
 						let closest = parent.closest("section, header, footer, body");
+						if(self.targetElement && closest.querySelector(self.targetElement))closest = closest.querySelector(self.targetElement);//gone too high
 						if (closest) {
 							parent = closest;
 						}
