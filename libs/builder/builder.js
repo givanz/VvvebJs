@@ -1454,7 +1454,7 @@ Vvveb.Builder = {
 								if (noChildren[parentTagName] || isVattribute) { 
 									parent.after(self.dragElement);
 								} else {
-									if (parent == self.dragElement.parenNode) {
+									if (parent == self.dragElement.parentNode) {
 										parent.appendChild(self.dragElement);
 									} else {
 										parent.append(self.dragElement);
