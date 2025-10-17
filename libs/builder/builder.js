@@ -2076,7 +2076,9 @@ Vvveb.Builder = {
           
          Vvveb.FontsManager.cleanUnusedFonts();
 
-         html += doc.documentElement.outerHTML;
+         if(doc.querySelector(Vvveb.Builder.targetElement))html = doc.querySelector(Vvveb.Builder.targetElement).innerHTML;
+         else html += doc.documentElement.outerHTML;
+		
          html = this.removeHelpers(html, keepHelperAttributes);
          
 		 window.dispatchEvent(new CustomEvent("vvveb.getHtml.after", {detail: doc}));
@@ -2088,6 +2090,8 @@ Vvveb.Builder = {
 	setHtml: function(html) {
 		//documentElement.innerHTML resets <head> each time and the page flickers
 		//return window.FrameDocument.documentElement.innerHTML = html;
+
+		if(window.FrameDocument.querySelector(Vvveb.Builder.targetElement)){window.FrameDocument.querySelector(Vvveb.Builder.targetElement).innerHTML = html;return}
 		
 		function getTag(html, tag, outerHtml = false) {
 			const start = html.indexOf("<" + tag);
