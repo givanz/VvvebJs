@@ -1585,6 +1585,8 @@ Vvveb.Builder = {
 		self.frameBody.addEventListener("mouseup", highlightUp);
 
 		let highlightDbClick = function(event) {
+
+			if(window.FrameDocument.querySelector(Vvveb.Builder.targetElement) == event.target)return false;
 			
 			if (Vvveb.Builder.isPreview == false) {
 				
@@ -1624,6 +1626,8 @@ Vvveb.Builder = {
 		self.frameBody.addEventListener("dblclick", highlightDbClick);
 		
 		let highlightClick = function(event) {
+
+			if(window.FrameDocument.querySelector(Vvveb.Builder.targetElement) == event.target)return false;
 			
 			if (Vvveb.Builder.isPreview == false){
 				if (event.target) {
