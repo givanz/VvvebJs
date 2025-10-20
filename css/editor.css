@@ -17936,9 +17936,9 @@ body {
     border-style: solid;
     border-width: 0px;
     background-color: var(--bs-body-bg);
-    height: 100%;
+    height: calc( 100vh - (var(--builder-header-top-height)));
     position: fixed;
-    top: 35px;
+    top: var(--builder-header-top-height);
     z-index: 10; }
   #vvveb-builder #left-panel {
     border-right-width: 1px;
@@ -17954,7 +17954,7 @@ body {
 		box-shadow: -1px -2px 2px var(--bs-border-color) inset;*/
     width: 15vw;
     width: calc(var(--builder-left-panel-width));
-    height: 100%;
+    height: calc( 100vh - (var(--builder-header-top-height)));
     max-height: 100%; }
     #vvveb-builder #left-panel > div {
       height: 100%;
