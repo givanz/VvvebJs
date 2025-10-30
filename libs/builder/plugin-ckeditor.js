@@ -34,7 +34,7 @@ Vvveb.WysiwygEditor = {
 	init: function(doc) {
 		this.doc = doc;
 		//use default editor toolbar for ckeditor
-		this.toolbar = $('#wysiwyg-editor');
+		this.toolbar = document.querySelector('#wysiwyg-editor');
 		this.toolbar.removeClass("default-editor").addClass("ckeditor");
 		this.toolbar.html('');
 	},

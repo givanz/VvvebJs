@@ -62,8 +62,8 @@ function changeNodeName(node, newNodeName)
 		newNode.setAttribute(attributes[i].nodeName, attributes[i].nodeValue);
 	}
 
-	$(newNode).append($(node).contents());
-	$(node).replaceWith(newNode);
+	document.querySelector(newNode).insertAdjacentHTML("beforeend",document.querySelector(node).contents());
+	document.querySelector(node).replaceWith(newNode);
 	
 	return newNode;
 }
@@ -817,13 +817,13 @@ Vvveb.Components.extend("_base", "_base", {
         inputtype: ImageInput,
         
         init: function(node) {
-			var image = $(node).css("background-image").replace(/^url\(['"]?(.+)['"]?\)/, '$1');
+			var image = document.querySelector(node).style.backgroundImage.replace(/^url\(['"]?(.+)['"]?\)/, '$1');
 			return image;
         },
 
 		onChange: function(node, value) {
 			
-			$(node).css('background-image', 'url(' + value + ')');
+			document.querySelector(node).style.backgroundImage = "url(" + value + ")";
 			
 			return node;
 		}        
@@ -1808,7 +1808,7 @@ Vvveb.Components.extend("_base", "html/selectinput", {
 		properties = [];
 		var i = 0;
 		
-		$(node).find('option').each(function() {
+		document.querySelector(node).find('option').forEach(function() {
 
 			data = {"value": this.value, "text": this.text};
 			
@@ -1822,7 +1822,7 @@ Vvveb.Components.extend("_base", "html/selectinput", {
 				data: data,
 				onChange: function(node, value, input) {
 					
-					option = $(this.optionNode);
+					option = document.querySelector(this.optionNode);
 					
 					//if remove button is clicked remove option and render row properties
 					if (input.nodeName == 'BUTTON')
@@ -1867,7 +1867,7 @@ Vvveb.Components.extend("_base", "html/selectinput", {
         data: {text:"Add option", icon:"la-plus"},
         onChange: function(node)
         {
-			 $(node).append('<option value="value">Text</option>');
+			 document.querySelector(node).insertAdjacentHTML("beforeend",'<option value="value">Text</option>');
 			 
 			 //render component properties again to include the new column inputs
 			 Vvveb.Components.render("html/selectinput");
@@ -2164,7 +2164,7 @@ Vvveb.Components.add("html/gridcolumn", {
         data: {hide_remove:true},
 		
 		beforeInit: function(node) {
-			_class = $(node).attr("class");
+			_class = document.querySelector(node).getAttribute("class");
 			
 			var reg = /col-([^-\$ ]*)?-?(\d+)/g; 
 			var match;
@@ -2202,8 +2202,8 @@ Vvveb.Components.add("html/gridrow", {
 		var i = 0;
 		var j = 0;
 		
-		$(node).find('[class*="col-"]').each(function() {
-			_class = $(this).attr("class");
+		document.querySelector(node).find('[class*="col-"]').forEach(function() {
+			_class = document.querySelector(this).getAttribute("class");
 			
 			var reg = /col-([^-\$ ]*)?-?(\d+)/g; 
 			var match;
@@ -2226,7 +2226,7 @@ Vvveb.Components.add("html/gridrow", {
 				onChange: function(node, value, input) {
 
 					//column = $('[class*="col-"]:eq(' + this.index + ')', node);
-					var column = $(this.columnNode);
+					var column = document.querySelector(this.columnNode);
 					
 					//if remove button is clicked remove column and render row properties
 					if (input.nodeName == 'BUTTON')
@@ -2281,7 +2281,7 @@ Vvveb.Components.add("html/gridrow", {
         data: {text:"Add column", icon:"la la-plus"},
         onChange: function(node)
         {
-			 $(node).append('<div class="col-3">Col-3</div>');
+			 document.querySelector(node).insertAdjacentHTML("beforeend",'<div class="col-3">Col-3</div>');
 			 
 			 //render component properties again to include the new column inputs
 			 Vvveb.Components.render("html/gridrow");

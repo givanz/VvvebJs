@@ -23,13 +23,13 @@ let defaultSeparatorSvg = '<svg id="Layer_1" data-name="Layer 1" xmlns="http://w
 let section_sort = 1;
 
 let SectionContent = [{
-        name: "Title",
+        name: i18n('section.titleName'),
         key: "title",
         sort: section_sort++,
         htmlAttr: "title",
         inputtype: TextInput
     },{
-        name: "Container width",
+        name: i18n('section.containerWidthName'),
         key: "container-width",
         sort: section_sort++,
 		child:":scope > .container, :scope > .container-fluid",
@@ -41,17 +41,17 @@ let SectionContent = [{
             options: [{
 				value: "container",
 				icon:"la la-box",
-				text: "Boxed",
-				title: "Boxed"
+				text: i18n('common.displayBlock'),
+				title: i18n('common.displayBlock')
 			},{
 				value: "container-fluid",
 				icon:"la la-arrows-alt-h",
-				title: "Full",
-				text: "Full"
+				title: i18n('common.displayNone'),
+				text: i18n('common.displayNone')
             }]
          }
 	},{
-        name: "Container height",
+        name: i18n('section.containerHeightName'),
         key: "container-height",
         sort: section_sort++,
         child:":scope > .container:first-child, :scope > .container-fluid:first-child",
@@ -63,14 +63,14 @@ let SectionContent = [{
 				options: [{
 				value: "container",
 				icon:"la la-expand",
-				text: "Auto",
-				title: "Auto",
+				text: i18n('common.displayNone'),
+				title: i18n('common.displayNone'),
 				checked:true,
             },{
 				value: "vh-100",
 				icon:"la la-arrows-alt-v",
-				title: "Full",
-				text: "Full"
+				title: i18n('common.displayNone'),
+				text: i18n('common.displayNone')
             }]
          }
 	}
@@ -690,7 +690,7 @@ Vvveb.Components.extend("_base", "elements/header", {
 //Vvveb.Components.add("elements/footer", {
 Vvveb.Components.extend("_base", "elements/footer", {
     nodes: ["footer"],
-    name: "Footer",
+    name: i18n('section.footer'),
     image: "icons/stream-solid.svg",
     html: `<footer>
 				<div class="container">
@@ -704,3 +704,6 @@ Vvveb.Components.extend("_base", "elements/footer", {
 	],
     init: componentsInit
 });  
+;  
+  
+;  

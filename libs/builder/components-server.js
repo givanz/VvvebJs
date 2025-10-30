@@ -16,11 +16,11 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-Vvveb.ComponentsGroup['Server Components'] = ["components/products", "components/product", "components/categories", "components/manufacturers", "components/search", "components/user", "components/product_gallery", "components/cart", "components/checkout", "components/filters", "components/product", "components/slider"];
+Vvveb.ComponentsGroup[i18n('server.group')] = ["components/products", "components/product", "components/categories", "components/manufacturers", "components/search", "components/user", "components/product_gallery", "components/cart", "components/checkout", "components/filters", "components/product", "components/slider"];
 
 
 Vvveb.Components.add("components/product", {
-    name: "Product",
+    name: i18n('server.productName'),
     attributes: ["data-component-product"],
 
     image: "icons/map.svg",
@@ -28,47 +28,47 @@ Vvveb.Components.add("components/product", {
     
 	properties: [
 	{
-        name: "Id",
+        name: i18n('server.idProperty'),
         key: "id",
         htmlAttr: "id",
         inputtype: TextInput
     },
 	{
-        name: "Select",
+        name: i18n('server.selectProperty'),
         key: "id",
         htmlAttr: "id",
         inputtype: SelectInput,
         data:{
 			options: [{
                 value: "",
-                text: "None"
+                text: i18n('server.noneText')
             }, {
                 value: "pull-left",
-                text: "Left"
+                text: i18n('server.leftText')
             }, {
                 value: "pull-right",
-                text: "Right"
+                text: i18n('server.rightText')
             }]
        },
     },
 	{
-        name: "Select 2",
+        name: i18n('server.select2Property'),
         key: "id",
         htmlAttr: "id",
         inputtype: SelectInput,
         data:{
 			options: [{
                 value: "",
-                text: "nimic"
+                text: i18n('server.nimicText')
             }, {
                 value: "pull-left",
-                text: "gigi"
+                text: i18n('server.gigiText')
             }, {
                 value: "pull-right",
-                text: "vasile"
+                text: i18n('server.vasileText')
             }, {
                 value: "pull-right",
-                text: "sad34"
+                text: i18n('server.sad34Text')
             }]
        },
     }]
@@ -76,21 +76,21 @@ Vvveb.Components.add("components/product", {
 
 
 Vvveb.Components.add("components/products", {
-    name: "Products",
+    name: i18n('server.productsName'),
     attributes: ["data-component-products"],
 
     image: "icons/products.svg",
-    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>' + i18n('server.yourResponseLabel') + '</label><textarea class="form-control"></textarea></div>',
 
     init: function (node)
 	{
-		$('.mb-3[data-group]').hide();
+		document.querySelector('.mb-3[data-group]').style.display = "none";;
 		if (node.dataset.type != undefined)
 		{
-			$('.mb-3[data-group="'+ node.dataset.type + '"]').show();
+			document.querySelector('.mb-3[data-group="'+ node.dataset.type + '"]').style.display = "block";;
 		} else
 		{		
-			$('.mb-3[data-group]:first').show();
+			document.querySelector('.mb-3[data-group]:first').style.display = "block";
 		}
 	},
     properties: [{
@@ -103,21 +103,21 @@ Vvveb.Components.add("components/products", {
             extraclass:"btn-group-fullwidth",
             options: [{
                 value: "autocomplete",
-                text: "Autocomplete",
+                text: i18n('server.autocompleteText'),
                 title: "Autocomplete",
                 icon:"la la-search",
                 checked:true,
             }, {
                 value: "automatic",
                 icon:"la la-cog",
-                text: "Configuration",
+                text: i18n('server.configurationText'),
                 title: "Configuration",
             }],
         },
 		onChange : function(element, value, input) {
 			
-			$('.mb-3[data-group]').hide();
-			$('.mb-3[data-group="'+ input.value + '"]').show();
+			document.querySelector('.mb-3[data-group]').style.display = "none";;
+			document.querySelector('.mb-3[data-group="'+ input.value + '"]').style.display = "block";
 
 			return element;
 		}, 
@@ -125,7 +125,7 @@ Vvveb.Components.add("components/products", {
 			return node.dataset.type;
 		},            
     },{
-        name: "Products",
+        name: i18n('server.productsProperty'),
         key: "products",
         group:"autocomplete",
         htmlAttr:"data-products",
@@ -134,7 +134,7 @@ Vvveb.Components.add("components/products", {
             url: "/admin/?module=editor/editor&action=productsAutocomplete",
         },
     },{
-        name: "Number of products",
+        name: i18n('server.numberOfProductsProperty'),
         group:"automatic",
         key: "limit",
 		htmlAttr:"data-limit",
@@ -149,7 +149,7 @@ Vvveb.Components.add("components/products", {
             return 10
         },
     },{
-        name: "Start from page",
+        name: i18n('server.startFromPageProperty'),
         group:"automatic",
         key: "page",
 		htmlAttr:"data-page",
@@ -164,7 +164,7 @@ Vvveb.Components.add("components/products", {
             return 0
         },
     },{
-        name: "Order by",
+        name: i18n('server.orderByProperty'),
         group:"automatic",
         key: "order",
 		htmlAttr:"data-order",
@@ -172,26 +172,26 @@ Vvveb.Components.add("components/products", {
         data: {
             options: [{
 				value: "price_asc",
-                text: "Price Ascending"
+                text: i18n('server.priceAscendingText')
             }, {
                 value: "price_desc",
-                text: "Price Descending"
+                text: i18n('server.priceDescendingText')
             }, {
                 value: "date_asc",
-                text: "Date Ascending"
+                text: i18n('server.dateAscendingText')
             }, {
                 value: "date_desc",
-                text: "Date Descending"
+                text: i18n('server.dateDescendingText')
             }, {
                 value: "sales_asc",
-                text: "Sales Ascending"
+                text: i18n('server.salesAscendingText')
             }, {
                 value: "sales_desc",
-                text: "Sales Descending"
+                text: i18n('server.salesDescendingText')
             }]
 		}
 	},{
-        name: "Category",
+        name: i18n('server.categoryProperty'),
         group:"automatic",
         key: "category",
 		htmlAttr:"data-category",
@@ -201,7 +201,7 @@ Vvveb.Components.add("components/products", {
         },
 
 	},{
-        name: "Manufacturer",
+        name: i18n('server.manufacturerProperty'),
         group:"automatic",
         key: "manufacturer",
 		htmlAttr:"data-manufacturer",
@@ -210,7 +210,7 @@ Vvveb.Components.add("components/products", {
             url: "/admin/?module=editor/editor&action=productsAutocomplete",
 		}
 	},{
-        name: "Manufacturer 2",
+        name: i18n('server.manufacturer2Property'),
         group:"automatic",
         key: "manufacturer 2",
 		htmlAttr:"data-manufacturer2",
@@ -222,20 +222,20 @@ Vvveb.Components.add("components/products", {
 });
 
 Vvveb.Components.add("components/manufacturers", {
-    name: "Manufacturers",
+    name: i18n('server.manufacturersName'),
     classes: ["component_manufacturers"],
     image: "icons/categories.svg",
-    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>' + i18n('server.yourResponseLabel') + '</label><textarea class="form-control"></textarea></div>',
     properties: [{
         nolabel:false,
         inputtype: TextInput,
-        data: {text:"Fields"}
+        data: {text:i18n('server.fieldsText')}
 	},{
-        name: "Name",
+        name: i18n('server.nameProperty'),
         key: "category",
         inputtype: TextInput
 	},{
-        name: "Image",
+        name: i18n('server.imageProperty'),
         key: "category",
         inputtype: TextInput
 	}
@@ -243,88 +243,88 @@ Vvveb.Components.add("components/manufacturers", {
 });
 
 Vvveb.Components.add("components/categories", {
-    name: "Categories",
+    name: i18n('server.categoriesName'),
     classes: ["component_categories"],
     image: "icons/categories.svg",
-    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>' + i18n('server.yourResponseLabel') + '</label><textarea class="form-control"></textarea></div>',
     properties: [{
-        name: "Name",
+        name: i18n('server.nameProperty'),
         key: "name",
         htmlAttr: "src",
         inputtype: FileUploadInput
     }]
 });
 Vvveb.Components.add("components/search", {
-    name: "Search",
+    name: i18n('server.searchName'),
     classes: ["component_search"],
     image: "icons/search.svg",
-    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>' + i18n('server.yourResponseLabel') + '</label><textarea class="form-control"></textarea></div>',
     properties: [{
-        name: "asdasdad",
+        name: i18n('server.placeholder1'),
         key: "src",
         htmlAttr: "src",
         inputtype: FileUploadInput
     }, {
-        name: "34234234",
+        name: i18n('server.placeholder2'),
         key: "width",
         htmlAttr: "width",
         inputtype: TextInput
     }, {
-        name: "d32d23",
+        name: i18n('server.placeholder3'),
         key: "height",
         htmlAttr: "height",
         inputtype: TextInput
     }]
 });
 Vvveb.Components.add("components/user", {
-    name: "User",
+    name: i18n('server.userName'),
     classes: ["component_user"],
     image: "icons/user.svg",
-    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>' + i18n('server.yourResponseLabel') + '</label><textarea class="form-control"></textarea></div>',
     properties: [{
-        name: "asdasdad",
+        name: i18n('server.placeholder1'),
         key: "src",
         htmlAttr: "src",
         inputtype: FileUploadInput
     }, {
-        name: "34234234",
+        name: i18n('server.placeholder2'),
         key: "width",
         htmlAttr: "width",
         inputtype: TextInput
     }, {
-        name: "d32d23",
+        name: i18n('server.placeholder3'),
         key: "height",
         htmlAttr: "height",
         inputtype: TextInput
     }]
 });
 Vvveb.Components.add("components/product_gallery", {
-    name: "Product gallery",
+    name: i18n('server.productGalleryName'),
     classes: ["component_product_gallery"],
     image: "icons/product_gallery.svg",
-    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>' + i18n('server.yourResponseLabel') + '</label><textarea class="form-control"></textarea></div>',
     properties: [{
-        name: "asdasdad",
+        name: i18n('server.placeholder1'),
         key: "src",
         htmlAttr: "src",
         inputtype: FileUploadInput
     }, {
-        name: "34234234",
+        name: i18n('server.placeholder2'),
         key: "width",
         htmlAttr: "width",
         inputtype: TextInput
     }, {
-        name: "d32d23",
+        name: i18n('server.placeholder3'),
         key: "height",
         htmlAttr: "height",
         inputtype: TextInput
     }]
 });
 Vvveb.Components.add("components/cart", {
-    name: "Cart",
+    name: i18n('server.cartName'),
     classes: ["component_cart"],
     image: "icons/cart.svg",
-    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>' + i18n('server.yourResponseLabel') + '</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "asdasdad",
         key: "src",
@@ -343,10 +343,10 @@ Vvveb.Components.add("components/cart", {
     }]
 });
 Vvveb.Components.add("components/checkout", {
-    name: "Checkout",
+    name: i18n('server.checkoutName'),
     classes: ["component_checkout"],
     image: "icons/checkout.svg",
-    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>' + i18n('server.yourResponseLabel') + '</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "asdasdad",
         key: "src",
@@ -368,7 +368,7 @@ Vvveb.Components.add("components/filters", {
     name: "Filters",
     classes: ["component_filters"],
     image: "icons/filters.svg",
-    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>' + i18n('server.yourResponseLabel') + '</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "asdasdad",
         key: "src",
@@ -390,7 +390,7 @@ Vvveb.Components.add("components/product", {
     name: "Product",
     classes: ["component_product"],
     image: "icons/product.svg",
-    html: '<div class="mb-3"><label>Your response:</label><textarea class="form-control"></textarea></div>',
+    html: '<div class="mb-3"><label>' + i18n('server.yourResponseLabel') + '</label><textarea class="form-control"></textarea></div>',
     properties: [{
         name: "asdasdad",
         key: "src",

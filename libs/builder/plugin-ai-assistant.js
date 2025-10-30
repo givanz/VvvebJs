@@ -1,4 +1,4 @@
-document.querySelector("#select-actions #edit-code-btn").after(generateElements('<a id="ai-assistant-btn" href="" title="AI assistant"><i class="icon-color-wand"></i></a>')[0]);
+document.querySelector("#select-actions #edit-code-btn").after(generateElements('<a id="ai-assistant-btn" href="" title="' + i18n('aiAssistant.aiAssistantTitle') + '"><i class="icon-color-wand"></i></a>')[0]);
 
 let aiResponseTemplate = `
 <div class="response">
@@ -18,38 +18,38 @@ let aiResponseTemplate = `
 		<button type="button" class="btn btn-sm btn-outline-primary btn-insert"><i class="icon-arrow-up"></i>Insert content</button>
 		<button type="button" class="btn btn-sm btn-outline-primary btn-replace"><i class="icon-swap-horizontal-outline"></i> Replace with</button>
 	</div>
-</div>	
+</div>
 `;
 			
 let aiModalTemplate = `<div class="modal fade" id="ai-assistant-modal" tabindex="-1" role="dialog" aria-labelledby="textarea-modal" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <p class="modal-title text-primary"><i class="icon-color-wand"></i> Ai assistant</p>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-        </button>
-      </div>
-      <div class="modal-body">
-        
-        <textarea rows="3" cols="150" class="form-control mb-3"></textarea>
-      
-	    <button type="button" class="btn btn-success btn-ask-ai"><i class="icon-color-wand la-lg"></i> Ask AI</button>
-	    <button type="button" class="btn btn-light border btn-insert-content"><i class="icon-arrow-up la-lg"></i> Insert element content</button>
+     <div class="modal-content">
+       <div class="modal-header">
+         <p class="modal-title text-primary"><i class="icon-color-wand"></i> ${i18n('aiAssistant.aiAssistantTitle')}</p>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+         </button>
+       </div>
+       <div class="modal-body">
+         
+         <textarea rows="3" cols="150" class="form-control mb-3"></textarea>
+       
+	    <button type="button" class="btn btn-success btn-ask-ai"><i class="icon-color-wand la-lg"></i> ${i18n('aiAssistant.askAiButton')}</button>
+	    <button type="button" class="btn btn-light border btn-insert-content"><i class="icon-arrow-up la-lg"></i> ${i18n('aiAssistant.insertElementButton')}</button>
 		
 		<div class="spinner-border spinner-border-sm mx-3" role="status" style="display:none">
-		  <span class="visually-hidden">Loading...</span>
+		  <span class="visually-hidden">${i18n('aiAssistant.loadingText')}</span>
 		</div>
 		
 		<div class="responses mt-3 pt-3 border-top" style="display:none">
 		</div>
 
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-primary btn-lg btn-save" data-bs-dismiss="modal"><i class="la la-save"></i> Save</button> -->
-        <button type="button" class="btn btn-secondary btn-lg close-btn" data-bs-dismiss="modal"><i class="la la-times"></i> Close</button>
-      </div>
-    </div>
-  </div>
+       </div>
+       <div class="modal-footer">
+         <!-- <button type="button" class="btn btn-primary btn-lg btn-save" data-bs-dismiss="modal"><i class="la la-save"></i> Save</button> -->
+         <button type="button" class="btn btn-secondary btn-lg close-btn" data-bs-dismiss="modal"><i class="la la-times"></i> ${i18n('aiAssistant.closeButton')}</button>
+       </div>
+     </div>
+   </div>
 </div>
 <style>
 .responses {
@@ -159,7 +159,7 @@ document.addEventListener("click", function(event) {
 
 function aiAssistantSendQuery()  {
 		if (!chatgptOptions["key"] ) {
-			displayToast("bg-danger", "Error", 'No ChatGPT key configured! Enter a valid key in the plugin settings page.');
+			displayToast("bg-danger", i18n('inputs.errorText'), i18n('aiAssistant.noChatGptKeyError'));
 			return;
 		}
 
@@ -176,7 +176,7 @@ function aiAssistantSendQuery()  {
 				content: prompt
 			  },{
 				role: "system",
-				content: "You are a Bootstrap 5 Html expert."
+				content: i18n('aiAssistant.bootstrapExpertSystem')
 			  },
 			],
 			*/
@@ -200,7 +200,7 @@ function aiAssistantSendQuery()  {
 				for (name in data.error) {
 					message += name +":" + data.error[name] + "\n";
 				}
-				//alert(message);
+				//alert(i18n('aiAssistant.alertText', {message: message}));
 				displayToast("bg-danger", "Error", message);
 				return;
 			}

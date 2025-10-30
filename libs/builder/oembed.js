@@ -291,8 +291,8 @@ async function getOembed(url, maxwidth = 800, maxheight = 600, silent = false) {
 		 }
 		 
 		 if (!silent) {
-			 let message = 'Embed error: URL did not match any provider.';
-			 displayToast("bg-danger", "Error", message);
+		  let message = i18n('oembed.embedUrlNotMatchError');
+		  displayToast("bg-danger", i18n('inputs.errorText'), message);
 		 }
 		 
 		 return;
@@ -314,16 +314,16 @@ async function getOembed(url, maxwidth = 800, maxheight = 600, silent = false) {
 	 }
 
 	 if (!remoteResponse || remoteResponse.status !== 200) {
-		let message = `Embed error: Could not fetch embed URL.`;
-		displayToast("bg-danger", "Error", message);
+	 let message = i18n('oembed.embedFetchError');
+	 displayToast("bg-danger", i18n('inputs.errorText'), message);
 	 }
 
 	 const json = await remoteResponse.json();
 
 	 if (json.html === undefined) {
-		const message = `Eembed error: ${message}`;
-		displayToast("bg-danger", "Error", message);
-		return;
+	 const message = i18n('oembed.embedGenericError', {message: message});
+	 displayToast("bg-danger", i18n('inputs.errorText'), message);
+	 return;
 	 }
 
     //response = { url: url, html: json.html, poster: json.thumbnail_url };

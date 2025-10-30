@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="auto">
+<html data-bs-theme="auto" lang="es">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,11 +20,11 @@
 					<img src="img/logo.png" alt="Vvveb" class="float-start" id="logo">
 					
 					<div class="btn-group float-start" role="group">
-					  <button class="btn btn-light" title="Toggle file manager" id="toggle-file-manager-btn" data-vvveb-action="toggleFileManager" data-bs-toggle="button" aria-pressed="false">
+					  <button class="btn btn-light" title="Toggle file manager" id="toggle-file-manager-btn" data-vvveb-action="toggleFileManager" data-bs-toggle="button" aria-pressed="false" data-i18n-title="editor.toggleFileManagerTitle">
 						  <img src="libs/builder/icons/file-manager-layout.svg" width="18" height="18" alt="" role="presentation">
 					  </button>
 
-					  <button class="btn btn-light" title="Toggle left column" id="toggle-left-column-btn" data-vvveb-action="toggleLeftColumn" data-bs-toggle="button" aria-pressed="false">
+					  <button class="btn btn-light" title="Toggle left column" id="toggle-left-column-btn" data-vvveb-action="toggleLeftColumn" data-bs-toggle="button" aria-pressed="false" data-i18n-title="editor.toggleLeftColumnTitle">
 						  <img src="libs/builder/icons/left-column-layout.svg" width="18" height="18" alt="" role="presentation">
 					  </button>
 					  
@@ -34,34 +34,34 @@
 					</div>
 
 					<div class="btn-group me-3" role="group">
-					  <button class="btn btn-light" title="Undo (Ctrl/Cmd + Z)" id="undo-btn" data-vvveb-action="undo" data-vvveb-shortcut="ctrl+z">
+					  <button class="btn btn-light" title="Undo (Ctrl/Cmd + Z)" id="undo-btn" data-vvveb-action="undo" data-vvveb-shortcut="ctrl+z" data-i18n-title="editor.undoTitle">
 						  <i class="la la-undo"></i>
 					  </button>
 
-            <button class="btn btn-light" title="Redo (Ctrl/Cmd + Shift + Y)" id="redo-btn" data-vvveb-action="redo" data-vvveb-shortcut="ctrl+shift+z">
+            <button class="btn btn-light" title="Redo (Ctrl/Cmd + Shift + Y)" id="redo-btn" data-vvveb-action="redo" data-vvveb-shortcut="ctrl+shift+z" data-i18n-title="editor.redoTitle">
               <i class="la la-undo la-flip-horizontal"></i>
 					  </button>
 					</div>
 										
 					
 					<div class="btn-group me-3" role="group">
-					  <button class="btn btn-light" title="Designer Mode (Free dragging)" id="designer-mode-btn" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="setDesignerMode">
+					  <button class="btn btn-light" title="Designer Mode (Free dragging)" id="designer-mode-btn" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="setDesignerMode" data-i18n-title="editor.designerModeTitle">
 						  <i class="la la-hand-rock"></i>
 					  </button>
 
-					  <button class="btn btn-light" title="Preview" id="preview-btn" type="button" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="preview">
+					  <button class="btn btn-light" title="Preview" id="preview-btn" type="button" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="preview" data-i18n-title="editor.previewTitle">
                 <i class="icon-eye-outline"></i>
 					  </button>
 
-					  <button class="btn btn-light" title="Fullscreen (F11)" id="fullscreen-btn" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="fullscreen">
+					  <button class="btn btn-light" title="Fullscreen (F11)" id="fullscreen-btn" data-bs-toggle="button" aria-pressed="false" data-vvveb-action="fullscreen" data-i18n-title="editor.fullscreenTitle">
 						  <i class="icon-expand-outline"></i>
 					  </button>
 
-					  <button class="btn btn-light active" title="Toggle navigator (Ctrl + Shift + N)" id="toggle-tree-list" data-bs-toggle="button" data-vvveb-action="toggleTreeList" aria-pressed="true">
+					  <button class="btn btn-light active" title="Toggle navigator (Ctrl + Shift + N)" id="toggle-tree-list" data-bs-toggle="button" data-vvveb-action="toggleTreeList" aria-pressed="true" data-i18n-title="editor.toggleNavigatorTitle">
 						  <i class="icon-layers-outline"></i>
 					  </button>
 
-					  <button class="btn btn-light" title="Download" id="download-btn" data-vvveb-action="download" data-v-download="index.html">
+					  <button class="btn btn-light" title="Download" id="download-btn" data-vvveb-action="download" data-v-download="index.html" data-i18n-title="editor.downloadTitle">
 						  <i class="la la-download"></i>
 					  </button>
 
@@ -69,16 +69,16 @@
 					
 								
 					<div class="btn-group me-2 float-end" role="group">
-					  <button class="btn btn-primary btn-sm btn-icon save-btn" title="Save (Ctrl + S)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-url="save.php" data-v-vvveb-shortcut="ctrl+e">
+					  <button class="btn btn-primary btn-sm btn-icon save-btn" title="Save (Ctrl + S)" id="save-btn" data-vvveb-action="saveAjax" data-vvveb-url="save.php" data-v-vvveb-shortcut="ctrl+e" data-i18n-title="editor.saveTitle">
 
 						<span class="loading d-none">
 						<i class="icon-save-outline"></i>
 						  <span class="spinner-border spinner-border-sm align-middle" role="status" aria-hidden="true">
 						  </span>
-						  <span>Saving </span> ... </span>
+						  <span data-i18n-text="editor.saving">Saving </span> ... </span>
 
 						<span class="button-text">
-						  <i class="icon-save-outline"></i> <span>Save page</span>
+						  <i class="icon-save-outline"></i> <span data-i18n-text="editor.savePageButton">Save page</span>
 						</span>	
 
 					  </button>
@@ -91,22 +91,22 @@
 							<i class="la la-sun"></i>
 						</button>
 						
-					    <a href="#" class="btn btn-light btn-sm btn-preview-url" target="blank" title="View page">
+					    <a href="#" class="btn btn-light btn-sm btn-preview-url" target="blank" data-i18n-title="editor.viewPageTitle">
 							<i class="la la-external-link-alt"></i>
 						</a>
 
 					    <div class="btn-group responsive-btns" role="group">
 
 
-		 			 <button id="mobile-view" data-view="mobile" class="btn btn-light"  title="Mobile view" data-vvveb-action="viewport">
+		 			 <button id="mobile-view" data-view="mobile" class="btn btn-light"  title="Mobile view" data-vvveb-action="viewport" data-i18n-title="editor.mobileViewTitle">
 						  <i class="la la-mobile"></i>
 					  </button>
 
-					  <button id="tablet-view"  data-view="tablet" class="btn btn-light"  title="Tablet view" data-vvveb-action="viewport">
+					  <button id="tablet-view"  data-view="tablet" class="btn btn-light"  title="Tablet view" data-vvveb-action="viewport" data-i18n-title="editor.tabletViewTitle">
 						  <i class="la la-tablet"></i>
 					  </button>
 					  
-					  <button id="desktop-view"  data-view="" class="btn btn-light"  title="Desktop view" data-vvveb-action="viewport">
+					  <button id="desktop-view"  data-view="" class="btn btn-light"  title="Desktop view" data-vvveb-action="viewport" data-i18n-title="editor.desktopViewTitle">
 						  <i class="la la-laptop"></i>
 					  </button>
 			
@@ -125,10 +125,10 @@
 					  <div>
 					  <div id="filemanager"> 
 							<div class="header">
-								<span class="text-secondary"><i class="la la-file la-lg"></i> Pages</span>
+								<span class="text-secondary"><i class="la la-file la-lg"></i> <span data-i18n-text="editor.pages">Pages</span>
 
 									<div class="btn-group responsive-btns float-end" role="group">
-									  <button class="btn btn-outline-primary btn-sm btn-add" title="New page (Ctrl + Shift + P)" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="">
+									  <button class="btn btn-outline-primary btn-sm btn-add" title="New page (Ctrl + Shift + P)" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="" data-i18n-title="editor.newPageTitle">
 									<!-- <span>Add new</span> -->
 									<i class="icon-add"></i>
 									  </button>
@@ -177,7 +177,7 @@
 								</a>
 							  </li>
 							  <li class="nav-item component-configuration-tab">
-								<a class="nav-link" id="configuration-tab" data-bs-toggle="tab" href="#configuration" role="tab" aria-controls="configuration" aria-selected="false" title="Styles">
+								<a class="nav-link" id="configuration-tab" data-bs-toggle="tab" href="#configuration" role="tab" aria-controls="configuration" aria-selected="false" title="Styles" data-i18n-title="editor.styleTab">
 									<i class="icon-color-wand-outline"></i>
 									<!-- img src="../../../js/vvvebjs/icons/filters.svg" height="23"--> 
 									<!-- div><small>Properties</small></div -->
@@ -194,11 +194,11 @@
 										<ul class="nav nav-tabs nav-fill nav-underline  sections-tabs" id="sections-tabs" role="tablist">
 										  <li class="nav-item content-tab">
 											<a class="nav-link active" data-bs-toggle="tab" href="#sections-new-tab" role="tab" aria-controls="components" aria-selected="false">
-												<i class="icon-albums-outline"></i> <div><span>Sections</span></div></a>
+												<i class="icon-albums-outline"></i> <div><span data-i18n-text="editor.sections">Sections</span></div></a>
 										  </li>
 										  <li class="nav-item style-tab">
 											<a class="nav-link" data-bs-toggle="tab" href="#sections-list" role="tab" aria-controls="sections" aria-selected="true">
-												 <i class="icon-document-text-outline"></i><div><span>Page Sections</span></div></a>
+												 <i class="icon-document-text-outline"></i><div><span data-i18n-text="editor.pageSections">Page Sections</span></div></a>
 										  </li>
 										</ul>
 								
@@ -271,12 +271,12 @@
 
 													   <div class="search">
 															  <div class="expand">
-																  <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></button> 
-																  <button title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
+																  <button class="text-sm" title="Expand All" data-vvveb-action="expand" data-i18n-title="editor.expandAllTitle"><i class="la la-plus"></i></button> 
+																  <button title="Collapse all" data-vvveb-action="collapse" data-i18n-title="editor.collapseAllTitle"><i class="la la-minus"></i></button> 
 															  </div>	
 
-															  <input class="form-control section-search" placeholder="Search sections" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
-															  <button class="clear-backspace"  data-vvveb-action="clearSearch" title="Clear search">
+															  <input class="form-control section-search" placeholder="Search sections" type="text" data-vvveb-action="search" data-vvveb-on="keyup" data-i18n-placeholder="editor.searchSectionsPlaceholder">
+															  <button class="clear-backspace"  data-vvveb-action="clearSearch" title="Clear search" data-i18n-title="editor.clearSearchTitle">
 																  <i class="la la-times"></i>
 															  </button>
 														</div>
@@ -304,11 +304,11 @@
 										<ul class="nav nav-tabs nav-fill nav-underline  sections-tabs" role="tablist">
 										  <li class="nav-item components-tab">
 											<a class="nav-link active" data-bs-toggle="tab" href="#components" role="tab" aria-controls="components" aria-selected="true">
-												<i class="icon-cube-outline"></i> <div><span>Components</span></div></a>
+												<i class="icon-cube-outline"></i> <div><span data-i18n-text="editor.components">Components</span></div></a>
 										  </li>
 										  <li class="nav-item blocks-tab">
 											<a class="nav-link" data-bs-toggle="tab" href="#blocks" role="tab" aria-controls="components" aria-selected="false">
-												<i class="icon-copy-outline"></i> <div><span>Blocks</span></div></a>
+												<i class="icon-copy-outline"></i> <div><span data-i18n-text="editor.blocks">Blocks</span></div></a>
 										  </li>
 										</ul>
 								
@@ -318,11 +318,11 @@
 												 
 												   <div class="search">
 														  <div class="expand">
-																  <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></button> 
-																  <button title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
+																  <button class="text-sm" title="Expand All" data-vvveb-action="expand" data-i18n-title="editor.expandAllTitle"><i class="la la-plus"></i></button> 
+																  <button title="Collapse all" data-vvveb-action="collapse" data-i18n-title="editor.collapseAllTitle"><i class="la la-minus"></i></button> 
 														  </div>	
 
-														  <input class="form-control component-search" placeholder="Search components" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
+														  <input class="form-control component-search" placeholder="Search components" type="text" data-vvveb-action="search" data-vvveb-on="keyup" data-i18n-placeholder="editor.searchComponentsPlaceholder">
 														  <button class="clear-backspace" data-vvveb-action="clearSearch">
 															  <i class="la la-times"></i>
 															</button>
@@ -344,11 +344,11 @@
 
 													   <div class="search">
 															  <div class="expand">
-																  <button class="text-sm" title="Expand All" data-vvveb-action="expand"><i class="la la-plus"></i></button> 
-																  <button title="Collapse all" data-vvveb-action="collapse"><i class="la la-minus"></i></button> 
+																  <button class="text-sm" title="Expand All" data-vvveb-action="expand" data-i18n-title="editor.expandAllTitle"><i class="la la-plus"></i></button> 
+																  <button title="Collapse all" data-vvveb-action="collapse" data-i18n-title="editor.collapseAllTitle"><i class="la la-minus"></i></button> 
 															  </div>	
 
-															  <input class="form-control block-search" placeholder="Search blocks" type="text" data-vvveb-action="search" data-vvveb-on="keyup">
+															  <input class="form-control block-search" placeholder="Search blocks" type="text" data-vvveb-action="search" data-vvveb-on="keyup" data-i18n-placeholder="editor.searchBlocksPlaceholder">
 															  <button class="clear-backspace" data-vvveb-action="clearSearch">
 																  <i class="la la-times"></i>
 															  </button>
@@ -375,16 +375,16 @@
 												<ul class="nav nav-tabs nav-fill nav-underline" id="properties-tabs" role="tablist">
 													  <li class="nav-item content-tab">
 														<a class="nav-link content-tab active" data-bs-toggle="tab" href="#content-left-panel-tab" role="tab" aria-controls="components" aria-selected="true">
-															<i class="icon-albums-outline"></i> <span>Content</span>
+															<i class="icon-albums-outline"></i> <span data-i18n-text="editor.contentTab">Content</span>
 														</a>
 													  </li>
 													  <li class="nav-item style-tab">
 														<a class="nav-link" data-bs-toggle="tab" href="#style-left-panel-tab" role="tab" aria-controls="style" aria-selected="false">
-															<i class="icon-color-fill-outline"></i> <span>Style</span></a>
+															<i class="icon-color-fill-outline"></i> <span data-i18n-text="editor.styleTab">Style</span></a>
 													  </li>
 													  <li class="nav-item advanced-tab">
 														<a class="nav-link" data-bs-toggle="tab" href="#advanced-left-panel-tab" role="tab" aria-controls="advanced" aria-selected="false">
-															<i class="icon-settings-outline"></i> <span>Advanced</span></a>
+															<i class="icon-settings-outline"></i> <span data-i18n-text="editor.advancedTab">Advanced</span></a>
 													  </li>
 													</ul>
 											
@@ -392,7 +392,7 @@
 														 <div class="tab-pane show active" id="content-left-panel-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
 															<div class="alert alert-dismissible fade show alert-light m-3" role="alert" style="">		  
 																<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>		  
-																<strong>No selected element!</strong><br> Click on an element to edit.		
+																<strong data-i18n-text="editor.noElementSelected">No selected element!</strong><br><span data-i18n-text="editor.clickToEdit">Click on an element to edit.</span>		
 															</div>
 														</div>
 														
@@ -400,10 +400,10 @@
 															  <div class="border-bottom pb-2 px-2">
 																<div class="justify-content-end d-flex">
 																  <select class="form-select w-50" data-vvveb-action="setState" data-vvveb-on="change">
-																	<option value=""> - State - </option>
-																	<option value="hover">hover</option>
-																	<option value="active">active</option>
-																	<option value="nth-of-type(2n)">nth-of-type(2n)</option>
+																	<option value="" data-i18n-text="editor.stateOption"> - State - </option>
+																	<option value="hover" data-i18n-text="editor.hoverOption">hover</option>
+																	<option value="active" data-i18n-text="editor.activeOption">active</option>
+																	<option value="nth-of-type(2n)" data-i18n-text="editor.nthOfTypeOption">nth-of-type(2n)</option>
 																  </select>
 																</div>
 															  </div>
@@ -422,11 +422,11 @@
 									<ul class="nav nav-tabs nav-fill nav-underline sections-tabs" id="vars-tabs" role="tablist">
 									  <li class="nav-item vars-tab">
 										<a class="nav-link active" data-bs-toggle="tab" href="#vars-tab" role="tab" aria-controls="components" aria-selected="false">
-											<i class="icon-brush-outline"></i> <div><span>Variables</span></div></a>
+											<i class="icon-brush-outline"></i> <div><span data-i18n-text="editor.variablesTab">Variables</span></div></a>
 									  </li>
 									  <li class="nav-item css-tab">
 										<a class="nav-link" data-bs-toggle="tab" href="#css-tab" role="tab" aria-controls="css" aria-selected="true">
-											<i class="icon-code-slash-outline"></i> <div><span>Css</span></div></a>
+											<i class="icon-code-slash-outline"></i> <div><span data-i18n-text="editor.cssTab">Css</span></div></a>
 									  </li>
 									</ul>
 							
@@ -502,7 +502,7 @@
 								</div>
 								
 								<div id="section-actions">
-									<a id="add-section-btn" href="" title="Add element"><i class="la la-plus"></i></a>
+									<a id="add-section-btn" href="" title="Add element" data-i18n-title="editor.addElementTitle"><i class="la la-plus"></i></a>
 								</div>
 							</div>
 
@@ -554,32 +554,32 @@
 										
 										<div class="dropdown">
 										  <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											<span class="hint" aria-label="Text align"><i class="la la-align-left"></i></span>
+											<span class="hint" aria-label="Text align" data-i18n-aria-label="editor.textAlignTitle"><i class="la la-align-left"></i></span>
 										  </button>
 
 										  <div id="justify-btn" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-											<a class="dropdown-item" href="#" data-value="Left"><i class="la la-lg la-align-left"></i> Align Left</a>
-											<a class="dropdown-item" href="#" data-value="Center"><i class="la la-lg la-align-center"></i> Align Center</a>
-											<a class="dropdown-item" href="#" data-value="Right"><i class="la la-lg la-align-right"></i> Align Right</a>
-											<a class="dropdown-item" href="#" data-value="Full"><i class="la la-lg la-align-justify"></i> Align Justify</a>
+											<a class="dropdown-item" href="#" data-value="Left"><i class="la la-lg la-align-left"></i> <span data-i18n-text="editor.alignLeft">Align Left</span></a>
+											<a class="dropdown-item" href="#" data-value="Center"><i class="la la-lg la-align-center"></i> <span data-i18n-text="editor.alignCenter">Align Center</span></a>
+											<a class="dropdown-item" href="#" data-value="Right"><i class="la la-lg la-align-right"></i> <span data-i18n-text="editor.alignRight">Align Right</span></a>
+											<a class="dropdown-item" href="#" data-value="Full"><i class="la la-lg la-align-justify"></i> <span data-i18n-text="editor.alignJustify">Align Justify</span></a>
 										  </div>
 										</div>
 										
 										<div class="separator"></div>
 
-										<a id="link-btn" class="hint" href="" title="Create link" aria-label="Create link">
+										<a id="link-btn" class="hint" href="" title="Create link" aria-label="Create link" data-i18n-title="editor.createLinkTitle" ... data-i18n-aria-label="editor.createLinkTitle">
 											<i class="la la-link">
 										</i></a>
 										
 										<div class="separator"></div>
 										
-										<input id="fore-color" name="color" type="color" aria-label="Text color" pattern="#[a-f0-9]{6}" class="form-control form-control-color hint">
-										<input id="back-color" name="background-color" type="color" aria-label="Background color" pattern="#[a-f0-9]{6}" class="form-control form-control-color hint">
+										<input id="fore-color" name="color" type="color" aria-label="Text color" pattern="#[a-f0-9]{6}" class="form-control form-control-color hint" data-i18n-aria-label="editor.textColorLabel">
+										<input id="back-color" name="background-color" type="color" aria-label="Background color" pattern="#[a-f0-9]{6}" class="form-control form-control-color hint" data-i18n-aria-label="editor.backgroundColorLabel">
 										
 										<div class="separator"></div>
 
 										<select id="font-size" class="form-select" aria-label="Font size">
-											<option value="">- Font size -</option>
+											<option value="" data-i18n-text="editor.fontSizeOption">- Font size -</option>
 											<option value="8px">8 px</option>
 											<option value="9px">9 px</option>
 											<option value="10px">10 px</option>
@@ -606,8 +606,8 @@
 										<div class="separator"></div>
 										
 										<select id="font-family" class="form-select" title="Font family">
-											<option value=""> - Font family - </option>
-											<optgroup label="System default">
+											<option value="" data-i18n-text="editor.fontFamilyOption"> - Font family - </option>
+											<optgroup label="System default" data-i18n-label="editor.systemDefaultFont">
 												<option value="Arial, Helvetica, sans-serif">Arial</option>
 												<option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif">Lucida Grande</option>
 												<option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif">Palatino Linotype</option>
@@ -626,16 +626,16 @@
 								</div>
 
 								<div id="select-actions">
-									<a id="drag-btn" href="" title="Drag element"><i class="la la-arrows-alt"></i></a>
-									<a id="parent-btn" href="" title="Select parent" class="la-rotate-180"><i class="la la-level-up-alt"></i></a>
+									<a id="drag-btn" href="" title="Drag element" data-i18n-title="editor.dragElementTitle"><i class="la la-arrows-alt"></i></a>
+									<a id="parent-btn" href="" title="Select parent" class="la-rotate-180" data-i18n-title="editor.selectParentTitle"><i class="la la-level-up-alt"></i></a>
 									
-									<a id="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
-									<a id="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
-									<a id="edit-code-btn" href="" title="Edit html code"><i class="icon-code-outline"></i></a>
+									<a id="up-btn" href="" title="Move element up" data-i18n-title="editor.moveElementUpTitle"><i class="la la-arrow-up"></i></a>
+									<a id="down-btn" href="" title="Move element down" data-i18n-title="editor.moveElementDownTitle"><i class="la la-arrow-down"></i></a>
+									<a id="edit-code-btn" href="" title="Edit html code" data-i18n-title="editor.editHtmlCodeTitle"><i class="icon-code-outline"></i></a>
 
-									<a id="save-reusable-btn" href="" title="Save as reusable" class="mx-2"><i class="icon-save-outline"></i></a>
-									<a id="clone-btn" href="" title="Clone element"><i class="icon-copy-outline"></i></a>
-									<a id="delete-btn" href="" title="Remove element"><i class="icon-trash-outline"></i></a>
+									<a id="save-reusable-btn" href="" title="Save as reusable" class="mx-2" data-i18n-title="editor.saveReusableTitle"><i class="icon-save-outline"></i></a>
+									<a id="clone-btn" href="" title="Clone element" data-i18n-title="editor.cloneElementTitle"><i class="icon-copy-outline"></i></a>
+									<a id="delete-btn" href="" title="Remove element" data-i18n-title="editor.removeElementTitle"><i class="icon-trash-outline"></i></a>
 								</div>
 								
 								<div class="resize">
@@ -668,10 +668,10 @@
 									<div class="header">							
 										<ul class="nav nav-tabs" id="box-elements-tabs" role="tablist">
 										  <li class="nav-item component-tab">
-											<a class="nav-link px-3 active" id="box-components-tab" data-bs-toggle="tab" href="#box-components" role="tab" aria-controls="components" aria-selected="true"><i class="icon-cube-outline"></i><small>Components</small></a>
+											<a class="nav-link px-3 active" id="box-components-tab" data-bs-toggle="tab" href="#box-components" role="tab" aria-controls="components" aria-selected="true"><i class="icon-cube-outline"></i><small data-i18n-text="editor.components">Components</small></a>
 										  </li>
 										  <li class="nav-item sections-tab">
-											<a class="nav-link px-3" id="box-sections-tab" data-bs-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="icon-copy-outline"></i><small>Blocks</small></a>
+											<a class="nav-link px-3" id="box-sections-tab" data-bs-toggle="tab" href="#box-blocks" role="tab" aria-controls="blocks" aria-selected="false"><i class="icon-copy-outline"></i><small data-i18n-text="editor.blocks">Blocks</small></a>
 										  </li>
                           <!--
 										  <li class="nav-item component-properties-tab" style="display:none">
@@ -688,12 +688,12 @@
 											
 											<div class="form-check d-inline-block small me-1">
 												  <input type="radio" id="add-section-insert-mode-after" value="after" checked="checked" name="add-section-insert-mode" class="form-check-input">
-												 <label class="form-check-label" for="add-section-insert-mode-after">After</label>
+												 <label class="form-check-label" for="add-section-insert-mode-after" data-i18n-text="editor.insertAfter">After</label>
 												</div>
 												
 												<div class="form-check d-inline-block small">
 												  <input type="radio" id="add-section-insert-mode-inside" value="inside" name="add-section-insert-mode" class="form-check-input">
-													<label class="form-check-label" for="add-section-insert-mode-inside">Inside</label>
+													<label class="form-check-label" for="add-section-insert-mode-inside" data-i18n-text="editor.insertInside">Inside</label>
 												</div>
 										
 											</div>
@@ -799,7 +799,7 @@
 								 <div class="tab-pane show active" id="content-tab" data-section="content" role="tabpanel" aria-labelledby="content-tab">
 									<div class="alert alert-dismissible fade show alert-light m-3" role="alert">		  
 										<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>		  
-										<strong>No selected element!</strong><br> Click on an element to edit.		
+										<strong data-i18n-text="editor.noElementSelected">No selected element!</strong><br><span data-i18n-text="editor.clickToEdit">Click on an element to edit.</span>		
 									</div>
 								</div>
 								
@@ -807,10 +807,10 @@
 									<div class="border-bottom pb-2 px-2">
 									  <div class="justify-content-end d-flex">
 										<select class="form-select w-50" data-vvveb-action="setState" data-vvveb-on="change">
-										  <option value=""> - State - </option>
-										  <option value="hover">hover</option>
-										  <option value="active">active</option>
-										  <option value="nth-of-type(2n)">nth-of-type(2n)</option>
+										  <option value="" data-i18n-text="editor.stateOption"> - State - </option>
+										  <option value="hover" data-i18n-text="editor.hoverOption">hover</option>
+										  <option value="active" data-i18n-text="editor.activeOption">active</option>
+										  <option value="nth-of-type(2n)" data-i18n-text="editor.nthOfTypeOption">nth-of-type(2n)</option>
 										</select>
 									  </div>
 									</div>
@@ -1477,7 +1477,7 @@
 				<a class="up-btn" href="" title="Move element up"><i class="la la-arrow-up"></i></a>
 				<a class="down-btn" href="" title="Move element down"><i class="la la-arrow-down"></i></a>
 				-->
-				<a class="properties-btn" href="" title="Properties"><i class="icon-settings-outline"></i></a>
+				<a class="properties-btn" href="" title="Properties" data-i18n-title="editor.contentTab"><i class="icon-settings-outline"></i></a>
 		</div>
 		</div>
 
@@ -1720,6 +1720,10 @@
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
+<!-- i18n-dom-loader code-->
+<script src="libs/builder/i18n-dom-loader.js"></script>
+<!-- i18n code-->
+<script src="libs/builder/i18n.js"></script>
 <!-- builder code-->
 <script src="libs/builder/builder.js"></script>	
 <!-- undo manager-->

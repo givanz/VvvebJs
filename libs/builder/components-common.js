@@ -23,31 +23,31 @@ bgcolorSelectOptions = [{
 	text: ""
 },{
 	value: "bg-primary",
-	text: "Primary"
+	text: i18n('common.colorPrimary')
 },{
 	value: "bg-secondary",
-	text: "Secondary"
+	text: i18n('common.colorSecondary')
 },{
 	value: "bg-success",
-	text: "Success"
+	text: i18n('common.colorSuccess')
 },{
 	value: "bg-danger",
-	text: "Danger"
+	text: i18n('common.colorDanger')
 },{
 	value: "bg-warning",
-	text: "Warning"
+	text: i18n('common.colorWarning')
 },{
 	value: "bg-info",
-	text: "Info"
+	text: i18n('common.colorInfo')
 },{
 	value: "bg-body-secondary",
-	text: "Light"
+	text: i18n('common.colorLight')
 },{
 	value: "bg-dark",
-	text: "Dark"
+	text: i18n('common.colorDark')
 },{
 	value: "bg-white",
-	text: "White"
+	text: i18n('common.colorWhite')
 }];
 
 function changeNodeName(node, newNodeName) {
@@ -73,15 +73,15 @@ let style_section = 'style';
 let advanced_section = 'advanced';
 
 Vvveb.Components.add("_base", {
-    name: "Element",
+    name: i18n('common.componentElement'),
 	properties: [{
         key: "element_header",
         inputtype: SectionInput,
         name:false,
         sort:base_sort++,
-        data: {header:"General"},
+        data: {header:i18n('common.generalHeader')},
     },{
-        name: "Id",
+        name: i18n('common.idProperty'),
         key: "id",
         htmlAttr: "id",
         sort: base_sort++,
@@ -89,7 +89,7 @@ Vvveb.Components.add("_base", {
         col:6,
         inputtype: TextInput
     },{
-        name: "Class",
+        name: i18n('common.classProperty'),
         key: "class",
         htmlAttr: "class",
         sort: base_sort++,
@@ -108,7 +108,7 @@ Vvveb.Components.extend("_base", "_base", {
         name:false,
         sort: base_sort++,
 		section: style_section,
-        data: {header:"Display"},
+        data: {header:i18n('common.displayHeader')},
      },{
 		//linked styles notice message
 		name:"",
@@ -120,8 +120,8 @@ Vvveb.Components.extend("_base", "_base", {
         inputtype: NoticeInput,
         data: {
 			type:'warning',
-			title:'Linked styles',
-			text:'This element shares styles with other <a class="linked-elements-hover" href="javascript:void()"><b class="elements-count">4</b> elements</a>, to apply styles <b>only for this element</b> enter a <b>unique id</b> eg: <i>marketing-heading</i> in in <br/><a class="id-input" href="#content-tab" role="tab" aria-controls="components" aria-selected="false" href="#content-tab">Content > General > Id</a>.<br/><span class="text-muted small"></span>',
+			title:i18n('common.linkedStylesTitle'),
+			text:i18n('common.linkedStylesNoticeText'),
 		},
 		afterInit:function(node, inputElement) {
 			let selector = Vvveb.StyleManager.getSelectorForElement(node);
@@ -162,7 +162,7 @@ Vvveb.Components.extend("_base", "_base", {
 			}
 		},	 
     },{
-        name: "Display",
+        name: i18n('common.displayProperty'),
         key: "display",
         htmlAttr: "style",
         sort: base_sort++,
@@ -174,50 +174,50 @@ Vvveb.Components.extend("_base", "_base", {
         data: {
             options: [{
                 value: "block",
-                text: "Block"
+                text: i18n('common.displayBlock')
             },{
                 value: "inline",
-                text: "Inline"
+                text: i18n('common.displayInline')
             },{
                 value: "inline-block",
-                text: "Inline Block"
+                text: i18n('common.displayInlineBlock')
             },{
                 value: "inline-block",
-                text: "Inline Block"
+                text: i18n('common.displayInlineBlock')
             },{
                 value: "flex",
-                text: "Flex"
+                text: i18n('common.displayFlex')
             },{
                 value: "inline-flex",
-                text: "Inline Flex"
+                text: i18n('common.displayInlineFlex')
             },{
                 value: "grid",
-                text: "Grid"
+                text: i18n('common.displayGrid')
             },{
                 value: "inline-grid",
-                text: "Inline grid"
+                text: i18n('common.displayInlineGrid')
             },{
                 value: "table",
-                text: "Table"
+                text: i18n('common.displayTable')
             },{
                 value: "table-row",
-                text: "Table Row"
+                text: i18n('common.displayTableRow')
             },{
                 value: "list-item",
-                text: "List Item"
+                text: i18n('common.displayListItem')
             },{
                 value: "inherit",
-                text: "Inherit"
+                text: i18n('common.displayInherit')
             },{
                 value: "initial",
-                text: "Initial"
+                text: i18n('common.displayInitial')
             },{
                 value: "none",
-                text: "none"
+                text: i18n('common.displayNone')
             }]
         }
     },{
-        name: "Position",
+        name: i18n('common.positionProperty'),
         key: "position",
         htmlAttr: "style",
         sort: base_sort++,
@@ -229,20 +229,20 @@ Vvveb.Components.extend("_base", "_base", {
         data: {
             options: [{
                 value: "static",
-                text: "Static"
+                text: i18n('common.positionStatic')
             },{
                 value: "fixed",
-                text: "Fixed"
+                text: i18n('common.positionFixed')
             },{
                 value: "relative",
-                text: "Relative"
+                text: i18n('common.positionRelative')
             },{
                 value: "absolute",
-                text: "Absolute"
+                text: i18n('common.positionAbsolute')
             }]
         }
     },{
-        name: "Top",
+        name: i18n('common.topProperty'),
         key: "top",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -252,7 +252,7 @@ Vvveb.Components.extend("_base", "_base", {
         parent:"",
         inputtype: CssUnitInput
 	},{
-        name: "Left",
+        name: i18n('common.leftProperty'),
         key: "left",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -262,7 +262,7 @@ Vvveb.Components.extend("_base", "_base", {
         parent:"",
         inputtype: CssUnitInput
     },{
-        name: "Bottom",
+        name: i18n('common.bottomProperty'),
         key: "bottom",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -272,7 +272,7 @@ Vvveb.Components.extend("_base", "_base", {
         parent:"",
         inputtype: CssUnitInput
 	},{
-        name: "Right",
+        name: i18n('common.rightProperty'),
         key: "right",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -282,7 +282,7 @@ Vvveb.Components.extend("_base", "_base", {
         parent:"",
         inputtype: CssUnitInput
     },{
-        name: "Float",
+        name: i18n('common.floatProperty'),
         key: "float",
         htmlAttr: "style",
         sort: base_sort++,
@@ -296,24 +296,24 @@ Vvveb.Components.extend("_base", "_base", {
                 value: "none",
                 icon:"la la-times",
                 //text: "None",
-                title: "None",
+                title: i18n('common.floatNone'),
                 checked:true,
             },{
                 value: "left",
                 //text: "Left",
-                title: "Left",
+                title: i18n('common.floatLeft'),
                 icon:"la la-align-left",
                 checked:false,
             },{
                 value: "right",
                 //text: "Right",
-                title: "Right",
+                title: i18n('common.floatRight'),
                 icon:"la la-align-right",
                 checked:false,
             }],
          }
 	},{
-        name: "Opacity",
+        name: i18n('common.opacityProperty'),
         key: "opacity",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -328,7 +328,7 @@ Vvveb.Components.extend("_base", "_base", {
 			step:0.1
        },
 	},{
-        name: "Background Color",
+        name: i18n('common.backgroundColorProperty'),
         key: "background-color",
         sort: base_sort++,
 		section: style_section,
@@ -337,7 +337,7 @@ Vvveb.Components.extend("_base", "_base", {
 		htmlAttr: "style",
         inputtype: ColorInput,
 	},{
-        name: "Text Color",
+        name: i18n('common.textColorProperty'),
         key: "color",
         sort: base_sort++,
 		section: style_section,
@@ -356,10 +356,10 @@ let ComponentBaseTypography = {
 		name:false,
 		sort: base_sort++,
 		section: style_section,
-		data: {header:"Typography"},
+		data: {header:i18n('common.typographyHeader')},
  
 	},{
-        name: "Font size",
+        name: i18n('common.fontSizeProperty'),
         key: "font-size",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -368,7 +368,7 @@ let ComponentBaseTypography = {
 		inline:false,
         inputtype: CssUnitInput
 	},{
-        name: "Font weight",
+        name: i18n('common.fontWeightProperty'),
         key: "font-weight",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -379,38 +379,38 @@ let ComponentBaseTypography = {
         data: {
 			options: [{
 				value: "",
-				text: "Default"
+				text: i18n('common.fontWeightDefault')
 			},{	
 				value: "100",
-				text: "Thin"
+				text: i18n('common.fontWeightThin')
 			},{
 				value: "200",
-				text: "Extra-Light"
+				text: i18n('common.fontWeightExtraLight')
 			},{
 				value: "300",
-				text: "Light"
+				text: i18n('common.fontWeightLight')
 			},{
 				value: "400",
-				text: "Normal"
+				text: i18n('common.fontWeightNormal')
 			},{
 				value: "500",
-				text: "Medium"
+				text: i18n('common.fontWeightMedium')
 			},{
 				value: "600",
-				text: "Semi-Bold"
+				text: i18n('common.fontWeightSemiBold')
 			},{
 				value: "700",
-				text: "Bold"
+				text: i18n('common.fontWeightBold')
 			},{
 				value: "800",
-				text: "Extra-Bold"
+				text: i18n('common.fontWeightExtraBold')
 			},{
 				value: "900",
-				text: "Ultra-Bold"
+				text: i18n('common.fontWeightUltraBold')
 			}],
 		}
     },{
-        name: "Font family",
+        name: i18n('common.fontFamilyProperty'),
         key: "font-family",
 	htmlAttr: "style",
         sort: base_sort++,
@@ -422,7 +422,7 @@ let ComponentBaseTypography = {
 			options: fontList
 		}
 	},{
-        name: "Text align",
+        name: i18n('common.textAlignProperty'),
         key: "text-align",
         htmlAttr: "style",
         sort: base_sort++,
@@ -436,36 +436,36 @@ let ComponentBaseTypography = {
                 value: "",
                 icon:"la la-times",
                 //text: "None",
-                title: "None",
+                title: i18n('common.floatNone'),
                 checked:true,
             },{
                 value: "left",
                 //text: "Left",
-                title: "Left",
+                title: i18n('common.alignLeft'),
                 icon:"la la-align-left",
                 checked:false,
             },{
                 value: "center",
                 //text: "Center",
-                title: "Center",
+                title: i18n('common.alignCenter'),
                 icon:"la la-align-center",
                 checked:false,
             },{
                 value: "right",
                 //text: "Right",
-                title: "Right",
+                title: i18n('common.floatRight'),
                 icon:"la la-align-right",
                 checked:false,
             },{
                 value: "justify",
                 //text: "justify",
-                title: "Justify",
+                title: i18n('common.alignJustify'),
                 icon:"la la-align-justify",
                 checked:false,
             }],
         },
 	},{
-        name: "Line height",
+        name: i18n('common.lineHeightProperty'),
         key: "line-height",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -474,7 +474,7 @@ let ComponentBaseTypography = {
 		inline:false,
         inputtype: CssUnitInput
 	},{
-        name: "Letter spacing",
+        name: i18n('common.letterSpacingProperty'),
         key: "letter-spacing",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -483,7 +483,7 @@ let ComponentBaseTypography = {
 		inline:false,
         inputtype: CssUnitInput
 	},{
-        name: "Text decoration",
+        name: i18n('common.textDecorationProperty'),
         key: "text-decoration-line",
         htmlAttr: "style",
         sort: base_sort++,
@@ -497,36 +497,36 @@ let ComponentBaseTypography = {
                 value: "none",
                 icon:"la la-times",
                 //text: "None",
-                title: "None",
+                title: i18n('common.floatNone'),
                 checked:true,
             },{
                 value: "underline",
                 //text: "Left",
-                title: "underline",
+                title: i18n('common.decorationUnderline'),
                 icon:"la la-long-arrow-alt-down",
                 checked:false,
             },{
                 value: "overline",
                 //text: "Right",
-                title: "overline",
+                title: i18n('common.decorationOverline'),
                 icon:"la la-long-arrow-alt-up",
                 checked:false,
             },{
                 value: "line-through",
                 //text: "Right",
-                title: "Line Through",
+                title: i18n('common.decorationLineThrough'),
                 icon:"la la-strikethrough",
                 checked:false,
             },{
                 value: "underline overline",
                 //text: "justify",
-                title: "Underline Overline",
+                title: i18n('common.decorationUnderlineOverline'),
                 icon:"la la-arrows-alt-v",
                 checked:false,
             }],
         },
 	},{
-        name: "Decoration Color",
+        name: i18n('common.decorationColorProperty'),
         key: "text-decoration-color",
         sort: base_sort++,
 		section: style_section,
@@ -535,7 +535,7 @@ let ComponentBaseTypography = {
 		htmlAttr: "style",
         inputtype: ColorInput,
 	},{
-        name: "Decoration style",
+        name: i18n('common.decorationStyleProperty'),
         key: "text-decoration-style",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -546,22 +546,22 @@ let ComponentBaseTypography = {
         data: {
 			options: [{
 				value: "",
-				text: "Default"
+				text: i18n('common.styleDefault')
 			},{	
 				value: "solid",
-				text: "Solid"
+				text: i18n('common.styleSolid')
 			},{
 				value: "wavy",
-				text: "Wavy"
+				text: i18n('common.styleWavy')
 			},{
 				value: "dotted",
-				text: "Dotted"
+				text: i18n('common.styleDotted')
 			},{
 				value: "dashed",
-				text: "Dashed"
+				text: i18n('common.styleDashed')
 			},{
 				value: "double",
-				text: "Double"
+				text: i18n('common.styleDouble')
 			}],
 		}
   }]
@@ -577,9 +577,9 @@ let ComponentBaseSize = {
 		name:false,
 		sort: base_sort++,
 		section: style_section,
-		data: {header:"Size", expanded:false},
+		data: {header:i18n('common.sizeHeader'), expanded:false},
 	},{
-        name: "Width",
+        name: i18n('common.widthProperty'),
         key: "width",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -588,7 +588,7 @@ let ComponentBaseSize = {
 		inline:false,
         inputtype: CssUnitInput
 	},{
-        name: "Height",
+        name: i18n('common.heightProperty'),
         key: "height",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -597,7 +597,7 @@ let ComponentBaseSize = {
 		inline:false,
         inputtype: CssUnitInput
 	},{
-        name: "Min Width",
+        name: i18n('common.minWidthProperty'),
         key: "min-width",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -606,7 +606,7 @@ let ComponentBaseSize = {
 		inline:false,
         inputtype: CssUnitInput
 	},{
-        name: "Min Height",
+        name: i18n('common.minHeightProperty'),
         key: "min-height",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -615,7 +615,7 @@ let ComponentBaseSize = {
 		inline:false,
         inputtype: CssUnitInput
 	},{
-        name: "Max Width",
+        name: i18n('common.maxWidthProperty'),
         key: "max-width",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -624,7 +624,7 @@ let ComponentBaseSize = {
 		inline:false,
         inputtype: CssUnitInput
 	},{
-        name: "Max Height",
+        name: i18n('common.maxHeightProperty'),
         key: "max-height",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -645,9 +645,9 @@ let ComponentBaseMargin = {
 		name:false,
 		sort: base_sort++,
 		section: style_section,
-		data: {header:"Margin", expanded:false},
+		data: {header:i18n('common.marginHeader'), expanded:false},
 	},{
-        name: "Top",
+        name: i18n('common.topProperty'),
         key: "margin-top",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -656,7 +656,7 @@ let ComponentBaseMargin = {
 		inline:false,
         inputtype: CssUnitInput
 	},{
-        name: "Right",
+        name: i18n('common.rightProperty'),
         key: "margin-right",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -665,7 +665,7 @@ let ComponentBaseMargin = {
 		inline:false,
         inputtype: CssUnitInput
     },{
-        name: "Bottom",
+        name: i18n('common.bottomProperty'),
         key: "margin-bottom",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -674,7 +674,7 @@ let ComponentBaseMargin = {
 		inline:false,
         inputtype: CssUnitInput
     },{
-        name: "Left",
+        name: i18n('common.leftProperty'),
         key: "margin-left",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -696,9 +696,9 @@ let ComponentBasePadding = {
 		name:false,
 		sort: base_sort++,
 		section: style_section,
-		data: {header:"Padding", expanded:false},
+		data: {header:i18n('common.paddingHeader'), expanded:false},
 	},{
-        name: "Top",
+        name: i18n('common.topProperty'),
         key: "padding-top",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -707,7 +707,7 @@ let ComponentBasePadding = {
 		inline:false,
         inputtype: CssUnitInput
 	},{
-        name: "Right",
+        name: i18n('common.rightProperty'),
         key: "padding-right",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -716,7 +716,7 @@ let ComponentBasePadding = {
 		inline:false,
         inputtype: CssUnitInput
     },{
-        name: "Bottom",
+        name: i18n('common.bottomProperty'),
         key: "padding-bottom",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -725,7 +725,7 @@ let ComponentBasePadding = {
 		inline:false,
         inputtype: CssUnitInput
     },{
-        name: "Left",
+        name: i18n('common.leftProperty'),
         key: "padding-left",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -747,9 +747,9 @@ Vvveb.Components.extend("_base", "_base", {
 		name:false,
 		sort: base_sort++,
 		section: style_section,
-		data: {header:"Border", expanded:false},
+		data: {header:i18n('common.borderHeader'), expanded:false},
 	 },{        
-        name: "Style",
+        name: i18n('common.styleProperty'),
         key: "border-style",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -760,20 +760,20 @@ Vvveb.Components.extend("_base", "_base", {
         data: {
 			options: [{
 				value: "",
-				text: "Default"
+				text: i18n('common.styleDefault')
 			},{	
 				value: "solid",
-				text: "Solid"
+				text: i18n('common.styleSolid')
 			},{
 				value: "dotted",
-				text: "Dotted"
+				text: i18n('common.styleDotted')
 			},{
 				value: "dashed",
-				text: "Dashed"
+				text: i18n('common.styleDashed')
 			}],
 		}
 	},{
-        name: "Width",
+        name: i18n('common.widthProperty'),
         key: "border-width",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -782,7 +782,7 @@ Vvveb.Components.extend("_base", "_base", {
 		inline:false,
         inputtype: CssUnitInput
    	},{
-        name: "Color",
+        name: i18n('common.colorProperty'),
         key: "border-color",
         sort: base_sort++,
 		section: style_section,
@@ -803,9 +803,9 @@ Vvveb.Components.extend("_base", "_base", {
 		name:false,
 		sort: base_sort++,
 		section: style_section,
-		data: {header:"Border radius", expanded:false},
+		data: {header:i18n('common.borderRadiusHeader'), expanded:false},
 	},{
-        name: "Top Left",
+        name: i18n('common.topLeftRadiusProperty'),
         key: "border-top-left-radius",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -814,7 +814,7 @@ Vvveb.Components.extend("_base", "_base", {
 		inline:false,
         inputtype: CssUnitInput
 	},{
-        name: "Top Right",
+        name: i18n('common.topRightRadiusProperty'),
         key: "border-top-right-radius",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -823,7 +823,7 @@ Vvveb.Components.extend("_base", "_base", {
 		inline:false,
         inputtype: CssUnitInput
     },{
-        name: "Bottom Left",
+        name: i18n('common.bottomLeftRadiusProperty'),
         key: "border-bottom-left-radius",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -832,7 +832,7 @@ Vvveb.Components.extend("_base", "_base", {
 		inline:false,
         inputtype: CssUnitInput
     },{
-        name: "Bottom Right",
+        name: i18n('common.bottomRightRadiusProperty'),
         key: "border-bottom-right-radius",
 		htmlAttr: "style",
         sort: base_sort++,
@@ -851,9 +851,9 @@ Vvveb.Components.extend("_base", "_base", {
 		name:false,
 		sort: base_sort++,
 		section: style_section,
-		data: {header:"Background Image", expanded:false},
+		data: {header:i18n('common.backgroundImageHeader'), expanded:false},
 	 },{
-        name: "Image",
+        name: i18n('common.imageProperty'),
         key: "Image",
         sort: base_sort++,
 		section: style_section,
@@ -873,7 +873,7 @@ Vvveb.Components.extend("_base", "_base", {
 		}        
 
    	},{
-        name: "Repeat",
+        name: i18n('common.repeatProperty'),
         key: "background-repeat",
         sort: base_sort++,
 		section: style_section,
@@ -882,20 +882,20 @@ Vvveb.Components.extend("_base", "_base", {
         data: {
 			options: [{
 				value: "",
-				text: "Default"
+				text: i18n('common.styleDefault')
 			},{	
 				value: "repeat-x",
-				text: "repeat-x"
+				text: i18n('common.repeatX')
 			},{
 				value: "repeat-y",
-				text: "repeat-y"
+				text: i18n('common.repeatY')
 			},{
 				value: "no-repeat",
-				text: "no-repeat"
+				text: i18n('common.noRepeat')
 			}],
 		}
    	},{
-        name: "Size",
+        name: i18n('common.sizeProperty'),
         key: "background-size",
         sort: base_sort++,
 		section: style_section,
@@ -904,17 +904,17 @@ Vvveb.Components.extend("_base", "_base", {
         data: {
 			options: [{
 				value: "",
-				text: "Default"
+				text: i18n('common.styleDefault')
 			},{	
 				value: "contain",
-				text: "contain"
+				text: i18n('common.sizeContain')
 			},{
 				value: "cover",
-				text: "cover"
+				text: i18n('common.sizeCover')
 			}],
 		}
    	},{
-        name: "Position x",
+        name: i18n('common.positionXProperty'),
         key: "background-position-x",
         sort: base_sort++,
 		section: style_section,
@@ -925,20 +925,20 @@ Vvveb.Components.extend("_base", "_base", {
         data: {
 			options: [{
 				value: "",
-				text: "Default"
+				text: i18n('common.styleDefault')
 			},{	
 				value: "center",
-				text: "center"
+				text: i18n('common.positionCenter')
 			},{	
 				value: "right",
-				text: "right"
+				text: i18n('common.positionRight')
 			},{
 				value: "left",
-				text: "left"
+				text: i18n('common.positionLeft')
 			}],
 		}
    	},{
-        name: "Position y",
+        name: i18n('common.positionYProperty'),
         key: "background-position-y",
         sort: base_sort++,
 		section: style_section,
@@ -949,16 +949,16 @@ Vvveb.Components.extend("_base", "_base", {
         data: {
 			options: [{
 				value: "",
-				text: "Default"
+				text: i18n('common.styleDefault')
 			},{	
 				value: "center",
-				text: "center"
+				text: i18n('common.positionCenter')
 			},{	
 				value: "top",
-				text: "top"
+				text: i18n('common.positionTop')
 			},{
 				value: "bottom",
-				text: "bottom"
+				text: i18n('common.positionBottom')
 			}],
 		}
     }]
@@ -973,9 +973,9 @@ let ComponentDeviceVisibility = {
 		name:false,
 		sort: base_sort++,
 		section: advanced_section,
-		data: {header:"Hide based on device screen width"},
+		data: {header:i18n('common.hideOnDeviceHeader')},
 	},{
-        name: "Extra small devices",
+        name: i18n('common.extraSmallDevicesProperty'),
         key: "hidexs",
         col:6,
 		inline:true,
@@ -989,7 +989,7 @@ let ComponentDeviceVisibility = {
             off: ""
         }
 	},{
-        name: "Small devices",
+        name: i18n('common.smallDevicesProperty'),
         key: "hidesm",
         col:6,
 		inline:true,
@@ -1003,7 +1003,7 @@ let ComponentDeviceVisibility = {
             off: ""
         }
 	},{
-        name: "Medium devices",
+        name: i18n('common.mediumDevicesProperty'),
         key: "hidemd",
         col:6,
 		inline:true,
@@ -1017,7 +1017,7 @@ let ComponentDeviceVisibility = {
             off: ""
         }
 	},{
-        name: "Large devices",
+        name: i18n('common.largeDevicesProperty'),
         key: "hidelg",
         col:6,
 		inline:true,
@@ -1031,7 +1031,7 @@ let ComponentDeviceVisibility = {
             off: ""
         }
 	},{
-        name: "Xl devices",
+        name: i18n('common.extraLargeDevicesProperty'),
         key: "hidexl",
         col:6,
 		inline:true,
@@ -1045,7 +1045,7 @@ let ComponentDeviceVisibility = {
             off: ""
         }
 	},{
-        name: "Xxl devices",
+        name: i18n('common.extraExtraLargeDevicesProperty'),
         key: "hidexxl",
         col:6,
 		inline:true,
@@ -1065,7 +1065,7 @@ Vvveb.Components.extend("_base", "_base", ComponentDeviceVisibility);
 
 
 Vvveb.Components.add("config/bootstrap", {
-    name: "Bootstrap Variables",
+    name: i18n('common.bootstrapVariablesComponent'),
 	beforeInit: function (node) {
 		properties = [];
 		let i = 0;

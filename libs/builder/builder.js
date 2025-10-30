@@ -207,7 +207,7 @@ Vvveb.Components = {
 
 	updateProperty: function(type, key, value) {
 		let properties = this._components[type]["properties"];
-		for (property in properties) {
+		for (let property in properties) {
 			if (key == properties[property]["key"])  {
 				return this._components[type]["properties"][property] = 
 				Object.assign(properties[property], value);
@@ -217,9 +217,9 @@ Vvveb.Components = {
 
 	getProperty: function(type, key) {
 		let properties = this._components[type] ? this._components[type]["properties"] : [];
-		for (property in properties) {
-			if (key == properties[property]["key"])  {
-				return properties[property];
+		for (let property of properties) {
+			if (key == property["key"])  {
+				return property;
 			}
 		}
 	},
@@ -230,8 +230,8 @@ Vvveb.Components = {
 		this._components[type] = data;
 		
 		if (data.nodes) {
-			for (let i in data.nodes) {	
-				this._nodesLookup[ data.nodes[i] ] = data;
+			for (let node of data.nodes) {	
+				this._nodesLookup[ node ] = data;
 			}
 		}
 		
@@ -256,14 +256,14 @@ Vvveb.Components = {
 		}
 		
 		if (data.classes) {
-			for (let i in data.classes) {	
-				this._classesLookup[ data.classes[i] ] = data;
+			for (let classs of data.classes) {	
+				this._classesLookup[ classs ] = data;
 			}
 		}
 		
 		if (data.classesRegex) {
-			for (let i in data.classesRegex) {	
-				this._classesRegexLookup[ data.classesRegex[i] ] = data;
+			for (let classRegex of data.classesRegex) {	
+				this._classesRegexLookup[ classRegex ] = data;
 			}
 		}
 	},
@@ -300,10 +300,10 @@ Vvveb.Components = {
 		
 		if (node.attributes && node.attributes.length) {
 			//search for attributes
-			for (let i in node.attributes) {
-				if (node.attributes[i]) {
-					attr = node.attributes[i].name;
-					value = node.attributes[i].value;
+			for (let attribute of node.attributes) {
+				if (attribute) {
+					attr = attribute.name;
+					value = attribute.value;
 
 					if (attr in this._attributesLookup) {
 						component = this._attributesLookup[ attr ];
@@ -321,20 +321,20 @@ Vvveb.Components = {
 				}
 			}
 				
-			for (let i in node.attributes) {
-				attr = node.attributes[i].name;
-				value = node.attributes[i].value;
+			for (let attribute of node.attributes) {
+				attr = attribute.name;
+				value = attribute.value;
 				
 				//check for node classes
 				if (attr == "class") {
 					classes = value.split(" ");
 					
-					for (j in classes) {
-						if (classes[j] in this._classesLookup)
-						return this._classesLookup[ classes[j] ];	
+					for (let classs of classes) {
+						if (classs in this._classesLookup)
+						return this._classesLookup[ classs ];	
 					}
 					
-					for (regex in this._classesRegexLookup) {
+					for (let regex in this._classesRegexLookup) {
 						regexObj = new RegExp(regex);
 						if (regexObj.exec(value)) {
 							return this._classesRegexLookup[ regex ];	
@@ -652,7 +652,7 @@ Vvveb.WysiwygEditor = {
 		}
 		
 		if (element && style) {
-			for (name in style) {
+			for (let name in style) {
 
 				if ( !style[name] || 
 					(toggle && element.style.getPropertyValue(name))) {
@@ -750,7 +750,7 @@ Vvveb.WysiwygEditor = {
 				return false;
 		});
 
-		let sizes = "<option value=''> - Font size - </option>";
+		let sizes = "<option value=''> " + i18n('builder.fontSize') + " </option>";
 		for (i = 1;i <= 128; i++) {
 			sizes += "<option value='"+ i +"px'>"+ i +"</option>";
 		}
@@ -996,10 +996,12 @@ Vvveb.Builder = {
 					const block = Vvveb.Blocks.get(blockType);
 					
 					if (block) {
-						item = generateElements(`<li data-section="${group}" data-drag-type="block" data-type="${blockType}" data-search="${block.name.toLowerCase()}">
+						item = generateElements(`
+							<li data-section="${group}" data-drag-type="block" data-type="${blockType}" data-search="${block.name.toLowerCase()}">
 									<span class="name">${block.name}</span>
 									<img class="preview" src="" loading="lazy">
-								</li>`)[0];
+								</li>
+								`)[0];
 
 						if (block.image) {
 
@@ -1049,7 +1051,7 @@ Vvveb.Builder = {
 
 				window.FrameWindow.addEventListener("beforeunload", function(event) {
 					if (Vvveb.Undo.undoIndex >= 0) {
-						let dialogText = "You have unsaved changes";
+						let dialogText = i18n('builder.unsavedChanges');
 						event.returnValue = dialogText;
 						return dialogText;
 					}
@@ -1759,7 +1761,7 @@ Vvveb.Builder = {
 				type = 'section';
 			}
 			
-			const name = prompt("Enter name for new reusable " + type, '');
+			const name = prompt(i18n('builder.enterReusableName', {type: type}), '');
 			if (name) {
 				Vvveb.Builder.saveElement(node, type, name);
 			}
@@ -2159,11 +2161,11 @@ Vvveb.Builder = {
 				bg = "bg-danger";
 			}
 			
-			displayToast(bg, "Save", data.message ?? data);					
+			displayToast(bg, i18n('builder.save'), data.message ?? data);			
 		})
 		.catch(error => {
 			console.log(error.statusText);
-			displayToast("bg-danger", "Error", "Error saving!");
+			displayToast("bg-danger", i18n('builder.error'), i18n('builder.errorSaving'));
 		});
 		/*
 		return $.ajax({
@@ -2214,12 +2216,12 @@ Vvveb.Builder = {
 		})
 		.catch((err) => {
 			if (error) error(err);
-			let message = error?.statusText ?? "Error saving!";
-			displayToast("bg-danger", "Error", message);
+			let message = error?.statusText ?? i18n('builder.errorSaving');
+			displayToast("bg-danger", i18n('builder.error'), message);
 
 			if (err.hasOwnProperty('text')) err.text().then( errorMessage => {
 			  	let message = errorMessage.substr(0, 200);
-				displayToast("bg-danger", "Error", message);
+				displayToast("bg-danger", i18n('builder.error'), message);
 			});
 		});
 	},
@@ -2492,7 +2494,7 @@ Vvveb.Gui = {
 			btn.querySelector(".loading").classList.add("d-none");
 			btn.querySelector(".button-text").classList.remove("d-none");
 			let message = error?.statusText ?? "Error saving!";
-			displayToast("bg-danger", "Error", message);
+			displayToast("bg-danger", i18n('builder.error'), message);
 		});		
 	},
 	
@@ -3625,7 +3627,7 @@ Vvveb.FileManager = {
 	
 	deletePage: function(element, e) {
 		let page = element.dataset;
-		if (confirm(`Are you sure you want to delete "${page.file}"template?`)) {
+		if (confirm(i18n('builder.confirmDelete', {file: page.file}))) {
 
 			let detail = {page, element};
 			//allow event to change page or cancel by setting page to false
@@ -3648,16 +3650,16 @@ Vvveb.FileManager = {
 							bg = "bg-danger";
 						}
 
-						displayToast(bg, "Delete", data.message ?? data);
+						displayToast(bg, i18n('builder.delete'), data.message ?? data);
 				})
 				.catch(error => {
 					console.log(error);
-					let message = error.statusText ?? "Error deleting page!";
-					displayToast("bg-danger", "Error", message);
+					let message = error.statusText ?? i18n('builder.errorDeletingPage');
+					displayToast("bg-danger", i18n('builder.error'), message);
 
 					err.text().then( errorMessage => {
 						let message = errorMessage.substr(0, 200);
-						displayToast("bg-danger", "Error", message);
+						displayToast("bg-danger", i18n('builder.error'), message);
 					})					
 				});
 
@@ -3668,7 +3670,7 @@ Vvveb.FileManager = {
 	
 	renamePage: function(element, e, duplicate = false) {
 		let page = element.dataset;
-		let newfile = prompt(`Enter new file name for "${page.file}"`, page.file);
+		let newfile = prompt(i18n('builder.enterNewFileName', page.file), page.file);
 		let _self = this;
 		if (newfile) {
 
@@ -3717,11 +3719,11 @@ Vvveb.FileManager = {
 				.catch(error => {
 					console.log(error);
 					let message = error.statusText ?? "Error renaming page!";
-					displayToast("bg-danger", "Error", message);
+					displayToast("bg-danger", i18n('builder.error'), message);
 
 					error.text().then( errorMessage => {
 						let message = errorMessage.substr(0, 200);
-						displayToast("bg-danger", "Error", message);
+						displayToast("bg-danger", i18n('builder.error'), message);
 					})
 				});				
 			}

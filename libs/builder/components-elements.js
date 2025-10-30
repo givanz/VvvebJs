@@ -50,7 +50,7 @@ Vvveb.ComponentsGroup['Elements'] = [
 
 Vvveb.Components.extend("_base","elements/figure", {
     nodes: ["figure"],
-	name: "Figure",
+	name: i18n('elements.figureName'),
     image: "icons/image.svg",
     resizable:true,
     html: `<figure>
@@ -77,31 +77,31 @@ Vvveb.Components.extend("_base","elements/figure", {
     resizable:true,//show select box resize handlers
     
     properties: [{
-        name: "Image",
+        name: i18n('elements.imageProperty'),
         key: "src",
         child:"img",
         htmlAttr: "src",
         inputtype: ImageInput
     },{
-        name: "Width",
+        name: i18n('common.widthProperty'),
         key: "width",
         child:"img",
         htmlAttr: "width",
         inputtype: CssUnitInput
     },{
-        name: "Height",
+        name: i18n('common.heightProperty'),
         key: "height",
         child:"img",
         htmlAttr: "height",
         inputtype: CssUnitInput
     },{
-        name: "Alt",
+        name: i18n('elements.altProperty'),
         key: "alt",
         child:"img",
         htmlAttr: "alt",
         inputtype: TextInput
     },{
-        name: "Caption",
+        name: i18n('elements.captionProperty'),
         key: "caption",
         child:"figcaption",
         htmlAttr: "innerHTML",
@@ -114,12 +114,12 @@ Vvveb.Components.extend("_base","elements/figure", {
 //Icon
 Vvveb.Components.extend("_base","elements/font-icon", {
     classes: ["la", "lab"],
-    name: "Font Icon",
+    name: i18n('elements.fontIconName'),
     image: "icons/star.svg",
     html: `<i class="la la-star la-2x"></i>`,
     properties: [
 {
-		name: "Icon",
+		name: i18n('elements.iconProperty'),
 		key: "icon",
 		inline:true,
 		inputtype: HtmlListSelectInput,
@@ -142,11 +142,11 @@ Vvveb.Components.extend("_base","elements/font-icon", {
 			elements: 'Loading ...',
 			options: [{
                 value: "line-awesome",
-                text: "Line-awesome"
+                text: i18n('elements.lineAwesomeText')
             }]
 		},
 	},{
-        name: "Size",
+        name: i18n('common.sizeProperty'),
         key: "type",
         htmlAttr: "class",
         inputtype: SelectInput,
@@ -154,13 +154,13 @@ Vvveb.Components.extend("_base","elements/font-icon", {
         data: {
             options: [{
                 value: "",
-                text: "Normal"
+                text: i18n('common.sizeNormal')
             },{
                 value: "la-lg",
-                text: "Large"
+                text: i18n('common.sizeLarge')
             },{
                 value: "la-2x",
-                text: "2x"
+                text: i18n('common.size2x')
             }]
         }
     }]
@@ -181,13 +181,13 @@ V.Resources.Icons =
 
 Vvveb.Components.extend("_base","elements/svg-icon", {
     nodes: ["svg"],
-    name: "Svg Icon",
+    name: i18n('elements.svgIconName'),
     image: "icons/star.svg",
     html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="64" height="64">
 		<path d="M 30.335938 12.546875 L 20.164063 11.472656 L 16 2.132813 L 11.835938 11.472656 L 1.664063 12.546875 L 9.261719 19.394531 L 7.140625 29.398438 L 16 24.289063 L 24.859375 29.398438 L 22.738281 19.394531 Z"/>
     </svg>`,
     properties: [{
-		name: "Icon",
+		name: i18n('elements.iconProperty'),
 		key: "icon",
 		inline:true,
 		inputtype: HtmlListSelectInput,
@@ -213,95 +213,95 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
 				elements: 'Loading ...',
 				options: [{
 					value: "eva-icons",
-					text: "Eva icons"
+					text: i18n('elements.evaIconsText')
 				},{
 					value: "ionicons",
-					text: "IonIcons"
+					text: i18n('elements.ioniconsText')
 				},{
 					value: "linea",
-					text: "Linea"
+					text: i18n('elements.lineaText')
 				},{
 					value: "remix-icon",
-					text: "RemixIcon"
+					text: i18n('elements.remixIconText')
 				},{
 					value: "unicons",
-					text: "Unicons"
+					text: i18n('elements.uniconsText')
 				},{
 					value: "clarity-icons",
-					text: "Clarity icons"
+					text: i18n('elements.clarityIconsText')
 				},{
 					value: "jam-icons",
-					text: "Jam icons"
+					text: i18n('elements.jamIconsText')
 				},{
 					value: "ant-design-icons",
-					text: "Ant design icons"
+					text: i18n('elements.antDesignIconsText')
 				},{
 					value: "themify",
-					text: "Themify"
+					text: i18n('elements.themifyText')
 				},{
 					value: "css.gg",
-					text: "Css.gg"
+					text: i18n('elements.cssGgText')
 				},{
 					value: "olicons",
-					text: "Olicons"
+					text: i18n('elements.oliconsText')
 				},{
 					value: "open-iconic",
-					text: "Open iconic"
+					text: i18n('elements.openIconicText')
 				},{
 					value: "boxicons",
-					text: "Box icons"
+					text: i18n('elements.boxIconsText')
 				},{
 					value: "elegant-font",
-					text: "Elegant font"
+					text: i18n('elements.elegantFontText')
 				},{
 					value: "dripicons",
-					text: "Dripicons"
+					text: i18n('elements.dripiconsText')
 				},{
 					value: "feather",
-					text: "Feather"
+					text: i18n('elements.featherText')
 				},{
 					value: "coreui-icons",
-					text: "Coreui icons"
+					text: i18n('elements.coreuiIconsText')
 				},{
 					value: "heroicons",
-					text: "Heroicons"
+					text: i18n('elements.heroiconsText')
 				},{
 					value: "iconoir",
-					text: "Iconoir"
+					text: i18n('elements.iconoirText')
 				},{
 					value: "iconsax",
-					text: "Iconsax"
+					text: i18n('elements.iconsaxText')
 				},{
 					value: "ikonate",
-					text: "Ikonate"
+					text: i18n('elements.ikonateText')
 				},{
 					value: "tabler-icons",
-					text: "Tabler icons"
+					text: i18n('elements.tablerIconsText')
 				},{
 					value: "octicons",
-					text: "Octicons"
+					text: i18n('elements.octiconsText')
 				},{
 					value: "system-uicons",
-					text: "System-uicons"
+					text: i18n('elements.systemUiconsText')
 				},{
 					value: "font-awesome",
-					text: "FontAwesome"
+					text: i18n('elements.fontAwesomeText')
 				},{
 					value: "pe-icon-7-stroke",
-					text: "Pixeden icon 7 stroke"
+					text: i18n('elements.pixedenIcon7StrokeText')
 				},{
 					value: "77_essential_icons",
-					text: "77 essential icons"
+					text: i18n('elements.77EssentialIconsText')
 				},{
 					value: "150-outlined-icons",
-					text: "150 outlined icons"
+					text: i18n('elements.150OutlinedIconsText')
 				},{
 					value: "material-design",
-					text: "Material Design"
+					text: i18n('elements.materialDesignText')
 				}]
             },
 	   },{
-		name: "Width",
+		name: i18n('common.widthProperty'),
 		key: "width",
 		htmlAttr: "width",
 		inputtype: RangeInput,
@@ -311,7 +311,7 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
 			step:1
 		}
    },{
-		name: "Height",
+		name: i18n('common.heightProperty'),
 		key: "height",
 		htmlAttr: "height",
 		inputtype: RangeInput,
@@ -321,7 +321,7 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
 			step:1
 		}			
    },{
-		name: "Stroke width",
+		name: i18n('elements.strokeWidthProperty'),
 		key: "stroke-width",
 		htmlAttr: "stroke-width",
 		inputtype: RangeInput,
@@ -336,9 +336,9 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
 		name:false,
 		//sort: base_sort++,
 		section: style_section,
-		data: {header:"Svg colors"},
+		data: {header:i18n('elements.svgColorsHeader')},
 	},{
-        name: "Fill Color",
+        name: i18n('common.fillColorProperty'),
         key: "fill",
         //sort: base_sort++,
         col:4,
@@ -347,7 +347,7 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
         htmlAttr: "fill",
         inputtype: ColorInput,
    },{
-        name: "Color",
+        name: i18n('common.colorProperty'),
         key: "color",
         //sort: base_sort++,
         col:4,
@@ -356,7 +356,7 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
         htmlAttr: "color",
         inputtype: ColorInput,
    },{
-        name: "Stroke",
+        name: i18n('common.strokeProperty'),
         key: "Stroke",
         //sort: base_sort++,
         col:4,
@@ -370,11 +370,11 @@ Vvveb.Components.extend("_base","elements/svg-icon", {
 
 Vvveb.Components.add("elements/svg-element", {
     nodes: ["path", "line", "polyline", "polygon", "rect", "circle", "ellipse", "g"],
-    name: "Svg element",
+    name: i18n('elements.svgElementName'),
     image: "icons/star.svg",
     html: ``,
     properties: [{
-        name: "Fill Color",
+        name: i18n('common.fillColorProperty'),
         key: "fill",
         //sort: base_sort++,
         col:4,
@@ -383,7 +383,7 @@ Vvveb.Components.add("elements/svg-element", {
 		htmlAttr: "fill",
         inputtype: ColorInput,
    },{
-        name: "Color",
+        name: i18n('common.colorProperty'),
         key: "color",
         //sort: base_sort++,
         col:4,
@@ -392,7 +392,7 @@ Vvveb.Components.add("elements/svg-element", {
 		htmlAttr: "color",
         inputtype: ColorInput,
    },{
-        name: "Stroke",
+        name: i18n('common.strokeProperty'),
         key: "Stroke",
         //sort: base_sort++,
         col:4,
@@ -401,7 +401,7 @@ Vvveb.Components.add("elements/svg-element", {
 		htmlAttr: "color",
         inputtype: ColorInput,
   	},{
-  		name: "Stroke width",
+  		name: i18n('elements.strokeWidthProperty'),
 		key: "stroke-width",
 		htmlAttr: "stroke-width",
 		inputtype: RangeInput,
@@ -416,7 +416,7 @@ Vvveb.Components.add("elements/svg-element", {
 //Gallery
 Vvveb.Components.add("elements/gallery", {
     attributes: ["data-component-gallery"],
-    name: "Gallery",
+    name: i18n('elements.galleryName'),
     image: "icons/images.svg",
     html: `
 			<div class="gallery masonry has-shadow" data-component-gallery>
@@ -458,7 +458,7 @@ Vvveb.Components.add("elements/gallery", {
 			</div>
 			`,
 		properties: [{
-			name: "Masonry layout",
+			name: i18n('elements.masonryLayoutProperty'),
 			key: "masonry",
 			htmlAttr: "class",
 			validValues: ["masonry", "flex"],
@@ -483,7 +483,7 @@ Vvveb.Components.add("elements/gallery", {
 				}
 			},   			
 		},{
-			name: "Image shadow",
+			name: i18n('elements.imageShadowProperty'),
 			key: "shadow",
 			htmlAttr: "class",
 			validValues: [ "", "has-shadow"],
@@ -493,7 +493,7 @@ Vvveb.Components.add("elements/gallery", {
 				off: ""
 			},
 		},{
-			name: "Horizontal gap",
+			name: i18n('common.horizontalGapProperty'),
 			key: "column-gap",
 			htmlAttr: "style",
 			inputtype: CssUnitInput,
@@ -503,7 +503,7 @@ Vvveb.Components.add("elements/gallery", {
 				step:1
 			}
 	   },{
-			name: "Vertical gap",
+			name: i18n('common.verticalGapProperty'),
 			key: "margin-bottom",
 			htmlAttr: "style",
 			child: ".item",
@@ -514,7 +514,7 @@ Vvveb.Components.add("elements/gallery", {
 				step:1
 			}
 	   },{
-			name: "Images per row masonry",
+			name: i18n('elements.imagesPerRowMasonryProperty'),
 			key: "column-count",
 			group:"masonry",
 			htmlAttr: "style",
@@ -525,7 +525,7 @@ Vvveb.Components.add("elements/gallery", {
 				step:1
 			}
 		},{
-			name: "Images per row flex",
+			name: i18n('elements.imagesPerRowFlexProperty'),
 			group:"flex",
 			key: "flex-basis",
 			child: ".item",
@@ -548,7 +548,7 @@ Vvveb.Components.add("elements/gallery", {
 			name: "",
 			key: "addChild",
 			inputtype: ButtonInput,
-			data: {text:"Add image", icon:"la la-plus"},
+			data: {text:i18n('common.addImageButton'), icon:"la la-plus"},
 			onChange: function(node) {
 				 node.append(generateElements('<div class="item"><a><img src="../../media/posts/1.jpg"></a></div>')[0]);
 				 
@@ -577,18 +577,18 @@ Vvveb.Components.add("elements/gallery", {
 Vvveb.Components.add("elements/tab", {
 	//attributes: ["data-component-tabs"],
 	classes: ["tab-pane"],
-    name: "Tab",
+    name: i18n('elements.tabName'),
     image: "icons/tabs.svg",
     html: ``,
     properties: [{
-			name: "Id",
+			name: i18n('common.idProperty'),
 			key: "id",
 			htmlAttr: "id",
 			inline:false,
 			col:6,
 			inputtype: TextInput
 		},{
-			name: "Class",
+			name: i18n('common.classProperty'),
 			key: "class",
 			htmlAttr: "class",
 			inline:false,
@@ -596,7 +596,7 @@ Vvveb.Components.add("elements/tab", {
 			inputtype: TextInput
 			
 		} , {
-        name: "Active",
+        name: i18n('common.activeProperty'),
         key: "active",
         htmlAttr: "class",
         validValues: ["", "active"],
@@ -612,7 +612,7 @@ Vvveb.Components.add("elements/tab", {
 	
 Vvveb.Components.add("elements/tabs", {
     attributes: ["data-component-tabs"],
-    name: "Tabs",
+    name: i18n('elements.tabsName'),
     image: "icons/tabs.svg",
     html: `
 	<div data-component-tabs id="tabs-parentId">
@@ -656,8 +656,8 @@ Vvveb.Components.add("elements/tabs", {
 			data: {
 				selector:"> .nav-link",
 				container:"nav > .nav-tabs",
-				prefix:"Tab ",
-				name: "text",
+				prefix:i18n('elements.tabPrefix'),
+				name: i18n('common.textProperty'),
 				removeElement: false,//handle manually to delete pane also
 				//"newElement": ``
 			},
@@ -701,7 +701,7 @@ Vvveb.Components.add("elements/tabs", {
 //Accordion
 Vvveb.Components.add("elements/accordion", {
     classes: ["accordion"],
-    name: "Accordeon",
+    name: i18n('elements.accordionName'),
     image: "icons/accordion.svg",
     html: `<div class="accordion" id="accordion-parentId">
 		  <div class="accordion-item">
@@ -759,8 +759,8 @@ Vvveb.Components.add("elements/accordion", {
 			data: {
 				selector:":scope > .accordion-item",
 				container:"",
-				prefix:"Item ",
-				name: "text",
+				prefix:i18n('common.itemPrefix'),
+				name: i18n('common.textProperty'),
 				nameElement: ".accordion-button",
 				removeElement: false,//handle manually
 				//"newElement": ``
@@ -809,7 +809,7 @@ Vvveb.Components.add("elements/accordion", {
 				return node;
 			},
 		},{
-			name: "Flush",
+			name: i18n('elements.flushProperty'),
 			key: "flush",
 			htmlAttr: "class",
 			validValues: ["accordion-flush"],
@@ -824,7 +824,7 @@ Vvveb.Components.add("elements/accordion", {
 
 Vvveb.Components.add("elements/flip-box", {
     classes: ["flip-box"],
-    name: "Flip box",
+    name: i18n('elements.flipBoxName'),
     image: "icons/flipbox.svg",
     html: `<div class="flip-box enabled">
 		  <div class="flip-box-inner">
@@ -856,17 +856,17 @@ Vvveb.Components.add("elements/flip-box", {
 		  </div>
 		</div>`,
 		properties: [{
-			name: "Width",
+			name: i18n('common.widthProperty'),
 			key: "width",
 			htmlAttr: "style",
 			inputtype: CssUnitInput
 		},{
-			name: "Height",
+			name: i18n('common.heightProperty'),
 			key: "height",
 			htmlAttr: "style",
 			inputtype: CssUnitInput
 		},{
-			name: "Enabled",
+			name: i18n('elements.enabledProperty'),
 			key: "enabled",
 			htmlAttr: "class",
 			validValues: ["enabled"],
@@ -876,7 +876,7 @@ Vvveb.Components.add("elements/flip-box", {
 				off: ""
 			}
 		},{
-			name: "Show back",
+			name: i18n('elements.showBackProperty'),
 			key: "back",
 			htmlAttr: "class",
 			validValues: ["back"],
@@ -887,7 +887,7 @@ Vvveb.Components.add("elements/flip-box", {
 			}
 		},
 		{
-			name: "Vertical",
+			name: i18n('common.verticalProperty'),
 			key: "vertical",
 			htmlAttr: "class",
 			validValues: ["vertical"],
@@ -902,7 +902,7 @@ Vvveb.Components.add("elements/flip-box", {
 
 Vvveb.Components.add("elements/counter", {
     nodes: [".counter"],
-    name: "Counter",
+    name: i18n('elements.counterName'),
     image: "icons/stopwatch.svg",
     html: `<i class="font-icon la la-star"></i>`,
     properties: [
@@ -911,7 +911,7 @@ Vvveb.Components.add("elements/counter", {
 
 Vvveb.Components.add("elements/testimonial", {
     nodes: [".counter"],
-    name: "Testimonial",
+    name: i18n('elements.testimonialName'),
     image: "icons/testimonial.svg",
     html: `<blockquote cite="https://en.wikipedia.org/wiki/Marcus_Aurelius">
 				<p>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil.</p>
@@ -925,7 +925,7 @@ Vvveb.Components.add("elements/testimonial", {
 
 Vvveb.Components.add("elements/social-icons", {
     classes: ["social-icons"],
-    name: "Social icons",
+    name: i18n('elements.socialIconsName'),
     image: "icons/social-icons.svg",
     html: `<ul class="social-icons list-unstyled">
 				<li>
@@ -963,8 +963,8 @@ Vvveb.Components.add("elements/social-icons", {
 			data: {
 				selector:"> li",
 				container:"",
-				prefix:"Item ",
-				name: "text",
+				prefix:i18n('common.itemPrefix'),
+				name: i18n('common.textProperty'),
 				nameElement: "span",
 				removeElement: true,
 				//"newElement": ``
@@ -995,7 +995,7 @@ Vvveb.Components.add("elements/social-icons", {
 				return node;
 			},
 		},{
-			name: "Inline",
+			name: i18n('common.inlineProperty'),
 			key: "list-inline",
 			htmlAttr: "class",
 			validValues: ["list-inline"],
@@ -1005,7 +1005,7 @@ Vvveb.Components.add("elements/social-icons", {
 				off: ""
 			}
 		},{
-			name: "Unstyled",
+			name: i18n('common.unstyledProperty'),
 			key: "list-unstyled",
 			htmlAttr: "class",
 			validValues: ["list-unstyled"],
@@ -1080,7 +1080,7 @@ function carouselAfterDrop(node) {
 };
 
 Vvveb.Components.add("elements/carousel", {
-    name: "Carousel",
+    name: i18n('elements.carouselName'),
     image: "icons/carousel.svg",
     classes: ["swiper"],
     html: `
@@ -1116,7 +1116,7 @@ Vvveb.Components.add("elements/carousel", {
 	},
 
     properties: [{
-		name: "Slides",
+		name: i18n('elements.slidesProperty'),
         key: "slidesPerView",
         inputtype: ListInput,
 		htmlAttr:"data-slides-per-view",
@@ -1162,23 +1162,23 @@ Vvveb.Components.add("elements/carousel", {
 			return node;
 		},
 	},{
-		name: "Slides per view",
+		name: i18n('elements.slidesPerViewProperty'),
         key: "slidesPerView",
         inputtype: NumberInput,
 		htmlAttr:"data-slides-per-view",
 	},{
-		name: "Space between",
+		name: i18n('elements.spaceBetweenProperty'),
         key: "spaceBetween",
         inputtype: NumberInput,
 		htmlAttr:"data-space-between",
 	},{
-		name: "Speed",
+		name: i18n('common.speedProperty'),
         key: "speed",
         inputtype: NumberInput,
 		htmlAttr:"data-speed",
 		data: {step:100},
 	},{
-		name: "Delay",
+		name: i18n('common.delayProperty'),
         key: "delay",
         inputtype: NumberInput,
 		htmlAttr:"data-delay",
@@ -1187,67 +1187,67 @@ Vvveb.Components.add("elements/carousel", {
 		key: "carousel_options",
         inputtype: SectionInput,
         name:false,
-        data: {header:"Options"},
+        data: {header:i18n('common.optionsHeader')},
     },{	
-		name: "Simulate touch",
+		name: i18n('elements.simulateTouchProperty'),
         key: "simulateTouch",
 		htmlAttr:"data-simulate-touch",
 		inputtype: CheckboxInput,
 		inline:true,
         col:4
     },{	
-		name: "Autoplay",
+		name: i18n('elements.autoplayProperty'),
         key: "autoplay",
 		htmlAttr:"data-autoplay",
 		inputtype: CheckboxInput,
 		inline:true,
         col:4
 	},{
-		name: "Auto height",
+		name: i18n('elements.autoHeightProperty'),
         key: "autoHeight",
 		htmlAttr:"data-auto-height",
 		inputtype: CheckboxInput,
 		inline:true,
         col:4
 	},{
-		name: "Centered slides",
+		name: i18n('elements.centeredSlidesProperty'),
         key: "centeredSlides",
 		htmlAttr:"data-centered-slides",
 		inputtype: CheckboxInput,
 		inline:true,
         col:4
-	},{	name: "Center insufficient",
+	},{	name: i18n('elements.centerInsufficientSlidesProperty'),
         key: "centerInsufficientSlides",
 		htmlAttr:"data-center-insufficient-slides",
 		inputtype: CheckboxInput,
 		inline:true,
         col:4
-	},{	name: "Loop",
+	},{	name: i18n('elements.loopProperty'),
         key: "loop",
 		htmlAttr:"data-loop",
 		inputtype: CheckboxInput,
 		inline:true,
         col:4
-	},{	name: "Mouse wheel",
+	},{	name: i18n('elements.mouseWheelProperty'),
         key: "mousewheel",
 		htmlAttr:"data-mousewheel",
 		inputtype: CheckboxInput,
 		inline:true,
         col:4
 	},{	
-        name: "Pagination",
+        name: i18n('elements.paginationProperty'),
         key: "pagination",
 		htmlAttr:"data-pagination",
 		inputtype: CheckboxInput,
 		inline:true,
         col:4
-	},{	name: "Rewind",
+	},{	name: i18n('elements.rewindProperty'),
         key: "rewind",
 		htmlAttr:"data-rewind",
 		inputtype: CheckboxInput,
 		inline:true,
         col:4
-	},{	name: "Scrollbar",
+	},{	name: i18n('elements.scrollbarProperty'),
         key: "scrollbar",
 		htmlAttr:"data-scrollbar",
 		inputtype: CheckboxInput,
@@ -1280,7 +1280,7 @@ Vvveb.Components.add("elements/carousel", {
 
 //Slider
 Vvveb.Components.add("elements/slider", {
-	name: "Slider",
+	name: i18n('elements.sliderName'),
     image: "icons/slider.svg",
      html: `
 	  <div class="swiper" data-slides-per-view="1" data-draggable="true" data-navigation='{"nextEl": ".swiper-button-next","prevEl": ".swiper-button-prev"}'>
@@ -1304,7 +1304,7 @@ Vvveb.Components.add("elements/slider", {
 
 Vvveb.Components.add("elements/icon-list", {
     nodes: [".counter"],
-    name: "Icon list",
+    name: i18n('elements.iconListName'),
     image: "icons/icon-list.svg",
     html: `<i class="font-icon la la-star"></i>`,
     properties: [
@@ -1313,7 +1313,7 @@ Vvveb.Components.add("elements/icon-list", {
 
 Vvveb.Components.add("elements/divider", {
     nodes: [".counter"],
-    name: "Divider",
+    name: i18n('elements.dividerName'),
     image: "icons/stopwatch.svg",
     html: `<i class="font-icon la la-star"></i>`,
     properties: [
@@ -1322,7 +1322,7 @@ Vvveb.Components.add("elements/divider", {
 
 Vvveb.Components.add("elements/separator", {
     nodes: [".counter"],
-    name: "Separator",
+    name: i18n('elements.separatorName'),
     image: "icons/separator.svg",
     html: `<i class="font-icon la la-star"></i>`,
     properties: [
@@ -1331,7 +1331,7 @@ Vvveb.Components.add("elements/separator", {
 
 Vvveb.Components.add("elements/Image box", {
     nodes: [".counter"],
-    name: "Image Box",
+    name: i18n('elements.imageBoxName'),
     image: "icons/stopwatch.svg",
     html: `<i class="font-icon la la-star"></i>`,
     properties: [
@@ -1340,7 +1340,7 @@ Vvveb.Components.add("elements/Image box", {
 
 Vvveb.Components.add("elements/Icon box", {
     nodes: [".counter"],
-    name: "Image Box",
+    name: i18n('elements.imageBoxName'),
     image: "icons/stopwatch.svg",
     html: `<i class="font-icon la la-star"></i>`,
     properties: [
@@ -1349,7 +1349,7 @@ Vvveb.Components.add("elements/Icon box", {
 
 Vvveb.Components.add("elements/animated-headline", {
     nodes: [".counter"],
-    name: "Animated headline",
+    name: i18n('elements.animatedHeadlineName'),
     image: "icons/dots_three.svg",
     html: `<i class="font-icon la la-star"></i>`,
     properties: [
@@ -1358,7 +1358,7 @@ Vvveb.Components.add("elements/animated-headline", {
 
 Vvveb.Components.add("elements/price-table", {
     nodes: [".counter"],
-    name: "Price table",
+    name: i18n('elements.priceTableName'),
     image: "icons/price-table.svg",
     html: `<i class="font-icon la la-star"></i>`,
     properties: [
@@ -1367,7 +1367,7 @@ Vvveb.Components.add("elements/price-table", {
 
 Vvveb.Components.add("elements/price-list", {
     nodes: [".counter"],
-    name: "Price list",
+    name: i18n('elements.priceListName'),
     image: "icons/stopwatch.svg",
     html: `<i class="font-icon la la-star"></i>`,
     properties: [
@@ -1376,7 +1376,7 @@ Vvveb.Components.add("elements/price-list", {
 
 Vvveb.Components.add("elements/reviews", {
     nodes: [".counter"],
-    name: "Reviews",
+    name: i18n('elements.reviewsName'),
     image: "icons/reviews.svg",
     html: `<i class="font-icon la la-star"></i>`,
     properties: [
@@ -1385,11 +1385,11 @@ Vvveb.Components.add("elements/reviews", {
 
 Vvveb.Components.add("elements/code", {
     nodes: ["code"],
-    name: "Code",
+    name: i18n('elements.codeName'),
     image: "icons/code.svg",
     html: `<code>print "Hello world!"</code>`,
 	properties: [{
-		name: "Text",
+		name: i18n('common.textProperty'),
 		key: "text",
 		inline:false,
 		htmlAttr: "innerHTML",
@@ -1402,7 +1402,7 @@ Vvveb.Components.add("elements/code", {
   
 Vvveb.Components.add("elements/image-compare", {
     nodes: [".counter"],
-    name: "Image Compare",
+    name: i18n('elements.imageCompareName'),
     image: "icons/image-compare.svg",
     html: `<div class="c-compare" style="--value:50%;">
 	  <img class="c-compare__left" src="img/color.jpg" alt="" />
@@ -1414,7 +1414,7 @@ Vvveb.Components.add("elements/image-compare", {
 
 Vvveb.Components.add("elements/rating", {
     nodes: [".rating"],
-    name: "Rating stars",
+    name: i18n('elements.ratingStarsName'),
     image: "icons/rating.svg",
     html: `<div class="rating">
                 <i class="la la-star text-warning"></i>

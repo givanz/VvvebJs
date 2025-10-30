@@ -17,29 +17,29 @@ https://github.com/givanz/VvvebJs
 */
 
 
-Vvveb.ComponentsGroup['Embeds'] = ["embeds/embed"];
+Vvveb.ComponentsGroup[i18n('embeds.embedsGroup')] = ["embeds/embed"];
 
 Vvveb.Components.extend("_base", "embeds/embed", {
-    name: "Embed",
+    name: i18n('embeds.embedName'),
     attributes: ["data-component-oembed"],
     image: "icons/code.svg",
     //dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/maps.png">',
 	html: `<div data-component-oembed data-url="">
 			<div class="alert alert-light  m-5" role="alert">
 				<img width="64" src="${Vvveb.baseUrl}icons/code.svg">
-				<h6>Enter url to embed</h6>
+				<h6>${i18n('embeds.enterUrlToEmbed')}</h6>
 			</div></div>`,
 
 
     properties: [{
-        name: "Url",
+        name: i18n('embeds.urlProperty'),
         key: "url",
 		htmlAttr: "data-url",
         inputtype: TextInput,
         onChange: function(node, value) {
 			node.innerHTML = `<div class="alert alert-light d-flex justify-content-center">
 				  <div class="spinner-border m-5" role="status">
-					<span class="visually-hidden">Loading...</span>
+					<span class="visually-hidden">${i18n('embeds.loadingMessage')}</span>
 				  </div>
 				</div>`;
 			
@@ -64,13 +64,13 @@ Vvveb.Components.extend("_base", "embeds/embed", {
 			return node;
 		},	
     },{
-        name: "Width",
+        name: i18n('common.widthProperty'),
         key: "width",
         child:"iframe",
         htmlAttr: "width",
         inputtype: CssUnitInput
     },{
-        name: "Height",
+        name: i18n('common.heightProperty'),
         key: "height",
         child:"iframe",
         htmlAttr: "height",
@@ -85,8 +85,8 @@ for (const provider of ["youtube", "vimeo", "dailymotion", "flickr", "smugmug", 
 		html: `<div data-component-oembed data-url="">
 				<div class="alert alert-light  m-5" role="alert">
 					<img width="64" src="${Vvveb.baseUrl}icons/code.svg">
-					<h6>Enter ${provider} url to embed</h6>
+					<h6>${i18n('embeds.enterProviderUrlToEmbed', {provider: provider})}</h6>
 				</div></div>`,
 	});
-	Vvveb.ComponentsGroup['Embeds'].push("embeds/" + provider);
+	Vvveb.ComponentsGroup[i18n('embeds.embedsGroup')].push("embeds/" + provider);
 }

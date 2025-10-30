@@ -19,8 +19,8 @@ https://github.com/givanz/VvvebJs
 
 const gulp = require('gulp');
 const fileinclude = require('gulp-file-include');
-//const sass = require('gulp-sass')(require('sass'));
-const sass = require('gulp-sass')(require('node-sass'));
+const sass = require('gulp-sass')(require('sass'));
+//const sass = require('gulp-sass')(require('node-sass'));
 const formatHtml = require('gulp-format-html');
 const through2 = require( 'through2' );    
 

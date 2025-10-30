@@ -23,7 +23,7 @@ Vvveb.BlocksGroup['Bootstrap'] =
 
 
 Vvveb.Blocks.add("bootstrap4/product-card", {
-    name: "Product Cards with Transition",
+    name: i18n("bootstrap4.productCardBlock"),
     image: "https://d2d3qesrx8xj6s.cloudfront.net/img/screenshots/0c3153bcb2ed97483a82b1f4ea966f8187379792.png",
     html: `
 <div class="container">
@@ -32,12 +32,12 @@ Vvveb.Blocks.add("bootstrap4/product-card", {
     <div class="col-md-4">
         <div class="card rounded">
             <div class="card-image">
-                <span class="card-notify-badge">Low KMS</span>
+                <span class="card-notify-badge">${i18n('bootstrap4.badgeLowKMS')}</span>
                 <span class="card-notify-year">2018</span>
                 <img class="img-fluid" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262" alt="Alternate Text" />
             </div>
             <div class="card-image-overlay m-auto">
-                <span class="card-detail-badge">Used</span>
+                <span class="card-detail-badge">${i18n('bootstrap4.badgeUsed')}</span>
                 <span class="card-detail-badge">$28,000.00</span>
                 <span class="card-detail-badge">13000 Kms</span>
             </div>
@@ -45,14 +45,14 @@ Vvveb.Blocks.add("bootstrap4/product-card", {
                 <div class="ad-title m-auto">
                     <h5>Honda Accord LX</h5>
                 </div>
-                <a class="ad-btn" href="#">View</a>
+                <a class="ad-btn" href="#">${i18n('bootstrap4.buttonView')}</a>
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="card rounded">
             <div class="card-image">
-                <span class="card-notify-badge">Fully-Loaded</span>
+                <span class="card-notify-badge">${i18n('bootstrap4.badgeFullyLoaded')}</span>
                 <span class="card-notify-year">2017</span>
                 <img class="img-fluid" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=CAC80HOC021B121001.jpg&width=440&height=262" alt="Alternate Text" />
             </div>
@@ -73,7 +73,7 @@ Vvveb.Blocks.add("bootstrap4/product-card", {
     <div class="col-md-4">
         <div class="card rounded">
             <div class="card-image">
-                <span class="card-notify-badge">Price Reduced</span>
+                <span class="card-notify-badge">${i18n('bootstrap4.badgePriceReduced')}</span>
                 <span class="card-notify-year">2018</span>
                 <img class="img-fluid" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC091A021001.jpg&width=440&height=262" alt="Alternate Text" />
             </div>
@@ -192,7 +192,7 @@ Vvveb.Blocks.add("bootstrap4/product-card", {
 });    
 
 Vvveb.Blocks.add("bootstrap4/user-online", {
-    name: "User online",
+    name: i18n("bootstrap4.userOnlineBlock"),
     image: "https://d2d3qesrx8xj6s.cloudfront.net/img/screenshots/75091e3b5e6efba238457f05e6f9edd847de1bf8.jpg",
     html: `
    	<div class="container user-online-thumb">
@@ -248,7 +248,7 @@ border: 5px solid white;
 });    
 
 Vvveb.Blocks.add("bootstrap4/our-team", {
-    name: "Our team",
+    name: i18n("bootstrap4.ourTeamBlock"),
     image: "https://d2d3qesrx8xj6s.cloudfront.net/img/screenshots/b43c39513963d870d399a0aab2438af225f9f485.jpg",
     html:`
 <div class="team pb-5">
@@ -264,7 +264,7 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                                 <div class="card-body text-center">
                                     <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
                                     <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                    <p class="card-text">${i18n('bootstrap4.ourTeamCardText')}</p>
                                     <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
@@ -312,7 +312,7 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                                 <div class="card-body text-center">
                                     <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_02.png" alt="card image"></p>
                                     <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                    <p class="card-text">${i18n('bootstrap4.ourTeamCardText')}</p>
                                     <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
@@ -321,7 +321,7 @@ Vvveb.Blocks.add("bootstrap4/our-team", {
                             <div class="card">
                                 <div class="card-body text-center mt-4">
                                     <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                                    <p class="card-text">${i18n('bootstrap4.ourTeamCardText')}</p>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="https://www.fiverr.com/share/qb8D02">
@@ -682,7 +682,7 @@ section .section-title {
 
 
 Vvveb.Blocks.add("bootstrap4/login-form", {
-    name: "Login form",
+    name: i18n("bootstrap4.loginFormBlock"),
     image: "https://d2d3qesrx8xj6s.cloudfront.net/img/screenshots/fd3f41be24ffb976d66edf08adc4b2453a871b19.jpeg",
     html:`
 <div class="container">
@@ -695,24 +695,24 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
                		    <img class="profile-img img-fluid rounded-circle" src="https://source.unsplash.com/9UVmlIb0wJU/200x200"
                     alt="">
                			<form class="form-signin" action="" method="">
-               				<input type="text" class="form-control" placeholder="Username" required autofocus>
+               				<input type="text" class="form-control" placeholder="${i18n('bootstrap4.placeholderUsername')}" required autofocus>
                				<input type="password" class="form-control" placeholder="Password" required>
                				<input type="submit" class="btn btn-lg btn-default w-100" value="Sign In" />
                			</form>
                			<div id="tabs" data-tabs="tabs">
-               				<p class="text-center"><a href="#register" data-bs-toggle="tab">Need an Account?</a></p>
-               				<p class="text-center"><a href="#select" data-bs-toggle="tab">Select Account</a></p>
+               				<p class="text-center"><a href="#register" data-bs-toggle="tab">${i18n('bootstrap4.linkNeedAccount')}</a></p>
+               				<p class="text-center"><a href="#select" data-bs-toggle="tab">${i18n('bootstrap4.linkSelectAccount')}</a></p>
               				</div>
 						</div>
 						<div class="tab-pane" id="register">
 							<form class="form-signin" action="" method="">
-								<input type="text" class="form-control" placeholder="User Name ..." required autofocus>
-								<input type="email" class="form-control" placeholder="Emaill Address ..." required>
-								<input type="password" class="form-control" placeholder="Password ..." required>
-								<input type="submit" class="btn btn-lg btn-default w-100" value="Sign Up" />
+								<input type="text" class="form-control" placeholder="${i18n('bootstrap4.placeholderUserNameFull')}" required autofocus>
+								<input type="email" class="form-control" placeholder="${i18n('bootstrap4.placeholderEmail')}" required>
+								<input type="password" class="form-control" placeholder="${i18n('bootstrap4.placeholderPassword')}" required>
+								<input type="submit" class="btn btn-lg btn-default w-100" value="${i18n('bootstrap4.buttonSignUp')}" />
 							</form>
 							<div id="tabs" data-tabs="tabs">
-               			<p class="text-center"><a href="#login" data-bs-toggle="tab">Have an Account?</a></p>
+               			<p class="text-center"><a href="#login" data-bs-toggle="tab">${i18n('bootstrap4.linkHaveAccount')}</a></p>
               			</div>
 						</div>
 						<div class="tab-pane" id="select">
@@ -724,7 +724,7 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
                     alt="">
 										</div>	 
 										<div class="media-body">
-											<h4 class="select-name">User Name 1</h4>
+											<h4 class="select-name">${i18n('bootstrap4.accountUserName1')}</h4>
 										</div>
 									</a>
 								</div>
@@ -736,37 +736,37 @@ Vvveb.Blocks.add("bootstrap4/login-form", {
                     alt="">
 										</div>	 
 										<div class="media-body">
-											<h4 class="select-name">User Name 2</h4>
+											<h4 class="select-name">${i18n('bootstrap4.accountUserName2')}</h4>
 										</div>
 									</a>
 								</div>
                                 <hr />
-               			<p class="text-center"><a href="#login" data-bs-toggle="tab">Back to Login</a></p>
+               			<p class="text-center"><a href="#login" data-bs-toggle="tab">${i18n('bootstrap4.linkBackToLogin')}</a></p>
               			</div>
 						</div>
 						<div class="tab-pane" id="user1">
 							<img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                     alt="">
-							<h3 class="text-center">User Name 1</h3>
+							<h3 class="text-center">${i18n('bootstrap4.accountUserName1')}</h3>
 							<form class="form-signin" action="" method="">
 								<input type="hidden" class="form-control" value="User Name">
-								<input type="password" class="form-control" placeholder="Password" autofocus required>
-								<input type="submit" class="btn btn-lg btn-default w-100" value="Sign In" />
+								<input type="password" class="form-control" placeholder="${i18n('bootstrap4.placeholderPassword')}" autofocus required>
+								<input type="submit" class="btn btn-lg btn-default w-100" value="${i18n('bootstrap4.buttonSignIn')}" />
 							</form>
 							<p class="text-center"><a href="#login" data-bs-toggle="tab">Back to Login</a></p>
-               		<p class="text-center"><a href="#select" data-bs-toggle="tab">Select another Account</a></p>
+               		<p class="text-center"><a href="#select" data-bs-toggle="tab">${i18n('bootstrap4.linkSelectAnotherAccount')}</a></p>
 						</div>
 						<div class="tab-pane" id="user2">
 							<img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                     alt="">
-							<h3 class="text-center">User Name 2</h3>
+							<h3 class="text-center">${i18n('bootstrap4.accountUserName2')}</h3>
 							<form class="form-signin" action="" method="">
 								<input type="hidden" class="form-control" value="User Name">
-								<input type="password" class="form-control" placeholder="Password" autofocus required>
-								<input type="submit" class="btn btn-lg btn-default w-100" value="Sign In" />
+								<input type="password" class="form-control" placeholder="${i18n('bootstrap4.placeholderPassword')}" autofocus required>
+								<input type="submit" class="btn btn-lg btn-default w-100" value="${i18n('bootstrap4.buttonSignIn')}" />
 							</form>
 							<p class="text-center"><a href="#login" data-bs-toggle="tab">Back to Login</a></p>
-               		<p class="text-center"><a href="#select" data-bs-toggle="tab">Select another Account</a></p>
+               		<p class="text-center"><a href="#select" data-bs-toggle="tab">${i18n('bootstrap4.linkSelectAnotherAccount')}</a></p>
 						</div>
 					</div>
             </div>
@@ -867,7 +867,7 @@ body{
 
 
 Vvveb.Blocks.add("bootstrap4/about-team", {
-    name: "About and Team Section",
+    name: i18n("bootstrap4.aboutTeamBlock"),
     image: "https://assets.startbootstrap.com/img/screenshots/snippets/about-team.jpg",
     html:`
 <div class="container">
@@ -877,8 +877,8 @@ Vvveb.Blocks.add("bootstrap4/about-team", {
       <div class="card border-0 shadow">
         <img src="https://source.unsplash.com/TMgQMXoglsM/500x350" class="card-img-top" alt="...">
         <div class="card-body text-center">
-          <h5 class="card-title mb-0">Team Member</h5>
-          <div class="card-text text-black-50">Web Developer</div>
+          <h5 class="card-title mb-0">${i18n('bootstrap4.teamMemberTitle')}</h5>
+          <div class="card-text text-black-50">${i18n('bootstrap4.teamMemberRole')}</div>
         </div>
       </div>
     </div>
@@ -922,7 +922,7 @@ Vvveb.Blocks.add("bootstrap4/about-team", {
 
 
 Vvveb.Blocks.add("bootstrap4/pricing-1", {
-    name: "Pricing table",
+    name: i18n("bootstrap4.pricingTableBlock"),
     image: "https://d2d3qesrx8xj6s.cloudfront.net/img/screenshots/e92f797807bb4cd880bc3f161d9f9869854b6991.jpeg",
     html:`
 <div id="plans">
@@ -934,18 +934,18 @@ Vvveb.Blocks.add("bootstrap4/pricing-1", {
 			<div class="panel panel-danger panel-pricing">
 				<div class="panel-heading">
 					<i class="fa fa-desktop"></i>
-					<h3>Plan 1</h3>
+					<h3>${i18n('bootstrap4.plan1')}</h3>
 				</div>
 				<div class="panel-body text-center">
 					<p><strong>$100 / Month</strong></p>
 				</div>
 				<ul class="list-group text-center">
-					<li class="list-group-item"><i class="fa fa-check"></i> Personal use</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> Unlimited projects</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
+					<li class="list-group-item"><i class="fa fa-check"></i> ${i18n('bootstrap4.featurePersonalUse')}</li>
+					<li class="list-group-item"><i class="fa fa-check"></i> ${i18n('bootstrap4.featureUnlimitedProjects')}</li>
+					<li class="list-group-item"><i class="fa fa-check"></i> ${i18n('bootstrap4.featureSupport')}</li>
 				</ul>
 				<div class="panel-footer">
-					<a class="btn btn-lg w-100 btn-danger" href="#">BUY NOW!</a>
+					<a class="btn btn-lg w-100 btn-danger" href="#">${i18n('bootstrap4.buttonBuyNow')}</a>
 				</div>
 			</div>
 		</div>
@@ -956,15 +956,15 @@ Vvveb.Blocks.add("bootstrap4/pricing-1", {
 			<div class="panel panel-warning panel-pricing">
 				<div class="panel-heading">
 					<i class="fa fa-desktop"></i>
-					<h3>Plan 2</h3>
+					<h3>${i18n('bootstrap4.plan2')}</h3>
 				</div>
 				<div class="panel-body text-center">
 					<p><strong>$200 / Month</strong></p>
 				</div>
 				<ul class="list-group text-center">
-					<li class="list-group-item"><i class="fa fa-check"></i> Personal use</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> Unlimited projects</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
+					<li class="list-group-item"><i class="fa fa-check"></i> ${i18n('bootstrap4.featurePersonalUse')}</li>
+					<li class="list-group-item"><i class="fa fa-check"></i> ${i18n('bootstrap4.featureUnlimitedProjects')}</li>
+					<li class="list-group-item"><i class="fa fa-check"></i> ${i18n('bootstrap4.featureSupport')}</li>
 				</ul>
 				<div class="panel-footer">
 					<a class="btn btn-lg w-100 btn-warning" href="#">BUY NOW!</a>
@@ -978,15 +978,15 @@ Vvveb.Blocks.add("bootstrap4/pricing-1", {
 			<div class="panel panel-success panel-pricing">
 				<div class="panel-heading">
 					<i class="fa fa-desktop"></i>
-					<h3>Plan 3</h3>
+					<h3>${i18n('bootstrap4.plan3')}</h3>
 				</div>
 				<div class="panel-body text-center">
 					<p><strong>$300 / Month</strong></p>
 				</div>
 				<ul class="list-group text-center">
-					<li class="list-group-item"><i class="fa fa-check"></i> Personal use</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> Unlimited projects</li>
-					<li class="list-group-item"><i class="fa fa-check"></i> 27/7 support</li>
+					<li class="list-group-item"><i class="fa fa-check"></i> ${i18n('bootstrap4.featurePersonalUse')}</li>
+					<li class="list-group-item"><i class="fa fa-check"></i> ${i18n('bootstrap4.featureUnlimitedProjects')}</li>
+					<li class="list-group-item"><i class="fa fa-check"></i> ${i18n('bootstrap4.featureSupport')}</li>
 				</ul>
 				<div class="panel-footer">
 					<a class="btn btn-lg w-100 btn-success" href="#">BUY NOW!</a>
@@ -1040,7 +1040,7 @@ Vvveb.Blocks.add("bootstrap4/pricing-1", {
 });
 
 Vvveb.Blocks.add("bootstrap4/loading-circle", {
-    name: "Loading circle",
+    name: i18n("bootstrap4.loadingCircleBlock"),
     image: "https://d2d3qesrx8xj6s.cloudfront.net/img/screenshots/39f0571b9a377cb7ac9c0c11d2346b07dabe1c66.png",
     html:`
 <div class="loading-circle">
@@ -1079,7 +1079,7 @@ Vvveb.Blocks.add("bootstrap4/loading-circle", {
 
 
 Vvveb.Blocks.add("bootstrap4/block-quote", {
-    name: "Block quote",
+    name: i18n("bootstrap4.blockquoteBlock"),
     image: "https://d2d3qesrx8xj6s.cloudfront.net/img/screenshots/d9f382e143b77d5a630dd79a2a3860611a8a953c.jpg",
     html:`
 <div class="container">
@@ -1088,7 +1088,7 @@ Vvveb.Blocks.add("bootstrap4/block-quote", {
         “
       </p>
       <p class="quote-text">
-        Don't believe anything that you read on the internet, it may be fake. 
+        ${i18n('bootstrap4.quoteText')}
       </p>
       <hr>
       <div class="blog-post-actions">
@@ -1144,7 +1144,7 @@ blockquote{
 });
 
 Vvveb.Blocks.add("bootstrap4/subscribe-newsletter", {
-    name: "Subscribe newsletter",
+    name: i18n("bootstrap4.subscribeNewsletterBlock"),
     image: "https://d2d3qesrx8xj6s.cloudfront.net/img/screenshots/4f610196b7cb9596555c9c8c475d93ab4ef084f6.jpg",
     html:`
 <div class="subscribe-area pb-50 pt-70">
@@ -1153,16 +1153,16 @@ Vvveb.Blocks.add("bootstrap4/subscribe-newsletter", {
 
 					<div class="col-md-4">
 						<div class="subscribe-text mb-15">
-							<span>JOIN OUR NEWSLETTER</span>
-							<h2>subscribe newsletter</h2>
+							<span>${i18n('bootstrap4.joinNewsletterSpan')}</span>
+							<h2>${i18n('bootstrap4.subscribeNewsletterHeader')}</h2>
 						</div>
 					</div>
 					<div class="col-md-8">
 						<div class="subscribe-wrapper subscribe2-wrapper mb-15">
 							<div class="subscribe-form">
 								<form action="#">
-									<input placeholder="enter your email address" type="email">
-									<button>subscribe <i class="fas fa-long-arrow-alt-right"></i></button>
+									<input placeholder="${i18n('bootstrap4.placeholderEmailAddress')}" type="email">
+									<button>${i18n('bootstrap4.buttonSubscribe')} <i class="fas fa-long-arrow-alt-right"></i></button>
 								</form>
 							</div>
 						</div>

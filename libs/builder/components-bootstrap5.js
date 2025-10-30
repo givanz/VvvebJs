@@ -24,10 +24,10 @@ Vvveb.Components.extend("_base", "html/container", {
     classes: ["container", "container-fluid"],
     image: "icons/container.svg",
     html: '<div class="container" style="min-height:150px;"><div class="m-5">Container</div></div>',
-    name: "Container",
+    name: i18n("bootstrap5.containerComponent"),
     properties: [
      {
-        name: "Type",
+        name: i18n("bootstrap5.propertyType"),
         key: "type",
         htmlAttr: "class",
         inputtype: SelectInput,
@@ -66,7 +66,7 @@ Vvveb.Components.extend("_base", "html/container", {
 Vvveb.Components.extend("html/link", "html/btn", {
     classes: ["btn"],
     nodes: null,
-    name: "Button",
+    name: i18n("bootstrap5.buttonComponent"),
     image: "icons/button.svg",
     html: '<a class="btn btn-primary">Primary</a>',
     properties: [{
@@ -173,7 +173,7 @@ Vvveb.Components.extend("html/link", "html/btn", {
 	
 Vvveb.Components.extend("_base", "html/buttongroup", {
     classes: ["btn-group"],
-    name: "Button Group",
+    name: i18n("bootstrap5.buttonGroupComponent"),
     image: "icons/button_group.svg",
     html: '<div class="btn-group" role="group" aria-label="Basic example"><button type="button" class="btn btn-secondary">Left</button><button type="button" class="btn btn-secondary">Middle</button> <button type="button" class="btn btn-secondary">Right</button></div>',
 	properties: [{
@@ -195,7 +195,7 @@ Vvveb.Components.extend("_base", "html/buttongroup", {
             }]
         }
     },{
-	    name: "Alignment",
+	    name: i18n("bootstrap5.propertyAlignment"),
         key: "alignment",
         htmlAttr: "class",
         inputtype: SelectInput,
@@ -216,7 +216,7 @@ Vvveb.Components.extend("_base", "html/buttongroup", {
 });
 Vvveb.Components.extend("_base", "html/buttontoolbar", {
     classes: ["btn-toolbar"],
-    name: "Button Toolbar",
+    name: i18n("bootstrap5.buttonToolbarComponent"),
     image: "icons/button_toolbar.svg",
     html: '<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">\
 		  <div class="btn-group me-2" role="group" aria-label="First group">\
@@ -237,7 +237,7 @@ Vvveb.Components.extend("_base", "html/buttontoolbar", {
 });
 Vvveb.Components.extend("_base","html/alert", {
     classes: ["alert"],
-    name: "Alert",
+    name: i18n("bootstrap5.alertComponent"),
     image: "icons/alert.svg",
     html: '<div class="alert alert-warning alert-dismissible fade show" role="alert">\
 		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">\
@@ -246,7 +246,7 @@ Vvveb.Components.extend("_base","html/alert", {
 		  <strong>Holy guacamole!</strong> You should check in on some of those fields below.\
 		</div>',
     properties: [{
-        name: "Type",
+        name: i18n("bootstrap5.propertyType"),
         key: "type",
         htmlAttr: "class",
         validValues: ["alert-primary", "alert-secondary", "alert-success", "alert-danger", "alert-warning", "alert-info", "alert-light", "alert-dark"],
@@ -283,7 +283,7 @@ Vvveb.Components.extend("_base","html/alert", {
 Vvveb.Components.extend("_base", "html/badge", {
     classes: ["badge"],
     image: "icons/badge.svg",
-    name: "Badge",
+    name: i18n("bootstrap5.badgeComponent"),
     html: '<span class="badge bg-primary">Primary badge</span>',
     properties: [{
         name: "Color",
@@ -326,7 +326,7 @@ Vvveb.Components.extend("_base", "html/badge", {
 Vvveb.Components.extend("_base", "html/card", {
     classes: ["card"],
     image: "icons/panel.svg",
-    name: "Card",
+    name: i18n("bootstrap5.cardComponent"),
     html: '<div class="card">\
 		  <img class="card-img-top bg-body-secondary" src="' +  Vvveb.baseUrl + 'icons/image.svg" alt="Card image cap">\
 		  <div class="card-body">\
@@ -338,7 +338,7 @@ Vvveb.Components.extend("_base", "html/card", {
 });
 
 Vvveb.Components.extend("_base", "html/listgroup", {
-    name: "List Group",
+    name: i18n("bootstrap5.listGroupComponent"),
     image: "icons/list_group.svg",
     classes: ["list-group"],
     html: '<ul class="list-group">\n  <li class="list-group-item">\n    <span class="badge bg-success">14</span>\n    Cras justo odio\n  </li>\n  <li class="list-group-item">\n    <span class="badge bg-primary">2</span>\n    Dapibus ac facilisis in\n  </li>\n  <li class="list-group-item">\n    <span class="badge bg-danger">1</span>\n    Morbi leo risus\n  </li>\n</ul>',
@@ -444,7 +444,7 @@ Vvveb.Components.extend("_base", "html/listitem", {
 
 Vvveb.Components.extend("_base", "html/breadcrumbs", {
     classes: ["breadcrumb"],
-    name: "Breadcrumbs",
+    name: i18n("bootstrap5.breadcrumbsComponent"),
     image: "icons/breadcrumbs.svg",
     html: `<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -477,7 +477,7 @@ Vvveb.Components.extend("_base", "html/breadcrumbitem", {
 });
 Vvveb.Components.extend("_base", "html/pagination", {
     classes: ["pagination"],
-    name: "Pagination",
+    name: i18n("bootstrap5.paginationComponent"),
     image: "icons/pagination.svg",
     html: '<nav aria-label="Page navigation example">\
 	  <ul class="pagination">\
@@ -508,7 +508,7 @@ Vvveb.Components.extend("_base", "html/pagination", {
             }]
         }
     },{
-        name: "Alignment",
+        name: i18n("bootstrap5.propertyAlignment"),
         key: "alignment",
         htmlAttr: "class",
         inputtype: SelectInput,
@@ -575,7 +575,7 @@ Vvveb.Components.extend("_base", "html/progress", {
         }
     },
     {
-        name: "Progress",
+        name: i18n("bootstrap5.progressComponent"),
         key: "background",
         child:".progress-bar",
 		htmlAttr: "class",
@@ -761,7 +761,7 @@ Vvveb.Components.extend("_base", "html/gridcolumn", {
 });
 
 Vvveb.Components.extend("_base", "html/gridrow", {
-    name: "Grid Row",
+    name: i18n("bootstrap5.rowComponent"),
     image: "icons/grid_row.svg",
     classes: ["row"],
     html: '<div class="row"><div class="col-sm-4"><h3>col-sm-4</h3></div><div class="col-sm-4 col-5"><h3>col-sm-4</h3></div><div class="col-sm-4"><h3>col-sm-4</h3></div></div>',
@@ -874,7 +874,7 @@ Vvveb.Components.extend("_base", "html/gridrow", {
             }],
         },
 	},{       
-		name: "Vertical align",
+		name: i18n("bootstrap5.propertyVerticalAlign"),
         key: "vertical-align",
         htmlAttr: "class",
         inline:false,
@@ -972,7 +972,7 @@ Vvveb.Components.extend("_base", "html/gridrow", {
             }],
         },
 	},{       
-        name: "Wrap",
+        name: i18n("bootstrap5.propertyWrap"),
         key: "wrap",
         htmlAttr: "class",
         inline:false,
@@ -984,28 +984,28 @@ Vvveb.Components.extend("_base", "html/gridrow", {
                 value: "",
                 icon:"la la-times",
                 //text: "None",
-                title: "None",
+                title: i18n("bootstrap5.propertyNone"),
                 checked:true,
             },{
                 value: "flex-wrap",
                 //text: "Left",
-                title: "Wrap",
+                title: i18n("bootstrap5.propertyWrapOption"),
                 icon:"la la-undo",
                 checked:false,
             },{
                 value: "flex-nowrap",
                 //text: "Center",
-                title: "No wrap",
+                title: i18n("bootstrap5.propertyNoWrapOption"),
                 icon:"la la-arrow-right",
                 checked:false,
             }],
         },
 	},{
-        name: "Column",
+        name: i18n("bootstrap5.propertyColumn"),
         key: "column1",
         inputtype: GridInput
 	},{
-        name: "Column",
+        name: i18n("bootstrap5.propertyColumn"),
         key: "column1",
         inline:true,
         col:12,
@@ -1014,7 +1014,7 @@ Vvveb.Components.extend("_base", "html/gridrow", {
         name: "",
         key: "addChild",
         inputtype: ButtonInput,
-        data: {text:"Add column", icon:"la la-plus"},
+        data: {text:i18n('bootstrap5.buttonAddColumn'), icon:"la la-plus"},
         onChange: function(node)
         {
 			 node.append(generateElements('<div class="col-3"><h3>Col-3</h3></div>')[0]);

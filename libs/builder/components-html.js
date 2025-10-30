@@ -16,14 +16,14 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-Vvveb.ComponentsGroup['Base'] =
+Vvveb.ComponentsGroup[i18n('html.baseGroup')] =
 ["html/heading", "html/image", "html/hr",  "html/form", "html/textinput", "html/textareainput", "html/selectinput"/*, "html/fileinput"*/, "html/checkbox", "html/radiobutton", "html/link", "html/button", "html/paragraph", "html/blockquote", "html/list", "html/table", "html/preformatted", "html/audio", "html/video","html/iframe"];
 
 Vvveb.Components.extend("_base", "html/heading", {
     image: "icons/heading.svg",
-    name: "Heading",
+    name: i18n('html.headingName'),
     nodes: ["h1", "h2","h3", "h4","h5","h6"],
-    html: "<h1>Heading</h1>",
+    html: "<h1>" + i18n('html.headingDefault') + "</h1>",
     
 	properties: [{
         name: "Size",
@@ -47,22 +47,22 @@ Vvveb.Components.extend("_base", "html/heading", {
         data:{
 			options: [{
                 value: "1",
-                text: "Heading 1"
+                text: i18n('html.heading1Text')
             }, {
                 value: "2",
-                text: "Heading 2"
+                text: i18n('html.heading2Text')
             }, {
                 value: "3",
-                text: "Heading 3"
+                text: i18n('html.heading3Text')
             }, {
                 value: "4",
-                text: "Heading 4"
+                text: i18n('html.heading4Text')
             }, {
                 value: "5",
-                text: "Heading 5"
+                text: i18n('html.heading5Text')
             }, {
                 value: "6",
-                text: "Heading 6"
+                text: i18n('html.heading6Text')
             }]
        },
     }]
@@ -78,7 +78,7 @@ let linkComponentProperties = [
 		inputtype: TextInput
 	},*/
 	{
-		name: "Url",
+		name: i18n('embeds.urlProperty'),
 		key: "href",
 		sort:2,
 		htmlAttr: "href",
@@ -90,7 +90,7 @@ let linkComponentProperties = [
 		htmlAttr: "rel",
 		inputtype: LinkInput
 	}, {
-		name: "Target",
+		name: i18n('html.targetProperty'),
 		key: "target",
 		sort:4,
 		htmlAttr: "target",
@@ -101,16 +101,16 @@ let linkComponentProperties = [
 				text: ""
 			}, {
 				value: "_blank",
-				text: "Blank"
+				text: i18n('html.blankText')
 			}, {
 				value: "_parent",
-				text: "Parent"
+				text: i18n('html.parentText')
 			}, {
 				value: "_self",
-				text: "Self"
+				text: i18n('html.selfText')
 			}, {
 				value: "_top",
-				text: "Top"
+				text: i18n('html.topText')
 			}]
 	   },
 	}, {
@@ -123,7 +123,7 @@ let linkComponentProperties = [
 
 Vvveb.Components.extend("_base", "html/link", {
     nodes: ["a"],
-    name: "Link",
+    name: i18n('html.linkName'),
     html: '<a href="#" rel="noopener">Link Text</a>',
 	image: "icons/link.svg",
     properties: linkComponentProperties
@@ -131,28 +131,28 @@ Vvveb.Components.extend("_base", "html/link", {
 
 Vvveb.Components.extend("_base", "html/image", {
     nodes: ["img"],
-    name: "Image",
+    name: i18n('html.imageName'),
     html: '<img src="' +  Vvveb.baseUrl + 'icons/image.svg" width="200" class="img-fluid align-center">',
     image: "icons/image.svg",
     resizable:true,//show select box resize handlers
     
     properties: [{
-        name: "Image",
+        name: i18n('html.imageName'),
         key: "src",
         htmlAttr: "src",
         inputtype: ImageInput
     }, {
-        name: "Width",
+        name: i18n('html.widthProperty'),
         key: "width",
         htmlAttr: "width",
         inputtype: NumberInput
     }, {
-        name: "Height",
+        name: i18n('html.heightProperty'),
         key: "height",
         htmlAttr: "height",
         inputtype: NumberInput
     }, {
-        name: "Alt",
+        name: i18n('elements.altProperty'),
         key: "alt",
         htmlAttr: "alt",
         inputtype: TextInput
@@ -258,10 +258,10 @@ Vvveb.Components.extend("_base", "html/image", {
 Vvveb.Components.extend("_base", "html/hr", {
     image: "icons/hr.svg",
     nodes: ["hr"],
-    name: "Horizontal Rule",
+    name: i18n('html.horizontalRuleName'),
     html: '<hr class="border-primary border-4 opacity-25">',
 	properties:[{
-        name: "Type",
+        name: i18n('common.typeProperty'),
         key: "border-color",
 		htmlAttr: "class",
         validValues: ["border-primary", "border-secondary", "border-success", "border-danger", "border-warning", "border-info", "border-light", "border-dark", "border-white"],
@@ -373,27 +373,27 @@ Vvveb.Components.extend("_base", "html/textinput", {
     image: "icons/text_input.svg",
     html: '<input type="text" class="form-control">',
     properties: [{
-        name: "Name",
+        name: i18n('html.nameProperty'),
         key: "name",
         htmlAttr: "name",
         inputtype: TextInput
     }, {
-        name: "Value",
+        name: i18n('html.valueProperty'),
         key: "value",
         htmlAttr: "value",
         inputtype: TextInput
     }, {
-        name: "Type",
+        name: i18n('common.typeProperty'),
         key: "type",
         htmlAttr: "type",
 		inputtype: SelectInput,
         data: {
             options: [{
                 value: "text",
-                text: "text"
+                text: i18n('html.textProperty')
             }, {
                 value: "button",
-                text: "button"
+                text: i18n('html.buttonTypeText')
             }, {
                 value: "checkbox",
                 text: "checkbox"
@@ -408,7 +408,7 @@ Vvveb.Components.extend("_base", "html/textinput", {
                 text: "datetime-local"
             }, {
                 value: "email",
-                text: "email"
+                text: i18n('html.emailTypeText')
             }, {
                 value: "file",
                 text: "file"
@@ -423,10 +423,10 @@ Vvveb.Components.extend("_base", "html/textinput", {
                 text: "month"
             }, {
                 value: "number",
-                text: "number"
+                text: i18n('html.numberTypeText')
             }, {
                 value: "password",
-                text: "password"
+                text: i18n('html.passwordTypeText')
             }, {
                 value: "radio",
                 text: "radio"
@@ -435,32 +435,32 @@ Vvveb.Components.extend("_base", "html/textinput", {
                 text: "range"
             }, {
                 value: "reset",
-                text: "reset"
+                text: i18n('html.resetTypeText')
             }, {
                 value: "search",
-                text: "search"
+                text: i18n('html.searchTypeText')
             }, {
                 value: "submit",
-                text: "submit"
+                text: i18n('html.submitTypeText')
             }, {
                 value: "tel",
                 text: "tel"
             }, {
                 value: "text",
-                text: "text"
+                text: i18n('html.textProperty')
             }, {
                 value: "time",
                 text: "time"
             }, {
                 value: "url",
-                text: "url"
+                text: i18n('embeds.urlProperty')
             }, {
                 value: "week",
                 text: "week"
             }]
         }
     }, {
-        name: "Placeholder",
+        name: i18n('html.placeholderProperty'),
         key: "placeholder",
         htmlAttr: "placeholder",
         inputtype: TextInput
@@ -483,7 +483,7 @@ Vvveb.Components.extend("_base", "html/textinput", {
 
 Vvveb.Components.extend("_base", "html/selectinput", {
 	nodes: ["select"],
-    name: "Select Input",
+    name: i18n('html.selectInputName'),
     image: "icons/select_input.svg",
     html: '<select class="form-control"><option value="value1">Text 1</option><option value="value2">Text 2</option><option value="value3">Text 3</option></select>',
 
@@ -532,7 +532,7 @@ Vvveb.Components.extend("_base", "html/selectinput", {
 	},
     
     properties: [{
-        name: "Name",
+        name: i18n('html.nameProperty'),
         key: "name",
         htmlAttr: "name",
         inputtype: TextInput
@@ -551,11 +551,11 @@ Vvveb.Components.extend("_base", "html/selectinput", {
 		inline:true,
         inputtype: CheckboxInput,
     }, {
-        name: "Option",
+        name: i18n('html.optionProperty'),
         key: "option1",
         inputtype: TextValueInput
 	}, {
-        name: "Option",
+        name: i18n('html.optionProperty'),
         key: "option2",
         inputtype: TextValueInput
 	}, {
@@ -581,22 +581,22 @@ Vvveb.Components.extend("_base", "html/textareainput", {
     image: "icons/text_area.svg",
     html: '<textarea class="form-control"></textarea>',
 	properties: [{
-        name: "Name",
+        name: i18n('html.nameProperty'),
         key: "name",
         htmlAttr: "name",
         inputtype: TextInput
     }, {
-        name: "Value",
+        name: i18n('html.valueProperty'),
         key: "value",
         htmlAttr: "value",
         inputtype: TextInput
     }, {
-        name: "Placeholder",
+        name: i18n('html.placeholderProperty'),
         key: "placeholder",
         htmlAttr: "placeholder",
         inputtype: TextInput
     }, {
-        name: "Columns",
+        name: i18n('html.columnsProperty'),
         key: "cols",
         htmlAttr: "cols",
         inputtype: NumberInput
@@ -622,7 +622,7 @@ Vvveb.Components.extend("_base", "html/textareainput", {
     }]	
 });
 Vvveb.Components.extend("_base", "html/radiobutton", {
-    name: "Radio Button",
+    name: i18n('html.radioButtonName'),
 	attributes: {"type":"radio"},
     image: "icons/radio.svg",
     html: `<div class="form-check">
@@ -641,21 +641,21 @@ Vvveb.Components.extend("_base", "html/radiobutton", {
 			  </label>
 			</div>`,
     properties: [{
-        name: "Name",
+        name: i18n('html.nameProperty'),
         key: "name",
         htmlAttr: "name",
         inputtype: TextInput,
         //inline:true,
         //col:6
     },{
-        name: "Value",
+        name: i18n('html.valueProperty'),
         key: "value",
         htmlAttr: "value",
         inputtype: TextInput,
         //inline:true,
         //col:6
     },{
-		name: "Checked",
+		name: i18n('html.checkedProperty'),
         key: "checked",
         htmlAttr: "Checked",
         inputtype: CheckboxInput,
@@ -679,7 +679,7 @@ Vvveb.Components.extend("_base", "html/radiobutton", {
 });
 
 Vvveb.Components.extend("_base", "html/checkbox", {
-    name: "Checkbox",
+    name: i18n('html.checkboxName'),
     attributes: {"type":"checkbox"},
     image: "icons/checkbox.svg",
     html: `<div class="form-check">
@@ -688,21 +688,21 @@ Vvveb.Components.extend("_base", "html/checkbox", {
 			  </label>
 			</div>`,
     properties: [{
-        name: "Name",
+        name: i18n('html.nameProperty'),
         key: "name",
         htmlAttr: "name",
         inputtype: TextInput,
         //inline:true,
         //col:6
     },{
-        name: "Value",
+        name: i18n('html.valueProperty'),
         key: "value",
         htmlAttr: "value",
         inputtype: TextInput,
         //inline:true,
         //col:6
     },{
-		name: "Checked",
+		name: i18n('html.checkedProperty'),
         key: "checked",
         htmlAttr: "Checked",
         inputtype: CheckboxInput,
@@ -736,7 +736,7 @@ Vvveb.Components.extend("_base", "html/fileinput", {
 
 Vvveb.Components.extend("_base", "html/video", {
     nodes: ["video"],
-    name: "Video",
+    name: i18n('html.videoName'),
     html: '<video width="320" height="240" playsinline loop autoplay muted src="../../media/demo/sample.webm" poster="../../media/sample.webp"><video>',
     dragHtml: '<img  width="320" height="240" src="' + Vvveb.baseUrl + 'icons/video.svg">',
 	image: "icons/video.svg",
@@ -748,32 +748,32 @@ Vvveb.Components.extend("_base", "html/video", {
         htmlAttr: "src",
         inputtype: VideoInput
     },{       
-		name: "Poster",
+		name: i18n('html.posterProperty'),
         key: "poster",
         htmlAttr: "poster",
         inputtype: ImageInput
     },{
-        name: "Width",
+        name: i18n('html.widthProperty'),
         key: "width",
         htmlAttr: "width",
         inputtype: TextInput
     }, {
-        name: "Height",
+        name: i18n('html.heightProperty'),
         key: "height",
         htmlAttr: "height",
         inputtype: TextInput
     },{
-        name: "Muted",
+        name: i18n('html.mutedProperty'),
         key: "muted",
         htmlAttr: "muted",
         inputtype: CheckboxInput
     },{
-        name: "Loop",
+        name: i18n('elements.loopProperty'),
         key: "loop",
         htmlAttr: "loop",
         inputtype: CheckboxInput
     },{
-        name: "Autoplay",
+        name: i18n('elements.autoplayProperty'),
         key: "autoplay",
         htmlAttr: "autoplay",
         inputtype: CheckboxInput
@@ -783,7 +783,7 @@ Vvveb.Components.extend("_base", "html/video", {
         htmlAttr: "playsinline",
         inputtype: CheckboxInput
     },{
-        name: "Controls",
+        name: i18n('html.controlsProperty'),
         key: "controls",
         htmlAttr: "controls",
         inputtype: CheckboxInput
@@ -808,30 +808,30 @@ Vvveb.Components.extend("_base", "html/button", {
     image: "icons/button.svg",
     html: '<button>Button</button>',
     properties: [{
-        name: "Text",
+        name: i18n('html.textProperty'),
         key: "text",
         htmlAttr: "innerHTML",
         inputtype: TextInput
     }, {
-        name: "Name",
+        name: i18n('html.nameProperty'),
         key: "name",
         htmlAttr: "name",
         inputtype: TextInput
     }, {
-        name: "Type",
+        name: i18n('html.typeProperty'),
         key: "type",
 		htmlAttr: "type",
         inputtype: SelectInput,
         data: {
 			options: [{
 				value: "button",
-				text: "button"
+				text: i18n('html.buttonTypeText')
 			}, {	
 				value: "reset",
-				text: "reset"
+				text: i18n('html.resetTypeText')
 			}, {
 				value: "submit",
-				text: "submit"
+				text: i18n('html.submitTypeText')
 			}],
 		}
    	},{
@@ -853,7 +853,7 @@ Vvveb.Components.extend("_base", "html/button", {
 
 Vvveb.Components.extend("_base", "html/paragraph", {
     nodes: ["p"],
-    name: "Paragraph",
+    name: i18n('html.paragraphName'),
 	image: "icons/paragraph.svg",
 	html: '<p>Lorem ipsum</p>',
     properties: [{
@@ -896,7 +896,7 @@ Vvveb.Components.extend("_base", "html/paragraph", {
 
 Vvveb.Components.extend("_base", "html/blockquote", {
     nodes: ["blockquote"],
-    name: "Blockquote",
+    name: i18n('html.blockquoteName'),
 	image: "icons/blockquote.svg",
 	html: `<blockquote cite="https://en.wikipedia.org/wiki/Marcus_Aurelius">
 				<p>Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness all of them due to the offenders' ignorance of what is good or evil.</p>
@@ -905,7 +905,7 @@ Vvveb.Components.extend("_base", "html/blockquote", {
 				</cite>	
 			</blockquote>`,
     properties: [{
-        name: "Cite",
+        name: i18n('html.citeProperty'),
         key: "cite",
         inline:false,
         htmlAttr: "cite",
@@ -915,7 +915,7 @@ Vvveb.Components.extend("_base", "html/blockquote", {
 
 Vvveb.Components.extend("_base", "html/list", {
     nodes: ["ul", "ol"],
-    name: "List",
+    name: i18n('html.listName'),
 	image: "icons/list.svg",
 	html: `<ul>
 				<li>Begin with the possible; begin with one step.</li>
@@ -925,7 +925,7 @@ Vvveb.Components.extend("_base", "html/list", {
 				<li>Only super-efforts count.</li>
 			</ul>`,
 	properties: [{
-        name: "Type",
+        name: i18n('html.typeProperty'),
         key: "type",
         inputtype: SelectInput,
         
@@ -940,14 +940,14 @@ Vvveb.Components.extend("_base", "html/list", {
         data:{
             options: [{
                 value: "ul",
-                text: "Unordered"
+                text: i18n('html.unorderedListText')
             }, {
                 value: "ol",
-                text: "Ordered"
+                text: i18n('html.orderedListText')
             }]
        },
     },{
-		name: "Items",
+		name: i18n('html.itemsProperty'),
         key: "items",
         inputtype: ListInput,
 		htmlAttr:"data-slides-per-view",
@@ -981,14 +981,14 @@ Vvveb.Components.extend("_base", "html/list", {
 
 Vvveb.Components.extend("_base", "html/preformatted", {
     nodes: ["pre"],
-    name: "Preformatted",
+    name: i18n('html.preformattedName'),
 	image: "icons/paragraph.svg",
 	html: `<pre>Today I shall be meeting with interference, 
 ingratitude, insolence, disloyalty, ill-will, and
 selfishness all of them due to the offenders'
 ignorance of what is good or evil..</pre>`,
     properties: [{
-        name: "Text",
+        name: i18n('html.textProperty'),
         key: "text",
         inline:false,
         htmlAttr: "innerHTML",
@@ -1002,7 +1002,7 @@ ignorance of what is good or evil..</pre>`,
 Vvveb.Components.extend("_base", "html/form", {
     nodes: ["form"],
     image: "icons/form.svg",
-    name: "Form",
+    name: i18n('html.formName'),
     html: `<form action="" method="POST">
 	  <div class="mb-3">
 		<label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -1041,22 +1041,22 @@ Vvveb.Components.extend("_base", "html/form", {
             }]
         }
     }, */{
-        name: "Action",
+        name: i18n('html.actionProperty'),
         key: "action",
         htmlAttr: "action",
         inputtype: TextInput
     }, {
-        name: "Method",
+        name: i18n('html.methodProperty'),
         key: "method",
         htmlAttr: "method",
         inputtype: SelectInput,
         data: {
             options: [{
                 value: "post",
-                text: "Post"
+                text: i18n('html.postMethodText')
             }, {
                 value: "get",
-                text: "Get"
+                text: i18n('html.getMethodText')
             }]
         }
     }, {
@@ -1088,7 +1088,7 @@ Vvveb.Components.extend("_base", "html/tablerow", {
     name: "Table Row",
     html: "<tr><td>Cell 1</td><td>Cell 2</td><td>Cell 3</td></tr>",
     properties: [{
-        name: "Type",
+        name: i18n('html.typeProperty'),
         key: "type",
         htmlAttr: "class",
         inputtype: SelectInput,
@@ -1147,7 +1147,7 @@ Vvveb.Components.extend("_base", "html/tablehead", {
     name: "Table Head",
     html: "<thead><tr><th>Head 1</th><th>Head 2</th><th>Head 3</th></tr></thead>",
     properties: [{
-        name: "Type",
+        name: i18n('common.typeProperty'),
         key: "type",
         htmlAttr: "class",
         inputtype: SelectInput,
@@ -1177,7 +1177,7 @@ Vvveb.Components.extend("_base", "html/table", {
     nodes: ["table"],
     classes: ["table"],
     image: "icons/table.svg",
-    name: "Table",
+    name: i18n('html.tableName'),
     html: `<table class="table table-striped table-hover">
 			  <thead>
 				<tr>
@@ -1208,7 +1208,7 @@ Vvveb.Components.extend("_base", "html/table", {
 			  </tbody>
 			</table>`,
     properties: [{
-        name: "Type",
+        name: i18n('common.typeProperty'),
         key: "type",
 		htmlAttr: "class",
         validValues: ["table-primary", "table-secondary", "table-success", "table-danger", "table-warning", "table-info", "table-light", "table-dark", "table-white"],
@@ -1257,7 +1257,7 @@ Vvveb.Components.extend("_base", "html/table", {
             off: ""
         }
     }, {
-        name: "Small",
+        name: i18n('html.smallProperty'),
         key: "small",
         htmlAttr: "class",
         validValues: ["table-sm"],
@@ -1267,7 +1267,7 @@ Vvveb.Components.extend("_base", "html/table", {
             off: ""
         }
     }, {
-        name: "Hover",
+        name: i18n('html.hoverProperty'),
         key: "hover",
         htmlAttr: "class",
         validValues: ["table-hover"],
@@ -1277,7 +1277,7 @@ Vvveb.Components.extend("_base", "html/table", {
             off: ""
         }
     }, {
-        name: "Bordered",
+        name: i18n('html.borderedProperty'),
         key: "bordered",
         htmlAttr: "class",
         validValues: ["table-bordered"],
@@ -1287,7 +1287,7 @@ Vvveb.Components.extend("_base", "html/table", {
             off: ""
         }
     }, {
-        name: "Striped",
+        name: i18n('html.stripedProperty'),
         key: "striped",
         htmlAttr: "class",
         validValues: ["table-striped"],
@@ -1297,7 +1297,7 @@ Vvveb.Components.extend("_base", "html/table", {
             off: ""
         }
     }, {
-        name: "Inverse",
+        name: i18n('html.inverseProperty'),
         key: "inverse",
         htmlAttr: "class",
         validValues: ["table-inverse"],
@@ -1317,7 +1317,7 @@ Vvveb.Components.extend("_base", "html/table", {
         data: {
             options: [{
                 value: "",
-                text: "None"
+                text: i18n('html.displayNone')
             }, {
                 value: "thead-default",
                 text: "Default"
@@ -1332,7 +1332,7 @@ Vvveb.Components.extend("_base", "html/table", {
 Vvveb.Components.extend("_base", "html/audio", {
     nodes: ["audio"],
     attributes: ["data-component-audio"],
-    name: "Audio",
+    name: i18n('html.audioName'),
     image: "icons/audio.svg",
     html: `<figure data-component-audio><audio controls src="#"></audio></figure>`,
     properties: [{
@@ -1347,7 +1347,7 @@ Vvveb.Components.extend("_base", "html/audio", {
         name:false,
         data: {header:"Options"},
     }, {
-		name: "Autoplay",
+		name: i18n('elements.autoplayProperty'),
         key: "autoplay",
         htmlAttr: "autoplay",
         child:"audio",
@@ -1363,7 +1363,7 @@ Vvveb.Components.extend("_base", "html/audio", {
         inline:true,
         col:4,
 */    }, {
-        name: "Loop",
+        name: i18n('elements.loopProperty'),
         key: "loop",
         htmlAttr: "loop",
         inputtype: CheckboxInput,
@@ -1406,19 +1406,19 @@ Vvveb.Components.extend("_base", "html/html", {
     image: "icons/posts.svg",
     html: `<html><body></body></html>`,
     properties: [{
-        name: "Title",
+        name: i18n('html.titleProperty'),
         key: "title",
         htmlAttr: "innerHTML",
         inputtype: TextInput,
         child:"title",
     }, {
-        name: "Meta description",
+        name: i18n('html.metaDescriptionProperty'),
         key: "description",
         htmlAttr: "content",
         inputtype: TextInput,
         child:'meta[name=description]',
     }, {
-        name: "Meta keywords",
+        name: i18n('html.metaKeywordsProperty'),
         key: "keywords",
         htmlAttr: "content",
         inputtype: TextInput,
@@ -1434,7 +1434,7 @@ Vvveb.ComponentsGroup['Base'] =
 
 Vvveb.Components.extend("_base", "html/iframe", {
 	attributes: ["data-component-iframe"],
-    name: "Iframe",
+    name: i18n('html.iframeName'),
     image: "icons/file.svg",
     html: '<div data-component-iframe><iframe src="https://www.vvveb.com" width="320" height="240"></iframe></div>',
 	properties: [{
@@ -1444,13 +1444,13 @@ Vvveb.Components.extend("_base", "html/iframe", {
         child:"iframe",
         inputtype: TextInput
     }, {
-        name: "Width",
+        name: i18n('html.widthProperty'),
         key: "width",
         htmlAttr: "width",
         child:"iframe",
         inputtype: CssUnitInput
     }, {
-        name: "Height",
+        name: i18n('html.heightProperty'),
         key: "height",
         htmlAttr: "height",
         child:"iframe",

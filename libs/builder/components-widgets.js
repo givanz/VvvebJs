@@ -16,10 +16,10 @@ limitations under the License.
 https://github.com/givanz/VvvebJs
 */
 
-Vvveb.ComponentsGroup['Widgets'] = ["widgets/googlemaps", "widgets/embed-video", "widgets/chartjs", "widgets/lottie",/* "widgets/facebookpage", */"widgets/paypal", /*"widgets/instagram",*/ "widgets/twitter", "widgets/openstreetmap"/*, "widgets/facebookcomments"*/];
+Vvveb.ComponentsGroup[i18n('widgets.widgetsGroup')] = ["widgets/googlemaps", "widgets/embed-video", "widgets/chartjs", "widgets/lottie",/* "widgets/facebookpage", */"widgets/paypal", /*"widgets/instagram",*/ "widgets/twitter", "widgets/openstreetmap"/*, "widgets/facebookcomments"*/];
 
 Vvveb.Components.extend("_base", "widgets/googlemaps", {
-    name: "Google Maps",
+    name: i18n('widgets.googleMapsName'),
     attributes: ["data-component-maps"],
     image: "icons/map.svg",
     dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/maps.png">',
@@ -63,40 +63,40 @@ Vvveb.Components.extend("_base", "widgets/googlemaps", {
 	},
 
     properties: [{
-        name: "Address",
+        name: i18n('widgets.addressProperty'),
         key: "q",
         inputtype: TextInput
     },{
-        name: "Map type",
+        name: i18n('widgets.mapTypeProperty'),
         key: "t",
         inputtype: SelectInput,
         data:{
-			options: [{
+   options: [{
                 value: "q",
-                text: "Roadmap"
+                text: i18n('widgets.roadmapOption')
             },{
                 value: "w",
-                text: "Satellite"
+                text: i18n('widgets.satelliteOption')
             }]
        },
     },{
-        name: "Zoom",
+        name: i18n('widgets.zoomProperty'),
         key: "z",
         inputtype: RangeInput,
         data:{
-			max: 20, //max zoom level
-			min:1,
-			step:1
-		}
+   max: 20, //max zoom level
+   min:1,
+   step:1
+  }
     },{
-        name: "Key",
+        name: i18n('widgets.keyProperty'),
         key: "key",
         inputtype: TextInput
-	}]
+ }]
 });
 
 Vvveb.Components.extend("_base", "widgets/openstreetmap", {
-    name: "Open Street Map",
+    name: i18n('widgets.openStreetMapName'),
     attributes: ["data-component-openstreetmap"],
     image: "icons/map.svg",
     dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/maps.png">',
@@ -134,7 +134,7 @@ Vvveb.Components.extend("_base", "widgets/openstreetmap", {
 	},
 
     properties: [{
-        name: "Map",
+        name: i18n('widgets.mapProperty'),
         key: "bbox",
         inputtype: TextInput
 /*    },{
@@ -160,7 +160,7 @@ Vvveb.Components.extend("_base", "widgets/openstreetmap", {
 });
 
 Vvveb.Components.extend("_base", "widgets/embed-video", {
-    name: "Embed Video",
+    name: i18n('widgets.embedVideoName'),
     attributes: ["data-component-video"],
     image: "icons/youtube.svg",
     dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/youtube.svg" width="100" height="100">', //use image for drag and swap with iframe on drop for drag performance
@@ -249,123 +249,123 @@ Vvveb.Components.extend("_base", "widgets/embed-video", {
 	},	
 	
     properties: [{
-        name: "Provider",
+        name: i18n('widgets.providerProperty'),
         key: "t",
         inputtype: SelectInput,
         data:{
-			options: [{
-                text: "Youtube",
+   options: [{
+                text: i18n('widgets.youtubeOption'),
                 value: "y"
             },{
-                text: "Vimeo",
+                text: i18n('widgets.vimeoOption'),
                 value: "v"
             },{
-                text: "HTML5",
+                text: i18n('widgets.html5Option'),
                 value: "h"
             }]
        },
-	 },{
-        name: "Video",
+  },{
+        name: i18n('widgets.videoProperty'),
         key: "video_id",
         inputtype: TextInput,
-   		onChange: function(node, value, input, component) {
-			
-			let youtube = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]+)/i;
-			let vimeo = /(?:vimeo\.com(?:[^\d]+))(\d+)/i;
-			let id = false;
-			let t = false;
+    	onChange: function(node, value, input, component) {
+   
+   let youtube = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]+)/i;
+   let vimeo = /(?:vimeo\.com(?:[^\d]+))(\d+)/i;
+   let id = false;
+   let t = false;
 
-			if (((id = value.match(youtube)) && (t = "y")) || ((id = value.match(vimeo)) && (t = "v"))) {
-				document.querySelector(".component-properties select[name=t]").value = t;
-				document.querySelector(".component-properties select[name=video_id]").value = id[1];
+   if (((id = value.match(youtube)) && (t = "y")) || ((id = value.match(vimeo)) && (t = "v"))) {
+    document.querySelector(".component-properties select[name=t]").value = t;
+    document.querySelector(".component-properties select[name=video_id]").value = id[1];
 
-				component.t = t;
-				component.video_id = id[1];
+    component.t = t;
+    component.video_id = id[1];
 
-				return id[1];
-			}
-			
-			return node;
-		}
+    return id[1];
+   }
+   
+   return node;
+  }
     },{
-        name: "Poster",
+        name: i18n('widgets.posterProperty'),
         key: "poster",
         htmlAttr: "poster",
         inputtype: ImageInput
     },{
-        name: "Url",
+        name: i18n('widgets.urlProperty'),
         key: "url",
         inputtype: TextInput
     },{
-		name: "Width",
+  name: i18n('widgets.widthProperty'),
         key: "width",
         htmlAttr: "style",
         inline:false,
         col:6,
         inputtype: CssUnitInput
     },{
-        name: "Height",
+        name: i18n('widgets.heightProperty'),
         key: "height",
         htmlAttr: "style",
         inline:false,
         col:6,
         inputtype: CssUnitInput
     },{
-		key: "video_options",
+  key: "video_options",
         inputtype: SectionInput,
         name:false,
-        data: {header:"Options"},
+        data: {header:i18n('widgets.optionsHeader')},
     },{
-        name: "Auto play",
+        name: i18n('widgets.autoPlayProperty'),
         key: "autoplay",
         htmlAttr: "autoplay",
         inline:true,
         col:4,
         inputtype: CheckboxInput
     },{
-        name: "Plays inline",
+        name: i18n('widgets.playsInlineProperty'),
         key: "playsinline",
         htmlAttr: "playsinline",
         inline:true,
         col:4,
         inputtype: CheckboxInput
     },{
-        name: "Controls",
+        name: i18n('widgets.controlsProperty'),
         key: "controls",
         htmlAttr: "controls",
         inline:true,
         col:4,
         inputtype: CheckboxInput
     },{
-        name: "Loop",
+        name: i18n('widgets.loopProperty'),
         key: "loop",
         htmlAttr: "loop",
         inline:true,
         col:4,
         inputtype: CheckboxInput
     },{
-        name: "Muted",
+        name: i18n('widgets.mutedProperty'),
         key: "muted",
         htmlAttr: "muted",
         inline:true,
         col:4,
         inputtype: CheckboxInput
-	},{
-		name:"",
-		key: "autoplay_warning",
+ },{
+  name:"",
+  key: "autoplay_warning",
         inline:false,
         col:12,
         inputtype: NoticeInput,
         data: {
-			type:'warning',
-			title:'Autoplay',
-			text:'Most browsers allow auto play only if video is muted and plays inline'
-		}
-	}]
+   type:'warning',
+   title:i18n('widgets.autoplayWarningTitle'),
+   text:i18n('widgets.autoplayWarningText')
+  }
+ }]
 });
 
 Vvveb.Components.extend("_base", "widgets/facebookcomments", {
-    name: "Facebook Comments",
+    name: i18n('widgets.facebookCommentsName'),
     attributes: ["data-component-facebookcomments"],
     image: "icons/facebook.svg",
     dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/facebook.svg">',
@@ -385,36 +385,36 @@ Vvveb.Components.extend("_base", "widgets/facebookcomments", {
 			data-width="100%" \
 			></div></div>',
     properties: [{
-        name: "Href",
+        name: i18n('widgets.hrefProperty'),
         key: "business",
         htmlAttr: "data-href",
         child:".fb-comments",
         inputtype: TextInput
-    },{		
-        name: "Item name",
+    },{
+        name: i18n('widgets.itemNameProperty'),
         key: "item_name",
         htmlAttr: "data-numposts",
         child:".fb-comments",
         inputtype: TextInput
-    },{		
-        name: "Color scheme",
+    },{
+        name: i18n('widgets.colorSchemeProperty'),
         key: "colorscheme",
         htmlAttr: "data-colorscheme",
         child:".fb-comments",
         inputtype: TextInput
-    },{		
-        name: "Order by",
+    },{
+        name: i18n('widgets.orderByProperty'),
         key: "order-by",
         htmlAttr: "data-order-by",
         child:".fb-comments",
         inputtype: TextInput
-    },{		
-        name: "Currency code",
+    },{
+        name: i18n('widgets.currencyCodeProperty'),
         key: "width",
         htmlAttr: "data-width",
         child:".fb-comments",
         inputtype: TextInput
-	}]
+ }]
 });
 /*
 Vvveb.Components.extend("_base", "widgets/instagram", {
@@ -436,7 +436,7 @@ Vvveb.Components.extend("_base", "widgets/instagram", {
 });
 */
 Vvveb.Components.extend("_base", "widgets/twitter", {
-    name: "Twitter",
+    name: i18n('widgets.twitterName'),
     attributes: ["data-component-twitter"],
     image: "icons/twitter.svg",
     dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/twitter.svg">',
@@ -479,28 +479,28 @@ Vvveb.Components.extend("_base", "widgets/twitter", {
 	},
 
     properties: [{
-        name: "Tweet",
+        name: i18n('widgets.tweetProperty'),
         key: "tweet",
         inputtype: TextInput,
-   		onChange: function(node, value, input, component) {
-			
-			let twitterRegex = /(?:twitter\.com(?:[^\d]+))(\d+)/i;
-			let id = false;
+    	onChange: function(node, value, input, component) {
+   
+   let twitterRegex = /(?:twitter\.com(?:[^\d]+))(\d+)/i;
+   let id = false;
 
-			if (id = value.match(twitterRegex)) {
-				document.querySelector(".component-properties input[name=tweet]").value = id[1];
+   if (id = value.match(twitterRegex)) {
+    document.querySelector(".component-properties input[name=tweet]").value = id[1];
 
-				component.tweet = id[1];
-				return id[1];
-			}
-			
-			return node;
-		}
-	}]
+    component.tweet = id[1];
+    return id[1];
+   }
+   
+   return node;
+  }
+ }]
 });
 
 Vvveb.Components.extend("_base", "widgets/paypal", {
-    name: "Paypal",
+    name: i18n('widgets.paypalName'),
     attributes: ["data-component-paypal"],
     image: "icons/paypal.svg",
     html: '<form action="https://www.paypal.com/cgi-bin/webscr" method="post" data-component-paypal>\
@@ -526,34 +526,34 @@ Vvveb.Components.extend("_base", "widgets/paypal", {
 \
 			</form>',
     properties: [{
-        name: "Email",
+        name: i18n('widgets.emailProperty'),
         key: "business",
         htmlAttr: "value",
         child:"input[name='business']",
         inputtype: TextInput
-    },{		
-        name: "Item name",
+    },{
+        name: i18n('widgets.itemNameProperty'),
         key: "item_name",
         htmlAttr: "value",
         child:"input[name='item_name']",
         inputtype: TextInput
-    },{		
-        name: "Item number",
+    },{
+        name: i18n('widgets.itemNumberProperty'),
         key: "item_number",
         htmlAttr: "value",
         child:"input[name='item_number']",
         inputtype: TextInput
-    },{		
-        name: "Currency code",
+    },{
+        name: i18n('widgets.currencyCodeProperty'),
         key: "currency_code",
         htmlAttr: "value",
         child:"input[name='currency_code']",
         inputtype: TextInput
-	}],
+ }],
 });
     
 Vvveb.Components.extend("_base", "widgets/facebookpage", {
-    name: "Facebook Page Plugin",
+    name: i18n('widgets.facebookPagePluginName'),
     attributes: ["data-component-facebookpage"],
     image: "icons/facebook.svg",
     dropHtml: '<img src="' + Vvveb.baseUrl + 'icons/facebook.png">',
@@ -578,36 +578,36 @@ Vvveb.Components.extend("_base", "widgets/facebookpage", {
 		</div>`,
 
     properties: [{
-        name: "Small header",
+        name: i18n('widgets.smallHeaderProperty'),
         key: "small-header",
         htmlAttr: "data-small-header",
         child:".fb-page",
         inputtype: TextInput
-    },{		
-        name: "Adapt container width",
+    },{
+        name: i18n('widgets.adaptContainerWidthProperty'),
         key: "adapt-container-width",
         htmlAttr: "data-adapt-container-width",
         child:".fb-page",
         inputtype: TextInput
-    },{		
-        name: "Hide cover",
+    },{
+        name: i18n('widgets.hideCoverProperty'),
         key: "hide-cover",
         htmlAttr: "data-hide-cover",
         child:".fb-page",
         inputtype: TextInput
-    },{		
-        name: "Show facepile",
+    },{
+        name: i18n('widgets.showFacepileProperty'),
         key: "show-facepile",
         htmlAttr: "data-show-facepile",
         child:".fb-page",
         inputtype: TextInput
-    },{		
-        name: "App Id",
+    },{
+        name: i18n('widgets.appIdProperty'),
         key: "appid",
         htmlAttr: "data-appId",
         child:".fb-page",
         inputtype: TextInput
-	}],
+ }],
    onChange: function(node, input, value, component) {
 	   
 	   let newElement = generateElements(this.html)[0];
@@ -624,7 +624,7 @@ Vvveb.Components.extend("_base", "widgets/facebookpage", {
 });
     
 Vvveb.Components.extend("_base", "widgets/chartjs", {
-    name: "Chart.js",
+    name: i18n('widgets.chartjsName'),
     attributes: ["data-component-chartjs"],
     image: "icons/chart.svg",
 	dragHtml: '<img src="' + Vvveb.baseUrl + 'icons/chart.svg">',
@@ -671,12 +671,12 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
 		if (document.getElementById("#chartjs-script")) {
 			body.append(generateElements('<script id="chartjs-script" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>')[0]);
 			body.append(generateElements('<script>\
-				$(document).ready(function() {\
-					$(".chartjs").each(function () {\
-						ctx = $("canvas", this).get(0).getContext("2d");\
+				document.querySelector(document).ready(function() {\
+					document.querySelector(".chartjs").forEach(function () {\
+						ctx = document.querySelector("canvas", this).get(0).getContext("2d");\
 						config = JSON.parse(this.dataset.chart);\
 						chartjs = new Chart(ctx, config);\
-					});\
+  });\
 				\});\
 			  </script>')[0]);
 		}
@@ -708,46 +708,46 @@ Vvveb.Components.extend("_base", "widgets/chartjs", {
 	},
     
     properties: [{
-        name: "Type",
+        name: i18n('widgets.typeProperty'),
         key: "type",
         inputtype: SelectInput,
         data:{
-			options: [{
-                text: "Line",
+   options: [{
+                text: i18n('widgets.lineOption'),
                 value: "line"
             },{
-                text: "Bar",
+                text: i18n('widgets.barOption'),
                 value: "bar"
             },{
-                text: "Pie",
+                text: i18n('widgets.pieOption'),
                 value: "pie"
             },{
-                text: "Doughnut",
+                text: i18n('widgets.doughnutOption'),
                 value: "doughnut"
             },{
-                text: "Polar Area",
+                text: i18n('widgets.polarAreaOption'),
                 value: "polarArea"
             },{
-                text: "Bubble",
+                text: i18n('widgets.bubbleOption'),
                 value: "bubble"
             },{
-                text: "Scatter",
+                text: i18n('widgets.scatterOption'),
                 value: "scatter"
             },{
-                text: "Radar",
+                text: i18n('widgets.radarOption'),
                 value: "radar"
             }]
        },
-		init: function(node) {
-			return JSON.parse(node.dataset.chart).type;
-		},
+  init: function(node) {
+   return JSON.parse(node.dataset.chart).type;
+  },
        onChange: function(node, value, input, component) {
-		   component.config.type = value;
-		   component.drawChart();
-		   
-		   return node;
-		}
-	 }]
+     component.config.type = value;
+     component.drawChart();
+     
+     return node;
+  }
+  }]
 });
 
 function lottieAfterDrop(node) {
@@ -801,7 +801,7 @@ function lottieAfterDrop(node) {
 };
 
 Vvveb.Components.add("widgets/lottie", {
-    name: "Lottie",
+    name: i18n('widgets.lottieName'),
     image: "icons/lottie.svg",
     attributes: ["data-component-lottie"],
     html: `
@@ -817,23 +817,23 @@ Vvveb.Components.add("widgets/lottie", {
 	},	
 	
     properties: [{
-		name: "Path",
+  name: i18n('widgets.pathProperty'),
         key: "path",
         //inputtype: ImageInput,
         inputtype: TextInput,
-		htmlAttr:"data-path",
-	},{
-		name: "Autoplay",
+  htmlAttr:"data-path",
+ },{
+  name: i18n('widgets.autoplayProperty'),
         key: "autoplay",
-		htmlAttr:"data-autoplay",
-		inputtype: CheckboxInput,
-		inline:true,
+  htmlAttr:"data-autoplay",
+  inputtype: CheckboxInput,
+  inline:true,
         col:4
-	},{	name: "Loop",
+ },{	name: i18n('widgets.loopProperty'),
         key: "loop",
-		htmlAttr:"data-loop",
-		inputtype: CheckboxInput,
-		inline:true,
+  htmlAttr:"data-loop",
+  inputtype: CheckboxInput,
+  inline:true,
         col:4
-	}]
+ }]
 });
