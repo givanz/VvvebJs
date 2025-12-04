@@ -864,6 +864,15 @@ Vvveb.Builder = {
 		
 		self.leftPanelWidth = document.getElementById("left-panel").clientWidth;
 	},
+
+	initFromHtml: function(html, callback, targetElement){
+		//creating the iframe content via full html as a blob allows inline js to execute
+		
+		const blob = new Blob([html], { type: 'text/html' });
+		const blobUrl = URL.createObjectURL(blob);		
+		
+		this.init(blobUrl, callback, targetElement);		
+	},
 	
 /* controls */    	
 	loadControlGroups : function() {	
