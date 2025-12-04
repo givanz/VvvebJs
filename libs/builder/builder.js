@@ -852,7 +852,8 @@ Vvveb.Builder = {
         self.documentFrame = document.querySelector("#iframe-wrapper > iframe");
         self.canvas = document.getElementById("canvas");
 
-		self._loadIframe(url + (url.indexOf('?') > -1 ? '&r=':'?r=') + Math.random());
+		if(url.indexOf('blob') == -1)url = (url.indexOf('?') > -1 ? '&r=':'?r=') + Math.random();
+		self._loadIframe(url);
 		
 		self._initDragdrop();
 		
