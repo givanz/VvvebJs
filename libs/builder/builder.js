@@ -1105,6 +1105,8 @@ Vvveb.Builder = {
 
 				if (self.initCallback) self.initCallback();
 
+			    Vvveb.TreeList.loadComponents();
+
                 return self._frameLoaded();
         });		
         
@@ -3544,7 +3546,10 @@ Vvveb.TreeList = {
 		
 		this.tree     = [];
 		this.idToNode = {};
-		getNodeTree(window.FrameDocument.body, this.tree, {}, this.idToNode);
+
+		let topLevel = (window.FrameDocument.querySelector(Vvveb.Builder.targetElement) ? window.FrameDocument.querySelector(Vvveb.Builder.targetElement) : window.FrameDocument.body);
+		
+		getNodeTree(topLevel, this.tree, {}, this.idToNode);
 		
 		let ol = drawComponentsTree(this.tree);
 		list.replaceWith(ol);
