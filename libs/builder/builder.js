@@ -836,7 +836,7 @@ Vvveb.Builder = {
 	leftPanelWidth: 275,
 	ignoreClasses: ["clearfix", "masonry", "has-shadow"],
 	
-	init: function(url, callback) {
+	init: function(url, callback, targetElement) {
 
 		let self = this;
 		
@@ -847,11 +847,13 @@ Vvveb.Builder = {
 		self.selectedEl = null;
 		self.highlightEl = null;
 		self.initCallback = callback;
+		self.targetElement = targetElement;
 		
         self.documentFrame = document.querySelector("#iframe-wrapper > iframe");
         self.canvas = document.getElementById("canvas");
 
-		self._loadIframe(url + (url.indexOf('?') > -1 ? '&r=':'?r=') + Math.random());
+		if(url.indexOf('blob') == -1)url = (url.indexOf('?') > -1 ? '&r=':'?r=') + Math.random();
+		self._loadIframe(url);
 		
 		self._initDragdrop();
 		
@@ -862,6 +864,15 @@ Vvveb.Builder = {
 		self.highlightEnabled = true;
 		
 		self.leftPanelWidth = document.getElementById("left-panel").clientWidth;
+	},
+
+	initFromHtml: function(html, callback, targetElement){
+		//creating the iframe content via full html as a blob allows inline js to execute
+		
+		const blob = new Blob([html], { type: 'text/html' });
+		const blobUrl = URL.createObjectURL(blob);		
+		
+		this.init(blobUrl, callback, targetElement);		
 	},
 	
 /* controls */    	
@@ -1094,6 +1105,8 @@ Vvveb.Builder = {
 
 				if (self.initCallback) self.initCallback();
 
+			    Vvveb.TreeList.loadComponents();
+
                 return self._frameLoaded();
         });		
         
@@ -1105,7 +1118,8 @@ Vvveb.Builder = {
 		
 		self.frameDoc  = window.FrameDocument;
 		self.frameHtml = window.FrameDocument.querySelector("html");
-		self.frameBody = window.FrameDocument.querySelector("body");
+		if(window.FrameDocument.querySelector(self.targetElement))self.frameBody = window.FrameDocument.querySelector(self.targetElement);
+		else self.frameBody = window.FrameDocument.querySelector("body");
 		self.frameHead = window.FrameDocument.querySelector("head");
 		
 		//insert editor helpers like non editable areas
@@ -1431,6 +1445,7 @@ Vvveb.Builder = {
 
 					if (self.dragType == "section") {
 						let closest = parent.closest("section, header, footer, body");
+						if(self.targetElement && closest.querySelector(self.targetElement))closest = closest.querySelector(self.targetElement);//gone too high
 						if (closest) {
 							parent = closest;
 						}
@@ -1582,6 +1597,8 @@ Vvveb.Builder = {
 		self.frameBody.addEventListener("mouseup", highlightUp);
 
 		let highlightDbClick = function(event) {
+
+			if(window.FrameDocument.querySelector(Vvveb.Builder.targetElement) == event.target)return false;
 			
 			if (Vvveb.Builder.isPreview == false) {
 				
@@ -1621,6 +1638,8 @@ Vvveb.Builder = {
 		self.frameBody.addEventListener("dblclick", highlightDbClick);
 		
 		let highlightClick = function(event) {
+
+			if(window.FrameDocument.querySelector(Vvveb.Builder.targetElement) == event.target)return false;
 			
 			if (Vvveb.Builder.isPreview == false){
 				if (event.target) {
@@ -2073,7 +2092,9 @@ Vvveb.Builder = {
           
          Vvveb.FontsManager.cleanUnusedFonts();
 
-         html += doc.documentElement.outerHTML;
+         if(doc.querySelector(Vvveb.Builder.targetElement))html = doc.querySelector(Vvveb.Builder.targetElement).innerHTML;
+         else html += doc.documentElement.outerHTML;
+		
          html = this.removeHelpers(html, keepHelperAttributes);
          
 		 window.dispatchEvent(new CustomEvent("vvveb.getHtml.after", {detail: doc}));
@@ -2085,6 +2106,8 @@ Vvveb.Builder = {
 	setHtml: function(html) {
 		//documentElement.innerHTML resets <head> each time and the page flickers
 		//return window.FrameDocument.documentElement.innerHTML = html;
+
+		if(window.FrameDocument.querySelector(Vvveb.Builder.targetElement)){window.FrameDocument.querySelector(Vvveb.Builder.targetElement).innerHTML = html;return}
 		
 		function getTag(html, tag, outerHtml = false) {
 			const start = html.indexOf("<" + tag);
@@ -3523,7 +3546,10 @@ Vvveb.TreeList = {
 		
 		this.tree     = [];
 		this.idToNode = {};
-		getNodeTree(window.FrameDocument.body, this.tree, {}, this.idToNode);
+
+		let topLevel = (window.FrameDocument.querySelector(Vvveb.Builder.targetElement) ? window.FrameDocument.querySelector(Vvveb.Builder.targetElement) : window.FrameDocument.body);
+		
+		getNodeTree(topLevel, this.tree, {}, this.idToNode);
 		
 		let ol = drawComponentsTree(this.tree);
 		list.replaceWith(ol);
