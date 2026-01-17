@@ -678,7 +678,7 @@ Vvveb.WysiwygEditor = {
         }
 		
 		//select link element to edit link etc
-		if (tag == "a") {
+		if (tag == "a" || 1) {//why not always select the modified/new element
 			Vvveb.Builder.selectNode(element);
 			Vvveb.Builder.loadNodeComponent(element);
 		}
