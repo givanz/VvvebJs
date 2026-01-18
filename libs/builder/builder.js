@@ -1181,6 +1181,14 @@ Vvveb.Builder = {
 		Vvveb.Components.render(component);
 		this.selectedComponent = component;
 
+		//if component properties is loaded in left panel tab instead of right panel show tab
+		let propertiesTab = document.querySelector(".component-properties-tab a");
+		if (propertiesTab.offsetParent) {//if properites tab is enabled/visible 
+				propertiesTab.style.display = "";
+				const bsTab = bootstrap.Tab.getOrCreateInstance(propertiesTab);
+				bsTab.show(); 
+		}		
+
 	},
 	
 	reloadComponent:  function() {
