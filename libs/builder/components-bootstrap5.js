@@ -1017,7 +1017,7 @@ Vvveb.Components.extend("_base", "html/gridrow", {
         data: {text:"Add column", icon:"la la-plus"},
         onChange: function(node)
         {
-			 node.append(generateElements('<div class="col-3"><h3>Col-3</h3></div>')[0]);
+			 node.append(generateElements('<div class="col-"><h3>Auto Column</h3></div>')[0]);
 			 
 			 //render component properties again to include the new column inputs
 			 Vvveb.Components.render("html/gridrow");
