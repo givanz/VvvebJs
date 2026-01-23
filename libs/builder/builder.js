@@ -2055,7 +2055,9 @@ Vvveb.Builder = {
 		doc.querySelectorAll("[contenteditable]").forEach(e => e.removeAttribute("contenteditable"));
 		doc.querySelectorAll("[spellcheckker]").forEach(e => e.removeAttribute("spellcheckker"));
 		doc.querySelectorAll('script[src^="chrome-extension://"]').forEach(e => e.remove());
-		doc.querySelectorAll('script[src^="moz-extension://"]').forEach(e => e.remove());
+		doc.querySelectorAll('.swiper').forEach(el => {el.classList.remove('swiper-initialized');});
+		doc.querySelectorAll('.swiper-wrapper').forEach(el => {el.style.removeProperty('transform');});
+		doc.querySelectorAll('.swiper-slide').forEach(el => {el.classList.remove('swiper-slide-active','swiper-slide-next','swiper-slide-prev');});
 		
 		// scroll page to top to avoid saving the page in a different state
 		// like saving with sticky classes set for navbar etc
