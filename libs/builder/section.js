@@ -23,10 +23,10 @@ let defaultSeparatorSvg = '<svg id="Layer_1" data-name="Layer 1" xmlns="http://w
 let section_sort = 1;
 
 let SectionContent = [{
-        name: "Title",
-        key: "title",
+        name: "Label",
+        key: "label",
         sort: section_sort++,
-        htmlAttr: "title",
+        htmlAttr: "aria-label",
         inputtype: TextInput
     },{
         name: "Container width",
@@ -119,12 +119,12 @@ let SectionBackground = [{
             }],
         },
 		hideGroups : function() {
-			document.querySelectorAll('.mb-3[data-group="bg-image"],.mb-3[data-group="bg-video"]').forEach(e => e.classList.add("d-none"));
+			document.querySelectorAll('.mb-2[data-group="bg-image"],.mb-2[data-group="bg-video"]').forEach(e => e.classList.add("d-none"));
 		},
 		
 		onChange : function(node, value, input) {
 			this.hideGroups();
-			document.querySelectorAll('.mb-3[data-group="'+ input.value + '"].d-none').forEach((el, i) => {
+			document.querySelectorAll('.mb-2[data-group="'+ input.value + '"].d-none').forEach((el, i) => {
 				el.classList.remove("d-none");
 			});
 
@@ -163,17 +163,18 @@ let SectionBackground = [{
 			}
 
 
-			return element;
+			return node;
 		}, 
 		init: function(node) {
 			let selected = "none";
-			let img = node.querySelector(":scope > .background-container img");
-			let video = node.querySelector(":scope > .background-container video");
+			let img   = node.querySelector(":scope > .background-container > img");
+			let video = node.querySelector(":scope > .background-container > video");
 			
-			if (img?.offsetParent) {
+			if (img && (img.offsetParent || img.offsetHeight || !img.classList.contains("d-none"))) {
 				selected = "bg-image";
 			}
-			if (video?.offsetParent) {
+			
+			if (video && (img.offsetParent || video.offsetHeight || !video.classList.contains("d-none"))) {
 				selected = "bg-video";
 			}
 			
@@ -217,7 +218,7 @@ let SectionBackground = [{
         validValues: ["", "parallax"],
         inputtype: ToggleInput,
         data: {
-            className: "form-switch-lg",
+            className: "",
             on: 'parallax',
             off: ''
         },	 
@@ -241,12 +242,12 @@ let SectionOverlay = [{
         //validValues: ["", "active"],
         inputtype: ToggleInput,
         data: {
-			className: "form-switch-lg",
+            className: "",
             on: 'true',
             off: 'false'
         },
 		onChange : function(node, value, input) {
-			let group = document.querySelectorAll('.mb-3[data-group="overlay"]');
+			let group = document.querySelectorAll('.mb-2[data-group="overlay"]');
 			let overlay = node.querySelector(":scope > .overlay");
 			
 			if (value == 'true') {
@@ -267,7 +268,7 @@ let SectionOverlay = [{
 		}, 
 		init: function(node) {
 			let overlay = node.querySelector(":scope > .overlay");
-			let group = document.querySelectorAll('.mb-3[data-group="overlay"]');
+			let group = document.querySelectorAll('.mb-2[data-group="overlay"]');
 
 			if (overlay && overlay.offsetParent) {
 				group.forEach(e => e.classList.remove("d-none"));
@@ -317,7 +318,7 @@ function sectionSeparatorProperties(name, title) {
         inline: true,
         inputtype: ToggleInput,
         data: {
-			className: "form-switch-lg",
+            className: "",
             on: 'true',
             off: 'false'
         },
@@ -437,7 +438,7 @@ function sectionSeparatorProperties(name, title) {
         name: "Fill Color",
         key: "fill",
         sort: section_sort++,
-        col:4,
+        col:12,
         inline:true,
         //section: style_section,
 		group:`${name}_separator`,
@@ -448,7 +449,7 @@ function sectionSeparatorProperties(name, title) {
         name: "Color",
         key: "color",
         sort: section_sort++,
-        col:4,
+        col:12,
         inline:true,
         //section: style_section,
 	group:`${name}_separator`,
@@ -459,7 +460,7 @@ function sectionSeparatorProperties(name, title) {
         name: "Stroke",
         key: "stroke",
         sort: section_sort++,
-        col:4,
+        col:12,
         inline:true,
         //section: style_section,
 		group:`${name}_separator`,
@@ -486,7 +487,7 @@ let SectionBottomSeparator = [{
         validValues: ["", "active"],
         inputtype: ToggleInput,
         data: {
-			className: "form-switch-lg",
+            className: "",
             on: "active",
             off: ""
         }
@@ -613,7 +614,7 @@ let ComponentSectionAdvanced = [];/* [{
 
 function componentsInit(node) {
 		
-		document.querySelectorAll('.mb-3[data-group]').forEach(e => e.classList.add("d-none"));
+		document.querySelectorAll('.mb-2[data-group]').forEach(e => e.classList.add("d-none"));
 
 		let img = node.querySelector(":scope > .background-container img");
 		let video = node.querySelector(":scope > .background-container video");
@@ -621,17 +622,17 @@ function componentsInit(node) {
 		let separatorTop = node.querySelector(":scope > .separator.top");
 		let separatorBottom = node.querySelector(":scope > .separator.bottom");
 		let bg = "";
-		
-		if (img && img.offsetParent) {
+	
+		if (img && (img.offsetParent || img.offsetHeight || !img.classList.contains("d-none"))) {
 			bg = "bg-image";
 		}
 		
-		if (video && video.offsetParent) {
+		if (video && (img.offsetParent || video.offsetHeight || !video.classList.contains("d-none"))) {
 			bg = "bg-video";
-		}
-		
+		}	
+	
 		let showSection = function (section) {
-			document.querySelectorAll('.mb-3[data-group="' + section + '"]').forEach(e => e.classList.remove("d-none"));
+			document.querySelectorAll('.mb-2[data-group="' + section + '"]').forEach(e => e.classList.remove("d-none"));
 		}
 		
 		if (bg) {
@@ -655,7 +656,7 @@ function componentsInit(node) {
 Vvveb.Components.extend("_base", "elements/section", {
     nodes: ["section"],
     name: "Section",
-    image: "icons/stream-solid.svg",
+    image: "icons/section.svg",
     html: `<section>
 				<div class="container">
 					<h1>Section</h1>
@@ -673,7 +674,7 @@ Vvveb.Components.extend("_base", "elements/section", {
 Vvveb.Components.extend("_base", "elements/header", {
     nodes: ["header"],
     name: "Header",
-    image: "icons/stream-solid.svg",
+    image: "icons/section.svg",
     html: `<header>
 				<div class="container">
 					<h1>Section</h1>
@@ -691,7 +692,7 @@ Vvveb.Components.extend("_base", "elements/header", {
 Vvveb.Components.extend("_base", "elements/footer", {
     nodes: ["footer"],
     name: "Footer",
-    image: "icons/stream-solid.svg",
+    image: "icons/section.svg",
     html: `<footer>
 				<div class="container">
 					<h1>Section</h1>

@@ -89,6 +89,35 @@ Prevents iframe mouse events that prevents clicking on the component
 .vvveb-hidden {
   display: none !important; }
 
+body.vvveb-hidden {
+  display: unset !important; }
+  body.vvveb-hidden .vvveb-hidden, body.vvveb-hidden .d-none, body.vvveb-hidden .invisible {
+    display: unset !important;
+    visibility: visible !important;
+    overflow: hidden;
+    position: relative; }
+    body.vvveb-hidden .vvveb-hidden::after, body.vvveb-hidden .d-none::after, body.vvveb-hidden .invisible::after {
+      content: "Hidden";
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      padding-top: 5px;
+      font-weight: 600;
+      font-size: 12px;
+      text-align: center;
+      background: rgba(252, 252, 252, 0.85);
+      background: rgba(var(--bs-body-bg-rgb), 0.85);
+      border: 1px dashed #999;
+      border: 1px dashed var(--bs-border-color);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+    body.vvveb-hidden .vvveb-hidden:hover::after, body.vvveb-hidden .d-none:hover::after, body.vvveb-hidden .invisible:hover::after {
+      display: none; }
+
 section .container div > .row > [class*="col-"]:empty,
 section .container div > .row > .col:empty,
 section .container > .row > [class*="col-"]:empty,
@@ -130,3 +159,30 @@ section:hover .container-fluid > .row > .col {
 .row:hover > .col {
   outline: 1px dashed rgba(var(--bs-success-rgb), 0.35);
   outline-offset: -2px; }
+
+#vvvebjs-new-section {
+  background: #f8f9fa;
+  background: var(--bs-tertiary-bg);
+  display: block; }
+  #vvvebjs-new-section .col {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background: #fff;
+    background: var(--bs-body-bg);
+    border: 1px dashed #ccc; }
+  #vvvebjs-new-section button {
+    margin: 0.5rem;
+    background: #0030C0;
+    padding: 0.4rem 2.5rem;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 3px;
+    border-color: #0030C0;
+    border-width: 1px; }
+  #vvvebjs-new-section .container,
+  #vvvebjs-new-section .row,
+  #vvvebjs-new-section .col {
+    padding: 1rem;
+    justify-content: center; }

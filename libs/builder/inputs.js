@@ -253,7 +253,7 @@ let HtmlListSelectInput = { ...Input, ...{
 			})
 			.catch(error => {
 				console.log(error.statusText);
-				displayToast("bg-danger", "Error", "Error loading list");
+				displayToast("danger", "Error", "Error loading list");
 			});
 		}
 	},
@@ -766,10 +766,10 @@ let ListInput = { ...Input, ...{
 		let sectionItem = this.closest(".section-item");
 		if (sectionItem.parentNode) {
 			let index = [...sectionItem.parentNode.children].indexOf(sectionItem);//sectionItem.index();
-		
-		event.action = "select";
-		event.index = index;
-		input.onChange(event, node, input, this);
+			
+			event.action = "select";
+			event.index = index;
+			input.onChange(event, node, input, this);
 		}
 		return false;
 	},
@@ -801,7 +801,24 @@ let ListInput = { ...Input, ...{
 		data.elements = elements;
 		this.data = data;
 
-		return this.render("listinput", data);
+		let list = this.render("listinput", data);
+		let items = list.querySelectorAll(".section-item");
+		let i = 0;
+		for (const item of items) {
+			const container = item.querySelector(".tree") ?? item;
+			let properties = {};
+			if (data.elementProperties) {
+				for (let prop in data.elementProperties) {
+					properties[prop] = Object.assign({}, data.elementProperties[prop]);
+					properties[prop].element = elements[i];
+				}
+			}
+			
+			Vvveb.Components.renderProperties(null, properties, null, container);
+			i++;
+		}
+
+		return list;
 	},
   }
 }
@@ -810,18 +827,25 @@ let AutocompleteInput = { ...Input, ...{
 
     events: [
         ["autocomplete.change", "onAutocompleteChange", "input"],
+        ["input", "onAutocompleteChange", "input"],
 	 ],
 
-	onAutocompleteChange: function(event, value, text) {
-		input.value = value;
-		return this.onChange(event, node);
+	onAutocompleteChange: function(event, node, input) {
+		input.value = event.detail.value;
+		return input.onChange.call(this, event, node, input);
 	},
+
+	setValue: function(value) {
+		if (this.element && value) {
+			let input = this.element.querySelectorAll('input').forEach(e => e.value = value);
+		}
+	},	
 
 	init: function(data) {
 		
 		this.element = this.render("textinput", data);
 		
-		let autocomplete = new Autocomplete({input:this.element.querySelector("input"), url:data.url});
+		let autocomplete = new _AutocompleteInput(this.element.querySelector("input"), data);
 		
 		return this.element;
 	}
@@ -840,22 +864,16 @@ let AutocompleteList = { ...Input, ...{
 	},
 
 	setValue: function(value) {
-		if (this.element[0] && value) {
-			let input = this.element[0].querySelector('input');
-		
-			if (input) { 
-				input.dataset.autocompleteList.setValue(value);
-				
-			}
-		}		
+		if (this.element && value) {
+			let input = this.element.querySelectorAll('input').forEach(e => e.value = value);
+		}	
 	},
 
 	init: function(data) {
 		
 		this.element = this.render("textinput", data);
 		
-		let autocomplete = new Autocomplete({input:this.element.querySelector("input"), url:data.url});
-		$('input', this.element).autocompleteList(data);//using default parameters
+		let autocomplete = new _AutocompleteList(this.element.querySelector("input"), data);
 		
 		return this.element;
 	}
@@ -868,27 +886,26 @@ let TagsInput = { ...Input, ...{
         ["tagsinput.change", "onTagsInputChange", "input"],
 	 ],
 
-	onTagsInputChange: function(event, value, text) {
-		input.value = value;
-		return this.onChange(event, node);
+	onTagsInputChange: function(event, node, input) {
+		let tags = "";
+		for (const tag in event.detail[0]) {
+			if (tags) tags += " ";
+			tags += tag;
+		}
+		input.value = tags;
+		return input.onChange.call(this, event, node, input);
 	},
 
 	setValue: function(value) {
-		if (this.element[0] && value) {
-			let input = this.element[0].querySelector('select');
-		
-			if (input) { 
-				input.dataset.tagsInput.setValue(value);
-				
-			}
+		if (this.autocomplete && value) {
+			this.autocomplete.tagsInput.setValue(value.split(" "));
 		}
 	},
 
 	init: function(data) {
 		
 		this.element = this.render("tagsinput", data);
-		
-		$('input', this.element).tagsInput(data);//using default parameters
+		this.autocomplete = new _TagsInput(this.element.querySelector("input"), data);
 		
 		return this.element;
 	}

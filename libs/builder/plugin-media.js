@@ -30,7 +30,7 @@ ImageInput = { ...ImageInput, ...{
 		if (value && value.indexOf("data:image") == -1 && value != "none") {
 				this.element[0].querySelector('input[type="text"]').value = value;
 				//$('input[type="text"]', this.element).val(value);
-				let src = (value.indexOf("//") > -1 || value.indexOf("media/") > -1 || value.indexOf("image-cache/") > -1 ? '' : Vvveb.themeBaseUrl) + value
+				let src = (value.indexOf("//") > -1 || value.indexOf("media/") > -1 || value.indexOf("image-cache/") > -1 || value[0] == '/' ? '' : Vvveb.themeBaseUrl) + value;
 				this.element[0].querySelector(this.tag).src = src;
 				//$(this.tag, this.element).attr("src", src);
 		} else {
@@ -59,7 +59,8 @@ ImageInput = { ...ImageInput, ...{
 		//reselect image after loading to adjust highlight box size
 		let onLoad = function () {
 				if (Vvveb.Builder.selectedEl) {
-					Vvveb.Builder.selectedEl.click();
+					Vvveb.Builder.selectNode(Vvveb.Builder.selectedEl);
+					Vvveb.Builder.loadNodeComponent(Vvveb.Builder.selectedEl);
 				}
 		};
 		
@@ -95,5 +96,75 @@ VideoInput = { ...ImageInput, ...{
 	init: function(data) {
 		return this.render("videoinput-gallery", data);
 	},
+  }
+}
+
+SvgInput = { ...ImageInput, ...{
+	tag:"svg",
+
+    events: [
+        ["change", "onChange", "input[type=text]"],
+        ["click", "onClick", "button"],
+        ["click", "onClick", "svg"],
+	 ],
+
+	
+	init: function(data) {
+		return this.render("svginput-gallery", data);
+	},
+	
+	setValue: function(value) {
+		if (this.element[0] && value) {
+			let input = this.element[0].querySelector('svg');
+		
+			if (input) { 
+				input.innerHTML = value;
+			}
+		}
+	},
+	
+	onChange: function(event, node, input) {
+		if (event && event.target) {
+			let self = this;
+			let value = this.value;
+			let src = mediaPath + value;
+			let currentTarget = event.currentTarget;
+
+			fetch(src)
+			.then(res => res.text())
+			.then(value => {
+				//const e = new CustomEvent('propertyChange', { detail: {value, input: self, origEvent:event} });
+				//currentTarget.dispatchEvent(e);
+	
+				let element = Vvveb.Builder.selectedEl;
+				let newElement = generateElements(value)[0];
+				let attributes = element.attributes;
+				
+				//keep old svg size and colors
+				for (let i = 0; i < attributes.length; i++) {
+					let attr = attributes[i];
+					if (attr.name && attr.name != "viewBox") {
+						newElement.setAttribute(attr.name, attr.value);
+					}
+				}
+			
+				element.replaceWith(newElement);
+				Vvveb.Builder.selectedEl = newElement;
+
+				if (Vvveb.Builder.selectedEl) {
+					Vvveb.Builder.selectNode(Vvveb.Builder.selectedEl);
+					let svg = node.querySelector('svg')
+					svg.innerHTML = newElement.innerHTML;
+					svg.setAttribute('viewBox', newElement.getAttribute('viewBox'));
+					//Vvveb.Builder.loadNodeComponent(Vvveb.Builder.selectedEl);
+				}
+			})
+			
+			//event.data.element.trigger('propertyChange', [this.value, this, event]);
+		}
+	},
+	
+	 onImageChange: function(event, node, input) {
+	 }
   }
 }

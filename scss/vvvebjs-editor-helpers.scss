@@ -102,6 +102,41 @@ Prevents iframe mouse events that prevents clicking on the component
 	display:none !important;;
 }
 
+body.vvveb-hidden {
+	display:unset !important;
+	
+	.vvveb-hidden, .d-none, .invisible {
+		display:unset !important;
+		visibility: visible !important;
+		overflow: hidden;
+		position: relative;
+	
+		&::after {
+			content:"Hidden";
+			position:absolute;
+			left:0px;
+			top:0px;
+			width:100%;
+			height:100%;
+			padding-top:5px;
+			font-weight:600;
+			font-size:12px;
+			text-align:center;
+			background:rgba(252, 252, 252, 0.85);
+			background:rgba(var(--bs-body-bg-rgb), 0.85);
+			border:1px dashed #999;
+			border:1px dashed var(--bs-border-color);
+			overflow:hidden;
+			display: flex;		
+			align-items: center;
+			justify-content: center;
+		}
+		
+		&:hover::after {
+			display:none;
+		}
+	}
+}
 
 @mixin col-empty-highlight {
 
@@ -160,3 +195,39 @@ section:hover {
 .row:hover {
 	@include col-hover;
 }
+
+#vvvebjs-new-section {
+	background: rgb(248, 249, 250);
+	background: var(--bs-tertiary-bg);
+	display:block;
+	
+	.col {
+		justify-content: center;
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		background: #fff;
+		background: var(--bs-body-bg);
+		border: 1px dashed #ccc;
+	}
+	button {
+		margin: 0.5rem;
+		background: #0030C0;
+		padding: 0.4rem 2.5rem;
+		color: #fff;
+		font-size: 14px;
+		border-radius: 3px;
+		border-color: #0030C0;
+		border-width: 1px;
+		&:hover {
+		}
+	}
+
+	.container,
+	.row,
+	.col {
+		padding: 1rem;
+		justify-content: center;
+	}
+}
+

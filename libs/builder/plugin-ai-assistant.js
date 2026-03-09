@@ -159,7 +159,7 @@ document.addEventListener("click", function(event) {
 
 function aiAssistantSendQuery()  {
 		if (!chatgptOptions["key"] ) {
-			displayToast("bg-danger", "Error", 'No ChatGPT key configured! Enter a valid key in the plugin settings page.');
+			displayToast("danger", "Error", 'No ChatGPT key configured! Enter a valid key in the plugin settings page.');
 			return;
 		}
 
@@ -201,7 +201,7 @@ function aiAssistantSendQuery()  {
 					message += name +":" + data.error[name] + "\n";
 				}
 				//alert(message);
-				displayToast("bg-danger", "Error", message);
+				displayToast("danger", "Error", message);
 				return;
 			}
 			
@@ -222,7 +222,7 @@ function aiAssistantSendQuery()  {
 			//$("textarea", aiModal).val(reply);
 		}).catch(error => {
 			aiModal.querySelector(".spinner-border").style.display = 'none';
-			displayToast("bg-danger", "Error", error);
+			displayToast("danger", "Error", error);
 			console.log("something went wrong", error);
 		})
 }

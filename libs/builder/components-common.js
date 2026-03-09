@@ -89,13 +89,27 @@ Vvveb.Components.add("_base", {
         col:6,
         inputtype: TextInput
     },{
+        name: "Title",
+        key: "title",
+        htmlAttr: "title",
+        sort: base_sort++,
+        inline:false,
+        col:6,
+        inputtype: TextInput
+    },{
         name: "Class",
         key: "class",
         htmlAttr: "class",
         sort: base_sort++,
         inline:false,
-        col:6,
-        inputtype: TextInput
+        col:12,
+		inputtype: TagsInput,
+		data: {
+			allowFreeText:true,
+			//get all classes used on the page
+			data:[...[...document.querySelectorAll("[class]")].reduce((s, e) =>
+				(e.classList.forEach(c => s.add(c)), s), new Set())].sort(),
+		},
     }
    ]
 });    
@@ -328,11 +342,11 @@ Vvveb.Components.extend("_base", "_base", {
 			step:0.1
        },
 	},{
-        name: "Background Color",
+        name: "Background",
         key: "background-color",
         sort: base_sort++,
 		section: style_section,
-        col:6,
+        col:12,
 		inline:true,
 		htmlAttr: "style",
         inputtype: ColorInput,
@@ -341,7 +355,7 @@ Vvveb.Components.extend("_base", "_base", {
         key: "color",
         sort: base_sort++,
 		section: style_section,
-        col:6,
+        col:12,
 		inline:true,
 		htmlAttr: "style",
         inputtype: ColorInput,
@@ -530,7 +544,7 @@ let ComponentBaseTypography = {
         key: "text-decoration-color",
         sort: base_sort++,
 		section: style_section,
-        col:6,
+        col:12,
 		inline:true,
 		htmlAttr: "style",
         inputtype: ColorInput,
@@ -540,7 +554,7 @@ let ComponentBaseTypography = {
 		htmlAttr: "style",
         sort: base_sort++,
 		section: style_section,
-        col:6,
+        col:12,
 		inline:true,
         inputtype: SelectInput,
         data: {
@@ -920,7 +934,7 @@ Vvveb.Components.extend("_base", "_base", {
 		section: style_section,
 		htmlAttr: "style",
         col:6,
-		inline:true,
+		inline:false,
 		inputtype: SelectInput,
         data: {
 			options: [{
@@ -944,7 +958,7 @@ Vvveb.Components.extend("_base", "_base", {
 		section: style_section,
 		htmlAttr: "style",
         col:6,
-		inline:true,
+		inline:false,
 		inputtype: SelectInput,
         data: {
 			options: [{
@@ -1109,7 +1123,7 @@ Vvveb.Components.add("config/bootstrap", {
 					//index: i - 1,
 					columnNode: this,
 					col:(value.type == "font" || value.type == "dimensions") ? 12 : 6,
-					inline:(value.type == "font" || value.type == "dimensions") ? false : true,
+					inline:(value.type == "font" || value.type == "dimensions") ? false : false,
 					section: advanced_section,
 					inputtype: input,
 					data: data,

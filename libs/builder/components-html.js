@@ -64,8 +64,15 @@ Vvveb.Components.extend("_base", "html/heading", {
                 value: "6",
                 text: "Heading 6"
             }]
-       },
-    }]
+		}
+   	},{
+		name: "Text",
+		key: "innerHTML",
+		inline:false,
+		sort:3,
+		htmlAttr: "innerHTML",
+		inputtype: TextareaInput
+	}]
 });    
 
 
@@ -89,6 +96,12 @@ let linkComponentProperties = [
 		sort:3,
 		htmlAttr: "rel",
 		inputtype: LinkInput
+   	},{
+		name: "Text",
+		key: "innerHTML",
+		sort:3,
+		htmlAttr: "innerHTML",
+		inputtype: TextareaInput
 	}, {
 		name: "Target",
 		key: "target",
@@ -204,7 +217,7 @@ Vvveb.Components.extend("_base", "html/image", {
             className: "form-switch"
         },
 		setGroup: value => {
-			let group = document.querySelectorAll('.mb-3[data-group="link"]');
+			let group = document.querySelectorAll('.mb-2[data-group="link"]');
 			if (group.length) {
 				group.forEach(el => {
 					if (value) {	
@@ -240,7 +253,7 @@ Vvveb.Components.extend("_base", "html/image", {
 	)),
 	
     init(node) {
-		let group = document.querySelectorAll('.mb-3[data-group="link"]');
+		let group = document.querySelectorAll('.mb-2[data-group="link"]');
 		if (group.length) {
 			group.forEach(el => {
 				if (value) {	
@@ -854,8 +867,8 @@ Vvveb.Components.extend("_base", "html/button", {
 Vvveb.Components.extend("_base", "html/paragraph", {
     nodes: ["p"],
     name: "Paragraph",
-	image: "icons/paragraph.svg",
-	html: '<p>Lorem ipsum</p>',
+    image: "icons/paragraph.svg",
+    html: '<p>Lorem ipsum</p>',
     properties: [{
         name: "Text align",
         key: "p-text-align",
@@ -864,7 +877,7 @@ Vvveb.Components.extend("_base", "html/paragraph", {
         validValues: ["", "text-start", "text-center", "text-end"],
         inputtype: RadioButtonInput,
         data: {
-			extraclass:"btn-group-sm btn-group-fullwidth",
+            extraclass:"btn-group-sm btn-group-fullwidth",
             options: [{
                 value: "",
                 icon:"la la-times",
@@ -891,6 +904,13 @@ Vvveb.Components.extend("_base", "html/paragraph", {
                 checked:false,
             }],
         },
+	},{
+		name: "Text",
+		key: "innerHTML",
+		sort:3,
+		inline:false,
+		htmlAttr: "innerHTML",
+		inputtype: TextareaInput
 	}]
 });
 
@@ -911,6 +931,13 @@ Vvveb.Components.extend("_base", "html/blockquote", {
         htmlAttr: "cite",
         inputtype: TextInput,
     }]
+});
+
+Vvveb.Components.extend("_base", "html/list-item", {
+    nodes: ["li"],
+    name: "List item",
+	image: "icons/list.svg",
+	html: `<li>List item</li>`
 });
 
 Vvveb.Components.extend("_base", "html/list", {

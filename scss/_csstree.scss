@@ -83,14 +83,14 @@
 
 				&:hover
 				{
-					color:var(--bs-link-color);
+					//color:var(--bs-link-color);
 				}
 			}
 			
 			.file-actions {
 				display:none;
 				position:absolute;
-				background-color: var(--bs-body-bg);				
+				//background-color: var(--bs-body-bg);				
 				top:0px;
 				right:2px;
 				
@@ -143,9 +143,9 @@
 			
 			 + ol
 			{
-				background: url(../libs/builder/icons/arrow-right.svg) 5px .3rem no-repeat;
+				background: url(../libs/builder/icons/arrow-right.svg) 8px .8rem no-repeat;
 				background-size:12px 12px;
-				margin: -1.5rem 0 0 0rem;
+				margin: -1.9rem 0 0 0rem;
 				padding: 2rem 0 0 2rem;
 				height: 0;
 				
@@ -167,7 +167,7 @@
 
 		li input:checked + ol
 		{
-			background: url(../libs/builder/icons/arrow-down.svg) 5px .6rem no-repeat;
+			background: url(../libs/builder/icons/arrow-down.svg) 8px .7rem no-repeat;
 			background-size:12px 12px;
 			margin: -2.5em 0 0 0rem;
 			padding: 2rem 0 0 2.5rem;
@@ -182,11 +182,16 @@
 //dark mode support for svg images 
 [data-bs-theme="dark"] {
 	.tree > ol li.active label {
-		color: var(--bs-primary);
+		color: var(--bs-primary-border-subtle);
 	}
 	
 	.tree > ol li label {
 		filter:invert(93%) hue-rotate(180deg);
 		color: var(--bs-dark);
+	}
+	
+	.tree > ol li.file .file-actions .btn {
+		--bs-btn-color: var(--bs-primary-border-subtle);
+		--bs-btn-border-color: var(--bs-link-hover-color);
 	}
 }

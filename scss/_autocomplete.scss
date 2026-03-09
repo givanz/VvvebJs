@@ -1,0 +1,110 @@
+/* autocomplete */
+input.autocomplete-loading
+{
+	background-image:url(../libs/autocomplete/autocomplete.gif);
+	background-position: left center;
+	background-repeat:no-repeat;
+}
+
+ul.autocomplete ~ .btn-close {
+    position: absolute;
+    right: 1.5rem;
+    margin-top: -1.5rem;
+	display:none;
+}
+
+
+.autocomplete-open ~ button.btn-close {
+    display: block;
+}
+
+ul.autocomplete 
+{
+    position: absolute;
+    overflow: hidden;
+    background-color: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+	border-top:none;
+	margin-top: -1px;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    color: var(--bs-body-color);
+	display:none;
+	z-index:1000;
+}
+ul.autocomplete li 
+{
+  display: block; 
+  padding: 0.3em; 
+  overflow: hidden;
+  width: 100%;
+  cursor:pointer;
+  
+  &:hover {
+	  background-color: var(--bs-primary);
+	  color: var(--bs-body-bg);
+  }
+}
+
+ul.autocomplete li.selected 
+{
+  background-color: Highlight ; 
+  background-color: var(--bs-primary); 
+  color: var(--bs-body-bg);
+  color: var(--bs-white);
+}
+
+
+input.autocomplete-list {
+	border-radius: 5px 5px 0px 0px;
+}
+
+div.autocomplete-list {
+
+    //box-shadow: -1px 1px 2px 1px rgba(var(--bs-body-color-rgb), 0.07) inset;
+    //background: #fafafa;
+    border-radius: 0px 0px 5px 5px;
+    overflow:auto;
+    min-height:150px;
+    height:150px;
+	resize: vertical;
+
+}
+.autocomplete-list > div:nth-child(2n) {
+    //background: var(--bs-border-color);
+}
+.autocomplete-list > div {
+	padding: 0.3rem 0.3rem 0.3rem 1rem;
+	border-bottom:1px dashed var(--bs-border-color);
+	display:flex;
+	justify-content: space-between;	
+	align-items: center;
+	
+	.btn-close {
+		vertical-align:middle;
+		margin: 0.5rem;
+	}
+}
+
+.tags-input {
+	.tag {
+		display:inline-block;
+		font-size:0.75rem;
+		padding:0 0.3rem;
+		border:1px solid var(--bs-primary-bg-subtle);
+		background-color: var(--bs-primary-bg-subtle);
+		background-color: rgba(var(--bs-primary-rgb), 0.10);
+		color: var(--bs-primary-text-emphasis);
+		border-radius: 4px;
+		margin:0.2rem;		
+		
+		.remove-btn {
+			color:var(--bs-link-color);
+		}
+	}
+	
+	input.form-control {
+		box-shadow: none;
+	}
+}
