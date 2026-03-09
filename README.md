@@ -72,6 +72,12 @@ Clone the repository or download a release then open `editor.html`
 
 Because of browser iframe security you need to use a webserver such as apache/xampp and open `http://localhost/editor.html`
 
+To disable browser security and open `editor.html` without installing a webserver run chrome with
+
+```bash
+chrome --disable-web-security --user-data-dir=/tmp/temporary_profile editor.html
+```
+
 To use the image upload or page save feature you need to have php installed.
 
 
