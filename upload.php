@@ -22,7 +22,7 @@ This script is used by image upload input to save the image on the server and re
 */ 
 
 $uploadDenyExtensions  = ['php'];
-$uploadAllowExtensions = ['ico','jpg','jpeg','png','gif','webp','svg'];
+$uploadAllowExtensions = ['ico','jpg','jpeg','png','gif','webp'];
 
 function showError($error) {
 	header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
