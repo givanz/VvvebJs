@@ -2168,7 +2168,7 @@ Vvveb.Builder = {
 
 	getHtml: function(keepHelperAttributes = true, filter = true) {
 		let doc = window.FrameDocument;
-		let hasDoctpe = (doc.doctype !== null);
+		let hasDoctpe = (doc.doctype != null);
 		let html = "";
 		
 		doc.querySelectorAll("[contenteditable]").forEach(e => e.removeAttribute("contenteditable"));
