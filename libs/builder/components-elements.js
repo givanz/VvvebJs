@@ -1212,6 +1212,11 @@ function carouselAfterDrop(node) {
 					}
 					params[i] = param;
 				}
+                if (window.self !== window.top){//is editor (maybe a better test, as could have iframe on front end too)
+                        params.simulateTouch = false;//quick fix for swiper blocking propogation of events to vvvebs, disable swipe, nav buttons still work
+                 }else{
+                        if(params.autoplay == 'true')params.autoplay = {'delay':params.delay};//autoplay in front end only for usability
+                 }
 				swiper.push(new Swiper(el, params))
 				//swiper.push(new Swiper(el, { ...{autoplay:{delay: 500}}, ...el.dataset}))		
 			});
