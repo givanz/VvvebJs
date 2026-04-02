@@ -5,7 +5,7 @@ function ucFirst(str) {
 }
 
 if (typeof mediaScanUrl === "undefined") {
-	var mediaPath = "/media/";
+	var mediaPath = "/media";
 	var mediaScanUrl = "scan.php";
 	var uploadUrl = "upload.php";
 }
