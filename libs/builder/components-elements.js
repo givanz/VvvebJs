@@ -1297,7 +1297,21 @@ Vvveb.Components.add("elements/carousel", {
 				if (event.action == "add") {
 					let random = Math.floor(Math.random() * 6) + 1;
 					let index = element.swiper.slides.length + 1;
-					element.swiper.appendSlide(generateElements(`<div class="swiper-slide"><img src="../../media/posts/${random}.jpg" class="img-fluid"><p>Slide ${index}</p></div>`)[0]);
+					//add/blank slide html should mirror that in the initial loadout in sections.js
+					element.swiper.appendSlide(generateElements(
+					`<div class="swiper-slide">
+						<img src="${Vvveb.themeBaseUrl}../../media/${random}.jpg" class="img-fluid">
+						<div class="content">
+							<div class="container">
+								<div>
+									<div class="row align-items-center justify-content-center text-start">
+										<p>Slide ${index}</p>
+									</div>
+								</div>
+							</div>
+						 </div>
+					</div>`
+					)[0]);
 					element.swiper.slideTo(index);
 					//temporary solution to better update list
 					Vvveb.Components.render("elements/carousel");
