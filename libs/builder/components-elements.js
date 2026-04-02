@@ -1212,8 +1212,8 @@ function carouselAfterDrop(node) {
 					}
 					params[i] = param;
 				}
+                if(params.autoplay == 'true')params.autoplay = {'delay':params.delay};
 				swiper.push(new Swiper(el, params))
-				//swiper.push(new Swiper(el, { ...{autoplay:{delay: 500}}, ...el.dataset}))		
 			});
 		}
 
@@ -1336,7 +1336,7 @@ Vvveb.Components.add("elements/carousel", {
 		htmlAttr:"data-speed",
 		data: {step:100},
 	},{
-		name: "Delay",
+		name: "Autoplay Delay",
         key: "delay",
         inputtype: NumberInput,
 		htmlAttr:"data-delay",
