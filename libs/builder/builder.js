@@ -2898,6 +2898,8 @@ Vvveb.Gui = {
 		treeList.classList.toggle("d-none");
 		if (!treeList.offsetParent) {
 			document.getElementById("toggle-tree-list").classList.remove("active");
+		}else{
+			Vvveb.TreeList.loadComponents();
 		}
 	},
 
