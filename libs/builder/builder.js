@@ -2240,6 +2240,11 @@ Vvveb.Builder = {
 	},
 
 	saveElement: function(element, type, name, callback) {
+		
+		if(Vvveb.Sections.get('reusable/'+ name) || Vvveb.Blocks.get('reusable/'+ name)){
+			displayToast("bg-danger", "Error", "Reusable name already exists");
+		}
+		
 		if (type == 'section') {
 			Vvveb.Sections.add('reusable/'+ name, {
 				name,
