@@ -1259,6 +1259,21 @@ Vvveb.Components.add("elements/carousel", {
 		<!-- <div class="swiper-scrollbar"></div> -->
 	  </div>	
 	`,
+	
+	beforeInit(node) {
+		if (node.dataset.breakpoints) {
+			breakpoints = JSON.parse(node.dataset.breakpoints);
+			
+			for (let prop of this.properties) {
+				if (prop.breakpoint && breakpoints[prop.breakpoint] && breakpoints[prop.breakpoint][prop.breakname]) {
+					prop.defaultValue = breakpoints[prop.breakpoint][prop.breakname];
+				}
+			}
+		} 
+
+		return node;
+	},
+	
 	afterDrop: carouselAfterDrop,
 	
     onChange: function (node, property, value) {
@@ -1267,9 +1282,46 @@ Vvveb.Components.add("elements/carousel", {
 			value = {"waitForTransition":true,"enabled":value,"delay":element.dataset.delay};
 		}
 
+		if (value == 'true') value= true;
+		if (value == 'false') value = false;
+
+		/*
 		element.swiper.params[property.key] = value;
 		element.swiper.originalParams[property.key] = value;
-		element.swiper.update();
+
+		if (property.key == 'effect') {
+			//Vvveb.Builder.iframe.contentWindow.cleanSwiper(element);
+			element.swiper.destroy();
+			Vvveb.Builder.iframe.contentWindow.initSwiper(true);
+		} else {
+			element.swiper.update();
+		}
+		*/
+		
+		if (property.group == "breakpoints") {
+				let breakpoints;
+				if (node.dataset.breakpoints) {
+					breakpoints = JSON.parse(node.dataset.breakpoints);
+				} else {
+					breakpoints = {};
+				}
+				
+				property.breakpoint = parseInt(property.breakpoint);
+				
+				if (!breakpoints[property.breakpoint]) {
+					breakpoints[property.breakpoint] = {};
+				}
+				
+				breakpoints[property.breakpoint][property.breakname] = parseInt(value);
+				
+				node.dataset.breakpoints = JSON.stringify(breakpoints);
+			
+			
+		}
+		
+		element.swiper.destroy();
+		Vvveb.Builder.iframe.contentWindow.initSwiper(true);
+
 		return node;
 	},
 
@@ -1342,85 +1394,112 @@ Vvveb.Components.add("elements/carousel", {
 		htmlAttr:"data-delay",
 		data: {step:100},
     },{
-		key: "carousel_options",
+        name: "Effect",
+        key: "effect",
+        inputtype: SelectInput,
+        htmlAttr:"data-effect",
+      
+        data:{
+            options: [{
+                value: "",
+                text: "None"
+            }, {
+                value: "fade",
+                text: "Fade"
+            }, {
+                value: "flip",
+                text: "Flip"
+            }, {
+                value: "cube",
+                text: "Cube"
+            }, {
+                value: "cards",
+                text: "Cards"
+            }, {
+                value: "creative",
+                text: "Creative"
+            }]
+	}
+    },{
+	key: "carousel_options",
         inputtype: SectionInput,
         name:false,
         data: {header:"Options"},
     },{	
-		name: "Simulate touch",
+	name: "Simulate touch",
         key: "simulateTouch",
-		htmlAttr:"data-simulate-touch",
-		inputtype: CheckboxInput,
-		inline:true,
+	htmlAttr:"data-simulate-touch",
+	inputtype: CheckboxInput,
+	inline:true,
         col:6
     },{	
-		name: "Autoplay",
+	name: "Autoplay",
         key: "autoplay",
-		htmlAttr:"data-autoplay",
-		inputtype: CheckboxInput,
-		inline:true,
+	htmlAttr:"data-autoplay",
+	inputtype: CheckboxInput,
+	inline:true,
         col:6
-	},{
-		name: "Auto height",
+    },{
+	name: "Auto height",
         key: "autoHeight",
-		htmlAttr:"data-auto-height",
-		inputtype: CheckboxInput,
-		inline:true,
+	htmlAttr:"data-auto-height",
+	inputtype: CheckboxInput,
+	inline:true,
         col:6
-	},{
-		name: "Centered slides",
+    },{
+	name: "Centered slides",
         key: "centeredSlides",
-		htmlAttr:"data-centered-slides",
-		inputtype: CheckboxInput,
-		inline:true,
+	htmlAttr:"data-centered-slides",
+	inputtype: CheckboxInput,
+	inline:true,
         col:6
-	},{	name: "Center insufficient",
+    },{	name: "Center insufficient",
         key: "centerInsufficientSlides",
-		htmlAttr:"data-center-insufficient-slides",
-		inputtype: CheckboxInput,
-		inline:true,
+	htmlAttr:"data-center-insufficient-slides",
+	inputtype: CheckboxInput,
+	inline:true,
         col:6
-	},{	name: "Loop",
+    },{	name: "Loop",
         key: "loop",
-		htmlAttr:"data-loop",
-		inputtype: CheckboxInput,
-		inline:true,
+	htmlAttr:"data-loop",
+	inputtype: CheckboxInput,
+	inline:true,
         col:6
-	},{	name: "Mouse wheel",
+    },{	name: "Mouse wheel",
         key: "mousewheel",
-		htmlAttr:"data-mousewheel",
-		inputtype: CheckboxInput,
-		inline:true,
+	htmlAttr:"data-mousewheel",
+	inputtype: CheckboxInput,
+	inline:true,
         col:6
-	},{	
+    },{	
         name: "Pagination",
         key: "pagination",
-		htmlAttr:"data-pagination",
-		inputtype: CheckboxInput,
-		inline:true,
+	htmlAttr:"data-pagination",
+	inputtype: CheckboxInput,
+	inline:true,
         col:6
-	},{	name: "Rewind",
+    },{	name: "Rewind",
         key: "rewind",
-		htmlAttr:"data-rewind",
-		inputtype: CheckboxInput,
-		inline:true,
+	htmlAttr:"data-rewind",
+	inputtype: CheckboxInput,
+	inline:true,
         col:6
-	},{	name: "Scrollbar",
+    },{	name: "Scrollbar",
         key: "scrollbar",
-		htmlAttr:"data-scrollbar",
-		inputtype: CheckboxInput,
-		inline:true,
+	htmlAttr:"data-scrollbar",
+	inputtype: CheckboxInput,
+	inline:true,
         col:6
-	},/*{
+    },{
         name: "direction",
         key: "direction",
-		htmlAttr:"data-direction",
-		section: style_section,
+	htmlAttr:"data-direction",
+	section: style_section,
         col:6,
         inline:false,
         inputtype: RadioButtonInput,
         data: {
-			extraclass:"btn-group-sm btn-group-fullwidth",
+            extraclass:"btn-group-sm btn-group-fullwidth",
             options: [{
                 value: "horizontal",
                 icon:"la la-arrow-down",
@@ -1431,9 +1510,84 @@ Vvveb.Components.add("elements/carousel", {
                 title: "Vertical",
                 icon:"la la-arrow-right",
                 checked:false,
-			}],
-		}
-    }*/]
+            }],
+	}
+    },{
+        key: "breakpoint_options",
+        inputtype: SectionInput,
+        name:false,
+        data: {header:"Breakpoints"},
+    },{
+        name: "Slides mobile",
+        group: "breakpoints",
+        key: "sm.view",
+        breakpoint: "320",
+        breakname: "slidesPerView",
+        inputtype: NumberInput,
+    },{
+        name: "Space mobile",
+        group: "breakpoints",
+        key: "sm.space",
+        breakpoint: "320",
+        breakname: "spaceBetween",
+        inputtype: NumberInput,
+    },{
+        name: "Slides tablet",
+        group: "breakpoints",
+        key: "md.view",
+        breakpoint: "480",
+        breakname: "slidesPerView",
+        inputtype: NumberInput,
+    },{
+        name: "Space tablet",
+        group: "breakpoints",
+        key: "md.space",
+        breakpoint: "480",
+        breakname: "spaceBetween",
+        inputtype: NumberInput,
+    },{
+        name: "Slides landscape",
+        group: "breakpoints",
+        key: "lg.view",
+        breakpoint: "768",
+        breakname: "slidesPerView",
+        inputtype: NumberInput,
+    },{
+        name: "Space landscape",
+        group: "breakpoints",
+        key: "lg.space",
+        breakpoint: "768",
+        breakname: "spaceBetween",
+        inputtype: NumberInput,
+    },{
+        name: "Slides laptop",
+        group: "breakpoints",
+        key: "xl.view",
+        breakpoint: "1024",
+        breakname: "slidesPerView",
+        inputtype: NumberInput,
+    },{
+        name: "Space laptop",
+        group: "breakpoints",
+        key: "xl.space",
+        breakpoint: "1024",
+        breakname: "spaceBetween",
+        inputtype: NumberInput,
+    },{
+        name: "Slides desktop",
+        group: "breakpoints",
+        key: "xxl.view",
+        breakpoint: "1200",
+        breakname: "slidesPerView",
+        inputtype: NumberInput,
+    },{
+        name: "Space desktop",
+        group: "breakpoints",
+        key: "xxl.space",
+        breakpoint: "1200",
+        breakname: "spaceBetween",
+        inputtype: NumberInput,
+    }]
 });
 
 //Slider
