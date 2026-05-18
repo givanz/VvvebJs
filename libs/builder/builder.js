@@ -1991,16 +1991,24 @@ Vvveb.Builder = {
 				}
 			}
 			
-			if (after) {
-				element.after(node);
+			if (element) {
+				if (after) {
+					element.after(node);
+				} else {
+					element.append(node);
+				}
 			} else {
-				element.append(node);
+				let newsection = Vvveb.Builder.frameBody.querySelector('newsection')
+				if (newsection) {
+					newsection.before(node);
+				} else {
+					Vvveb.Builder.frameBody.append(node);
+				}
 			}
 			
 			if (component.afterDrop) {
 				node = component.afterDrop(node);
 			}
-			
 
 			self.selectNode(node);
 			self.loadNodeComponent(node);
@@ -2696,6 +2704,9 @@ Vvveb.Gui = {
 			breakpoint = null;
 		}
 		
+		Vvveb.Builder.documentFrame.style.width = "";
+		Vvveb.Builder.documentFrame.style.height = "";
+		
 		if (breakpoint) {
 			document.getElementById("canvas").classList.add("responsive");
 			document.getElementById("iframe-wrapper").style.width = Vvveb.StyleManager.breakpoints[breakpoint].replace(".98", "");
@@ -2912,13 +2923,27 @@ Vvveb.Gui = {
 			treeList.style.width = "";
 			btnIcon.className = "icon-stop-outline";
 		} else {
-			treeList.style.height = "100vh";
-			treeList.style.height = "calc(100vh - 35px)";
+			treeList.style.height = "100%";
 			treeList.style.right = "0";
-			treeList.style.top = "35px";
+			treeList.style.top = "0";
 			treeList.style.left = "auto";
 			treeList.style.width = "300px";
 			btnIcon.className = "icon-remove-outline";
+		}
+	},
+
+	treeListPanel: function () {
+		let treeList = document.getElementById("tree-list");
+		let canvas = document.getElementById("canvas");
+		let filemanager = document.getElementById("filemanager");
+		let btnIcon = document.querySelector("[data-vvveb-action='treeListPanel'] i");
+		
+		if (treeList.parentNode == canvas) {
+			filemanager.after(treeList);
+			btnIcon.className = "icon-chevron-forward-outline";
+		} else {
+			canvas.append(treeList);
+			btnIcon.className = "icon-chevron-back-outline";
 		}
 	},
 
@@ -3536,11 +3561,17 @@ Vvveb.SectionList = {
 							Vvveb.Builder.frameBody.append(node);
 						}
 					} else {
-						Vvveb.Builder.frameBody.append(node);
+						let newsection = Vvveb.Builder.frameBody.querySelector('newsection')
+						if (newsection) {
+							newsection.before(node);
+						} else {
+							Vvveb.Builder.frameBody.append(node);
+						}
 					}
 				}
 				
 				//node.click();
+
 				Vvveb.Builder.selectNode(node);
 				Vvveb.Builder.loadNodeComponent(node);
 				/*
@@ -4526,10 +4557,14 @@ Vvveb.NewSection = {
 		}
 		
 		this.container = generateElements(this.template)[0];
-		if (position == 'after') {
-			lastSection.after(this.container);
+		if (lastSection) {
+			if (position == 'after') {
+				lastSection.after(this.container);
+			} else {
+				lastSection.before(this.container);
+			}
 		} else {
-			lastSection.before(this.container);
+			Vvveb.Builder.frameBody.append(this.container)
 		}
 		
 		return this.container;

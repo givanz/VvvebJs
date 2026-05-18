@@ -100,11 +100,11 @@
 
 					<button class="btn btn-light btn-dark-mode" data-vvveb-action="darkMode">
 						<!-- i class="la la-adjust la-lg"></i -->
-						<i class="la la-sun fs-6"></i>
+						<i class="la la-sun"></i>
 					</button>
 
 					<a href="#" class="btn btn-light px-1 btn-preview-url" target="_blank" title="View page">
-						<i class="la la-external-link-alt fs-6"></i>
+						<i class="la la-external-link-alt"></i>
 					</a>
 
 					<div class="btn-group responsive-btns" role="group">
@@ -116,31 +116,31 @@
 
 						<div class="dropdown-menu">
 
-							<button id="mobile-view" data-view="sm" class="btn btn-light w-100" title="Mobile view"
+							<button id="mobile-view" data-view="sm" class="btn btn-light w-100" title="Mobile"
 								data-vvveb-action="viewport">
 								<i class="la la-mobile"></i>
 								<span>Mobile view</span>
 							</button>
 
-							<button id="tablet-view" data-view="md" class="btn btn-light w-100" title="Tablet view"
+							<button id="tablet-view" data-view="md" class="btn btn-light w-100" title="Tablet"
 								data-vvveb-action="viewport">
 								<i class="la la-tablet la-rotate-90"></i>
 								<span>Tablet view</span>
 							</button>
 
 							<button id="tablet-landscape-view" data-view="lg" class="btn btn-light w-100"
-								title="Tablet landscape view" data-vvveb-action="viewport">
+								title="Tablet landscape" data-vvveb-action="viewport">
 								<i class="la la-tablet"></i>
 								<span>Tablet landscape view</span>
 							</button>
 
-							<button id="laptop-view" data-view="xl" class="btn btn-light w-100" title="Laptop view"
+							<button id="laptop-view" data-view="xl" class="btn btn-light w-100" title="Laptop"
 								data-vvveb-action="viewport">
 								<i class="la la-laptop"></i>
 								<span>Laptop view</span>
 							</button>
 
-							<button id="desktop-view" data-view="xxl" class="btn btn-light w-100" title="Desktop view"
+							<button id="desktop-view" data-view="xxl" class="btn btn-light w-100" title="Desktop"
 								data-vvveb-action="viewport">
 								<i class="la la-desktop"></i>
 								<span>Desktop view</span>
@@ -191,25 +191,21 @@
 			<div>
 				<div id="filemanager">
 					<div class="header">
-						<span class="text-muted lh-lg">
-							<span>Pages</span>
-						</span>
+						<div class="search">
+						  <input class="form-control h-100" placeholder="Pages" type="search" data-vvveb-action="searchPages" data-vvveb-on="input">
+						</div>
+						
+						<div class="btns" role="group">			 
 
-						<div class="float-end" role="group">
-
-							<button class="btn btn-outline-primary btn-sm btn-icon btn-add"
-								title="New page (Ctrl + Shift + P)" id="new-file-btn" data-vvveb-action="newPage"
-								data-vvveb-shortcut="">
-								<span>Add page</span>
-								<i class="icon-add"></i>
-							</button>
-
-							<button class="btn btn-primary btn-sm btn-icon btn-add"
-								title="New section (Ctrl + Shift + S)" id="new-section" data-vvveb-action="newSection"
-								data-vvveb-shortcut="">
-
-								<i class="icon-add"></i>
-							</button>
+						  <button class="btn btn-outline-secondary btn-sm btn-icon btn-add" title="New page (Ctrl + Shift + P)" id="new-file-btn" data-vvveb-action="newPage" data-vvveb-shortcut="">
+							   <span>Add page</span>
+							   <i class="icon-add"></i>
+						  </button>
+						  
+						  <button class="btn btn-outline-primary btn-sm btn-icon btn-add" title="New section (Ctrl + Shift + S)" id="new-section" data-vvveb-action="newSection" data-vvveb-shortcut="">
+							  
+							   <i class="icon-add"></i>
+						  </button>	
 
 							<!--  
 									  <button class="btn btn-link text-dark p-0"  title="Delete file" id="delete-file-btn" data-vvveb-action="deletePage" data-vvveb-shortcut="">
@@ -1075,6 +1071,9 @@
 					<span>
 						<button class="btn btn-sm" data-vvveb-action="treeListRight" aria-pressed="true">
 							<i class="icon-stop-outline"></i>
+						</button>			
+						<button class="btn btn-sm" data-vvveb-action="treeListPanel" aria-pressed="true">
+							<i class="icon-chevron-back-outline"></i>
 						</button>
 						<button class="btn btn-sm" data-vvveb-action="toggleTreeList" aria-pressed="true">
 							<i class="icon-close"></i>
@@ -1218,7 +1217,7 @@
 					</div>
 
 
-					<button id="code-editor-btn" data-view="mobile" class="btn btn-sm btn-outline-secondary border-0"
+					<button id="code-editor-btn" data-view="mobile" class="btn btn-xs btn-outline-secondary border-0"
 						title="Code editor (Ctrl + E)" data-vvveb-action="toggleEditor">
 						<i class="la la-code"></i> Code editor
 					</button>
@@ -1600,7 +1599,7 @@
 		{% if (typeof hide_remove === 'undefined') { %}
 		<div class="col-12">
 		
-			<button class="btn btn-sm btn-outline-light text-danger">
+			<button class="btn btn-sm btn-outline-secondary text-danger">
 				<i class="la la-trash la-lg"></i> Remove
 			</button>
 			
@@ -1627,7 +1626,7 @@
 		{% if (typeof hide_remove === 'undefined') { %}
 		<div class="col-12">
 		
-			<button class="btn btn-sm btn-outline-light text-danger">
+			<button class="btn btn-sm btn-outline-secondary text-danger">
 				<i class="la la-trash la-lg"></i> Remove
 			</button>
 			
@@ -1682,7 +1681,7 @@
 	<div>
 		<video id="thumb-v{%=key%}" class="img-thumbnail p-0" data-target-input="#input-v{%=key%}" data-target-thumb="#thumb-v{%=key%}" style="cursor:pointer" src="" width="225" height="225" playsinline loop muted controls></video>
 		<input name="v{%=key%}" type="text" class="form-control mt-1" id="input-v{%=key%}"/>
-		<button name="button" class="btn btn-secondary btn-sm btn-icon mt-2 w-100" data-target-input="#vinput-v{%=key%}" data-target-thumb="#thumb-v{%=key%}"><i class="la la-video la-lg"></i><span>Set video</span></button>
+		<button name="button" class="btn btn-secondary btn-sm btn-icon mt-2 w-100" data-target-input="#input-v{%=key%}" data-target-thumb="#thumb-v{%=key%}"><i class="la la-video la-lg"></i><span>Set video</span></button>
 	</div>
 	
 </script>
@@ -1735,7 +1734,7 @@
 
 <script id="vvveb-input-button" type="text/html">
 	<div>
-		<button class="btn btn-sm {% if (typeof className !== 'undefined') { %} {%=className%} {% } else { %}btn-outline-primary{% } %}">
+		<button class="btn btn-sm btn-icon {% if (typeof className !== 'undefined') { %} {%=className%} {% } else { %}btn-outline-primary{% } %}">
 			<i class="la  {% if (typeof icon !== 'undefined') { %} {%=icon%} {% } else { %} la-plus {% } %} la-lg"></i> {%=text%}
 		</button>
 	</div>		
