@@ -925,6 +925,41 @@ Vvveb.Components.extend("_base", "html/blockquote", {
 				</cite>	
 			</blockquote>`,
     properties: [{
+        name: "Align",
+        key: "align",
+        htmlAttr: "class",
+        inline:false,
+        validValues: ["", "align-left", "align-center", "align-right"],
+        inputtype: RadioButtonInput,
+        data: {
+            extraclass:"btn-group-sm btn-group-fullwidth",
+            options: [{
+                value: "",
+                icon:"la la-times",
+                //text: "None",
+                title: "None",
+                checked:true,
+            }, {
+                value: "align-left",
+                //text: "Left",
+                title: "text-start",
+                icon:"la la-align-left",
+                checked:false,
+            }, {
+                value: "align-center",
+                //text: "Center",
+                title: "Center",
+                icon:"la la-align-center",
+                checked:false,
+            }, {
+                value: "align-right",
+                //text: "Right",
+                title: "Right",
+                icon:"la la-align-right",
+                checked:false,
+            }],
+        },
+	}, {
         name: "Cite",
         key: "cite",
         inline:false,
