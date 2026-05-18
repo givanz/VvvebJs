@@ -17,6 +17,7 @@ https://github.com/givanz/VvvebJs
 */
 
 let bgVideoTemplate = '<video playsinline loop muted autoplay src="../../media/sample.webm" poster="../../media/sample.webp"><video>';
+let bgYoutubeTemplate = '<div class="iframe-container"><iframe src="https://www.youtube.com/embed/C6fOoy7Se_4?autoplay=1&loop=1&playsinline=1&controls=0&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe></div>';
 let bgImageTemplate = '<img src="../../media/4.jpg">';
 let defaultSeparatorSvg = '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 41" width="100%" height="300" fill="var(--bs-body-bg)" preserveAspectRatio="none"><defs><style>.cls-1{fill:inherit}</style></defs><title>rough-edges-bottom</title><path class="cls-1" d="M0,185l125-26,33,17,58-12s54,19,55,19,50-11,50-11l56,6,60-8,63,15v15H0Z" transform="translate(0 -159)"/></svg>';
 
@@ -110,7 +111,12 @@ let SectionBackground = [{
                 value: "bg-video",
                 icon:"la la-video",
                 text: "Video",
-                title: "Video",/*
+                title: "Video",
+            },{
+                value: "bg-yt",
+                icon:"lab la-youtube",
+                text: "Youtube",
+                title: "Youtube",/*
             },{
                 value: "slideshow",
                 icon:"la la-arrows-alt-h",
@@ -119,7 +125,7 @@ let SectionBackground = [{
             }],
         },
 		hideGroups : function() {
-			document.querySelectorAll('.mb-2[data-group="bg-image"],.mb-2[data-group="bg-video"]').forEach(e => e.classList.add("d-none"));
+			document.querySelectorAll('.mb-2[data-group="bg-image"],.mb-2[data-group="bg-video"],.mb-2[data-group="bg-yt"]').forEach(e => e.classList.add("d-none"));
 		},
 		
 		onChange : function(node, value, input) {
@@ -136,6 +142,7 @@ let SectionBackground = [{
 			
 			let img = node.querySelector(":scope > .background-container > img");
 			let video = node.querySelector(":scope > .background-container > video");
+			let yt = node.querySelector(":scope > .background-container > .iframe-container ");
 			
 			container.querySelectorAll(":scope > *").forEach((el, i) => {
 				el.classList.add("d-none");
@@ -160,6 +167,15 @@ let SectionBackground = [{
 						node.click();
 					}
 				break;
+				case "bg-yt":
+					if (yt) {
+						yt.classList.remove("d-none");
+					} else {
+						container.append(generateElements(bgYoutubeTemplate)[0]);
+						//reselect element to load video
+						node.click();
+					}
+				break;
 			}
 
 
@@ -169,13 +185,18 @@ let SectionBackground = [{
 			let selected = "none";
 			let img   = node.querySelector(":scope > .background-container > img");
 			let video = node.querySelector(":scope > .background-container > video");
+			let yt = node.querySelector(":scope > .background-container > .iframe-container ");
 			
 			if (img && (img.offsetParent || img.offsetHeight || !img.classList.contains("d-none"))) {
 				selected = "bg-image";
 			}
 			
-			if (video && (img.offsetParent || video.offsetHeight || !video.classList.contains("d-none"))) {
+			if (video && (video.offsetParent || video.offsetHeight || !video.classList.contains("d-none"))) {
 				selected = "bg-video";
+			}
+			
+			if (yt && (yt.offsetParent || yt.offsetHeight || !yt.classList.contains("d-none"))) {
+				selected = "bg-yt";
 			}
 			
 			this.hideGroups();
@@ -209,7 +230,21 @@ let SectionBackground = [{
 		group:"bg-video",
 		inline:true,
         inputtype: ImageInput
-     }, {   
+    },{
+        name: "Video",
+        key: "src",
+        sort: section_sort++,
+        htmlAttr: "src",
+		child:":scope > .background-container > .iframe-container > iframe",
+		group:"bg-yt",
+		inline:true,
+        inputtype: TextInput,
+        onChange: function(node, value) {
+			return value.replace("watch?v=", "embed/") + "?autoplay=1&loop=1&playsinline=1&controls=0&mute=1";
+
+			return node;
+		},
+    },{
         name: "Parallax",
         key: "parallax",
         sort: section_sort++,
@@ -618,6 +653,7 @@ function componentsInit(node) {
 
 		let img = node.querySelector(":scope > .background-container img");
 		let video = node.querySelector(":scope > .background-container video");
+		let yt = node.querySelector(":scope > .background-container .iframe-container");
 		let overlay = node.querySelector(":scope > .overlay");
 		let separatorTop = node.querySelector(":scope > .separator.top");
 		let separatorBottom = node.querySelector(":scope > .separator.bottom");
@@ -627,8 +663,12 @@ function componentsInit(node) {
 			bg = "bg-image";
 		}
 		
-		if (video && (img.offsetParent || video.offsetHeight || !video.classList.contains("d-none"))) {
+		if (video && (video.offsetParent || video.offsetHeight || !video.classList.contains("d-none"))) {
 			bg = "bg-video";
+		}	
+		
+		if (yt && (yt.offsetParent || yt.offsetHeight || !yt.classList.contains("d-none"))) {
+			bg = "bg-yt";
 		}	
 	
 		let showSection = function (section) {
