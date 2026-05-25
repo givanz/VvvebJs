@@ -1207,7 +1207,7 @@ function carouselAfterDrop(node) {
 				};
 				for (i in el.dataset) {
 					let param = el.dataset[i];
-					if (param[0] = '{') {
+					if (param[0] == '{') {
 						param = JSON.parse(param);
 					}
 					params[i] = param;
@@ -1220,7 +1220,7 @@ function carouselAfterDrop(node) {
 		if (document.readyState !== 'loading') {
 			initSwiper();
 		  } else {
-			document.addEventListener('DOMContentLoaded', initSwiper);
+			document.addEventListener('DOMContentLoaded', () => initSwiper());
 		  }`;			
 		
 		body.appendChild(link);
