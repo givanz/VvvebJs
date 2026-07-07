@@ -878,7 +878,7 @@ let ListInput = { ...Input, ...{
 			if (data.nameElement) {
 				element = element.querySelector(data.nameElement);
 			}
-			let name = (data.name = "text" ? element.textContent.substr(0, 15) : element.id);
+			let name = (data.name == "text" ? element.textContent.substr(0, 15) : element.id);
 			options.push({
 				name: name,
 				type: (data.prefix ?? "") + (i + 1) + (data.suffix ?? ""),
