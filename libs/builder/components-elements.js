@@ -1361,6 +1361,16 @@ Vvveb.Components.add("elements/carousel", {
 					element.swiper.removeSlide(event.index);
 				} else if (event.action == "select") {
 					element.swiper.slideTo(event.index, 300, true);
+				}else if (event.action == "clone") {
+
+					let wrapper = element.swiper.wrapperEl;
+					let slides = [...wrapper.children];
+					let sourceSlide = slides[event.index];
+					let clone = sourceSlide.cloneNode(true);
+					
+					wrapper.insertBefore(clone, sourceSlide.nextSibling);
+					
+					Vvveb.Components.render("elements/carousel");
 				}
 			}
 			

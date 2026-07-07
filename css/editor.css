@@ -19353,6 +19353,7 @@ li[data-type] {
           .sections-container > div.section-item .controls .buttons a:hover {
             background-color: rgba(18, 83, 205, 0.1);
             text-decoration: none; }
+/*
         .sections-container > div.section-item .controls .buttons .delete-btn,
         .sections-container > div.section-item .controls .buttons .up-btn,
         .sections-container > div.section-item .controls .buttons .down-btn {
@@ -19361,6 +19362,7 @@ li[data-type] {
         .sections-container > div.section-item .controls .buttons:hover .up-btn,
         .sections-container > div.section-item .controls .buttons:hover .down-btn {
           visibility: visible; }
+*/
     .sections-container > div.section-item.drag-over {
       border: 2px dashed var(--bs-link-color);
       border-radius: 5px; }

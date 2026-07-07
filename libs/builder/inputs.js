@@ -811,6 +811,7 @@ let ListInput = { ...Input, ...{
         ["click", "remove", ".delete-btn"],
         ["click", "add", ".btn-new"],
         ["click", "select", ".section-item"],
+		["click", "clone", ".clone-btn"],
 	 ],
 	
 
@@ -848,7 +849,18 @@ let ListInput = { ...Input, ...{
 		event.action = "add";
 		input.onChange(event, node, input, this);
 		return false;
-	},	
+	},
+		
+	clone: function(event, node, input) {
+		let sectionItem = this.closest(".section-item");
+		let index = [...sectionItem.parentNode.children].indexOf(sectionItem);
+
+		event.action = "clone";
+		event.index = index;
+		input.onChange(event, node, input, this);
+		event.preventDefault();
+		return false;
+	},
 	
 	select: function(event, node, input) {
 		let sectionItem = this.closest(".section-item");
