@@ -1285,6 +1285,8 @@ Vvveb.Components.add("elements/carousel", {
 			value = {"waitForTransition":true,"enabled":value,"delay":element.dataset.delay};
 		}
 
+		if (property.key == "loop")value = false;//not compatible with builder due to dom rearrangement, live only
+
 		if (value == 'true') value= true;
 		if (value == 'false') value = false;
 
@@ -1368,7 +1370,11 @@ Vvveb.Components.add("elements/carousel", {
 				for (i in dataset) {
 					element.swiper.params[i] = dataset[i];
 					element.dataset[i] = dataset[i];
-				}; 
+				};
+				
+				element.swiper.params["loop"] = false;
+				element.dataset["loop"] = false;//not compatible with builder due to dom rearrangement, live only
+				
 				element.swiper.update(); 
 			}, 1000);
 			
@@ -1462,7 +1468,7 @@ Vvveb.Components.add("elements/carousel", {
 	inputtype: CheckboxInput,
 	inline:true,
         col:6
-    },{	name: "Loop",
+    },{	name: "Loop (live only)",
         key: "loop",
 	htmlAttr:"data-loop",
 	inputtype: CheckboxInput,
