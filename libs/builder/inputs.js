@@ -811,6 +811,11 @@ let ListInput = { ...Input, ...{
         ["click", "remove", ".delete-btn"],
         ["click", "add", ".btn-new"],
         ["click", "select", ".section-item"],
+        
+        ["dragstart", "dragStart", ".section-item"],
+        ["dragover", "dragOver", ".section-item"],
+        ["drop", "drop", ".section-item"],
+        ["dragend", "dragEnd", ".section-item"],
 	 ],
 	
 
@@ -863,6 +868,78 @@ let ListInput = { ...Input, ...{
 	},
 
 	setValue: function(value) {
+	},
+
+	dragStart: function(event, node, input) {
+		event.dataTransfer.effectAllowed = "move";
+		event.dataTransfer.setData("text/html", this.innerHTML);
+		
+		input._draggedElement = this;
+		input._draggedIndex = this.dataset.index || [...this.parentNode.children].indexOf(this);
+		this.classList.add("dragging");
+		
+		return false;
+	},
+
+	drop: function(event, node, input) {
+		event.preventDefault();
+		event.stopPropagation();
+		
+		const dragged = input._draggedElement;
+		const dropTarget = event.target.closest(".section-item");
+		
+		if (dragged && dropTarget && dragged !== dropTarget) {
+			const container = dropTarget.parentNode; // use actual parent, not a fresh query
+			
+			// Safety check: make sure dragged and dropTarget share the same parent
+			if (dragged.parentNode === container) {
+				const dropIndex = [...container.children].indexOf(dropTarget);
+				const draggedIndex = [...container.children].indexOf(dragged);
+				
+				if (dropIndex > draggedIndex) {
+					container.insertBefore(dragged, dropTarget.nextSibling);
+				} else {
+					container.insertBefore(dragged, dropTarget);
+				}
+				
+				event.action = "reorder";
+				event.oldIndex = input._draggedIndex;
+				event.newIndex = [...container.children].indexOf(dragged);
+				input.onChange(event, node, input, dragged);
+			}
+		}
+		
+		document.querySelectorAll(".section-item.drag-over").forEach(item => {
+			item.classList.remove("drag-over");
+		});
+		
+		return false;
+	},
+
+	dragOver: function(event, node, input) {
+		event.preventDefault();
+		event.dataTransfer.dropEffect = "move";
+		
+		const dragged = input._draggedElement;
+		const dropTarget = event.target.closest(".section-item");
+		
+		document.querySelectorAll(".section-item.drag-over").forEach(item => {
+			item.classList.remove("drag-over");
+		});
+		
+		if (dragged && dropTarget && dragged !== dropTarget) {
+			dropTarget.classList.add("drag-over");
+		}
+		return false;
+	},
+
+	dragEnd: function(event, node, input) {
+		this.classList.remove("dragging");
+		document.querySelectorAll(".section-item.drag-over").forEach(item => {
+			item.classList.remove("drag-over");
+		});
+		input._draggedElement = null;
+		return false;
 	},
 
 	init: function(data, node) {

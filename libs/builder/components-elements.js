@@ -1361,6 +1361,17 @@ Vvveb.Components.add("elements/carousel", {
 					element.swiper.removeSlide(event.index);
 				} else if (event.action == "select") {
 					element.swiper.slideTo(event.index, 300, true);
+				}else if (event.action == "reorder") {
+					let wrapper = element.swiper.wrapperEl;
+					let slides = [...wrapper.children];
+					let movedSlide = slides[event.oldIndex];
+
+					if (event.newIndex > event.oldIndex) {
+						wrapper.insertBefore(movedSlide, slides[event.newIndex].nextSibling);
+					} else {
+						wrapper.insertBefore(movedSlide, slides[event.newIndex]);
+					}
+
 				}
 			}
 			
