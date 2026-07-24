@@ -666,17 +666,19 @@ Vvveb.WysiwygEditor = {
 		let element = this.element;
 		let range;
 
+		let baseNode = (selection.baseNode === undefined && selection.anchorNode ? selection.anchorNode : selection.baseNode );//either may have the data
+
 		if (!tag) {
 			tag = "span";
 		}
 
 		if (selection.rangeCount > 0) {
 			//check if the whole text is inside an existing node to use the node directly
-			if ((selection.baseNode && selection.baseNode.nextSibling == null && selection.baseNode.previousSibling == null 
-				&& selection.anchorOffset == 0 && selection.focusOffset == selection.baseNode.length) 
+			if ((baseNode && baseNode.nextSibling == null && baseNode.previousSibling == null 
+				&& selection.anchorOffset == 0 && selection.focusOffset == baseNode.length) 
 				|| (selection.anchorOffset == selection.focusOffset)) {
 					
-				element = selection.baseNode.parentNode;
+				element = baseNode.parentNode;
 				
 			} else {
 				element = document.createElement(tag);
