@@ -16,5 +16,4 @@ let ColorInput = { ...ColorInput, ...{
 		return colorinput;
 	},
   }
-);
-
+};
