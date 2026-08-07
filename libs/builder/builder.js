@@ -2266,7 +2266,7 @@ Vvveb.Builder = {
 		if (type == 'section') {
 			Vvveb.Sections.add('reusable/'+ name, {
 				name,
-				image: "img/logo-small.png",
+				image: Vvveb.themeBaseUrl + "img/logo.png",",
 				html: element.outerHTML});
 			
 			if (Vvveb.SectionsGroup["Reusable"] === undefined) {
@@ -2278,7 +2278,7 @@ Vvveb.Builder = {
 		} else {
 			Vvveb.Blocks.add('reusable/'+ name, {
 				name,
-				image: "img/logo-small.png",
+				image: Vvveb.themeBaseUrl + "img/logo.png",
 				html: element.outerHTML});
 			
 			if (Vvveb.BlocksGroup["Reusable"] === undefined) {
